@@ -1255,6 +1255,35 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repository/anonymous_access_enabled`.
             public var anonymousAccessEnabled: Swift.Bool?
+            /// The status of the code search index for this repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status`.
+            public struct CodeSearchIndexStatusPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status/lexical_search_ok`.
+                public var lexicalSearchOk: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status/lexical_commit_sha`.
+                public var lexicalCommitSha: Swift.String?
+                /// Creates a new `CodeSearchIndexStatusPayload`.
+                ///
+                /// - Parameters:
+                ///   - lexicalSearchOk:
+                ///   - lexicalCommitSha:
+                public init(
+                    lexicalSearchOk: Swift.Bool? = nil,
+                    lexicalCommitSha: Swift.String? = nil
+                ) {
+                    self.lexicalSearchOk = lexicalSearchOk
+                    self.lexicalCommitSha = lexicalCommitSha
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case lexicalSearchOk = "lexical_search_ok"
+                    case lexicalCommitSha = "lexical_commit_sha"
+                }
+            }
+            /// The status of the code search index for this repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status`.
+            public var codeSearchIndexStatus: Components.Schemas.Repository.CodeSearchIndexStatusPayload?
             /// Creates a new `Repository`.
             ///
             /// - Parameters:
@@ -1353,6 +1382,7 @@ public enum Components {
             ///   - masterBranch:
             ///   - starredAt:
             ///   - anonymousAccessEnabled: Whether anonymous git access is enabled for this repository
+            ///   - codeSearchIndexStatus: The status of the code search index for this repository
             public init(
                 id: Swift.Int64,
                 nodeId: Swift.String,
@@ -1448,7 +1478,8 @@ public enum Components {
                 watchers: Swift.Int,
                 masterBranch: Swift.String? = nil,
                 starredAt: Swift.String? = nil,
-                anonymousAccessEnabled: Swift.Bool? = nil
+                anonymousAccessEnabled: Swift.Bool? = nil,
+                codeSearchIndexStatus: Components.Schemas.Repository.CodeSearchIndexStatusPayload? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -1545,6 +1576,7 @@ public enum Components {
                 self.masterBranch = masterBranch
                 self.starredAt = starredAt
                 self.anonymousAccessEnabled = anonymousAccessEnabled
+                self.codeSearchIndexStatus = codeSearchIndexStatus
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -1642,6 +1674,7 @@ public enum Components {
                 case masterBranch = "master_branch"
                 case starredAt = "starred_at"
                 case anonymousAccessEnabled = "anonymous_access_enabled"
+                case codeSearchIndexStatus = "code_search_index_status"
             }
         }
         /// Code Of Conduct
