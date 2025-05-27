@@ -143,6 +143,13 @@ public struct Client: APIProtocol {
                     name: "is_multi_repo",
                     value: input.query.isMultiRepo
                 )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "hide_secret",
+                    value: input.query.hideSecret
+                )
                 converter.setAcceptHeader(
                     in: &request.headerFields,
                     contentTypes: input.headers.accept
@@ -346,6 +353,13 @@ public struct Client: APIProtocol {
                     explode: true,
                     name: "is_multi_repo",
                     value: input.query.isMultiRepo
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "hide_secret",
+                    value: input.query.hideSecret
                 )
                 converter.setAcceptHeader(
                     in: &request.headerFields,
@@ -552,6 +566,13 @@ public struct Client: APIProtocol {
                     name: "is_multi_repo",
                     value: input.query.isMultiRepo
                 )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "hide_secret",
+                    value: input.query.hideSecret
+                )
                 converter.setAcceptHeader(
                     in: &request.headerFields,
                     contentTypes: input.headers.accept
@@ -646,6 +667,13 @@ public struct Client: APIProtocol {
                     method: .get
                 )
                 suppressMutabilityWarning(&request)
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "hide_secret",
+                    value: input.query.hideSecret
+                )
                 converter.setAcceptHeader(
                     in: &request.headerFields,
                     contentTypes: input.headers.accept

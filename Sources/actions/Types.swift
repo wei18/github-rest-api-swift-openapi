@@ -2327,8 +2327,14 @@ extension APIProtocol {
     ///
     /// - Remark: HTTP `DELETE /orgs/{org}/actions/runners/{runner_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/actions/runners/{runner_id}/delete(actions/delete-self-hosted-runner-from-org)`.
-    public func actionsDeleteSelfHostedRunnerFromOrg(path: Operations.ActionsDeleteSelfHostedRunnerFromOrg.Input.Path) async throws -> Operations.ActionsDeleteSelfHostedRunnerFromOrg.Output {
-        try await actionsDeleteSelfHostedRunnerFromOrg(Operations.ActionsDeleteSelfHostedRunnerFromOrg.Input(path: path))
+    public func actionsDeleteSelfHostedRunnerFromOrg(
+        path: Operations.ActionsDeleteSelfHostedRunnerFromOrg.Input.Path,
+        headers: Operations.ActionsDeleteSelfHostedRunnerFromOrg.Input.Headers = .init()
+    ) async throws -> Operations.ActionsDeleteSelfHostedRunnerFromOrg.Output {
+        try await actionsDeleteSelfHostedRunnerFromOrg(Operations.ActionsDeleteSelfHostedRunnerFromOrg.Input(
+            path: path,
+            headers: headers
+        ))
     }
     /// List labels for a self-hosted runner for an organization
     ///
@@ -3321,8 +3327,14 @@ extension APIProtocol {
     ///
     /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/actions/runners/{runner_id}`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/runners/{runner_id}/delete(actions/delete-self-hosted-runner-from-repo)`.
-    public func actionsDeleteSelfHostedRunnerFromRepo(path: Operations.ActionsDeleteSelfHostedRunnerFromRepo.Input.Path) async throws -> Operations.ActionsDeleteSelfHostedRunnerFromRepo.Output {
-        try await actionsDeleteSelfHostedRunnerFromRepo(Operations.ActionsDeleteSelfHostedRunnerFromRepo.Input(path: path))
+    public func actionsDeleteSelfHostedRunnerFromRepo(
+        path: Operations.ActionsDeleteSelfHostedRunnerFromRepo.Input.Path,
+        headers: Operations.ActionsDeleteSelfHostedRunnerFromRepo.Input.Headers = .init()
+    ) async throws -> Operations.ActionsDeleteSelfHostedRunnerFromRepo.Output {
+        try await actionsDeleteSelfHostedRunnerFromRepo(Operations.ActionsDeleteSelfHostedRunnerFromRepo.Input(
+            path: path,
+            headers: headers
+        ))
     }
     /// List labels for a self-hosted runner for a repository
     ///
@@ -5228,6 +5240,35 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repository/anonymous_access_enabled`.
             public var anonymousAccessEnabled: Swift.Bool?
+            /// The status of the code search index for this repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status`.
+            public struct CodeSearchIndexStatusPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status/lexical_search_ok`.
+                public var lexicalSearchOk: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status/lexical_commit_sha`.
+                public var lexicalCommitSha: Swift.String?
+                /// Creates a new `CodeSearchIndexStatusPayload`.
+                ///
+                /// - Parameters:
+                ///   - lexicalSearchOk:
+                ///   - lexicalCommitSha:
+                public init(
+                    lexicalSearchOk: Swift.Bool? = nil,
+                    lexicalCommitSha: Swift.String? = nil
+                ) {
+                    self.lexicalSearchOk = lexicalSearchOk
+                    self.lexicalCommitSha = lexicalCommitSha
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case lexicalSearchOk = "lexical_search_ok"
+                    case lexicalCommitSha = "lexical_commit_sha"
+                }
+            }
+            /// The status of the code search index for this repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status`.
+            public var codeSearchIndexStatus: Components.Schemas.Repository.CodeSearchIndexStatusPayload?
             /// Creates a new `Repository`.
             ///
             /// - Parameters:
@@ -5326,6 +5367,7 @@ public enum Components {
             ///   - masterBranch:
             ///   - starredAt:
             ///   - anonymousAccessEnabled: Whether anonymous git access is enabled for this repository
+            ///   - codeSearchIndexStatus: The status of the code search index for this repository
             public init(
                 id: Swift.Int64,
                 nodeId: Swift.String,
@@ -5421,7 +5463,8 @@ public enum Components {
                 watchers: Swift.Int,
                 masterBranch: Swift.String? = nil,
                 starredAt: Swift.String? = nil,
-                anonymousAccessEnabled: Swift.Bool? = nil
+                anonymousAccessEnabled: Swift.Bool? = nil,
+                codeSearchIndexStatus: Components.Schemas.Repository.CodeSearchIndexStatusPayload? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -5518,6 +5561,7 @@ public enum Components {
                 self.masterBranch = masterBranch
                 self.starredAt = starredAt
                 self.anonymousAccessEnabled = anonymousAccessEnabled
+                self.codeSearchIndexStatus = codeSearchIndexStatus
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -5615,6 +5659,7 @@ public enum Components {
                 case masterBranch = "master_branch"
                 case starredAt = "starred_at"
                 case anonymousAccessEnabled = "anonymous_access_enabled"
+                case codeSearchIndexStatus = "code_search_index_status"
             }
         }
         /// Code Of Conduct
@@ -17165,12 +17210,29 @@ public enum Operations {
                 }
             }
             public var path: Operations.ActionsDeleteSelfHostedRunnerFromOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/runners/{runner_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsDeleteSelfHostedRunnerFromOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsDeleteSelfHostedRunnerFromOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsDeleteSelfHostedRunnerFromOrg.Input.Headers
             /// Creates a new `Input`.
             ///
             /// - Parameters:
             ///   - path:
-            public init(path: Operations.ActionsDeleteSelfHostedRunnerFromOrg.Input.Path) {
+            ///   - headers:
+            public init(
+                path: Operations.ActionsDeleteSelfHostedRunnerFromOrg.Input.Path,
+                headers: Operations.ActionsDeleteSelfHostedRunnerFromOrg.Input.Headers = .init()
+            ) {
                 self.path = path
+                self.headers = headers
             }
         }
         @frozen public enum Output: Sendable, Hashable {
@@ -17209,10 +17271,58 @@ public enum Operations {
                     }
                 }
             }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/runners/{runner_id}/delete(actions/delete-self-hosted-runner-from-org)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailedSimple)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailedSimple {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
             case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
         }
     }
     /// List labels for a self-hosted runner for an organization
@@ -25593,12 +25703,29 @@ public enum Operations {
                 }
             }
             public var path: Operations.ActionsDeleteSelfHostedRunnerFromRepo.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runners/{runner_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsDeleteSelfHostedRunnerFromRepo.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsDeleteSelfHostedRunnerFromRepo.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsDeleteSelfHostedRunnerFromRepo.Input.Headers
             /// Creates a new `Input`.
             ///
             /// - Parameters:
             ///   - path:
-            public init(path: Operations.ActionsDeleteSelfHostedRunnerFromRepo.Input.Path) {
+            ///   - headers:
+            public init(
+                path: Operations.ActionsDeleteSelfHostedRunnerFromRepo.Input.Path,
+                headers: Operations.ActionsDeleteSelfHostedRunnerFromRepo.Input.Headers = .init()
+            ) {
                 self.path = path
+                self.headers = headers
             }
         }
         @frozen public enum Output: Sendable, Hashable {
@@ -25637,10 +25764,58 @@ public enum Operations {
                     }
                 }
             }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/runners/{runner_id}/delete(actions/delete-self-hosted-runner-from-repo)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailedSimple)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailedSimple {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
             case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
         }
     }
     /// List labels for a self-hosted runner for a repository

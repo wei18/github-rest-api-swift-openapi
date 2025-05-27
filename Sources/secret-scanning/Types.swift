@@ -180,10 +180,12 @@ extension APIProtocol {
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/get(secret-scanning/get-alert)`.
     public func secretScanningGetAlert(
         path: Operations.SecretScanningGetAlert.Input.Path,
+        query: Operations.SecretScanningGetAlert.Input.Query = .init(),
         headers: Operations.SecretScanningGetAlert.Input.Headers = .init()
     ) async throws -> Operations.SecretScanningGetAlert.Output {
         try await secretScanningGetAlert(Operations.SecretScanningGetAlert.Input(
             path: path,
+            query: query,
             headers: headers
         ))
     }
@@ -2256,6 +2258,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-multi-repo`.
         public typealias SecretScanningAlertMultiRepo = Swift.Bool
+        /// A boolean value representing whether or not to hide literal secrets in the results.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-hide-secret`.
+        public typealias SecretScanningAlertHideSecret = Swift.Bool
         /// The account owner of the repository. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/owner`.
@@ -2475,6 +2481,10 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/is_multi_repo`.
                 public var isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo?
+                /// A boolean value representing whether or not to hide literal secrets in the results.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/hide_secret`.
+                public var hideSecret: Components.Parameters.SecretScanningAlertHideSecret?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -2489,6 +2499,7 @@ public enum Operations {
                 ///   - validity: A comma-separated list of validities that, when present, will return alerts that match the validities in this list. Valid options are `active`, `inactive`, and `unknown`.
                 ///   - isPubliclyLeaked: A boolean value representing whether or not to filter alerts by the publicly-leaked tag being present.
                 ///   - isMultiRepo: A boolean value representing whether or not to filter alerts by the multi-repo tag being present.
+                ///   - hideSecret: A boolean value representing whether or not to hide literal secrets in the results.
                 public init(
                     state: Components.Parameters.SecretScanningAlertState? = nil,
                     secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
@@ -2500,7 +2511,8 @@ public enum Operations {
                     after: Components.Parameters.PaginationAfter? = nil,
                     validity: Components.Parameters.SecretScanningAlertValidity? = nil,
                     isPubliclyLeaked: Components.Parameters.SecretScanningAlertPubliclyLeaked? = nil,
-                    isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo? = nil
+                    isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo? = nil,
+                    hideSecret: Components.Parameters.SecretScanningAlertHideSecret? = nil
                 ) {
                     self.state = state
                     self.secretType = secretType
@@ -2513,6 +2525,7 @@ public enum Operations {
                     self.validity = validity
                     self.isPubliclyLeaked = isPubliclyLeaked
                     self.isMultiRepo = isMultiRepo
+                    self.hideSecret = hideSecret
                 }
             }
             public var query: Operations.SecretScanningListAlertsForEnterprise.Input.Query
@@ -2785,6 +2798,10 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/is_multi_repo`.
                 public var isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo?
+                /// A boolean value representing whether or not to hide literal secrets in the results.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/hide_secret`.
+                public var hideSecret: Components.Parameters.SecretScanningAlertHideSecret?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -2800,6 +2817,7 @@ public enum Operations {
                 ///   - validity: A comma-separated list of validities that, when present, will return alerts that match the validities in this list. Valid options are `active`, `inactive`, and `unknown`.
                 ///   - isPubliclyLeaked: A boolean value representing whether or not to filter alerts by the publicly-leaked tag being present.
                 ///   - isMultiRepo: A boolean value representing whether or not to filter alerts by the multi-repo tag being present.
+                ///   - hideSecret: A boolean value representing whether or not to hide literal secrets in the results.
                 public init(
                     state: Components.Parameters.SecretScanningAlertState? = nil,
                     secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
@@ -2812,7 +2830,8 @@ public enum Operations {
                     after: Components.Parameters.SecretScanningPaginationAfterOrgRepo? = nil,
                     validity: Components.Parameters.SecretScanningAlertValidity? = nil,
                     isPubliclyLeaked: Components.Parameters.SecretScanningAlertPubliclyLeaked? = nil,
-                    isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo? = nil
+                    isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo? = nil,
+                    hideSecret: Components.Parameters.SecretScanningAlertHideSecret? = nil
                 ) {
                     self.state = state
                     self.secretType = secretType
@@ -2826,6 +2845,7 @@ public enum Operations {
                     self.validity = validity
                     self.isPubliclyLeaked = isPubliclyLeaked
                     self.isMultiRepo = isMultiRepo
+                    self.hideSecret = hideSecret
                 }
             }
             public var query: Operations.SecretScanningListAlertsForOrg.Input.Query
@@ -3107,6 +3127,10 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/is_multi_repo`.
                 public var isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo?
+                /// A boolean value representing whether or not to hide literal secrets in the results.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/hide_secret`.
+                public var hideSecret: Components.Parameters.SecretScanningAlertHideSecret?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -3122,6 +3146,7 @@ public enum Operations {
                 ///   - validity: A comma-separated list of validities that, when present, will return alerts that match the validities in this list. Valid options are `active`, `inactive`, and `unknown`.
                 ///   - isPubliclyLeaked: A boolean value representing whether or not to filter alerts by the publicly-leaked tag being present.
                 ///   - isMultiRepo: A boolean value representing whether or not to filter alerts by the multi-repo tag being present.
+                ///   - hideSecret: A boolean value representing whether or not to hide literal secrets in the results.
                 public init(
                     state: Components.Parameters.SecretScanningAlertState? = nil,
                     secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
@@ -3134,7 +3159,8 @@ public enum Operations {
                     after: Components.Parameters.SecretScanningPaginationAfterOrgRepo? = nil,
                     validity: Components.Parameters.SecretScanningAlertValidity? = nil,
                     isPubliclyLeaked: Components.Parameters.SecretScanningAlertPubliclyLeaked? = nil,
-                    isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo? = nil
+                    isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo? = nil,
+                    hideSecret: Components.Parameters.SecretScanningAlertHideSecret? = nil
                 ) {
                     self.state = state
                     self.secretType = secretType
@@ -3148,6 +3174,7 @@ public enum Operations {
                     self.validity = validity
                     self.isPubliclyLeaked = isPubliclyLeaked
                     self.isMultiRepo = isMultiRepo
+                    self.hideSecret = hideSecret
                 }
             }
             public var query: Operations.SecretScanningListAlertsForRepo.Input.Query
@@ -3364,6 +3391,21 @@ public enum Operations {
                 }
             }
             public var path: Operations.SecretScanningGetAlert.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// A boolean value representing whether or not to hide literal secrets in the results.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/GET/query/hide_secret`.
+                public var hideSecret: Components.Parameters.SecretScanningAlertHideSecret?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - hideSecret: A boolean value representing whether or not to hide literal secrets in the results.
+                public init(hideSecret: Components.Parameters.SecretScanningAlertHideSecret? = nil) {
+                    self.hideSecret = hideSecret
+                }
+            }
+            public var query: Operations.SecretScanningGetAlert.Input.Query
             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/GET/header`.
             public struct Headers: Sendable, Hashable {
                 public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningGetAlert.AcceptableContentType>]
@@ -3380,12 +3422,15 @@ public enum Operations {
             ///
             /// - Parameters:
             ///   - path:
+            ///   - query:
             ///   - headers:
             public init(
                 path: Operations.SecretScanningGetAlert.Input.Path,
+                query: Operations.SecretScanningGetAlert.Input.Query = .init(),
                 headers: Operations.SecretScanningGetAlert.Input.Headers = .init()
             ) {
                 self.path = path
+                self.query = query
                 self.headers = headers
             }
         }
