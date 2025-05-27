@@ -440,6 +440,8 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/registry_type`.
             @frozen public enum RegistryTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
                 case mavenRepository = "maven_repository"
+                case nugetFeed = "nuget_feed"
+                case goproxyServer = "goproxy_server"
             }
             /// The registry type.
             ///
@@ -511,6 +513,8 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/registry_type`.
             @frozen public enum RegistryTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
                 case mavenRepository = "maven_repository"
+                case nugetFeed = "nuget_feed"
+                case goproxyServer = "goproxy_server"
             }
             /// The registry type.
             ///
@@ -1024,6 +1028,8 @@ public enum Operations {
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/registry_type`.
                     @frozen public enum RegistryTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
                         case mavenRepository = "maven_repository"
+                        case nugetFeed = "nuget_feed"
+                        case goproxyServer = "goproxy_server"
                     }
                     /// The registry type.
                     ///
@@ -1667,6 +1673,8 @@ public enum Operations {
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/registry_type`.
                     @frozen public enum RegistryTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
                         case mavenRepository = "maven_repository"
+                        case nugetFeed = "nuget_feed"
+                        case goproxyServer = "goproxy_server"
                     }
                     /// The registry type.
                     ///
