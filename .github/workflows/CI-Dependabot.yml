@@ -33,20 +33,28 @@ jobs:
           swift: ${{ matrix.swift }}
           os: ${{ matrix.os }}
 
-      - name: "Update Mintfile"
-        run: |
-          swift .github/dependabot-mintfile/MintfileBuilder.swift
-          git add Mintfile
-
-      - name: "Sync code base"
+      - name: "gh pr checkout and git config"
         env:
-          PR_URL: ${{ github.event.pull_request.html_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr checkout ${{ github.event.pull_request.number }}
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          
+      - name: "Update Mintfile"
+        run: |
+          swift .github/dependabot-mintfile/MintfileBuilder.swift
+          make commit file="Mintfile"
+
+      - name: "Update Sources"
+        run: |
           make -j 3 install
+          
+      - name: "git push, gh pr auto merge"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
           git push
           gh pr merge --auto --merge "$PR_URL"
           gh pr review --approve "$PR_URL"
