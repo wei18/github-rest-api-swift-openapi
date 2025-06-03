@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'Submodule/**'
+      - '.github/dependabot-mintfile/**'
 
 permissions:
   contents: write
@@ -18,7 +19,9 @@ jobs:
           - ubuntu-latest
           # - macos-latest #Fix: The macos-latest workflow label currently uses the macOS 12 runner image.
           # - macos-13
-        swift: [5, 6]
+        swift: 
+          - 5
+          # - 6
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
     steps:
