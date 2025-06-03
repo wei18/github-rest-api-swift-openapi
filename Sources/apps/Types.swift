@@ -1455,20 +1455,14 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/integration/permissions`.
             public var permissions: Components.Schemas.Integration.PermissionsPayload
-            /// The list of events for the GitHub app
+            /// The list of events for the GitHub app. Note that the `installation_target`, `security_advisory`, and `meta` events are not included because they are global events and not specific to an installation.
             ///
             /// - Remark: Generated from `#/components/schemas/integration/events`.
             public var events: [Swift.String]
-            /// The number of installations associated with the GitHub app
+            /// The number of installations associated with the GitHub app. Only returned when the integration is requesting details about itself.
             ///
             /// - Remark: Generated from `#/components/schemas/integration/installations_count`.
             public var installationsCount: Swift.Int?
-            /// - Remark: Generated from `#/components/schemas/integration/client_secret`.
-            public var clientSecret: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/integration/webhook_secret`.
-            public var webhookSecret: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/integration/pem`.
-            public var pem: Swift.String?
             /// Creates a new `Integration`.
             ///
             /// - Parameters:
@@ -1484,11 +1478,8 @@ public enum Components {
             ///   - createdAt:
             ///   - updatedAt:
             ///   - permissions: The set of permissions for the GitHub app
-            ///   - events: The list of events for the GitHub app
-            ///   - installationsCount: The number of installations associated with the GitHub app
-            ///   - clientSecret:
-            ///   - webhookSecret:
-            ///   - pem:
+            ///   - events: The list of events for the GitHub app. Note that the `installation_target`, `security_advisory`, and `meta` events are not included because they are global events and not specific to an installation.
+            ///   - installationsCount: The number of installations associated with the GitHub app. Only returned when the integration is requesting details about itself.
             public init(
                 id: Swift.Int,
                 slug: Swift.String? = nil,
@@ -1503,10 +1494,7 @@ public enum Components {
                 updatedAt: Foundation.Date,
                 permissions: Components.Schemas.Integration.PermissionsPayload,
                 events: [Swift.String],
-                installationsCount: Swift.Int? = nil,
-                clientSecret: Swift.String? = nil,
-                webhookSecret: Swift.String? = nil,
-                pem: Swift.String? = nil
+                installationsCount: Swift.Int? = nil
             ) {
                 self.id = id
                 self.slug = slug
@@ -1522,9 +1510,6 @@ public enum Components {
                 self.permissions = permissions
                 self.events = events
                 self.installationsCount = installationsCount
-                self.clientSecret = clientSecret
-                self.webhookSecret = webhookSecret
-                self.pem = pem
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -1541,9 +1526,6 @@ public enum Components {
                 case permissions
                 case events
                 case installationsCount = "installations_count"
-                case clientSecret = "client_secret"
-                case webhookSecret = "webhook_secret"
-                case pem
             }
         }
         /// The URL to which the payloads will be delivered.

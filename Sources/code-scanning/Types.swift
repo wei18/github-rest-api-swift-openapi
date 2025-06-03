@@ -3290,6 +3290,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/code-scanning-default-setup/query_suite`.
             public var querySuite: Components.Schemas.CodeScanningDefaultSetup.QuerySuitePayload?
+            /// Threat model to be used for code scanning analysis. Use `remote` to analyze only network sources and `remote_and_local` to include local sources like filesystem access, command-line arguments, database reads, environment variable and standard input.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-scanning-default-setup/threat_model`.
+            @frozen public enum ThreatModelPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case remote = "remote"
+                case remoteAndLocal = "remote_and_local"
+            }
+            /// Threat model to be used for code scanning analysis. Use `remote` to analyze only network sources and `remote_and_local` to include local sources like filesystem access, command-line arguments, database reads, environment variable and standard input.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-scanning-default-setup/threat_model`.
+            public var threatModel: Components.Schemas.CodeScanningDefaultSetup.ThreatModelPayload?
             /// Timestamp of latest configuration update.
             ///
             /// - Remark: Generated from `#/components/schemas/code-scanning-default-setup/updated_at`.
@@ -3312,6 +3323,7 @@ public enum Components {
             ///   - runnerType: Runner type to be used.
             ///   - runnerLabel: Runner label to be used if the runner type is labeled.
             ///   - querySuite: CodeQL query suite to be used.
+            ///   - threatModel: Threat model to be used for code scanning analysis. Use `remote` to analyze only network sources and `remote_and_local` to include local sources like filesystem access, command-line arguments, database reads, environment variable and standard input.
             ///   - updatedAt: Timestamp of latest configuration update.
             ///   - schedule: The frequency of the periodic analysis.
             public init(
@@ -3320,6 +3332,7 @@ public enum Components {
                 runnerType: Components.Schemas.CodeScanningDefaultSetup.RunnerTypePayload? = nil,
                 runnerLabel: Swift.String? = nil,
                 querySuite: Components.Schemas.CodeScanningDefaultSetup.QuerySuitePayload? = nil,
+                threatModel: Components.Schemas.CodeScanningDefaultSetup.ThreatModelPayload? = nil,
                 updatedAt: Foundation.Date? = nil,
                 schedule: Components.Schemas.CodeScanningDefaultSetup.SchedulePayload? = nil
             ) {
@@ -3328,6 +3341,7 @@ public enum Components {
                 self.runnerType = runnerType
                 self.runnerLabel = runnerLabel
                 self.querySuite = querySuite
+                self.threatModel = threatModel
                 self.updatedAt = updatedAt
                 self.schedule = schedule
             }
@@ -3337,6 +3351,7 @@ public enum Components {
                 case runnerType = "runner_type"
                 case runnerLabel = "runner_label"
                 case querySuite = "query_suite"
+                case threatModel = "threat_model"
                 case updatedAt = "updated_at"
                 case schedule
             }
@@ -3382,6 +3397,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/code-scanning-default-setup-update/query_suite`.
             public var querySuite: Components.Schemas.CodeScanningDefaultSetupUpdate.QuerySuitePayload?
+            /// Threat model to be used for code scanning analysis. Use `remote` to analyze only network sources and `remote_and_local` to include local sources like filesystem access, command-line arguments, database reads, environment variable and standard input.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-scanning-default-setup-update/threat_model`.
+            @frozen public enum ThreatModelPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case remote = "remote"
+                case remoteAndLocal = "remote_and_local"
+            }
+            /// Threat model to be used for code scanning analysis. Use `remote` to analyze only network sources and `remote_and_local` to include local sources like filesystem access, command-line arguments, database reads, environment variable and standard input.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-scanning-default-setup-update/threat_model`.
+            public var threatModel: Components.Schemas.CodeScanningDefaultSetupUpdate.ThreatModelPayload?
             /// - Remark: Generated from `#/components/schemas/code-scanning-default-setup-update/LanguagesPayload`.
             @frozen public enum LanguagesPayloadPayload: String, Codable, Hashable, Sendable, CaseIterable {
                 case actions = "actions"
@@ -3409,18 +3435,21 @@ public enum Components {
             ///   - runnerType: Runner type to be used.
             ///   - runnerLabel: Runner label to be used if the runner type is labeled.
             ///   - querySuite: CodeQL query suite to be used.
+            ///   - threatModel: Threat model to be used for code scanning analysis. Use `remote` to analyze only network sources and `remote_and_local` to include local sources like filesystem access, command-line arguments, database reads, environment variable and standard input.
             ///   - languages: CodeQL languages to be analyzed.
             public init(
                 state: Components.Schemas.CodeScanningDefaultSetupUpdate.StatePayload? = nil,
                 runnerType: Components.Schemas.CodeScanningDefaultSetupUpdate.RunnerTypePayload? = nil,
                 runnerLabel: Swift.String? = nil,
                 querySuite: Components.Schemas.CodeScanningDefaultSetupUpdate.QuerySuitePayload? = nil,
+                threatModel: Components.Schemas.CodeScanningDefaultSetupUpdate.ThreatModelPayload? = nil,
                 languages: Components.Schemas.CodeScanningDefaultSetupUpdate.LanguagesPayload? = nil
             ) {
                 self.state = state
                 self.runnerType = runnerType
                 self.runnerLabel = runnerLabel
                 self.querySuite = querySuite
+                self.threatModel = threatModel
                 self.languages = languages
             }
             public enum CodingKeys: String, CodingKey {
@@ -3428,6 +3457,7 @@ public enum Components {
                 case runnerType = "runner_type"
                 case runnerLabel = "runner_label"
                 case querySuite = "query_suite"
+                case threatModel = "threat_model"
                 case languages
             }
             public init(from decoder: any Decoder) throws {
@@ -3448,6 +3478,10 @@ public enum Components {
                     Components.Schemas.CodeScanningDefaultSetupUpdate.QuerySuitePayload.self,
                     forKey: .querySuite
                 )
+                self.threatModel = try container.decodeIfPresent(
+                    Components.Schemas.CodeScanningDefaultSetupUpdate.ThreatModelPayload.self,
+                    forKey: .threatModel
+                )
                 self.languages = try container.decodeIfPresent(
                     Components.Schemas.CodeScanningDefaultSetupUpdate.LanguagesPayload.self,
                     forKey: .languages
@@ -3457,6 +3491,7 @@ public enum Components {
                     "runner_type",
                     "runner_label",
                     "query_suite",
+                    "threat_model",
                     "languages"
                 ])
             }
