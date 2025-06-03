@@ -274,6 +274,219 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
+    ///
+    /// > [!NOTE]
+    /// >    This operation supports both server-to-server and user-to-server access.
+    /// Unauthorized users will not see the existence of this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)`.
+    public func dependabotRepositoryAccessForOrg(_ input: Operations.DependabotRepositoryAccessForOrg.Input) async throws -> Operations.DependabotRepositoryAccessForOrg.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.DependabotRepositoryAccessForOrg.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/organizations/{}/dependabot/repository-access",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.DependabotRepositoryAccessForOrg.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.DependabotRepositoryAccessDetails.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Set the default repository access level for Dependabot
+    ///
+    /// > [!NOTE]
+    /// >    This operation supports both server-to-server and user-to-server access.
+    /// Sets the default level of repository access Dependabot will have while performing an update.  Available values are:
+    /// - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories.
+    /// - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories.
+    ///
+    /// Unauthorized users will not see the existence of this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/dependabot/repository-access/default-level`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)`.
+    public func dependabotSetRepositoryAccessDefaultLevel(_ input: Operations.DependabotSetRepositoryAccessDefaultLevel.Input) async throws -> Operations.DependabotSetRepositoryAccessDefaultLevel.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.DependabotSetRepositoryAccessDefaultLevel.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/organizations/{}/dependabot/repository-access/default-level",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .put
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// List Dependabot alerts for an organization
     ///
     /// Lists Dependabot alerts for an organization.
