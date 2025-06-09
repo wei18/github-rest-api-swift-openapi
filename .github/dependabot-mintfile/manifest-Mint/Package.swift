@@ -6,6 +6,6 @@ import PackageDescription
 let package = Package(
     name: "manifest-Mint",
     dependencies: [
-        .package(url: "https://github.com/yonaskolb/Mint", exact: "0.17.5"),
+        .package(url: "https://github.com/yonaskolb/Mint", exact: "0.18.0"),
     ]
 )
