@@ -13,7 +13,7 @@ import struct Foundation.Date
 public protocol APIProtocol: Sendable {
     /// Render a Markdown document
     ///
-    ///
+    /// Depending on what is rendered in the Markdown, you may need to provide additional token scopes for labels, such as `issues:read` or `pull_requests:read`.
     ///
     /// - Remark: HTTP `POST /markdown`.
     /// - Remark: Generated from `#/paths//markdown/post(markdown/render)`.
@@ -31,7 +31,7 @@ public protocol APIProtocol: Sendable {
 extension APIProtocol {
     /// Render a Markdown document
     ///
-    ///
+    /// Depending on what is rendered in the Markdown, you may need to provide additional token scopes for labels, such as `issues:read` or `pull_requests:read`.
     ///
     /// - Remark: HTTP `POST /markdown`.
     /// - Remark: Generated from `#/paths//markdown/post(markdown/render)`.
@@ -108,7 +108,7 @@ public enum Components {
 public enum Operations {
     /// Render a Markdown document
     ///
-    ///
+    /// Depending on what is rendered in the Markdown, you may need to provide additional token scopes for labels, such as `issues:read` or `pull_requests:read`.
     ///
     /// - Remark: HTTP `POST /markdown`.
     /// - Remark: Generated from `#/paths//markdown/post(markdown/render)`.

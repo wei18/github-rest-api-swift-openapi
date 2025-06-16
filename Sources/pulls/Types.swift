@@ -5039,6 +5039,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/review-comment/original_start_line`.
             public var originalStartLine: Swift.Int?
+            /// The level at which the comment is targeted, can be a diff line or a file.
+            ///
+            /// - Remark: Generated from `#/components/schemas/review-comment/subject_type`.
+            @frozen public enum SubjectTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case line = "line"
+                case file = "file"
+            }
+            /// The level at which the comment is targeted, can be a diff line or a file.
+            ///
+            /// - Remark: Generated from `#/components/schemas/review-comment/subject_type`.
+            public var subjectType: Components.Schemas.ReviewComment.SubjectTypePayload?
             /// Creates a new `ReviewComment`.
             ///
             /// - Parameters:
@@ -5070,6 +5081,7 @@ public enum Components {
             ///   - originalLine: The original line of the blob to which the comment applies. The last line of the range for a multi-line comment
             ///   - startLine: The first line of the range for a multi-line comment.
             ///   - originalStartLine: The original first line of the range for a multi-line comment.
+            ///   - subjectType: The level at which the comment is targeted, can be a diff line or a file.
             public init(
                 url: Swift.String,
                 pullRequestReviewId: Swift.Int64? = nil,
@@ -5098,7 +5110,8 @@ public enum Components {
                 line: Swift.Int? = nil,
                 originalLine: Swift.Int? = nil,
                 startLine: Swift.Int? = nil,
-                originalStartLine: Swift.Int? = nil
+                originalStartLine: Swift.Int? = nil,
+                subjectType: Components.Schemas.ReviewComment.SubjectTypePayload? = nil
             ) {
                 self.url = url
                 self.pullRequestReviewId = pullRequestReviewId
@@ -5128,6 +5141,7 @@ public enum Components {
                 self.originalLine = originalLine
                 self.startLine = startLine
                 self.originalStartLine = originalStartLine
+                self.subjectType = subjectType
             }
             public enum CodingKeys: String, CodingKey {
                 case url
@@ -5158,6 +5172,7 @@ public enum Components {
                 case originalLine = "original_line"
                 case startLine = "start_line"
                 case originalStartLine = "original_start_line"
+                case subjectType = "subject_type"
             }
         }
     }

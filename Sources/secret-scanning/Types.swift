@@ -1036,420 +1036,6 @@ public enum Components {
             case revoked = "revoked"
             case usedInTests = "used_in_tests"
         }
-        /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert`.
-        public struct OrganizationSecretScanningAlert: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/number`.
-            public var number: Components.Schemas.AlertNumber?
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/created_at`.
-            public var createdAt: Components.Schemas.AlertCreatedAt?
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/updated_at`.
-            public var updatedAt: Components.Schemas.NullableAlertUpdatedAt?
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/url`.
-            public var url: Components.Schemas.AlertUrl?
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/html_url`.
-            public var htmlUrl: Components.Schemas.AlertHtmlUrl?
-            /// The REST API URL of the code locations for this alert.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/locations_url`.
-            public var locationsUrl: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/state`.
-            public var state: Components.Schemas.SecretScanningAlertState?
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/resolution`.
-            public var resolution: Components.Schemas.SecretScanningAlertResolution?
-            /// The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/resolved_at`.
-            public var resolvedAt: Foundation.Date?
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/resolved_by`.
-            public var resolvedBy: Components.Schemas.NullableSimpleUser?
-            /// The type of secret that secret scanning detected.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/secret_type`.
-            public var secretType: Swift.String?
-            /// User-friendly name for the detected secret, matching the `secret_type`.
-            /// For a list of built-in patterns, see "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)."
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/secret_type_display_name`.
-            public var secretTypeDisplayName: Swift.String?
-            /// The secret that was detected.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/secret`.
-            public var secret: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/repository`.
-            public var repository: Components.Schemas.SimpleRepository?
-            /// Whether push protection was bypassed for the detected secret.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypassed`.
-            public var pushProtectionBypassed: Swift.Bool?
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypassed_by`.
-            public var pushProtectionBypassedBy: Components.Schemas.NullableSimpleUser?
-            /// The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypassed_at`.
-            public var pushProtectionBypassedAt: Foundation.Date?
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypass_request_reviewer`.
-            public var pushProtectionBypassRequestReviewer: Components.Schemas.NullableSimpleUser?
-            /// An optional comment when reviewing a push protection bypass.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypass_request_reviewer_comment`.
-            public var pushProtectionBypassRequestReviewerComment: Swift.String?
-            /// An optional comment when requesting a push protection bypass.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypass_request_comment`.
-            public var pushProtectionBypassRequestComment: Swift.String?
-            /// The URL to a push protection bypass request.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypass_request_html_url`.
-            public var pushProtectionBypassRequestHtmlUrl: Swift.String?
-            /// The comment that was optionally added when this alert was closed
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/resolution_comment`.
-            public var resolutionComment: Swift.String?
-            /// The token status as of the latest validity check.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/validity`.
-            @frozen public enum ValidityPayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case active = "active"
-                case inactive = "inactive"
-                case unknown = "unknown"
-            }
-            /// The token status as of the latest validity check.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/validity`.
-            public var validity: Components.Schemas.OrganizationSecretScanningAlert.ValidityPayload?
-            /// Whether the secret was publicly leaked.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/publicly_leaked`.
-            public var publiclyLeaked: Swift.Bool?
-            /// Whether the detected secret was found in multiple repositories in the same organization or enterprise.
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/multi_repo`.
-            public var multiRepo: Swift.Bool?
-            /// A boolean value representing whether or not alert is base64 encoded
-            ///
-            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/is_base64_encoded`.
-            public var isBase64Encoded: Swift.Bool?
-            /// Creates a new `OrganizationSecretScanningAlert`.
-            ///
-            /// - Parameters:
-            ///   - number:
-            ///   - createdAt:
-            ///   - updatedAt:
-            ///   - url:
-            ///   - htmlUrl:
-            ///   - locationsUrl: The REST API URL of the code locations for this alert.
-            ///   - state:
-            ///   - resolution:
-            ///   - resolvedAt: The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-            ///   - resolvedBy:
-            ///   - secretType: The type of secret that secret scanning detected.
-            ///   - secretTypeDisplayName: User-friendly name for the detected secret, matching the `secret_type`.
-            ///   - secret: The secret that was detected.
-            ///   - repository:
-            ///   - pushProtectionBypassed: Whether push protection was bypassed for the detected secret.
-            ///   - pushProtectionBypassedBy:
-            ///   - pushProtectionBypassedAt: The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-            ///   - pushProtectionBypassRequestReviewer:
-            ///   - pushProtectionBypassRequestReviewerComment: An optional comment when reviewing a push protection bypass.
-            ///   - pushProtectionBypassRequestComment: An optional comment when requesting a push protection bypass.
-            ///   - pushProtectionBypassRequestHtmlUrl: The URL to a push protection bypass request.
-            ///   - resolutionComment: The comment that was optionally added when this alert was closed
-            ///   - validity: The token status as of the latest validity check.
-            ///   - publiclyLeaked: Whether the secret was publicly leaked.
-            ///   - multiRepo: Whether the detected secret was found in multiple repositories in the same organization or enterprise.
-            ///   - isBase64Encoded: A boolean value representing whether or not alert is base64 encoded
-            public init(
-                number: Components.Schemas.AlertNumber? = nil,
-                createdAt: Components.Schemas.AlertCreatedAt? = nil,
-                updatedAt: Components.Schemas.NullableAlertUpdatedAt? = nil,
-                url: Components.Schemas.AlertUrl? = nil,
-                htmlUrl: Components.Schemas.AlertHtmlUrl? = nil,
-                locationsUrl: Swift.String? = nil,
-                state: Components.Schemas.SecretScanningAlertState? = nil,
-                resolution: Components.Schemas.SecretScanningAlertResolution? = nil,
-                resolvedAt: Foundation.Date? = nil,
-                resolvedBy: Components.Schemas.NullableSimpleUser? = nil,
-                secretType: Swift.String? = nil,
-                secretTypeDisplayName: Swift.String? = nil,
-                secret: Swift.String? = nil,
-                repository: Components.Schemas.SimpleRepository? = nil,
-                pushProtectionBypassed: Swift.Bool? = nil,
-                pushProtectionBypassedBy: Components.Schemas.NullableSimpleUser? = nil,
-                pushProtectionBypassedAt: Foundation.Date? = nil,
-                pushProtectionBypassRequestReviewer: Components.Schemas.NullableSimpleUser? = nil,
-                pushProtectionBypassRequestReviewerComment: Swift.String? = nil,
-                pushProtectionBypassRequestComment: Swift.String? = nil,
-                pushProtectionBypassRequestHtmlUrl: Swift.String? = nil,
-                resolutionComment: Swift.String? = nil,
-                validity: Components.Schemas.OrganizationSecretScanningAlert.ValidityPayload? = nil,
-                publiclyLeaked: Swift.Bool? = nil,
-                multiRepo: Swift.Bool? = nil,
-                isBase64Encoded: Swift.Bool? = nil
-            ) {
-                self.number = number
-                self.createdAt = createdAt
-                self.updatedAt = updatedAt
-                self.url = url
-                self.htmlUrl = htmlUrl
-                self.locationsUrl = locationsUrl
-                self.state = state
-                self.resolution = resolution
-                self.resolvedAt = resolvedAt
-                self.resolvedBy = resolvedBy
-                self.secretType = secretType
-                self.secretTypeDisplayName = secretTypeDisplayName
-                self.secret = secret
-                self.repository = repository
-                self.pushProtectionBypassed = pushProtectionBypassed
-                self.pushProtectionBypassedBy = pushProtectionBypassedBy
-                self.pushProtectionBypassedAt = pushProtectionBypassedAt
-                self.pushProtectionBypassRequestReviewer = pushProtectionBypassRequestReviewer
-                self.pushProtectionBypassRequestReviewerComment = pushProtectionBypassRequestReviewerComment
-                self.pushProtectionBypassRequestComment = pushProtectionBypassRequestComment
-                self.pushProtectionBypassRequestHtmlUrl = pushProtectionBypassRequestHtmlUrl
-                self.resolutionComment = resolutionComment
-                self.validity = validity
-                self.publiclyLeaked = publiclyLeaked
-                self.multiRepo = multiRepo
-                self.isBase64Encoded = isBase64Encoded
-            }
-            public enum CodingKeys: String, CodingKey {
-                case number
-                case createdAt = "created_at"
-                case updatedAt = "updated_at"
-                case url
-                case htmlUrl = "html_url"
-                case locationsUrl = "locations_url"
-                case state
-                case resolution
-                case resolvedAt = "resolved_at"
-                case resolvedBy = "resolved_by"
-                case secretType = "secret_type"
-                case secretTypeDisplayName = "secret_type_display_name"
-                case secret
-                case repository
-                case pushProtectionBypassed = "push_protection_bypassed"
-                case pushProtectionBypassedBy = "push_protection_bypassed_by"
-                case pushProtectionBypassedAt = "push_protection_bypassed_at"
-                case pushProtectionBypassRequestReviewer = "push_protection_bypass_request_reviewer"
-                case pushProtectionBypassRequestReviewerComment = "push_protection_bypass_request_reviewer_comment"
-                case pushProtectionBypassRequestComment = "push_protection_bypass_request_comment"
-                case pushProtectionBypassRequestHtmlUrl = "push_protection_bypass_request_html_url"
-                case resolutionComment = "resolution_comment"
-                case validity
-                case publiclyLeaked = "publicly_leaked"
-                case multiRepo = "multi_repo"
-                case isBase64Encoded = "is_base64_encoded"
-            }
-        }
-        /// The ID of the push protection bypass placeholder. This value is returned on any push protected routes.
-        ///
-        /// - Remark: Generated from `#/components/schemas/secret-scanning-push-protection-bypass-placeholder-id`.
-        public typealias SecretScanningPushProtectionBypassPlaceholderId = Swift.String
-        /// - Remark: Generated from `#/components/schemas/secret-scanning-alert`.
-        public struct SecretScanningAlert: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/number`.
-            public var number: Components.Schemas.AlertNumber?
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/created_at`.
-            public var createdAt: Components.Schemas.AlertCreatedAt?
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/updated_at`.
-            public var updatedAt: Components.Schemas.NullableAlertUpdatedAt?
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/url`.
-            public var url: Components.Schemas.AlertUrl?
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/html_url`.
-            public var htmlUrl: Components.Schemas.AlertHtmlUrl?
-            /// The REST API URL of the code locations for this alert.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/locations_url`.
-            public var locationsUrl: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/state`.
-            public var state: Components.Schemas.SecretScanningAlertState?
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/resolution`.
-            public var resolution: Components.Schemas.SecretScanningAlertResolution?
-            /// The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/resolved_at`.
-            public var resolvedAt: Foundation.Date?
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/resolved_by`.
-            public var resolvedBy: Components.Schemas.NullableSimpleUser?
-            /// An optional comment to resolve an alert.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/resolution_comment`.
-            public var resolutionComment: Swift.String?
-            /// The type of secret that secret scanning detected.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/secret_type`.
-            public var secretType: Swift.String?
-            /// User-friendly name for the detected secret, matching the `secret_type`.
-            /// For a list of built-in patterns, see "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)."
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/secret_type_display_name`.
-            public var secretTypeDisplayName: Swift.String?
-            /// The secret that was detected.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/secret`.
-            public var secret: Swift.String?
-            /// Whether push protection was bypassed for the detected secret.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypassed`.
-            public var pushProtectionBypassed: Swift.Bool?
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypassed_by`.
-            public var pushProtectionBypassedBy: Components.Schemas.NullableSimpleUser?
-            /// The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypassed_at`.
-            public var pushProtectionBypassedAt: Foundation.Date?
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypass_request_reviewer`.
-            public var pushProtectionBypassRequestReviewer: Components.Schemas.NullableSimpleUser?
-            /// An optional comment when reviewing a push protection bypass.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypass_request_reviewer_comment`.
-            public var pushProtectionBypassRequestReviewerComment: Swift.String?
-            /// An optional comment when requesting a push protection bypass.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypass_request_comment`.
-            public var pushProtectionBypassRequestComment: Swift.String?
-            /// The URL to a push protection bypass request.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypass_request_html_url`.
-            public var pushProtectionBypassRequestHtmlUrl: Swift.String?
-            /// The token status as of the latest validity check.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/validity`.
-            @frozen public enum ValidityPayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case active = "active"
-                case inactive = "inactive"
-                case unknown = "unknown"
-            }
-            /// The token status as of the latest validity check.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/validity`.
-            public var validity: Components.Schemas.SecretScanningAlert.ValidityPayload?
-            /// Whether the detected secret was publicly leaked.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/publicly_leaked`.
-            public var publiclyLeaked: Swift.Bool?
-            /// Whether the detected secret was found in multiple repositories under the same organization or enterprise.
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/multi_repo`.
-            public var multiRepo: Swift.Bool?
-            /// A boolean value representing whether or not alert is base64 encoded
-            ///
-            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/is_base64_encoded`.
-            public var isBase64Encoded: Swift.Bool?
-            /// Creates a new `SecretScanningAlert`.
-            ///
-            /// - Parameters:
-            ///   - number:
-            ///   - createdAt:
-            ///   - updatedAt:
-            ///   - url:
-            ///   - htmlUrl:
-            ///   - locationsUrl: The REST API URL of the code locations for this alert.
-            ///   - state:
-            ///   - resolution:
-            ///   - resolvedAt: The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-            ///   - resolvedBy:
-            ///   - resolutionComment: An optional comment to resolve an alert.
-            ///   - secretType: The type of secret that secret scanning detected.
-            ///   - secretTypeDisplayName: User-friendly name for the detected secret, matching the `secret_type`.
-            ///   - secret: The secret that was detected.
-            ///   - pushProtectionBypassed: Whether push protection was bypassed for the detected secret.
-            ///   - pushProtectionBypassedBy:
-            ///   - pushProtectionBypassedAt: The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
-            ///   - pushProtectionBypassRequestReviewer:
-            ///   - pushProtectionBypassRequestReviewerComment: An optional comment when reviewing a push protection bypass.
-            ///   - pushProtectionBypassRequestComment: An optional comment when requesting a push protection bypass.
-            ///   - pushProtectionBypassRequestHtmlUrl: The URL to a push protection bypass request.
-            ///   - validity: The token status as of the latest validity check.
-            ///   - publiclyLeaked: Whether the detected secret was publicly leaked.
-            ///   - multiRepo: Whether the detected secret was found in multiple repositories under the same organization or enterprise.
-            ///   - isBase64Encoded: A boolean value representing whether or not alert is base64 encoded
-            public init(
-                number: Components.Schemas.AlertNumber? = nil,
-                createdAt: Components.Schemas.AlertCreatedAt? = nil,
-                updatedAt: Components.Schemas.NullableAlertUpdatedAt? = nil,
-                url: Components.Schemas.AlertUrl? = nil,
-                htmlUrl: Components.Schemas.AlertHtmlUrl? = nil,
-                locationsUrl: Swift.String? = nil,
-                state: Components.Schemas.SecretScanningAlertState? = nil,
-                resolution: Components.Schemas.SecretScanningAlertResolution? = nil,
-                resolvedAt: Foundation.Date? = nil,
-                resolvedBy: Components.Schemas.NullableSimpleUser? = nil,
-                resolutionComment: Swift.String? = nil,
-                secretType: Swift.String? = nil,
-                secretTypeDisplayName: Swift.String? = nil,
-                secret: Swift.String? = nil,
-                pushProtectionBypassed: Swift.Bool? = nil,
-                pushProtectionBypassedBy: Components.Schemas.NullableSimpleUser? = nil,
-                pushProtectionBypassedAt: Foundation.Date? = nil,
-                pushProtectionBypassRequestReviewer: Components.Schemas.NullableSimpleUser? = nil,
-                pushProtectionBypassRequestReviewerComment: Swift.String? = nil,
-                pushProtectionBypassRequestComment: Swift.String? = nil,
-                pushProtectionBypassRequestHtmlUrl: Swift.String? = nil,
-                validity: Components.Schemas.SecretScanningAlert.ValidityPayload? = nil,
-                publiclyLeaked: Swift.Bool? = nil,
-                multiRepo: Swift.Bool? = nil,
-                isBase64Encoded: Swift.Bool? = nil
-            ) {
-                self.number = number
-                self.createdAt = createdAt
-                self.updatedAt = updatedAt
-                self.url = url
-                self.htmlUrl = htmlUrl
-                self.locationsUrl = locationsUrl
-                self.state = state
-                self.resolution = resolution
-                self.resolvedAt = resolvedAt
-                self.resolvedBy = resolvedBy
-                self.resolutionComment = resolutionComment
-                self.secretType = secretType
-                self.secretTypeDisplayName = secretTypeDisplayName
-                self.secret = secret
-                self.pushProtectionBypassed = pushProtectionBypassed
-                self.pushProtectionBypassedBy = pushProtectionBypassedBy
-                self.pushProtectionBypassedAt = pushProtectionBypassedAt
-                self.pushProtectionBypassRequestReviewer = pushProtectionBypassRequestReviewer
-                self.pushProtectionBypassRequestReviewerComment = pushProtectionBypassRequestReviewerComment
-                self.pushProtectionBypassRequestComment = pushProtectionBypassRequestComment
-                self.pushProtectionBypassRequestHtmlUrl = pushProtectionBypassRequestHtmlUrl
-                self.validity = validity
-                self.publiclyLeaked = publiclyLeaked
-                self.multiRepo = multiRepo
-                self.isBase64Encoded = isBase64Encoded
-            }
-            public enum CodingKeys: String, CodingKey {
-                case number
-                case createdAt = "created_at"
-                case updatedAt = "updated_at"
-                case url
-                case htmlUrl = "html_url"
-                case locationsUrl = "locations_url"
-                case state
-                case resolution
-                case resolvedAt = "resolved_at"
-                case resolvedBy = "resolved_by"
-                case resolutionComment = "resolution_comment"
-                case secretType = "secret_type"
-                case secretTypeDisplayName = "secret_type_display_name"
-                case secret
-                case pushProtectionBypassed = "push_protection_bypassed"
-                case pushProtectionBypassedBy = "push_protection_bypassed_by"
-                case pushProtectionBypassedAt = "push_protection_bypassed_at"
-                case pushProtectionBypassRequestReviewer = "push_protection_bypass_request_reviewer"
-                case pushProtectionBypassRequestReviewerComment = "push_protection_bypass_request_reviewer_comment"
-                case pushProtectionBypassRequestComment = "push_protection_bypass_request_comment"
-                case pushProtectionBypassRequestHtmlUrl = "push_protection_bypass_request_html_url"
-                case validity
-                case publiclyLeaked = "publicly_leaked"
-                case multiRepo = "multi_repo"
-                case isBase64Encoded = "is_base64_encoded"
-            }
-        }
-        /// An optional comment when closing or reopening an alert. Cannot be updated or deleted.
-        ///
-        /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-resolution-comment`.
-        public typealias SecretScanningAlertResolutionComment = Swift.String
         /// Represents a 'commit' secret scanning location type. This location type shows that a secret was detected inside a commit to a repository.
         ///
         /// - Remark: Generated from `#/components/schemas/secret-scanning-location-commit`.
@@ -1829,6 +1415,596 @@ public enum Components {
                 case pullRequestReviewCommentUrl = "pull_request_review_comment_url"
             }
         }
+        /// Details on the location where the token was initially detected. This can be a commit, wiki commit, issue, discussion, pull request.
+        ///
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location`.
+        @frozen public enum NullableSecretScanningFirstDetectedLocation: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case1`.
+            case SecretScanningLocationCommit(Components.Schemas.SecretScanningLocationCommit)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case2`.
+            case SecretScanningLocationWikiCommit(Components.Schemas.SecretScanningLocationWikiCommit)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case3`.
+            case SecretScanningLocationIssueTitle(Components.Schemas.SecretScanningLocationIssueTitle)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case4`.
+            case SecretScanningLocationIssueBody(Components.Schemas.SecretScanningLocationIssueBody)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case5`.
+            case SecretScanningLocationIssueComment(Components.Schemas.SecretScanningLocationIssueComment)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case6`.
+            case SecretScanningLocationDiscussionTitle(Components.Schemas.SecretScanningLocationDiscussionTitle)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case7`.
+            case SecretScanningLocationDiscussionBody(Components.Schemas.SecretScanningLocationDiscussionBody)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case8`.
+            case SecretScanningLocationDiscussionComment(Components.Schemas.SecretScanningLocationDiscussionComment)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case9`.
+            case SecretScanningLocationPullRequestTitle(Components.Schemas.SecretScanningLocationPullRequestTitle)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case10`.
+            case SecretScanningLocationPullRequestBody(Components.Schemas.SecretScanningLocationPullRequestBody)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case11`.
+            case SecretScanningLocationPullRequestComment(Components.Schemas.SecretScanningLocationPullRequestComment)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case12`.
+            case SecretScanningLocationPullRequestReview(Components.Schemas.SecretScanningLocationPullRequestReview)
+            /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case13`.
+            case SecretScanningLocationPullRequestReviewComment(Components.Schemas.SecretScanningLocationPullRequestReviewComment)
+            public init(from decoder: any Decoder) throws {
+                var errors: [any Error] = []
+                do {
+                    self = .SecretScanningLocationCommit(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationWikiCommit(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationIssueTitle(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationIssueBody(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationIssueComment(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationDiscussionTitle(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationDiscussionBody(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationDiscussionComment(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationPullRequestTitle(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationPullRequestBody(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationPullRequestComment(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationPullRequestReview(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .SecretScanningLocationPullRequestReviewComment(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                    type: Self.self,
+                    codingPath: decoder.codingPath,
+                    errors: errors
+                )
+            }
+            public func encode(to encoder: any Encoder) throws {
+                switch self {
+                case let .SecretScanningLocationCommit(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationWikiCommit(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationIssueTitle(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationIssueBody(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationIssueComment(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationDiscussionTitle(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationDiscussionBody(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationDiscussionComment(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationPullRequestTitle(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationPullRequestBody(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationPullRequestComment(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationPullRequestReview(value):
+                    try value.encode(to: encoder)
+                case let .SecretScanningLocationPullRequestReviewComment(value):
+                    try value.encode(to: encoder)
+                }
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert`.
+        public struct OrganizationSecretScanningAlert: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/number`.
+            public var number: Components.Schemas.AlertNumber?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/created_at`.
+            public var createdAt: Components.Schemas.AlertCreatedAt?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/updated_at`.
+            public var updatedAt: Components.Schemas.NullableAlertUpdatedAt?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/url`.
+            public var url: Components.Schemas.AlertUrl?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/html_url`.
+            public var htmlUrl: Components.Schemas.AlertHtmlUrl?
+            /// The REST API URL of the code locations for this alert.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/locations_url`.
+            public var locationsUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/state`.
+            public var state: Components.Schemas.SecretScanningAlertState?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/resolution`.
+            public var resolution: Components.Schemas.SecretScanningAlertResolution?
+            /// The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/resolved_at`.
+            public var resolvedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/resolved_by`.
+            public var resolvedBy: Components.Schemas.NullableSimpleUser?
+            /// The type of secret that secret scanning detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/secret_type`.
+            public var secretType: Swift.String?
+            /// User-friendly name for the detected secret, matching the `secret_type`.
+            /// For a list of built-in patterns, see "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)."
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/secret_type_display_name`.
+            public var secretTypeDisplayName: Swift.String?
+            /// The secret that was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/secret`.
+            public var secret: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/repository`.
+            public var repository: Components.Schemas.SimpleRepository?
+            /// Whether push protection was bypassed for the detected secret.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypassed`.
+            public var pushProtectionBypassed: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypassed_by`.
+            public var pushProtectionBypassedBy: Components.Schemas.NullableSimpleUser?
+            /// The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypassed_at`.
+            public var pushProtectionBypassedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypass_request_reviewer`.
+            public var pushProtectionBypassRequestReviewer: Components.Schemas.NullableSimpleUser?
+            /// An optional comment when reviewing a push protection bypass.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypass_request_reviewer_comment`.
+            public var pushProtectionBypassRequestReviewerComment: Swift.String?
+            /// An optional comment when requesting a push protection bypass.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypass_request_comment`.
+            public var pushProtectionBypassRequestComment: Swift.String?
+            /// The URL to a push protection bypass request.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/push_protection_bypass_request_html_url`.
+            public var pushProtectionBypassRequestHtmlUrl: Swift.String?
+            /// The comment that was optionally added when this alert was closed
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/resolution_comment`.
+            public var resolutionComment: Swift.String?
+            /// The token status as of the latest validity check.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/validity`.
+            @frozen public enum ValidityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case active = "active"
+                case inactive = "inactive"
+                case unknown = "unknown"
+            }
+            /// The token status as of the latest validity check.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/validity`.
+            public var validity: Components.Schemas.OrganizationSecretScanningAlert.ValidityPayload?
+            /// Whether the secret was publicly leaked.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/publicly_leaked`.
+            public var publiclyLeaked: Swift.Bool?
+            /// Whether the detected secret was found in multiple repositories in the same organization or enterprise.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/multi_repo`.
+            public var multiRepo: Swift.Bool?
+            /// A boolean value representing whether or not alert is base64 encoded
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/is_base64_encoded`.
+            public var isBase64Encoded: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/first_location_detected`.
+            public var firstLocationDetected: Components.Schemas.NullableSecretScanningFirstDetectedLocation?
+            /// A boolean value representing whether or not the token in the alert was detected in more than one location.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/has_more_locations`.
+            public var hasMoreLocations: Swift.Bool?
+            /// Creates a new `OrganizationSecretScanningAlert`.
+            ///
+            /// - Parameters:
+            ///   - number:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - locationsUrl: The REST API URL of the code locations for this alert.
+            ///   - state:
+            ///   - resolution:
+            ///   - resolvedAt: The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///   - resolvedBy:
+            ///   - secretType: The type of secret that secret scanning detected.
+            ///   - secretTypeDisplayName: User-friendly name for the detected secret, matching the `secret_type`.
+            ///   - secret: The secret that was detected.
+            ///   - repository:
+            ///   - pushProtectionBypassed: Whether push protection was bypassed for the detected secret.
+            ///   - pushProtectionBypassedBy:
+            ///   - pushProtectionBypassedAt: The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///   - pushProtectionBypassRequestReviewer:
+            ///   - pushProtectionBypassRequestReviewerComment: An optional comment when reviewing a push protection bypass.
+            ///   - pushProtectionBypassRequestComment: An optional comment when requesting a push protection bypass.
+            ///   - pushProtectionBypassRequestHtmlUrl: The URL to a push protection bypass request.
+            ///   - resolutionComment: The comment that was optionally added when this alert was closed
+            ///   - validity: The token status as of the latest validity check.
+            ///   - publiclyLeaked: Whether the secret was publicly leaked.
+            ///   - multiRepo: Whether the detected secret was found in multiple repositories in the same organization or enterprise.
+            ///   - isBase64Encoded: A boolean value representing whether or not alert is base64 encoded
+            ///   - firstLocationDetected:
+            ///   - hasMoreLocations: A boolean value representing whether or not the token in the alert was detected in more than one location.
+            public init(
+                number: Components.Schemas.AlertNumber? = nil,
+                createdAt: Components.Schemas.AlertCreatedAt? = nil,
+                updatedAt: Components.Schemas.NullableAlertUpdatedAt? = nil,
+                url: Components.Schemas.AlertUrl? = nil,
+                htmlUrl: Components.Schemas.AlertHtmlUrl? = nil,
+                locationsUrl: Swift.String? = nil,
+                state: Components.Schemas.SecretScanningAlertState? = nil,
+                resolution: Components.Schemas.SecretScanningAlertResolution? = nil,
+                resolvedAt: Foundation.Date? = nil,
+                resolvedBy: Components.Schemas.NullableSimpleUser? = nil,
+                secretType: Swift.String? = nil,
+                secretTypeDisplayName: Swift.String? = nil,
+                secret: Swift.String? = nil,
+                repository: Components.Schemas.SimpleRepository? = nil,
+                pushProtectionBypassed: Swift.Bool? = nil,
+                pushProtectionBypassedBy: Components.Schemas.NullableSimpleUser? = nil,
+                pushProtectionBypassedAt: Foundation.Date? = nil,
+                pushProtectionBypassRequestReviewer: Components.Schemas.NullableSimpleUser? = nil,
+                pushProtectionBypassRequestReviewerComment: Swift.String? = nil,
+                pushProtectionBypassRequestComment: Swift.String? = nil,
+                pushProtectionBypassRequestHtmlUrl: Swift.String? = nil,
+                resolutionComment: Swift.String? = nil,
+                validity: Components.Schemas.OrganizationSecretScanningAlert.ValidityPayload? = nil,
+                publiclyLeaked: Swift.Bool? = nil,
+                multiRepo: Swift.Bool? = nil,
+                isBase64Encoded: Swift.Bool? = nil,
+                firstLocationDetected: Components.Schemas.NullableSecretScanningFirstDetectedLocation? = nil,
+                hasMoreLocations: Swift.Bool? = nil
+            ) {
+                self.number = number
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.locationsUrl = locationsUrl
+                self.state = state
+                self.resolution = resolution
+                self.resolvedAt = resolvedAt
+                self.resolvedBy = resolvedBy
+                self.secretType = secretType
+                self.secretTypeDisplayName = secretTypeDisplayName
+                self.secret = secret
+                self.repository = repository
+                self.pushProtectionBypassed = pushProtectionBypassed
+                self.pushProtectionBypassedBy = pushProtectionBypassedBy
+                self.pushProtectionBypassedAt = pushProtectionBypassedAt
+                self.pushProtectionBypassRequestReviewer = pushProtectionBypassRequestReviewer
+                self.pushProtectionBypassRequestReviewerComment = pushProtectionBypassRequestReviewerComment
+                self.pushProtectionBypassRequestComment = pushProtectionBypassRequestComment
+                self.pushProtectionBypassRequestHtmlUrl = pushProtectionBypassRequestHtmlUrl
+                self.resolutionComment = resolutionComment
+                self.validity = validity
+                self.publiclyLeaked = publiclyLeaked
+                self.multiRepo = multiRepo
+                self.isBase64Encoded = isBase64Encoded
+                self.firstLocationDetected = firstLocationDetected
+                self.hasMoreLocations = hasMoreLocations
+            }
+            public enum CodingKeys: String, CodingKey {
+                case number
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case url
+                case htmlUrl = "html_url"
+                case locationsUrl = "locations_url"
+                case state
+                case resolution
+                case resolvedAt = "resolved_at"
+                case resolvedBy = "resolved_by"
+                case secretType = "secret_type"
+                case secretTypeDisplayName = "secret_type_display_name"
+                case secret
+                case repository
+                case pushProtectionBypassed = "push_protection_bypassed"
+                case pushProtectionBypassedBy = "push_protection_bypassed_by"
+                case pushProtectionBypassedAt = "push_protection_bypassed_at"
+                case pushProtectionBypassRequestReviewer = "push_protection_bypass_request_reviewer"
+                case pushProtectionBypassRequestReviewerComment = "push_protection_bypass_request_reviewer_comment"
+                case pushProtectionBypassRequestComment = "push_protection_bypass_request_comment"
+                case pushProtectionBypassRequestHtmlUrl = "push_protection_bypass_request_html_url"
+                case resolutionComment = "resolution_comment"
+                case validity
+                case publiclyLeaked = "publicly_leaked"
+                case multiRepo = "multi_repo"
+                case isBase64Encoded = "is_base64_encoded"
+                case firstLocationDetected = "first_location_detected"
+                case hasMoreLocations = "has_more_locations"
+            }
+        }
+        /// The ID of the push protection bypass placeholder. This value is returned on any push protected routes.
+        ///
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-push-protection-bypass-placeholder-id`.
+        public typealias SecretScanningPushProtectionBypassPlaceholderId = Swift.String
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-alert`.
+        public struct SecretScanningAlert: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/number`.
+            public var number: Components.Schemas.AlertNumber?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/created_at`.
+            public var createdAt: Components.Schemas.AlertCreatedAt?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/updated_at`.
+            public var updatedAt: Components.Schemas.NullableAlertUpdatedAt?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/url`.
+            public var url: Components.Schemas.AlertUrl?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/html_url`.
+            public var htmlUrl: Components.Schemas.AlertHtmlUrl?
+            /// The REST API URL of the code locations for this alert.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/locations_url`.
+            public var locationsUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/state`.
+            public var state: Components.Schemas.SecretScanningAlertState?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/resolution`.
+            public var resolution: Components.Schemas.SecretScanningAlertResolution?
+            /// The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/resolved_at`.
+            public var resolvedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/resolved_by`.
+            public var resolvedBy: Components.Schemas.NullableSimpleUser?
+            /// An optional comment to resolve an alert.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/resolution_comment`.
+            public var resolutionComment: Swift.String?
+            /// The type of secret that secret scanning detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/secret_type`.
+            public var secretType: Swift.String?
+            /// User-friendly name for the detected secret, matching the `secret_type`.
+            /// For a list of built-in patterns, see "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)."
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/secret_type_display_name`.
+            public var secretTypeDisplayName: Swift.String?
+            /// The secret that was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/secret`.
+            public var secret: Swift.String?
+            /// Whether push protection was bypassed for the detected secret.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypassed`.
+            public var pushProtectionBypassed: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypassed_by`.
+            public var pushProtectionBypassedBy: Components.Schemas.NullableSimpleUser?
+            /// The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypassed_at`.
+            public var pushProtectionBypassedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypass_request_reviewer`.
+            public var pushProtectionBypassRequestReviewer: Components.Schemas.NullableSimpleUser?
+            /// An optional comment when reviewing a push protection bypass.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypass_request_reviewer_comment`.
+            public var pushProtectionBypassRequestReviewerComment: Swift.String?
+            /// An optional comment when requesting a push protection bypass.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypass_request_comment`.
+            public var pushProtectionBypassRequestComment: Swift.String?
+            /// The URL to a push protection bypass request.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/push_protection_bypass_request_html_url`.
+            public var pushProtectionBypassRequestHtmlUrl: Swift.String?
+            /// The token status as of the latest validity check.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/validity`.
+            @frozen public enum ValidityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case active = "active"
+                case inactive = "inactive"
+                case unknown = "unknown"
+            }
+            /// The token status as of the latest validity check.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/validity`.
+            public var validity: Components.Schemas.SecretScanningAlert.ValidityPayload?
+            /// Whether the detected secret was publicly leaked.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/publicly_leaked`.
+            public var publiclyLeaked: Swift.Bool?
+            /// Whether the detected secret was found in multiple repositories under the same organization or enterprise.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/multi_repo`.
+            public var multiRepo: Swift.Bool?
+            /// A boolean value representing whether or not alert is base64 encoded
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/is_base64_encoded`.
+            public var isBase64Encoded: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/first_location_detected`.
+            public var firstLocationDetected: Components.Schemas.NullableSecretScanningFirstDetectedLocation?
+            /// A boolean value representing whether or not the token in the alert was detected in more than one location.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/has_more_locations`.
+            public var hasMoreLocations: Swift.Bool?
+            /// Creates a new `SecretScanningAlert`.
+            ///
+            /// - Parameters:
+            ///   - number:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - locationsUrl: The REST API URL of the code locations for this alert.
+            ///   - state:
+            ///   - resolution:
+            ///   - resolvedAt: The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///   - resolvedBy:
+            ///   - resolutionComment: An optional comment to resolve an alert.
+            ///   - secretType: The type of secret that secret scanning detected.
+            ///   - secretTypeDisplayName: User-friendly name for the detected secret, matching the `secret_type`.
+            ///   - secret: The secret that was detected.
+            ///   - pushProtectionBypassed: Whether push protection was bypassed for the detected secret.
+            ///   - pushProtectionBypassedBy:
+            ///   - pushProtectionBypassedAt: The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///   - pushProtectionBypassRequestReviewer:
+            ///   - pushProtectionBypassRequestReviewerComment: An optional comment when reviewing a push protection bypass.
+            ///   - pushProtectionBypassRequestComment: An optional comment when requesting a push protection bypass.
+            ///   - pushProtectionBypassRequestHtmlUrl: The URL to a push protection bypass request.
+            ///   - validity: The token status as of the latest validity check.
+            ///   - publiclyLeaked: Whether the detected secret was publicly leaked.
+            ///   - multiRepo: Whether the detected secret was found in multiple repositories under the same organization or enterprise.
+            ///   - isBase64Encoded: A boolean value representing whether or not alert is base64 encoded
+            ///   - firstLocationDetected:
+            ///   - hasMoreLocations: A boolean value representing whether or not the token in the alert was detected in more than one location.
+            public init(
+                number: Components.Schemas.AlertNumber? = nil,
+                createdAt: Components.Schemas.AlertCreatedAt? = nil,
+                updatedAt: Components.Schemas.NullableAlertUpdatedAt? = nil,
+                url: Components.Schemas.AlertUrl? = nil,
+                htmlUrl: Components.Schemas.AlertHtmlUrl? = nil,
+                locationsUrl: Swift.String? = nil,
+                state: Components.Schemas.SecretScanningAlertState? = nil,
+                resolution: Components.Schemas.SecretScanningAlertResolution? = nil,
+                resolvedAt: Foundation.Date? = nil,
+                resolvedBy: Components.Schemas.NullableSimpleUser? = nil,
+                resolutionComment: Swift.String? = nil,
+                secretType: Swift.String? = nil,
+                secretTypeDisplayName: Swift.String? = nil,
+                secret: Swift.String? = nil,
+                pushProtectionBypassed: Swift.Bool? = nil,
+                pushProtectionBypassedBy: Components.Schemas.NullableSimpleUser? = nil,
+                pushProtectionBypassedAt: Foundation.Date? = nil,
+                pushProtectionBypassRequestReviewer: Components.Schemas.NullableSimpleUser? = nil,
+                pushProtectionBypassRequestReviewerComment: Swift.String? = nil,
+                pushProtectionBypassRequestComment: Swift.String? = nil,
+                pushProtectionBypassRequestHtmlUrl: Swift.String? = nil,
+                validity: Components.Schemas.SecretScanningAlert.ValidityPayload? = nil,
+                publiclyLeaked: Swift.Bool? = nil,
+                multiRepo: Swift.Bool? = nil,
+                isBase64Encoded: Swift.Bool? = nil,
+                firstLocationDetected: Components.Schemas.NullableSecretScanningFirstDetectedLocation? = nil,
+                hasMoreLocations: Swift.Bool? = nil
+            ) {
+                self.number = number
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.locationsUrl = locationsUrl
+                self.state = state
+                self.resolution = resolution
+                self.resolvedAt = resolvedAt
+                self.resolvedBy = resolvedBy
+                self.resolutionComment = resolutionComment
+                self.secretType = secretType
+                self.secretTypeDisplayName = secretTypeDisplayName
+                self.secret = secret
+                self.pushProtectionBypassed = pushProtectionBypassed
+                self.pushProtectionBypassedBy = pushProtectionBypassedBy
+                self.pushProtectionBypassedAt = pushProtectionBypassedAt
+                self.pushProtectionBypassRequestReviewer = pushProtectionBypassRequestReviewer
+                self.pushProtectionBypassRequestReviewerComment = pushProtectionBypassRequestReviewerComment
+                self.pushProtectionBypassRequestComment = pushProtectionBypassRequestComment
+                self.pushProtectionBypassRequestHtmlUrl = pushProtectionBypassRequestHtmlUrl
+                self.validity = validity
+                self.publiclyLeaked = publiclyLeaked
+                self.multiRepo = multiRepo
+                self.isBase64Encoded = isBase64Encoded
+                self.firstLocationDetected = firstLocationDetected
+                self.hasMoreLocations = hasMoreLocations
+            }
+            public enum CodingKeys: String, CodingKey {
+                case number
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case url
+                case htmlUrl = "html_url"
+                case locationsUrl = "locations_url"
+                case state
+                case resolution
+                case resolvedAt = "resolved_at"
+                case resolvedBy = "resolved_by"
+                case resolutionComment = "resolution_comment"
+                case secretType = "secret_type"
+                case secretTypeDisplayName = "secret_type_display_name"
+                case secret
+                case pushProtectionBypassed = "push_protection_bypassed"
+                case pushProtectionBypassedBy = "push_protection_bypassed_by"
+                case pushProtectionBypassedAt = "push_protection_bypassed_at"
+                case pushProtectionBypassRequestReviewer = "push_protection_bypass_request_reviewer"
+                case pushProtectionBypassRequestReviewerComment = "push_protection_bypass_request_reviewer_comment"
+                case pushProtectionBypassRequestComment = "push_protection_bypass_request_comment"
+                case pushProtectionBypassRequestHtmlUrl = "push_protection_bypass_request_html_url"
+                case validity
+                case publiclyLeaked = "publicly_leaked"
+                case multiRepo = "multi_repo"
+                case isBase64Encoded = "is_base64_encoded"
+                case firstLocationDetected = "first_location_detected"
+                case hasMoreLocations = "has_more_locations"
+            }
+        }
+        /// An optional comment when closing or reopening an alert. Cannot be updated or deleted.
+        ///
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-resolution-comment`.
+        public typealias SecretScanningAlertResolutionComment = Swift.String
         /// - Remark: Generated from `#/components/schemas/secret-scanning-location`.
         public struct SecretScanningLocation: Codable, Hashable, Sendable {
             /// The location type. Because secrets may be found in different types of resources (ie. code, comments, issues, pull requests, discussions), this field identifies the type of resource where the secret was found.

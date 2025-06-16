@@ -1221,12 +1221,16 @@ public enum Components {
             public var id: Swift.Int64
             /// - Remark: Generated from `#/components/schemas/enterprise-team/name`.
             public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/description`.
+            public var description: Swift.String?
             /// - Remark: Generated from `#/components/schemas/enterprise-team/slug`.
             public var slug: Swift.String
             /// - Remark: Generated from `#/components/schemas/enterprise-team/url`.
             public var url: Swift.String
             /// - Remark: Generated from `#/components/schemas/enterprise-team/sync_to_organizations`.
-            public var syncToOrganizations: Swift.String
+            public var syncToOrganizations: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/organization_selection_type`.
+            public var organizationSelectionType: Swift.String?
             /// - Remark: Generated from `#/components/schemas/enterprise-team/group_id`.
             public var groupId: Swift.String?
             /// - Remark: Generated from `#/components/schemas/enterprise-team/group_name`.
@@ -1244,9 +1248,11 @@ public enum Components {
             /// - Parameters:
             ///   - id:
             ///   - name:
+            ///   - description:
             ///   - slug:
             ///   - url:
             ///   - syncToOrganizations:
+            ///   - organizationSelectionType:
             ///   - groupId:
             ///   - groupName:
             ///   - htmlUrl:
@@ -1256,9 +1262,11 @@ public enum Components {
             public init(
                 id: Swift.Int64,
                 name: Swift.String,
+                description: Swift.String? = nil,
                 slug: Swift.String,
                 url: Swift.String,
-                syncToOrganizations: Swift.String,
+                syncToOrganizations: Swift.String? = nil,
+                organizationSelectionType: Swift.String? = nil,
                 groupId: Swift.String? = nil,
                 groupName: Swift.String? = nil,
                 htmlUrl: Swift.String,
@@ -1268,9 +1276,11 @@ public enum Components {
             ) {
                 self.id = id
                 self.name = name
+                self.description = description
                 self.slug = slug
                 self.url = url
                 self.syncToOrganizations = syncToOrganizations
+                self.organizationSelectionType = organizationSelectionType
                 self.groupId = groupId
                 self.groupName = groupName
                 self.htmlUrl = htmlUrl
@@ -1281,9 +1291,11 @@ public enum Components {
             public enum CodingKeys: String, CodingKey {
                 case id
                 case name
+                case description
                 case slug
                 case url
                 case syncToOrganizations = "sync_to_organizations"
+                case organizationSelectionType = "organization_selection_type"
                 case groupId = "group_id"
                 case groupName = "group_name"
                 case htmlUrl = "html_url"

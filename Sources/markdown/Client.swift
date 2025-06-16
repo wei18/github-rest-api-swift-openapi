@@ -40,7 +40,7 @@ public struct Client: APIProtocol {
     }
     /// Render a Markdown document
     ///
-    ///
+    /// Depending on what is rendered in the Markdown, you may need to provide additional token scopes for labels, such as `issues:read` or `pull_requests:read`.
     ///
     /// - Remark: HTTP `POST /markdown`.
     /// - Remark: Generated from `#/paths//markdown/post(markdown/render)`.

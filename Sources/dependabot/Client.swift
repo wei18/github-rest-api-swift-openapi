@@ -298,6 +298,20 @@ public struct Client: APIProtocol {
                     method: .get
                 )
                 suppressMutabilityWarning(&request)
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "page",
+                    value: input.query.page
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "per_page",
+                    value: input.query.perPage
+                )
                 converter.setAcceptHeader(
                     in: &request.headerFields,
                     contentTypes: input.headers.accept
@@ -389,6 +403,14 @@ public struct Client: APIProtocol {
     /// > [!NOTE]
     /// >    This operation supports both server-to-server and user-to-server access.
     /// Unauthorized users will not see the existence of this endpoint.
+    ///
+    /// **Example request body:**
+    /// ```json
+    /// {
+    ///   "repository_ids_to_add": [123, 456],
+    ///   "repository_ids_to_remove": [789]
+    /// }
+    /// ```
     ///
     /// - Remark: HTTP `PATCH /organizations/{org}/dependabot/repository-access`.
     /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)`.

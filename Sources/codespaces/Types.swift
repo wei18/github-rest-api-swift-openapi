@@ -3237,6 +3237,30 @@ public enum Components {
             public var webCommitSignoffRequired: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/security_and_analysis`.
             public var securityAndAnalysis: Components.Schemas.SecurityAndAnalysis?
+            /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/custom_properties`.
+            public struct CustomPropertiesPayload: Codable, Hashable, Sendable {
+                /// A container of undocumented properties.
+                public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                /// Creates a new `CustomPropertiesPayload`.
+                ///
+                /// - Parameters:
+                ///   - additionalProperties: A container of undocumented properties.
+                public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                    self.additionalProperties = additionalProperties
+                }
+                public init(from decoder: any Decoder) throws {
+                    additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    try encoder.encodeAdditionalProperties(additionalProperties)
+                }
+            }
+            /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/custom_properties`.
+            public var customProperties: Components.Schemas.MinimalRepository.CustomPropertiesPayload?
             /// Creates a new `MinimalRepository`.
             ///
             /// - Parameters:
@@ -3327,6 +3351,7 @@ public enum Components {
             ///   - allowForking:
             ///   - webCommitSignoffRequired:
             ///   - securityAndAnalysis:
+            ///   - customProperties: The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values.
             public init(
                 id: Swift.Int64,
                 nodeId: Swift.String,
@@ -3414,7 +3439,8 @@ public enum Components {
                 watchers: Swift.Int? = nil,
                 allowForking: Swift.Bool? = nil,
                 webCommitSignoffRequired: Swift.Bool? = nil,
-                securityAndAnalysis: Components.Schemas.SecurityAndAnalysis? = nil
+                securityAndAnalysis: Components.Schemas.SecurityAndAnalysis? = nil,
+                customProperties: Components.Schemas.MinimalRepository.CustomPropertiesPayload? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -3503,6 +3529,7 @@ public enum Components {
                 self.allowForking = allowForking
                 self.webCommitSignoffRequired = webCommitSignoffRequired
                 self.securityAndAnalysis = securityAndAnalysis
+                self.customProperties = customProperties
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -3592,6 +3619,7 @@ public enum Components {
                 case allowForking = "allow_forking"
                 case webCommitSignoffRequired = "web_commit_signoff_required"
                 case securityAndAnalysis = "security_and_analysis"
+                case customProperties = "custom_properties"
             }
         }
         /// An object without any properties.

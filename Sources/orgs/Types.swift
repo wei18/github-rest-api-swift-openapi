@@ -66,6 +66,17 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `DELETE /orgs/{org}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/delete(orgs/delete)`.
     func orgsDelete(_ input: Operations.OrgsDelete.Input) async throws -> Operations.OrgsDelete.Output
+    /// List attestations by bulk subject digests
+    ///
+    /// List a collection of artifact attestations associated with any entry in a list of subject digests owned by an organization.
+    ///
+    /// The collection of attestations returned by this endpoint is filtered according to the authenticated user's permissions; if the authenticated user cannot read a repository, the attestations associated with that repository will not be included in the response. In addition, when using a fine-grained access token the `attestations:read` permission is required.
+    ///
+    /// **Please note:** in order to offer meaningful security benefits, an attestation's signature and timestamps **must** be cryptographically verified, and the identity of the attestation signer **must** be validated. Attestations can be verified using the [GitHub CLI `attestation verify` command](https://cli.github.com/manual/gh_attestation_verify). For more information, see [our guide on how to use artifact attestations to establish a build's provenance](https://docs.github.com/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds).
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/attestations/bulk-list`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/attestations/bulk-list/post(orgs/list-attestations-bulk)`.
+    func orgsListAttestationsBulk(_ input: Operations.OrgsListAttestationsBulk.Input) async throws -> Operations.OrgsListAttestationsBulk.Output
     /// List attestations
     ///
     /// List a collection of artifact attestations with a given subject digest that are associated with repositories owned by an organization.
@@ -961,6 +972,29 @@ extension APIProtocol {
         try await orgsDelete(Operations.OrgsDelete.Input(
             path: path,
             headers: headers
+        ))
+    }
+    /// List attestations by bulk subject digests
+    ///
+    /// List a collection of artifact attestations associated with any entry in a list of subject digests owned by an organization.
+    ///
+    /// The collection of attestations returned by this endpoint is filtered according to the authenticated user's permissions; if the authenticated user cannot read a repository, the attestations associated with that repository will not be included in the response. In addition, when using a fine-grained access token the `attestations:read` permission is required.
+    ///
+    /// **Please note:** in order to offer meaningful security benefits, an attestation's signature and timestamps **must** be cryptographically verified, and the identity of the attestation signer **must** be validated. Attestations can be verified using the [GitHub CLI `attestation verify` command](https://cli.github.com/manual/gh_attestation_verify). For more information, see [our guide on how to use artifact attestations to establish a build's provenance](https://docs.github.com/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds).
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/attestations/bulk-list`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/attestations/bulk-list/post(orgs/list-attestations-bulk)`.
+    public func orgsListAttestationsBulk(
+        path: Operations.OrgsListAttestationsBulk.Input.Path,
+        query: Operations.OrgsListAttestationsBulk.Input.Query = .init(),
+        headers: Operations.OrgsListAttestationsBulk.Input.Headers = .init(),
+        body: Operations.OrgsListAttestationsBulk.Input.Body
+    ) async throws -> Operations.OrgsListAttestationsBulk.Output {
+        try await orgsListAttestationsBulk(Operations.OrgsListAttestationsBulk.Input(
+            path: path,
+            query: query,
+            headers: headers,
+            body: body
         ))
     }
     /// List attestations
@@ -5053,6 +5087,30 @@ public enum Components {
             public var webCommitSignoffRequired: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/security_and_analysis`.
             public var securityAndAnalysis: Components.Schemas.SecurityAndAnalysis?
+            /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/custom_properties`.
+            public struct CustomPropertiesPayload: Codable, Hashable, Sendable {
+                /// A container of undocumented properties.
+                public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                /// Creates a new `CustomPropertiesPayload`.
+                ///
+                /// - Parameters:
+                ///   - additionalProperties: A container of undocumented properties.
+                public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                    self.additionalProperties = additionalProperties
+                }
+                public init(from decoder: any Decoder) throws {
+                    additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    try encoder.encodeAdditionalProperties(additionalProperties)
+                }
+            }
+            /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/custom_properties`.
+            public var customProperties: Components.Schemas.MinimalRepository.CustomPropertiesPayload?
             /// Creates a new `MinimalRepository`.
             ///
             /// - Parameters:
@@ -5143,6 +5201,7 @@ public enum Components {
             ///   - allowForking:
             ///   - webCommitSignoffRequired:
             ///   - securityAndAnalysis:
+            ///   - customProperties: The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values.
             public init(
                 id: Swift.Int64,
                 nodeId: Swift.String,
@@ -5230,7 +5289,8 @@ public enum Components {
                 watchers: Swift.Int? = nil,
                 allowForking: Swift.Bool? = nil,
                 webCommitSignoffRequired: Swift.Bool? = nil,
-                securityAndAnalysis: Components.Schemas.SecurityAndAnalysis? = nil
+                securityAndAnalysis: Components.Schemas.SecurityAndAnalysis? = nil,
+                customProperties: Components.Schemas.MinimalRepository.CustomPropertiesPayload? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -5319,6 +5379,7 @@ public enum Components {
                 self.allowForking = allowForking
                 self.webCommitSignoffRequired = webCommitSignoffRequired
                 self.securityAndAnalysis = securityAndAnalysis
+                self.customProperties = customProperties
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -5408,6 +5469,7 @@ public enum Components {
                 case allowForking = "allow_forking"
                 case webCommitSignoffRequired = "web_commit_signoff_required"
                 case securityAndAnalysis = "security_and_analysis"
+                case customProperties = "custom_properties"
             }
         }
         /// A GitHub organization.
@@ -5614,6 +5676,10 @@ public enum Components {
             public var plan: Components.Schemas.OrganizationFull.PlanPayload?
             /// - Remark: Generated from `#/components/schemas/organization-full/default_repository_permission`.
             public var defaultRepositoryPermission: Swift.String?
+            /// The default branch for repositories created in this organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-full/default_repository_branch`.
+            public var defaultRepositoryBranch: Swift.String?
             /// - Remark: Generated from `#/components/schemas/organization-full/members_can_create_repositories`.
             public var membersCanCreateRepositories: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/organization-full/two_factor_requirement_enabled`.
@@ -5632,6 +5698,22 @@ public enum Components {
             public var membersCanCreatePublicPages: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/organization-full/members_can_create_private_pages`.
             public var membersCanCreatePrivatePages: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/organization-full/members_can_delete_repositories`.
+            public var membersCanDeleteRepositories: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/organization-full/members_can_change_repo_visibility`.
+            public var membersCanChangeRepoVisibility: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/organization-full/members_can_invite_outside_collaborators`.
+            public var membersCanInviteOutsideCollaborators: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/organization-full/members_can_delete_issues`.
+            public var membersCanDeleteIssues: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/organization-full/display_commenter_full_name_setting_enabled`.
+            public var displayCommenterFullNameSettingEnabled: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/organization-full/readers_can_create_discussions`.
+            public var readersCanCreateDiscussions: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/organization-full/members_can_create_teams`.
+            public var membersCanCreateTeams: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/organization-full/members_can_view_dependency_insights`.
+            public var membersCanViewDependencyInsights: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/organization-full/members_can_fork_private_repositories`.
             public var membersCanForkPrivateRepositories: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/organization-full/web_commit_signoff_required`.
@@ -5746,6 +5828,7 @@ public enum Components {
             ///   - billingEmail:
             ///   - plan:
             ///   - defaultRepositoryPermission:
+            ///   - defaultRepositoryBranch: The default branch for repositories created in this organization.
             ///   - membersCanCreateRepositories:
             ///   - twoFactorRequirementEnabled:
             ///   - membersAllowedRepositoryCreationType:
@@ -5755,6 +5838,14 @@ public enum Components {
             ///   - membersCanCreatePages:
             ///   - membersCanCreatePublicPages:
             ///   - membersCanCreatePrivatePages:
+            ///   - membersCanDeleteRepositories:
+            ///   - membersCanChangeRepoVisibility:
+            ///   - membersCanInviteOutsideCollaborators:
+            ///   - membersCanDeleteIssues:
+            ///   - displayCommenterFullNameSettingEnabled:
+            ///   - readersCanCreateDiscussions:
+            ///   - membersCanCreateTeams:
+            ///   - membersCanViewDependencyInsights:
             ///   - membersCanForkPrivateRepositories:
             ///   - webCommitSignoffRequired:
             ///   - advancedSecurityEnabledForNewRepositories: **Endpoint closing down notice.** Please use [code security configurations](https://docs.github.com/rest/code-security/configurations) instead.
@@ -5805,6 +5896,7 @@ public enum Components {
                 billingEmail: Swift.String? = nil,
                 plan: Components.Schemas.OrganizationFull.PlanPayload? = nil,
                 defaultRepositoryPermission: Swift.String? = nil,
+                defaultRepositoryBranch: Swift.String? = nil,
                 membersCanCreateRepositories: Swift.Bool? = nil,
                 twoFactorRequirementEnabled: Swift.Bool? = nil,
                 membersAllowedRepositoryCreationType: Swift.String? = nil,
@@ -5814,6 +5906,14 @@ public enum Components {
                 membersCanCreatePages: Swift.Bool? = nil,
                 membersCanCreatePublicPages: Swift.Bool? = nil,
                 membersCanCreatePrivatePages: Swift.Bool? = nil,
+                membersCanDeleteRepositories: Swift.Bool? = nil,
+                membersCanChangeRepoVisibility: Swift.Bool? = nil,
+                membersCanInviteOutsideCollaborators: Swift.Bool? = nil,
+                membersCanDeleteIssues: Swift.Bool? = nil,
+                displayCommenterFullNameSettingEnabled: Swift.Bool? = nil,
+                readersCanCreateDiscussions: Swift.Bool? = nil,
+                membersCanCreateTeams: Swift.Bool? = nil,
+                membersCanViewDependencyInsights: Swift.Bool? = nil,
                 membersCanForkPrivateRepositories: Swift.Bool? = nil,
                 webCommitSignoffRequired: Swift.Bool? = nil,
                 advancedSecurityEnabledForNewRepositories: Swift.Bool? = nil,
@@ -5864,6 +5964,7 @@ public enum Components {
                 self.billingEmail = billingEmail
                 self.plan = plan
                 self.defaultRepositoryPermission = defaultRepositoryPermission
+                self.defaultRepositoryBranch = defaultRepositoryBranch
                 self.membersCanCreateRepositories = membersCanCreateRepositories
                 self.twoFactorRequirementEnabled = twoFactorRequirementEnabled
                 self.membersAllowedRepositoryCreationType = membersAllowedRepositoryCreationType
@@ -5873,6 +5974,14 @@ public enum Components {
                 self.membersCanCreatePages = membersCanCreatePages
                 self.membersCanCreatePublicPages = membersCanCreatePublicPages
                 self.membersCanCreatePrivatePages = membersCanCreatePrivatePages
+                self.membersCanDeleteRepositories = membersCanDeleteRepositories
+                self.membersCanChangeRepoVisibility = membersCanChangeRepoVisibility
+                self.membersCanInviteOutsideCollaborators = membersCanInviteOutsideCollaborators
+                self.membersCanDeleteIssues = membersCanDeleteIssues
+                self.displayCommenterFullNameSettingEnabled = displayCommenterFullNameSettingEnabled
+                self.readersCanCreateDiscussions = readersCanCreateDiscussions
+                self.membersCanCreateTeams = membersCanCreateTeams
+                self.membersCanViewDependencyInsights = membersCanViewDependencyInsights
                 self.membersCanForkPrivateRepositories = membersCanForkPrivateRepositories
                 self.webCommitSignoffRequired = webCommitSignoffRequired
                 self.advancedSecurityEnabledForNewRepositories = advancedSecurityEnabledForNewRepositories
@@ -5924,6 +6033,7 @@ public enum Components {
                 case billingEmail = "billing_email"
                 case plan
                 case defaultRepositoryPermission = "default_repository_permission"
+                case defaultRepositoryBranch = "default_repository_branch"
                 case membersCanCreateRepositories = "members_can_create_repositories"
                 case twoFactorRequirementEnabled = "two_factor_requirement_enabled"
                 case membersAllowedRepositoryCreationType = "members_allowed_repository_creation_type"
@@ -5933,6 +6043,14 @@ public enum Components {
                 case membersCanCreatePages = "members_can_create_pages"
                 case membersCanCreatePublicPages = "members_can_create_public_pages"
                 case membersCanCreatePrivatePages = "members_can_create_private_pages"
+                case membersCanDeleteRepositories = "members_can_delete_repositories"
+                case membersCanChangeRepoVisibility = "members_can_change_repo_visibility"
+                case membersCanInviteOutsideCollaborators = "members_can_invite_outside_collaborators"
+                case membersCanDeleteIssues = "members_can_delete_issues"
+                case displayCommenterFullNameSettingEnabled = "display_commenter_full_name_setting_enabled"
+                case readersCanCreateDiscussions = "readers_can_create_discussions"
+                case membersCanCreateTeams = "members_can_create_teams"
+                case membersCanViewDependencyInsights = "members_can_view_dependency_insights"
                 case membersCanForkPrivateRepositories = "members_can_fork_private_repositories"
                 case webCommitSignoffRequired = "web_commit_signoff_required"
                 case advancedSecurityEnabledForNewRepositories = "advanced_security_enabled_for_new_repositories"
@@ -9771,6 +9889,405 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List attestations by bulk subject digests
+    ///
+    /// List a collection of artifact attestations associated with any entry in a list of subject digests owned by an organization.
+    ///
+    /// The collection of attestations returned by this endpoint is filtered according to the authenticated user's permissions; if the authenticated user cannot read a repository, the attestations associated with that repository will not be included in the response. In addition, when using a fine-grained access token the `attestations:read` permission is required.
+    ///
+    /// **Please note:** in order to offer meaningful security benefits, an attestation's signature and timestamps **must** be cryptographically verified, and the identity of the attestation signer **must** be validated. Attestations can be verified using the [GitHub CLI `attestation verify` command](https://cli.github.com/manual/gh_attestation_verify). For more information, see [our guide on how to use artifact attestations to establish a build's provenance](https://docs.github.com/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds).
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/attestations/bulk-list`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/attestations/bulk-list/post(orgs/list-attestations-bulk)`.
+    public enum OrgsListAttestationsBulk {
+        public static let id: Swift.String = "orgs/list-attestations-bulk"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsListAttestationsBulk.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/query/before`.
+                public var before: Components.Parameters.PaginationBefore?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    before: Components.Parameters.PaginationBefore? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil
+                ) {
+                    self.perPage = perPage
+                    self.before = before
+                    self.after = after
+                }
+            }
+            public var query: Operations.OrgsListAttestationsBulk.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListAttestationsBulk.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListAttestationsBulk.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsListAttestationsBulk.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// List of subject digests to fetch attestations for.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/requestBody/json/subject_digests`.
+                    public var subjectDigests: [Swift.String]
+                    /// Optional filter for fetching attestations with a given predicate type.
+                    /// This option accepts `provenance`, `sbom`, or freeform text for custom predicate types.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/requestBody/json/predicate_type`.
+                    public var predicateType: Swift.String?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - subjectDigests: List of subject digests to fetch attestations for.
+                    ///   - predicateType: Optional filter for fetching attestations with a given predicate type.
+                    public init(
+                        subjectDigests: [Swift.String],
+                        predicateType: Swift.String? = nil
+                    ) {
+                        self.subjectDigests = subjectDigests
+                        self.predicateType = predicateType
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case subjectDigests = "subject_digests"
+                        case predicateType = "predicate_type"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/requestBody/content/application\/json`.
+                case json(Operations.OrgsListAttestationsBulk.Input.Body.JsonPayload)
+            }
+            public var body: Operations.OrgsListAttestationsBulk.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.OrgsListAttestationsBulk.Input.Path,
+                query: Operations.OrgsListAttestationsBulk.Input.Query = .init(),
+                headers: Operations.OrgsListAttestationsBulk.Input.Headers = .init(),
+                body: Operations.OrgsListAttestationsBulk.Input.Body
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// Mapping of subject digest to bundles.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests`.
+                        public struct AttestationsSubjectDigestsPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload`.
+                            public struct AdditionalPropertiesPayloadPayload: Codable, Hashable, Sendable {
+                                /// The bundle of the attestation.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle`.
+                                public struct BundlePayload: Codable, Hashable, Sendable {
+                                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle/mediaType`.
+                                    public var mediaType: Swift.String?
+                                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle/verificationMaterial`.
+                                    public struct VerificationMaterialPayload: Codable, Hashable, Sendable {
+                                        /// A container of undocumented properties.
+                                        public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                                        /// Creates a new `VerificationMaterialPayload`.
+                                        ///
+                                        /// - Parameters:
+                                        ///   - additionalProperties: A container of undocumented properties.
+                                        public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                                            self.additionalProperties = additionalProperties
+                                        }
+                                        public init(from decoder: any Decoder) throws {
+                                            additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                                        }
+                                        public func encode(to encoder: any Encoder) throws {
+                                            try encoder.encodeAdditionalProperties(additionalProperties)
+                                        }
+                                    }
+                                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle/verificationMaterial`.
+                                    public var verificationMaterial: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload.VerificationMaterialPayload?
+                                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle/dsseEnvelope`.
+                                    public struct DsseEnvelopePayload: Codable, Hashable, Sendable {
+                                        /// A container of undocumented properties.
+                                        public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                                        /// Creates a new `DsseEnvelopePayload`.
+                                        ///
+                                        /// - Parameters:
+                                        ///   - additionalProperties: A container of undocumented properties.
+                                        public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                                            self.additionalProperties = additionalProperties
+                                        }
+                                        public init(from decoder: any Decoder) throws {
+                                            additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                                        }
+                                        public func encode(to encoder: any Encoder) throws {
+                                            try encoder.encodeAdditionalProperties(additionalProperties)
+                                        }
+                                    }
+                                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle/dsseEnvelope`.
+                                    public var dsseEnvelope: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload.DsseEnvelopePayload?
+                                    /// Creates a new `BundlePayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - mediaType:
+                                    ///   - verificationMaterial:
+                                    ///   - dsseEnvelope:
+                                    public init(
+                                        mediaType: Swift.String? = nil,
+                                        verificationMaterial: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload.VerificationMaterialPayload? = nil,
+                                        dsseEnvelope: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload.DsseEnvelopePayload? = nil
+                                    ) {
+                                        self.mediaType = mediaType
+                                        self.verificationMaterial = verificationMaterial
+                                        self.dsseEnvelope = dsseEnvelope
+                                    }
+                                    public enum CodingKeys: String, CodingKey {
+                                        case mediaType
+                                        case verificationMaterial
+                                        case dsseEnvelope
+                                    }
+                                }
+                                /// The bundle of the attestation.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle`.
+                                public var bundle: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload?
+                                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/repository_id`.
+                                public var repositoryId: Swift.Int?
+                                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle_url`.
+                                public var bundleUrl: Swift.String?
+                                /// Creates a new `AdditionalPropertiesPayloadPayload`.
+                                ///
+                                /// - Parameters:
+                                ///   - bundle: The bundle of the attestation.
+                                ///   - repositoryId:
+                                ///   - bundleUrl:
+                                public init(
+                                    bundle: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload? = nil,
+                                    repositoryId: Swift.Int? = nil,
+                                    bundleUrl: Swift.String? = nil
+                                ) {
+                                    self.bundle = bundle
+                                    self.repositoryId = repositoryId
+                                    self.bundleUrl = bundleUrl
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case bundle
+                                    case repositoryId = "repository_id"
+                                    case bundleUrl = "bundle_url"
+                                }
+                            }
+                            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/additionalProperties`.
+                            public typealias AdditionalPropertiesPayload = [Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload]
+                            /// A container of undocumented properties.
+                            public var additionalProperties: [String: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayload?]
+                            /// Creates a new `AttestationsSubjectDigestsPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - additionalProperties: A container of undocumented properties.
+                            public init(additionalProperties: [String: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayload?] = .init()) {
+                                self.additionalProperties = additionalProperties
+                            }
+                            public init(from decoder: any Decoder) throws {
+                                additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                            }
+                            public func encode(to encoder: any Encoder) throws {
+                                try encoder.encodeAdditionalProperties(additionalProperties)
+                            }
+                        }
+                        /// Mapping of subject digest to bundles.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests`.
+                        public var attestationsSubjectDigests: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload?
+                        /// Information about the current page.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/page_info`.
+                        public struct PageInfoPayload: Codable, Hashable, Sendable {
+                            /// Indicates whether there is a next page.
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/page_info/has_next`.
+                            public var hasNext: Swift.Bool?
+                            /// Indicates whether there is a previous page.
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/page_info/has_previous`.
+                            public var hasPrevious: Swift.Bool?
+                            /// The cursor to the next page.
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/page_info/next`.
+                            public var next: Swift.String?
+                            /// The cursor to the previous page.
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/page_info/previous`.
+                            public var previous: Swift.String?
+                            /// Creates a new `PageInfoPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - hasNext: Indicates whether there is a next page.
+                            ///   - hasPrevious: Indicates whether there is a previous page.
+                            ///   - next: The cursor to the next page.
+                            ///   - previous: The cursor to the previous page.
+                            public init(
+                                hasNext: Swift.Bool? = nil,
+                                hasPrevious: Swift.Bool? = nil,
+                                next: Swift.String? = nil,
+                                previous: Swift.String? = nil
+                            ) {
+                                self.hasNext = hasNext
+                                self.hasPrevious = hasPrevious
+                                self.next = next
+                                self.previous = previous
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case hasNext = "has_next"
+                                case hasPrevious = "has_previous"
+                                case next
+                                case previous
+                            }
+                        }
+                        /// Information about the current page.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/json/page_info`.
+                        public var pageInfo: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.PageInfoPayload?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - attestationsSubjectDigests: Mapping of subject digest to bundles.
+                        ///   - pageInfo: Information about the current page.
+                        public init(
+                            attestationsSubjectDigests: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload? = nil,
+                            pageInfo: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.PageInfoPayload? = nil
+                        ) {
+                            self.attestationsSubjectDigests = attestationsSubjectDigests
+                            self.pageInfo = pageInfo
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case attestationsSubjectDigests = "attestations_subject_digests"
+                            case pageInfo = "page_info"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/responses/200/content/application\/json`.
+                    case json(Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsListAttestationsBulk.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsListAttestationsBulk.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/attestations/bulk-list/post(orgs/list-attestations-bulk)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsListAttestationsBulk.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsListAttestationsBulk.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
                             response: self
                         )
                     }

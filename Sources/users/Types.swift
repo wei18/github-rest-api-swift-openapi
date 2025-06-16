@@ -300,6 +300,27 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /users/{username}`.
     /// - Remark: Generated from `#/paths//users/{username}/get(users/get-by-username)`.
     func usersGetByUsername(_ input: Operations.UsersGetByUsername.Input) async throws -> Operations.UsersGetByUsername.Output
+    /// Delete attestations in bulk
+    ///
+    /// Delete artifact attestations in bulk by either subject digests or unique ID.
+    ///
+    /// - Remark: HTTP `POST /users/{username}/attestations/delete-request`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/delete-request/post(users/delete-attestations-bulk)`.
+    func usersDeleteAttestationsBulk(_ input: Operations.UsersDeleteAttestationsBulk.Input) async throws -> Operations.UsersDeleteAttestationsBulk.Output
+    /// Delete attestations by subject digest
+    ///
+    /// Delete an artifact attestation by subject digest.
+    ///
+    /// - Remark: HTTP `DELETE /users/{username}/attestations/digest/{subject_digest}`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/digest/{subject_digest}/delete(users/delete-attestations-by-subject-digest)`.
+    func usersDeleteAttestationsBySubjectDigest(_ input: Operations.UsersDeleteAttestationsBySubjectDigest.Input) async throws -> Operations.UsersDeleteAttestationsBySubjectDigest.Output
+    /// Delete attestations by ID
+    ///
+    /// Delete an artifact attestation by unique ID that is associated with a repository owned by a user.
+    ///
+    /// - Remark: HTTP `DELETE /users/{username}/attestations/{attestation_id}`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/{attestation_id}/delete(users/delete-attestations-by-id)`.
+    func usersDeleteAttestationsById(_ input: Operations.UsersDeleteAttestationsById.Input) async throws -> Operations.UsersDeleteAttestationsById.Output
     /// List attestations
     ///
     /// List a collection of artifact attestations with a given subject digest that are associated with repositories owned by a user.
@@ -926,6 +947,53 @@ extension APIProtocol {
         headers: Operations.UsersGetByUsername.Input.Headers = .init()
     ) async throws -> Operations.UsersGetByUsername.Output {
         try await usersGetByUsername(Operations.UsersGetByUsername.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Delete attestations in bulk
+    ///
+    /// Delete artifact attestations in bulk by either subject digests or unique ID.
+    ///
+    /// - Remark: HTTP `POST /users/{username}/attestations/delete-request`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/delete-request/post(users/delete-attestations-bulk)`.
+    public func usersDeleteAttestationsBulk(
+        path: Operations.UsersDeleteAttestationsBulk.Input.Path,
+        headers: Operations.UsersDeleteAttestationsBulk.Input.Headers = .init(),
+        body: Operations.UsersDeleteAttestationsBulk.Input.Body
+    ) async throws -> Operations.UsersDeleteAttestationsBulk.Output {
+        try await usersDeleteAttestationsBulk(Operations.UsersDeleteAttestationsBulk.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Delete attestations by subject digest
+    ///
+    /// Delete an artifact attestation by subject digest.
+    ///
+    /// - Remark: HTTP `DELETE /users/{username}/attestations/digest/{subject_digest}`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/digest/{subject_digest}/delete(users/delete-attestations-by-subject-digest)`.
+    public func usersDeleteAttestationsBySubjectDigest(
+        path: Operations.UsersDeleteAttestationsBySubjectDigest.Input.Path,
+        headers: Operations.UsersDeleteAttestationsBySubjectDigest.Input.Headers = .init()
+    ) async throws -> Operations.UsersDeleteAttestationsBySubjectDigest.Output {
+        try await usersDeleteAttestationsBySubjectDigest(Operations.UsersDeleteAttestationsBySubjectDigest.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Delete attestations by ID
+    ///
+    /// Delete an artifact attestation by unique ID that is associated with a repository owned by a user.
+    ///
+    /// - Remark: HTTP `DELETE /users/{username}/attestations/{attestation_id}`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/{attestation_id}/delete(users/delete-attestations-by-id)`.
+    public func usersDeleteAttestationsById(
+        path: Operations.UsersDeleteAttestationsById.Input.Path,
+        headers: Operations.UsersDeleteAttestationsById.Input.Headers = .init()
+    ) async throws -> Operations.UsersDeleteAttestationsById.Output {
+        try await usersDeleteAttestationsById(Operations.UsersDeleteAttestationsById.Input(
             path: path,
             headers: headers
         ))
@@ -11234,6 +11302,614 @@ public enum Operations {
             /// Resource not found
             ///
             /// - Remark: Generated from `#/paths//users/{username}/get(users/get-by-username)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Delete attestations in bulk
+    ///
+    /// Delete artifact attestations in bulk by either subject digests or unique ID.
+    ///
+    /// - Remark: HTTP `POST /users/{username}/attestations/delete-request`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/delete-request/post(users/delete-attestations-bulk)`.
+    public enum UsersDeleteAttestationsBulk {
+        public static let id: Swift.String = "users/delete-attestations-bulk"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The handle for the GitHub user account.
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/path/username`.
+                public var username: Components.Parameters.Username
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - username: The handle for the GitHub user account.
+                public init(username: Components.Parameters.Username) {
+                    self.username = username
+                }
+            }
+            public var path: Operations.UsersDeleteAttestationsBulk.Input.Path
+            /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UsersDeleteAttestationsBulk.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UsersDeleteAttestationsBulk.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.UsersDeleteAttestationsBulk.Input.Headers
+            /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// The request body must include either `subject_digests` or `attestation_ids`, but not both.
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/requestBody/json`.
+                @frozen public enum JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/requestBody/json/case1`.
+                    public struct Case1Payload: Codable, Hashable, Sendable {
+                        /// List of subject digests associated with the artifact attestations to delete.
+                        ///
+                        /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/requestBody/json/case1/subject_digests`.
+                        public var subjectDigests: [Swift.String]
+                        /// Creates a new `Case1Payload`.
+                        ///
+                        /// - Parameters:
+                        ///   - subjectDigests: List of subject digests associated with the artifact attestations to delete.
+                        public init(subjectDigests: [Swift.String]) {
+                            self.subjectDigests = subjectDigests
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case subjectDigests = "subject_digests"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/requestBody/json/case1`.
+                    case case1(Operations.UsersDeleteAttestationsBulk.Input.Body.JsonPayload.Case1Payload)
+                    /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/requestBody/json/case2`.
+                    public struct Case2Payload: Codable, Hashable, Sendable {
+                        /// List of unique IDs associated with the artifact attestations to delete.
+                        ///
+                        /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/requestBody/json/case2/attestation_ids`.
+                        public var attestationIds: [Swift.Int]
+                        /// Creates a new `Case2Payload`.
+                        ///
+                        /// - Parameters:
+                        ///   - attestationIds: List of unique IDs associated with the artifact attestations to delete.
+                        public init(attestationIds: [Swift.Int]) {
+                            self.attestationIds = attestationIds
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case attestationIds = "attestation_ids"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/requestBody/json/case2`.
+                    case case2(Operations.UsersDeleteAttestationsBulk.Input.Body.JsonPayload.Case2Payload)
+                    public init(from decoder: any Decoder) throws {
+                        var errors: [any Error] = []
+                        do {
+                            self = .case1(try .init(from: decoder))
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case2(try .init(from: decoder))
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
+                    }
+                    public func encode(to encoder: any Encoder) throws {
+                        switch self {
+                        case let .case1(value):
+                            try value.encode(to: encoder)
+                        case let .case2(value):
+                            try value.encode(to: encoder)
+                        }
+                    }
+                }
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/requestBody/content/application\/json`.
+                case json(Operations.UsersDeleteAttestationsBulk.Input.Body.JsonPayload)
+            }
+            public var body: Operations.UsersDeleteAttestationsBulk.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.UsersDeleteAttestationsBulk.Input.Path,
+                headers: Operations.UsersDeleteAttestationsBulk.Input.Headers = .init(),
+                body: Operations.UsersDeleteAttestationsBulk.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// Creates a new `Ok`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/delete-request/post(users/delete-attestations-bulk)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.UsersDeleteAttestationsBulk.Output.Ok)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/delete-request/post(users/delete-attestations-bulk)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            public static var ok: Self {
+                .ok(.init())
+            }
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.UsersDeleteAttestationsBulk.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/delete-request/post(users/delete-attestations-bulk)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Delete attestations by subject digest
+    ///
+    /// Delete an artifact attestation by subject digest.
+    ///
+    /// - Remark: HTTP `DELETE /users/{username}/attestations/digest/{subject_digest}`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/digest/{subject_digest}/delete(users/delete-attestations-by-subject-digest)`.
+    public enum UsersDeleteAttestationsBySubjectDigest {
+        public static let id: Swift.String = "users/delete-attestations-by-subject-digest"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{username}/attestations/digest/{subject_digest}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The handle for the GitHub user account.
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/digest/{subject_digest}/DELETE/path/username`.
+                public var username: Components.Parameters.Username
+                /// Subject Digest
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/digest/{subject_digest}/DELETE/path/subject_digest`.
+                public var subjectDigest: Swift.String
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - username: The handle for the GitHub user account.
+                ///   - subjectDigest: Subject Digest
+                public init(
+                    username: Components.Parameters.Username,
+                    subjectDigest: Swift.String
+                ) {
+                    self.username = username
+                    self.subjectDigest = subjectDigest
+                }
+            }
+            public var path: Operations.UsersDeleteAttestationsBySubjectDigest.Input.Path
+            /// - Remark: Generated from `#/paths/users/{username}/attestations/digest/{subject_digest}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UsersDeleteAttestationsBySubjectDigest.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UsersDeleteAttestationsBySubjectDigest.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.UsersDeleteAttestationsBySubjectDigest.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.UsersDeleteAttestationsBySubjectDigest.Input.Path,
+                headers: Operations.UsersDeleteAttestationsBySubjectDigest.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// Creates a new `Ok`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/digest/{subject_digest}/delete(users/delete-attestations-by-subject-digest)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.UsersDeleteAttestationsBySubjectDigest.Output.Ok)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/digest/{subject_digest}/delete(users/delete-attestations-by-subject-digest)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            public static var ok: Self {
+                .ok(.init())
+            }
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.UsersDeleteAttestationsBySubjectDigest.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/digest/{subject_digest}/delete(users/delete-attestations-by-subject-digest)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.UsersDeleteAttestationsBySubjectDigest.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/digest/{subject_digest}/delete(users/delete-attestations-by-subject-digest)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.UsersDeleteAttestationsBySubjectDigest.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/digest/{subject_digest}/delete(users/delete-attestations-by-subject-digest)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Delete attestations by ID
+    ///
+    /// Delete an artifact attestation by unique ID that is associated with a repository owned by a user.
+    ///
+    /// - Remark: HTTP `DELETE /users/{username}/attestations/{attestation_id}`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/{attestation_id}/delete(users/delete-attestations-by-id)`.
+    public enum UsersDeleteAttestationsById {
+        public static let id: Swift.String = "users/delete-attestations-by-id"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{username}/attestations/{attestation_id}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The handle for the GitHub user account.
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/{attestation_id}/DELETE/path/username`.
+                public var username: Components.Parameters.Username
+                /// Attestation ID
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/{attestation_id}/DELETE/path/attestation_id`.
+                public var attestationId: Swift.Int
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - username: The handle for the GitHub user account.
+                ///   - attestationId: Attestation ID
+                public init(
+                    username: Components.Parameters.Username,
+                    attestationId: Swift.Int
+                ) {
+                    self.username = username
+                    self.attestationId = attestationId
+                }
+            }
+            public var path: Operations.UsersDeleteAttestationsById.Input.Path
+            /// - Remark: Generated from `#/paths/users/{username}/attestations/{attestation_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UsersDeleteAttestationsById.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UsersDeleteAttestationsById.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.UsersDeleteAttestationsById.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.UsersDeleteAttestationsById.Input.Path,
+                headers: Operations.UsersDeleteAttestationsById.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// Creates a new `Ok`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/{attestation_id}/delete(users/delete-attestations-by-id)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.UsersDeleteAttestationsById.Output.Ok)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/{attestation_id}/delete(users/delete-attestations-by-id)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            public static var ok: Self {
+                .ok(.init())
+            }
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.UsersDeleteAttestationsById.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/{attestation_id}/delete(users/delete-attestations-by-id)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.UsersDeleteAttestationsById.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/{attestation_id}/delete(users/delete-attestations-by-id)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.UsersDeleteAttestationsById.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/{attestation_id}/delete(users/delete-attestations-by-id)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/{attestation_id}/delete(users/delete-attestations-by-id)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
