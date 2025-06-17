@@ -11,9 +11,14 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: swift-actions/setup-swift@v2
+    - uses: jdx/mise-action@v2
       with:
-        swift-version: ${{ inputs.swift }}
+        mise_toml: |
+          [tools]
+          swift = "${{ inputs.swift }}"
+          [settings]
+          experimental = true
+
     - uses: irgaly/setup-mint@v1
       with:
         mint-executable-directory: $HOME/.mint/bin
