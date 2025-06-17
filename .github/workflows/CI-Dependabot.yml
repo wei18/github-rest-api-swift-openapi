@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
-      - uses: ./.github/workflows/actions/setup
+      - uses: ./.github/composites/setup
         with:
           swift: ${{ matrix.swift }}
           os: ${{ matrix.os }}
