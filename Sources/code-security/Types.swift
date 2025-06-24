@@ -1035,6 +1035,10 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/code-security-configuration/dependabot_security_updates`.
             public var dependabotSecurityUpdates: Components.Schemas.CodeSecurityConfiguration.DependabotSecurityUpdatesPayload?
+            /// Feature options for code scanning
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-security-configuration/code_scanning_options`.
+            public var codeScanningOptions: OpenAPIRuntime.OpenAPIObjectContainer?
             /// The enablement status of code scanning default setup
             ///
             /// - Remark: Generated from `#/components/schemas/code-security-configuration/code_scanning_default_setup`.
@@ -1293,6 +1297,7 @@ public enum Components {
             ///   - dependencyGraphAutosubmitActionOptions: Feature options for Automatic dependency submission
             ///   - dependabotAlerts: The enablement status of Dependabot alerts
             ///   - dependabotSecurityUpdates: The enablement status of Dependabot security updates
+            ///   - codeScanningOptions: Feature options for code scanning
             ///   - codeScanningDefaultSetup: The enablement status of code scanning default setup
             ///   - codeScanningDefaultSetupOptions: Feature options for code scanning default setup
             ///   - codeScanningDelegatedAlertDismissal: The enablement status of code scanning delegated alert dismissal
@@ -1321,6 +1326,7 @@ public enum Components {
                 dependencyGraphAutosubmitActionOptions: Components.Schemas.CodeSecurityConfiguration.DependencyGraphAutosubmitActionOptionsPayload? = nil,
                 dependabotAlerts: Components.Schemas.CodeSecurityConfiguration.DependabotAlertsPayload? = nil,
                 dependabotSecurityUpdates: Components.Schemas.CodeSecurityConfiguration.DependabotSecurityUpdatesPayload? = nil,
+                codeScanningOptions: OpenAPIRuntime.OpenAPIObjectContainer? = nil,
                 codeScanningDefaultSetup: Components.Schemas.CodeSecurityConfiguration.CodeScanningDefaultSetupPayload? = nil,
                 codeScanningDefaultSetupOptions: Components.Schemas.CodeSecurityConfiguration.CodeScanningDefaultSetupOptionsPayload? = nil,
                 codeScanningDelegatedAlertDismissal: Components.Schemas.CodeSecurityConfiguration.CodeScanningDelegatedAlertDismissalPayload? = nil,
@@ -1349,6 +1355,7 @@ public enum Components {
                 self.dependencyGraphAutosubmitActionOptions = dependencyGraphAutosubmitActionOptions
                 self.dependabotAlerts = dependabotAlerts
                 self.dependabotSecurityUpdates = dependabotSecurityUpdates
+                self.codeScanningOptions = codeScanningOptions
                 self.codeScanningDefaultSetup = codeScanningDefaultSetup
                 self.codeScanningDefaultSetupOptions = codeScanningDefaultSetupOptions
                 self.codeScanningDelegatedAlertDismissal = codeScanningDelegatedAlertDismissal
@@ -1378,6 +1385,7 @@ public enum Components {
                 case dependencyGraphAutosubmitActionOptions = "dependency_graph_autosubmit_action_options"
                 case dependabotAlerts = "dependabot_alerts"
                 case dependabotSecurityUpdates = "dependabot_security_updates"
+                case codeScanningOptions = "code_scanning_options"
                 case codeScanningDefaultSetup = "code_scanning_default_setup"
                 case codeScanningDefaultSetupOptions = "code_scanning_default_setup_options"
                 case codeScanningDelegatedAlertDismissal = "code_scanning_delegated_alert_dismissal"
