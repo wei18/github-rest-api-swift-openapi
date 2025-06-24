@@ -23,6 +23,7 @@ public protocol APIProtocol: Sendable {
     /// * The `graphql` object provides your rate limit status for the GraphQL API. For more information, see "[Resource limitations](https://docs.github.com/graphql/overview/resource-limitations#rate-limit)."
     /// * The `integration_manifest` object provides your rate limit status for the `POST /app-manifests/{code}/conversions` operation. For more information, see "[Creating a GitHub App from a manifest](https://docs.github.com/apps/creating-github-apps/setting-up-a-github-app/creating-a-github-app-from-a-manifest#3-you-exchange-the-temporary-code-to-retrieve-the-app-configuration)."
     /// * The `dependency_snapshots` object provides your rate limit status for submitting snapshots to the dependency graph. For more information, see "[Dependency graph](https://docs.github.com/rest/dependency-graph)."
+    /// * The `dependency_sbom` object provides your rate limit status for requesting SBOMs from the dependency graph. For more information, see "[Dependency graph](https://docs.github.com/rest/dependency-graph)."
     /// * The `code_scanning_upload` object provides your rate limit status for uploading SARIF results to code scanning. For more information, see "[Uploading a SARIF file to GitHub](https://docs.github.com/code-security/code-scanning/integrating-with-code-scanning/uploading-a-sarif-file-to-github)."
     /// * The `actions_runner_registration` object provides your rate limit status for registering self-hosted runners in GitHub Actions. For more information, see "[Self-hosted runners](https://docs.github.com/rest/actions/self-hosted-runners)."
     /// * The `source_import` object is no longer in use for any API endpoints, and it will be removed in the next API version. For more information about API versions, see "[API Versions](https://docs.github.com/rest/about-the-rest-api/api-versions)."
@@ -49,6 +50,7 @@ extension APIProtocol {
     /// * The `graphql` object provides your rate limit status for the GraphQL API. For more information, see "[Resource limitations](https://docs.github.com/graphql/overview/resource-limitations#rate-limit)."
     /// * The `integration_manifest` object provides your rate limit status for the `POST /app-manifests/{code}/conversions` operation. For more information, see "[Creating a GitHub App from a manifest](https://docs.github.com/apps/creating-github-apps/setting-up-a-github-app/creating-a-github-app-from-a-manifest#3-you-exchange-the-temporary-code-to-retrieve-the-app-configuration)."
     /// * The `dependency_snapshots` object provides your rate limit status for submitting snapshots to the dependency graph. For more information, see "[Dependency graph](https://docs.github.com/rest/dependency-graph)."
+    /// * The `dependency_sbom` object provides your rate limit status for requesting SBOMs from the dependency graph. For more information, see "[Dependency graph](https://docs.github.com/rest/dependency-graph)."
     /// * The `code_scanning_upload` object provides your rate limit status for uploading SARIF results to code scanning. For more information, see "[Uploading a SARIF file to GitHub](https://docs.github.com/code-security/code-scanning/integrating-with-code-scanning/uploading-a-sarif-file-to-github)."
     /// * The `actions_runner_registration` object provides your rate limit status for registering self-hosted runners in GitHub Actions. For more information, see "[Self-hosted runners](https://docs.github.com/rest/actions/self-hosted-runners)."
     /// * The `source_import` object is no longer in use for any API endpoints, and it will be removed in the next API version. For more information about API versions, see "[API Versions](https://docs.github.com/rest/about-the-rest-api/api-versions)."
@@ -184,6 +186,8 @@ public enum Components {
                 public var scim: Components.Schemas.RateLimit?
                 /// - Remark: Generated from `#/components/schemas/rate-limit-overview/resources/dependency_snapshots`.
                 public var dependencySnapshots: Components.Schemas.RateLimit?
+                /// - Remark: Generated from `#/components/schemas/rate-limit-overview/resources/dependency_sbom`.
+                public var dependencySbom: Components.Schemas.RateLimit?
                 /// - Remark: Generated from `#/components/schemas/rate-limit-overview/resources/code_scanning_autofix`.
                 public var codeScanningAutofix: Components.Schemas.RateLimit?
                 /// Creates a new `ResourcesPayload`.
@@ -199,6 +203,7 @@ public enum Components {
                 ///   - actionsRunnerRegistration:
                 ///   - scim:
                 ///   - dependencySnapshots:
+                ///   - dependencySbom:
                 ///   - codeScanningAutofix:
                 public init(
                     core: Components.Schemas.RateLimit,
@@ -211,6 +216,7 @@ public enum Components {
                     actionsRunnerRegistration: Components.Schemas.RateLimit? = nil,
                     scim: Components.Schemas.RateLimit? = nil,
                     dependencySnapshots: Components.Schemas.RateLimit? = nil,
+                    dependencySbom: Components.Schemas.RateLimit? = nil,
                     codeScanningAutofix: Components.Schemas.RateLimit? = nil
                 ) {
                     self.core = core
@@ -223,6 +229,7 @@ public enum Components {
                     self.actionsRunnerRegistration = actionsRunnerRegistration
                     self.scim = scim
                     self.dependencySnapshots = dependencySnapshots
+                    self.dependencySbom = dependencySbom
                     self.codeScanningAutofix = codeScanningAutofix
                 }
                 public enum CodingKeys: String, CodingKey {
@@ -236,6 +243,7 @@ public enum Components {
                     case actionsRunnerRegistration = "actions_runner_registration"
                     case scim
                     case dependencySnapshots = "dependency_snapshots"
+                    case dependencySbom = "dependency_sbom"
                     case codeScanningAutofix = "code_scanning_autofix"
                 }
             }
@@ -325,6 +333,7 @@ public enum Operations {
     /// * The `graphql` object provides your rate limit status for the GraphQL API. For more information, see "[Resource limitations](https://docs.github.com/graphql/overview/resource-limitations#rate-limit)."
     /// * The `integration_manifest` object provides your rate limit status for the `POST /app-manifests/{code}/conversions` operation. For more information, see "[Creating a GitHub App from a manifest](https://docs.github.com/apps/creating-github-apps/setting-up-a-github-app/creating-a-github-app-from-a-manifest#3-you-exchange-the-temporary-code-to-retrieve-the-app-configuration)."
     /// * The `dependency_snapshots` object provides your rate limit status for submitting snapshots to the dependency graph. For more information, see "[Dependency graph](https://docs.github.com/rest/dependency-graph)."
+    /// * The `dependency_sbom` object provides your rate limit status for requesting SBOMs from the dependency graph. For more information, see "[Dependency graph](https://docs.github.com/rest/dependency-graph)."
     /// * The `code_scanning_upload` object provides your rate limit status for uploading SARIF results to code scanning. For more information, see "[Uploading a SARIF file to GitHub](https://docs.github.com/code-security/code-scanning/integrating-with-code-scanning/uploading-a-sarif-file-to-github)."
     /// * The `actions_runner_registration` object provides your rate limit status for registering self-hosted runners in GitHub Actions. For more information, see "[Self-hosted runners](https://docs.github.com/rest/actions/self-hosted-runners)."
     /// * The `source_import` object is no longer in use for any API endpoints, and it will be removed in the next API version. For more information about API versions, see "[API Versions](https://docs.github.com/rest/about-the-rest-api/api-versions)."
