@@ -300,6 +300,17 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /users/{username}`.
     /// - Remark: Generated from `#/paths//users/{username}/get(users/get-by-username)`.
     func usersGetByUsername(_ input: Operations.UsersGetByUsername.Input) async throws -> Operations.UsersGetByUsername.Output
+    /// List attestations by bulk subject digests
+    ///
+    /// List a collection of artifact attestations associated with any entry in a list of subject digests owned by a user.
+    ///
+    /// The collection of attestations returned by this endpoint is filtered according to the authenticated user's permissions; if the authenticated user cannot read a repository, the attestations associated with that repository will not be included in the response. In addition, when using a fine-grained access token the `attestations:read` permission is required.
+    ///
+    /// **Please note:** in order to offer meaningful security benefits, an attestation's signature and timestamps **must** be cryptographically verified, and the identity of the attestation signer **must** be validated. Attestations can be verified using the [GitHub CLI `attestation verify` command](https://cli.github.com/manual/gh_attestation_verify). For more information, see [our guide on how to use artifact attestations to establish a build's provenance](https://docs.github.com/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds).
+    ///
+    /// - Remark: HTTP `POST /users/{username}/attestations/bulk-list`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/bulk-list/post(users/list-attestations-bulk)`.
+    func usersListAttestationsBulk(_ input: Operations.UsersListAttestationsBulk.Input) async throws -> Operations.UsersListAttestationsBulk.Output
     /// Delete attestations in bulk
     ///
     /// Delete artifact attestations in bulk by either subject digests or unique ID.
@@ -949,6 +960,29 @@ extension APIProtocol {
         try await usersGetByUsername(Operations.UsersGetByUsername.Input(
             path: path,
             headers: headers
+        ))
+    }
+    /// List attestations by bulk subject digests
+    ///
+    /// List a collection of artifact attestations associated with any entry in a list of subject digests owned by a user.
+    ///
+    /// The collection of attestations returned by this endpoint is filtered according to the authenticated user's permissions; if the authenticated user cannot read a repository, the attestations associated with that repository will not be included in the response. In addition, when using a fine-grained access token the `attestations:read` permission is required.
+    ///
+    /// **Please note:** in order to offer meaningful security benefits, an attestation's signature and timestamps **must** be cryptographically verified, and the identity of the attestation signer **must** be validated. Attestations can be verified using the [GitHub CLI `attestation verify` command](https://cli.github.com/manual/gh_attestation_verify). For more information, see [our guide on how to use artifact attestations to establish a build's provenance](https://docs.github.com/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds).
+    ///
+    /// - Remark: HTTP `POST /users/{username}/attestations/bulk-list`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/bulk-list/post(users/list-attestations-bulk)`.
+    public func usersListAttestationsBulk(
+        path: Operations.UsersListAttestationsBulk.Input.Path,
+        query: Operations.UsersListAttestationsBulk.Input.Query = .init(),
+        headers: Operations.UsersListAttestationsBulk.Input.Headers = .init(),
+        body: Operations.UsersListAttestationsBulk.Input.Body
+    ) async throws -> Operations.UsersListAttestationsBulk.Output {
+        try await usersListAttestationsBulk(Operations.UsersListAttestationsBulk.Input(
+            path: path,
+            query: query,
+            headers: headers,
+            body: body
         ))
     }
     /// Delete attestations in bulk
@@ -2746,21 +2780,27 @@ public enum Components {
             public var id: Swift.Int
             /// - Remark: Generated from `#/components/schemas/key-simple/key`.
             public var key: Swift.String
+            /// - Remark: Generated from `#/components/schemas/key-simple/created_at`.
+            public var createdAt: Foundation.Date?
             /// Creates a new `KeySimple`.
             ///
             /// - Parameters:
             ///   - id:
             ///   - key:
+            ///   - createdAt:
             public init(
                 id: Swift.Int,
-                key: Swift.String
+                key: Swift.String,
+                createdAt: Foundation.Date? = nil
             ) {
                 self.id = id
                 self.key = key
+                self.createdAt = createdAt
             }
             public enum CodingKeys: String, CodingKey {
                 case id
                 case key
+                case createdAt = "created_at"
             }
         }
     }
@@ -11317,6 +11357,405 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List attestations by bulk subject digests
+    ///
+    /// List a collection of artifact attestations associated with any entry in a list of subject digests owned by a user.
+    ///
+    /// The collection of attestations returned by this endpoint is filtered according to the authenticated user's permissions; if the authenticated user cannot read a repository, the attestations associated with that repository will not be included in the response. In addition, when using a fine-grained access token the `attestations:read` permission is required.
+    ///
+    /// **Please note:** in order to offer meaningful security benefits, an attestation's signature and timestamps **must** be cryptographically verified, and the identity of the attestation signer **must** be validated. Attestations can be verified using the [GitHub CLI `attestation verify` command](https://cli.github.com/manual/gh_attestation_verify). For more information, see [our guide on how to use artifact attestations to establish a build's provenance](https://docs.github.com/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds).
+    ///
+    /// - Remark: HTTP `POST /users/{username}/attestations/bulk-list`.
+    /// - Remark: Generated from `#/paths//users/{username}/attestations/bulk-list/post(users/list-attestations-bulk)`.
+    public enum UsersListAttestationsBulk {
+        public static let id: Swift.String = "users/list-attestations-bulk"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The handle for the GitHub user account.
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/path/username`.
+                public var username: Components.Parameters.Username
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - username: The handle for the GitHub user account.
+                public init(username: Components.Parameters.Username) {
+                    self.username = username
+                }
+            }
+            public var path: Operations.UsersListAttestationsBulk.Input.Path
+            /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/query/before`.
+                public var before: Components.Parameters.PaginationBefore?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    before: Components.Parameters.PaginationBefore? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil
+                ) {
+                    self.perPage = perPage
+                    self.before = before
+                    self.after = after
+                }
+            }
+            public var query: Operations.UsersListAttestationsBulk.Input.Query
+            /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UsersListAttestationsBulk.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UsersListAttestationsBulk.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.UsersListAttestationsBulk.Input.Headers
+            /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// List of subject digests to fetch attestations for.
+                    ///
+                    /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/requestBody/json/subject_digests`.
+                    public var subjectDigests: [Swift.String]
+                    /// Optional filter for fetching attestations with a given predicate type.
+                    /// This option accepts `provenance`, `sbom`, or freeform text for custom predicate types.
+                    ///
+                    /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/requestBody/json/predicate_type`.
+                    public var predicateType: Swift.String?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - subjectDigests: List of subject digests to fetch attestations for.
+                    ///   - predicateType: Optional filter for fetching attestations with a given predicate type.
+                    public init(
+                        subjectDigests: [Swift.String],
+                        predicateType: Swift.String? = nil
+                    ) {
+                        self.subjectDigests = subjectDigests
+                        self.predicateType = predicateType
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case subjectDigests = "subject_digests"
+                        case predicateType = "predicate_type"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/requestBody/content/application\/json`.
+                case json(Operations.UsersListAttestationsBulk.Input.Body.JsonPayload)
+            }
+            public var body: Operations.UsersListAttestationsBulk.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.UsersListAttestationsBulk.Input.Path,
+                query: Operations.UsersListAttestationsBulk.Input.Query = .init(),
+                headers: Operations.UsersListAttestationsBulk.Input.Headers = .init(),
+                body: Operations.UsersListAttestationsBulk.Input.Body
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// Mapping of subject digest to bundles.
+                        ///
+                        /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests`.
+                        public struct AttestationsSubjectDigestsPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload`.
+                            public struct AdditionalPropertiesPayloadPayload: Codable, Hashable, Sendable {
+                                /// The bundle of the attestation.
+                                ///
+                                /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle`.
+                                public struct BundlePayload: Codable, Hashable, Sendable {
+                                    /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle/mediaType`.
+                                    public var mediaType: Swift.String?
+                                    /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle/verificationMaterial`.
+                                    public struct VerificationMaterialPayload: Codable, Hashable, Sendable {
+                                        /// A container of undocumented properties.
+                                        public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                                        /// Creates a new `VerificationMaterialPayload`.
+                                        ///
+                                        /// - Parameters:
+                                        ///   - additionalProperties: A container of undocumented properties.
+                                        public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                                            self.additionalProperties = additionalProperties
+                                        }
+                                        public init(from decoder: any Decoder) throws {
+                                            additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                                        }
+                                        public func encode(to encoder: any Encoder) throws {
+                                            try encoder.encodeAdditionalProperties(additionalProperties)
+                                        }
+                                    }
+                                    /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle/verificationMaterial`.
+                                    public var verificationMaterial: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload.VerificationMaterialPayload?
+                                    /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle/dsseEnvelope`.
+                                    public struct DsseEnvelopePayload: Codable, Hashable, Sendable {
+                                        /// A container of undocumented properties.
+                                        public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                                        /// Creates a new `DsseEnvelopePayload`.
+                                        ///
+                                        /// - Parameters:
+                                        ///   - additionalProperties: A container of undocumented properties.
+                                        public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                                            self.additionalProperties = additionalProperties
+                                        }
+                                        public init(from decoder: any Decoder) throws {
+                                            additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                                        }
+                                        public func encode(to encoder: any Encoder) throws {
+                                            try encoder.encodeAdditionalProperties(additionalProperties)
+                                        }
+                                    }
+                                    /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle/dsseEnvelope`.
+                                    public var dsseEnvelope: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload.DsseEnvelopePayload?
+                                    /// Creates a new `BundlePayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - mediaType:
+                                    ///   - verificationMaterial:
+                                    ///   - dsseEnvelope:
+                                    public init(
+                                        mediaType: Swift.String? = nil,
+                                        verificationMaterial: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload.VerificationMaterialPayload? = nil,
+                                        dsseEnvelope: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload.DsseEnvelopePayload? = nil
+                                    ) {
+                                        self.mediaType = mediaType
+                                        self.verificationMaterial = verificationMaterial
+                                        self.dsseEnvelope = dsseEnvelope
+                                    }
+                                    public enum CodingKeys: String, CodingKey {
+                                        case mediaType
+                                        case verificationMaterial
+                                        case dsseEnvelope
+                                    }
+                                }
+                                /// The bundle of the attestation.
+                                ///
+                                /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle`.
+                                public var bundle: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload?
+                                /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/repository_id`.
+                                public var repositoryId: Swift.Int?
+                                /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/AdditionalPropertiesPayload/bundle_url`.
+                                public var bundleUrl: Swift.String?
+                                /// Creates a new `AdditionalPropertiesPayloadPayload`.
+                                ///
+                                /// - Parameters:
+                                ///   - bundle: The bundle of the attestation.
+                                ///   - repositoryId:
+                                ///   - bundleUrl:
+                                public init(
+                                    bundle: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload.BundlePayload? = nil,
+                                    repositoryId: Swift.Int? = nil,
+                                    bundleUrl: Swift.String? = nil
+                                ) {
+                                    self.bundle = bundle
+                                    self.repositoryId = repositoryId
+                                    self.bundleUrl = bundleUrl
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case bundle
+                                    case repositoryId = "repository_id"
+                                    case bundleUrl = "bundle_url"
+                                }
+                            }
+                            /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests/additionalProperties`.
+                            public typealias AdditionalPropertiesPayload = [Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayloadPayload]
+                            /// A container of undocumented properties.
+                            public var additionalProperties: [String: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayload?]
+                            /// Creates a new `AttestationsSubjectDigestsPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - additionalProperties: A container of undocumented properties.
+                            public init(additionalProperties: [String: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayload?] = .init()) {
+                                self.additionalProperties = additionalProperties
+                            }
+                            public init(from decoder: any Decoder) throws {
+                                additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                            }
+                            public func encode(to encoder: any Encoder) throws {
+                                try encoder.encodeAdditionalProperties(additionalProperties)
+                            }
+                        }
+                        /// Mapping of subject digest to bundles.
+                        ///
+                        /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/attestations_subject_digests`.
+                        public var attestationsSubjectDigests: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload?
+                        /// Information about the current page.
+                        ///
+                        /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/page_info`.
+                        public struct PageInfoPayload: Codable, Hashable, Sendable {
+                            /// Indicates whether there is a next page.
+                            ///
+                            /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/page_info/has_next`.
+                            public var hasNext: Swift.Bool?
+                            /// Indicates whether there is a previous page.
+                            ///
+                            /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/page_info/has_previous`.
+                            public var hasPrevious: Swift.Bool?
+                            /// The cursor to the next page.
+                            ///
+                            /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/page_info/next`.
+                            public var next: Swift.String?
+                            /// The cursor to the previous page.
+                            ///
+                            /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/page_info/previous`.
+                            public var previous: Swift.String?
+                            /// Creates a new `PageInfoPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - hasNext: Indicates whether there is a next page.
+                            ///   - hasPrevious: Indicates whether there is a previous page.
+                            ///   - next: The cursor to the next page.
+                            ///   - previous: The cursor to the previous page.
+                            public init(
+                                hasNext: Swift.Bool? = nil,
+                                hasPrevious: Swift.Bool? = nil,
+                                next: Swift.String? = nil,
+                                previous: Swift.String? = nil
+                            ) {
+                                self.hasNext = hasNext
+                                self.hasPrevious = hasPrevious
+                                self.next = next
+                                self.previous = previous
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case hasNext = "has_next"
+                                case hasPrevious = "has_previous"
+                                case next
+                                case previous
+                            }
+                        }
+                        /// Information about the current page.
+                        ///
+                        /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/json/page_info`.
+                        public var pageInfo: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.PageInfoPayload?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - attestationsSubjectDigests: Mapping of subject digest to bundles.
+                        ///   - pageInfo: Information about the current page.
+                        public init(
+                            attestationsSubjectDigests: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload? = nil,
+                            pageInfo: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.PageInfoPayload? = nil
+                        ) {
+                            self.attestationsSubjectDigests = attestationsSubjectDigests
+                            self.pageInfo = pageInfo
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case attestationsSubjectDigests = "attestations_subject_digests"
+                            case pageInfo = "page_info"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/responses/200/content/application\/json`.
+                    case json(Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.UsersListAttestationsBulk.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.UsersListAttestationsBulk.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/attestations/bulk-list/post(users/list-attestations-bulk)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.UsersListAttestationsBulk.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.UsersListAttestationsBulk.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
                             response: self
                         )
                     }
