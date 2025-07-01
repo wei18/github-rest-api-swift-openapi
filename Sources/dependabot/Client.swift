@@ -274,8 +274,9 @@ public struct Client: APIProtocol {
             }
         )
     }
-    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
+    /// Lists the repositories Dependabot can access in an organization
     ///
+    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
     /// > [!NOTE]
     /// >    This operation supports both server-to-server and user-to-server access.
     /// Unauthorized users will not see the existence of this endpoint.
@@ -398,7 +399,9 @@ public struct Client: APIProtocol {
             }
         )
     }
-    /// Updates repositories to the list of repositories that organization admins have allowed Dependabot to access when updating dependencies.
+    /// Updates Dependabot's repository access list for an organization
+    ///
+    /// Updates repositories according to the list of repositories that organization admins have given Dependabot access to when they've updated dependencies.
     ///
     /// > [!NOTE]
     /// >    This operation supports both server-to-server and user-to-server access.
@@ -507,13 +510,13 @@ public struct Client: APIProtocol {
     }
     /// Set the default repository access level for Dependabot
     ///
-    /// > [!NOTE]
-    /// >    This operation supports both server-to-server and user-to-server access.
     /// Sets the default level of repository access Dependabot will have while performing an update.  Available values are:
     /// - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories.
     /// - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories.
     ///
     /// Unauthorized users will not see the existence of this endpoint.
+    ///
+    /// This operation supports both server-to-server and user-to-server access.
     ///
     /// - Remark: HTTP `PUT /organizations/{org}/dependabot/repository-access/default-level`.
     /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)`.

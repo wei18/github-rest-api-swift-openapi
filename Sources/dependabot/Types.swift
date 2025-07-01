@@ -24,8 +24,9 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /enterprises/{enterprise}/dependabot/alerts`.
     /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/alerts/get(dependabot/list-alerts-for-enterprise)`.
     func dependabotListAlertsForEnterprise(_ input: Operations.DependabotListAlertsForEnterprise.Input) async throws -> Operations.DependabotListAlertsForEnterprise.Output
-    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
+    /// Lists the repositories Dependabot can access in an organization
     ///
+    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
     /// > [!NOTE]
     /// >    This operation supports both server-to-server and user-to-server access.
     /// Unauthorized users will not see the existence of this endpoint.
@@ -33,7 +34,9 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /organizations/{org}/dependabot/repository-access`.
     /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)`.
     func dependabotRepositoryAccessForOrg(_ input: Operations.DependabotRepositoryAccessForOrg.Input) async throws -> Operations.DependabotRepositoryAccessForOrg.Output
-    /// Updates repositories to the list of repositories that organization admins have allowed Dependabot to access when updating dependencies.
+    /// Updates Dependabot's repository access list for an organization
+    ///
+    /// Updates repositories according to the list of repositories that organization admins have given Dependabot access to when they've updated dependencies.
     ///
     /// > [!NOTE]
     /// >    This operation supports both server-to-server and user-to-server access.
@@ -52,13 +55,13 @@ public protocol APIProtocol: Sendable {
     func dependabotUpdateRepositoryAccessForOrg(_ input: Operations.DependabotUpdateRepositoryAccessForOrg.Input) async throws -> Operations.DependabotUpdateRepositoryAccessForOrg.Output
     /// Set the default repository access level for Dependabot
     ///
-    /// > [!NOTE]
-    /// >    This operation supports both server-to-server and user-to-server access.
     /// Sets the default level of repository access Dependabot will have while performing an update.  Available values are:
     /// - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories.
     /// - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories.
     ///
     /// Unauthorized users will not see the existence of this endpoint.
+    ///
+    /// This operation supports both server-to-server and user-to-server access.
     ///
     /// - Remark: HTTP `PUT /organizations/{org}/dependabot/repository-access/default-level`.
     /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)`.
@@ -264,8 +267,9 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
+    /// Lists the repositories Dependabot can access in an organization
     ///
+    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
     /// > [!NOTE]
     /// >    This operation supports both server-to-server and user-to-server access.
     /// Unauthorized users will not see the existence of this endpoint.
@@ -283,7 +287,9 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// Updates repositories to the list of repositories that organization admins have allowed Dependabot to access when updating dependencies.
+    /// Updates Dependabot's repository access list for an organization
+    ///
+    /// Updates repositories according to the list of repositories that organization admins have given Dependabot access to when they've updated dependencies.
     ///
     /// > [!NOTE]
     /// >    This operation supports both server-to-server and user-to-server access.
@@ -312,13 +318,13 @@ extension APIProtocol {
     }
     /// Set the default repository access level for Dependabot
     ///
-    /// > [!NOTE]
-    /// >    This operation supports both server-to-server and user-to-server access.
     /// Sets the default level of repository access Dependabot will have while performing an update.  Available values are:
     /// - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories.
     /// - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories.
     ///
     /// Unauthorized users will not see the existence of this endpoint.
+    ///
+    /// This operation supports both server-to-server and user-to-server access.
     ///
     /// - Remark: HTTP `PUT /organizations/{org}/dependabot/repository-access/default-level`.
     /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)`.
@@ -4915,8 +4921,9 @@ public enum Operations {
             }
         }
     }
-    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
+    /// Lists the repositories Dependabot can access in an organization
     ///
+    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
     /// > [!NOTE]
     /// >    This operation supports both server-to-server and user-to-server access.
     /// Unauthorized users will not see the existence of this endpoint.
@@ -5122,7 +5129,9 @@ public enum Operations {
             }
         }
     }
-    /// Updates repositories to the list of repositories that organization admins have allowed Dependabot to access when updating dependencies.
+    /// Updates Dependabot's repository access list for an organization
+    ///
+    /// Updates repositories according to the list of repositories that organization admins have given Dependabot access to when they've updated dependencies.
     ///
     /// > [!NOTE]
     /// >    This operation supports both server-to-server and user-to-server access.
@@ -5332,13 +5341,13 @@ public enum Operations {
     }
     /// Set the default repository access level for Dependabot
     ///
-    /// > [!NOTE]
-    /// >    This operation supports both server-to-server and user-to-server access.
     /// Sets the default level of repository access Dependabot will have while performing an update.  Available values are:
     /// - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories.
     /// - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories.
     ///
     /// Unauthorized users will not see the existence of this endpoint.
+    ///
+    /// This operation supports both server-to-server and user-to-server access.
     ///
     /// - Remark: HTTP `PUT /organizations/{org}/dependabot/repository-access/default-level`.
     /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)`.

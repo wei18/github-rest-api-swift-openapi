@@ -562,6 +562,241 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// Delete attestations in bulk
+    ///
+    /// Delete artifact attestations in bulk by either subject digests or unique ID.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/attestations/delete-request`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/attestations/delete-request/post(orgs/delete-attestations-bulk)`.
+    public func orgsDeleteAttestationsBulk(_ input: Operations.OrgsDeleteAttestationsBulk.Input) async throws -> Operations.OrgsDeleteAttestationsBulk.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsDeleteAttestationsBulk.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/attestations/delete-request",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .post
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    return .ok(.init())
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Delete attestations by subject digest
+    ///
+    /// Delete an artifact attestation by subject digest.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/attestations/digest/{subject_digest}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/attestations/digest/{subject_digest}/delete(orgs/delete-attestations-by-subject-digest)`.
+    public func orgsDeleteAttestationsBySubjectDigest(_ input: Operations.OrgsDeleteAttestationsBySubjectDigest.Input) async throws -> Operations.OrgsDeleteAttestationsBySubjectDigest.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsDeleteAttestationsBySubjectDigest.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/attestations/digest/{}",
+                    parameters: [
+                        input.path.org,
+                        input.path.subjectDigest
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .delete
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    return .ok(.init())
+                case 204:
+                    return .noContent(.init())
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Delete attestations by ID
+    ///
+    /// Delete an artifact attestation by unique ID that is associated with a repository owned by an org.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/attestations/{attestation_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/attestations/{attestation_id}/delete(orgs/delete-attestations-by-id)`.
+    public func orgsDeleteAttestationsById(_ input: Operations.OrgsDeleteAttestationsById.Input) async throws -> Operations.OrgsDeleteAttestationsById.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsDeleteAttestationsById.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/attestations/{}",
+                    parameters: [
+                        input.path.org,
+                        input.path.attestationId
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .delete
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    return .ok(.init())
+                case 204:
+                    return .noContent(.init())
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// List attestations
     ///
     /// List a collection of artifact attestations with a given subject digest that are associated with repositories owned by an organization.
