@@ -1035,6 +1035,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/registry_type`.
                     public var registryType: Operations.PrivateRegistriesCreateOrgPrivateRegistry.Input.Body.JsonPayload.RegistryTypePayload
+                    /// The URL of the private registry.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/url`.
+                    public var url: Swift.String
                     /// The username to use when authenticating with the private registry. This field should be omitted if the private registry does not require a username for authentication.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/username`.
@@ -1067,6 +1071,7 @@ public enum Operations {
                     ///
                     /// - Parameters:
                     ///   - registryType: The registry type.
+                    ///   - url: The URL of the private registry.
                     ///   - username: The username to use when authenticating with the private registry. This field should be omitted if the private registry does not require a username for authentication.
                     ///   - encryptedValue: The value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get private registries public key for an organization](https://docs.github.com/rest/private-registries/organization-configurations#get-private-registries-public-key-for-an-organization) endpoint.
                     ///   - keyId: The ID of the key you used to encrypt the secret.
@@ -1074,6 +1079,7 @@ public enum Operations {
                     ///   - selectedRepositoryIds: An array of repository IDs that can access the organization private registry. You can only provide a list of repository IDs when `visibility` is set to `selected`. You can manage the list of selected repositories using the [Update a private registry for an organization](https://docs.github.com/rest/private-registries/organization-configurations#update-a-private-registry-for-an-organization) endpoint. This field should be omitted if `visibility` is set to `all` or `private`.
                     public init(
                         registryType: Operations.PrivateRegistriesCreateOrgPrivateRegistry.Input.Body.JsonPayload.RegistryTypePayload,
+                        url: Swift.String,
                         username: Swift.String? = nil,
                         encryptedValue: Swift.String,
                         keyId: Swift.String,
@@ -1081,6 +1087,7 @@ public enum Operations {
                         selectedRepositoryIds: [Swift.Int]? = nil
                     ) {
                         self.registryType = registryType
+                        self.url = url
                         self.username = username
                         self.encryptedValue = encryptedValue
                         self.keyId = keyId
@@ -1089,6 +1096,7 @@ public enum Operations {
                     }
                     public enum CodingKeys: String, CodingKey {
                         case registryType = "registry_type"
+                        case url
                         case username
                         case encryptedValue = "encrypted_value"
                         case keyId = "key_id"
@@ -1680,6 +1688,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/registry_type`.
                     public var registryType: Operations.PrivateRegistriesUpdateOrgPrivateRegistry.Input.Body.JsonPayload.RegistryTypePayload?
+                    /// The URL of the private registry.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/url`.
+                    public var url: Swift.String?
                     /// The username to use when authenticating with the private registry. This field should be omitted if the private registry does not require a username for authentication.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/username`.
@@ -1712,6 +1724,7 @@ public enum Operations {
                     ///
                     /// - Parameters:
                     ///   - registryType: The registry type.
+                    ///   - url: The URL of the private registry.
                     ///   - username: The username to use when authenticating with the private registry. This field should be omitted if the private registry does not require a username for authentication.
                     ///   - encryptedValue: The value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get private registries public key for an organization](https://docs.github.com/rest/private-registries/organization-configurations#get-private-registries-public-key-for-an-organization) endpoint.
                     ///   - keyId: The ID of the key you used to encrypt the secret.
@@ -1719,6 +1732,7 @@ public enum Operations {
                     ///   - selectedRepositoryIds: An array of repository IDs that can access the organization private registry. You can only provide a list of repository IDs when `visibility` is set to `selected`. This field should be omitted if `visibility` is set to `all` or `private`.
                     public init(
                         registryType: Operations.PrivateRegistriesUpdateOrgPrivateRegistry.Input.Body.JsonPayload.RegistryTypePayload? = nil,
+                        url: Swift.String? = nil,
                         username: Swift.String? = nil,
                         encryptedValue: Swift.String? = nil,
                         keyId: Swift.String? = nil,
@@ -1726,6 +1740,7 @@ public enum Operations {
                         selectedRepositoryIds: [Swift.Int]? = nil
                     ) {
                         self.registryType = registryType
+                        self.url = url
                         self.username = username
                         self.encryptedValue = encryptedValue
                         self.keyId = keyId
@@ -1734,6 +1749,7 @@ public enum Operations {
                     }
                     public enum CodingKeys: String, CodingKey {
                         case registryType = "registry_type"
+                        case url
                         case username
                         case encryptedValue = "encrypted_value"
                         case keyId = "key_id"
