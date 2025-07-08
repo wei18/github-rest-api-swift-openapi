@@ -6067,14 +6067,14 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/detach/DELETE/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// An array of repository IDs to detach from configurations.
+                    /// An array of repository IDs to detach from configurations. Up to 1000 IDs can be provided.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/detach/DELETE/requestBody/json/selected_repository_ids`.
                     public var selectedRepositoryIds: [Swift.Int]?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
-                    ///   - selectedRepositoryIds: An array of repository IDs to detach from configurations.
+                    ///   - selectedRepositoryIds: An array of repository IDs to detach from configurations. Up to 1000 IDs can be provided.
                     public init(selectedRepositoryIds: [Swift.Int]? = nil) {
                         self.selectedRepositoryIds = selectedRepositoryIds
                     }
