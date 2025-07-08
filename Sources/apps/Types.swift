@@ -99,7 +99,7 @@ public protocol APIProtocol: Sendable {
     func appsGetInstallation(_ input: Operations.AppsGetInstallation.Input) async throws -> Operations.AppsGetInstallation.Output
     /// Delete an installation for the authenticated app
     ///
-    /// Uninstalls a GitHub App on a user, organization, or business account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/rest/apps/apps#suspend-an-app-installation)" endpoint.
+    /// Uninstalls a GitHub App on a user, organization, or enterprise account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/rest/apps/apps#suspend-an-app-installation)" endpoint.
     ///
     /// You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
@@ -121,7 +121,7 @@ public protocol APIProtocol: Sendable {
     func appsCreateInstallationAccessToken(_ input: Operations.AppsCreateInstallationAccessToken.Input) async throws -> Operations.AppsCreateInstallationAccessToken.Output
     /// Suspend an app installation
     ///
-    /// Suspends a GitHub App on a user, organization, or business account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account.
+    /// Suspends a GitHub App on a user, organization, or enterprise account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account.
     ///
     /// You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
@@ -496,7 +496,7 @@ extension APIProtocol {
     }
     /// Delete an installation for the authenticated app
     ///
-    /// Uninstalls a GitHub App on a user, organization, or business account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/rest/apps/apps#suspend-an-app-installation)" endpoint.
+    /// Uninstalls a GitHub App on a user, organization, or enterprise account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/rest/apps/apps#suspend-an-app-installation)" endpoint.
     ///
     /// You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
@@ -536,7 +536,7 @@ extension APIProtocol {
     }
     /// Suspend an app installation
     ///
-    /// Suspends a GitHub App on a user, organization, or business account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account.
+    /// Suspends a GitHub App on a user, organization, or enterprise account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account.
     ///
     /// You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
@@ -3180,6 +3180,8 @@ public enum Components {
             public var htmlUrl: Swift.String
             /// - Remark: Generated from `#/components/schemas/installation/app_id`.
             public var appId: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/installation/client_id`.
+            public var clientId: Swift.String?
             /// The ID of the user or organization this token is being scoped to.
             ///
             /// - Remark: Generated from `#/components/schemas/installation/target_id`.
@@ -3218,6 +3220,7 @@ public enum Components {
             ///   - repositoriesUrl:
             ///   - htmlUrl:
             ///   - appId:
+            ///   - clientId:
             ///   - targetId: The ID of the user or organization this token is being scoped to.
             ///   - targetType:
             ///   - permissions:
@@ -3239,6 +3242,7 @@ public enum Components {
                 repositoriesUrl: Swift.String,
                 htmlUrl: Swift.String,
                 appId: Swift.Int,
+                clientId: Swift.String? = nil,
                 targetId: Swift.Int,
                 targetType: Swift.String,
                 permissions: Components.Schemas.AppPermissions,
@@ -3260,6 +3264,7 @@ public enum Components {
                 self.repositoriesUrl = repositoriesUrl
                 self.htmlUrl = htmlUrl
                 self.appId = appId
+                self.clientId = clientId
                 self.targetId = targetId
                 self.targetType = targetType
                 self.permissions = permissions
@@ -3282,6 +3287,7 @@ public enum Components {
                 case repositoriesUrl = "repositories_url"
                 case htmlUrl = "html_url"
                 case appId = "app_id"
+                case clientId = "client_id"
                 case targetId = "target_id"
                 case targetType = "target_type"
                 case permissions
@@ -6825,7 +6831,7 @@ public enum Operations {
     }
     /// Delete an installation for the authenticated app
     ///
-    /// Uninstalls a GitHub App on a user, organization, or business account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/rest/apps/apps#suspend-an-app-installation)" endpoint.
+    /// Uninstalls a GitHub App on a user, organization, or enterprise account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/rest/apps/apps#suspend-an-app-installation)" endpoint.
     ///
     /// You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
@@ -7238,7 +7244,7 @@ public enum Operations {
     }
     /// Suspend an app installation
     ///
-    /// Suspends a GitHub App on a user, organization, or business account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account.
+    /// Suspends a GitHub App on a user, organization, or enterprise account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account.
     ///
     /// You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
     ///
