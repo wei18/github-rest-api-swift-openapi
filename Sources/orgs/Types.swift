@@ -454,6 +454,9 @@ public protocol APIProtocol: Sendable {
     ///
     /// Removing a user from this list will remove them from all teams and they will no longer have any access to the organization's repositories.
     ///
+    /// > [!NOTE]
+    /// > If a user has both direct membership in the organization as well as indirect membership via an enterprise team, only their direct membership will be removed. Their indirect membership via an enterprise team remains until the user is removed from the enterprise team.
+    ///
     /// - Remark: HTTP `DELETE /orgs/{org}/members/{username}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/members/{username}/delete(orgs/remove-member)`.
     func orgsRemoveMember(_ input: Operations.OrgsRemoveMember.Input) async throws -> Operations.OrgsRemoveMember.Output
@@ -484,6 +487,9 @@ public protocol APIProtocol: Sendable {
     /// In order to remove a user's membership with an organization, the authenticated user must be an organization owner.
     ///
     /// If the specified user is an active member of the organization, this will remove them from the organization. If the specified user has been invited to the organization, this will cancel their invitation. The specified user will receive an email notification in both cases.
+    ///
+    /// > [!NOTE]
+    /// > If a user has both direct membership in the organization as well as indirect membership via an enterprise team, only their direct membership will be removed. Their indirect membership via an enterprise team remains until the user is removed from the enterprise team.
     ///
     /// - Remark: HTTP `DELETE /orgs/{org}/memberships/{username}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/memberships/{username}/delete(orgs/remove-membership-for-user)`.
@@ -1753,6 +1759,9 @@ extension APIProtocol {
     ///
     /// Removing a user from this list will remove them from all teams and they will no longer have any access to the organization's repositories.
     ///
+    /// > [!NOTE]
+    /// > If a user has both direct membership in the organization as well as indirect membership via an enterprise team, only their direct membership will be removed. Their indirect membership via an enterprise team remains until the user is removed from the enterprise team.
+    ///
     /// - Remark: HTTP `DELETE /orgs/{org}/members/{username}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/members/{username}/delete(orgs/remove-member)`.
     public func orgsRemoveMember(
@@ -1809,6 +1818,9 @@ extension APIProtocol {
     /// In order to remove a user's membership with an organization, the authenticated user must be an organization owner.
     ///
     /// If the specified user is an active member of the organization, this will remove them from the organization. If the specified user has been invited to the organization, this will cancel their invitation. The specified user will receive an email notification in both cases.
+    ///
+    /// > [!NOTE]
+    /// > If a user has both direct membership in the organization as well as indirect membership via an enterprise team, only their direct membership will be removed. Their indirect membership via an enterprise team remains until the user is removed from the enterprise team.
     ///
     /// - Remark: HTTP `DELETE /orgs/{org}/memberships/{username}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/memberships/{username}/delete(orgs/remove-membership-for-user)`.
@@ -4442,6 +4454,8 @@ public enum Components {
             public var htmlUrl: Swift.String
             /// - Remark: Generated from `#/components/schemas/installation/app_id`.
             public var appId: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/installation/client_id`.
+            public var clientId: Swift.String?
             /// The ID of the user or organization this token is being scoped to.
             ///
             /// - Remark: Generated from `#/components/schemas/installation/target_id`.
@@ -4480,6 +4494,7 @@ public enum Components {
             ///   - repositoriesUrl:
             ///   - htmlUrl:
             ///   - appId:
+            ///   - clientId:
             ///   - targetId: The ID of the user or organization this token is being scoped to.
             ///   - targetType:
             ///   - permissions:
@@ -4501,6 +4516,7 @@ public enum Components {
                 repositoriesUrl: Swift.String,
                 htmlUrl: Swift.String,
                 appId: Swift.Int,
+                clientId: Swift.String? = nil,
                 targetId: Swift.Int,
                 targetType: Swift.String,
                 permissions: Components.Schemas.AppPermissions,
@@ -4522,6 +4538,7 @@ public enum Components {
                 self.repositoriesUrl = repositoriesUrl
                 self.htmlUrl = htmlUrl
                 self.appId = appId
+                self.clientId = clientId
                 self.targetId = targetId
                 self.targetType = targetType
                 self.permissions = permissions
@@ -4544,6 +4561,7 @@ public enum Components {
                 case repositoriesUrl = "repositories_url"
                 case htmlUrl = "html_url"
                 case appId = "app_id"
+                case clientId = "client_id"
                 case targetId = "target_id"
                 case targetType = "target_type"
                 case permissions
@@ -18171,6 +18189,9 @@ public enum Operations {
     ///
     /// Removing a user from this list will remove them from all teams and they will no longer have any access to the organization's repositories.
     ///
+    /// > [!NOTE]
+    /// > If a user has both direct membership in the organization as well as indirect membership via an enterprise team, only their direct membership will be removed. Their indirect membership via an enterprise team remains until the user is removed from the enterprise team.
+    ///
     /// - Remark: HTTP `DELETE /orgs/{org}/members/{username}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/members/{username}/delete(orgs/remove-member)`.
     public enum OrgsRemoveMember {
@@ -18739,6 +18760,9 @@ public enum Operations {
     /// In order to remove a user's membership with an organization, the authenticated user must be an organization owner.
     ///
     /// If the specified user is an active member of the organization, this will remove them from the organization. If the specified user has been invited to the organization, this will cancel their invitation. The specified user will receive an email notification in both cases.
+    ///
+    /// > [!NOTE]
+    /// > If a user has both direct membership in the organization as well as indirect membership via an enterprise team, only their direct membership will be removed. Their indirect membership via an enterprise team remains until the user is removed from the enterprise team.
     ///
     /// - Remark: HTTP `DELETE /orgs/{org}/memberships/{username}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/memberships/{username}/delete(orgs/remove-membership-for-user)`.
