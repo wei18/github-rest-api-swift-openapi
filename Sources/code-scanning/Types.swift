@@ -3979,6 +3979,34 @@ public enum Components {
                 self.body = body
             }
         }
+        public struct CodeScanningInvalidState: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/code_scanning_invalid_state/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/code_scanning_invalid_state/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.CodeScanningInvalidState.Body
+            /// Creates a new `CodeScanningInvalidState`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.CodeScanningInvalidState.Body) {
+                self.body = body
+            }
+        }
     }
     /// Types generated from the `#/components/headers` section of the OpenAPI document.
     public enum Headers {
@@ -9061,6 +9089,29 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Response if the configuration change cannot be made because the repository is not in the required state
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-scanning/default-setup/patch(code-scanning/update-default-setup)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.CodeScanningInvalidState)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.CodeScanningInvalidState {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
                             response: self
                         )
                     }
