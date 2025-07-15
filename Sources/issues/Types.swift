@@ -3653,6 +3653,7 @@ public enum Components {
                 case completed = "completed"
                 case reopened = "reopened"
                 case notPlanned = "not_planned"
+                case duplicate = "duplicate"
             }
             /// The reason for the current state
             ///
@@ -4482,6 +4483,7 @@ public enum Components {
                 case completed = "completed"
                 case reopened = "reopened"
                 case notPlanned = "not_planned"
+                case duplicate = "duplicate"
             }
             /// The reason for the current state
             ///
@@ -12287,6 +12289,7 @@ public enum Operations {
                     @frozen public enum StateReasonPayload: String, Codable, Hashable, Sendable, CaseIterable {
                         case completed = "completed"
                         case notPlanned = "not_planned"
+                        case duplicate = "duplicate"
                         case reopened = "reopened"
                     }
                     /// The reason for the state change. Ignored unless `state` is changed.

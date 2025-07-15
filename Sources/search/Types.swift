@@ -2264,6 +2264,11 @@ public enum Components {
         }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
         public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
+            /// Enable or disable GitHub Advanced Security for the repository.
+            ///
+            /// For standalone Code Scanning or Secret Protection products, this parameter cannot be used.
+            ///
+            ///
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security`.
             public struct AdvancedSecurityPayload: Codable, Hashable, Sendable {
                 /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security/status`.
@@ -2284,6 +2289,11 @@ public enum Components {
                     case status
                 }
             }
+            /// Enable or disable GitHub Advanced Security for the repository.
+            ///
+            /// For standalone Code Scanning or Secret Protection products, this parameter cannot be used.
+            ///
+            ///
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security`.
             public var advancedSecurity: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload?
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/code_security`.
@@ -2429,7 +2439,7 @@ public enum Components {
             /// Creates a new `SecurityAndAnalysis`.
             ///
             /// - Parameters:
-            ///   - advancedSecurity:
+            ///   - advancedSecurity: Enable or disable GitHub Advanced Security for the repository.
             ///   - codeSecurity:
             ///   - dependabotSecurityUpdates: Enable or disable Dependabot security updates for the repository.
             ///   - secretScanning:

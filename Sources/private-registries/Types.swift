@@ -442,6 +442,13 @@ public enum Components {
                 case mavenRepository = "maven_repository"
                 case nugetFeed = "nuget_feed"
                 case goproxyServer = "goproxy_server"
+                case npmRegistry = "npm_registry"
+                case rubygemsServer = "rubygems_server"
+                case cargoRegistry = "cargo_registry"
+                case composerRepository = "composer_repository"
+                case dockerRegistry = "docker_registry"
+                case gitSource = "git_source"
+                case helmRegistry = "helm_registry"
             }
             /// The registry type.
             ///
@@ -515,6 +522,13 @@ public enum Components {
                 case mavenRepository = "maven_repository"
                 case nugetFeed = "nuget_feed"
                 case goproxyServer = "goproxy_server"
+                case npmRegistry = "npm_registry"
+                case rubygemsServer = "rubygems_server"
+                case cargoRegistry = "cargo_registry"
+                case composerRepository = "composer_repository"
+                case dockerRegistry = "docker_registry"
+                case gitSource = "git_source"
+                case helmRegistry = "helm_registry"
             }
             /// The registry type.
             ///
@@ -1030,6 +1044,13 @@ public enum Operations {
                         case mavenRepository = "maven_repository"
                         case nugetFeed = "nuget_feed"
                         case goproxyServer = "goproxy_server"
+                        case npmRegistry = "npm_registry"
+                        case rubygemsServer = "rubygems_server"
+                        case cargoRegistry = "cargo_registry"
+                        case composerRepository = "composer_repository"
+                        case dockerRegistry = "docker_registry"
+                        case gitSource = "git_source"
+                        case helmRegistry = "helm_registry"
                     }
                     /// The registry type.
                     ///
@@ -1683,6 +1704,13 @@ public enum Operations {
                         case mavenRepository = "maven_repository"
                         case nugetFeed = "nuget_feed"
                         case goproxyServer = "goproxy_server"
+                        case npmRegistry = "npm_registry"
+                        case rubygemsServer = "rubygems_server"
+                        case cargoRegistry = "cargo_registry"
+                        case composerRepository = "composer_repository"
+                        case dockerRegistry = "docker_registry"
+                        case gitSource = "git_source"
+                        case helmRegistry = "helm_registry"
                     }
                     /// The registry type.
                     ///
