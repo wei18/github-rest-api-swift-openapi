@@ -2415,6 +2415,10 @@ public enum Operations {
                     public var description: Swift.String
                     /// The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
                     ///
+                    /// > [!WARNING]
+                    /// > `code_security` and `secret_protection` are deprecated values for this field. Prefer the individual `code_security` and `secret_protection` fields to set the status of these features.
+                    ///
+                    ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/advanced_security`.
                     @frozen public enum AdvancedSecurityPayload: String, Codable, Hashable, Sendable, CaseIterable {
                         case enabled = "enabled"
@@ -2424,8 +2428,24 @@ public enum Operations {
                     }
                     /// The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
                     ///
+                    /// > [!WARNING]
+                    /// > `code_security` and `secret_protection` are deprecated values for this field. Prefer the individual `code_security` and `secret_protection` fields to set the status of these features.
+                    ///
+                    ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/advanced_security`.
                     public var advancedSecurity: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.AdvancedSecurityPayload?
+                    /// The enablement status of GitHub Code Security features.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/code_security`.
+                    @frozen public enum CodeSecurityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of GitHub Code Security features.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/code_security`.
+                    public var codeSecurity: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.CodeSecurityPayload?
                     /// The enablement status of Dependency Graph
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/dependency_graph`.
@@ -2523,6 +2543,18 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/code_scanning_delegated_alert_dismissal`.
                     public var codeScanningDelegatedAlertDismissal: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload?
+                    /// The enablement status of GitHub Secret Protection features.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/secret_protection`.
+                    @frozen public enum SecretProtectionPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of GitHub Secret Protection features.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/secret_protection`.
+                    public var secretProtection: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretProtectionPayload?
                     /// The enablement status of secret scanning
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/secret_scanning`.
@@ -2624,6 +2656,7 @@ public enum Operations {
                     ///   - name: The name of the code security configuration. Must be unique within the enterprise.
                     ///   - description: A description of the code security configuration
                     ///   - advancedSecurity: The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
+                    ///   - codeSecurity: The enablement status of GitHub Code Security features.
                     ///   - dependencyGraph: The enablement status of Dependency Graph
                     ///   - dependencyGraphAutosubmitAction: The enablement status of Automatic dependency submission
                     ///   - dependencyGraphAutosubmitActionOptions: Feature options for Automatic dependency submission
@@ -2632,6 +2665,7 @@ public enum Operations {
                     ///   - codeScanningDefaultSetup: The enablement status of code scanning default setup
                     ///   - codeScanningDefaultSetupOptions:
                     ///   - codeScanningDelegatedAlertDismissal: The enablement status of code scanning delegated alert dismissal
+                    ///   - secretProtection: The enablement status of GitHub Secret Protection features.
                     ///   - secretScanning: The enablement status of secret scanning
                     ///   - secretScanningPushProtection: The enablement status of secret scanning push protection
                     ///   - secretScanningValidityChecks: The enablement status of secret scanning validity checks
@@ -2644,6 +2678,7 @@ public enum Operations {
                         name: Swift.String,
                         description: Swift.String,
                         advancedSecurity: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.AdvancedSecurityPayload? = nil,
+                        codeSecurity: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.CodeSecurityPayload? = nil,
                         dependencyGraph: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.DependencyGraphPayload? = nil,
                         dependencyGraphAutosubmitAction: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.DependencyGraphAutosubmitActionPayload? = nil,
                         dependencyGraphAutosubmitActionOptions: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.DependencyGraphAutosubmitActionOptionsPayload? = nil,
@@ -2652,6 +2687,7 @@ public enum Operations {
                         codeScanningDefaultSetup: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.CodeScanningDefaultSetupPayload? = nil,
                         codeScanningDefaultSetupOptions: Components.Schemas.CodeScanningDefaultSetupOptions? = nil,
                         codeScanningDelegatedAlertDismissal: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload? = nil,
+                        secretProtection: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretProtectionPayload? = nil,
                         secretScanning: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningPayload? = nil,
                         secretScanningPushProtection: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningPushProtectionPayload? = nil,
                         secretScanningValidityChecks: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningValidityChecksPayload? = nil,
@@ -2664,6 +2700,7 @@ public enum Operations {
                         self.name = name
                         self.description = description
                         self.advancedSecurity = advancedSecurity
+                        self.codeSecurity = codeSecurity
                         self.dependencyGraph = dependencyGraph
                         self.dependencyGraphAutosubmitAction = dependencyGraphAutosubmitAction
                         self.dependencyGraphAutosubmitActionOptions = dependencyGraphAutosubmitActionOptions
@@ -2672,6 +2709,7 @@ public enum Operations {
                         self.codeScanningDefaultSetup = codeScanningDefaultSetup
                         self.codeScanningDefaultSetupOptions = codeScanningDefaultSetupOptions
                         self.codeScanningDelegatedAlertDismissal = codeScanningDelegatedAlertDismissal
+                        self.secretProtection = secretProtection
                         self.secretScanning = secretScanning
                         self.secretScanningPushProtection = secretScanningPushProtection
                         self.secretScanningValidityChecks = secretScanningValidityChecks
@@ -2685,6 +2723,7 @@ public enum Operations {
                         case name
                         case description
                         case advancedSecurity = "advanced_security"
+                        case codeSecurity = "code_security"
                         case dependencyGraph = "dependency_graph"
                         case dependencyGraphAutosubmitAction = "dependency_graph_autosubmit_action"
                         case dependencyGraphAutosubmitActionOptions = "dependency_graph_autosubmit_action_options"
@@ -2693,6 +2732,7 @@ public enum Operations {
                         case codeScanningDefaultSetup = "code_scanning_default_setup"
                         case codeScanningDefaultSetupOptions = "code_scanning_default_setup_options"
                         case codeScanningDelegatedAlertDismissal = "code_scanning_delegated_alert_dismissal"
+                        case secretProtection = "secret_protection"
                         case secretScanning = "secret_scanning"
                         case secretScanningPushProtection = "secret_scanning_push_protection"
                         case secretScanningValidityChecks = "secret_scanning_validity_checks"
@@ -2715,6 +2755,10 @@ public enum Operations {
                         self.advancedSecurity = try container.decodeIfPresent(
                             Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.AdvancedSecurityPayload.self,
                             forKey: .advancedSecurity
+                        )
+                        self.codeSecurity = try container.decodeIfPresent(
+                            Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.CodeSecurityPayload.self,
+                            forKey: .codeSecurity
                         )
                         self.dependencyGraph = try container.decodeIfPresent(
                             Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.DependencyGraphPayload.self,
@@ -2747,6 +2791,10 @@ public enum Operations {
                         self.codeScanningDelegatedAlertDismissal = try container.decodeIfPresent(
                             Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload.self,
                             forKey: .codeScanningDelegatedAlertDismissal
+                        )
+                        self.secretProtection = try container.decodeIfPresent(
+                            Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretProtectionPayload.self,
+                            forKey: .secretProtection
                         )
                         self.secretScanning = try container.decodeIfPresent(
                             Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningPayload.self,
@@ -2784,6 +2832,7 @@ public enum Operations {
                             "name",
                             "description",
                             "advanced_security",
+                            "code_security",
                             "dependency_graph",
                             "dependency_graph_autosubmit_action",
                             "dependency_graph_autosubmit_action_options",
@@ -2792,6 +2841,7 @@ public enum Operations {
                             "code_scanning_default_setup",
                             "code_scanning_default_setup_options",
                             "code_scanning_delegated_alert_dismissal",
+                            "secret_protection",
                             "secret_scanning",
                             "secret_scanning_push_protection",
                             "secret_scanning_validity_checks",
@@ -3402,6 +3452,10 @@ public enum Operations {
                     public var description: Swift.String?
                     /// The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
                     ///
+                    /// > [!WARNING]
+                    /// > `code_security` and `secret_protection` are deprecated values for this field. Prefer the individual `code_security` and `secret_protection` fields to set the status of these features.
+                    ///
+                    ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/advanced_security`.
                     @frozen public enum AdvancedSecurityPayload: String, Codable, Hashable, Sendable, CaseIterable {
                         case enabled = "enabled"
@@ -3411,8 +3465,24 @@ public enum Operations {
                     }
                     /// The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
                     ///
+                    /// > [!WARNING]
+                    /// > `code_security` and `secret_protection` are deprecated values for this field. Prefer the individual `code_security` and `secret_protection` fields to set the status of these features.
+                    ///
+                    ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/advanced_security`.
                     public var advancedSecurity: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.AdvancedSecurityPayload?
+                    /// The enablement status of GitHub Code Security features.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_security`.
+                    @frozen public enum CodeSecurityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of GitHub Code Security features.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_security`.
+                    public var codeSecurity: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.CodeSecurityPayload?
                     /// The enablement status of Dependency Graph
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/dependency_graph`.
@@ -3510,6 +3580,18 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_scanning_delegated_alert_dismissal`.
                     public var codeScanningDelegatedAlertDismissal: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload?
+                    /// The enablement status of GitHub Secret Protection features.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_protection`.
+                    @frozen public enum SecretProtectionPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of GitHub Secret Protection features.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_protection`.
+                    public var secretProtection: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretProtectionPayload?
                     /// The enablement status of secret scanning
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_scanning`.
@@ -3611,6 +3693,7 @@ public enum Operations {
                     ///   - name: The name of the code security configuration. Must be unique across the enterprise.
                     ///   - description: A description of the code security configuration
                     ///   - advancedSecurity: The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
+                    ///   - codeSecurity: The enablement status of GitHub Code Security features.
                     ///   - dependencyGraph: The enablement status of Dependency Graph
                     ///   - dependencyGraphAutosubmitAction: The enablement status of Automatic dependency submission
                     ///   - dependencyGraphAutosubmitActionOptions: Feature options for Automatic dependency submission
@@ -3619,6 +3702,7 @@ public enum Operations {
                     ///   - codeScanningDefaultSetup: The enablement status of code scanning default setup
                     ///   - codeScanningDefaultSetupOptions:
                     ///   - codeScanningDelegatedAlertDismissal: The enablement status of code scanning delegated alert dismissal
+                    ///   - secretProtection: The enablement status of GitHub Secret Protection features.
                     ///   - secretScanning: The enablement status of secret scanning
                     ///   - secretScanningPushProtection: The enablement status of secret scanning push protection
                     ///   - secretScanningValidityChecks: The enablement status of secret scanning validity checks
@@ -3631,6 +3715,7 @@ public enum Operations {
                         name: Swift.String? = nil,
                         description: Swift.String? = nil,
                         advancedSecurity: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.AdvancedSecurityPayload? = nil,
+                        codeSecurity: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.CodeSecurityPayload? = nil,
                         dependencyGraph: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.DependencyGraphPayload? = nil,
                         dependencyGraphAutosubmitAction: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.DependencyGraphAutosubmitActionPayload? = nil,
                         dependencyGraphAutosubmitActionOptions: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.DependencyGraphAutosubmitActionOptionsPayload? = nil,
@@ -3639,6 +3724,7 @@ public enum Operations {
                         codeScanningDefaultSetup: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.CodeScanningDefaultSetupPayload? = nil,
                         codeScanningDefaultSetupOptions: Components.Schemas.CodeScanningDefaultSetupOptions? = nil,
                         codeScanningDelegatedAlertDismissal: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload? = nil,
+                        secretProtection: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretProtectionPayload? = nil,
                         secretScanning: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningPayload? = nil,
                         secretScanningPushProtection: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningPushProtectionPayload? = nil,
                         secretScanningValidityChecks: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningValidityChecksPayload? = nil,
@@ -3651,6 +3737,7 @@ public enum Operations {
                         self.name = name
                         self.description = description
                         self.advancedSecurity = advancedSecurity
+                        self.codeSecurity = codeSecurity
                         self.dependencyGraph = dependencyGraph
                         self.dependencyGraphAutosubmitAction = dependencyGraphAutosubmitAction
                         self.dependencyGraphAutosubmitActionOptions = dependencyGraphAutosubmitActionOptions
@@ -3659,6 +3746,7 @@ public enum Operations {
                         self.codeScanningDefaultSetup = codeScanningDefaultSetup
                         self.codeScanningDefaultSetupOptions = codeScanningDefaultSetupOptions
                         self.codeScanningDelegatedAlertDismissal = codeScanningDelegatedAlertDismissal
+                        self.secretProtection = secretProtection
                         self.secretScanning = secretScanning
                         self.secretScanningPushProtection = secretScanningPushProtection
                         self.secretScanningValidityChecks = secretScanningValidityChecks
@@ -3672,6 +3760,7 @@ public enum Operations {
                         case name
                         case description
                         case advancedSecurity = "advanced_security"
+                        case codeSecurity = "code_security"
                         case dependencyGraph = "dependency_graph"
                         case dependencyGraphAutosubmitAction = "dependency_graph_autosubmit_action"
                         case dependencyGraphAutosubmitActionOptions = "dependency_graph_autosubmit_action_options"
@@ -3680,6 +3769,7 @@ public enum Operations {
                         case codeScanningDefaultSetup = "code_scanning_default_setup"
                         case codeScanningDefaultSetupOptions = "code_scanning_default_setup_options"
                         case codeScanningDelegatedAlertDismissal = "code_scanning_delegated_alert_dismissal"
+                        case secretProtection = "secret_protection"
                         case secretScanning = "secret_scanning"
                         case secretScanningPushProtection = "secret_scanning_push_protection"
                         case secretScanningValidityChecks = "secret_scanning_validity_checks"
@@ -3702,6 +3792,10 @@ public enum Operations {
                         self.advancedSecurity = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.AdvancedSecurityPayload.self,
                             forKey: .advancedSecurity
+                        )
+                        self.codeSecurity = try container.decodeIfPresent(
+                            Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.CodeSecurityPayload.self,
+                            forKey: .codeSecurity
                         )
                         self.dependencyGraph = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.DependencyGraphPayload.self,
@@ -3734,6 +3828,10 @@ public enum Operations {
                         self.codeScanningDelegatedAlertDismissal = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload.self,
                             forKey: .codeScanningDelegatedAlertDismissal
+                        )
+                        self.secretProtection = try container.decodeIfPresent(
+                            Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretProtectionPayload.self,
+                            forKey: .secretProtection
                         )
                         self.secretScanning = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningPayload.self,
@@ -3771,6 +3869,7 @@ public enum Operations {
                             "name",
                             "description",
                             "advanced_security",
+                            "code_security",
                             "dependency_graph",
                             "dependency_graph_autosubmit_action",
                             "dependency_graph_autosubmit_action_options",
@@ -3779,6 +3878,7 @@ public enum Operations {
                             "code_scanning_default_setup",
                             "code_scanning_default_setup_options",
                             "code_scanning_delegated_alert_dismissal",
+                            "secret_protection",
                             "secret_scanning",
                             "secret_scanning_push_protection",
                             "secret_scanning_validity_checks",
@@ -5227,6 +5327,10 @@ public enum Operations {
                     public var description: Swift.String
                     /// The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
                     ///
+                    /// > [!WARNING]
+                    /// > `code_security` and `secret_protection` are deprecated values for this field. Prefer the individual `code_security` and `secret_protection` fields to set the status of these features.
+                    ///
+                    ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/advanced_security`.
                     @frozen public enum AdvancedSecurityPayload: String, Codable, Hashable, Sendable, CaseIterable {
                         case enabled = "enabled"
@@ -5236,8 +5340,24 @@ public enum Operations {
                     }
                     /// The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
                     ///
+                    /// > [!WARNING]
+                    /// > `code_security` and `secret_protection` are deprecated values for this field. Prefer the individual `code_security` and `secret_protection` fields to set the status of these features.
+                    ///
+                    ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/advanced_security`.
                     public var advancedSecurity: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.AdvancedSecurityPayload?
+                    /// The enablement status of GitHub Code Security features.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/code_security`.
+                    @frozen public enum CodeSecurityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of GitHub Code Security features.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/code_security`.
+                    public var codeSecurity: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.CodeSecurityPayload?
                     /// The enablement status of Dependency Graph
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/dependency_graph`.
@@ -5335,6 +5455,18 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/code_scanning_delegated_alert_dismissal`.
                     public var codeScanningDelegatedAlertDismissal: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload?
+                    /// The enablement status of GitHub Secret Protection features.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/secret_protection`.
+                    @frozen public enum SecretProtectionPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of GitHub Secret Protection features.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/secret_protection`.
+                    public var secretProtection: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretProtectionPayload?
                     /// The enablement status of secret scanning
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/secret_scanning`.
@@ -5509,6 +5641,7 @@ public enum Operations {
                     ///   - name: The name of the code security configuration. Must be unique within the organization.
                     ///   - description: A description of the code security configuration
                     ///   - advancedSecurity: The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
+                    ///   - codeSecurity: The enablement status of GitHub Code Security features.
                     ///   - dependencyGraph: The enablement status of Dependency Graph
                     ///   - dependencyGraphAutosubmitAction: The enablement status of Automatic dependency submission
                     ///   - dependencyGraphAutosubmitActionOptions: Feature options for Automatic dependency submission
@@ -5517,6 +5650,7 @@ public enum Operations {
                     ///   - codeScanningDefaultSetup: The enablement status of code scanning default setup
                     ///   - codeScanningDefaultSetupOptions:
                     ///   - codeScanningDelegatedAlertDismissal: The enablement status of code scanning delegated alert dismissal
+                    ///   - secretProtection: The enablement status of GitHub Secret Protection features.
                     ///   - secretScanning: The enablement status of secret scanning
                     ///   - secretScanningPushProtection: The enablement status of secret scanning push protection
                     ///   - secretScanningDelegatedBypass: The enablement status of secret scanning delegated bypass
@@ -5531,6 +5665,7 @@ public enum Operations {
                         name: Swift.String,
                         description: Swift.String,
                         advancedSecurity: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.AdvancedSecurityPayload? = nil,
+                        codeSecurity: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.CodeSecurityPayload? = nil,
                         dependencyGraph: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependencyGraphPayload? = nil,
                         dependencyGraphAutosubmitAction: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependencyGraphAutosubmitActionPayload? = nil,
                         dependencyGraphAutosubmitActionOptions: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependencyGraphAutosubmitActionOptionsPayload? = nil,
@@ -5539,6 +5674,7 @@ public enum Operations {
                         codeScanningDefaultSetup: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.CodeScanningDefaultSetupPayload? = nil,
                         codeScanningDefaultSetupOptions: Components.Schemas.CodeScanningDefaultSetupOptions? = nil,
                         codeScanningDelegatedAlertDismissal: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload? = nil,
+                        secretProtection: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretProtectionPayload? = nil,
                         secretScanning: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningPayload? = nil,
                         secretScanningPushProtection: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningPushProtectionPayload? = nil,
                         secretScanningDelegatedBypass: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassPayload? = nil,
@@ -5553,6 +5689,7 @@ public enum Operations {
                         self.name = name
                         self.description = description
                         self.advancedSecurity = advancedSecurity
+                        self.codeSecurity = codeSecurity
                         self.dependencyGraph = dependencyGraph
                         self.dependencyGraphAutosubmitAction = dependencyGraphAutosubmitAction
                         self.dependencyGraphAutosubmitActionOptions = dependencyGraphAutosubmitActionOptions
@@ -5561,6 +5698,7 @@ public enum Operations {
                         self.codeScanningDefaultSetup = codeScanningDefaultSetup
                         self.codeScanningDefaultSetupOptions = codeScanningDefaultSetupOptions
                         self.codeScanningDelegatedAlertDismissal = codeScanningDelegatedAlertDismissal
+                        self.secretProtection = secretProtection
                         self.secretScanning = secretScanning
                         self.secretScanningPushProtection = secretScanningPushProtection
                         self.secretScanningDelegatedBypass = secretScanningDelegatedBypass
@@ -5576,6 +5714,7 @@ public enum Operations {
                         case name
                         case description
                         case advancedSecurity = "advanced_security"
+                        case codeSecurity = "code_security"
                         case dependencyGraph = "dependency_graph"
                         case dependencyGraphAutosubmitAction = "dependency_graph_autosubmit_action"
                         case dependencyGraphAutosubmitActionOptions = "dependency_graph_autosubmit_action_options"
@@ -5584,6 +5723,7 @@ public enum Operations {
                         case codeScanningDefaultSetup = "code_scanning_default_setup"
                         case codeScanningDefaultSetupOptions = "code_scanning_default_setup_options"
                         case codeScanningDelegatedAlertDismissal = "code_scanning_delegated_alert_dismissal"
+                        case secretProtection = "secret_protection"
                         case secretScanning = "secret_scanning"
                         case secretScanningPushProtection = "secret_scanning_push_protection"
                         case secretScanningDelegatedBypass = "secret_scanning_delegated_bypass"
@@ -5608,6 +5748,10 @@ public enum Operations {
                         self.advancedSecurity = try container.decodeIfPresent(
                             Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.AdvancedSecurityPayload.self,
                             forKey: .advancedSecurity
+                        )
+                        self.codeSecurity = try container.decodeIfPresent(
+                            Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.CodeSecurityPayload.self,
+                            forKey: .codeSecurity
                         )
                         self.dependencyGraph = try container.decodeIfPresent(
                             Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependencyGraphPayload.self,
@@ -5640,6 +5784,10 @@ public enum Operations {
                         self.codeScanningDelegatedAlertDismissal = try container.decodeIfPresent(
                             Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload.self,
                             forKey: .codeScanningDelegatedAlertDismissal
+                        )
+                        self.secretProtection = try container.decodeIfPresent(
+                            Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretProtectionPayload.self,
+                            forKey: .secretProtection
                         )
                         self.secretScanning = try container.decodeIfPresent(
                             Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningPayload.self,
@@ -5685,6 +5833,7 @@ public enum Operations {
                             "name",
                             "description",
                             "advanced_security",
+                            "code_security",
                             "dependency_graph",
                             "dependency_graph_autosubmit_action",
                             "dependency_graph_autosubmit_action_options",
@@ -5693,6 +5842,7 @@ public enum Operations {
                             "code_scanning_default_setup",
                             "code_scanning_default_setup_options",
                             "code_scanning_delegated_alert_dismissal",
+                            "secret_protection",
                             "secret_scanning",
                             "secret_scanning_push_protection",
                             "secret_scanning_delegated_bypass",
@@ -6558,6 +6708,10 @@ public enum Operations {
                     public var description: Swift.String?
                     /// The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
                     ///
+                    /// > [!WARNING]
+                    /// > `code_security` and `secret_protection` are deprecated values for this field. Prefer the individual `code_security` and `secret_protection` fields to set the status of these features.
+                    ///
+                    ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/advanced_security`.
                     @frozen public enum AdvancedSecurityPayload: String, Codable, Hashable, Sendable, CaseIterable {
                         case enabled = "enabled"
@@ -6567,8 +6721,24 @@ public enum Operations {
                     }
                     /// The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
                     ///
+                    /// > [!WARNING]
+                    /// > `code_security` and `secret_protection` are deprecated values for this field. Prefer the individual `code_security` and `secret_protection` fields to set the status of these features.
+                    ///
+                    ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/advanced_security`.
                     public var advancedSecurity: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.AdvancedSecurityPayload?
+                    /// The enablement status of GitHub Code Security features.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_security`.
+                    @frozen public enum CodeSecurityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of GitHub Code Security features.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_security`.
+                    public var codeSecurity: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeSecurityPayload?
                     /// The enablement status of Dependency Graph
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/dependency_graph`.
@@ -6666,6 +6836,18 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_scanning_delegated_alert_dismissal`.
                     public var codeScanningDelegatedAlertDismissal: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload?
+                    /// The enablement status of GitHub Secret Protection features.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_protection`.
+                    @frozen public enum SecretProtectionPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of GitHub Secret Protection features.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_protection`.
+                    public var secretProtection: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretProtectionPayload?
                     /// The enablement status of secret scanning
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_scanning`.
@@ -6840,6 +7022,7 @@ public enum Operations {
                     ///   - name: The name of the code security configuration. Must be unique within the organization.
                     ///   - description: A description of the code security configuration
                     ///   - advancedSecurity: The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
+                    ///   - codeSecurity: The enablement status of GitHub Code Security features.
                     ///   - dependencyGraph: The enablement status of Dependency Graph
                     ///   - dependencyGraphAutosubmitAction: The enablement status of Automatic dependency submission
                     ///   - dependencyGraphAutosubmitActionOptions: Feature options for Automatic dependency submission
@@ -6848,6 +7031,7 @@ public enum Operations {
                     ///   - codeScanningDefaultSetup: The enablement status of code scanning default setup
                     ///   - codeScanningDefaultSetupOptions:
                     ///   - codeScanningDelegatedAlertDismissal: The enablement status of code scanning delegated alert dismissal
+                    ///   - secretProtection: The enablement status of GitHub Secret Protection features.
                     ///   - secretScanning: The enablement status of secret scanning
                     ///   - secretScanningPushProtection: The enablement status of secret scanning push protection
                     ///   - secretScanningDelegatedBypass: The enablement status of secret scanning delegated bypass
@@ -6862,6 +7046,7 @@ public enum Operations {
                         name: Swift.String? = nil,
                         description: Swift.String? = nil,
                         advancedSecurity: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.AdvancedSecurityPayload? = nil,
+                        codeSecurity: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeSecurityPayload? = nil,
                         dependencyGraph: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependencyGraphPayload? = nil,
                         dependencyGraphAutosubmitAction: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependencyGraphAutosubmitActionPayload? = nil,
                         dependencyGraphAutosubmitActionOptions: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependencyGraphAutosubmitActionOptionsPayload? = nil,
@@ -6870,6 +7055,7 @@ public enum Operations {
                         codeScanningDefaultSetup: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeScanningDefaultSetupPayload? = nil,
                         codeScanningDefaultSetupOptions: Components.Schemas.CodeScanningDefaultSetupOptions? = nil,
                         codeScanningDelegatedAlertDismissal: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload? = nil,
+                        secretProtection: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretProtectionPayload? = nil,
                         secretScanning: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningPayload? = nil,
                         secretScanningPushProtection: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningPushProtectionPayload? = nil,
                         secretScanningDelegatedBypass: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassPayload? = nil,
@@ -6884,6 +7070,7 @@ public enum Operations {
                         self.name = name
                         self.description = description
                         self.advancedSecurity = advancedSecurity
+                        self.codeSecurity = codeSecurity
                         self.dependencyGraph = dependencyGraph
                         self.dependencyGraphAutosubmitAction = dependencyGraphAutosubmitAction
                         self.dependencyGraphAutosubmitActionOptions = dependencyGraphAutosubmitActionOptions
@@ -6892,6 +7079,7 @@ public enum Operations {
                         self.codeScanningDefaultSetup = codeScanningDefaultSetup
                         self.codeScanningDefaultSetupOptions = codeScanningDefaultSetupOptions
                         self.codeScanningDelegatedAlertDismissal = codeScanningDelegatedAlertDismissal
+                        self.secretProtection = secretProtection
                         self.secretScanning = secretScanning
                         self.secretScanningPushProtection = secretScanningPushProtection
                         self.secretScanningDelegatedBypass = secretScanningDelegatedBypass
@@ -6907,6 +7095,7 @@ public enum Operations {
                         case name
                         case description
                         case advancedSecurity = "advanced_security"
+                        case codeSecurity = "code_security"
                         case dependencyGraph = "dependency_graph"
                         case dependencyGraphAutosubmitAction = "dependency_graph_autosubmit_action"
                         case dependencyGraphAutosubmitActionOptions = "dependency_graph_autosubmit_action_options"
@@ -6915,6 +7104,7 @@ public enum Operations {
                         case codeScanningDefaultSetup = "code_scanning_default_setup"
                         case codeScanningDefaultSetupOptions = "code_scanning_default_setup_options"
                         case codeScanningDelegatedAlertDismissal = "code_scanning_delegated_alert_dismissal"
+                        case secretProtection = "secret_protection"
                         case secretScanning = "secret_scanning"
                         case secretScanningPushProtection = "secret_scanning_push_protection"
                         case secretScanningDelegatedBypass = "secret_scanning_delegated_bypass"
@@ -6939,6 +7129,10 @@ public enum Operations {
                         self.advancedSecurity = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.AdvancedSecurityPayload.self,
                             forKey: .advancedSecurity
+                        )
+                        self.codeSecurity = try container.decodeIfPresent(
+                            Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeSecurityPayload.self,
+                            forKey: .codeSecurity
                         )
                         self.dependencyGraph = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependencyGraphPayload.self,
@@ -6971,6 +7165,10 @@ public enum Operations {
                         self.codeScanningDelegatedAlertDismissal = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload.self,
                             forKey: .codeScanningDelegatedAlertDismissal
+                        )
+                        self.secretProtection = try container.decodeIfPresent(
+                            Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretProtectionPayload.self,
+                            forKey: .secretProtection
                         )
                         self.secretScanning = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningPayload.self,
@@ -7016,6 +7214,7 @@ public enum Operations {
                             "name",
                             "description",
                             "advanced_security",
+                            "code_security",
                             "dependency_graph",
                             "dependency_graph_autosubmit_action",
                             "dependency_graph_autosubmit_action_options",
@@ -7024,6 +7223,7 @@ public enum Operations {
                             "code_scanning_default_setup",
                             "code_scanning_default_setup_options",
                             "code_scanning_delegated_alert_dismissal",
+                            "secret_protection",
                             "secret_scanning",
                             "secret_scanning_push_protection",
                             "secret_scanning_delegated_bypass",
