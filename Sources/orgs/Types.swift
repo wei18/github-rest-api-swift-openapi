@@ -4712,6 +4712,11 @@ public enum Components {
         }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
         public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
+            /// Enable or disable GitHub Advanced Security for the repository.
+            ///
+            /// For standalone Code Scanning or Secret Protection products, this parameter cannot be used.
+            ///
+            ///
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security`.
             public struct AdvancedSecurityPayload: Codable, Hashable, Sendable {
                 /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security/status`.
@@ -4732,6 +4737,11 @@ public enum Components {
                     case status
                 }
             }
+            /// Enable or disable GitHub Advanced Security for the repository.
+            ///
+            /// For standalone Code Scanning or Secret Protection products, this parameter cannot be used.
+            ///
+            ///
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security`.
             public var advancedSecurity: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload?
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/code_security`.
@@ -4877,7 +4887,7 @@ public enum Components {
             /// Creates a new `SecurityAndAnalysis`.
             ///
             /// - Parameters:
-            ///   - advancedSecurity:
+            ///   - advancedSecurity: Enable or disable GitHub Advanced Security for the repository.
             ///   - codeSecurity:
             ///   - dependabotSecurityUpdates: Enable or disable Dependabot security updates for the repository.
             ///   - secretScanning:
@@ -6985,6 +6995,15 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/org-membership/role`.
             public var role: Components.Schemas.OrgMembership.RolePayload
+            /// Whether the user has direct membership in the organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-membership/direct_membership`.
+            public var directMembership: Swift.Bool?
+            /// The slugs of the enterprise teams providing the user with indirect membership in the organization.
+            /// A limit of 100 enterprise team slugs is returned.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-membership/enterprise_teams_providing_indirect_membership`.
+            public var enterpriseTeamsProvidingIndirectMembership: [Swift.String]?
             /// - Remark: Generated from `#/components/schemas/org-membership/organization_url`.
             public var organizationUrl: Swift.String
             /// - Remark: Generated from `#/components/schemas/org-membership/organization`.
@@ -7014,6 +7033,8 @@ public enum Components {
             ///   - url:
             ///   - state: The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.
             ///   - role: The user's membership type in the organization.
+            ///   - directMembership: Whether the user has direct membership in the organization.
+            ///   - enterpriseTeamsProvidingIndirectMembership: The slugs of the enterprise teams providing the user with indirect membership in the organization.
             ///   - organizationUrl:
             ///   - organization:
             ///   - user:
@@ -7022,6 +7043,8 @@ public enum Components {
                 url: Swift.String,
                 state: Components.Schemas.OrgMembership.StatePayload,
                 role: Components.Schemas.OrgMembership.RolePayload,
+                directMembership: Swift.Bool? = nil,
+                enterpriseTeamsProvidingIndirectMembership: [Swift.String]? = nil,
                 organizationUrl: Swift.String,
                 organization: Components.Schemas.OrganizationSimple,
                 user: Components.Schemas.NullableSimpleUser? = nil,
@@ -7030,6 +7053,8 @@ public enum Components {
                 self.url = url
                 self.state = state
                 self.role = role
+                self.directMembership = directMembership
+                self.enterpriseTeamsProvidingIndirectMembership = enterpriseTeamsProvidingIndirectMembership
                 self.organizationUrl = organizationUrl
                 self.organization = organization
                 self.user = user
@@ -7039,6 +7064,8 @@ public enum Components {
                 case url
                 case state
                 case role
+                case directMembership = "direct_membership"
+                case enterpriseTeamsProvidingIndirectMembership = "enterprise_teams_providing_indirect_membership"
                 case organizationUrl = "organization_url"
                 case organization
                 case user
