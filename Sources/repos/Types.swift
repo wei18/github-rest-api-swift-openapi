@@ -8568,6 +8568,11 @@ public enum Components {
         }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
         public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
+            /// Enable or disable GitHub Advanced Security for the repository.
+            ///
+            /// For standalone Code Scanning or Secret Protection products, this parameter cannot be used.
+            ///
+            ///
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security`.
             public struct AdvancedSecurityPayload: Codable, Hashable, Sendable {
                 /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security/status`.
@@ -8588,6 +8593,11 @@ public enum Components {
                     case status
                 }
             }
+            /// Enable or disable GitHub Advanced Security for the repository.
+            ///
+            /// For standalone Code Scanning or Secret Protection products, this parameter cannot be used.
+            ///
+            ///
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security`.
             public var advancedSecurity: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload?
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/code_security`.
@@ -8733,7 +8743,7 @@ public enum Components {
             /// Creates a new `SecurityAndAnalysis`.
             ///
             /// - Parameters:
-            ///   - advancedSecurity:
+            ///   - advancedSecurity: Enable or disable GitHub Advanced Security for the repository.
             ///   - codeSecurity:
             ///   - dependabotSecurityUpdates: Enable or disable Dependabot security updates for the repository.
             ///   - secretScanning:
@@ -21351,6 +21361,10 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/release/prerelease`.
             public var prerelease: Swift.Bool
+            /// Whether or not the release is immutable.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/immutable`.
+            public var immutable: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/release/created_at`.
             public var createdAt: Foundation.Date
             /// - Remark: Generated from `#/components/schemas/release/published_at`.
@@ -21388,6 +21402,7 @@ public enum Components {
             ///   - body:
             ///   - draft: true to create a draft (unpublished) release, false to create a published one.
             ///   - prerelease: Whether to identify the release as a prerelease or a full release.
+            ///   - immutable: Whether or not the release is immutable.
             ///   - createdAt:
             ///   - publishedAt:
             ///   - author:
@@ -21412,6 +21427,7 @@ public enum Components {
                 body: Swift.String? = nil,
                 draft: Swift.Bool,
                 prerelease: Swift.Bool,
+                immutable: Swift.Bool? = nil,
                 createdAt: Foundation.Date,
                 publishedAt: Foundation.Date? = nil,
                 author: Components.Schemas.SimpleUser,
@@ -21436,6 +21452,7 @@ public enum Components {
                 self.body = body
                 self.draft = draft
                 self.prerelease = prerelease
+                self.immutable = immutable
                 self.createdAt = createdAt
                 self.publishedAt = publishedAt
                 self.author = author
@@ -21461,6 +21478,7 @@ public enum Components {
                 case body
                 case draft
                 case prerelease
+                case immutable
                 case createdAt = "created_at"
                 case publishedAt = "published_at"
                 case author
@@ -25948,7 +25966,11 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis`.
                     public struct SecurityAndAnalysisPayload: Codable, Hashable, Sendable {
-                        /// Use the `status` property to enable or disable GitHub Advanced Security for this repository. For more information, see "[About GitHub Advanced Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security)."
+                        /// Use the `status` property to enable or disable GitHub Advanced Security for this repository.
+                        /// For more information, see "[About GitHub Advanced
+                        /// Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security)."
+                        ///
+                        /// For standalone Code Scanning or Secret Protection products, this parameter cannot be used.
                         ///
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/advanced_security`.
                         public struct AdvancedSecurityPayload: Codable, Hashable, Sendable {
@@ -25967,7 +25989,11 @@ public enum Operations {
                                 case status
                             }
                         }
-                        /// Use the `status` property to enable or disable GitHub Advanced Security for this repository. For more information, see "[About GitHub Advanced Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security)."
+                        /// Use the `status` property to enable or disable GitHub Advanced Security for this repository.
+                        /// For more information, see "[About GitHub Advanced
+                        /// Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security)."
+                        ///
+                        /// For standalone Code Scanning or Secret Protection products, this parameter cannot be used.
                         ///
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/advanced_security`.
                         public var advancedSecurity: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.AdvancedSecurityPayload?
@@ -26089,7 +26115,7 @@ public enum Operations {
                         /// Creates a new `SecurityAndAnalysisPayload`.
                         ///
                         /// - Parameters:
-                        ///   - advancedSecurity: Use the `status` property to enable or disable GitHub Advanced Security for this repository. For more information, see "[About GitHub Advanced Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security)."
+                        ///   - advancedSecurity: Use the `status` property to enable or disable GitHub Advanced Security for this repository.
                         ///   - codeSecurity: Use the `status` property to enable or disable GitHub Code Security for this repository.
                         ///   - secretScanning: Use the `status` property to enable or disable secret scanning for this repository. For more information, see "[About secret scanning](/code-security/secret-security/about-secret-scanning)."
                         ///   - secretScanningPushProtection: Use the `status` property to enable or disable secret scanning push protection for this repository. For more information, see "[Protecting pushes with secret scanning](/code-security/secret-scanning/protecting-pushes-with-secret-scanning)."
