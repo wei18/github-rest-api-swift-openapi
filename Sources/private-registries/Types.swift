@@ -449,6 +449,11 @@ public enum Components {
                 case dockerRegistry = "docker_registry"
                 case gitSource = "git_source"
                 case helmRegistry = "helm_registry"
+                case hexOrganization = "hex_organization"
+                case hexRepository = "hex_repository"
+                case pubRepository = "pub_repository"
+                case pythonIndex = "python_index"
+                case terraformRegistry = "terraform_registry"
             }
             /// The registry type.
             ///
@@ -529,6 +534,11 @@ public enum Components {
                 case dockerRegistry = "docker_registry"
                 case gitSource = "git_source"
                 case helmRegistry = "helm_registry"
+                case hexOrganization = "hex_organization"
+                case hexRepository = "hex_repository"
+                case pubRepository = "pub_repository"
+                case pythonIndex = "python_index"
+                case terraformRegistry = "terraform_registry"
             }
             /// The registry type.
             ///
@@ -1051,6 +1061,11 @@ public enum Operations {
                         case dockerRegistry = "docker_registry"
                         case gitSource = "git_source"
                         case helmRegistry = "helm_registry"
+                        case hexOrganization = "hex_organization"
+                        case hexRepository = "hex_repository"
+                        case pubRepository = "pub_repository"
+                        case pythonIndex = "python_index"
+                        case terraformRegistry = "terraform_registry"
                     }
                     /// The registry type.
                     ///
@@ -1711,6 +1726,11 @@ public enum Operations {
                         case dockerRegistry = "docker_registry"
                         case gitSource = "git_source"
                         case helmRegistry = "helm_registry"
+                        case hexOrganization = "hex_organization"
+                        case hexRepository = "hex_repository"
+                        case pubRepository = "pub_repository"
+                        case pythonIndex = "python_index"
+                        case terraformRegistry = "terraform_registry"
                     }
                     /// The registry type.
                     ///
