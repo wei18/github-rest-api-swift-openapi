@@ -2631,6 +2631,8 @@ public enum Components {
             public var verified: Swift.Bool
             /// - Remark: Generated from `#/components/schemas/key/read_only`.
             public var readOnly: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/key/last_used`.
+            public var lastUsed: Foundation.Date?
             /// Creates a new `Key`.
             ///
             /// - Parameters:
@@ -2641,6 +2643,7 @@ public enum Components {
             ///   - createdAt:
             ///   - verified:
             ///   - readOnly:
+            ///   - lastUsed:
             public init(
                 key: Swift.String,
                 id: Swift.Int64,
@@ -2648,7 +2651,8 @@ public enum Components {
                 title: Swift.String,
                 createdAt: Foundation.Date,
                 verified: Swift.Bool,
-                readOnly: Swift.Bool
+                readOnly: Swift.Bool,
+                lastUsed: Foundation.Date? = nil
             ) {
                 self.key = key
                 self.id = id
@@ -2657,6 +2661,7 @@ public enum Components {
                 self.createdAt = createdAt
                 self.verified = verified
                 self.readOnly = readOnly
+                self.lastUsed = lastUsed
             }
             public enum CodingKeys: String, CodingKey {
                 case key
@@ -2666,6 +2671,7 @@ public enum Components {
                 case createdAt = "created_at"
                 case verified
                 case readOnly = "read_only"
+                case lastUsed = "last_used"
             }
         }
         /// Social media account
@@ -2782,25 +2788,31 @@ public enum Components {
             public var key: Swift.String
             /// - Remark: Generated from `#/components/schemas/key-simple/created_at`.
             public var createdAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/key-simple/last_used`.
+            public var lastUsed: Foundation.Date?
             /// Creates a new `KeySimple`.
             ///
             /// - Parameters:
             ///   - id:
             ///   - key:
             ///   - createdAt:
+            ///   - lastUsed:
             public init(
                 id: Swift.Int,
                 key: Swift.String,
-                createdAt: Foundation.Date? = nil
+                createdAt: Foundation.Date? = nil,
+                lastUsed: Foundation.Date? = nil
             ) {
                 self.id = id
                 self.key = key
                 self.createdAt = createdAt
+                self.lastUsed = lastUsed
             }
             public enum CodingKeys: String, CodingKey {
                 case id
                 case key
                 case createdAt = "created_at"
+                case lastUsed = "last_used"
             }
         }
     }

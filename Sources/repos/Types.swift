@@ -13512,6 +13512,223 @@ public enum Components {
                 case updatedAt = "updated_at"
             }
         }
+        /// A repository rule.
+        ///
+        /// - Remark: Generated from `#/components/schemas/org-rules`.
+        @frozen public enum OrgRules: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/org-rules/case1`.
+            case RepositoryRuleCreation(Components.Schemas.RepositoryRuleCreation)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case2`.
+            case RepositoryRuleUpdate(Components.Schemas.RepositoryRuleUpdate)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case3`.
+            case RepositoryRuleDeletion(Components.Schemas.RepositoryRuleDeletion)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case4`.
+            case RepositoryRuleRequiredLinearHistory(Components.Schemas.RepositoryRuleRequiredLinearHistory)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case5`.
+            case RepositoryRuleRequiredDeployments(Components.Schemas.RepositoryRuleRequiredDeployments)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case6`.
+            case RepositoryRuleRequiredSignatures(Components.Schemas.RepositoryRuleRequiredSignatures)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case7`.
+            case RepositoryRulePullRequest(Components.Schemas.RepositoryRulePullRequest)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case8`.
+            case RepositoryRuleRequiredStatusChecks(Components.Schemas.RepositoryRuleRequiredStatusChecks)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case9`.
+            case RepositoryRuleNonFastForward(Components.Schemas.RepositoryRuleNonFastForward)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case10`.
+            case RepositoryRuleCommitMessagePattern(Components.Schemas.RepositoryRuleCommitMessagePattern)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case11`.
+            case RepositoryRuleCommitAuthorEmailPattern(Components.Schemas.RepositoryRuleCommitAuthorEmailPattern)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case12`.
+            case RepositoryRuleCommitterEmailPattern(Components.Schemas.RepositoryRuleCommitterEmailPattern)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case13`.
+            case RepositoryRuleBranchNamePattern(Components.Schemas.RepositoryRuleBranchNamePattern)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case14`.
+            case RepositoryRuleTagNamePattern(Components.Schemas.RepositoryRuleTagNamePattern)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case15`.
+            case RepositoryRuleFilePathRestriction(Components.Schemas.RepositoryRuleFilePathRestriction)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case16`.
+            case RepositoryRuleMaxFilePathLength(Components.Schemas.RepositoryRuleMaxFilePathLength)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case17`.
+            case RepositoryRuleFileExtensionRestriction(Components.Schemas.RepositoryRuleFileExtensionRestriction)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case18`.
+            case RepositoryRuleMaxFileSize(Components.Schemas.RepositoryRuleMaxFileSize)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case19`.
+            case RepositoryRuleWorkflows(Components.Schemas.RepositoryRuleWorkflows)
+            /// - Remark: Generated from `#/components/schemas/org-rules/case20`.
+            case RepositoryRuleCodeScanning(Components.Schemas.RepositoryRuleCodeScanning)
+            public init(from decoder: any Decoder) throws {
+                var errors: [any Error] = []
+                do {
+                    self = .RepositoryRuleCreation(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleUpdate(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleDeletion(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleRequiredLinearHistory(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleRequiredDeployments(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleRequiredSignatures(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRulePullRequest(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleRequiredStatusChecks(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleNonFastForward(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleCommitMessagePattern(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleCommitAuthorEmailPattern(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleCommitterEmailPattern(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleBranchNamePattern(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleTagNamePattern(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleFilePathRestriction(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleMaxFilePathLength(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleFileExtensionRestriction(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleMaxFileSize(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleWorkflows(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleCodeScanning(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                    type: Self.self,
+                    codingPath: decoder.codingPath,
+                    errors: errors
+                )
+            }
+            public func encode(to encoder: any Encoder) throws {
+                switch self {
+                case let .RepositoryRuleCreation(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleUpdate(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleDeletion(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleRequiredLinearHistory(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleRequiredDeployments(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleRequiredSignatures(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRulePullRequest(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleRequiredStatusChecks(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleNonFastForward(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleCommitMessagePattern(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleCommitAuthorEmailPattern(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleCommitterEmailPattern(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleBranchNamePattern(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleTagNamePattern(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleFilePathRestriction(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleMaxFilePathLength(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleFileExtensionRestriction(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleMaxFileSize(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleWorkflows(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleCodeScanning(value):
+                    try value.encode(to: encoder)
+                }
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/RuleSuites`.
         public struct RuleSuitesPayload: Codable, Hashable, Sendable {
             /// The unique identifier of the rule insight.
@@ -20302,7 +20519,7 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/deploy-key/added_by`.
             public var addedBy: Swift.String?
             /// - Remark: Generated from `#/components/schemas/deploy-key/last_used`.
-            public var lastUsed: Swift.String?
+            public var lastUsed: Foundation.Date?
             /// - Remark: Generated from `#/components/schemas/deploy-key/enabled`.
             public var enabled: Swift.Bool?
             /// Creates a new `DeployKey`.
@@ -20327,7 +20544,7 @@ public enum Components {
                 createdAt: Swift.String,
                 readOnly: Swift.Bool,
                 addedBy: Swift.String? = nil,
-                lastUsed: Swift.String? = nil,
+                lastUsed: Foundation.Date? = nil,
                 enabled: Swift.Bool? = nil
             ) {
                 self.id = id
@@ -24413,7 +24630,7 @@ public enum Operations {
                     /// An array of rules within the ruleset.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/rulesets/POST/requestBody/json/rules`.
-                    public var rules: [Components.Schemas.RepositoryRule]?
+                    public var rules: [Components.Schemas.OrgRules]?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -24429,7 +24646,7 @@ public enum Operations {
                         enforcement: Components.Schemas.RepositoryRuleEnforcement,
                         bypassActors: [Components.Schemas.RepositoryRulesetBypassActor]? = nil,
                         conditions: Components.Schemas.OrgRulesetConditions? = nil,
-                        rules: [Components.Schemas.RepositoryRule]? = nil
+                        rules: [Components.Schemas.OrgRules]? = nil
                     ) {
                         self.name = name
                         self.target = target
@@ -25311,7 +25528,7 @@ public enum Operations {
                     /// An array of rules within the ruleset.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/rulesets/{ruleset_id}/PUT/requestBody/json/rules`.
-                    public var rules: [Components.Schemas.RepositoryRule]?
+                    public var rules: [Components.Schemas.OrgRules]?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -25327,7 +25544,7 @@ public enum Operations {
                         enforcement: Components.Schemas.RepositoryRuleEnforcement? = nil,
                         bypassActors: [Components.Schemas.RepositoryRulesetBypassActor]? = nil,
                         conditions: Components.Schemas.OrgRulesetConditions? = nil,
-                        rules: [Components.Schemas.RepositoryRule]? = nil
+                        rules: [Components.Schemas.OrgRules]? = nil
                     ) {
                         self.name = name
                         self.target = target
