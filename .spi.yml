@@ -36,6 +36,7 @@ builder:
     - GitHubRestAPIPackages
     - GitHubRestAPIPrivate_Registries
     - GitHubRestAPIProjects
+    - GitHubRestAPIProjects_Classic
     - GitHubRestAPIPulls
     - GitHubRestAPIRate_Limit
     - GitHubRestAPIReactions

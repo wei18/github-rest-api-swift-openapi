@@ -1217,7 +1217,7 @@ public struct Client: APIProtocol {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/get(code-security/get-configurations-for-org)`.
@@ -1434,7 +1434,7 @@ public struct Client: APIProtocol {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations/defaults`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/defaults/get(code-security/get-default-configurations)`.
@@ -2250,7 +2250,7 @@ public struct Client: APIProtocol {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations/{configuration_id}/repositories`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/{configuration_id}/repositories/get(code-security/get-repositories-for-configuration)`.

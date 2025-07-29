@@ -2262,6 +2262,35 @@ public enum Components {
                 case rocket
             }
         }
+        /// - Remark: Generated from `#/components/schemas/sub-issues-summary`.
+        public struct SubIssuesSummary: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/sub-issues-summary/total`.
+            public var total: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/sub-issues-summary/completed`.
+            public var completed: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/sub-issues-summary/percent_completed`.
+            public var percentCompleted: Swift.Int
+            /// Creates a new `SubIssuesSummary`.
+            ///
+            /// - Parameters:
+            ///   - total:
+            ///   - completed:
+            ///   - percentCompleted:
+            public init(
+                total: Swift.Int,
+                completed: Swift.Int,
+                percentCompleted: Swift.Int
+            ) {
+                self.total = total
+                self.completed = completed
+                self.percentCompleted = percentCompleted
+            }
+            public enum CodingKeys: String, CodingKey {
+                case total
+                case completed
+                case percentCompleted = "percent_completed"
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
         public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
             /// Enable or disable GitHub Advanced Security for the repository.
@@ -3662,36 +3691,7 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/issue-search-result-item/labels`.
             public var labels: Components.Schemas.IssueSearchResultItem.LabelsPayload
             /// - Remark: Generated from `#/components/schemas/issue-search-result-item/sub_issues_summary`.
-            public struct SubIssuesSummaryPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/issue-search-result-item/sub_issues_summary/total`.
-                public var total: Swift.Int
-                /// - Remark: Generated from `#/components/schemas/issue-search-result-item/sub_issues_summary/completed`.
-                public var completed: Swift.Int
-                /// - Remark: Generated from `#/components/schemas/issue-search-result-item/sub_issues_summary/percent_completed`.
-                public var percentCompleted: Swift.Int
-                /// Creates a new `SubIssuesSummaryPayload`.
-                ///
-                /// - Parameters:
-                ///   - total:
-                ///   - completed:
-                ///   - percentCompleted:
-                public init(
-                    total: Swift.Int,
-                    completed: Swift.Int,
-                    percentCompleted: Swift.Int
-                ) {
-                    self.total = total
-                    self.completed = completed
-                    self.percentCompleted = percentCompleted
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case total
-                    case completed
-                    case percentCompleted = "percent_completed"
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/issue-search-result-item/sub_issues_summary`.
-            public var subIssuesSummary: Components.Schemas.IssueSearchResultItem.SubIssuesSummaryPayload?
+            public var subIssuesSummary: Components.Schemas.SubIssuesSummary?
             /// - Remark: Generated from `#/components/schemas/issue-search-result-item/state`.
             public var state: Swift.String
             /// - Remark: Generated from `#/components/schemas/issue-search-result-item/state_reason`.
@@ -3831,7 +3831,7 @@ public enum Components {
                 assignees: [Components.Schemas.SimpleUser]? = nil,
                 user: Components.Schemas.NullableSimpleUser? = nil,
                 labels: Components.Schemas.IssueSearchResultItem.LabelsPayload,
-                subIssuesSummary: Components.Schemas.IssueSearchResultItem.SubIssuesSummaryPayload? = nil,
+                subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
                 state: Swift.String,
                 stateReason: Swift.String? = nil,
                 assignee: Components.Schemas.NullableSimpleUser? = nil,
