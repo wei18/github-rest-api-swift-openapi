@@ -6,6 +6,6 @@ import PackageDescription
 let package = Package(
     name: "manifest-swift-openapi-generator",
     dependencies: [
-        .package(url: "https://github.com/apple/swift-openapi-generator", exact: "1.10.0"),
+        .package(url: "https://github.com/apple/swift-openapi-generator", exact: "1.10.1"),
     ]
 )
