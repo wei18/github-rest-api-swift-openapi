@@ -122,7 +122,7 @@ public protocol APIProtocol: Sendable {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/get(code-security/get-configurations-for-org)`.
@@ -144,7 +144,7 @@ public protocol APIProtocol: Sendable {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations/defaults`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/defaults/get(code-security/get-default-configurations)`.
@@ -228,7 +228,7 @@ public protocol APIProtocol: Sendable {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations/{configuration_id}/repositories`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/{configuration_id}/repositories/get(code-security/get-repositories-for-configuration)`.
@@ -443,7 +443,7 @@ extension APIProtocol {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/get(code-security/get-configurations-for-org)`.
@@ -485,7 +485,7 @@ extension APIProtocol {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations/defaults`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/defaults/get(code-security/get-default-configurations)`.
@@ -633,7 +633,7 @@ extension APIProtocol {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations/{configuration_id}/repositories`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/{configuration_id}/repositories/get(code-security/get-repositories-for-configuration)`.
@@ -5100,7 +5100,7 @@ public enum Operations {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/get(code-security/get-configurations-for-org)`.
@@ -6025,7 +6025,7 @@ public enum Operations {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations/defaults`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/defaults/get(code-security/get-default-configurations)`.
@@ -8108,7 +8108,7 @@ public enum Operations {
     ///
     /// The authenticated user must be an administrator or security manager for the organization to use this endpoint.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/code-security/configurations/{configuration_id}/repositories`.
     /// - Remark: Generated from `#/paths//orgs/{org}/code-security/configurations/{configuration_id}/repositories/get(code-security/get-repositories-for-configuration)`.
