@@ -12059,7 +12059,7 @@ public enum Components {
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request/parameters/allowed_merge_methods`.
                 public var allowedMergeMethods: Components.Schemas.RepositoryRulePullRequest.ParametersPayload.AllowedMergeMethodsPayload?
-                /// Automatically request review from Copilot for new pull requests, if the author has access to Copilot code review.
+                /// Request Copilot code review for new pull requests automatically if the author has access to Copilot code review.
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request/parameters/automatic_copilot_code_review_enabled`.
                 public var automaticCopilotCodeReviewEnabled: Swift.Bool?
@@ -12087,7 +12087,7 @@ public enum Components {
                 ///
                 /// - Parameters:
                 ///   - allowedMergeMethods: Array of allowed merge methods. Allowed values include `merge`, `squash`, and `rebase`. At least one option must be enabled.
-                ///   - automaticCopilotCodeReviewEnabled: Automatically request review from Copilot for new pull requests, if the author has access to Copilot code review.
+                ///   - automaticCopilotCodeReviewEnabled: Request Copilot code review for new pull requests automatically if the author has access to Copilot code review.
                 ///   - dismissStaleReviewsOnPush: New, reviewable commits pushed will dismiss previous pull request review approvals.
                 ///   - requireCodeOwnerReview: Require an approving review in pull requests that modify files that have a designated code owner.
                 ///   - requireLastPushApproval: Whether the most recent reviewable push must be approved by someone other than the person who pushed it.
