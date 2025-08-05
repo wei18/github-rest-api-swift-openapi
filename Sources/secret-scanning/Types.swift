@@ -35,6 +35,24 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /orgs/{org}/secret-scanning/alerts`.
     /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/alerts/get(secret-scanning/list-alerts-for-org)`.
     func secretScanningListAlertsForOrg(_ input: Operations.SecretScanningListAlertsForOrg.Input) async throws -> Operations.SecretScanningListAlertsForOrg.Output
+    /// List organization pattern configurations
+    ///
+    /// Lists the secret scanning pattern configurations for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/secret-scanning/pattern-configurations`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/get(secret-scanning/list-org-pattern-configs)`.
+    func secretScanningListOrgPatternConfigs(_ input: Operations.SecretScanningListOrgPatternConfigs.Input) async throws -> Operations.SecretScanningListOrgPatternConfigs.Output
+    /// Update organization pattern configurations
+    ///
+    /// Updates the secret scanning pattern configurations for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/secret-scanning/pattern-configurations`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/patch(secret-scanning/update-org-pattern-configs)`.
+    func secretScanningUpdateOrgPatternConfigs(_ input: Operations.SecretScanningUpdateOrgPatternConfigs.Input) async throws -> Operations.SecretScanningUpdateOrgPatternConfigs.Output
     /// List secret scanning alerts for a repository
     ///
     /// Lists secret scanning alerts for an eligible repository, from newest to oldest.
@@ -145,6 +163,42 @@ extension APIProtocol {
             path: path,
             query: query,
             headers: headers
+        ))
+    }
+    /// List organization pattern configurations
+    ///
+    /// Lists the secret scanning pattern configurations for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/secret-scanning/pattern-configurations`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/get(secret-scanning/list-org-pattern-configs)`.
+    public func secretScanningListOrgPatternConfigs(
+        path: Operations.SecretScanningListOrgPatternConfigs.Input.Path,
+        headers: Operations.SecretScanningListOrgPatternConfigs.Input.Headers = .init()
+    ) async throws -> Operations.SecretScanningListOrgPatternConfigs.Output {
+        try await secretScanningListOrgPatternConfigs(Operations.SecretScanningListOrgPatternConfigs.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Update organization pattern configurations
+    ///
+    /// Updates the secret scanning pattern configurations for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/secret-scanning/pattern-configurations`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/patch(secret-scanning/update-org-pattern-configs)`.
+    public func secretScanningUpdateOrgPatternConfigs(
+        path: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Path,
+        headers: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Headers = .init(),
+        body: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body
+    ) async throws -> Operations.SecretScanningUpdateOrgPatternConfigs.Output {
+        try await secretScanningUpdateOrgPatternConfigs(Operations.SecretScanningUpdateOrgPatternConfigs.Input(
+            path: path,
+            headers: headers,
+            body: body
         ))
     }
     /// List secret scanning alerts for a repository
@@ -474,6 +528,180 @@ public enum Components {
                 case documentationUrl = "documentation_url"
                 case url
                 case status
+            }
+        }
+        /// Scim Error
+        ///
+        /// - Remark: Generated from `#/components/schemas/scim-error`.
+        public struct ScimError: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/scim-error/message`.
+            public var message: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/documentation_url`.
+            public var documentationUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/detail`.
+            public var detail: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/status`.
+            public var status: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/scim-error/scimType`.
+            public var scimType: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/schemas`.
+            public var schemas: [Swift.String]?
+            /// Creates a new `ScimError`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - detail:
+            ///   - status:
+            ///   - scimType:
+            ///   - schemas:
+            public init(
+                message: Swift.String? = nil,
+                documentationUrl: Swift.String? = nil,
+                detail: Swift.String? = nil,
+                status: Swift.Int? = nil,
+                scimType: Swift.String? = nil,
+                schemas: [Swift.String]? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.detail = detail
+                self.status = status
+                self.scimType = scimType
+                self.schemas = schemas
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case detail
+                case status
+                case scimType
+                case schemas
+            }
+        }
+        /// Validation Error
+        ///
+        /// - Remark: Generated from `#/components/schemas/validation-error`.
+        public struct ValidationError: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/validation-error/message`.
+            public var message: Swift.String
+            /// - Remark: Generated from `#/components/schemas/validation-error/documentation_url`.
+            public var documentationUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload`.
+            public struct ErrorsPayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/resource`.
+                public var resource: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/field`.
+                public var field: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/message`.
+                public var message: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/code`.
+                public var code: Swift.String
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/index`.
+                public var index: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value`.
+                @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case1`.
+                    case case1(Swift.String?)
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case2`.
+                    case case2(Swift.Int?)
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
+                    case case3([Swift.String]?)
+                    public init(from decoder: any Decoder) throws {
+                        var errors: [any Error] = []
+                        do {
+                            self = .case1(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case2(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case3(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
+                    }
+                    public func encode(to encoder: any Encoder) throws {
+                        switch self {
+                        case let .case1(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case2(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case3(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        }
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value`.
+                public var value: Components.Schemas.ValidationError.ErrorsPayloadPayload.ValuePayload?
+                /// Creates a new `ErrorsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - resource:
+                ///   - field:
+                ///   - message:
+                ///   - code:
+                ///   - index:
+                ///   - value:
+                public init(
+                    resource: Swift.String? = nil,
+                    field: Swift.String? = nil,
+                    message: Swift.String? = nil,
+                    code: Swift.String,
+                    index: Swift.Int? = nil,
+                    value: Components.Schemas.ValidationError.ErrorsPayloadPayload.ValuePayload? = nil
+                ) {
+                    self.resource = resource
+                    self.field = field
+                    self.message = message
+                    self.code = code
+                    self.index = index
+                    self.value = value
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case resource
+                    case field
+                    case message
+                    case code
+                    case index
+                    case value
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/validation-error/errors`.
+            public typealias ErrorsPayload = [Components.Schemas.ValidationError.ErrorsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/validation-error/errors`.
+            public var errors: Components.Schemas.ValidationError.ErrorsPayload?
+            /// Creates a new `ValidationError`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - errors:
+            public init(
+                message: Swift.String,
+                documentationUrl: Swift.String,
+                errors: Components.Schemas.ValidationError.ErrorsPayload? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.errors = errors
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case errors
             }
         }
         /// A GitHub user.
@@ -1783,6 +2011,175 @@ public enum Components {
                 case hasMoreLocations = "has_more_locations"
             }
         }
+        /// The version of the entity. This is used to confirm you're updating the current version of the entity and mitigate unintentionally overriding someone else's update.
+        ///
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-row-version`.
+        public typealias SecretScanningRowVersion = Swift.String
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override`.
+        public struct SecretScanningPatternOverride: Codable, Hashable, Sendable {
+            /// The ID of the pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/token_type`.
+            public var tokenType: Swift.String?
+            /// The version of this pattern if it's a custom pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/custom_pattern_version`.
+            public var customPatternVersion: Swift.String?
+            /// The slug of the pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/slug`.
+            public var slug: Swift.String?
+            /// The user-friendly name for the pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/display_name`.
+            public var displayName: Swift.String?
+            /// The total number of alerts generated by this pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/alert_total`.
+            public var alertTotal: Swift.Int?
+            /// The percentage of all alerts that this pattern represents, rounded to the nearest integer.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/alert_total_percentage`.
+            public var alertTotalPercentage: Swift.Int?
+            /// The number of false positive alerts generated by this pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/false_positives`.
+            public var falsePositives: Swift.Int?
+            /// The percentage of alerts from this pattern that are false positives, rounded to the nearest integer.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/false_positive_rate`.
+            public var falsePositiveRate: Swift.Int?
+            /// The percentage of blocks for this pattern that were bypassed, rounded to the nearest integer.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/bypass_rate`.
+            public var bypassRate: Swift.Int?
+            /// The default push protection setting for this pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/default_setting`.
+            @frozen public enum DefaultSettingPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case disabled = "disabled"
+                case enabled = "enabled"
+            }
+            /// The default push protection setting for this pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/default_setting`.
+            public var defaultSetting: Components.Schemas.SecretScanningPatternOverride.DefaultSettingPayload?
+            /// The push protection setting for this pattern set at the enterprise level. Only present for partner patterns when the organization has a parent enterprise.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/enterprise_setting`.
+            @frozen public enum EnterpriseSettingPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case notSet = "not-set"
+                case disabled = "disabled"
+                case enabled = "enabled"
+            }
+            /// The push protection setting for this pattern set at the enterprise level. Only present for partner patterns when the organization has a parent enterprise.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/enterprise_setting`.
+            public var enterpriseSetting: Components.Schemas.SecretScanningPatternOverride.EnterpriseSettingPayload?
+            /// The current push protection setting for this pattern. If this is `not-set`, then it inherits either the enterprise setting if it exists or the default setting.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/setting`.
+            @frozen public enum SettingPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case notSet = "not-set"
+                case disabled = "disabled"
+                case enabled = "enabled"
+            }
+            /// The current push protection setting for this pattern. If this is `not-set`, then it inherits either the enterprise setting if it exists or the default setting.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override/setting`.
+            public var setting: Components.Schemas.SecretScanningPatternOverride.SettingPayload?
+            /// Creates a new `SecretScanningPatternOverride`.
+            ///
+            /// - Parameters:
+            ///   - tokenType: The ID of the pattern.
+            ///   - customPatternVersion: The version of this pattern if it's a custom pattern.
+            ///   - slug: The slug of the pattern.
+            ///   - displayName: The user-friendly name for the pattern.
+            ///   - alertTotal: The total number of alerts generated by this pattern.
+            ///   - alertTotalPercentage: The percentage of all alerts that this pattern represents, rounded to the nearest integer.
+            ///   - falsePositives: The number of false positive alerts generated by this pattern.
+            ///   - falsePositiveRate: The percentage of alerts from this pattern that are false positives, rounded to the nearest integer.
+            ///   - bypassRate: The percentage of blocks for this pattern that were bypassed, rounded to the nearest integer.
+            ///   - defaultSetting: The default push protection setting for this pattern.
+            ///   - enterpriseSetting: The push protection setting for this pattern set at the enterprise level. Only present for partner patterns when the organization has a parent enterprise.
+            ///   - setting: The current push protection setting for this pattern. If this is `not-set`, then it inherits either the enterprise setting if it exists or the default setting.
+            public init(
+                tokenType: Swift.String? = nil,
+                customPatternVersion: Swift.String? = nil,
+                slug: Swift.String? = nil,
+                displayName: Swift.String? = nil,
+                alertTotal: Swift.Int? = nil,
+                alertTotalPercentage: Swift.Int? = nil,
+                falsePositives: Swift.Int? = nil,
+                falsePositiveRate: Swift.Int? = nil,
+                bypassRate: Swift.Int? = nil,
+                defaultSetting: Components.Schemas.SecretScanningPatternOverride.DefaultSettingPayload? = nil,
+                enterpriseSetting: Components.Schemas.SecretScanningPatternOverride.EnterpriseSettingPayload? = nil,
+                setting: Components.Schemas.SecretScanningPatternOverride.SettingPayload? = nil
+            ) {
+                self.tokenType = tokenType
+                self.customPatternVersion = customPatternVersion
+                self.slug = slug
+                self.displayName = displayName
+                self.alertTotal = alertTotal
+                self.alertTotalPercentage = alertTotalPercentage
+                self.falsePositives = falsePositives
+                self.falsePositiveRate = falsePositiveRate
+                self.bypassRate = bypassRate
+                self.defaultSetting = defaultSetting
+                self.enterpriseSetting = enterpriseSetting
+                self.setting = setting
+            }
+            public enum CodingKeys: String, CodingKey {
+                case tokenType = "token_type"
+                case customPatternVersion = "custom_pattern_version"
+                case slug
+                case displayName = "display_name"
+                case alertTotal = "alert_total"
+                case alertTotalPercentage = "alert_total_percentage"
+                case falsePositives = "false_positives"
+                case falsePositiveRate = "false_positive_rate"
+                case bypassRate = "bypass_rate"
+                case defaultSetting = "default_setting"
+                case enterpriseSetting = "enterprise_setting"
+                case setting
+            }
+        }
+        /// A collection of secret scanning patterns and their settings related to push protection.
+        ///
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-configuration`.
+        public struct SecretScanningPatternConfiguration: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-configuration/pattern_config_version`.
+            public var patternConfigVersion: Components.Schemas.SecretScanningRowVersion?
+            /// Overrides for partner patterns.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-configuration/provider_pattern_overrides`.
+            public var providerPatternOverrides: [Components.Schemas.SecretScanningPatternOverride]?
+            /// Overrides for custom patterns defined by the organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-configuration/custom_pattern_overrides`.
+            public var customPatternOverrides: [Components.Schemas.SecretScanningPatternOverride]?
+            /// Creates a new `SecretScanningPatternConfiguration`.
+            ///
+            /// - Parameters:
+            ///   - patternConfigVersion:
+            ///   - providerPatternOverrides: Overrides for partner patterns.
+            ///   - customPatternOverrides: Overrides for custom patterns defined by the organization.
+            public init(
+                patternConfigVersion: Components.Schemas.SecretScanningRowVersion? = nil,
+                providerPatternOverrides: [Components.Schemas.SecretScanningPatternOverride]? = nil,
+                customPatternOverrides: [Components.Schemas.SecretScanningPatternOverride]? = nil
+            ) {
+                self.patternConfigVersion = patternConfigVersion
+                self.providerPatternOverrides = providerPatternOverrides
+                self.customPatternOverrides = customPatternOverrides
+            }
+            public enum CodingKeys: String, CodingKey {
+                case patternConfigVersion = "pattern_config_version"
+                case providerPatternOverrides = "provider_pattern_overrides"
+                case customPatternOverrides = "custom_pattern_overrides"
+            }
+        }
         /// The ID of the push protection bypass placeholder. This value is returned on any push protected routes.
         ///
         /// - Remark: Generated from `#/components/schemas/secret-scanning-push-protection-bypass-placeholder-id`.
@@ -2495,9 +2892,145 @@ public enum Components {
                 self.body = body
             }
         }
+        public struct BadRequest: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/bad_request/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/bad_request/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        default:
+                            try throwUnexpectedResponseBody(
+                                expectedContent: "application/json",
+                                body: self
+                            )
+                        }
+                    }
+                }
+                /// - Remark: Generated from `#/components/responses/bad_request/content/application\/scim+json`.
+                case applicationScimJson(Components.Schemas.ScimError)
+                /// The associated value of the enum case if `self` is `.applicationScimJson`.
+                ///
+                /// - Throws: An error if `self` is not `.applicationScimJson`.
+                /// - SeeAlso: `.applicationScimJson`.
+                public var applicationScimJson: Components.Schemas.ScimError {
+                    get throws {
+                        switch self {
+                        case let .applicationScimJson(body):
+                            return body
+                        default:
+                            try throwUnexpectedResponseBody(
+                                expectedContent: "application/scim+json",
+                                body: self
+                            )
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.BadRequest.Body
+            /// Creates a new `BadRequest`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.BadRequest.Body) {
+                self.body = body
+            }
+        }
+        public struct ValidationFailed: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/validation_failed/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/validation_failed/content/application\/json`.
+                case json(Components.Schemas.ValidationError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.ValidationError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.ValidationFailed.Body
+            /// Creates a new `ValidationFailed`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.ValidationFailed.Body) {
+                self.body = body
+            }
+        }
         public struct NotModified: Sendable, Hashable {
             /// Creates a new `NotModified`.
             public init() {}
+        }
+        public struct Forbidden: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/forbidden/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/forbidden/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.Forbidden.Body
+            /// Creates a new `Forbidden`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.Forbidden.Body) {
+                self.body = body
+            }
+        }
+        public struct Conflict: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/conflict/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/conflict/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.Conflict.Body
+            /// Creates a new `Conflict`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.Conflict.Body) {
+                self.body = body
+            }
         }
         public struct ServiceUnavailable: Sendable, Hashable {
             /// - Remark: Generated from `#/components/responses/service_unavailable/content`.
@@ -3197,6 +3730,583 @@ public enum Operations {
             public static var allCases: [Self] {
                 [
                     .json
+                ]
+            }
+        }
+    }
+    /// List organization pattern configurations
+    ///
+    /// Lists the secret scanning pattern configurations for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/secret-scanning/pattern-configurations`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/get(secret-scanning/list-org-pattern-configs)`.
+    public enum SecretScanningListOrgPatternConfigs {
+        public static let id: Swift.String = "secret-scanning/list-org-pattern-configs"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.SecretScanningListOrgPatternConfigs.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningListOrgPatternConfigs.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningListOrgPatternConfigs.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.SecretScanningListOrgPatternConfigs.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.SecretScanningListOrgPatternConfigs.Input.Path,
+                headers: Operations.SecretScanningListOrgPatternConfigs.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.SecretScanningPatternConfiguration)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.SecretScanningPatternConfiguration {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.SecretScanningListOrgPatternConfigs.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.SecretScanningListOrgPatternConfigs.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/get(secret-scanning/list-org-pattern-configs)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.SecretScanningListOrgPatternConfigs.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.SecretScanningListOrgPatternConfigs.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/get(secret-scanning/list-org-pattern-configs)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/get(secret-scanning/list-org-pattern-configs)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Update organization pattern configurations
+    ///
+    /// Updates the secret scanning pattern configurations for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/secret-scanning/pattern-configurations`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/patch(secret-scanning/update-org-pattern-configs)`.
+    public enum SecretScanningUpdateOrgPatternConfigs {
+        public static let id: Swift.String = "secret-scanning/update-org-pattern-configs"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningUpdateOrgPatternConfigs.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningUpdateOrgPatternConfigs.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/pattern_config_version`.
+                    public var patternConfigVersion: Components.Schemas.SecretScanningRowVersion?
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/ProviderPatternSettingsPayload`.
+                    public struct ProviderPatternSettingsPayloadPayload: Codable, Hashable, Sendable {
+                        /// The ID of the pattern to configure.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/ProviderPatternSettingsPayload/token_type`.
+                        public var tokenType: Swift.String?
+                        /// Push protection setting to set for the pattern.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/ProviderPatternSettingsPayload/push_protection_setting`.
+                        @frozen public enum PushProtectionSettingPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case notSet = "not-set"
+                            case disabled = "disabled"
+                            case enabled = "enabled"
+                        }
+                        /// Push protection setting to set for the pattern.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/ProviderPatternSettingsPayload/push_protection_setting`.
+                        public var pushProtectionSetting: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body.JsonPayload.ProviderPatternSettingsPayloadPayload.PushProtectionSettingPayload?
+                        /// Creates a new `ProviderPatternSettingsPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - tokenType: The ID of the pattern to configure.
+                        ///   - pushProtectionSetting: Push protection setting to set for the pattern.
+                        public init(
+                            tokenType: Swift.String? = nil,
+                            pushProtectionSetting: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body.JsonPayload.ProviderPatternSettingsPayloadPayload.PushProtectionSettingPayload? = nil
+                        ) {
+                            self.tokenType = tokenType
+                            self.pushProtectionSetting = pushProtectionSetting
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case tokenType = "token_type"
+                            case pushProtectionSetting = "push_protection_setting"
+                        }
+                    }
+                    /// Pattern settings for provider patterns.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/provider_pattern_settings`.
+                    public typealias ProviderPatternSettingsPayload = [Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body.JsonPayload.ProviderPatternSettingsPayloadPayload]
+                    /// Pattern settings for provider patterns.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/provider_pattern_settings`.
+                    public var providerPatternSettings: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body.JsonPayload.ProviderPatternSettingsPayload?
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/CustomPatternSettingsPayload`.
+                    public struct CustomPatternSettingsPayloadPayload: Codable, Hashable, Sendable {
+                        /// The ID of the pattern to configure.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/CustomPatternSettingsPayload/token_type`.
+                        public var tokenType: Swift.String?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/CustomPatternSettingsPayload/custom_pattern_version`.
+                        public var customPatternVersion: Components.Schemas.SecretScanningRowVersion?
+                        /// Push protection setting to set for the pattern.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/CustomPatternSettingsPayload/push_protection_setting`.
+                        @frozen public enum PushProtectionSettingPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case disabled = "disabled"
+                            case enabled = "enabled"
+                        }
+                        /// Push protection setting to set for the pattern.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/CustomPatternSettingsPayload/push_protection_setting`.
+                        public var pushProtectionSetting: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body.JsonPayload.CustomPatternSettingsPayloadPayload.PushProtectionSettingPayload?
+                        /// Creates a new `CustomPatternSettingsPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - tokenType: The ID of the pattern to configure.
+                        ///   - customPatternVersion:
+                        ///   - pushProtectionSetting: Push protection setting to set for the pattern.
+                        public init(
+                            tokenType: Swift.String? = nil,
+                            customPatternVersion: Components.Schemas.SecretScanningRowVersion? = nil,
+                            pushProtectionSetting: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body.JsonPayload.CustomPatternSettingsPayloadPayload.PushProtectionSettingPayload? = nil
+                        ) {
+                            self.tokenType = tokenType
+                            self.customPatternVersion = customPatternVersion
+                            self.pushProtectionSetting = pushProtectionSetting
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case tokenType = "token_type"
+                            case customPatternVersion = "custom_pattern_version"
+                            case pushProtectionSetting = "push_protection_setting"
+                        }
+                    }
+                    /// Pattern settings for custom patterns.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/custom_pattern_settings`.
+                    public typealias CustomPatternSettingsPayload = [Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body.JsonPayload.CustomPatternSettingsPayloadPayload]
+                    /// Pattern settings for custom patterns.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/json/custom_pattern_settings`.
+                    public var customPatternSettings: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body.JsonPayload.CustomPatternSettingsPayload?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - patternConfigVersion:
+                    ///   - providerPatternSettings: Pattern settings for provider patterns.
+                    ///   - customPatternSettings: Pattern settings for custom patterns.
+                    public init(
+                        patternConfigVersion: Components.Schemas.SecretScanningRowVersion? = nil,
+                        providerPatternSettings: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body.JsonPayload.ProviderPatternSettingsPayload? = nil,
+                        customPatternSettings: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body.JsonPayload.CustomPatternSettingsPayload? = nil
+                    ) {
+                        self.patternConfigVersion = patternConfigVersion
+                        self.providerPatternSettings = providerPatternSettings
+                        self.customPatternSettings = customPatternSettings
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case patternConfigVersion = "pattern_config_version"
+                        case providerPatternSettings = "provider_pattern_settings"
+                        case customPatternSettings = "custom_pattern_settings"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/requestBody/content/application\/json`.
+                case json(Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body.JsonPayload)
+            }
+            public var body: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Path,
+                headers: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Headers = .init(),
+                body: Operations.SecretScanningUpdateOrgPatternConfigs.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The updated pattern configuration version.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/responses/200/content/json/pattern_config_version`.
+                        public var patternConfigVersion: Swift.String?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - patternConfigVersion: The updated pattern configuration version.
+                        public init(patternConfigVersion: Swift.String? = nil) {
+                            self.patternConfigVersion = patternConfigVersion
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case patternConfigVersion = "pattern_config_version"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/pattern-configurations/PATCH/responses/200/content/application\/json`.
+                    case json(Operations.SecretScanningUpdateOrgPatternConfigs.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.SecretScanningUpdateOrgPatternConfigs.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.SecretScanningUpdateOrgPatternConfigs.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.SecretScanningUpdateOrgPatternConfigs.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/patch(secret-scanning/update-org-pattern-configs)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.SecretScanningUpdateOrgPatternConfigs.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.SecretScanningUpdateOrgPatternConfigs.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/patch(secret-scanning/update-org-pattern-configs)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/patch(secret-scanning/update-org-pattern-configs)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/patch(secret-scanning/update-org-pattern-configs)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Conflict
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/patch(secret-scanning/update-org-pattern-configs)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/pattern-configurations/patch(secret-scanning/update-org-pattern-configs)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
                 ]
             }
         }

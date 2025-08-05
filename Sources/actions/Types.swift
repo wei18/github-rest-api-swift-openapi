@@ -11,6 +11,110 @@ import struct Foundation.Date
 #endif
 /// A type that performs HTTP operations defined by the OpenAPI document.
 public protocol APIProtocol: Sendable {
+    /// Get artifact and log retention settings for an organization
+    ///
+    /// Gets artifact and log retention settings for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/get(actions/get-artifact-and-log-retention-settings-organization)`.
+    func actionsGetArtifactAndLogRetentionSettingsOrganization(_ input: Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Input) async throws -> Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Output
+    /// Set artifact and log retention settings for an organization
+    ///
+    /// Sets artifact and log retention settings for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-organization)`.
+    func actionsSetArtifactAndLogRetentionSettingsOrganization(_ input: Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Input) async throws -> Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Output
+    /// Get fork PR contributor approval permissions for an organization
+    ///
+    /// Gets the fork PR contributor approval policy for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/get(actions/get-fork-pr-contributor-approval-permissions-organization)`.
+    func actionsGetForkPrContributorApprovalPermissionsOrganization(_ input: Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Input) async throws -> Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Output
+    /// Set fork PR contributor approval permissions for an organization
+    ///
+    /// Sets the fork PR contributor approval policy for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-organization)`.
+    func actionsSetForkPrContributorApprovalPermissionsOrganization(_ input: Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Input) async throws -> Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Output
+    /// Get private repo fork PR workflow settings for an organization
+    ///
+    /// Gets the settings for whether workflows from fork pull requests can run on private repositories in an organization.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-organization)`.
+    func actionsGetPrivateRepoForkPrWorkflowsSettingsOrganization(_ input: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Input) async throws -> Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Output
+    /// Set private repo fork PR workflow settings for an organization
+    ///
+    /// Sets the settings for whether workflows from fork pull requests can run on private repositories in an organization.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-organization)`.
+    func actionsSetPrivateRepoForkPrWorkflowsSettingsOrganization(_ input: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Input) async throws -> Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Output
+    /// Get self-hosted runners settings for an organization
+    ///
+    /// Gets the settings for self-hosted runners for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/self-hosted-runners`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/get(actions/get-self-hosted-runners-permissions-organization)`.
+    func actionsGetSelfHostedRunnersPermissionsOrganization(_ input: Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Input) async throws -> Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Output
+    /// Set self-hosted runners settings for an organization
+    ///
+    /// Sets the settings for self-hosted runners for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/self-hosted-runners`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/put(actions/set-self-hosted-runners-permissions-organization)`.
+    func actionsSetSelfHostedRunnersPermissionsOrganization(_ input: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input) async throws -> Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Output
+    /// List repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Lists repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/self-hosted-runners/repositories`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/get(actions/list-selected-repositories-self-hosted-runners-organization)`.
+    func actionsListSelectedRepositoriesSelfHostedRunnersOrganization(_ input: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Input) async throws -> Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Output
+    /// Set repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Sets repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/self-hosted-runners/repositories`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/put(actions/set-selected-repositories-self-hosted-runners-organization)`.
+    func actionsSetSelectedRepositoriesSelfHostedRunnersOrganization(_ input: Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input) async throws -> Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Output
+    /// Add a repository to the list of repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Adds a repository to the list of repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/put(actions/enable-selected-repository-self-hosted-runners-organization)`.
+    func actionsEnableSelectedRepositorySelfHostedRunnersOrganization(_ input: Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Input) async throws -> Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Output
+    /// Remove a repository from the list of repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Removes a repository from the list of repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/delete(actions/disable-selected-repository-self-hosted-runners-organization)`.
+    func actionsDisableSelectedRepositorySelfHostedRunnersOrganization(_ input: Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Input) async throws -> Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Output
     /// Get GitHub Actions cache usage for an organization
     ///
     /// Gets the total GitHub Actions cache usage for an organization.
@@ -884,6 +988,60 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/permissions/access`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/access/put(actions/set-workflow-access-to-repository)`.
     func actionsSetWorkflowAccessToRepository(_ input: Operations.ActionsSetWorkflowAccessToRepository.Input) async throws -> Operations.ActionsSetWorkflowAccessToRepository.Output
+    /// Get artifact and log retention settings for a repository
+    ///
+    /// Gets artifact and log retention settings for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/get(actions/get-artifact-and-log-retention-settings-repository)`.
+    func actionsGetArtifactAndLogRetentionSettingsRepository(_ input: Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Input) async throws -> Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Output
+    /// Set artifact and log retention settings for a repository
+    ///
+    /// Sets artifact and log retention settings for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-repository)`.
+    func actionsSetArtifactAndLogRetentionSettingsRepository(_ input: Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Input) async throws -> Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Output
+    /// Get fork PR contributor approval permissions for a repository
+    ///
+    /// Gets the fork PR contributor approval policy for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/get(actions/get-fork-pr-contributor-approval-permissions-repository)`.
+    func actionsGetForkPrContributorApprovalPermissionsRepository(_ input: Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Input) async throws -> Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Output
+    /// Set fork PR contributor approval permissions for a repository
+    ///
+    /// Sets the fork PR contributor approval policy for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-repository)`.
+    func actionsSetForkPrContributorApprovalPermissionsRepository(_ input: Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Input) async throws -> Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Output
+    /// Get private repo fork PR workflow settings for a repository
+    ///
+    /// Gets the settings for whether workflows from fork pull requests can run on a private repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-repository)`.
+    func actionsGetPrivateRepoForkPrWorkflowsSettingsRepository(_ input: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Input) async throws -> Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Output
+    /// Set private repo fork PR workflow settings for a repository
+    ///
+    /// Sets the settings for whether workflows from fork pull requests can run on a private repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-repository)`.
+    func actionsSetPrivateRepoForkPrWorkflowsSettingsRepository(_ input: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Input) async throws -> Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Output
     /// Get allowed actions and reusable workflows for a repository
     ///
     /// Gets the settings for selected actions and reusable workflows that are allowed in a repository. To use this endpoint, the repository policy for `allowed_actions` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for a repository](#set-github-actions-permissions-for-a-repository)."
@@ -1602,6 +1760,218 @@ public protocol APIProtocol: Sendable {
 
 /// Convenience overloads for operation inputs.
 extension APIProtocol {
+    /// Get artifact and log retention settings for an organization
+    ///
+    /// Gets artifact and log retention settings for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/get(actions/get-artifact-and-log-retention-settings-organization)`.
+    public func actionsGetArtifactAndLogRetentionSettingsOrganization(
+        path: Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Input.Path,
+        headers: Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Output {
+        try await actionsGetArtifactAndLogRetentionSettingsOrganization(Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set artifact and log retention settings for an organization
+    ///
+    /// Sets artifact and log retention settings for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-organization)`.
+    public func actionsSetArtifactAndLogRetentionSettingsOrganization(
+        path: Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Input.Path,
+        headers: Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Input.Headers = .init(),
+        body: Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Input.Body
+    ) async throws -> Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Output {
+        try await actionsSetArtifactAndLogRetentionSettingsOrganization(Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get fork PR contributor approval permissions for an organization
+    ///
+    /// Gets the fork PR contributor approval policy for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/get(actions/get-fork-pr-contributor-approval-permissions-organization)`.
+    public func actionsGetForkPrContributorApprovalPermissionsOrganization(
+        path: Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Input.Path,
+        headers: Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Output {
+        try await actionsGetForkPrContributorApprovalPermissionsOrganization(Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set fork PR contributor approval permissions for an organization
+    ///
+    /// Sets the fork PR contributor approval policy for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-organization)`.
+    public func actionsSetForkPrContributorApprovalPermissionsOrganization(
+        path: Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Input.Path,
+        headers: Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Input.Headers = .init(),
+        body: Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Input.Body
+    ) async throws -> Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Output {
+        try await actionsSetForkPrContributorApprovalPermissionsOrganization(Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get private repo fork PR workflow settings for an organization
+    ///
+    /// Gets the settings for whether workflows from fork pull requests can run on private repositories in an organization.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-organization)`.
+    public func actionsGetPrivateRepoForkPrWorkflowsSettingsOrganization(
+        path: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Path,
+        headers: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Output {
+        try await actionsGetPrivateRepoForkPrWorkflowsSettingsOrganization(Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set private repo fork PR workflow settings for an organization
+    ///
+    /// Sets the settings for whether workflows from fork pull requests can run on private repositories in an organization.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-organization)`.
+    public func actionsSetPrivateRepoForkPrWorkflowsSettingsOrganization(
+        path: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Path,
+        headers: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Headers = .init(),
+        body: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Body
+    ) async throws -> Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Output {
+        try await actionsSetPrivateRepoForkPrWorkflowsSettingsOrganization(Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get self-hosted runners settings for an organization
+    ///
+    /// Gets the settings for self-hosted runners for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/self-hosted-runners`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/get(actions/get-self-hosted-runners-permissions-organization)`.
+    public func actionsGetSelfHostedRunnersPermissionsOrganization(
+        path: Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Input.Path,
+        headers: Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Output {
+        try await actionsGetSelfHostedRunnersPermissionsOrganization(Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set self-hosted runners settings for an organization
+    ///
+    /// Sets the settings for self-hosted runners for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/self-hosted-runners`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/put(actions/set-self-hosted-runners-permissions-organization)`.
+    public func actionsSetSelfHostedRunnersPermissionsOrganization(
+        path: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Path,
+        headers: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Headers = .init(),
+        body: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Body
+    ) async throws -> Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Output {
+        try await actionsSetSelfHostedRunnersPermissionsOrganization(Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// List repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Lists repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/self-hosted-runners/repositories`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/get(actions/list-selected-repositories-self-hosted-runners-organization)`.
+    public func actionsListSelectedRepositoriesSelfHostedRunnersOrganization(
+        path: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Input.Path,
+        query: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Input.Query = .init(),
+        headers: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Input.Headers = .init()
+    ) async throws -> Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Output {
+        try await actionsListSelectedRepositoriesSelfHostedRunnersOrganization(Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Set repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Sets repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/self-hosted-runners/repositories`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/put(actions/set-selected-repositories-self-hosted-runners-organization)`.
+    public func actionsSetSelectedRepositoriesSelfHostedRunnersOrganization(
+        path: Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input.Path,
+        headers: Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input.Headers = .init(),
+        body: Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input.Body
+    ) async throws -> Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Output {
+        try await actionsSetSelectedRepositoriesSelfHostedRunnersOrganization(Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Add a repository to the list of repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Adds a repository to the list of repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/put(actions/enable-selected-repository-self-hosted-runners-organization)`.
+    public func actionsEnableSelectedRepositorySelfHostedRunnersOrganization(
+        path: Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Input.Path,
+        headers: Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Input.Headers = .init()
+    ) async throws -> Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Output {
+        try await actionsEnableSelectedRepositorySelfHostedRunnersOrganization(Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Remove a repository from the list of repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Removes a repository from the list of repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/delete(actions/disable-selected-repository-self-hosted-runners-organization)`.
+    public func actionsDisableSelectedRepositorySelfHostedRunnersOrganization(
+        path: Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Input.Path,
+        headers: Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Input.Headers = .init()
+    ) async throws -> Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Output {
+        try await actionsDisableSelectedRepositorySelfHostedRunnersOrganization(Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
     /// Get GitHub Actions cache usage for an organization
     ///
     /// Gets the total GitHub Actions cache usage for an organization.
@@ -3112,6 +3482,114 @@ extension APIProtocol {
     ) async throws -> Operations.ActionsSetWorkflowAccessToRepository.Output {
         try await actionsSetWorkflowAccessToRepository(Operations.ActionsSetWorkflowAccessToRepository.Input(
             path: path,
+            body: body
+        ))
+    }
+    /// Get artifact and log retention settings for a repository
+    ///
+    /// Gets artifact and log retention settings for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/get(actions/get-artifact-and-log-retention-settings-repository)`.
+    public func actionsGetArtifactAndLogRetentionSettingsRepository(
+        path: Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Input.Path,
+        headers: Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Output {
+        try await actionsGetArtifactAndLogRetentionSettingsRepository(Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set artifact and log retention settings for a repository
+    ///
+    /// Sets artifact and log retention settings for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-repository)`.
+    public func actionsSetArtifactAndLogRetentionSettingsRepository(
+        path: Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Input.Path,
+        headers: Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Input.Headers = .init(),
+        body: Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Input.Body
+    ) async throws -> Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Output {
+        try await actionsSetArtifactAndLogRetentionSettingsRepository(Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get fork PR contributor approval permissions for a repository
+    ///
+    /// Gets the fork PR contributor approval policy for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/get(actions/get-fork-pr-contributor-approval-permissions-repository)`.
+    public func actionsGetForkPrContributorApprovalPermissionsRepository(
+        path: Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Input.Path,
+        headers: Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Output {
+        try await actionsGetForkPrContributorApprovalPermissionsRepository(Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set fork PR contributor approval permissions for a repository
+    ///
+    /// Sets the fork PR contributor approval policy for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-repository)`.
+    public func actionsSetForkPrContributorApprovalPermissionsRepository(
+        path: Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Input.Path,
+        headers: Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Input.Headers = .init(),
+        body: Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Input.Body
+    ) async throws -> Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Output {
+        try await actionsSetForkPrContributorApprovalPermissionsRepository(Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get private repo fork PR workflow settings for a repository
+    ///
+    /// Gets the settings for whether workflows from fork pull requests can run on a private repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-repository)`.
+    public func actionsGetPrivateRepoForkPrWorkflowsSettingsRepository(
+        path: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Path,
+        headers: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Output {
+        try await actionsGetPrivateRepoForkPrWorkflowsSettingsRepository(Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set private repo fork PR workflow settings for a repository
+    ///
+    /// Sets the settings for whether workflows from fork pull requests can run on a private repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-repository)`.
+    public func actionsSetPrivateRepoForkPrWorkflowsSettingsRepository(
+        path: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Path,
+        headers: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Headers = .init(),
+        body: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Body
+    ) async throws -> Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Output {
+        try await actionsSetPrivateRepoForkPrWorkflowsSettingsRepository(Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Input(
+            path: path,
+            headers: headers,
             body: body
         ))
     }
@@ -4693,6 +5171,131 @@ public enum Components {
                 case status
                 case scimType
                 case schemas
+            }
+        }
+        /// Validation Error
+        ///
+        /// - Remark: Generated from `#/components/schemas/validation-error`.
+        public struct ValidationError: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/validation-error/message`.
+            public var message: Swift.String
+            /// - Remark: Generated from `#/components/schemas/validation-error/documentation_url`.
+            public var documentationUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload`.
+            public struct ErrorsPayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/resource`.
+                public var resource: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/field`.
+                public var field: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/message`.
+                public var message: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/code`.
+                public var code: Swift.String
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/index`.
+                public var index: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value`.
+                @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case1`.
+                    case case1(Swift.String?)
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case2`.
+                    case case2(Swift.Int?)
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
+                    case case3([Swift.String]?)
+                    public init(from decoder: any Decoder) throws {
+                        var errors: [any Error] = []
+                        do {
+                            self = .case1(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case2(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case3(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
+                    }
+                    public func encode(to encoder: any Encoder) throws {
+                        switch self {
+                        case let .case1(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case2(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case3(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        }
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value`.
+                public var value: Components.Schemas.ValidationError.ErrorsPayloadPayload.ValuePayload?
+                /// Creates a new `ErrorsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - resource:
+                ///   - field:
+                ///   - message:
+                ///   - code:
+                ///   - index:
+                ///   - value:
+                public init(
+                    resource: Swift.String? = nil,
+                    field: Swift.String? = nil,
+                    message: Swift.String? = nil,
+                    code: Swift.String,
+                    index: Swift.Int? = nil,
+                    value: Components.Schemas.ValidationError.ErrorsPayloadPayload.ValuePayload? = nil
+                ) {
+                    self.resource = resource
+                    self.field = field
+                    self.message = message
+                    self.code = code
+                    self.index = index
+                    self.value = value
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case resource
+                    case field
+                    case message
+                    case code
+                    case index
+                    case value
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/validation-error/errors`.
+            public typealias ErrorsPayload = [Components.Schemas.ValidationError.ErrorsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/validation-error/errors`.
+            public var errors: Components.Schemas.ValidationError.ErrorsPayload?
+            /// Creates a new `ValidationError`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - errors:
+            public init(
+                message: Swift.String,
+                documentationUrl: Swift.String,
+                errors: Components.Schemas.ValidationError.ErrorsPayload? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.errors = errors
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case errors
             }
         }
         /// A GitHub user.
@@ -6807,6 +7410,196 @@ public enum Components {
                 case webCommitSignoffRequired = "web_commit_signoff_required"
                 case securityAndAnalysis = "security_and_analysis"
                 case customProperties = "custom_properties"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/actions-artifact-and-log-retention-response`.
+        public struct ActionsArtifactAndLogRetentionResponse: Codable, Hashable, Sendable {
+            /// The number of days artifacts and logs are retained
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-artifact-and-log-retention-response/days`.
+            public var days: Swift.Int
+            /// The maximum number of days that can be configured
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-artifact-and-log-retention-response/maximum_allowed_days`.
+            public var maximumAllowedDays: Swift.Int
+            /// Creates a new `ActionsArtifactAndLogRetentionResponse`.
+            ///
+            /// - Parameters:
+            ///   - days: The number of days artifacts and logs are retained
+            ///   - maximumAllowedDays: The maximum number of days that can be configured
+            public init(
+                days: Swift.Int,
+                maximumAllowedDays: Swift.Int
+            ) {
+                self.days = days
+                self.maximumAllowedDays = maximumAllowedDays
+            }
+            public enum CodingKeys: String, CodingKey {
+                case days
+                case maximumAllowedDays = "maximum_allowed_days"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/actions-artifact-and-log-retention`.
+        public struct ActionsArtifactAndLogRetention: Codable, Hashable, Sendable {
+            /// The number of days to retain artifacts and logs
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-artifact-and-log-retention/days`.
+            public var days: Swift.Int
+            /// Creates a new `ActionsArtifactAndLogRetention`.
+            ///
+            /// - Parameters:
+            ///   - days: The number of days to retain artifacts and logs
+            public init(days: Swift.Int) {
+                self.days = days
+            }
+            public enum CodingKeys: String, CodingKey {
+                case days
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/actions-fork-pr-contributor-approval`.
+        public struct ActionsForkPrContributorApproval: Codable, Hashable, Sendable {
+            /// The policy that controls when fork PR workflows require approval from a maintainer.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-fork-pr-contributor-approval/approval_policy`.
+            @frozen public enum ApprovalPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case firstTimeContributorsNewToGithub = "first_time_contributors_new_to_github"
+                case firstTimeContributors = "first_time_contributors"
+                case allExternalContributors = "all_external_contributors"
+            }
+            /// The policy that controls when fork PR workflows require approval from a maintainer.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-fork-pr-contributor-approval/approval_policy`.
+            public var approvalPolicy: Components.Schemas.ActionsForkPrContributorApproval.ApprovalPolicyPayload
+            /// Creates a new `ActionsForkPrContributorApproval`.
+            ///
+            /// - Parameters:
+            ///   - approvalPolicy: The policy that controls when fork PR workflows require approval from a maintainer.
+            public init(approvalPolicy: Components.Schemas.ActionsForkPrContributorApproval.ApprovalPolicyPayload) {
+                self.approvalPolicy = approvalPolicy
+            }
+            public enum CodingKeys: String, CodingKey {
+                case approvalPolicy = "approval_policy"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/actions-fork-pr-workflows-private-repos`.
+        public struct ActionsForkPrWorkflowsPrivateRepos: Codable, Hashable, Sendable {
+            /// Whether workflows triggered by pull requests from forks are allowed to run on private repositories.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-fork-pr-workflows-private-repos/run_workflows_from_fork_pull_requests`.
+            public var runWorkflowsFromForkPullRequests: Swift.Bool
+            /// Whether GitHub Actions can create pull requests or submit approving pull request reviews from a workflow triggered by a fork pull request.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-fork-pr-workflows-private-repos/send_write_tokens_to_workflows`.
+            public var sendWriteTokensToWorkflows: Swift.Bool
+            /// Whether to make secrets and variables available to workflows triggered by pull requests from forks.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-fork-pr-workflows-private-repos/send_secrets_and_variables`.
+            public var sendSecretsAndVariables: Swift.Bool
+            /// Whether workflows triggered by pull requests from forks require approval from a repository administrator to run.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-fork-pr-workflows-private-repos/require_approval_for_fork_pr_workflows`.
+            public var requireApprovalForForkPrWorkflows: Swift.Bool
+            /// Creates a new `ActionsForkPrWorkflowsPrivateRepos`.
+            ///
+            /// - Parameters:
+            ///   - runWorkflowsFromForkPullRequests: Whether workflows triggered by pull requests from forks are allowed to run on private repositories.
+            ///   - sendWriteTokensToWorkflows: Whether GitHub Actions can create pull requests or submit approving pull request reviews from a workflow triggered by a fork pull request.
+            ///   - sendSecretsAndVariables: Whether to make secrets and variables available to workflows triggered by pull requests from forks.
+            ///   - requireApprovalForForkPrWorkflows: Whether workflows triggered by pull requests from forks require approval from a repository administrator to run.
+            public init(
+                runWorkflowsFromForkPullRequests: Swift.Bool,
+                sendWriteTokensToWorkflows: Swift.Bool,
+                sendSecretsAndVariables: Swift.Bool,
+                requireApprovalForForkPrWorkflows: Swift.Bool
+            ) {
+                self.runWorkflowsFromForkPullRequests = runWorkflowsFromForkPullRequests
+                self.sendWriteTokensToWorkflows = sendWriteTokensToWorkflows
+                self.sendSecretsAndVariables = sendSecretsAndVariables
+                self.requireApprovalForForkPrWorkflows = requireApprovalForForkPrWorkflows
+            }
+            public enum CodingKeys: String, CodingKey {
+                case runWorkflowsFromForkPullRequests = "run_workflows_from_fork_pull_requests"
+                case sendWriteTokensToWorkflows = "send_write_tokens_to_workflows"
+                case sendSecretsAndVariables = "send_secrets_and_variables"
+                case requireApprovalForForkPrWorkflows = "require_approval_for_fork_pr_workflows"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/actions-fork-pr-workflows-private-repos-request`.
+        public struct ActionsForkPrWorkflowsPrivateReposRequest: Codable, Hashable, Sendable {
+            /// Whether workflows triggered by pull requests from forks are allowed to run on private repositories.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-fork-pr-workflows-private-repos-request/run_workflows_from_fork_pull_requests`.
+            public var runWorkflowsFromForkPullRequests: Swift.Bool
+            /// Whether GitHub Actions can create pull requests or submit approving pull request reviews from a workflow triggered by a fork pull request.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-fork-pr-workflows-private-repos-request/send_write_tokens_to_workflows`.
+            public var sendWriteTokensToWorkflows: Swift.Bool?
+            /// Whether to make secrets and variables available to workflows triggered by pull requests from forks.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-fork-pr-workflows-private-repos-request/send_secrets_and_variables`.
+            public var sendSecretsAndVariables: Swift.Bool?
+            /// Whether workflows triggered by pull requests from forks require approval from a repository administrator to run.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-fork-pr-workflows-private-repos-request/require_approval_for_fork_pr_workflows`.
+            public var requireApprovalForForkPrWorkflows: Swift.Bool?
+            /// Creates a new `ActionsForkPrWorkflowsPrivateReposRequest`.
+            ///
+            /// - Parameters:
+            ///   - runWorkflowsFromForkPullRequests: Whether workflows triggered by pull requests from forks are allowed to run on private repositories.
+            ///   - sendWriteTokensToWorkflows: Whether GitHub Actions can create pull requests or submit approving pull request reviews from a workflow triggered by a fork pull request.
+            ///   - sendSecretsAndVariables: Whether to make secrets and variables available to workflows triggered by pull requests from forks.
+            ///   - requireApprovalForForkPrWorkflows: Whether workflows triggered by pull requests from forks require approval from a repository administrator to run.
+            public init(
+                runWorkflowsFromForkPullRequests: Swift.Bool,
+                sendWriteTokensToWorkflows: Swift.Bool? = nil,
+                sendSecretsAndVariables: Swift.Bool? = nil,
+                requireApprovalForForkPrWorkflows: Swift.Bool? = nil
+            ) {
+                self.runWorkflowsFromForkPullRequests = runWorkflowsFromForkPullRequests
+                self.sendWriteTokensToWorkflows = sendWriteTokensToWorkflows
+                self.sendSecretsAndVariables = sendSecretsAndVariables
+                self.requireApprovalForForkPrWorkflows = requireApprovalForForkPrWorkflows
+            }
+            public enum CodingKeys: String, CodingKey {
+                case runWorkflowsFromForkPullRequests = "run_workflows_from_fork_pull_requests"
+                case sendWriteTokensToWorkflows = "send_write_tokens_to_workflows"
+                case sendSecretsAndVariables = "send_secrets_and_variables"
+                case requireApprovalForForkPrWorkflows = "require_approval_for_fork_pr_workflows"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/self-hosted-runners-settings`.
+        public struct SelfHostedRunnersSettings: Codable, Hashable, Sendable {
+            /// The policy that controls whether self-hosted runners can be used by repositories in the organization
+            ///
+            /// - Remark: Generated from `#/components/schemas/self-hosted-runners-settings/enabled_repositories`.
+            @frozen public enum EnabledRepositoriesPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case selected = "selected"
+                case none = "none"
+            }
+            /// The policy that controls whether self-hosted runners can be used by repositories in the organization
+            ///
+            /// - Remark: Generated from `#/components/schemas/self-hosted-runners-settings/enabled_repositories`.
+            public var enabledRepositories: Components.Schemas.SelfHostedRunnersSettings.EnabledRepositoriesPayload
+            /// The URL to the endpoint for managing selected repositories for self-hosted runners in the organization
+            ///
+            /// - Remark: Generated from `#/components/schemas/self-hosted-runners-settings/selected_repositories_url`.
+            public var selectedRepositoriesUrl: Swift.String?
+            /// Creates a new `SelfHostedRunnersSettings`.
+            ///
+            /// - Parameters:
+            ///   - enabledRepositories: The policy that controls whether self-hosted runners can be used by repositories in the organization
+            ///   - selectedRepositoriesUrl: The URL to the endpoint for managing selected repositories for self-hosted runners in the organization
+            public init(
+                enabledRepositories: Components.Schemas.SelfHostedRunnersSettings.EnabledRepositoriesPayload,
+                selectedRepositoriesUrl: Swift.String? = nil
+            ) {
+                self.enabledRepositories = enabledRepositories
+                self.selectedRepositoriesUrl = selectedRepositoriesUrl
+            }
+            public enum CodingKeys: String, CodingKey {
+                case enabledRepositories = "enabled_repositories"
+                case selectedRepositoriesUrl = "selected_repositories_url"
             }
         }
         /// - Remark: Generated from `#/components/schemas/actions-cache-usage-org-enterprise`.
@@ -10355,14 +11148,14 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/org`.
         public typealias Org = Swift.String
-        /// Unique identifier of the GitHub-hosted runner.
-        ///
-        /// - Remark: Generated from `#/components/parameters/hosted-runner-id`.
-        public typealias HostedRunnerId = Swift.Int
         /// The unique identifier of the repository.
         ///
         /// - Remark: Generated from `#/components/parameters/repository-id`.
         public typealias RepositoryId = Swift.Int
+        /// Unique identifier of the GitHub-hosted runner.
+        ///
+        /// - Remark: Generated from `#/components/parameters/hosted-runner-id`.
+        public typealias HostedRunnerId = Swift.Int
         /// Only return runner groups that are allowed to be used by this repository.
         ///
         /// - Remark: Generated from `#/components/parameters/visible-to-repository`.
@@ -10633,6 +11426,34 @@ public enum Components {
             /// - Parameters:
             ///   - body: Received HTTP response body
             public init(body: Components.Responses.BadRequest.Body) {
+                self.body = body
+            }
+        }
+        public struct ValidationFailed: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/validation_failed/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/validation_failed/content/application\/json`.
+                case json(Components.Schemas.ValidationError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.ValidationError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.ValidationFailed.Body
+            /// Creates a new `ValidationFailed`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.ValidationFailed.Body) {
                 self.body = body
             }
         }
@@ -10915,6 +11736,2440 @@ public enum Components {
 
 /// API operations, with input and output types, generated from `#/paths` in the OpenAPI document.
 public enum Operations {
+    /// Get artifact and log retention settings for an organization
+    ///
+    /// Gets artifact and log retention settings for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/get(actions/get-artifact-and-log-retention-settings-organization)`.
+    public enum ActionsGetArtifactAndLogRetentionSettingsOrganization {
+        public static let id: Swift.String = "actions/get-artifact-and-log-retention-settings-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/artifact-and-log-retention/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/artifact-and-log-retention/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/artifact-and-log-retention/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Input.Path,
+                headers: Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/artifact-and-log-retention/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/artifact-and-log-retention/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsArtifactAndLogRetentionResponse)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsArtifactAndLogRetentionResponse {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/get(actions/get-artifact-and-log-retention-settings-organization)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetArtifactAndLogRetentionSettingsOrganization.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/get(actions/get-artifact-and-log-retention-settings-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/get(actions/get-artifact-and-log-retention-settings-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set artifact and log retention settings for an organization
+    ///
+    /// Sets artifact and log retention settings for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-organization)`.
+    public enum ActionsSetArtifactAndLogRetentionSettingsOrganization {
+        public static let id: Swift.String = "actions/set-artifact-and-log-retention-settings-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/artifact-and-log-retention/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/artifact-and-log-retention/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/artifact-and-log-retention/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Input.Headers
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/artifact-and-log-retention/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/artifact-and-log-retention/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsArtifactAndLogRetention)
+            }
+            public var body: Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Input.Path,
+                headers: Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Input.Headers = .init(),
+                body: Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// No content
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Output.NoContent)
+            /// No content
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetArtifactAndLogRetentionSettingsOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Conflict
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-organization)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-organization)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get fork PR contributor approval permissions for an organization
+    ///
+    /// Gets the fork PR contributor approval policy for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/get(actions/get-fork-pr-contributor-approval-permissions-organization)`.
+    public enum ActionsGetForkPrContributorApprovalPermissionsOrganization {
+        public static let id: Swift.String = "actions/get-fork-pr-contributor-approval-permissions-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-contributor-approval/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-contributor-approval/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-contributor-approval/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Input.Path,
+                headers: Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-contributor-approval/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-contributor-approval/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsForkPrContributorApproval)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsForkPrContributorApproval {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/get(actions/get-fork-pr-contributor-approval-permissions-organization)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetForkPrContributorApprovalPermissionsOrganization.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/get(actions/get-fork-pr-contributor-approval-permissions-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set fork PR contributor approval permissions for an organization
+    ///
+    /// Sets the fork PR contributor approval policy for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-organization)`.
+    public enum ActionsSetForkPrContributorApprovalPermissionsOrganization {
+        public static let id: Swift.String = "actions/set-fork-pr-contributor-approval-permissions-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-contributor-approval/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-contributor-approval/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-contributor-approval/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Input.Headers
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-contributor-approval/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-contributor-approval/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsForkPrContributorApproval)
+            }
+            public var body: Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Input.Path,
+                headers: Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Input.Headers = .init(),
+                body: Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetForkPrContributorApprovalPermissionsOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-organization)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get private repo fork PR workflow settings for an organization
+    ///
+    /// Gets the settings for whether workflows from fork pull requests can run on private repositories in an organization.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-organization)`.
+    public enum ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization {
+        public static let id: Swift.String = "actions/get-private-repo-fork-pr-workflows-settings-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Path,
+                headers: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsForkPrWorkflowsPrivateRepos)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsForkPrWorkflowsPrivateRepos {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-organization)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsOrganization.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set private repo fork PR workflow settings for an organization
+    ///
+    /// Sets the settings for whether workflows from fork pull requests can run on private repositories in an organization.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-organization)`.
+    public enum ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization {
+        public static let id: Swift.String = "actions/set-private-repo-fork-pr-workflows-settings-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Headers
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsForkPrWorkflowsPrivateReposRequest)
+            }
+            public var body: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Path,
+                headers: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Headers = .init(),
+                body: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Empty response for successful settings update
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Output.NoContent)
+            /// Empty response for successful settings update
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Forbidden: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/PUT/responses/403/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/PUT/responses/403/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Output.Forbidden.Body
+                /// Creates a new `Forbidden`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Output.Forbidden.Body) {
+                    self.body = body
+                }
+            }
+            /// Forbidden - Fork PR workflow settings for private repositories are managed by the enterprise owner
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Output.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsOrganization.Output.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-organization)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get self-hosted runners settings for an organization
+    ///
+    /// Gets the settings for self-hosted runners for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/self-hosted-runners`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/get(actions/get-self-hosted-runners-permissions-organization)`.
+    public enum ActionsGetSelfHostedRunnersPermissionsOrganization {
+        public static let id: Swift.String = "actions/get-self-hosted-runners-permissions-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Input.Path,
+                headers: Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.SelfHostedRunnersSettings)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.SelfHostedRunnersSettings {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/get(actions/get-self-hosted-runners-permissions-organization)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetSelfHostedRunnersPermissionsOrganization.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/get(actions/get-self-hosted-runners-permissions-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/get(actions/get-self-hosted-runners-permissions-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set self-hosted runners settings for an organization
+    ///
+    /// Sets the settings for self-hosted runners for an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/self-hosted-runners`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/put(actions/set-self-hosted-runners-permissions-organization)`.
+    public enum ActionsSetSelfHostedRunnersPermissionsOrganization {
+        public static let id: Swift.String = "actions/set-self-hosted-runners-permissions-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Headers
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The policy that controls whether self-hosted runners can be used in the organization
+                    ///
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/PUT/requestBody/json/enabled_repositories`.
+                    @frozen public enum EnabledRepositoriesPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case all = "all"
+                        case selected = "selected"
+                        case none = "none"
+                    }
+                    /// The policy that controls whether self-hosted runners can be used in the organization
+                    ///
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/PUT/requestBody/json/enabled_repositories`.
+                    public var enabledRepositories: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Body.JsonPayload.EnabledRepositoriesPayload
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - enabledRepositories: The policy that controls whether self-hosted runners can be used in the organization
+                    public init(enabledRepositories: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Body.JsonPayload.EnabledRepositoriesPayload) {
+                        self.enabledRepositories = enabledRepositories
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case enabledRepositories = "enabled_repositories"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/PUT/requestBody/content/application\/json`.
+                case json(Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Body.JsonPayload)
+            }
+            public var body: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Path,
+                headers: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Headers = .init(),
+                body: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// No content
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/put(actions/set-self-hosted-runners-permissions-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Output.NoContent)
+            /// No content
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/put(actions/set-self-hosted-runners-permissions-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetSelfHostedRunnersPermissionsOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/put(actions/set-self-hosted-runners-permissions-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/put(actions/set-self-hosted-runners-permissions-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Conflict
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/put(actions/set-self-hosted-runners-permissions-organization)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/put(actions/set-self-hosted-runners-permissions-organization)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Lists repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/permissions/self-hosted-runners/repositories`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/get(actions/list-selected-repositories-self-hosted-runners-organization)`.
+    public enum ActionsListSelectedRepositoriesSelfHostedRunnersOrganization {
+        public static let id: Swift.String = "actions/list-selected-repositories-self-hosted-runners-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/GET/query/page`.
+                public var page: Components.Parameters.Page?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    page: Components.Parameters.Page? = nil
+                ) {
+                    self.perPage = perPage
+                    self.page = page
+                }
+            }
+            public var query: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Input.Query
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Input.Path,
+                query: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Input.Query = .init(),
+                headers: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/GET/responses/200/content/json/total_count`.
+                        public var totalCount: Swift.Int?
+                        /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/GET/responses/200/content/json/repositories`.
+                        public var repositories: [Components.Schemas.Repository]?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - totalCount:
+                        ///   - repositories:
+                        public init(
+                            totalCount: Swift.Int? = nil,
+                            repositories: [Components.Schemas.Repository]? = nil
+                        ) {
+                            self.totalCount = totalCount
+                            self.repositories = repositories
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case totalCount = "total_count"
+                            case repositories
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/GET/responses/200/content/application\/json`.
+                    case json(Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/get(actions/list-selected-repositories-self-hosted-runners-organization)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsListSelectedRepositoriesSelfHostedRunnersOrganization.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/get(actions/list-selected-repositories-self-hosted-runners-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/get(actions/list-selected-repositories-self-hosted-runners-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Sets repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/self-hosted-runners/repositories`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/put(actions/set-selected-repositories-self-hosted-runners-organization)`.
+    public enum ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization {
+        public static let id: Swift.String = "actions/set-selected-repositories-self-hosted-runners-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input.Headers
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// IDs of repositories that can use repository-level self-hosted runners
+                    ///
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/PUT/requestBody/json/selected_repository_ids`.
+                    public var selectedRepositoryIds: [Swift.Int]
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - selectedRepositoryIds: IDs of repositories that can use repository-level self-hosted runners
+                    public init(selectedRepositoryIds: [Swift.Int]) {
+                        self.selectedRepositoryIds = selectedRepositoryIds
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case selectedRepositoryIds = "selected_repository_ids"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/PUT/requestBody/content/application\/json`.
+                case json(Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input.Body.JsonPayload)
+            }
+            public var body: Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input.Path,
+                headers: Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input.Headers = .init(),
+                body: Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// No content
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/put(actions/set-selected-repositories-self-hosted-runners-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Output.NoContent)
+            /// No content
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/put(actions/set-selected-repositories-self-hosted-runners-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetSelectedRepositoriesSelfHostedRunnersOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/put(actions/set-selected-repositories-self-hosted-runners-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/put(actions/set-selected-repositories-self-hosted-runners-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/put(actions/set-selected-repositories-self-hosted-runners-organization)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Add a repository to the list of repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Adds a repository to the list of repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/put(actions/enable-selected-repository-self-hosted-runners-organization)`.
+    public enum ActionsEnableSelectedRepositorySelfHostedRunnersOrganization {
+        public static let id: Swift.String = "actions/enable-selected-repository-self-hosted-runners-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// The unique identifier of the repository.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/PUT/path/repository_id`.
+                public var repositoryId: Components.Parameters.RepositoryId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - repositoryId: The unique identifier of the repository.
+                public init(
+                    org: Components.Parameters.Org,
+                    repositoryId: Components.Parameters.RepositoryId
+                ) {
+                    self.org = org
+                    self.repositoryId = repositoryId
+                }
+            }
+            public var path: Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Input.Path,
+                headers: Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// No content
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/put(actions/enable-selected-repository-self-hosted-runners-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Output.NoContent)
+            /// No content
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/put(actions/enable-selected-repository-self-hosted-runners-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsEnableSelectedRepositorySelfHostedRunnersOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/put(actions/enable-selected-repository-self-hosted-runners-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/put(actions/enable-selected-repository-self-hosted-runners-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Conflict
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/put(actions/enable-selected-repository-self-hosted-runners-organization)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/put(actions/enable-selected-repository-self-hosted-runners-organization)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Remove a repository from the list of repositories allowed to use self-hosted runners in an organization
+    ///
+    /// Removes a repository from the list of repositories that are allowed to use self-hosted runners in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope or the "Actions policies" fine-grained permission to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/delete(actions/disable-selected-repository-self-hosted-runners-organization)`.
+    public enum ActionsDisableSelectedRepositorySelfHostedRunnersOrganization {
+        public static let id: Swift.String = "actions/disable-selected-repository-self-hosted-runners-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/DELETE/path/org`.
+                public var org: Components.Parameters.Org
+                /// The unique identifier of the repository.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/DELETE/path/repository_id`.
+                public var repositoryId: Components.Parameters.RepositoryId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - repositoryId: The unique identifier of the repository.
+                public init(
+                    org: Components.Parameters.Org,
+                    repositoryId: Components.Parameters.RepositoryId
+                ) {
+                    self.org = org
+                    self.repositoryId = repositoryId
+                }
+            }
+            public var path: Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Input.Path,
+                headers: Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// No content
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/delete(actions/disable-selected-repository-self-hosted-runners-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Output.NoContent)
+            /// No content
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/delete(actions/disable-selected-repository-self-hosted-runners-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsDisableSelectedRepositorySelfHostedRunnersOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/delete(actions/disable-selected-repository-self-hosted-runners-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/delete(actions/disable-selected-repository-self-hosted-runners-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Conflict
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/delete(actions/disable-selected-repository-self-hosted-runners-organization)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/permissions/self-hosted-runners/repositories/{repository_id}/delete(actions/disable-selected-repository-self-hosted-runners-organization)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// Get GitHub Actions cache usage for an organization
     ///
     /// Gets the total GitHub Actions cache usage for an organization.
@@ -24102,6 +27357,1073 @@ public enum Operations {
             ///
             /// A response with a code that is not documented in the OpenAPI document.
             case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+    }
+    /// Get artifact and log retention settings for a repository
+    ///
+    /// Gets artifact and log retention settings for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/get(actions/get-artifact-and-log-retention-settings-repository)`.
+    public enum ActionsGetArtifactAndLogRetentionSettingsRepository {
+        public static let id: Swift.String = "actions/get-artifact-and-log-retention-settings-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Input.Path,
+                headers: Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsArtifactAndLogRetentionResponse)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsArtifactAndLogRetentionResponse {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/get(actions/get-artifact-and-log-retention-settings-repository)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetArtifactAndLogRetentionSettingsRepository.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/get(actions/get-artifact-and-log-retention-settings-repository)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set artifact and log retention settings for a repository
+    ///
+    /// Sets artifact and log retention settings for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-repository)`.
+    public enum ActionsSetArtifactAndLogRetentionSettingsRepository {
+        public static let id: Swift.String = "actions/set-artifact-and-log-retention-settings-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/PUT/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/PUT/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsArtifactAndLogRetention)
+            }
+            public var body: Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Input.Path,
+                headers: Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Input.Headers = .init(),
+                body: Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Empty response for successful settings update
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-repository)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Output.NoContent)
+            /// Empty response for successful settings update
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-repository)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetArtifactAndLogRetentionSettingsRepository.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-repository)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/artifact-and-log-retention/put(actions/set-artifact-and-log-retention-settings-repository)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get fork PR contributor approval permissions for a repository
+    ///
+    /// Gets the fork PR contributor approval policy for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/get(actions/get-fork-pr-contributor-approval-permissions-repository)`.
+    public enum ActionsGetForkPrContributorApprovalPermissionsRepository {
+        public static let id: Swift.String = "actions/get-fork-pr-contributor-approval-permissions-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Input.Path,
+                headers: Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsForkPrContributorApproval)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsForkPrContributorApproval {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/get(actions/get-fork-pr-contributor-approval-permissions-repository)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetForkPrContributorApprovalPermissionsRepository.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/get(actions/get-fork-pr-contributor-approval-permissions-repository)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set fork PR contributor approval permissions for a repository
+    ///
+    /// Sets the fork PR contributor approval policy for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-repository)`.
+    public enum ActionsSetForkPrContributorApprovalPermissionsRepository {
+        public static let id: Swift.String = "actions/set-fork-pr-contributor-approval-permissions-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/PUT/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/PUT/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsForkPrContributorApproval)
+            }
+            public var body: Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Input.Path,
+                headers: Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Input.Headers = .init(),
+                body: Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-repository)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-repository)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetForkPrContributorApprovalPermissionsRepository.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-repository)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-contributor-approval/put(actions/set-fork-pr-contributor-approval-permissions-repository)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get private repo fork PR workflow settings for a repository
+    ///
+    /// Gets the settings for whether workflows from fork pull requests can run on a private repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-repository)`.
+    public enum ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository {
+        public static let id: Swift.String = "actions/get-private-repo-fork-pr-workflows-settings-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Path,
+                headers: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsForkPrWorkflowsPrivateRepos)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsForkPrWorkflowsPrivateRepos {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-repository)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetPrivateRepoForkPrWorkflowsSettingsRepository.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-repository)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/get(actions/get-private-repo-fork-pr-workflows-settings-repository)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set private repo fork PR workflow settings for a repository
+    ///
+    /// Sets the settings for whether workflows from fork pull requests can run on a private repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-repository)`.
+    public enum ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository {
+        public static let id: Swift.String = "actions/set-private-repo-fork-pr-workflows-settings-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/PUT/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/PUT/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsForkPrWorkflowsPrivateReposRequest)
+            }
+            public var body: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Path,
+                headers: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Headers = .init(),
+                body: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Empty response for successful settings update
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-repository)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Output.NoContent)
+            /// Empty response for successful settings update
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-repository)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetPrivateRepoForkPrWorkflowsSettingsRepository.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-repository)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/permissions/fork-pr-workflows-private-repos/put(actions/set-private-repo-fork-pr-workflows-settings-repository)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
         }
     }
     /// Get allowed actions and reusable workflows for a repository

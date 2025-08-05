@@ -260,6 +260,69 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/comments`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/comments/post(issues/create-comment)`.
     func issuesCreateComment(_ input: Operations.IssuesCreateComment.Input) async throws -> Operations.IssuesCreateComment.Output
+    /// List dependencies an issue is blocked by
+    ///
+    /// You can use the REST API to list the dependencies an issue is blocked by.
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/get(issues/list-dependencies-blocked-by)`.
+    func issuesListDependenciesBlockedBy(_ input: Operations.IssuesListDependenciesBlockedBy.Input) async throws -> Operations.IssuesListDependenciesBlockedBy.Output
+    /// Add a dependency an issue is blocked by
+    ///
+    /// You can use the REST API to add a 'blocked by' relationship to an issue.
+    ///
+    /// Creating content too quickly using this endpoint may result in secondary rate limiting.
+    /// For more information, see [Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)
+    /// and [Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api).
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/post(issues/add-blocked-by-dependency)`.
+    func issuesAddBlockedByDependency(_ input: Operations.IssuesAddBlockedByDependency.Input) async throws -> Operations.IssuesAddBlockedByDependency.Output
+    /// Remove dependency an issue is blocked by
+    ///
+    /// You can use the REST API to remove a dependency that an issue is blocked by.
+    ///
+    /// Removing content too quickly using this endpoint may result in secondary rate limiting.
+    /// For more information, see [Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)
+    /// and [Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api).
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass a specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/delete(issues/remove-dependency-blocked-by)`.
+    func issuesRemoveDependencyBlockedBy(_ input: Operations.IssuesRemoveDependencyBlockedBy.Input) async throws -> Operations.IssuesRemoveDependencyBlockedBy.Output
+    /// List dependencies an issue is blocking
+    ///
+    /// You can use the REST API to list the dependencies an issue is blocking.
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/get(issues/list-dependencies-blocking)`.
+    func issuesListDependenciesBlocking(_ input: Operations.IssuesListDependenciesBlocking.Input) async throws -> Operations.IssuesListDependenciesBlocking.Output
     /// List issue events
     ///
     /// Lists all events for an issue.
@@ -894,6 +957,107 @@ extension APIProtocol {
             path: path,
             headers: headers,
             body: body
+        ))
+    }
+    /// List dependencies an issue is blocked by
+    ///
+    /// You can use the REST API to list the dependencies an issue is blocked by.
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/get(issues/list-dependencies-blocked-by)`.
+    public func issuesListDependenciesBlockedBy(
+        path: Operations.IssuesListDependenciesBlockedBy.Input.Path,
+        query: Operations.IssuesListDependenciesBlockedBy.Input.Query = .init(),
+        headers: Operations.IssuesListDependenciesBlockedBy.Input.Headers = .init()
+    ) async throws -> Operations.IssuesListDependenciesBlockedBy.Output {
+        try await issuesListDependenciesBlockedBy(Operations.IssuesListDependenciesBlockedBy.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Add a dependency an issue is blocked by
+    ///
+    /// You can use the REST API to add a 'blocked by' relationship to an issue.
+    ///
+    /// Creating content too quickly using this endpoint may result in secondary rate limiting.
+    /// For more information, see [Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)
+    /// and [Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api).
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/post(issues/add-blocked-by-dependency)`.
+    public func issuesAddBlockedByDependency(
+        path: Operations.IssuesAddBlockedByDependency.Input.Path,
+        headers: Operations.IssuesAddBlockedByDependency.Input.Headers = .init(),
+        body: Operations.IssuesAddBlockedByDependency.Input.Body
+    ) async throws -> Operations.IssuesAddBlockedByDependency.Output {
+        try await issuesAddBlockedByDependency(Operations.IssuesAddBlockedByDependency.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Remove dependency an issue is blocked by
+    ///
+    /// You can use the REST API to remove a dependency that an issue is blocked by.
+    ///
+    /// Removing content too quickly using this endpoint may result in secondary rate limiting.
+    /// For more information, see [Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)
+    /// and [Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api).
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass a specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/delete(issues/remove-dependency-blocked-by)`.
+    public func issuesRemoveDependencyBlockedBy(
+        path: Operations.IssuesRemoveDependencyBlockedBy.Input.Path,
+        headers: Operations.IssuesRemoveDependencyBlockedBy.Input.Headers = .init()
+    ) async throws -> Operations.IssuesRemoveDependencyBlockedBy.Output {
+        try await issuesRemoveDependencyBlockedBy(Operations.IssuesRemoveDependencyBlockedBy.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// List dependencies an issue is blocking
+    ///
+    /// You can use the REST API to list the dependencies an issue is blocking.
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/get(issues/list-dependencies-blocking)`.
+    public func issuesListDependenciesBlocking(
+        path: Operations.IssuesListDependenciesBlocking.Input.Path,
+        query: Operations.IssuesListDependenciesBlocking.Input.Query = .init(),
+        headers: Operations.IssuesListDependenciesBlocking.Input.Headers = .init()
+    ) async throws -> Operations.IssuesListDependenciesBlocking.Output {
+        try await issuesListDependenciesBlocking(Operations.IssuesListDependenciesBlocking.Input(
+            path: path,
+            query: query,
+            headers: headers
         ))
     }
     /// List issue events
@@ -3616,6 +3780,41 @@ public enum Components {
                 case percentCompleted = "percent_completed"
             }
         }
+        /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary`.
+        public struct IssueDependenciesSummary: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/blocked_by`.
+            public var blockedBy: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/blocking`.
+            public var blocking: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/total_blocked_by`.
+            public var totalBlockedBy: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/total_blocking`.
+            public var totalBlocking: Swift.Int
+            /// Creates a new `IssueDependenciesSummary`.
+            ///
+            /// - Parameters:
+            ///   - blockedBy:
+            ///   - blocking:
+            ///   - totalBlockedBy:
+            ///   - totalBlocking:
+            public init(
+                blockedBy: Swift.Int,
+                blocking: Swift.Int,
+                totalBlockedBy: Swift.Int,
+                totalBlocking: Swift.Int
+            ) {
+                self.blockedBy = blockedBy
+                self.blocking = blocking
+                self.totalBlockedBy = totalBlockedBy
+                self.totalBlocking = totalBlocking
+            }
+            public enum CodingKeys: String, CodingKey {
+                case blockedBy = "blocked_by"
+                case blocking
+                case totalBlockedBy = "total_blocked_by"
+                case totalBlocking = "total_blocking"
+            }
+        }
         /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
         ///
         /// - Remark: Generated from `#/components/schemas/issue`.
@@ -3848,6 +4047,8 @@ public enum Components {
             public var reactions: Components.Schemas.ReactionRollup?
             /// - Remark: Generated from `#/components/schemas/issue/sub_issues_summary`.
             public var subIssuesSummary: Components.Schemas.SubIssuesSummary?
+            /// - Remark: Generated from `#/components/schemas/issue/issue_dependencies_summary`.
+            public var issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary?
             /// Creates a new `Issue`.
             ///
             /// - Parameters:
@@ -3887,6 +4088,7 @@ public enum Components {
             ///   - authorAssociation:
             ///   - reactions:
             ///   - subIssuesSummary:
+            ///   - issueDependenciesSummary:
             public init(
                 id: Swift.Int64,
                 nodeId: Swift.String,
@@ -3923,7 +4125,8 @@ public enum Components {
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
                 authorAssociation: Components.Schemas.AuthorAssociation,
                 reactions: Components.Schemas.ReactionRollup? = nil,
-                subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil
+                subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
+                issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -3961,6 +4164,7 @@ public enum Components {
                 self.authorAssociation = authorAssociation
                 self.reactions = reactions
                 self.subIssuesSummary = subIssuesSummary
+                self.issueDependenciesSummary = issueDependenciesSummary
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -3999,6 +4203,7 @@ public enum Components {
                 case authorAssociation = "author_association"
                 case reactions
                 case subIssuesSummary = "sub_issues_summary"
+                case issueDependenciesSummary = "issue_dependencies_summary"
             }
         }
         /// Comments provide a way for people to collaborate on an issue.
@@ -4678,6 +4883,8 @@ public enum Components {
             public var reactions: Components.Schemas.ReactionRollup?
             /// - Remark: Generated from `#/components/schemas/nullable-issue/sub_issues_summary`.
             public var subIssuesSummary: Components.Schemas.SubIssuesSummary?
+            /// - Remark: Generated from `#/components/schemas/nullable-issue/issue_dependencies_summary`.
+            public var issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary?
             /// Creates a new `NullableIssue`.
             ///
             /// - Parameters:
@@ -4717,6 +4924,7 @@ public enum Components {
             ///   - authorAssociation:
             ///   - reactions:
             ///   - subIssuesSummary:
+            ///   - issueDependenciesSummary:
             public init(
                 id: Swift.Int64,
                 nodeId: Swift.String,
@@ -4753,7 +4961,8 @@ public enum Components {
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
                 authorAssociation: Components.Schemas.AuthorAssociation,
                 reactions: Components.Schemas.ReactionRollup? = nil,
-                subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil
+                subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
+                issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -4791,6 +5000,7 @@ public enum Components {
                 self.authorAssociation = authorAssociation
                 self.reactions = reactions
                 self.subIssuesSummary = subIssuesSummary
+                self.issueDependenciesSummary = issueDependenciesSummary
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -4829,6 +5039,7 @@ public enum Components {
                 case authorAssociation = "author_association"
                 case reactions
                 case subIssuesSummary = "sub_issues_summary"
+                case issueDependenciesSummary = "issue_dependencies_summary"
             }
         }
         /// Issue Event Label
@@ -8668,6 +8879,34 @@ public enum Components {
         public struct NotModified: Sendable, Hashable {
             /// Creates a new `NotModified`.
             public init() {}
+        }
+        public struct RequiresAuthentication: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/requires_authentication/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/requires_authentication/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.RequiresAuthentication.Body
+            /// Creates a new `RequiresAuthentication`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.RequiresAuthentication.Body) {
+                self.body = body
+            }
         }
         public struct Forbidden: Sendable, Hashable {
             /// - Remark: Generated from `#/components/responses/forbidden/content`.
@@ -13764,6 +14003,1174 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List dependencies an issue is blocked by
+    ///
+    /// You can use the REST API to list the dependencies an issue is blocked by.
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/get(issues/list-dependencies-blocked-by)`.
+    public enum IssuesListDependenciesBlockedBy {
+        public static let id: Swift.String = "issues/list-dependencies-blocked-by"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the issue.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/path/issue_number`.
+                public var issueNumber: Components.Parameters.IssueNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - issueNumber: The number that identifies the issue.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    issueNumber: Components.Parameters.IssueNumber
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.issueNumber = issueNumber
+                }
+            }
+            public var path: Operations.IssuesListDependenciesBlockedBy.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/query/page`.
+                public var page: Components.Parameters.Page?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    page: Components.Parameters.Page? = nil
+                ) {
+                    self.perPage = perPage
+                    self.page = page
+                }
+            }
+            public var query: Operations.IssuesListDependenciesBlockedBy.Input.Query
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesListDependenciesBlockedBy.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesListDependenciesBlockedBy.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.IssuesListDependenciesBlockedBy.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.IssuesListDependenciesBlockedBy.Input.Path,
+                query: Operations.IssuesListDependenciesBlockedBy.Input.Query = .init(),
+                headers: Operations.IssuesListDependenciesBlockedBy.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.IssuesListDependenciesBlockedBy.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.Issue])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.Issue] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.IssuesListDependenciesBlockedBy.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.IssuesListDependenciesBlockedBy.Output.Ok.Headers = .init(),
+                    body: Operations.IssuesListDependenciesBlockedBy.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/get(issues/list-dependencies-blocked-by)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.IssuesListDependenciesBlockedBy.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.IssuesListDependenciesBlockedBy.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Moved permanently
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/get(issues/list-dependencies-blocked-by)/responses/301`.
+            ///
+            /// HTTP response code: `301 movedPermanently`.
+            case movedPermanently(Components.Responses.MovedPermanently)
+            /// The associated value of the enum case if `self` is `.movedPermanently`.
+            ///
+            /// - Throws: An error if `self` is not `.movedPermanently`.
+            /// - SeeAlso: `.movedPermanently`.
+            public var movedPermanently: Components.Responses.MovedPermanently {
+                get throws {
+                    switch self {
+                    case let .movedPermanently(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "movedPermanently",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/get(issues/list-dependencies-blocked-by)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Gone
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/get(issues/list-dependencies-blocked-by)/responses/410`.
+            ///
+            /// HTTP response code: `410 gone`.
+            case gone(Components.Responses.Gone)
+            /// The associated value of the enum case if `self` is `.gone`.
+            ///
+            /// - Throws: An error if `self` is not `.gone`.
+            /// - SeeAlso: `.gone`.
+            public var gone: Components.Responses.Gone {
+                get throws {
+                    switch self {
+                    case let .gone(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "gone",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Add a dependency an issue is blocked by
+    ///
+    /// You can use the REST API to add a 'blocked by' relationship to an issue.
+    ///
+    /// Creating content too quickly using this endpoint may result in secondary rate limiting.
+    /// For more information, see [Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)
+    /// and [Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api).
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/post(issues/add-blocked-by-dependency)`.
+    public enum IssuesAddBlockedByDependency {
+        public static let id: Swift.String = "issues/add-blocked-by-dependency"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the issue.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/path/issue_number`.
+                public var issueNumber: Components.Parameters.IssueNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - issueNumber: The number that identifies the issue.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    issueNumber: Components.Parameters.IssueNumber
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.issueNumber = issueNumber
+                }
+            }
+            public var path: Operations.IssuesAddBlockedByDependency.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesAddBlockedByDependency.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesAddBlockedByDependency.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.IssuesAddBlockedByDependency.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The id of the issue that blocks the current issue
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/requestBody/json/issue_id`.
+                    public var issueId: Swift.Int
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - issueId: The id of the issue that blocks the current issue
+                    public init(issueId: Swift.Int) {
+                        self.issueId = issueId
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case issueId = "issue_id"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/requestBody/content/application\/json`.
+                case json(Operations.IssuesAddBlockedByDependency.Input.Body.JsonPayload)
+            }
+            public var body: Operations.IssuesAddBlockedByDependency.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.IssuesAddBlockedByDependency.Input.Path,
+                headers: Operations.IssuesAddBlockedByDependency.Input.Headers = .init(),
+                body: Operations.IssuesAddBlockedByDependency.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/responses/201/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/responses/201/headers/Location`.
+                    public var location: Swift.String?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - location:
+                    public init(location: Swift.String? = nil) {
+                        self.location = location
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.IssuesAddBlockedByDependency.Output.Created.Headers
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/responses/201/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/POST/responses/201/content/application\/json`.
+                    case json(Components.Schemas.Issue)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.Issue {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.IssuesAddBlockedByDependency.Output.Created.Body
+                /// Creates a new `Created`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.IssuesAddBlockedByDependency.Output.Created.Headers = .init(),
+                    body: Operations.IssuesAddBlockedByDependency.Output.Created.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/post(issues/add-blocked-by-dependency)/responses/201`.
+            ///
+            /// HTTP response code: `201 created`.
+            case created(Operations.IssuesAddBlockedByDependency.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
+            ///
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.IssuesAddBlockedByDependency.Output.Created {
+                get throws {
+                    switch self {
+                    case let .created(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Moved permanently
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/post(issues/add-blocked-by-dependency)/responses/301`.
+            ///
+            /// HTTP response code: `301 movedPermanently`.
+            case movedPermanently(Components.Responses.MovedPermanently)
+            /// The associated value of the enum case if `self` is `.movedPermanently`.
+            ///
+            /// - Throws: An error if `self` is not `.movedPermanently`.
+            /// - SeeAlso: `.movedPermanently`.
+            public var movedPermanently: Components.Responses.MovedPermanently {
+                get throws {
+                    switch self {
+                    case let .movedPermanently(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "movedPermanently",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/post(issues/add-blocked-by-dependency)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Gone
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/post(issues/add-blocked-by-dependency)/responses/410`.
+            ///
+            /// HTTP response code: `410 gone`.
+            case gone(Components.Responses.Gone)
+            /// The associated value of the enum case if `self` is `.gone`.
+            ///
+            /// - Throws: An error if `self` is not `.gone`.
+            /// - SeeAlso: `.gone`.
+            public var gone: Components.Responses.Gone {
+                get throws {
+                    switch self {
+                    case let .gone(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "gone",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/post(issues/add-blocked-by-dependency)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/post(issues/add-blocked-by-dependency)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Remove dependency an issue is blocked by
+    ///
+    /// You can use the REST API to remove a dependency that an issue is blocked by.
+    ///
+    /// Removing content too quickly using this endpoint may result in secondary rate limiting.
+    /// For more information, see [Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)
+    /// and [Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api).
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass a specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/delete(issues/remove-dependency-blocked-by)`.
+    public enum IssuesRemoveDependencyBlockedBy {
+        public static let id: Swift.String = "issues/remove-dependency-blocked-by"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/DELETE/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/DELETE/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the issue.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/DELETE/path/issue_number`.
+                public var issueNumber: Components.Parameters.IssueNumber
+                /// The id of the blocking issue to remove as a dependency
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/DELETE/path/issue_id`.
+                public var issueId: Swift.Int
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - issueNumber: The number that identifies the issue.
+                ///   - issueId: The id of the blocking issue to remove as a dependency
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    issueNumber: Components.Parameters.IssueNumber,
+                    issueId: Swift.Int
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.issueNumber = issueNumber
+                    self.issueId = issueId
+                }
+            }
+            public var path: Operations.IssuesRemoveDependencyBlockedBy.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesRemoveDependencyBlockedBy.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesRemoveDependencyBlockedBy.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.IssuesRemoveDependencyBlockedBy.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.IssuesRemoveDependencyBlockedBy.Input.Path,
+                headers: Operations.IssuesRemoveDependencyBlockedBy.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/DELETE/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/DELETE/responses/200/content/application\/json`.
+                    case json(Components.Schemas.Issue)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.Issue {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.IssuesRemoveDependencyBlockedBy.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.IssuesRemoveDependencyBlockedBy.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/delete(issues/remove-dependency-blocked-by)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.IssuesRemoveDependencyBlockedBy.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.IssuesRemoveDependencyBlockedBy.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Moved permanently
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/delete(issues/remove-dependency-blocked-by)/responses/301`.
+            ///
+            /// HTTP response code: `301 movedPermanently`.
+            case movedPermanently(Components.Responses.MovedPermanently)
+            /// The associated value of the enum case if `self` is `.movedPermanently`.
+            ///
+            /// - Throws: An error if `self` is not `.movedPermanently`.
+            /// - SeeAlso: `.movedPermanently`.
+            public var movedPermanently: Components.Responses.MovedPermanently {
+                get throws {
+                    switch self {
+                    case let .movedPermanently(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "movedPermanently",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/delete(issues/remove-dependency-blocked-by)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/delete(issues/remove-dependency-blocked-by)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/delete(issues/remove-dependency-blocked-by)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/delete(issues/remove-dependency-blocked-by)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Gone
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by/{issue_id}/delete(issues/remove-dependency-blocked-by)/responses/410`.
+            ///
+            /// HTTP response code: `410 gone`.
+            case gone(Components.Responses.Gone)
+            /// The associated value of the enum case if `self` is `.gone`.
+            ///
+            /// - Throws: An error if `self` is not `.gone`.
+            /// - SeeAlso: `.gone`.
+            public var gone: Components.Responses.Gone {
+                get throws {
+                    switch self {
+                    case let .gone(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "gone",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// List dependencies an issue is blocking
+    ///
+    /// You can use the REST API to list the dependencies an issue is blocking.
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw Markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the Markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's Markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/get(issues/list-dependencies-blocking)`.
+    public enum IssuesListDependenciesBlocking {
+        public static let id: Swift.String = "issues/list-dependencies-blocking"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the issue.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/path/issue_number`.
+                public var issueNumber: Components.Parameters.IssueNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - issueNumber: The number that identifies the issue.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    issueNumber: Components.Parameters.IssueNumber
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.issueNumber = issueNumber
+                }
+            }
+            public var path: Operations.IssuesListDependenciesBlocking.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/query/page`.
+                public var page: Components.Parameters.Page?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    page: Components.Parameters.Page? = nil
+                ) {
+                    self.perPage = perPage
+                    self.page = page
+                }
+            }
+            public var query: Operations.IssuesListDependenciesBlocking.Input.Query
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesListDependenciesBlocking.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesListDependenciesBlocking.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.IssuesListDependenciesBlocking.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.IssuesListDependenciesBlocking.Input.Path,
+                query: Operations.IssuesListDependenciesBlocking.Input.Query = .init(),
+                headers: Operations.IssuesListDependenciesBlocking.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.IssuesListDependenciesBlocking.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.Issue])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.Issue] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.IssuesListDependenciesBlocking.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.IssuesListDependenciesBlocking.Output.Ok.Headers = .init(),
+                    body: Operations.IssuesListDependenciesBlocking.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/get(issues/list-dependencies-blocking)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.IssuesListDependenciesBlocking.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.IssuesListDependenciesBlocking.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Moved permanently
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/get(issues/list-dependencies-blocking)/responses/301`.
+            ///
+            /// HTTP response code: `301 movedPermanently`.
+            case movedPermanently(Components.Responses.MovedPermanently)
+            /// The associated value of the enum case if `self` is `.movedPermanently`.
+            ///
+            /// - Throws: An error if `self` is not `.movedPermanently`.
+            /// - SeeAlso: `.movedPermanently`.
+            public var movedPermanently: Components.Responses.MovedPermanently {
+                get throws {
+                    switch self {
+                    case let .movedPermanently(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "movedPermanently",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/get(issues/list-dependencies-blocking)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Gone
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking/get(issues/list-dependencies-blocking)/responses/410`.
+            ///
+            /// HTTP response code: `410 gone`.
+            case gone(Components.Responses.Gone)
+            /// The associated value of the enum case if `self` is `.gone`.
+            ///
+            /// - Throws: An error if `self` is not `.gone`.
+            /// - SeeAlso: `.gone`.
+            public var gone: Components.Responses.Gone {
+                get throws {
+                    switch self {
+                    case let .gone(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "gone",
                             response: self
                         )
                     }

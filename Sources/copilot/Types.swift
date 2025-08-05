@@ -36,7 +36,7 @@ public protocol APIProtocol: Sendable {
     /// Only organization owners can view assigned seats.
     ///
     /// Each seat object contains information about the assigned user's most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the IDE activity to be reflected in `last_activity_at`.
-    /// For more information about activity data, see "[Reviewing user activity data for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/reviewing-activity-related-to-github-copilot-in-your-organization/reviewing-user-activity-data-for-copilot-in-your-organization)."
+    /// For more information about activity data, see [Metrics data properties for GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data).
     ///
     /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:org` scopes to use this endpoint.
     ///
@@ -144,7 +144,7 @@ public protocol APIProtocol: Sendable {
     /// Gets the GitHub Copilot seat details for a member of an organization who currently has access to GitHub Copilot.
     ///
     /// The seat object contains information about the user's most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the IDE activity to be reflected in `last_activity_at`.
-    /// For more information about activity data, see "[Reviewing user activity data for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/reviewing-activity-related-to-github-copilot-in-your-organization/reviewing-user-activity-data-for-copilot-in-your-organization)."
+    /// For more information about activity data, see [Metrics data properties for GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data).
     ///
     /// Only organization owners can view Copilot seat assignment details for members of their organization.
     ///
@@ -209,7 +209,7 @@ extension APIProtocol {
     /// Only organization owners can view assigned seats.
     ///
     /// Each seat object contains information about the assigned user's most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the IDE activity to be reflected in `last_activity_at`.
-    /// For more information about activity data, see "[Reviewing user activity data for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/reviewing-activity-related-to-github-copilot-in-your-organization/reviewing-user-activity-data-for-copilot-in-your-organization)."
+    /// For more information about activity data, see [Metrics data properties for GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data).
     ///
     /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:org` scopes to use this endpoint.
     ///
@@ -377,7 +377,7 @@ extension APIProtocol {
     /// Gets the GitHub Copilot seat details for a member of an organization who currently has access to GitHub Copilot.
     ///
     /// The seat object contains information about the user's most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the IDE activity to be reflected in `last_activity_at`.
-    /// For more information about activity data, see "[Reviewing user activity data for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/reviewing-activity-related-to-github-copilot-in-your-organization/reviewing-user-activity-data-for-copilot-in-your-organization)."
+    /// For more information about activity data, see [Metrics data properties for GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data).
     ///
     /// Only organization owners can view Copilot seat assignment details for members of their organization.
     ///
@@ -1365,6 +1365,10 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/copilot-seat-details/last_activity_editor`.
             public var lastActivityEditor: Swift.String?
+            /// Timestamp of the last time the user authenticated with GitHub Copilot, in ISO 8601 format.
+            ///
+            /// - Remark: Generated from `#/components/schemas/copilot-seat-details/last_authenticated_at`.
+            public var lastAuthenticatedAt: Foundation.Date?
             /// Timestamp of when the assignee was last granted access to GitHub Copilot, in ISO 8601 format.
             ///
             /// - Remark: Generated from `#/components/schemas/copilot-seat-details/created_at`.
@@ -1395,6 +1399,7 @@ public enum Components {
             ///   - pendingCancellationDate: The pending cancellation date for the seat, in `YYYY-MM-DD` format. This will be null unless the assignee's Copilot access has been canceled during the current billing cycle. If the seat has been cancelled, this corresponds to the start of the organization's next billing cycle.
             ///   - lastActivityAt: Timestamp of user's last GitHub Copilot activity, in ISO 8601 format.
             ///   - lastActivityEditor: Last editor that was used by the user for a GitHub Copilot completion.
+            ///   - lastAuthenticatedAt: Timestamp of the last time the user authenticated with GitHub Copilot, in ISO 8601 format.
             ///   - createdAt: Timestamp of when the assignee was last granted access to GitHub Copilot, in ISO 8601 format.
             ///   - updatedAt: **Closing down notice:** This field is no longer relevant and is closing down. Use the `created_at` field to determine when the assignee was last granted access to GitHub Copilot. Timestamp of when the assignee's GitHub Copilot access was last updated, in ISO 8601 format.
             ///   - planType: The Copilot plan of the organization, or the parent enterprise, when applicable.
@@ -1405,6 +1410,7 @@ public enum Components {
                 pendingCancellationDate: Swift.String? = nil,
                 lastActivityAt: Foundation.Date? = nil,
                 lastActivityEditor: Swift.String? = nil,
+                lastAuthenticatedAt: Foundation.Date? = nil,
                 createdAt: Foundation.Date,
                 updatedAt: Foundation.Date? = nil,
                 planType: Components.Schemas.CopilotSeatDetails.PlanTypePayload? = nil
@@ -1415,6 +1421,7 @@ public enum Components {
                 self.pendingCancellationDate = pendingCancellationDate
                 self.lastActivityAt = lastActivityAt
                 self.lastActivityEditor = lastActivityEditor
+                self.lastAuthenticatedAt = lastAuthenticatedAt
                 self.createdAt = createdAt
                 self.updatedAt = updatedAt
                 self.planType = planType
@@ -1426,6 +1433,7 @@ public enum Components {
                 case pendingCancellationDate = "pending_cancellation_date"
                 case lastActivityAt = "last_activity_at"
                 case lastActivityEditor = "last_activity_editor"
+                case lastAuthenticatedAt = "last_authenticated_at"
                 case createdAt = "created_at"
                 case updatedAt = "updated_at"
                 case planType = "plan_type"
@@ -1456,6 +1464,10 @@ public enum Components {
                     Swift.String.self,
                     forKey: .lastActivityEditor
                 )
+                self.lastAuthenticatedAt = try container.decodeIfPresent(
+                    Foundation.Date.self,
+                    forKey: .lastAuthenticatedAt
+                )
                 self.createdAt = try container.decode(
                     Foundation.Date.self,
                     forKey: .createdAt
@@ -1475,6 +1487,7 @@ public enum Components {
                     "pending_cancellation_date",
                     "last_activity_at",
                     "last_activity_editor",
+                    "last_authenticated_at",
                     "created_at",
                     "updated_at",
                     "plan_type"
@@ -2819,7 +2832,7 @@ public enum Operations {
     /// Only organization owners can view assigned seats.
     ///
     /// Each seat object contains information about the assigned user's most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the IDE activity to be reflected in `last_activity_at`.
-    /// For more information about activity data, see "[Reviewing user activity data for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/reviewing-activity-related-to-github-copilot-in-your-organization/reviewing-user-activity-data-for-copilot-in-your-organization)."
+    /// For more information about activity data, see [Metrics data properties for GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data).
     ///
     /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:org` scopes to use this endpoint.
     ///
@@ -4653,7 +4666,7 @@ public enum Operations {
     /// Gets the GitHub Copilot seat details for a member of an organization who currently has access to GitHub Copilot.
     ///
     /// The seat object contains information about the user's most recent Copilot activity. Users must have telemetry enabled in their IDE for Copilot in the IDE activity to be reflected in `last_activity_at`.
-    /// For more information about activity data, see "[Reviewing user activity data for Copilot in your organization](https://docs.github.com/copilot/managing-copilot/managing-github-copilot-in-your-organization/reviewing-activity-related-to-github-copilot-in-your-organization/reviewing-user-activity-data-for-copilot-in-your-organization)."
+    /// For more information about activity data, see [Metrics data properties for GitHub Copilot](https://docs.github.com/copilot/reference/metrics-data).
     ///
     /// Only organization owners can view Copilot seat assignment details for members of their organization.
     ///

@@ -2291,6 +2291,41 @@ public enum Components {
                 case percentCompleted = "percent_completed"
             }
         }
+        /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary`.
+        public struct IssueDependenciesSummary: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/blocked_by`.
+            public var blockedBy: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/blocking`.
+            public var blocking: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/total_blocked_by`.
+            public var totalBlockedBy: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/total_blocking`.
+            public var totalBlocking: Swift.Int
+            /// Creates a new `IssueDependenciesSummary`.
+            ///
+            /// - Parameters:
+            ///   - blockedBy:
+            ///   - blocking:
+            ///   - totalBlockedBy:
+            ///   - totalBlocking:
+            public init(
+                blockedBy: Swift.Int,
+                blocking: Swift.Int,
+                totalBlockedBy: Swift.Int,
+                totalBlocking: Swift.Int
+            ) {
+                self.blockedBy = blockedBy
+                self.blocking = blocking
+                self.totalBlockedBy = totalBlockedBy
+                self.totalBlocking = totalBlocking
+            }
+            public enum CodingKeys: String, CodingKey {
+                case blockedBy = "blocked_by"
+                case blocking
+                case totalBlockedBy = "total_blocked_by"
+                case totalBlocking = "total_blocking"
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
         public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
             /// Enable or disable GitHub Advanced Security for the repository.
@@ -3692,6 +3727,8 @@ public enum Components {
             public var labels: Components.Schemas.IssueSearchResultItem.LabelsPayload
             /// - Remark: Generated from `#/components/schemas/issue-search-result-item/sub_issues_summary`.
             public var subIssuesSummary: Components.Schemas.SubIssuesSummary?
+            /// - Remark: Generated from `#/components/schemas/issue-search-result-item/issue_dependencies_summary`.
+            public var issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary?
             /// - Remark: Generated from `#/components/schemas/issue-search-result-item/state`.
             public var state: Swift.String
             /// - Remark: Generated from `#/components/schemas/issue-search-result-item/state_reason`.
@@ -3794,6 +3831,7 @@ public enum Components {
             ///   - user:
             ///   - labels:
             ///   - subIssuesSummary:
+            ///   - issueDependenciesSummary:
             ///   - state:
             ///   - stateReason:
             ///   - assignee:
@@ -3832,6 +3870,7 @@ public enum Components {
                 user: Components.Schemas.NullableSimpleUser? = nil,
                 labels: Components.Schemas.IssueSearchResultItem.LabelsPayload,
                 subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
+                issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary? = nil,
                 state: Swift.String,
                 stateReason: Swift.String? = nil,
                 assignee: Components.Schemas.NullableSimpleUser? = nil,
@@ -3870,6 +3909,7 @@ public enum Components {
                 self.user = user
                 self.labels = labels
                 self.subIssuesSummary = subIssuesSummary
+                self.issueDependenciesSummary = issueDependenciesSummary
                 self.state = state
                 self.stateReason = stateReason
                 self.assignee = assignee
@@ -3909,6 +3949,7 @@ public enum Components {
                 case user
                 case labels
                 case subIssuesSummary = "sub_issues_summary"
+                case issueDependenciesSummary = "issue_dependencies_summary"
                 case state
                 case stateReason = "state_reason"
                 case assignee
