@@ -2872,6 +2872,41 @@ public enum Components {
                 case percentCompleted = "percent_completed"
             }
         }
+        /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary`.
+        public struct IssueDependenciesSummary: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/blocked_by`.
+            public var blockedBy: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/blocking`.
+            public var blocking: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/total_blocked_by`.
+            public var totalBlockedBy: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/total_blocking`.
+            public var totalBlocking: Swift.Int
+            /// Creates a new `IssueDependenciesSummary`.
+            ///
+            /// - Parameters:
+            ///   - blockedBy:
+            ///   - blocking:
+            ///   - totalBlockedBy:
+            ///   - totalBlocking:
+            public init(
+                blockedBy: Swift.Int,
+                blocking: Swift.Int,
+                totalBlockedBy: Swift.Int,
+                totalBlocking: Swift.Int
+            ) {
+                self.blockedBy = blockedBy
+                self.blocking = blocking
+                self.totalBlockedBy = totalBlockedBy
+                self.totalBlocking = totalBlocking
+            }
+            public enum CodingKeys: String, CodingKey {
+                case blockedBy = "blocked_by"
+                case blocking
+                case totalBlockedBy = "total_blocked_by"
+                case totalBlocking = "total_blocking"
+            }
+        }
         /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
         ///
         /// - Remark: Generated from `#/components/schemas/issue`.
@@ -3104,6 +3139,8 @@ public enum Components {
             public var reactions: Components.Schemas.ReactionRollup?
             /// - Remark: Generated from `#/components/schemas/issue/sub_issues_summary`.
             public var subIssuesSummary: Components.Schemas.SubIssuesSummary?
+            /// - Remark: Generated from `#/components/schemas/issue/issue_dependencies_summary`.
+            public var issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary?
             /// Creates a new `Issue`.
             ///
             /// - Parameters:
@@ -3143,6 +3180,7 @@ public enum Components {
             ///   - authorAssociation:
             ///   - reactions:
             ///   - subIssuesSummary:
+            ///   - issueDependenciesSummary:
             public init(
                 id: Swift.Int64,
                 nodeId: Swift.String,
@@ -3179,7 +3217,8 @@ public enum Components {
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
                 authorAssociation: Components.Schemas.AuthorAssociation,
                 reactions: Components.Schemas.ReactionRollup? = nil,
-                subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil
+                subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
+                issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -3217,6 +3256,7 @@ public enum Components {
                 self.authorAssociation = authorAssociation
                 self.reactions = reactions
                 self.subIssuesSummary = subIssuesSummary
+                self.issueDependenciesSummary = issueDependenciesSummary
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -3255,6 +3295,7 @@ public enum Components {
                 case authorAssociation = "author_association"
                 case reactions
                 case subIssuesSummary = "sub_issues_summary"
+                case issueDependenciesSummary = "issue_dependencies_summary"
             }
         }
         /// Comments provide a way for people to collaborate on an issue.
