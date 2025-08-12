@@ -2793,7 +2793,7 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/page`.
         public typealias Page = Swift.Int
-        /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+        /// The slug version of the enterprise name.
         ///
         /// - Remark: Generated from `#/components/parameters/enterprise`.
         public typealias Enterprise = Swift.String
@@ -3116,14 +3116,14 @@ public enum Operations {
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/path`.
             public struct Path: Sendable, Hashable {
-                /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                /// The slug version of the enterprise name.
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/path/enterprise`.
                 public var enterprise: Components.Parameters.Enterprise
                 /// Creates a new `Path`.
                 ///
                 /// - Parameters:
-                ///   - enterprise: The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                ///   - enterprise: The slug version of the enterprise name.
                 public init(enterprise: Components.Parameters.Enterprise) {
                     self.enterprise = enterprise
                 }

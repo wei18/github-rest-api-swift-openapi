@@ -1979,7 +1979,7 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/pagination-after`.
         public typealias PaginationAfter = Swift.String
-        /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+        /// The slug version of the enterprise name.
         ///
         /// - Remark: Generated from `#/components/parameters/enterprise`.
         public typealias Enterprise = Swift.String
@@ -2198,14 +2198,14 @@ public enum Operations {
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/GET/path`.
             public struct Path: Sendable, Hashable {
-                /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                /// The slug version of the enterprise name.
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/GET/path/enterprise`.
                 public var enterprise: Components.Parameters.Enterprise
                 /// Creates a new `Path`.
                 ///
                 /// - Parameters:
-                ///   - enterprise: The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                ///   - enterprise: The slug version of the enterprise name.
                 public init(enterprise: Components.Parameters.Enterprise) {
                     self.enterprise = enterprise
                 }
@@ -2414,14 +2414,14 @@ public enum Operations {
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/path`.
             public struct Path: Sendable, Hashable {
-                /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                /// The slug version of the enterprise name.
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/path/enterprise`.
                 public var enterprise: Components.Parameters.Enterprise
                 /// Creates a new `Path`.
                 ///
                 /// - Parameters:
-                ///   - enterprise: The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                ///   - enterprise: The slug version of the enterprise name.
                 public init(enterprise: Components.Parameters.Enterprise) {
                     self.enterprise = enterprise
                 }
@@ -3095,14 +3095,14 @@ public enum Operations {
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/defaults/GET/path`.
             public struct Path: Sendable, Hashable {
-                /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                /// The slug version of the enterprise name.
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/defaults/GET/path/enterprise`.
                 public var enterprise: Components.Parameters.Enterprise
                 /// Creates a new `Path`.
                 ///
                 /// - Parameters:
-                ///   - enterprise: The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                ///   - enterprise: The slug version of the enterprise name.
                 public init(enterprise: Components.Parameters.Enterprise) {
                     self.enterprise = enterprise
                 }
@@ -3231,7 +3231,7 @@ public enum Operations {
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/GET/path`.
             public struct Path: Sendable, Hashable {
-                /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                /// The slug version of the enterprise name.
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/GET/path/enterprise`.
                 public var enterprise: Components.Parameters.Enterprise
@@ -3242,7 +3242,7 @@ public enum Operations {
                 /// Creates a new `Path`.
                 ///
                 /// - Parameters:
-                ///   - enterprise: The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                ///   - enterprise: The slug version of the enterprise name.
                 ///   - configurationId: The unique identifier of the code security configuration.
                 public init(
                     enterprise: Components.Parameters.Enterprise,
@@ -3453,7 +3453,7 @@ public enum Operations {
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/path`.
             public struct Path: Sendable, Hashable {
-                /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                /// The slug version of the enterprise name.
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/path/enterprise`.
                 public var enterprise: Components.Parameters.Enterprise
@@ -3464,7 +3464,7 @@ public enum Operations {
                 /// Creates a new `Path`.
                 ///
                 /// - Parameters:
-                ///   - enterprise: The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                ///   - enterprise: The slug version of the enterprise name.
                 ///   - configurationId: The unique identifier of the code security configuration.
                 public init(
                     enterprise: Components.Parameters.Enterprise,
@@ -4159,7 +4159,7 @@ public enum Operations {
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/DELETE/path`.
             public struct Path: Sendable, Hashable {
-                /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                /// The slug version of the enterprise name.
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/DELETE/path/enterprise`.
                 public var enterprise: Components.Parameters.Enterprise
@@ -4170,7 +4170,7 @@ public enum Operations {
                 /// Creates a new `Path`.
                 ///
                 /// - Parameters:
-                ///   - enterprise: The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                ///   - enterprise: The slug version of the enterprise name.
                 ///   - configurationId: The unique identifier of the code security configuration.
                 public init(
                     enterprise: Components.Parameters.Enterprise,
@@ -4384,7 +4384,7 @@ public enum Operations {
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/attach/POST/path`.
             public struct Path: Sendable, Hashable {
-                /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                /// The slug version of the enterprise name.
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/attach/POST/path/enterprise`.
                 public var enterprise: Components.Parameters.Enterprise
@@ -4395,7 +4395,7 @@ public enum Operations {
                 /// Creates a new `Path`.
                 ///
                 /// - Parameters:
-                ///   - enterprise: The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                ///   - enterprise: The slug version of the enterprise name.
                 ///   - configurationId: The unique identifier of the code security configuration.
                 public init(
                     enterprise: Components.Parameters.Enterprise,
@@ -4615,7 +4615,7 @@ public enum Operations {
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/defaults/PUT/path`.
             public struct Path: Sendable, Hashable {
-                /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                /// The slug version of the enterprise name.
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/defaults/PUT/path/enterprise`.
                 public var enterprise: Components.Parameters.Enterprise
@@ -4626,7 +4626,7 @@ public enum Operations {
                 /// Creates a new `Path`.
                 ///
                 /// - Parameters:
-                ///   - enterprise: The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                ///   - enterprise: The slug version of the enterprise name.
                 ///   - configurationId: The unique identifier of the code security configuration.
                 public init(
                     enterprise: Components.Parameters.Enterprise,
@@ -4875,7 +4875,7 @@ public enum Operations {
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/repositories/GET/path`.
             public struct Path: Sendable, Hashable {
-                /// The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                /// The slug version of the enterprise name.
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/repositories/GET/path/enterprise`.
                 public var enterprise: Components.Parameters.Enterprise
@@ -4886,7 +4886,7 @@ public enum Operations {
                 /// Creates a new `Path`.
                 ///
                 /// - Parameters:
-                ///   - enterprise: The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+                ///   - enterprise: The slug version of the enterprise name.
                 ///   - configurationId: The unique identifier of the code security configuration.
                 public init(
                     enterprise: Components.Parameters.Enterprise,
@@ -6277,14 +6277,14 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/detach/DELETE/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// An array of repository IDs to detach from configurations. Up to 1000 IDs can be provided.
+                    /// An array of repository IDs to detach from configurations. Up to 250 IDs can be provided.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/detach/DELETE/requestBody/json/selected_repository_ids`.
                     public var selectedRepositoryIds: [Swift.Int]?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
-                    ///   - selectedRepositoryIds: An array of repository IDs to detach from configurations. Up to 1000 IDs can be provided.
+                    ///   - selectedRepositoryIds: An array of repository IDs to detach from configurations. Up to 250 IDs can be provided.
                     public init(selectedRepositoryIds: [Swift.Int]? = nil) {
                         self.selectedRepositoryIds = selectedRepositoryIds
                     }
