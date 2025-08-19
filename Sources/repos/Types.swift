@@ -11335,7 +11335,7 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/schemas/repository-ruleset-bypass-actor`.
         public struct RepositoryRulesetBypassActor: Codable, Hashable, Sendable {
-            /// The ID of the actor that can bypass a ruleset. If `actor_type` is `OrganizationAdmin`, this should be `1`. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
+            /// The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, and `Team` actor types. If `actor_type` is `OrganizationAdmin`, this should be `1`. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
             ///
             /// - Remark: Generated from `#/components/schemas/repository-ruleset-bypass-actor/actor_id`.
             public var actorId: Swift.Int?
@@ -11367,7 +11367,7 @@ public enum Components {
             /// Creates a new `RepositoryRulesetBypassActor`.
             ///
             /// - Parameters:
-            ///   - actorId: The ID of the actor that can bypass a ruleset. If `actor_type` is `OrganizationAdmin`, this should be `1`. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
+            ///   - actorId: The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, and `Team` actor types. If `actor_type` is `OrganizationAdmin`, this should be `1`. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
             ///   - actorType: The type of actor that can bypass a ruleset.
             ///   - bypassMode: When the specified actor can bypass the ruleset. `pull_request` means that an actor can only bypass rules on pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only applicable to branch rulesets.
             public init(
@@ -21586,6 +21586,8 @@ public enum Components {
             public var createdAt: Foundation.Date
             /// - Remark: Generated from `#/components/schemas/release/published_at`.
             public var publishedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/release/updated_at`.
+            public var updatedAt: Foundation.Date?
             /// - Remark: Generated from `#/components/schemas/release/author`.
             public var author: Components.Schemas.SimpleUser
             /// - Remark: Generated from `#/components/schemas/release/assets`.
@@ -21622,6 +21624,7 @@ public enum Components {
             ///   - immutable: Whether or not the release is immutable.
             ///   - createdAt:
             ///   - publishedAt:
+            ///   - updatedAt:
             ///   - author:
             ///   - assets:
             ///   - bodyHtml:
@@ -21647,6 +21650,7 @@ public enum Components {
                 immutable: Swift.Bool? = nil,
                 createdAt: Foundation.Date,
                 publishedAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil,
                 author: Components.Schemas.SimpleUser,
                 assets: [Components.Schemas.ReleaseAsset],
                 bodyHtml: Swift.String? = nil,
@@ -21672,6 +21676,7 @@ public enum Components {
                 self.immutable = immutable
                 self.createdAt = createdAt
                 self.publishedAt = publishedAt
+                self.updatedAt = updatedAt
                 self.author = author
                 self.assets = assets
                 self.bodyHtml = bodyHtml
@@ -21698,6 +21703,7 @@ public enum Components {
                 case immutable
                 case createdAt = "created_at"
                 case publishedAt = "published_at"
+                case updatedAt = "updated_at"
                 case author
                 case assets
                 case bodyHtml = "body_html"

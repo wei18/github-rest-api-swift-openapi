@@ -676,8 +676,8 @@ public struct Client: APIProtocol {
                     in: &request,
                     style: .form,
                     explode: true,
-                    name: "artifact_registry_url",
-                    value: input.query.artifactRegistryUrl
+                    name: "package_registry_url",
+                    value: input.query.packageRegistryUrl
                 )
                 try converter.setQueryItemAsURI(
                     in: &request,

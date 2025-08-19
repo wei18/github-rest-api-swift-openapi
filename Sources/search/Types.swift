@@ -2326,6 +2326,164 @@ public enum Components {
                 case totalBlocking = "total_blocking"
             }
         }
+        /// A value assigned to an issue field
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-field-value`.
+        public struct IssueFieldValue: Codable, Hashable, Sendable {
+            /// Unique identifier for the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/issue_field_id`.
+            public var issueFieldId: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/node_id`.
+            public var nodeId: Swift.String
+            /// The data type of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/data_type`.
+            @frozen public enum DataTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case text = "text"
+                case singleSelect = "single_select"
+                case number = "number"
+                case date = "date"
+            }
+            /// The data type of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/data_type`.
+            public var dataType: Components.Schemas.IssueFieldValue.DataTypePayload
+            /// The value of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/value`.
+            public struct ValuePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/value/value1`.
+                public var value1: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/value/value2`.
+                public var value2: Swift.Double?
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/value/value3`.
+                public var value3: Swift.Int?
+                /// Creates a new `ValuePayload`.
+                ///
+                /// - Parameters:
+                ///   - value1:
+                ///   - value2:
+                ///   - value3:
+                public init(
+                    value1: Swift.String? = nil,
+                    value2: Swift.Double? = nil,
+                    value3: Swift.Int? = nil
+                ) {
+                    self.value1 = value1
+                    self.value2 = value2
+                    self.value3 = value3
+                }
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self.value1 = try decoder.decodeFromSingleValueContainer()
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self.value2 = try decoder.decodeFromSingleValueContainer()
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self.value3 = try decoder.decodeFromSingleValueContainer()
+                    } catch {
+                        errors.append(error)
+                    }
+                    try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
+                        [
+                            self.value1,
+                            self.value2,
+                            self.value3
+                        ],
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    try encoder.encodeFirstNonNilValueToSingleValueContainer([
+                        self.value1,
+                        self.value2,
+                        self.value3
+                    ])
+                }
+            }
+            /// The value of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/value`.
+            public var value: Components.Schemas.IssueFieldValue.ValuePayload?
+            /// Details about the selected option (only present for single_select fields)
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option`.
+            public struct SingleSelectOptionPayload: Codable, Hashable, Sendable {
+                /// Unique identifier for the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option/id`.
+                public var id: Swift.Int64
+                /// The name of the option
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option/name`.
+                public var name: Swift.String
+                /// The color of the option
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option/color`.
+                public var color: Swift.String
+                /// Creates a new `SingleSelectOptionPayload`.
+                ///
+                /// - Parameters:
+                ///   - id: Unique identifier for the option.
+                ///   - name: The name of the option
+                ///   - color: The color of the option
+                public init(
+                    id: Swift.Int64,
+                    name: Swift.String,
+                    color: Swift.String
+                ) {
+                    self.id = id
+                    self.name = name
+                    self.color = color
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case name
+                    case color
+                }
+            }
+            /// Details about the selected option (only present for single_select fields)
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option`.
+            public var singleSelectOption: Components.Schemas.IssueFieldValue.SingleSelectOptionPayload?
+            /// Creates a new `IssueFieldValue`.
+            ///
+            /// - Parameters:
+            ///   - issueFieldId: Unique identifier for the issue field.
+            ///   - nodeId:
+            ///   - dataType: The data type of the issue field
+            ///   - value: The value of the issue field
+            ///   - singleSelectOption: Details about the selected option (only present for single_select fields)
+            public init(
+                issueFieldId: Swift.Int64,
+                nodeId: Swift.String,
+                dataType: Components.Schemas.IssueFieldValue.DataTypePayload,
+                value: Components.Schemas.IssueFieldValue.ValuePayload? = nil,
+                singleSelectOption: Components.Schemas.IssueFieldValue.SingleSelectOptionPayload? = nil
+            ) {
+                self.issueFieldId = issueFieldId
+                self.nodeId = nodeId
+                self.dataType = dataType
+                self.value = value
+                self.singleSelectOption = singleSelectOption
+            }
+            public enum CodingKeys: String, CodingKey {
+                case issueFieldId = "issue_field_id"
+                case nodeId = "node_id"
+                case dataType = "data_type"
+                case value
+                case singleSelectOption = "single_select_option"
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
         public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
             /// Enable or disable GitHub Advanced Security for the repository.
@@ -3729,6 +3887,8 @@ public enum Components {
             public var subIssuesSummary: Components.Schemas.SubIssuesSummary?
             /// - Remark: Generated from `#/components/schemas/issue-search-result-item/issue_dependencies_summary`.
             public var issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary?
+            /// - Remark: Generated from `#/components/schemas/issue-search-result-item/issue_field_values`.
+            public var issueFieldValues: [Components.Schemas.IssueFieldValue]?
             /// - Remark: Generated from `#/components/schemas/issue-search-result-item/state`.
             public var state: Swift.String
             /// - Remark: Generated from `#/components/schemas/issue-search-result-item/state_reason`.
@@ -3832,6 +3992,7 @@ public enum Components {
             ///   - labels:
             ///   - subIssuesSummary:
             ///   - issueDependenciesSummary:
+            ///   - issueFieldValues:
             ///   - state:
             ///   - stateReason:
             ///   - assignee:
@@ -3871,6 +4032,7 @@ public enum Components {
                 labels: Components.Schemas.IssueSearchResultItem.LabelsPayload,
                 subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
                 issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary? = nil,
+                issueFieldValues: [Components.Schemas.IssueFieldValue]? = nil,
                 state: Swift.String,
                 stateReason: Swift.String? = nil,
                 assignee: Components.Schemas.NullableSimpleUser? = nil,
@@ -3910,6 +4072,7 @@ public enum Components {
                 self.labels = labels
                 self.subIssuesSummary = subIssuesSummary
                 self.issueDependenciesSummary = issueDependenciesSummary
+                self.issueFieldValues = issueFieldValues
                 self.state = state
                 self.stateReason = stateReason
                 self.assignee = assignee
@@ -3950,6 +4113,7 @@ public enum Components {
                 case labels
                 case subIssuesSummary = "sub_issues_summary"
                 case issueDependenciesSummary = "issue_dependencies_summary"
+                case issueFieldValues = "issue_field_values"
                 case state
                 case stateReason = "state_reason"
                 case assignee
