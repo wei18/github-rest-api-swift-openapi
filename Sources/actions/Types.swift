@@ -7855,6 +7855,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/schemas/selected-actions-url`.
         public typealias SelectedActionsUrl = Swift.String
+        /// Whether actions must be pinned to a full-length commit SHA.
+        ///
+        /// - Remark: Generated from `#/components/schemas/sha-pinning-required`.
+        public typealias ShaPinningRequired = Swift.Bool
         /// - Remark: Generated from `#/components/schemas/actions-organization-permissions`.
         public struct ActionsOrganizationPermissions: Codable, Hashable, Sendable {
             /// - Remark: Generated from `#/components/schemas/actions-organization-permissions/enabled_repositories`.
@@ -7867,6 +7871,8 @@ public enum Components {
             public var allowedActions: Components.Schemas.AllowedActions?
             /// - Remark: Generated from `#/components/schemas/actions-organization-permissions/selected_actions_url`.
             public var selectedActionsUrl: Components.Schemas.SelectedActionsUrl?
+            /// - Remark: Generated from `#/components/schemas/actions-organization-permissions/sha_pinning_required`.
+            public var shaPinningRequired: Components.Schemas.ShaPinningRequired?
             /// Creates a new `ActionsOrganizationPermissions`.
             ///
             /// - Parameters:
@@ -7874,22 +7880,26 @@ public enum Components {
             ///   - selectedRepositoriesUrl: The API URL to use to get or set the selected repositories that are allowed to run GitHub Actions, when `enabled_repositories` is set to `selected`.
             ///   - allowedActions:
             ///   - selectedActionsUrl:
+            ///   - shaPinningRequired:
             public init(
                 enabledRepositories: Components.Schemas.EnabledRepositories,
                 selectedRepositoriesUrl: Swift.String? = nil,
                 allowedActions: Components.Schemas.AllowedActions? = nil,
-                selectedActionsUrl: Components.Schemas.SelectedActionsUrl? = nil
+                selectedActionsUrl: Components.Schemas.SelectedActionsUrl? = nil,
+                shaPinningRequired: Components.Schemas.ShaPinningRequired? = nil
             ) {
                 self.enabledRepositories = enabledRepositories
                 self.selectedRepositoriesUrl = selectedRepositoriesUrl
                 self.allowedActions = allowedActions
                 self.selectedActionsUrl = selectedActionsUrl
+                self.shaPinningRequired = shaPinningRequired
             }
             public enum CodingKeys: String, CodingKey {
                 case enabledRepositories = "enabled_repositories"
                 case selectedRepositoriesUrl = "selected_repositories_url"
                 case allowedActions = "allowed_actions"
                 case selectedActionsUrl = "selected_actions_url"
+                case shaPinningRequired = "sha_pinning_required"
             }
         }
         /// - Remark: Generated from `#/components/schemas/actions-artifact-and-log-retention-response`.
@@ -9548,25 +9558,31 @@ public enum Components {
             public var allowedActions: Components.Schemas.AllowedActions?
             /// - Remark: Generated from `#/components/schemas/actions-repository-permissions/selected_actions_url`.
             public var selectedActionsUrl: Components.Schemas.SelectedActionsUrl?
+            /// - Remark: Generated from `#/components/schemas/actions-repository-permissions/sha_pinning_required`.
+            public var shaPinningRequired: Components.Schemas.ShaPinningRequired?
             /// Creates a new `ActionsRepositoryPermissions`.
             ///
             /// - Parameters:
             ///   - enabled:
             ///   - allowedActions:
             ///   - selectedActionsUrl:
+            ///   - shaPinningRequired:
             public init(
                 enabled: Components.Schemas.ActionsEnabled,
                 allowedActions: Components.Schemas.AllowedActions? = nil,
-                selectedActionsUrl: Components.Schemas.SelectedActionsUrl? = nil
+                selectedActionsUrl: Components.Schemas.SelectedActionsUrl? = nil,
+                shaPinningRequired: Components.Schemas.ShaPinningRequired? = nil
             ) {
                 self.enabled = enabled
                 self.allowedActions = allowedActions
                 self.selectedActionsUrl = selectedActionsUrl
+                self.shaPinningRequired = shaPinningRequired
             }
             public enum CodingKeys: String, CodingKey {
                 case enabled
                 case allowedActions = "allowed_actions"
                 case selectedActionsUrl = "selected_actions_url"
+                case shaPinningRequired = "sha_pinning_required"
             }
         }
         /// - Remark: Generated from `#/components/schemas/actions-workflow-access-to-repository`.
@@ -13952,21 +13968,27 @@ public enum Operations {
                     public var enabledRepositories: Components.Schemas.EnabledRepositories
                     /// - Remark: Generated from `#/paths/orgs/{org}/actions/permissions/PUT/requestBody/json/allowed_actions`.
                     public var allowedActions: Components.Schemas.AllowedActions?
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/permissions/PUT/requestBody/json/sha_pinning_required`.
+                    public var shaPinningRequired: Components.Schemas.ShaPinningRequired?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - enabledRepositories:
                     ///   - allowedActions:
+                    ///   - shaPinningRequired:
                     public init(
                         enabledRepositories: Components.Schemas.EnabledRepositories,
-                        allowedActions: Components.Schemas.AllowedActions? = nil
+                        allowedActions: Components.Schemas.AllowedActions? = nil,
+                        shaPinningRequired: Components.Schemas.ShaPinningRequired? = nil
                     ) {
                         self.enabledRepositories = enabledRepositories
                         self.allowedActions = allowedActions
+                        self.shaPinningRequired = shaPinningRequired
                     }
                     public enum CodingKeys: String, CodingKey {
                         case enabledRepositories = "enabled_repositories"
                         case allowedActions = "allowed_actions"
+                        case shaPinningRequired = "sha_pinning_required"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/actions/permissions/PUT/requestBody/content/application\/json`.
@@ -27040,21 +27062,27 @@ public enum Operations {
                     public var enabled: Components.Schemas.ActionsEnabled
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/PUT/requestBody/json/allowed_actions`.
                     public var allowedActions: Components.Schemas.AllowedActions?
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/PUT/requestBody/json/sha_pinning_required`.
+                    public var shaPinningRequired: Components.Schemas.ShaPinningRequired?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - enabled:
                     ///   - allowedActions:
+                    ///   - shaPinningRequired:
                     public init(
                         enabled: Components.Schemas.ActionsEnabled,
-                        allowedActions: Components.Schemas.AllowedActions? = nil
+                        allowedActions: Components.Schemas.AllowedActions? = nil,
+                        shaPinningRequired: Components.Schemas.ShaPinningRequired? = nil
                     ) {
                         self.enabled = enabled
                         self.allowedActions = allowedActions
+                        self.shaPinningRequired = shaPinningRequired
                     }
                     public enum CodingKeys: String, CodingKey {
                         case enabled
                         case allowedActions = "allowed_actions"
+                        case shaPinningRequired = "sha_pinning_required"
                     }
                 }
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/permissions/PUT/requestBody/content/application\/json`.
