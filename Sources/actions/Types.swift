@@ -7720,27 +7720,27 @@ public enum Components {
         }
         /// Provides details of a hosted runner image
         ///
-        /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-image`.
-        public struct ActionsHostedRunnerImage: Codable, Hashable, Sendable {
+        /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-curated-image`.
+        public struct ActionsHostedRunnerCuratedImage: Codable, Hashable, Sendable {
             /// The ID of the image. Use this ID for the `image` parameter when creating a new larger runner.
             ///
-            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-image/id`.
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-curated-image/id`.
             public var id: Swift.String
             /// The operating system of the image.
             ///
-            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-image/platform`.
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-curated-image/platform`.
             public var platform: Swift.String
             /// Image size in GB.
             ///
-            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-image/size_gb`.
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-curated-image/size_gb`.
             public var sizeGb: Swift.Int
             /// Display name for this image.
             ///
-            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-image/display_name`.
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-curated-image/display_name`.
             public var displayName: Swift.String
             /// The image provider.
             ///
-            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-image/source`.
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-curated-image/source`.
             @frozen public enum SourcePayload: String, Codable, Hashable, Sendable, CaseIterable {
                 case github = "github"
                 case partner = "partner"
@@ -7748,9 +7748,9 @@ public enum Components {
             }
             /// The image provider.
             ///
-            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-image/source`.
-            public var source: Components.Schemas.ActionsHostedRunnerImage.SourcePayload
-            /// Creates a new `ActionsHostedRunnerImage`.
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-curated-image/source`.
+            public var source: Components.Schemas.ActionsHostedRunnerCuratedImage.SourcePayload
+            /// Creates a new `ActionsHostedRunnerCuratedImage`.
             ///
             /// - Parameters:
             ///   - id: The ID of the image. Use this ID for the `image` parameter when creating a new larger runner.
@@ -7763,7 +7763,7 @@ public enum Components {
                 platform: Swift.String,
                 sizeGb: Swift.Int,
                 displayName: Swift.String,
-                source: Components.Schemas.ActionsHostedRunnerImage.SourcePayload
+                source: Components.Schemas.ActionsHostedRunnerCuratedImage.SourcePayload
             ) {
                 self.id = id
                 self.platform = platform
@@ -12609,7 +12609,7 @@ public enum Operations {
                         /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/github-owned/GET/responses/200/content/json/total_count`.
                         public var totalCount: Swift.Int
                         /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/github-owned/GET/responses/200/content/json/images`.
-                        public var images: [Components.Schemas.ActionsHostedRunnerImage]
+                        public var images: [Components.Schemas.ActionsHostedRunnerCuratedImage]
                         /// Creates a new `JsonPayload`.
                         ///
                         /// - Parameters:
@@ -12617,7 +12617,7 @@ public enum Operations {
                         ///   - images:
                         public init(
                             totalCount: Swift.Int,
-                            images: [Components.Schemas.ActionsHostedRunnerImage]
+                            images: [Components.Schemas.ActionsHostedRunnerCuratedImage]
                         ) {
                             self.totalCount = totalCount
                             self.images = images
@@ -12764,7 +12764,7 @@ public enum Operations {
                         /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/partner/GET/responses/200/content/json/total_count`.
                         public var totalCount: Swift.Int
                         /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/partner/GET/responses/200/content/json/images`.
-                        public var images: [Components.Schemas.ActionsHostedRunnerImage]
+                        public var images: [Components.Schemas.ActionsHostedRunnerCuratedImage]
                         /// Creates a new `JsonPayload`.
                         ///
                         /// - Parameters:
@@ -12772,7 +12772,7 @@ public enum Operations {
                         ///   - images:
                         public init(
                             totalCount: Swift.Int,
-                            images: [Components.Schemas.ActionsHostedRunnerImage]
+                            images: [Components.Schemas.ActionsHostedRunnerCuratedImage]
                         ) {
                             self.totalCount = totalCount
                             self.images = images
