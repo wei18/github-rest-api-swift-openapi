@@ -14469,6 +14469,8 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/autolink/is_alphanumeric`.
             public var isAlphanumeric: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/autolink/updated_at`.
+            public var updatedAt: Foundation.Date?
             /// Creates a new `Autolink`.
             ///
             /// - Parameters:
@@ -14476,22 +14478,26 @@ public enum Components {
             ///   - keyPrefix: The prefix of a key that is linkified.
             ///   - urlTemplate: A template for the target URL that is generated if a key was found.
             ///   - isAlphanumeric: Whether this autolink reference matches alphanumeric characters. If false, this autolink reference only matches numeric characters.
+            ///   - updatedAt:
             public init(
                 id: Swift.Int,
                 keyPrefix: Swift.String,
                 urlTemplate: Swift.String,
-                isAlphanumeric: Swift.Bool
+                isAlphanumeric: Swift.Bool,
+                updatedAt: Foundation.Date? = nil
             ) {
                 self.id = id
                 self.keyPrefix = keyPrefix
                 self.urlTemplate = urlTemplate
                 self.isAlphanumeric = isAlphanumeric
+                self.updatedAt = updatedAt
             }
             public enum CodingKeys: String, CodingKey {
                 case id
                 case keyPrefix = "key_prefix"
                 case urlTemplate = "url_template"
                 case isAlphanumeric = "is_alphanumeric"
+                case updatedAt = "updated_at"
             }
         }
         /// Check Dependabot security updates
