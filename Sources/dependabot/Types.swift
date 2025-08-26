@@ -4312,16 +4312,16 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/secret-name`.
         public typealias SecretName = Swift.String
-        /// A comma-separated list of package registry URLs. If specified, only alerts for repositories with storage records matching these URLs will be returned.
+        /// A comma-separated list of artifact registry URLs. If specified, only alerts for repositories with storage records matching these URLs will be returned.
         ///
-        /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-package-registry-urls`.
-        public typealias DependabotAlertCommaSeparatedPackageRegistryUrls = Swift.String
-        /// A comma-separated list of Package Registry name strings. If specified, only alerts for repositories with storage records matching these registries will be returned.
+        /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-artifact-registry-urls`.
+        public typealias DependabotAlertCommaSeparatedArtifactRegistryUrls = Swift.String
+        /// A comma-separated list of Artifact Registry name strings. If specified, only alerts for repositories with storage records matching these registries will be returned.
         ///
         /// Can be: `jfrog-artifactory`
         ///
-        /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-package-registry`.
-        public typealias DependabotAlertCommaSeparatedPackageRegistry = Swift.String
+        /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-artifact-registry`.
+        public typealias DependabotAlertCommaSeparatedArtifactRegistry = Swift.String
         /// A comma-separated list of full manifest paths. If specified, only alerts for these manifests will be returned.
         ///
         /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-manifests`.
@@ -5621,16 +5621,16 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/epss_percentage`.
                 public var epssPercentage: Components.Parameters.DependabotAlertCommaSeparatedEpss?
-                /// A comma-separated list of package registry URLs. If specified, only alerts for repositories with storage records matching these URLs will be returned.
+                /// A comma-separated list of artifact registry URLs. If specified, only alerts for repositories with storage records matching these URLs will be returned.
                 ///
-                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/package_registry_url`.
-                public var packageRegistryUrl: Components.Parameters.DependabotAlertCommaSeparatedPackageRegistryUrls?
-                /// A comma-separated list of Package Registry name strings. If specified, only alerts for repositories with storage records matching these registries will be returned.
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/artifact_registry_url`.
+                public var artifactRegistryUrl: Components.Parameters.DependabotAlertCommaSeparatedArtifactRegistryUrls?
+                /// A comma-separated list of Artifact Registry name strings. If specified, only alerts for repositories with storage records matching these registries will be returned.
                 ///
                 /// Can be: `jfrog-artifactory`
                 ///
-                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/package_registry`.
-                public var packageRegistry: Components.Parameters.DependabotAlertCommaSeparatedPackageRegistry?
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/artifact_registry`.
+                public var artifactRegistry: Components.Parameters.DependabotAlertCommaSeparatedArtifactRegistry?
                 /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-has`.
                 @frozen public enum DependabotAlertCommaSeparatedHas: Codable, Hashable, Sendable {
                     /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-has/case1`.
@@ -5740,8 +5740,8 @@ public enum Operations {
                 ///   - ecosystem: A comma-separated list of ecosystems. If specified, only alerts for these ecosystems will be returned.
                 ///   - package: A comma-separated list of package names. If specified, only alerts for these packages will be returned.
                 ///   - epssPercentage: CVE Exploit Prediction Scoring System (EPSS) percentage. Can be specified as:
-                ///   - packageRegistryUrl: A comma-separated list of package registry URLs. If specified, only alerts for repositories with storage records matching these URLs will be returned.
-                ///   - packageRegistry: A comma-separated list of Package Registry name strings. If specified, only alerts for repositories with storage records matching these registries will be returned.
+                ///   - artifactRegistryUrl: A comma-separated list of artifact registry URLs. If specified, only alerts for repositories with storage records matching these URLs will be returned.
+                ///   - artifactRegistry: A comma-separated list of Artifact Registry name strings. If specified, only alerts for repositories with storage records matching these registries will be returned.
                 ///   - has: Filters the list of alerts based on whether the alert has the given value. If specified, only alerts meeting this criterion will be returned.
                 ///   - scope: The scope of the vulnerable dependency. If specified, only alerts with this scope will be returned.
                 ///   - sort: The property by which to sort the results.
@@ -5757,8 +5757,8 @@ public enum Operations {
                     ecosystem: Components.Parameters.DependabotAlertCommaSeparatedEcosystems? = nil,
                     package: Components.Parameters.DependabotAlertCommaSeparatedPackages? = nil,
                     epssPercentage: Components.Parameters.DependabotAlertCommaSeparatedEpss? = nil,
-                    packageRegistryUrl: Components.Parameters.DependabotAlertCommaSeparatedPackageRegistryUrls? = nil,
-                    packageRegistry: Components.Parameters.DependabotAlertCommaSeparatedPackageRegistry? = nil,
+                    artifactRegistryUrl: Components.Parameters.DependabotAlertCommaSeparatedArtifactRegistryUrls? = nil,
+                    artifactRegistry: Components.Parameters.DependabotAlertCommaSeparatedArtifactRegistry? = nil,
                     has: Components.Parameters.DependabotAlertCommaSeparatedHas? = nil,
                     scope: Components.Parameters.DependabotAlertScope? = nil,
                     sort: Components.Parameters.DependabotAlertSort? = nil,
@@ -5774,8 +5774,8 @@ public enum Operations {
                     self.ecosystem = ecosystem
                     self.package = package
                     self.epssPercentage = epssPercentage
-                    self.packageRegistryUrl = packageRegistryUrl
-                    self.packageRegistry = packageRegistry
+                    self.artifactRegistryUrl = artifactRegistryUrl
+                    self.artifactRegistry = artifactRegistry
                     self.has = has
                     self.scope = scope
                     self.sort = sort

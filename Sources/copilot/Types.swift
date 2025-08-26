@@ -124,7 +124,7 @@ public protocol APIProtocol: Sendable {
     /// > [!NOTE]
     /// > This endpoint will only return results for a given day if the organization contained **five or more members with active Copilot licenses** on that day, as evaluated at the end of that day.
     ///
-    /// The response contains metrics for up to 28 days prior. Metrics are processed once per day for the previous day,
+    /// The response contains metrics for up to 100 days prior. Metrics are processed once per day for the previous day,
     /// and the response will only include data up until yesterday. In order for an end user to be counted towards these metrics,
     /// they must have telemetry enabled in their IDE.
     ///
@@ -160,7 +160,7 @@ public protocol APIProtocol: Sendable {
     /// > [!NOTE]
     /// > This endpoint will only return results for a given day if the team had **five or more members with active Copilot licenses** on that day, as evaluated at the end of that day.
     ///
-    /// The response contains metrics for up to 28 days prior. Metrics are processed once per day for the previous day,
+    /// The response contains metrics for up to 100 days prior. Metrics are processed once per day for the previous day,
     /// and the response will only include data up until yesterday. In order for an end user to be counted towards these metrics,
     /// they must have telemetry enabled in their IDE.
     ///
@@ -347,7 +347,7 @@ extension APIProtocol {
     /// > [!NOTE]
     /// > This endpoint will only return results for a given day if the organization contained **five or more members with active Copilot licenses** on that day, as evaluated at the end of that day.
     ///
-    /// The response contains metrics for up to 28 days prior. Metrics are processed once per day for the previous day,
+    /// The response contains metrics for up to 100 days prior. Metrics are processed once per day for the previous day,
     /// and the response will only include data up until yesterday. In order for an end user to be counted towards these metrics,
     /// they must have telemetry enabled in their IDE.
     ///
@@ -401,7 +401,7 @@ extension APIProtocol {
     /// > [!NOTE]
     /// > This endpoint will only return results for a given day if the team had **five or more members with active Copilot licenses** on that day, as evaluated at the end of that day.
     ///
-    /// The response contains metrics for up to 28 days prior. Metrics are processed once per day for the previous day,
+    /// The response contains metrics for up to 100 days prior. Metrics are processed once per day for the previous day,
     /// and the response will only include data up until yesterday. In order for an end user to be counted towards these metrics,
     /// they must have telemetry enabled in their IDE.
     ///
@@ -4388,7 +4388,7 @@ public enum Operations {
     /// > [!NOTE]
     /// > This endpoint will only return results for a given day if the organization contained **five or more members with active Copilot licenses** on that day, as evaluated at the end of that day.
     ///
-    /// The response contains metrics for up to 28 days prior. Metrics are processed once per day for the previous day,
+    /// The response contains metrics for up to 100 days prior. Metrics are processed once per day for the previous day,
     /// and the response will only include data up until yesterday. In order for an end user to be counted towards these metrics,
     /// they must have telemetry enabled in their IDE.
     ///
@@ -4419,7 +4419,7 @@ public enum Operations {
             public var path: Operations.CopilotCopilotMetricsForOrganization.Input.Path
             /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/GET/query`.
             public struct Query: Sendable, Hashable {
-                /// Show usage metrics since this date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (`YYYY-MM-DDTHH:MM:SSZ`). Maximum value is 28 days ago.
+                /// Show usage metrics since this date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (`YYYY-MM-DDTHH:MM:SSZ`). Maximum value is 100 days ago.
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/GET/query/since`.
                 public var since: Swift.String?
@@ -4431,17 +4431,17 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/GET/query/page`.
                 public var page: Components.Parameters.Page?
-                /// The number of days of metrics to display per page (max 28). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                /// The number of days of metrics to display per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/GET/query/per_page`.
                 public var perPage: Swift.Int?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
-                ///   - since: Show usage metrics since this date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (`YYYY-MM-DDTHH:MM:SSZ`). Maximum value is 28 days ago.
+                ///   - since: Show usage metrics since this date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (`YYYY-MM-DDTHH:MM:SSZ`). Maximum value is 100 days ago.
                 ///   - until: Show usage metrics until this date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (`YYYY-MM-DDTHH:MM:SSZ`) and should not preceed the `since` date if it is passed.
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///   - perPage: The number of days of metrics to display per page (max 28). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - perPage: The number of days of metrics to display per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
                     since: Swift.String? = nil,
                     until: Swift.String? = nil,
@@ -4943,7 +4943,7 @@ public enum Operations {
     /// > [!NOTE]
     /// > This endpoint will only return results for a given day if the team had **five or more members with active Copilot licenses** on that day, as evaluated at the end of that day.
     ///
-    /// The response contains metrics for up to 28 days prior. Metrics are processed once per day for the previous day,
+    /// The response contains metrics for up to 100 days prior. Metrics are processed once per day for the previous day,
     /// and the response will only include data up until yesterday. In order for an end user to be counted towards these metrics,
     /// they must have telemetry enabled in their IDE.
     ///
@@ -4983,7 +4983,7 @@ public enum Operations {
             public var path: Operations.CopilotCopilotMetricsForTeam.Input.Path
             /// - Remark: Generated from `#/paths/orgs/{org}/team/{team_slug}/copilot/metrics/GET/query`.
             public struct Query: Sendable, Hashable {
-                /// Show usage metrics since this date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (`YYYY-MM-DDTHH:MM:SSZ`). Maximum value is 28 days ago.
+                /// Show usage metrics since this date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (`YYYY-MM-DDTHH:MM:SSZ`). Maximum value is 100 days ago.
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/team/{team_slug}/copilot/metrics/GET/query/since`.
                 public var since: Swift.String?
@@ -4995,17 +4995,17 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/team/{team_slug}/copilot/metrics/GET/query/page`.
                 public var page: Components.Parameters.Page?
-                /// The number of days of metrics to display per page (max 28). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                /// The number of days of metrics to display per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/team/{team_slug}/copilot/metrics/GET/query/per_page`.
                 public var perPage: Swift.Int?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
-                ///   - since: Show usage metrics since this date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (`YYYY-MM-DDTHH:MM:SSZ`). Maximum value is 28 days ago.
+                ///   - since: Show usage metrics since this date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (`YYYY-MM-DDTHH:MM:SSZ`). Maximum value is 100 days ago.
                 ///   - until: Show usage metrics until this date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (`YYYY-MM-DDTHH:MM:SSZ`) and should not preceed the `since` date if it is passed.
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///   - perPage: The number of days of metrics to display per page (max 28). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - perPage: The number of days of metrics to display per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
                     since: Swift.String? = nil,
                     until: Swift.String? = nil,

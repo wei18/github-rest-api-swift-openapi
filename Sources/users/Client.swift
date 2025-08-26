@@ -2798,7 +2798,7 @@ public struct Client: APIProtocol {
     ///
     /// Adds a public SSH key to the authenticated user's GitHub account.
     ///
-    /// OAuth app tokens and personal access tokens (classic) need the `write:gpg_key` scope to use this endpoint.
+    /// OAuth app tokens and personal access tokens (classic) need the `write:public_key` scope to use this endpoint.
     ///
     /// - Remark: HTTP `POST /user/keys`.
     /// - Remark: Generated from `#/paths//user/keys/post(users/create-public-ssh-key-for-authenticated-user)`.
