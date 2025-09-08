@@ -54,7 +54,7 @@ public protocol APIProtocol: Sendable {
     /// Search issues and pull requests
     ///
     /// > [!WARNING]
-    /// > **Notice:** Search for issues and pull requests will be overridden by advanced search on September 4, 2025.
+    /// > **Notice:** Search for issues and pull requests will be overridden by advanced search on November 4, 2025.
     /// > You can read more about this change on [the GitHub blog](https://github.blog/changelog/2025-03-06-github-issues-projects-api-support-for-issues-advanced-search-and-more/).
     ///
     /// - Remark: HTTP `GET /search/issues`.
@@ -186,7 +186,7 @@ extension APIProtocol {
     /// Search issues and pull requests
     ///
     /// > [!WARNING]
-    /// > **Notice:** Search for issues and pull requests will be overridden by advanced search on September 4, 2025.
+    /// > **Notice:** Search for issues and pull requests will be overridden by advanced search on November 4, 2025.
     /// > You can read more about this change on [the GitHub blog](https://github.blog/changelog/2025-03-06-github-issues-projects-api-support-for-issues-advanced-search-and-more/).
     ///
     /// - Remark: HTTP `GET /search/issues`.
@@ -5975,7 +5975,7 @@ public enum Operations {
     /// Search issues and pull requests
     ///
     /// > [!WARNING]
-    /// > **Notice:** Search for issues and pull requests will be overridden by advanced search on September 4, 2025.
+    /// > **Notice:** Search for issues and pull requests will be overridden by advanced search on November 4, 2025.
     /// > You can read more about this change on [the GitHub blog](https://github.blog/changelog/2025-03-06-github-issues-projects-api-support-for-issues-advanced-search-and-more/).
     ///
     /// - Remark: HTTP `GET /search/issues`.
