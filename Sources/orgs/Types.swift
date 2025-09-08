@@ -66,6 +66,24 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `DELETE /orgs/{org}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/delete(orgs/delete)`.
     func orgsDelete(_ input: Operations.OrgsDelete.Input) async throws -> Operations.OrgsDelete.Output
+    /// Create artifact metadata storage record
+    ///
+    /// Create metadata storage records for artifacts associated with an organization.
+    /// This endpoint will create a new artifact storage record on behalf of any artifact matching the provided digest and
+    /// associated with a repository owned by the organization.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/storage-record`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/storage-record/post(orgs/create-artifact-storage-record)`.
+    func orgsCreateArtifactStorageRecord(_ input: Operations.OrgsCreateArtifactStorageRecord.Input) async throws -> Operations.OrgsCreateArtifactStorageRecord.Output
+    /// List artifact storage records
+    ///
+    /// List a collection of artifact storage records with a given subject digest that are associated with repositories owned by an organization.
+    ///
+    /// The collection of storage records returned by this endpoint is filtered according to the authenticated user's permissions; if the authenticated user cannot read a repository, the attestations associated with that repository will not be included in the response. In addition, when using a fine-grained access token the `content:read` permission is required.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/artifacts/{subject_digest}/metadata/storage-records`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/get(orgs/list-artifact-storage-records)`.
+    func orgsListArtifactStorageRecords(_ input: Operations.OrgsListArtifactStorageRecords.Input) async throws -> Operations.OrgsListArtifactStorageRecords.Output
     /// List attestations by bulk subject digests
     ///
     /// List a collection of artifact attestations associated with any entry in a list of subject digests owned by an organization.
@@ -997,6 +1015,42 @@ extension APIProtocol {
         headers: Operations.OrgsDelete.Input.Headers = .init()
     ) async throws -> Operations.OrgsDelete.Output {
         try await orgsDelete(Operations.OrgsDelete.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Create artifact metadata storage record
+    ///
+    /// Create metadata storage records for artifacts associated with an organization.
+    /// This endpoint will create a new artifact storage record on behalf of any artifact matching the provided digest and
+    /// associated with a repository owned by the organization.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/storage-record`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/storage-record/post(orgs/create-artifact-storage-record)`.
+    public func orgsCreateArtifactStorageRecord(
+        path: Operations.OrgsCreateArtifactStorageRecord.Input.Path,
+        headers: Operations.OrgsCreateArtifactStorageRecord.Input.Headers = .init(),
+        body: Operations.OrgsCreateArtifactStorageRecord.Input.Body
+    ) async throws -> Operations.OrgsCreateArtifactStorageRecord.Output {
+        try await orgsCreateArtifactStorageRecord(Operations.OrgsCreateArtifactStorageRecord.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// List artifact storage records
+    ///
+    /// List a collection of artifact storage records with a given subject digest that are associated with repositories owned by an organization.
+    ///
+    /// The collection of storage records returned by this endpoint is filtered according to the authenticated user's permissions; if the authenticated user cannot read a repository, the attestations associated with that repository will not be included in the response. In addition, when using a fine-grained access token the `content:read` permission is required.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/artifacts/{subject_digest}/metadata/storage-records`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/get(orgs/list-artifact-storage-records)`.
+    public func orgsListArtifactStorageRecords(
+        path: Operations.OrgsListArtifactStorageRecords.Input.Path,
+        headers: Operations.OrgsListArtifactStorageRecords.Input.Headers = .init()
+    ) async throws -> Operations.OrgsListArtifactStorageRecords.Output {
+        try await orgsListArtifactStorageRecords(Operations.OrgsListArtifactStorageRecords.Input(
             path: path,
             headers: headers
         ))
@@ -10002,6 +10056,549 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Create artifact metadata storage record
+    ///
+    /// Create metadata storage records for artifacts associated with an organization.
+    /// This endpoint will create a new artifact storage record on behalf of any artifact matching the provided digest and
+    /// associated with a repository owned by the organization.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/storage-record`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/storage-record/post(orgs/create-artifact-storage-record)`.
+    public enum OrgsCreateArtifactStorageRecord {
+        public static let id: Swift.String = "orgs/create-artifact-storage-record"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsCreateArtifactStorageRecord.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateArtifactStorageRecord.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateArtifactStorageRecord.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsCreateArtifactStorageRecord.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The name of the artifact.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/name`.
+                    public var name: Swift.String
+                    /// The digest of the artifact (algorithm:hex-encoded-digest).
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/digest`.
+                    public var digest: Swift.String
+                    /// The URL where the artifact is stored.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/artifact_url`.
+                    public var artifactUrl: Swift.String?
+                    /// The path of the artifact.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/path`.
+                    public var path: Swift.String?
+                    /// The base URL of the artifact registry.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/registry_url`.
+                    public var registryUrl: Swift.String
+                    /// The repository name within the registry.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/repository`.
+                    public var repository: Swift.String?
+                    /// The status of the artifact (e.g., active, inactive).
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/status`.
+                    @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case active = "active"
+                        case eol = "eol"
+                        case deleted = "deleted"
+                    }
+                    /// The status of the artifact (e.g., active, inactive).
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/status`.
+                    public var status: Operations.OrgsCreateArtifactStorageRecord.Input.Body.JsonPayload.StatusPayload?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - name: The name of the artifact.
+                    ///   - digest: The digest of the artifact (algorithm:hex-encoded-digest).
+                    ///   - artifactUrl: The URL where the artifact is stored.
+                    ///   - path: The path of the artifact.
+                    ///   - registryUrl: The base URL of the artifact registry.
+                    ///   - repository: The repository name within the registry.
+                    ///   - status: The status of the artifact (e.g., active, inactive).
+                    public init(
+                        name: Swift.String,
+                        digest: Swift.String,
+                        artifactUrl: Swift.String? = nil,
+                        path: Swift.String? = nil,
+                        registryUrl: Swift.String,
+                        repository: Swift.String? = nil,
+                        status: Operations.OrgsCreateArtifactStorageRecord.Input.Body.JsonPayload.StatusPayload? = nil
+                    ) {
+                        self.name = name
+                        self.digest = digest
+                        self.artifactUrl = artifactUrl
+                        self.path = path
+                        self.registryUrl = registryUrl
+                        self.repository = repository
+                        self.status = status
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case name
+                        case digest
+                        case artifactUrl = "artifact_url"
+                        case path
+                        case registryUrl = "registry_url"
+                        case repository
+                        case status
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/content/application\/json`.
+                case json(Operations.OrgsCreateArtifactStorageRecord.Input.Body.JsonPayload)
+            }
+            public var body: Operations.OrgsCreateArtifactStorageRecord.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.OrgsCreateArtifactStorageRecord.Input.Path,
+                headers: Operations.OrgsCreateArtifactStorageRecord.Input.Headers = .init(),
+                body: Operations.OrgsCreateArtifactStorageRecord.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/total_count`.
+                        public var totalCount: Swift.Int?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload`.
+                        public struct StorageRecordsPayloadPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload/id`.
+                            public var id: Swift.Int?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload/name`.
+                            public var name: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload/digest`.
+                            public var digest: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload/artifact_url`.
+                            public var artifactUrl: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload/registry_url`.
+                            public var registryUrl: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload/repository`.
+                            public var repository: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload/status`.
+                            public var status: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload/created_at`.
+                            public var createdAt: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload/updated_at`.
+                            public var updatedAt: Swift.String?
+                            /// Creates a new `StorageRecordsPayloadPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - id:
+                            ///   - name:
+                            ///   - digest:
+                            ///   - artifactUrl:
+                            ///   - registryUrl:
+                            ///   - repository:
+                            ///   - status:
+                            ///   - createdAt:
+                            ///   - updatedAt:
+                            public init(
+                                id: Swift.Int? = nil,
+                                name: Swift.String? = nil,
+                                digest: Swift.String? = nil,
+                                artifactUrl: Swift.String? = nil,
+                                registryUrl: Swift.String? = nil,
+                                repository: Swift.String? = nil,
+                                status: Swift.String? = nil,
+                                createdAt: Swift.String? = nil,
+                                updatedAt: Swift.String? = nil
+                            ) {
+                                self.id = id
+                                self.name = name
+                                self.digest = digest
+                                self.artifactUrl = artifactUrl
+                                self.registryUrl = registryUrl
+                                self.repository = repository
+                                self.status = status
+                                self.createdAt = createdAt
+                                self.updatedAt = updatedAt
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case id
+                                case name
+                                case digest
+                                case artifactUrl = "artifact_url"
+                                case registryUrl = "registry_url"
+                                case repository
+                                case status
+                                case createdAt = "created_at"
+                                case updatedAt = "updated_at"
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/storage_records`.
+                        public typealias StorageRecordsPayload = [Operations.OrgsCreateArtifactStorageRecord.Output.Ok.Body.JsonPayload.StorageRecordsPayloadPayload]
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/storage_records`.
+                        public var storageRecords: Operations.OrgsCreateArtifactStorageRecord.Output.Ok.Body.JsonPayload.StorageRecordsPayload?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - totalCount:
+                        ///   - storageRecords:
+                        public init(
+                            totalCount: Swift.Int? = nil,
+                            storageRecords: Operations.OrgsCreateArtifactStorageRecord.Output.Ok.Body.JsonPayload.StorageRecordsPayload? = nil
+                        ) {
+                            self.totalCount = totalCount
+                            self.storageRecords = storageRecords
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case totalCount = "total_count"
+                            case storageRecords = "storage_records"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/application\/json`.
+                    case json(Operations.OrgsCreateArtifactStorageRecord.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.OrgsCreateArtifactStorageRecord.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsCreateArtifactStorageRecord.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsCreateArtifactStorageRecord.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Artifact metadata storage record stored successfully.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/storage-record/post(orgs/create-artifact-storage-record)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsCreateArtifactStorageRecord.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsCreateArtifactStorageRecord.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List artifact storage records
+    ///
+    /// List a collection of artifact storage records with a given subject digest that are associated with repositories owned by an organization.
+    ///
+    /// The collection of storage records returned by this endpoint is filtered according to the authenticated user's permissions; if the authenticated user cannot read a repository, the attestations associated with that repository will not be included in the response. In addition, when using a fine-grained access token the `content:read` permission is required.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/artifacts/{subject_digest}/metadata/storage-records`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/get(orgs/list-artifact-storage-records)`.
+    public enum OrgsListArtifactStorageRecords {
+        public static let id: Swift.String = "orgs/list-artifact-storage-records"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// The parameter should be set to the attestation's subject's SHA256 digest, in the form `sha256:HEX_DIGEST`.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/path/subject_digest`.
+                public var subjectDigest: Swift.String
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - subjectDigest: The parameter should be set to the attestation's subject's SHA256 digest, in the form `sha256:HEX_DIGEST`.
+                public init(
+                    org: Components.Parameters.Org,
+                    subjectDigest: Swift.String
+                ) {
+                    self.org = org
+                    self.subjectDigest = subjectDigest
+                }
+            }
+            public var path: Operations.OrgsListArtifactStorageRecords.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListArtifactStorageRecords.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListArtifactStorageRecords.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsListArtifactStorageRecords.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.OrgsListArtifactStorageRecords.Input.Path,
+                headers: Operations.OrgsListArtifactStorageRecords.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The number of storage records for this digest and organization
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/total_count`.
+                        public var totalCount: Swift.Int?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/StorageRecordsPayload`.
+                        public struct StorageRecordsPayloadPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/StorageRecordsPayload/id`.
+                            public var id: Swift.Int?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/StorageRecordsPayload/name`.
+                            public var name: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/StorageRecordsPayload/digest`.
+                            public var digest: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/StorageRecordsPayload/artifact_url`.
+                            public var artifactUrl: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/StorageRecordsPayload/registry_url`.
+                            public var registryUrl: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/StorageRecordsPayload/repository`.
+                            public var repository: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/StorageRecordsPayload/status`.
+                            public var status: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/StorageRecordsPayload/created_at`.
+                            public var createdAt: Swift.String?
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/StorageRecordsPayload/updated_at`.
+                            public var updatedAt: Swift.String?
+                            /// Creates a new `StorageRecordsPayloadPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - id:
+                            ///   - name:
+                            ///   - digest:
+                            ///   - artifactUrl:
+                            ///   - registryUrl:
+                            ///   - repository:
+                            ///   - status:
+                            ///   - createdAt:
+                            ///   - updatedAt:
+                            public init(
+                                id: Swift.Int? = nil,
+                                name: Swift.String? = nil,
+                                digest: Swift.String? = nil,
+                                artifactUrl: Swift.String? = nil,
+                                registryUrl: Swift.String? = nil,
+                                repository: Swift.String? = nil,
+                                status: Swift.String? = nil,
+                                createdAt: Swift.String? = nil,
+                                updatedAt: Swift.String? = nil
+                            ) {
+                                self.id = id
+                                self.name = name
+                                self.digest = digest
+                                self.artifactUrl = artifactUrl
+                                self.registryUrl = registryUrl
+                                self.repository = repository
+                                self.status = status
+                                self.createdAt = createdAt
+                                self.updatedAt = updatedAt
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case id
+                                case name
+                                case digest
+                                case artifactUrl = "artifact_url"
+                                case registryUrl = "registry_url"
+                                case repository
+                                case status
+                                case createdAt = "created_at"
+                                case updatedAt = "updated_at"
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/storage_records`.
+                        public typealias StorageRecordsPayload = [Operations.OrgsListArtifactStorageRecords.Output.Ok.Body.JsonPayload.StorageRecordsPayloadPayload]
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/json/storage_records`.
+                        public var storageRecords: Operations.OrgsListArtifactStorageRecords.Output.Ok.Body.JsonPayload.StorageRecordsPayload?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - totalCount: The number of storage records for this digest and organization
+                        ///   - storageRecords:
+                        public init(
+                            totalCount: Swift.Int? = nil,
+                            storageRecords: Operations.OrgsListArtifactStorageRecords.Output.Ok.Body.JsonPayload.StorageRecordsPayload? = nil
+                        ) {
+                            self.totalCount = totalCount
+                            self.storageRecords = storageRecords
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case totalCount = "total_count"
+                            case storageRecords = "storage_records"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/GET/responses/200/content/application\/json`.
+                    case json(Operations.OrgsListArtifactStorageRecords.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.OrgsListArtifactStorageRecords.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsListArtifactStorageRecords.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsListArtifactStorageRecords.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/get(orgs/list-artifact-storage-records)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsListArtifactStorageRecords.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsListArtifactStorageRecords.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
                             response: self
                         )
                     }

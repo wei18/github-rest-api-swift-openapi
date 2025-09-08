@@ -464,6 +464,148 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// Create artifact metadata storage record
+    ///
+    /// Create metadata storage records for artifacts associated with an organization.
+    /// This endpoint will create a new artifact storage record on behalf of any artifact matching the provided digest and
+    /// associated with a repository owned by the organization.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/storage-record`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/storage-record/post(orgs/create-artifact-storage-record)`.
+    public func orgsCreateArtifactStorageRecord(_ input: Operations.OrgsCreateArtifactStorageRecord.Input) async throws -> Operations.OrgsCreateArtifactStorageRecord.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsCreateArtifactStorageRecord.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/artifacts/metadata/storage-record",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .post
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsCreateArtifactStorageRecord.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.OrgsCreateArtifactStorageRecord.Output.Ok.Body.JsonPayload.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// List artifact storage records
+    ///
+    /// List a collection of artifact storage records with a given subject digest that are associated with repositories owned by an organization.
+    ///
+    /// The collection of storage records returned by this endpoint is filtered according to the authenticated user's permissions; if the authenticated user cannot read a repository, the attestations associated with that repository will not be included in the response. In addition, when using a fine-grained access token the `content:read` permission is required.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/artifacts/{subject_digest}/metadata/storage-records`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/{subject_digest}/metadata/storage-records/get(orgs/list-artifact-storage-records)`.
+    public func orgsListArtifactStorageRecords(_ input: Operations.OrgsListArtifactStorageRecords.Input) async throws -> Operations.OrgsListArtifactStorageRecords.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsListArtifactStorageRecords.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/artifacts/{}/metadata/storage-records",
+                    parameters: [
+                        input.path.org,
+                        input.path.subjectDigest
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsListArtifactStorageRecords.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.OrgsListArtifactStorageRecords.Output.Ok.Body.JsonPayload.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// List attestations by bulk subject digests
     ///
     /// List a collection of artifact attestations associated with any entry in a list of subject digests owned by an organization.

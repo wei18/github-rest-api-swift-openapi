@@ -3292,11 +3292,15 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/issue/performed_via_github_app`.
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/issue/author_association`.
-            public var authorAssociation: Components.Schemas.AuthorAssociation
+            public var authorAssociation: Components.Schemas.AuthorAssociation?
             /// - Remark: Generated from `#/components/schemas/issue/reactions`.
             public var reactions: Components.Schemas.ReactionRollup?
             /// - Remark: Generated from `#/components/schemas/issue/sub_issues_summary`.
             public var subIssuesSummary: Components.Schemas.SubIssuesSummary?
+            /// URL to get the parent issue of this issue, if it is a sub-issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/parent_issue_url`.
+            public var parentIssueUrl: Swift.String?
             /// - Remark: Generated from `#/components/schemas/issue/issue_dependencies_summary`.
             public var issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary?
             /// - Remark: Generated from `#/components/schemas/issue/issue_field_values`.
@@ -3340,6 +3344,7 @@ public enum Components {
             ///   - authorAssociation:
             ///   - reactions:
             ///   - subIssuesSummary:
+            ///   - parentIssueUrl: URL to get the parent issue of this issue, if it is a sub-issue
             ///   - issueDependenciesSummary:
             ///   - issueFieldValues:
             public init(
@@ -3376,9 +3381,10 @@ public enum Components {
                 _type: Components.Schemas.IssueType? = nil,
                 repository: Components.Schemas.Repository? = nil,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                authorAssociation: Components.Schemas.AuthorAssociation,
+                authorAssociation: Components.Schemas.AuthorAssociation? = nil,
                 reactions: Components.Schemas.ReactionRollup? = nil,
                 subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
+                parentIssueUrl: Swift.String? = nil,
                 issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary? = nil,
                 issueFieldValues: [Components.Schemas.IssueFieldValue]? = nil
             ) {
@@ -3418,6 +3424,7 @@ public enum Components {
                 self.authorAssociation = authorAssociation
                 self.reactions = reactions
                 self.subIssuesSummary = subIssuesSummary
+                self.parentIssueUrl = parentIssueUrl
                 self.issueDependenciesSummary = issueDependenciesSummary
                 self.issueFieldValues = issueFieldValues
             }
@@ -3458,6 +3465,7 @@ public enum Components {
                 case authorAssociation = "author_association"
                 case reactions
                 case subIssuesSummary = "sub_issues_summary"
+                case parentIssueUrl = "parent_issue_url"
                 case issueDependenciesSummary = "issue_dependencies_summary"
                 case issueFieldValues = "issue_field_values"
             }

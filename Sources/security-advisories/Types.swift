@@ -6672,7 +6672,7 @@ public enum Operations {
                 /// If specified, only return advisories that affect any of `package` or `package@version`. A maximum of 1000 packages can be specified.
                 /// If the query parameter causes the URL to exceed the maximum URL length supported by your client, you must specify fewer packages.
                 ///
-                /// Example: `affects=package1,package2@1.0.0,package3@^2.0.0` or `affects[]=package1&affects[]=package2@1.0.0`
+                /// Example: `affects=package1,package2@1.0.0,package3@2.0.0` or `affects[]=package1&affects[]=package2@1.0.0`
                 ///
                 /// - Remark: Generated from `#/paths/advisories/GET/query/affects`.
                 public var affects: Operations.SecurityAdvisoriesListGlobalAdvisories.Input.Query.AffectsPayload?
