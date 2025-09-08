@@ -381,6 +381,20 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/issues/{issue_number}/lock`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/lock/delete(issues/unlock)`.
     func issuesUnlock(_ input: Operations.IssuesUnlock.Input) async throws -> Operations.IssuesUnlock.Output
+    /// Get parent issue
+    ///
+    /// You can use the REST API to get the parent issue of a sub-issue.
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/parent`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/parent/get(issues/get-parent)`.
+    func issuesGetParent(_ input: Operations.IssuesGetParent.Input) async throws -> Operations.IssuesGetParent.Output
     /// Remove sub-issue
     ///
     /// You can use the REST API to remove a sub-issue from an issue.
@@ -1188,6 +1202,28 @@ extension APIProtocol {
         headers: Operations.IssuesUnlock.Input.Headers = .init()
     ) async throws -> Operations.IssuesUnlock.Output {
         try await issuesUnlock(Operations.IssuesUnlock.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Get parent issue
+    ///
+    /// You can use the REST API to get the parent issue of a sub-issue.
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/parent`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/parent/get(issues/get-parent)`.
+    public func issuesGetParent(
+        path: Operations.IssuesGetParent.Input.Path,
+        headers: Operations.IssuesGetParent.Input.Headers = .init()
+    ) async throws -> Operations.IssuesGetParent.Output {
+        try await issuesGetParent(Operations.IssuesGetParent.Input(
             path: path,
             headers: headers
         ))
@@ -4200,11 +4236,15 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/issue/performed_via_github_app`.
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/issue/author_association`.
-            public var authorAssociation: Components.Schemas.AuthorAssociation
+            public var authorAssociation: Components.Schemas.AuthorAssociation?
             /// - Remark: Generated from `#/components/schemas/issue/reactions`.
             public var reactions: Components.Schemas.ReactionRollup?
             /// - Remark: Generated from `#/components/schemas/issue/sub_issues_summary`.
             public var subIssuesSummary: Components.Schemas.SubIssuesSummary?
+            /// URL to get the parent issue of this issue, if it is a sub-issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/parent_issue_url`.
+            public var parentIssueUrl: Swift.String?
             /// - Remark: Generated from `#/components/schemas/issue/issue_dependencies_summary`.
             public var issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary?
             /// - Remark: Generated from `#/components/schemas/issue/issue_field_values`.
@@ -4248,6 +4288,7 @@ public enum Components {
             ///   - authorAssociation:
             ///   - reactions:
             ///   - subIssuesSummary:
+            ///   - parentIssueUrl: URL to get the parent issue of this issue, if it is a sub-issue
             ///   - issueDependenciesSummary:
             ///   - issueFieldValues:
             public init(
@@ -4284,9 +4325,10 @@ public enum Components {
                 _type: Components.Schemas.IssueType? = nil,
                 repository: Components.Schemas.Repository? = nil,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                authorAssociation: Components.Schemas.AuthorAssociation,
+                authorAssociation: Components.Schemas.AuthorAssociation? = nil,
                 reactions: Components.Schemas.ReactionRollup? = nil,
                 subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
+                parentIssueUrl: Swift.String? = nil,
                 issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary? = nil,
                 issueFieldValues: [Components.Schemas.IssueFieldValue]? = nil
             ) {
@@ -4326,6 +4368,7 @@ public enum Components {
                 self.authorAssociation = authorAssociation
                 self.reactions = reactions
                 self.subIssuesSummary = subIssuesSummary
+                self.parentIssueUrl = parentIssueUrl
                 self.issueDependenciesSummary = issueDependenciesSummary
                 self.issueFieldValues = issueFieldValues
             }
@@ -4366,6 +4409,7 @@ public enum Components {
                 case authorAssociation = "author_association"
                 case reactions
                 case subIssuesSummary = "sub_issues_summary"
+                case parentIssueUrl = "parent_issue_url"
                 case issueDependenciesSummary = "issue_dependencies_summary"
                 case issueFieldValues = "issue_field_values"
             }
@@ -5042,11 +5086,15 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/nullable-issue/performed_via_github_app`.
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/nullable-issue/author_association`.
-            public var authorAssociation: Components.Schemas.AuthorAssociation
+            public var authorAssociation: Components.Schemas.AuthorAssociation?
             /// - Remark: Generated from `#/components/schemas/nullable-issue/reactions`.
             public var reactions: Components.Schemas.ReactionRollup?
             /// - Remark: Generated from `#/components/schemas/nullable-issue/sub_issues_summary`.
             public var subIssuesSummary: Components.Schemas.SubIssuesSummary?
+            /// URL to get the parent issue of this issue, if it is a sub-issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-issue/parent_issue_url`.
+            public var parentIssueUrl: Swift.String?
             /// - Remark: Generated from `#/components/schemas/nullable-issue/issue_dependencies_summary`.
             public var issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary?
             /// - Remark: Generated from `#/components/schemas/nullable-issue/issue_field_values`.
@@ -5090,6 +5138,7 @@ public enum Components {
             ///   - authorAssociation:
             ///   - reactions:
             ///   - subIssuesSummary:
+            ///   - parentIssueUrl: URL to get the parent issue of this issue, if it is a sub-issue
             ///   - issueDependenciesSummary:
             ///   - issueFieldValues:
             public init(
@@ -5126,9 +5175,10 @@ public enum Components {
                 _type: Components.Schemas.IssueType? = nil,
                 repository: Components.Schemas.Repository? = nil,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                authorAssociation: Components.Schemas.AuthorAssociation,
+                authorAssociation: Components.Schemas.AuthorAssociation? = nil,
                 reactions: Components.Schemas.ReactionRollup? = nil,
                 subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
+                parentIssueUrl: Swift.String? = nil,
                 issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary? = nil,
                 issueFieldValues: [Components.Schemas.IssueFieldValue]? = nil
             ) {
@@ -5168,6 +5218,7 @@ public enum Components {
                 self.authorAssociation = authorAssociation
                 self.reactions = reactions
                 self.subIssuesSummary = subIssuesSummary
+                self.parentIssueUrl = parentIssueUrl
                 self.issueDependenciesSummary = issueDependenciesSummary
                 self.issueFieldValues = issueFieldValues
             }
@@ -5208,6 +5259,7 @@ public enum Components {
                 case authorAssociation = "author_association"
                 case reactions
                 case subIssuesSummary = "sub_issues_summary"
+                case parentIssueUrl = "parent_issue_url"
                 case issueDependenciesSummary = "issue_dependencies_summary"
                 case issueFieldValues = "issue_field_values"
             }
@@ -17457,6 +17509,230 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get parent issue
+    ///
+    /// You can use the REST API to get the parent issue of a sub-issue.
+    ///
+    /// This endpoint supports the following custom media types. For more information, see [Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).
+    ///
+    /// - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response will include `body`. This is the default if you do not pass any specific media type.
+    /// - **`application/vnd.github.text+json`**: Returns a text only representation of the markdown body. Response will include `body_text`.
+    /// - **`application/vnd.github.html+json`**: Returns HTML rendered from the body's markdown. Response will include `body_html`.
+    /// - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations. Response will include `body`, `body_text`, and `body_html`.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/parent`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/parent/get(issues/get-parent)`.
+    public enum IssuesGetParent {
+        public static let id: Swift.String = "issues/get-parent"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/parent/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/parent/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/parent/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the issue.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/parent/GET/path/issue_number`.
+                public var issueNumber: Components.Parameters.IssueNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - issueNumber: The number that identifies the issue.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    issueNumber: Components.Parameters.IssueNumber
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.issueNumber = issueNumber
+                }
+            }
+            public var path: Operations.IssuesGetParent.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/parent/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesGetParent.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesGetParent.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.IssuesGetParent.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.IssuesGetParent.Input.Path,
+                headers: Operations.IssuesGetParent.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/parent/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/parent/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.Issue)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.Issue {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.IssuesGetParent.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.IssuesGetParent.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/parent/get(issues/get-parent)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.IssuesGetParent.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.IssuesGetParent.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Moved permanently
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/parent/get(issues/get-parent)/responses/301`.
+            ///
+            /// HTTP response code: `301 movedPermanently`.
+            case movedPermanently(Components.Responses.MovedPermanently)
+            /// The associated value of the enum case if `self` is `.movedPermanently`.
+            ///
+            /// - Throws: An error if `self` is not `.movedPermanently`.
+            /// - SeeAlso: `.movedPermanently`.
+            public var movedPermanently: Components.Responses.MovedPermanently {
+                get throws {
+                    switch self {
+                    case let .movedPermanently(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "movedPermanently",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/parent/get(issues/get-parent)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Gone
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/parent/get(issues/get-parent)/responses/410`.
+            ///
+            /// HTTP response code: `410 gone`.
+            case gone(Components.Responses.Gone)
+            /// The associated value of the enum case if `self` is `.gone`.
+            ///
+            /// - Throws: An error if `self` is not `.gone`.
+            /// - SeeAlso: `.gone`.
+            public var gone: Components.Responses.Gone {
+                get throws {
+                    switch self {
+                    case let .gone(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "gone",
                             response: self
                         )
                     }
