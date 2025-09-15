@@ -10,10 +10,431 @@ import struct Foundation.Data
 import struct Foundation.Date
 #endif
 /// A type that performs HTTP operations defined by the OpenAPI document.
-public protocol APIProtocol: Sendable {}
+public protocol APIProtocol: Sendable {
+    /// List projects for organization
+    ///
+    /// List all projects owned by a specific organization accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/get(projects/list-for-org)`.
+    func projectsListForOrg(_ input: Operations.ProjectsListForOrg.Input) async throws -> Operations.ProjectsListForOrg.Output
+    /// Get project for organization
+    ///
+    /// Get a specific organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/get(projects/get-for-org)`.
+    func projectsGetForOrg(_ input: Operations.ProjectsGetForOrg.Input) async throws -> Operations.ProjectsGetForOrg.Output
+    /// List project fields for organization
+    ///
+    /// List all fields for a specific organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/fields`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/get(projects/list-fields-for-org)`.
+    func projectsListFieldsForOrg(_ input: Operations.ProjectsListFieldsForOrg.Input) async throws -> Operations.ProjectsListFieldsForOrg.Output
+    /// Get project field for organization
+    ///
+    /// Get a specific field for an organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/fields/{field_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-org)`.
+    func projectsGetFieldForOrg(_ input: Operations.ProjectsGetFieldForOrg.Input) async throws -> Operations.ProjectsGetFieldForOrg.Output
+    /// List items for an organization owned project
+    ///
+    /// List all items for a specific organization-owned project accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/get(projects/list-items-for-org)`.
+    func projectsListItemsForOrg(_ input: Operations.ProjectsListItemsForOrg.Input) async throws -> Operations.ProjectsListItemsForOrg.Output
+    /// Add item to organization owned project
+    ///
+    /// Add an issue or pull request item to the specified organization owned project.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/post(projects/add-item-for-org)`.
+    func projectsAddItemForOrg(_ input: Operations.ProjectsAddItemForOrg.Input) async throws -> Operations.ProjectsAddItemForOrg.Output
+    /// Get an item for an organization owned project
+    ///
+    /// Get a specific item from an organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/get(projects/get-org-item)`.
+    func projectsGetOrgItem(_ input: Operations.ProjectsGetOrgItem.Input) async throws -> Operations.ProjectsGetOrgItem.Output
+    /// Update project item for organization
+    ///
+    /// Update a specific item in an organization-owned project.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-org)`.
+    func projectsUpdateItemForOrg(_ input: Operations.ProjectsUpdateItemForOrg.Input) async throws -> Operations.ProjectsUpdateItemForOrg.Output
+    /// Delete project item for organization
+    ///
+    /// Delete a specific item from an organization-owned project.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-org)`.
+    func projectsDeleteItemForOrg(_ input: Operations.ProjectsDeleteItemForOrg.Input) async throws -> Operations.ProjectsDeleteItemForOrg.Output
+    /// Get project for user
+    ///
+    /// Get a specific user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/get(projects/get-for-user)`.
+    func projectsGetForUser(_ input: Operations.ProjectsGetForUser.Input) async throws -> Operations.ProjectsGetForUser.Output
+    /// List project fields for user
+    ///
+    /// List all fields for a specific user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/fields`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/get(projects/list-fields-for-user)`.
+    func projectsListFieldsForUser(_ input: Operations.ProjectsListFieldsForUser.Input) async throws -> Operations.ProjectsListFieldsForUser.Output
+    /// Get project field for user
+    ///
+    /// Get a specific field for a user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/fields/{field_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-user)`.
+    func projectsGetFieldForUser(_ input: Operations.ProjectsGetFieldForUser.Input) async throws -> Operations.ProjectsGetFieldForUser.Output
+    /// List items for a user owned project
+    ///
+    /// List all items for a specific user-owned project accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/get(projects/list-items-for-user)`.
+    func projectsListItemsForUser(_ input: Operations.ProjectsListItemsForUser.Input) async throws -> Operations.ProjectsListItemsForUser.Output
+    /// Add item to user owned project
+    ///
+    /// Add an issue or pull request item to the specified user owned project.
+    ///
+    /// - Remark: HTTP `POST /users/{user_id}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/post(projects/add-item-for-user)`.
+    func projectsAddItemForUser(_ input: Operations.ProjectsAddItemForUser.Input) async throws -> Operations.ProjectsAddItemForUser.Output
+    /// Get an item for a user owned project
+    ///
+    /// Get a specific item from a user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/get(projects/get-user-item)`.
+    func projectsGetUserItem(_ input: Operations.ProjectsGetUserItem.Input) async throws -> Operations.ProjectsGetUserItem.Output
+    /// Update project item for user
+    ///
+    /// Update a specific item in a user-owned project.
+    ///
+    /// - Remark: HTTP `PATCH /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-user)`.
+    func projectsUpdateItemForUser(_ input: Operations.ProjectsUpdateItemForUser.Input) async throws -> Operations.ProjectsUpdateItemForUser.Output
+    /// Delete project item for user
+    ///
+    /// Delete a specific item from a user-owned project.
+    ///
+    /// - Remark: HTTP `DELETE /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-user)`.
+    func projectsDeleteItemForUser(_ input: Operations.ProjectsDeleteItemForUser.Input) async throws -> Operations.ProjectsDeleteItemForUser.Output
+    /// List projects for user
+    ///
+    /// List all projects owned by a specific user accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /users/{username}/projectsV2`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/get(projects/list-for-user)`.
+    func projectsListForUser(_ input: Operations.ProjectsListForUser.Input) async throws -> Operations.ProjectsListForUser.Output
+}
 
 /// Convenience overloads for operation inputs.
 extension APIProtocol {
+    /// List projects for organization
+    ///
+    /// List all projects owned by a specific organization accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/get(projects/list-for-org)`.
+    public func projectsListForOrg(
+        path: Operations.ProjectsListForOrg.Input.Path,
+        query: Operations.ProjectsListForOrg.Input.Query = .init(),
+        headers: Operations.ProjectsListForOrg.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsListForOrg.Output {
+        try await projectsListForOrg(Operations.ProjectsListForOrg.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Get project for organization
+    ///
+    /// Get a specific organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/get(projects/get-for-org)`.
+    public func projectsGetForOrg(
+        path: Operations.ProjectsGetForOrg.Input.Path,
+        headers: Operations.ProjectsGetForOrg.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsGetForOrg.Output {
+        try await projectsGetForOrg(Operations.ProjectsGetForOrg.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// List project fields for organization
+    ///
+    /// List all fields for a specific organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/fields`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/get(projects/list-fields-for-org)`.
+    public func projectsListFieldsForOrg(
+        path: Operations.ProjectsListFieldsForOrg.Input.Path,
+        query: Operations.ProjectsListFieldsForOrg.Input.Query = .init(),
+        headers: Operations.ProjectsListFieldsForOrg.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsListFieldsForOrg.Output {
+        try await projectsListFieldsForOrg(Operations.ProjectsListFieldsForOrg.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Get project field for organization
+    ///
+    /// Get a specific field for an organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/fields/{field_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-org)`.
+    public func projectsGetFieldForOrg(
+        path: Operations.ProjectsGetFieldForOrg.Input.Path,
+        headers: Operations.ProjectsGetFieldForOrg.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsGetFieldForOrg.Output {
+        try await projectsGetFieldForOrg(Operations.ProjectsGetFieldForOrg.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// List items for an organization owned project
+    ///
+    /// List all items for a specific organization-owned project accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/get(projects/list-items-for-org)`.
+    public func projectsListItemsForOrg(
+        path: Operations.ProjectsListItemsForOrg.Input.Path,
+        query: Operations.ProjectsListItemsForOrg.Input.Query = .init(),
+        headers: Operations.ProjectsListItemsForOrg.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsListItemsForOrg.Output {
+        try await projectsListItemsForOrg(Operations.ProjectsListItemsForOrg.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Add item to organization owned project
+    ///
+    /// Add an issue or pull request item to the specified organization owned project.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/post(projects/add-item-for-org)`.
+    public func projectsAddItemForOrg(
+        path: Operations.ProjectsAddItemForOrg.Input.Path,
+        headers: Operations.ProjectsAddItemForOrg.Input.Headers = .init(),
+        body: Operations.ProjectsAddItemForOrg.Input.Body
+    ) async throws -> Operations.ProjectsAddItemForOrg.Output {
+        try await projectsAddItemForOrg(Operations.ProjectsAddItemForOrg.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get an item for an organization owned project
+    ///
+    /// Get a specific item from an organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/get(projects/get-org-item)`.
+    public func projectsGetOrgItem(
+        path: Operations.ProjectsGetOrgItem.Input.Path,
+        query: Operations.ProjectsGetOrgItem.Input.Query = .init(),
+        headers: Operations.ProjectsGetOrgItem.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsGetOrgItem.Output {
+        try await projectsGetOrgItem(Operations.ProjectsGetOrgItem.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Update project item for organization
+    ///
+    /// Update a specific item in an organization-owned project.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-org)`.
+    public func projectsUpdateItemForOrg(
+        path: Operations.ProjectsUpdateItemForOrg.Input.Path,
+        headers: Operations.ProjectsUpdateItemForOrg.Input.Headers = .init(),
+        body: Operations.ProjectsUpdateItemForOrg.Input.Body
+    ) async throws -> Operations.ProjectsUpdateItemForOrg.Output {
+        try await projectsUpdateItemForOrg(Operations.ProjectsUpdateItemForOrg.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Delete project item for organization
+    ///
+    /// Delete a specific item from an organization-owned project.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-org)`.
+    public func projectsDeleteItemForOrg(
+        path: Operations.ProjectsDeleteItemForOrg.Input.Path,
+        headers: Operations.ProjectsDeleteItemForOrg.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsDeleteItemForOrg.Output {
+        try await projectsDeleteItemForOrg(Operations.ProjectsDeleteItemForOrg.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Get project for user
+    ///
+    /// Get a specific user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/get(projects/get-for-user)`.
+    public func projectsGetForUser(
+        path: Operations.ProjectsGetForUser.Input.Path,
+        headers: Operations.ProjectsGetForUser.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsGetForUser.Output {
+        try await projectsGetForUser(Operations.ProjectsGetForUser.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// List project fields for user
+    ///
+    /// List all fields for a specific user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/fields`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/get(projects/list-fields-for-user)`.
+    public func projectsListFieldsForUser(
+        path: Operations.ProjectsListFieldsForUser.Input.Path,
+        query: Operations.ProjectsListFieldsForUser.Input.Query = .init(),
+        headers: Operations.ProjectsListFieldsForUser.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsListFieldsForUser.Output {
+        try await projectsListFieldsForUser(Operations.ProjectsListFieldsForUser.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Get project field for user
+    ///
+    /// Get a specific field for a user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/fields/{field_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-user)`.
+    public func projectsGetFieldForUser(
+        path: Operations.ProjectsGetFieldForUser.Input.Path,
+        headers: Operations.ProjectsGetFieldForUser.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsGetFieldForUser.Output {
+        try await projectsGetFieldForUser(Operations.ProjectsGetFieldForUser.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// List items for a user owned project
+    ///
+    /// List all items for a specific user-owned project accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/get(projects/list-items-for-user)`.
+    public func projectsListItemsForUser(
+        path: Operations.ProjectsListItemsForUser.Input.Path,
+        query: Operations.ProjectsListItemsForUser.Input.Query = .init(),
+        headers: Operations.ProjectsListItemsForUser.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsListItemsForUser.Output {
+        try await projectsListItemsForUser(Operations.ProjectsListItemsForUser.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Add item to user owned project
+    ///
+    /// Add an issue or pull request item to the specified user owned project.
+    ///
+    /// - Remark: HTTP `POST /users/{user_id}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/post(projects/add-item-for-user)`.
+    public func projectsAddItemForUser(
+        path: Operations.ProjectsAddItemForUser.Input.Path,
+        headers: Operations.ProjectsAddItemForUser.Input.Headers = .init(),
+        body: Operations.ProjectsAddItemForUser.Input.Body
+    ) async throws -> Operations.ProjectsAddItemForUser.Output {
+        try await projectsAddItemForUser(Operations.ProjectsAddItemForUser.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get an item for a user owned project
+    ///
+    /// Get a specific item from a user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/get(projects/get-user-item)`.
+    public func projectsGetUserItem(
+        path: Operations.ProjectsGetUserItem.Input.Path,
+        query: Operations.ProjectsGetUserItem.Input.Query = .init(),
+        headers: Operations.ProjectsGetUserItem.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsGetUserItem.Output {
+        try await projectsGetUserItem(Operations.ProjectsGetUserItem.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Update project item for user
+    ///
+    /// Update a specific item in a user-owned project.
+    ///
+    /// - Remark: HTTP `PATCH /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-user)`.
+    public func projectsUpdateItemForUser(
+        path: Operations.ProjectsUpdateItemForUser.Input.Path,
+        headers: Operations.ProjectsUpdateItemForUser.Input.Headers = .init(),
+        body: Operations.ProjectsUpdateItemForUser.Input.Body
+    ) async throws -> Operations.ProjectsUpdateItemForUser.Output {
+        try await projectsUpdateItemForUser(Operations.ProjectsUpdateItemForUser.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Delete project item for user
+    ///
+    /// Delete a specific item from a user-owned project.
+    ///
+    /// - Remark: HTTP `DELETE /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-user)`.
+    public func projectsDeleteItemForUser(
+        path: Operations.ProjectsDeleteItemForUser.Input.Path,
+        headers: Operations.ProjectsDeleteItemForUser.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsDeleteItemForUser.Output {
+        try await projectsDeleteItemForUser(Operations.ProjectsDeleteItemForUser.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// List projects for user
+    ///
+    /// List all projects owned by a specific user accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /users/{username}/projectsV2`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/get(projects/list-for-user)`.
+    public func projectsListForUser(
+        path: Operations.ProjectsListForUser.Input.Path,
+        query: Operations.ProjectsListForUser.Input.Query = .init(),
+        headers: Operations.ProjectsListForUser.Input.Headers = .init()
+    ) async throws -> Operations.ProjectsListForUser.Output {
+        try await projectsListForUser(Operations.ProjectsListForUser.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
 }
 
 /// Server URLs defined in the OpenAPI document.
@@ -38,16 +459,9047 @@ public enum Servers {
 /// Types generated from the components section of the OpenAPI document.
 public enum Components {
     /// Types generated from the `#/components/schemas` section of the OpenAPI document.
-    public enum Schemas {}
+    public enum Schemas {
+        /// A GitHub user.
+        ///
+        /// - Remark: Generated from `#/components/schemas/simple-user`.
+        public struct SimpleUser: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/simple-user/name`.
+            public var name: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/email`.
+            public var email: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/login`.
+            public var login: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/simple-user/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/avatar_url`.
+            public var avatarUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/gravatar_id`.
+            public var gravatarId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/followers_url`.
+            public var followersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/following_url`.
+            public var followingUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/gists_url`.
+            public var gistsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/starred_url`.
+            public var starredUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/subscriptions_url`.
+            public var subscriptionsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/organizations_url`.
+            public var organizationsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/repos_url`.
+            public var reposUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/events_url`.
+            public var eventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/received_events_url`.
+            public var receivedEventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/type`.
+            public var _type: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/site_admin`.
+            public var siteAdmin: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/simple-user/starred_at`.
+            public var starredAt: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/user_view_type`.
+            public var userViewType: Swift.String?
+            /// Creates a new `SimpleUser`.
+            ///
+            /// - Parameters:
+            ///   - name:
+            ///   - email:
+            ///   - login:
+            ///   - id:
+            ///   - nodeId:
+            ///   - avatarUrl:
+            ///   - gravatarId:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - followersUrl:
+            ///   - followingUrl:
+            ///   - gistsUrl:
+            ///   - starredUrl:
+            ///   - subscriptionsUrl:
+            ///   - organizationsUrl:
+            ///   - reposUrl:
+            ///   - eventsUrl:
+            ///   - receivedEventsUrl:
+            ///   - _type:
+            ///   - siteAdmin:
+            ///   - starredAt:
+            ///   - userViewType:
+            public init(
+                name: Swift.String? = nil,
+                email: Swift.String? = nil,
+                login: Swift.String,
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                avatarUrl: Swift.String,
+                gravatarId: Swift.String? = nil,
+                url: Swift.String,
+                htmlUrl: Swift.String,
+                followersUrl: Swift.String,
+                followingUrl: Swift.String,
+                gistsUrl: Swift.String,
+                starredUrl: Swift.String,
+                subscriptionsUrl: Swift.String,
+                organizationsUrl: Swift.String,
+                reposUrl: Swift.String,
+                eventsUrl: Swift.String,
+                receivedEventsUrl: Swift.String,
+                _type: Swift.String,
+                siteAdmin: Swift.Bool,
+                starredAt: Swift.String? = nil,
+                userViewType: Swift.String? = nil
+            ) {
+                self.name = name
+                self.email = email
+                self.login = login
+                self.id = id
+                self.nodeId = nodeId
+                self.avatarUrl = avatarUrl
+                self.gravatarId = gravatarId
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.followersUrl = followersUrl
+                self.followingUrl = followingUrl
+                self.gistsUrl = gistsUrl
+                self.starredUrl = starredUrl
+                self.subscriptionsUrl = subscriptionsUrl
+                self.organizationsUrl = organizationsUrl
+                self.reposUrl = reposUrl
+                self.eventsUrl = eventsUrl
+                self.receivedEventsUrl = receivedEventsUrl
+                self._type = _type
+                self.siteAdmin = siteAdmin
+                self.starredAt = starredAt
+                self.userViewType = userViewType
+            }
+            public enum CodingKeys: String, CodingKey {
+                case name
+                case email
+                case login
+                case id
+                case nodeId = "node_id"
+                case avatarUrl = "avatar_url"
+                case gravatarId = "gravatar_id"
+                case url
+                case htmlUrl = "html_url"
+                case followersUrl = "followers_url"
+                case followingUrl = "following_url"
+                case gistsUrl = "gists_url"
+                case starredUrl = "starred_url"
+                case subscriptionsUrl = "subscriptions_url"
+                case organizationsUrl = "organizations_url"
+                case reposUrl = "repos_url"
+                case eventsUrl = "events_url"
+                case receivedEventsUrl = "received_events_url"
+                case _type = "type"
+                case siteAdmin = "site_admin"
+                case starredAt = "starred_at"
+                case userViewType = "user_view_type"
+            }
+        }
+        /// Basic Error
+        ///
+        /// - Remark: Generated from `#/components/schemas/basic-error`.
+        public struct BasicError: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/basic-error/message`.
+            public var message: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/documentation_url`.
+            public var documentationUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/url`.
+            public var url: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/status`.
+            public var status: Swift.String?
+            /// Creates a new `BasicError`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - url:
+            ///   - status:
+            public init(
+                message: Swift.String? = nil,
+                documentationUrl: Swift.String? = nil,
+                url: Swift.String? = nil,
+                status: Swift.String? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.url = url
+                self.status = status
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case url
+                case status
+            }
+        }
+        /// An enterprise on GitHub.
+        ///
+        /// - Remark: Generated from `#/components/schemas/enterprise`.
+        public struct Enterprise: Codable, Hashable, Sendable {
+            /// A short description of the enterprise.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/enterprise/html_url`.
+            public var htmlUrl: Swift.String
+            /// The enterprise's website URL.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise/website_url`.
+            public var websiteUrl: Swift.String?
+            /// Unique identifier of the enterprise
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/enterprise/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the enterprise.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise/name`.
+            public var name: Swift.String
+            /// The slug url identifier for the enterprise.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise/slug`.
+            public var slug: Swift.String
+            /// - Remark: Generated from `#/components/schemas/enterprise/created_at`.
+            public var createdAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/enterprise/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/enterprise/avatar_url`.
+            public var avatarUrl: Swift.String
+            /// Creates a new `Enterprise`.
+            ///
+            /// - Parameters:
+            ///   - description: A short description of the enterprise.
+            ///   - htmlUrl:
+            ///   - websiteUrl: The enterprise's website URL.
+            ///   - id: Unique identifier of the enterprise
+            ///   - nodeId:
+            ///   - name: The name of the enterprise.
+            ///   - slug: The slug url identifier for the enterprise.
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - avatarUrl:
+            public init(
+                description: Swift.String? = nil,
+                htmlUrl: Swift.String,
+                websiteUrl: Swift.String? = nil,
+                id: Swift.Int,
+                nodeId: Swift.String,
+                name: Swift.String,
+                slug: Swift.String,
+                createdAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil,
+                avatarUrl: Swift.String
+            ) {
+                self.description = description
+                self.htmlUrl = htmlUrl
+                self.websiteUrl = websiteUrl
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.slug = slug
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.avatarUrl = avatarUrl
+            }
+            public enum CodingKeys: String, CodingKey {
+                case description
+                case htmlUrl = "html_url"
+                case websiteUrl = "website_url"
+                case id
+                case nodeId = "node_id"
+                case name
+                case slug
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case avatarUrl = "avatar_url"
+            }
+        }
+        /// Validation Error
+        ///
+        /// - Remark: Generated from `#/components/schemas/validation-error`.
+        public struct ValidationError: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/validation-error/message`.
+            public var message: Swift.String
+            /// - Remark: Generated from `#/components/schemas/validation-error/documentation_url`.
+            public var documentationUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload`.
+            public struct ErrorsPayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/resource`.
+                public var resource: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/field`.
+                public var field: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/message`.
+                public var message: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/code`.
+                public var code: Swift.String
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/index`.
+                public var index: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value`.
+                @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case1`.
+                    case case1(Swift.String?)
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case2`.
+                    case case2(Swift.Int?)
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
+                    case case3([Swift.String]?)
+                    public init(from decoder: any Decoder) throws {
+                        var errors: [any Error] = []
+                        do {
+                            self = .case1(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case2(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case3(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
+                    }
+                    public func encode(to encoder: any Encoder) throws {
+                        switch self {
+                        case let .case1(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case2(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case3(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        }
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value`.
+                public var value: Components.Schemas.ValidationError.ErrorsPayloadPayload.ValuePayload?
+                /// Creates a new `ErrorsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - resource:
+                ///   - field:
+                ///   - message:
+                ///   - code:
+                ///   - index:
+                ///   - value:
+                public init(
+                    resource: Swift.String? = nil,
+                    field: Swift.String? = nil,
+                    message: Swift.String? = nil,
+                    code: Swift.String,
+                    index: Swift.Int? = nil,
+                    value: Components.Schemas.ValidationError.ErrorsPayloadPayload.ValuePayload? = nil
+                ) {
+                    self.resource = resource
+                    self.field = field
+                    self.message = message
+                    self.code = code
+                    self.index = index
+                    self.value = value
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case resource
+                    case field
+                    case message
+                    case code
+                    case index
+                    case value
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/validation-error/errors`.
+            public typealias ErrorsPayload = [Components.Schemas.ValidationError.ErrorsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/validation-error/errors`.
+            public var errors: Components.Schemas.ValidationError.ErrorsPayload?
+            /// Creates a new `ValidationError`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - errors:
+            public init(
+                message: Swift.String,
+                documentationUrl: Swift.String,
+                errors: Components.Schemas.ValidationError.ErrorsPayload? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.errors = errors
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case errors
+            }
+        }
+        /// A GitHub user.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-simple-user`.
+        public struct NullableSimpleUser: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/name`.
+            public var name: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/email`.
+            public var email: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/login`.
+            public var login: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/avatar_url`.
+            public var avatarUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/gravatar_id`.
+            public var gravatarId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/followers_url`.
+            public var followersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/following_url`.
+            public var followingUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/gists_url`.
+            public var gistsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/starred_url`.
+            public var starredUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/subscriptions_url`.
+            public var subscriptionsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/organizations_url`.
+            public var organizationsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/repos_url`.
+            public var reposUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/events_url`.
+            public var eventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/received_events_url`.
+            public var receivedEventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/type`.
+            public var _type: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/site_admin`.
+            public var siteAdmin: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/starred_at`.
+            public var starredAt: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-user/user_view_type`.
+            public var userViewType: Swift.String?
+            /// Creates a new `NullableSimpleUser`.
+            ///
+            /// - Parameters:
+            ///   - name:
+            ///   - email:
+            ///   - login:
+            ///   - id:
+            ///   - nodeId:
+            ///   - avatarUrl:
+            ///   - gravatarId:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - followersUrl:
+            ///   - followingUrl:
+            ///   - gistsUrl:
+            ///   - starredUrl:
+            ///   - subscriptionsUrl:
+            ///   - organizationsUrl:
+            ///   - reposUrl:
+            ///   - eventsUrl:
+            ///   - receivedEventsUrl:
+            ///   - _type:
+            ///   - siteAdmin:
+            ///   - starredAt:
+            ///   - userViewType:
+            public init(
+                name: Swift.String? = nil,
+                email: Swift.String? = nil,
+                login: Swift.String,
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                avatarUrl: Swift.String,
+                gravatarId: Swift.String? = nil,
+                url: Swift.String,
+                htmlUrl: Swift.String,
+                followersUrl: Swift.String,
+                followingUrl: Swift.String,
+                gistsUrl: Swift.String,
+                starredUrl: Swift.String,
+                subscriptionsUrl: Swift.String,
+                organizationsUrl: Swift.String,
+                reposUrl: Swift.String,
+                eventsUrl: Swift.String,
+                receivedEventsUrl: Swift.String,
+                _type: Swift.String,
+                siteAdmin: Swift.Bool,
+                starredAt: Swift.String? = nil,
+                userViewType: Swift.String? = nil
+            ) {
+                self.name = name
+                self.email = email
+                self.login = login
+                self.id = id
+                self.nodeId = nodeId
+                self.avatarUrl = avatarUrl
+                self.gravatarId = gravatarId
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.followersUrl = followersUrl
+                self.followingUrl = followingUrl
+                self.gistsUrl = gistsUrl
+                self.starredUrl = starredUrl
+                self.subscriptionsUrl = subscriptionsUrl
+                self.organizationsUrl = organizationsUrl
+                self.reposUrl = reposUrl
+                self.eventsUrl = eventsUrl
+                self.receivedEventsUrl = receivedEventsUrl
+                self._type = _type
+                self.siteAdmin = siteAdmin
+                self.starredAt = starredAt
+                self.userViewType = userViewType
+            }
+            public enum CodingKeys: String, CodingKey {
+                case name
+                case email
+                case login
+                case id
+                case nodeId = "node_id"
+                case avatarUrl = "avatar_url"
+                case gravatarId = "gravatar_id"
+                case url
+                case htmlUrl = "html_url"
+                case followersUrl = "followers_url"
+                case followingUrl = "following_url"
+                case gistsUrl = "gists_url"
+                case starredUrl = "starred_url"
+                case subscriptionsUrl = "subscriptions_url"
+                case organizationsUrl = "organizations_url"
+                case reposUrl = "repos_url"
+                case eventsUrl = "events_url"
+                case receivedEventsUrl = "received_events_url"
+                case _type = "type"
+                case siteAdmin = "site_admin"
+                case starredAt = "starred_at"
+                case userViewType = "user_view_type"
+            }
+        }
+        /// License Simple
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-license-simple`.
+        public struct NullableLicenseSimple: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/nullable-license-simple/key`.
+            public var key: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-license-simple/name`.
+            public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-license-simple/url`.
+            public var url: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-license-simple/spdx_id`.
+            public var spdxId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-license-simple/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-license-simple/html_url`.
+            public var htmlUrl: Swift.String?
+            /// Creates a new `NullableLicenseSimple`.
+            ///
+            /// - Parameters:
+            ///   - key:
+            ///   - name:
+            ///   - url:
+            ///   - spdxId:
+            ///   - nodeId:
+            ///   - htmlUrl:
+            public init(
+                key: Swift.String,
+                name: Swift.String,
+                url: Swift.String? = nil,
+                spdxId: Swift.String? = nil,
+                nodeId: Swift.String,
+                htmlUrl: Swift.String? = nil
+            ) {
+                self.key = key
+                self.name = name
+                self.url = url
+                self.spdxId = spdxId
+                self.nodeId = nodeId
+                self.htmlUrl = htmlUrl
+            }
+            public enum CodingKeys: String, CodingKey {
+                case key
+                case name
+                case url
+                case spdxId = "spdx_id"
+                case nodeId = "node_id"
+                case htmlUrl = "html_url"
+            }
+        }
+        /// A repository on GitHub.
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository`.
+        public struct Repository: Codable, Hashable, Sendable {
+            /// Unique identifier of the repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/repository/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/name`.
+            public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/full_name`.
+            public var fullName: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/license`.
+            public var license: Components.Schemas.NullableLicenseSimple?
+            /// - Remark: Generated from `#/components/schemas/repository/forks`.
+            public var forks: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/repository/permissions`.
+            public struct PermissionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository/permissions/admin`.
+                public var admin: Swift.Bool
+                /// - Remark: Generated from `#/components/schemas/repository/permissions/pull`.
+                public var pull: Swift.Bool
+                /// - Remark: Generated from `#/components/schemas/repository/permissions/triage`.
+                public var triage: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/repository/permissions/push`.
+                public var push: Swift.Bool
+                /// - Remark: Generated from `#/components/schemas/repository/permissions/maintain`.
+                public var maintain: Swift.Bool?
+                /// Creates a new `PermissionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - admin:
+                ///   - pull:
+                ///   - triage:
+                ///   - push:
+                ///   - maintain:
+                public init(
+                    admin: Swift.Bool,
+                    pull: Swift.Bool,
+                    triage: Swift.Bool? = nil,
+                    push: Swift.Bool,
+                    maintain: Swift.Bool? = nil
+                ) {
+                    self.admin = admin
+                    self.pull = pull
+                    self.triage = triage
+                    self.push = push
+                    self.maintain = maintain
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case admin
+                    case pull
+                    case triage
+                    case push
+                    case maintain
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/repository/permissions`.
+            public var permissions: Components.Schemas.Repository.PermissionsPayload?
+            /// - Remark: Generated from `#/components/schemas/repository/owner`.
+            public var owner: Components.Schemas.SimpleUser
+            /// Whether the repository is private or public.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/private`.
+            public var _private: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/repository/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/repository/fork`.
+            public var fork: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/repository/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/archive_url`.
+            public var archiveUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/assignees_url`.
+            public var assigneesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/blobs_url`.
+            public var blobsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/branches_url`.
+            public var branchesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/collaborators_url`.
+            public var collaboratorsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/comments_url`.
+            public var commentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/commits_url`.
+            public var commitsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/compare_url`.
+            public var compareUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/contents_url`.
+            public var contentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/contributors_url`.
+            public var contributorsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/deployments_url`.
+            public var deploymentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/downloads_url`.
+            public var downloadsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/events_url`.
+            public var eventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/forks_url`.
+            public var forksUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/git_commits_url`.
+            public var gitCommitsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/git_refs_url`.
+            public var gitRefsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/git_tags_url`.
+            public var gitTagsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/git_url`.
+            public var gitUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/issue_comment_url`.
+            public var issueCommentUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/issue_events_url`.
+            public var issueEventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/issues_url`.
+            public var issuesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/keys_url`.
+            public var keysUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/labels_url`.
+            public var labelsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/languages_url`.
+            public var languagesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/merges_url`.
+            public var mergesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/milestones_url`.
+            public var milestonesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/notifications_url`.
+            public var notificationsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/pulls_url`.
+            public var pullsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/releases_url`.
+            public var releasesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/ssh_url`.
+            public var sshUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/stargazers_url`.
+            public var stargazersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/statuses_url`.
+            public var statusesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/subscribers_url`.
+            public var subscribersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/subscription_url`.
+            public var subscriptionUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/tags_url`.
+            public var tagsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/teams_url`.
+            public var teamsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/trees_url`.
+            public var treesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/clone_url`.
+            public var cloneUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/mirror_url`.
+            public var mirrorUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/repository/hooks_url`.
+            public var hooksUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/svn_url`.
+            public var svnUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/homepage`.
+            public var homepage: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/repository/language`.
+            public var language: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/repository/forks_count`.
+            public var forksCount: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/repository/stargazers_count`.
+            public var stargazersCount: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/repository/watchers_count`.
+            public var watchersCount: Swift.Int
+            /// The size of the repository, in kilobytes. Size is calculated hourly. When a repository is initially created, the size is 0.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/size`.
+            public var size: Swift.Int
+            /// The default branch of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/default_branch`.
+            public var defaultBranch: Swift.String
+            /// - Remark: Generated from `#/components/schemas/repository/open_issues_count`.
+            public var openIssuesCount: Swift.Int
+            /// Whether this repository acts as a template that can be used to generate new repositories.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/is_template`.
+            public var isTemplate: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/repository/topics`.
+            public var topics: [Swift.String]?
+            /// Whether issues are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_issues`.
+            public var hasIssues: Swift.Bool
+            /// Whether projects are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_projects`.
+            public var hasProjects: Swift.Bool
+            /// Whether the wiki is enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_wiki`.
+            public var hasWiki: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/repository/has_pages`.
+            public var hasPages: Swift.Bool
+            /// Whether downloads are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_downloads`.
+            @available(*, deprecated)
+            public var hasDownloads: Swift.Bool
+            /// Whether discussions are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_discussions`.
+            public var hasDiscussions: Swift.Bool?
+            /// Whether the repository is archived.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/archived`.
+            public var archived: Swift.Bool
+            /// Returns whether or not this repository disabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/disabled`.
+            public var disabled: Swift.Bool
+            /// The repository visibility: public, private, or internal.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/visibility`.
+            public var visibility: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/repository/pushed_at`.
+            public var pushedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/repository/created_at`.
+            public var createdAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/repository/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// Whether to allow rebase merges for pull requests.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/allow_rebase_merge`.
+            public var allowRebaseMerge: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/repository/temp_clone_token`.
+            public var tempCloneToken: Swift.String?
+            /// Whether to allow squash merges for pull requests.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/allow_squash_merge`.
+            public var allowSquashMerge: Swift.Bool?
+            /// Whether to allow Auto-merge to be used on pull requests.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/allow_auto_merge`.
+            public var allowAutoMerge: Swift.Bool?
+            /// Whether to delete head branches when pull requests are merged
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/delete_branch_on_merge`.
+            public var deleteBranchOnMerge: Swift.Bool?
+            /// Whether or not a pull request head branch that is behind its base branch can always be updated even if it is not required to be up to date before merging.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/allow_update_branch`.
+            public var allowUpdateBranch: Swift.Bool?
+            /// Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/use_squash_pr_title_as_default`.
+            @available(*, deprecated)
+            public var useSquashPrTitleAsDefault: Swift.Bool?
+            /// The default value for a squash merge commit title:
+            ///
+            /// - `PR_TITLE` - default to the pull request's title.
+            /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/squash_merge_commit_title`.
+            @frozen public enum SquashMergeCommitTitlePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case prTitle = "PR_TITLE"
+                case commitOrPrTitle = "COMMIT_OR_PR_TITLE"
+            }
+            /// The default value for a squash merge commit title:
+            ///
+            /// - `PR_TITLE` - default to the pull request's title.
+            /// - `COMMIT_OR_PR_TITLE` - default to the commit's title (if only one commit) or the pull request's title (when more than one commit).
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/squash_merge_commit_title`.
+            public var squashMergeCommitTitle: Components.Schemas.Repository.SquashMergeCommitTitlePayload?
+            /// The default value for a squash merge commit message:
+            ///
+            /// - `PR_BODY` - default to the pull request's body.
+            /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
+            /// - `BLANK` - default to a blank commit message.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/squash_merge_commit_message`.
+            @frozen public enum SquashMergeCommitMessagePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case prBody = "PR_BODY"
+                case commitMessages = "COMMIT_MESSAGES"
+                case blank = "BLANK"
+            }
+            /// The default value for a squash merge commit message:
+            ///
+            /// - `PR_BODY` - default to the pull request's body.
+            /// - `COMMIT_MESSAGES` - default to the branch's commit messages.
+            /// - `BLANK` - default to a blank commit message.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/squash_merge_commit_message`.
+            public var squashMergeCommitMessage: Components.Schemas.Repository.SquashMergeCommitMessagePayload?
+            /// The default value for a merge commit title.
+            ///
+            /// - `PR_TITLE` - default to the pull request's title.
+            /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/merge_commit_title`.
+            @frozen public enum MergeCommitTitlePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case prTitle = "PR_TITLE"
+                case mergeMessage = "MERGE_MESSAGE"
+            }
+            /// The default value for a merge commit title.
+            ///
+            /// - `PR_TITLE` - default to the pull request's title.
+            /// - `MERGE_MESSAGE` - default to the classic title for a merge message (e.g., Merge pull request #123 from branch-name).
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/merge_commit_title`.
+            public var mergeCommitTitle: Components.Schemas.Repository.MergeCommitTitlePayload?
+            /// The default value for a merge commit message.
+            ///
+            /// - `PR_TITLE` - default to the pull request's title.
+            /// - `PR_BODY` - default to the pull request's body.
+            /// - `BLANK` - default to a blank commit message.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/merge_commit_message`.
+            @frozen public enum MergeCommitMessagePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case prBody = "PR_BODY"
+                case prTitle = "PR_TITLE"
+                case blank = "BLANK"
+            }
+            /// The default value for a merge commit message.
+            ///
+            /// - `PR_TITLE` - default to the pull request's title.
+            /// - `PR_BODY` - default to the pull request's body.
+            /// - `BLANK` - default to a blank commit message.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/merge_commit_message`.
+            public var mergeCommitMessage: Components.Schemas.Repository.MergeCommitMessagePayload?
+            /// Whether to allow merge commits for pull requests.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/allow_merge_commit`.
+            public var allowMergeCommit: Swift.Bool?
+            /// Whether to allow forking this repo
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/allow_forking`.
+            public var allowForking: Swift.Bool?
+            /// Whether to require contributors to sign off on web-based commits
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/web_commit_signoff_required`.
+            public var webCommitSignoffRequired: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/repository/open_issues`.
+            public var openIssues: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/repository/watchers`.
+            public var watchers: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/repository/master_branch`.
+            public var masterBranch: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/repository/starred_at`.
+            public var starredAt: Swift.String?
+            /// Whether anonymous git access is enabled for this repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/anonymous_access_enabled`.
+            public var anonymousAccessEnabled: Swift.Bool?
+            /// The status of the code search index for this repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status`.
+            public struct CodeSearchIndexStatusPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status/lexical_search_ok`.
+                public var lexicalSearchOk: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status/lexical_commit_sha`.
+                public var lexicalCommitSha: Swift.String?
+                /// Creates a new `CodeSearchIndexStatusPayload`.
+                ///
+                /// - Parameters:
+                ///   - lexicalSearchOk:
+                ///   - lexicalCommitSha:
+                public init(
+                    lexicalSearchOk: Swift.Bool? = nil,
+                    lexicalCommitSha: Swift.String? = nil
+                ) {
+                    self.lexicalSearchOk = lexicalSearchOk
+                    self.lexicalCommitSha = lexicalCommitSha
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case lexicalSearchOk = "lexical_search_ok"
+                    case lexicalCommitSha = "lexical_commit_sha"
+                }
+            }
+            /// The status of the code search index for this repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/code_search_index_status`.
+            public var codeSearchIndexStatus: Components.Schemas.Repository.CodeSearchIndexStatusPayload?
+            /// Creates a new `Repository`.
+            ///
+            /// - Parameters:
+            ///   - id: Unique identifier of the repository
+            ///   - nodeId:
+            ///   - name: The name of the repository.
+            ///   - fullName:
+            ///   - license:
+            ///   - forks:
+            ///   - permissions:
+            ///   - owner:
+            ///   - _private: Whether the repository is private or public.
+            ///   - htmlUrl:
+            ///   - description:
+            ///   - fork:
+            ///   - url:
+            ///   - archiveUrl:
+            ///   - assigneesUrl:
+            ///   - blobsUrl:
+            ///   - branchesUrl:
+            ///   - collaboratorsUrl:
+            ///   - commentsUrl:
+            ///   - commitsUrl:
+            ///   - compareUrl:
+            ///   - contentsUrl:
+            ///   - contributorsUrl:
+            ///   - deploymentsUrl:
+            ///   - downloadsUrl:
+            ///   - eventsUrl:
+            ///   - forksUrl:
+            ///   - gitCommitsUrl:
+            ///   - gitRefsUrl:
+            ///   - gitTagsUrl:
+            ///   - gitUrl:
+            ///   - issueCommentUrl:
+            ///   - issueEventsUrl:
+            ///   - issuesUrl:
+            ///   - keysUrl:
+            ///   - labelsUrl:
+            ///   - languagesUrl:
+            ///   - mergesUrl:
+            ///   - milestonesUrl:
+            ///   - notificationsUrl:
+            ///   - pullsUrl:
+            ///   - releasesUrl:
+            ///   - sshUrl:
+            ///   - stargazersUrl:
+            ///   - statusesUrl:
+            ///   - subscribersUrl:
+            ///   - subscriptionUrl:
+            ///   - tagsUrl:
+            ///   - teamsUrl:
+            ///   - treesUrl:
+            ///   - cloneUrl:
+            ///   - mirrorUrl:
+            ///   - hooksUrl:
+            ///   - svnUrl:
+            ///   - homepage:
+            ///   - language:
+            ///   - forksCount:
+            ///   - stargazersCount:
+            ///   - watchersCount:
+            ///   - size: The size of the repository, in kilobytes. Size is calculated hourly. When a repository is initially created, the size is 0.
+            ///   - defaultBranch: The default branch of the repository.
+            ///   - openIssuesCount:
+            ///   - isTemplate: Whether this repository acts as a template that can be used to generate new repositories.
+            ///   - topics:
+            ///   - hasIssues: Whether issues are enabled.
+            ///   - hasProjects: Whether projects are enabled.
+            ///   - hasWiki: Whether the wiki is enabled.
+            ///   - hasPages:
+            ///   - hasDownloads: Whether downloads are enabled.
+            ///   - hasDiscussions: Whether discussions are enabled.
+            ///   - archived: Whether the repository is archived.
+            ///   - disabled: Returns whether or not this repository disabled.
+            ///   - visibility: The repository visibility: public, private, or internal.
+            ///   - pushedAt:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - allowRebaseMerge: Whether to allow rebase merges for pull requests.
+            ///   - tempCloneToken:
+            ///   - allowSquashMerge: Whether to allow squash merges for pull requests.
+            ///   - allowAutoMerge: Whether to allow Auto-merge to be used on pull requests.
+            ///   - deleteBranchOnMerge: Whether to delete head branches when pull requests are merged
+            ///   - allowUpdateBranch: Whether or not a pull request head branch that is behind its base branch can always be updated even if it is not required to be up to date before merging.
+            ///   - useSquashPrTitleAsDefault: Whether a squash merge commit can use the pull request title as default. **This property is closing down. Please use `squash_merge_commit_title` instead.
+            ///   - squashMergeCommitTitle: The default value for a squash merge commit title:
+            ///   - squashMergeCommitMessage: The default value for a squash merge commit message:
+            ///   - mergeCommitTitle: The default value for a merge commit title.
+            ///   - mergeCommitMessage: The default value for a merge commit message.
+            ///   - allowMergeCommit: Whether to allow merge commits for pull requests.
+            ///   - allowForking: Whether to allow forking this repo
+            ///   - webCommitSignoffRequired: Whether to require contributors to sign off on web-based commits
+            ///   - openIssues:
+            ///   - watchers:
+            ///   - masterBranch:
+            ///   - starredAt:
+            ///   - anonymousAccessEnabled: Whether anonymous git access is enabled for this repository
+            ///   - codeSearchIndexStatus: The status of the code search index for this repository
+            public init(
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                name: Swift.String,
+                fullName: Swift.String,
+                license: Components.Schemas.NullableLicenseSimple? = nil,
+                forks: Swift.Int,
+                permissions: Components.Schemas.Repository.PermissionsPayload? = nil,
+                owner: Components.Schemas.SimpleUser,
+                _private: Swift.Bool,
+                htmlUrl: Swift.String,
+                description: Swift.String? = nil,
+                fork: Swift.Bool,
+                url: Swift.String,
+                archiveUrl: Swift.String,
+                assigneesUrl: Swift.String,
+                blobsUrl: Swift.String,
+                branchesUrl: Swift.String,
+                collaboratorsUrl: Swift.String,
+                commentsUrl: Swift.String,
+                commitsUrl: Swift.String,
+                compareUrl: Swift.String,
+                contentsUrl: Swift.String,
+                contributorsUrl: Swift.String,
+                deploymentsUrl: Swift.String,
+                downloadsUrl: Swift.String,
+                eventsUrl: Swift.String,
+                forksUrl: Swift.String,
+                gitCommitsUrl: Swift.String,
+                gitRefsUrl: Swift.String,
+                gitTagsUrl: Swift.String,
+                gitUrl: Swift.String,
+                issueCommentUrl: Swift.String,
+                issueEventsUrl: Swift.String,
+                issuesUrl: Swift.String,
+                keysUrl: Swift.String,
+                labelsUrl: Swift.String,
+                languagesUrl: Swift.String,
+                mergesUrl: Swift.String,
+                milestonesUrl: Swift.String,
+                notificationsUrl: Swift.String,
+                pullsUrl: Swift.String,
+                releasesUrl: Swift.String,
+                sshUrl: Swift.String,
+                stargazersUrl: Swift.String,
+                statusesUrl: Swift.String,
+                subscribersUrl: Swift.String,
+                subscriptionUrl: Swift.String,
+                tagsUrl: Swift.String,
+                teamsUrl: Swift.String,
+                treesUrl: Swift.String,
+                cloneUrl: Swift.String,
+                mirrorUrl: Swift.String? = nil,
+                hooksUrl: Swift.String,
+                svnUrl: Swift.String,
+                homepage: Swift.String? = nil,
+                language: Swift.String? = nil,
+                forksCount: Swift.Int,
+                stargazersCount: Swift.Int,
+                watchersCount: Swift.Int,
+                size: Swift.Int,
+                defaultBranch: Swift.String,
+                openIssuesCount: Swift.Int,
+                isTemplate: Swift.Bool? = nil,
+                topics: [Swift.String]? = nil,
+                hasIssues: Swift.Bool,
+                hasProjects: Swift.Bool,
+                hasWiki: Swift.Bool,
+                hasPages: Swift.Bool,
+                hasDownloads: Swift.Bool,
+                hasDiscussions: Swift.Bool? = nil,
+                archived: Swift.Bool,
+                disabled: Swift.Bool,
+                visibility: Swift.String? = nil,
+                pushedAt: Foundation.Date? = nil,
+                createdAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil,
+                allowRebaseMerge: Swift.Bool? = nil,
+                tempCloneToken: Swift.String? = nil,
+                allowSquashMerge: Swift.Bool? = nil,
+                allowAutoMerge: Swift.Bool? = nil,
+                deleteBranchOnMerge: Swift.Bool? = nil,
+                allowUpdateBranch: Swift.Bool? = nil,
+                useSquashPrTitleAsDefault: Swift.Bool? = nil,
+                squashMergeCommitTitle: Components.Schemas.Repository.SquashMergeCommitTitlePayload? = nil,
+                squashMergeCommitMessage: Components.Schemas.Repository.SquashMergeCommitMessagePayload? = nil,
+                mergeCommitTitle: Components.Schemas.Repository.MergeCommitTitlePayload? = nil,
+                mergeCommitMessage: Components.Schemas.Repository.MergeCommitMessagePayload? = nil,
+                allowMergeCommit: Swift.Bool? = nil,
+                allowForking: Swift.Bool? = nil,
+                webCommitSignoffRequired: Swift.Bool? = nil,
+                openIssues: Swift.Int,
+                watchers: Swift.Int,
+                masterBranch: Swift.String? = nil,
+                starredAt: Swift.String? = nil,
+                anonymousAccessEnabled: Swift.Bool? = nil,
+                codeSearchIndexStatus: Components.Schemas.Repository.CodeSearchIndexStatusPayload? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.fullName = fullName
+                self.license = license
+                self.forks = forks
+                self.permissions = permissions
+                self.owner = owner
+                self._private = _private
+                self.htmlUrl = htmlUrl
+                self.description = description
+                self.fork = fork
+                self.url = url
+                self.archiveUrl = archiveUrl
+                self.assigneesUrl = assigneesUrl
+                self.blobsUrl = blobsUrl
+                self.branchesUrl = branchesUrl
+                self.collaboratorsUrl = collaboratorsUrl
+                self.commentsUrl = commentsUrl
+                self.commitsUrl = commitsUrl
+                self.compareUrl = compareUrl
+                self.contentsUrl = contentsUrl
+                self.contributorsUrl = contributorsUrl
+                self.deploymentsUrl = deploymentsUrl
+                self.downloadsUrl = downloadsUrl
+                self.eventsUrl = eventsUrl
+                self.forksUrl = forksUrl
+                self.gitCommitsUrl = gitCommitsUrl
+                self.gitRefsUrl = gitRefsUrl
+                self.gitTagsUrl = gitTagsUrl
+                self.gitUrl = gitUrl
+                self.issueCommentUrl = issueCommentUrl
+                self.issueEventsUrl = issueEventsUrl
+                self.issuesUrl = issuesUrl
+                self.keysUrl = keysUrl
+                self.labelsUrl = labelsUrl
+                self.languagesUrl = languagesUrl
+                self.mergesUrl = mergesUrl
+                self.milestonesUrl = milestonesUrl
+                self.notificationsUrl = notificationsUrl
+                self.pullsUrl = pullsUrl
+                self.releasesUrl = releasesUrl
+                self.sshUrl = sshUrl
+                self.stargazersUrl = stargazersUrl
+                self.statusesUrl = statusesUrl
+                self.subscribersUrl = subscribersUrl
+                self.subscriptionUrl = subscriptionUrl
+                self.tagsUrl = tagsUrl
+                self.teamsUrl = teamsUrl
+                self.treesUrl = treesUrl
+                self.cloneUrl = cloneUrl
+                self.mirrorUrl = mirrorUrl
+                self.hooksUrl = hooksUrl
+                self.svnUrl = svnUrl
+                self.homepage = homepage
+                self.language = language
+                self.forksCount = forksCount
+                self.stargazersCount = stargazersCount
+                self.watchersCount = watchersCount
+                self.size = size
+                self.defaultBranch = defaultBranch
+                self.openIssuesCount = openIssuesCount
+                self.isTemplate = isTemplate
+                self.topics = topics
+                self.hasIssues = hasIssues
+                self.hasProjects = hasProjects
+                self.hasWiki = hasWiki
+                self.hasPages = hasPages
+                self.hasDownloads = hasDownloads
+                self.hasDiscussions = hasDiscussions
+                self.archived = archived
+                self.disabled = disabled
+                self.visibility = visibility
+                self.pushedAt = pushedAt
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.allowRebaseMerge = allowRebaseMerge
+                self.tempCloneToken = tempCloneToken
+                self.allowSquashMerge = allowSquashMerge
+                self.allowAutoMerge = allowAutoMerge
+                self.deleteBranchOnMerge = deleteBranchOnMerge
+                self.allowUpdateBranch = allowUpdateBranch
+                self.useSquashPrTitleAsDefault = useSquashPrTitleAsDefault
+                self.squashMergeCommitTitle = squashMergeCommitTitle
+                self.squashMergeCommitMessage = squashMergeCommitMessage
+                self.mergeCommitTitle = mergeCommitTitle
+                self.mergeCommitMessage = mergeCommitMessage
+                self.allowMergeCommit = allowMergeCommit
+                self.allowForking = allowForking
+                self.webCommitSignoffRequired = webCommitSignoffRequired
+                self.openIssues = openIssues
+                self.watchers = watchers
+                self.masterBranch = masterBranch
+                self.starredAt = starredAt
+                self.anonymousAccessEnabled = anonymousAccessEnabled
+                self.codeSearchIndexStatus = codeSearchIndexStatus
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case name
+                case fullName = "full_name"
+                case license
+                case forks
+                case permissions
+                case owner
+                case _private = "private"
+                case htmlUrl = "html_url"
+                case description
+                case fork
+                case url
+                case archiveUrl = "archive_url"
+                case assigneesUrl = "assignees_url"
+                case blobsUrl = "blobs_url"
+                case branchesUrl = "branches_url"
+                case collaboratorsUrl = "collaborators_url"
+                case commentsUrl = "comments_url"
+                case commitsUrl = "commits_url"
+                case compareUrl = "compare_url"
+                case contentsUrl = "contents_url"
+                case contributorsUrl = "contributors_url"
+                case deploymentsUrl = "deployments_url"
+                case downloadsUrl = "downloads_url"
+                case eventsUrl = "events_url"
+                case forksUrl = "forks_url"
+                case gitCommitsUrl = "git_commits_url"
+                case gitRefsUrl = "git_refs_url"
+                case gitTagsUrl = "git_tags_url"
+                case gitUrl = "git_url"
+                case issueCommentUrl = "issue_comment_url"
+                case issueEventsUrl = "issue_events_url"
+                case issuesUrl = "issues_url"
+                case keysUrl = "keys_url"
+                case labelsUrl = "labels_url"
+                case languagesUrl = "languages_url"
+                case mergesUrl = "merges_url"
+                case milestonesUrl = "milestones_url"
+                case notificationsUrl = "notifications_url"
+                case pullsUrl = "pulls_url"
+                case releasesUrl = "releases_url"
+                case sshUrl = "ssh_url"
+                case stargazersUrl = "stargazers_url"
+                case statusesUrl = "statuses_url"
+                case subscribersUrl = "subscribers_url"
+                case subscriptionUrl = "subscription_url"
+                case tagsUrl = "tags_url"
+                case teamsUrl = "teams_url"
+                case treesUrl = "trees_url"
+                case cloneUrl = "clone_url"
+                case mirrorUrl = "mirror_url"
+                case hooksUrl = "hooks_url"
+                case svnUrl = "svn_url"
+                case homepage
+                case language
+                case forksCount = "forks_count"
+                case stargazersCount = "stargazers_count"
+                case watchersCount = "watchers_count"
+                case size
+                case defaultBranch = "default_branch"
+                case openIssuesCount = "open_issues_count"
+                case isTemplate = "is_template"
+                case topics
+                case hasIssues = "has_issues"
+                case hasProjects = "has_projects"
+                case hasWiki = "has_wiki"
+                case hasPages = "has_pages"
+                case hasDownloads = "has_downloads"
+                case hasDiscussions = "has_discussions"
+                case archived
+                case disabled
+                case visibility
+                case pushedAt = "pushed_at"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case allowRebaseMerge = "allow_rebase_merge"
+                case tempCloneToken = "temp_clone_token"
+                case allowSquashMerge = "allow_squash_merge"
+                case allowAutoMerge = "allow_auto_merge"
+                case deleteBranchOnMerge = "delete_branch_on_merge"
+                case allowUpdateBranch = "allow_update_branch"
+                case useSquashPrTitleAsDefault = "use_squash_pr_title_as_default"
+                case squashMergeCommitTitle = "squash_merge_commit_title"
+                case squashMergeCommitMessage = "squash_merge_commit_message"
+                case mergeCommitTitle = "merge_commit_title"
+                case mergeCommitMessage = "merge_commit_message"
+                case allowMergeCommit = "allow_merge_commit"
+                case allowForking = "allow_forking"
+                case webCommitSignoffRequired = "web_commit_signoff_required"
+                case openIssues = "open_issues"
+                case watchers
+                case masterBranch = "master_branch"
+                case starredAt = "starred_at"
+                case anonymousAccessEnabled = "anonymous_access_enabled"
+                case codeSearchIndexStatus = "code_search_index_status"
+            }
+        }
+        /// A collection of related issues and pull requests.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-milestone`.
+        public struct NullableMilestone: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/labels_url`.
+            public var labelsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/node_id`.
+            public var nodeId: Swift.String
+            /// The number of the milestone.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/number`.
+            public var number: Swift.Int
+            /// The state of the milestone.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/state`.
+            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case open = "open"
+                case closed = "closed"
+            }
+            /// The state of the milestone.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/state`.
+            public var state: Components.Schemas.NullableMilestone.StatePayload
+            /// The title of the milestone.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/title`.
+            public var title: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/creator`.
+            public var creator: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/open_issues`.
+            public var openIssues: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/closed_issues`.
+            public var closedIssues: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/closed_at`.
+            public var closedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/due_on`.
+            public var dueOn: Foundation.Date?
+            /// Creates a new `NullableMilestone`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - labelsUrl:
+            ///   - id:
+            ///   - nodeId:
+            ///   - number: The number of the milestone.
+            ///   - state: The state of the milestone.
+            ///   - title: The title of the milestone.
+            ///   - description:
+            ///   - creator:
+            ///   - openIssues:
+            ///   - closedIssues:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - closedAt:
+            ///   - dueOn:
+            public init(
+                url: Swift.String,
+                htmlUrl: Swift.String,
+                labelsUrl: Swift.String,
+                id: Swift.Int,
+                nodeId: Swift.String,
+                number: Swift.Int,
+                state: Components.Schemas.NullableMilestone.StatePayload,
+                title: Swift.String,
+                description: Swift.String? = nil,
+                creator: Components.Schemas.NullableSimpleUser? = nil,
+                openIssues: Swift.Int,
+                closedIssues: Swift.Int,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                closedAt: Foundation.Date? = nil,
+                dueOn: Foundation.Date? = nil
+            ) {
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.labelsUrl = labelsUrl
+                self.id = id
+                self.nodeId = nodeId
+                self.number = number
+                self.state = state
+                self.title = title
+                self.description = description
+                self.creator = creator
+                self.openIssues = openIssues
+                self.closedIssues = closedIssues
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.closedAt = closedAt
+                self.dueOn = dueOn
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case htmlUrl = "html_url"
+                case labelsUrl = "labels_url"
+                case id
+                case nodeId = "node_id"
+                case number
+                case state
+                case title
+                case description
+                case creator
+                case openIssues = "open_issues"
+                case closedIssues = "closed_issues"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case closedAt = "closed_at"
+                case dueOn = "due_on"
+            }
+        }
+        /// The type of issue.
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-type`.
+        public struct IssueType: Codable, Hashable, Sendable {
+            /// The unique identifier of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/id`.
+            public var id: Swift.Int
+            /// The node identifier of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/name`.
+            public var name: Swift.String
+            /// The description of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/description`.
+            public var description: Swift.String?
+            /// The color of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/color`.
+            @frozen public enum ColorPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case gray = "gray"
+                case blue = "blue"
+                case green = "green"
+                case yellow = "yellow"
+                case orange = "orange"
+                case red = "red"
+                case pink = "pink"
+                case purple = "purple"
+            }
+            /// The color of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/color`.
+            public var color: Components.Schemas.IssueType.ColorPayload?
+            /// The time the issue type created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/created_at`.
+            public var createdAt: Foundation.Date?
+            /// The time the issue type last updated.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// The enabled state of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/is_enabled`.
+            public var isEnabled: Swift.Bool?
+            /// Creates a new `IssueType`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the issue type.
+            ///   - nodeId: The node identifier of the issue type.
+            ///   - name: The name of the issue type.
+            ///   - description: The description of the issue type.
+            ///   - color: The color of the issue type.
+            ///   - createdAt: The time the issue type created.
+            ///   - updatedAt: The time the issue type last updated.
+            ///   - isEnabled: The enabled state of the issue type.
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                name: Swift.String,
+                description: Swift.String? = nil,
+                color: Components.Schemas.IssueType.ColorPayload? = nil,
+                createdAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil,
+                isEnabled: Swift.Bool? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.description = description
+                self.color = color
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.isEnabled = isEnabled
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case name
+                case description
+                case color
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case isEnabled = "is_enabled"
+            }
+        }
+        /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-integration`.
+        public struct NullableIntegration: Codable, Hashable, Sendable {
+            /// Unique identifier of the GitHub app
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/id`.
+            public var id: Swift.Int
+            /// The slug name of the GitHub app
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/slug`.
+            public var slug: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/client_id`.
+            public var clientId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/owner`.
+            @frozen public enum OwnerPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/owner/case1`.
+                case SimpleUser(Components.Schemas.SimpleUser)
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/owner/case2`.
+                case Enterprise(Components.Schemas.Enterprise)
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self = .SimpleUser(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .Enterprise(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    switch self {
+                    case let .SimpleUser(value):
+                        try value.encode(to: encoder)
+                    case let .Enterprise(value):
+                        try value.encode(to: encoder)
+                    }
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/owner`.
+            public var owner: Components.Schemas.NullableIntegration.OwnerPayload
+            /// The name of the GitHub app
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/name`.
+            public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/external_url`.
+            public var externalUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// The set of permissions for the GitHub app
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions`.
+            public struct PermissionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions/issues`.
+                public var issues: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions/checks`.
+                public var checks: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions/metadata`.
+                public var metadata: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions/contents`.
+                public var contents: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions/deployments`.
+                public var deployments: Swift.String?
+                /// A container of undocumented properties.
+                public var additionalProperties: [String: Swift.String]
+                /// Creates a new `PermissionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - issues:
+                ///   - checks:
+                ///   - metadata:
+                ///   - contents:
+                ///   - deployments:
+                ///   - additionalProperties: A container of undocumented properties.
+                public init(
+                    issues: Swift.String? = nil,
+                    checks: Swift.String? = nil,
+                    metadata: Swift.String? = nil,
+                    contents: Swift.String? = nil,
+                    deployments: Swift.String? = nil,
+                    additionalProperties: [String: Swift.String] = .init()
+                ) {
+                    self.issues = issues
+                    self.checks = checks
+                    self.metadata = metadata
+                    self.contents = contents
+                    self.deployments = deployments
+                    self.additionalProperties = additionalProperties
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case issues
+                    case checks
+                    case metadata
+                    case contents
+                    case deployments
+                }
+                public init(from decoder: any Decoder) throws {
+                    let container = try decoder.container(keyedBy: CodingKeys.self)
+                    self.issues = try container.decodeIfPresent(
+                        Swift.String.self,
+                        forKey: .issues
+                    )
+                    self.checks = try container.decodeIfPresent(
+                        Swift.String.self,
+                        forKey: .checks
+                    )
+                    self.metadata = try container.decodeIfPresent(
+                        Swift.String.self,
+                        forKey: .metadata
+                    )
+                    self.contents = try container.decodeIfPresent(
+                        Swift.String.self,
+                        forKey: .contents
+                    )
+                    self.deployments = try container.decodeIfPresent(
+                        Swift.String.self,
+                        forKey: .deployments
+                    )
+                    additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [
+                        "issues",
+                        "checks",
+                        "metadata",
+                        "contents",
+                        "deployments"
+                    ])
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    var container = encoder.container(keyedBy: CodingKeys.self)
+                    try container.encodeIfPresent(
+                        self.issues,
+                        forKey: .issues
+                    )
+                    try container.encodeIfPresent(
+                        self.checks,
+                        forKey: .checks
+                    )
+                    try container.encodeIfPresent(
+                        self.metadata,
+                        forKey: .metadata
+                    )
+                    try container.encodeIfPresent(
+                        self.contents,
+                        forKey: .contents
+                    )
+                    try container.encodeIfPresent(
+                        self.deployments,
+                        forKey: .deployments
+                    )
+                    try encoder.encodeAdditionalProperties(additionalProperties)
+                }
+            }
+            /// The set of permissions for the GitHub app
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions`.
+            public var permissions: Components.Schemas.NullableIntegration.PermissionsPayload
+            /// The list of events for the GitHub app. Note that the `installation_target`, `security_advisory`, and `meta` events are not included because they are global events and not specific to an installation.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/events`.
+            public var events: [Swift.String]
+            /// The number of installations associated with the GitHub app. Only returned when the integration is requesting details about itself.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/installations_count`.
+            public var installationsCount: Swift.Int?
+            /// Creates a new `NullableIntegration`.
+            ///
+            /// - Parameters:
+            ///   - id: Unique identifier of the GitHub app
+            ///   - slug: The slug name of the GitHub app
+            ///   - nodeId:
+            ///   - clientId:
+            ///   - owner:
+            ///   - name: The name of the GitHub app
+            ///   - description:
+            ///   - externalUrl:
+            ///   - htmlUrl:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - permissions: The set of permissions for the GitHub app
+            ///   - events: The list of events for the GitHub app. Note that the `installation_target`, `security_advisory`, and `meta` events are not included because they are global events and not specific to an installation.
+            ///   - installationsCount: The number of installations associated with the GitHub app. Only returned when the integration is requesting details about itself.
+            public init(
+                id: Swift.Int,
+                slug: Swift.String? = nil,
+                nodeId: Swift.String,
+                clientId: Swift.String? = nil,
+                owner: Components.Schemas.NullableIntegration.OwnerPayload,
+                name: Swift.String,
+                description: Swift.String? = nil,
+                externalUrl: Swift.String,
+                htmlUrl: Swift.String,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                permissions: Components.Schemas.NullableIntegration.PermissionsPayload,
+                events: [Swift.String],
+                installationsCount: Swift.Int? = nil
+            ) {
+                self.id = id
+                self.slug = slug
+                self.nodeId = nodeId
+                self.clientId = clientId
+                self.owner = owner
+                self.name = name
+                self.description = description
+                self.externalUrl = externalUrl
+                self.htmlUrl = htmlUrl
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.permissions = permissions
+                self.events = events
+                self.installationsCount = installationsCount
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case slug
+                case nodeId = "node_id"
+                case clientId = "client_id"
+                case owner
+                case name
+                case description
+                case externalUrl = "external_url"
+                case htmlUrl = "html_url"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case permissions
+                case events
+                case installationsCount = "installations_count"
+            }
+        }
+        /// How the author is associated with the repository.
+        ///
+        /// - Remark: Generated from `#/components/schemas/author-association`.
+        @frozen public enum AuthorAssociation: String, Codable, Hashable, Sendable, CaseIterable {
+            case collaborator = "COLLABORATOR"
+            case contributor = "CONTRIBUTOR"
+            case firstTimer = "FIRST_TIMER"
+            case firstTimeContributor = "FIRST_TIME_CONTRIBUTOR"
+            case mannequin = "MANNEQUIN"
+            case member = "MEMBER"
+            case none = "NONE"
+            case owner = "OWNER"
+        }
+        /// - Remark: Generated from `#/components/schemas/reaction-rollup`.
+        public struct ReactionRollup: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/total_count`.
+            public var totalCount: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/+1`.
+            public var _plus_1: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/-1`.
+            public var _hyphen_1: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/laugh`.
+            public var laugh: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/confused`.
+            public var confused: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/heart`.
+            public var heart: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/hooray`.
+            public var hooray: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/eyes`.
+            public var eyes: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/rocket`.
+            public var rocket: Swift.Int
+            /// Creates a new `ReactionRollup`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - totalCount:
+            ///   - _plus_1:
+            ///   - _hyphen_1:
+            ///   - laugh:
+            ///   - confused:
+            ///   - heart:
+            ///   - hooray:
+            ///   - eyes:
+            ///   - rocket:
+            public init(
+                url: Swift.String,
+                totalCount: Swift.Int,
+                _plus_1: Swift.Int,
+                _hyphen_1: Swift.Int,
+                laugh: Swift.Int,
+                confused: Swift.Int,
+                heart: Swift.Int,
+                hooray: Swift.Int,
+                eyes: Swift.Int,
+                rocket: Swift.Int
+            ) {
+                self.url = url
+                self.totalCount = totalCount
+                self._plus_1 = _plus_1
+                self._hyphen_1 = _hyphen_1
+                self.laugh = laugh
+                self.confused = confused
+                self.heart = heart
+                self.hooray = hooray
+                self.eyes = eyes
+                self.rocket = rocket
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case totalCount = "total_count"
+                case _plus_1 = "+1"
+                case _hyphen_1 = "-1"
+                case laugh
+                case confused
+                case heart
+                case hooray
+                case eyes
+                case rocket
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/sub-issues-summary`.
+        public struct SubIssuesSummary: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/sub-issues-summary/total`.
+            public var total: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/sub-issues-summary/completed`.
+            public var completed: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/sub-issues-summary/percent_completed`.
+            public var percentCompleted: Swift.Int
+            /// Creates a new `SubIssuesSummary`.
+            ///
+            /// - Parameters:
+            ///   - total:
+            ///   - completed:
+            ///   - percentCompleted:
+            public init(
+                total: Swift.Int,
+                completed: Swift.Int,
+                percentCompleted: Swift.Int
+            ) {
+                self.total = total
+                self.completed = completed
+                self.percentCompleted = percentCompleted
+            }
+            public enum CodingKeys: String, CodingKey {
+                case total
+                case completed
+                case percentCompleted = "percent_completed"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary`.
+        public struct IssueDependenciesSummary: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/blocked_by`.
+            public var blockedBy: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/blocking`.
+            public var blocking: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/total_blocked_by`.
+            public var totalBlockedBy: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/total_blocking`.
+            public var totalBlocking: Swift.Int
+            /// Creates a new `IssueDependenciesSummary`.
+            ///
+            /// - Parameters:
+            ///   - blockedBy:
+            ///   - blocking:
+            ///   - totalBlockedBy:
+            ///   - totalBlocking:
+            public init(
+                blockedBy: Swift.Int,
+                blocking: Swift.Int,
+                totalBlockedBy: Swift.Int,
+                totalBlocking: Swift.Int
+            ) {
+                self.blockedBy = blockedBy
+                self.blocking = blocking
+                self.totalBlockedBy = totalBlockedBy
+                self.totalBlocking = totalBlocking
+            }
+            public enum CodingKeys: String, CodingKey {
+                case blockedBy = "blocked_by"
+                case blocking
+                case totalBlockedBy = "total_blocked_by"
+                case totalBlocking = "total_blocking"
+            }
+        }
+        /// A value assigned to an issue field
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-field-value`.
+        public struct IssueFieldValue: Codable, Hashable, Sendable {
+            /// Unique identifier for the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/issue_field_id`.
+            public var issueFieldId: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/node_id`.
+            public var nodeId: Swift.String
+            /// The data type of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/data_type`.
+            @frozen public enum DataTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case text = "text"
+                case singleSelect = "single_select"
+                case number = "number"
+                case date = "date"
+            }
+            /// The data type of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/data_type`.
+            public var dataType: Components.Schemas.IssueFieldValue.DataTypePayload
+            /// The value of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/value`.
+            public struct ValuePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/value/value1`.
+                public var value1: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/value/value2`.
+                public var value2: Swift.Double?
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/value/value3`.
+                public var value3: Swift.Int?
+                /// Creates a new `ValuePayload`.
+                ///
+                /// - Parameters:
+                ///   - value1:
+                ///   - value2:
+                ///   - value3:
+                public init(
+                    value1: Swift.String? = nil,
+                    value2: Swift.Double? = nil,
+                    value3: Swift.Int? = nil
+                ) {
+                    self.value1 = value1
+                    self.value2 = value2
+                    self.value3 = value3
+                }
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self.value1 = try decoder.decodeFromSingleValueContainer()
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self.value2 = try decoder.decodeFromSingleValueContainer()
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self.value3 = try decoder.decodeFromSingleValueContainer()
+                    } catch {
+                        errors.append(error)
+                    }
+                    try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
+                        [
+                            self.value1,
+                            self.value2,
+                            self.value3
+                        ],
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    try encoder.encodeFirstNonNilValueToSingleValueContainer([
+                        self.value1,
+                        self.value2,
+                        self.value3
+                    ])
+                }
+            }
+            /// The value of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/value`.
+            public var value: Components.Schemas.IssueFieldValue.ValuePayload?
+            /// Details about the selected option (only present for single_select fields)
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option`.
+            public struct SingleSelectOptionPayload: Codable, Hashable, Sendable {
+                /// Unique identifier for the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option/id`.
+                public var id: Swift.Int64
+                /// The name of the option
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option/name`.
+                public var name: Swift.String
+                /// The color of the option
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option/color`.
+                public var color: Swift.String
+                /// Creates a new `SingleSelectOptionPayload`.
+                ///
+                /// - Parameters:
+                ///   - id: Unique identifier for the option.
+                ///   - name: The name of the option
+                ///   - color: The color of the option
+                public init(
+                    id: Swift.Int64,
+                    name: Swift.String,
+                    color: Swift.String
+                ) {
+                    self.id = id
+                    self.name = name
+                    self.color = color
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case name
+                    case color
+                }
+            }
+            /// Details about the selected option (only present for single_select fields)
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option`.
+            public var singleSelectOption: Components.Schemas.IssueFieldValue.SingleSelectOptionPayload?
+            /// Creates a new `IssueFieldValue`.
+            ///
+            /// - Parameters:
+            ///   - issueFieldId: Unique identifier for the issue field.
+            ///   - nodeId:
+            ///   - dataType: The data type of the issue field
+            ///   - value: The value of the issue field
+            ///   - singleSelectOption: Details about the selected option (only present for single_select fields)
+            public init(
+                issueFieldId: Swift.Int64,
+                nodeId: Swift.String,
+                dataType: Components.Schemas.IssueFieldValue.DataTypePayload,
+                value: Components.Schemas.IssueFieldValue.ValuePayload? = nil,
+                singleSelectOption: Components.Schemas.IssueFieldValue.SingleSelectOptionPayload? = nil
+            ) {
+                self.issueFieldId = issueFieldId
+                self.nodeId = nodeId
+                self.dataType = dataType
+                self.value = value
+                self.singleSelectOption = singleSelectOption
+            }
+            public enum CodingKeys: String, CodingKey {
+                case issueFieldId = "issue_field_id"
+                case nodeId = "node_id"
+                case dataType = "data_type"
+                case value
+                case singleSelectOption = "single_select_option"
+            }
+        }
+        /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue`.
+        public struct Issue: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issue/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/issue/node_id`.
+            public var nodeId: Swift.String
+            /// URL for the issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue/repository_url`.
+            public var repositoryUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue/labels_url`.
+            public var labelsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue/comments_url`.
+            public var commentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue/events_url`.
+            public var eventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue/html_url`.
+            public var htmlUrl: Swift.String
+            /// Number uniquely identifying the issue within its repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/number`.
+            public var number: Swift.Int
+            /// State of the issue; either 'open' or 'closed'
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/state`.
+            public var state: Swift.String
+            /// The reason for the current state
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/state_reason`.
+            @frozen public enum StateReasonPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case completed = "completed"
+                case reopened = "reopened"
+                case notPlanned = "not_planned"
+                case duplicate = "duplicate"
+            }
+            /// The reason for the current state
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/state_reason`.
+            public var stateReason: Components.Schemas.Issue.StateReasonPayload?
+            /// Title of the issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/title`.
+            public var title: Swift.String
+            /// Contents of the issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/body`.
+            public var body: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/user`.
+            public var user: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload`.
+            @frozen public enum LabelsPayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case1`.
+                case case1(Swift.String)
+                /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2`.
+                public struct Case2Payload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/id`.
+                    public var id: Swift.Int64?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/node_id`.
+                    public var nodeId: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/url`.
+                    public var url: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/name`.
+                    public var name: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/description`.
+                    public var description: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/color`.
+                    public var color: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/default`.
+                    public var _default: Swift.Bool?
+                    /// Creates a new `Case2Payload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - nodeId:
+                    ///   - url:
+                    ///   - name:
+                    ///   - description:
+                    ///   - color:
+                    ///   - _default:
+                    public init(
+                        id: Swift.Int64? = nil,
+                        nodeId: Swift.String? = nil,
+                        url: Swift.String? = nil,
+                        name: Swift.String? = nil,
+                        description: Swift.String? = nil,
+                        color: Swift.String? = nil,
+                        _default: Swift.Bool? = nil
+                    ) {
+                        self.id = id
+                        self.nodeId = nodeId
+                        self.url = url
+                        self.name = name
+                        self.description = description
+                        self.color = color
+                        self._default = _default
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case nodeId = "node_id"
+                        case url
+                        case name
+                        case description
+                        case color
+                        case _default = "default"
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2`.
+                case case2(Components.Schemas.Issue.LabelsPayloadPayload.Case2Payload)
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self = .case1(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .case2(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    switch self {
+                    case let .case1(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    case let .case2(value):
+                        try value.encode(to: encoder)
+                    }
+                }
+            }
+            /// Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/labels`.
+            public typealias LabelsPayload = [Components.Schemas.Issue.LabelsPayloadPayload]
+            /// Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/labels`.
+            public var labels: Components.Schemas.Issue.LabelsPayload
+            /// - Remark: Generated from `#/components/schemas/issue/assignee`.
+            public var assignee: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/issue/assignees`.
+            public var assignees: [Components.Schemas.SimpleUser]?
+            /// - Remark: Generated from `#/components/schemas/issue/milestone`.
+            public var milestone: Components.Schemas.NullableMilestone?
+            /// - Remark: Generated from `#/components/schemas/issue/locked`.
+            public var locked: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/issue/active_lock_reason`.
+            public var activeLockReason: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/comments`.
+            public var comments: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue/pull_request`.
+            public struct PullRequestPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/issue/pull_request/merged_at`.
+                public var mergedAt: Foundation.Date?
+                /// - Remark: Generated from `#/components/schemas/issue/pull_request/diff_url`.
+                public var diffUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/issue/pull_request/html_url`.
+                public var htmlUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/issue/pull_request/patch_url`.
+                public var patchUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/issue/pull_request/url`.
+                public var url: Swift.String?
+                /// Creates a new `PullRequestPayload`.
+                ///
+                /// - Parameters:
+                ///   - mergedAt:
+                ///   - diffUrl:
+                ///   - htmlUrl:
+                ///   - patchUrl:
+                ///   - url:
+                public init(
+                    mergedAt: Foundation.Date? = nil,
+                    diffUrl: Swift.String? = nil,
+                    htmlUrl: Swift.String? = nil,
+                    patchUrl: Swift.String? = nil,
+                    url: Swift.String? = nil
+                ) {
+                    self.mergedAt = mergedAt
+                    self.diffUrl = diffUrl
+                    self.htmlUrl = htmlUrl
+                    self.patchUrl = patchUrl
+                    self.url = url
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case mergedAt = "merged_at"
+                    case diffUrl = "diff_url"
+                    case htmlUrl = "html_url"
+                    case patchUrl = "patch_url"
+                    case url
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/issue/pull_request`.
+            public var pullRequest: Components.Schemas.Issue.PullRequestPayload?
+            /// - Remark: Generated from `#/components/schemas/issue/closed_at`.
+            public var closedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/issue/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/issue/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/issue/draft`.
+            public var draft: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/issue/closed_by`.
+            public var closedBy: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/issue/body_html`.
+            public var bodyHtml: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/body_text`.
+            public var bodyText: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/timeline_url`.
+            public var timelineUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/type`.
+            public var _type: Components.Schemas.IssueType?
+            /// - Remark: Generated from `#/components/schemas/issue/repository`.
+            public var repository: Components.Schemas.Repository?
+            /// - Remark: Generated from `#/components/schemas/issue/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/issue/author_association`.
+            public var authorAssociation: Components.Schemas.AuthorAssociation?
+            /// - Remark: Generated from `#/components/schemas/issue/reactions`.
+            public var reactions: Components.Schemas.ReactionRollup?
+            /// - Remark: Generated from `#/components/schemas/issue/sub_issues_summary`.
+            public var subIssuesSummary: Components.Schemas.SubIssuesSummary?
+            /// URL to get the parent issue of this issue, if it is a sub-issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/parent_issue_url`.
+            public var parentIssueUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/issue_dependencies_summary`.
+            public var issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary?
+            /// - Remark: Generated from `#/components/schemas/issue/issue_field_values`.
+            public var issueFieldValues: [Components.Schemas.IssueFieldValue]?
+            /// Creates a new `Issue`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url: URL for the issue
+            ///   - repositoryUrl:
+            ///   - labelsUrl:
+            ///   - commentsUrl:
+            ///   - eventsUrl:
+            ///   - htmlUrl:
+            ///   - number: Number uniquely identifying the issue within its repository
+            ///   - state: State of the issue; either 'open' or 'closed'
+            ///   - stateReason: The reason for the current state
+            ///   - title: Title of the issue
+            ///   - body: Contents of the issue
+            ///   - user:
+            ///   - labels: Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
+            ///   - assignee:
+            ///   - assignees:
+            ///   - milestone:
+            ///   - locked:
+            ///   - activeLockReason:
+            ///   - comments:
+            ///   - pullRequest:
+            ///   - closedAt:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - draft:
+            ///   - closedBy:
+            ///   - bodyHtml:
+            ///   - bodyText:
+            ///   - timelineUrl:
+            ///   - _type:
+            ///   - repository:
+            ///   - performedViaGithubApp:
+            ///   - authorAssociation:
+            ///   - reactions:
+            ///   - subIssuesSummary:
+            ///   - parentIssueUrl: URL to get the parent issue of this issue, if it is a sub-issue
+            ///   - issueDependenciesSummary:
+            ///   - issueFieldValues:
+            public init(
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                url: Swift.String,
+                repositoryUrl: Swift.String,
+                labelsUrl: Swift.String,
+                commentsUrl: Swift.String,
+                eventsUrl: Swift.String,
+                htmlUrl: Swift.String,
+                number: Swift.Int,
+                state: Swift.String,
+                stateReason: Components.Schemas.Issue.StateReasonPayload? = nil,
+                title: Swift.String,
+                body: Swift.String? = nil,
+                user: Components.Schemas.NullableSimpleUser? = nil,
+                labels: Components.Schemas.Issue.LabelsPayload,
+                assignee: Components.Schemas.NullableSimpleUser? = nil,
+                assignees: [Components.Schemas.SimpleUser]? = nil,
+                milestone: Components.Schemas.NullableMilestone? = nil,
+                locked: Swift.Bool,
+                activeLockReason: Swift.String? = nil,
+                comments: Swift.Int,
+                pullRequest: Components.Schemas.Issue.PullRequestPayload? = nil,
+                closedAt: Foundation.Date? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                draft: Swift.Bool? = nil,
+                closedBy: Components.Schemas.NullableSimpleUser? = nil,
+                bodyHtml: Swift.String? = nil,
+                bodyText: Swift.String? = nil,
+                timelineUrl: Swift.String? = nil,
+                _type: Components.Schemas.IssueType? = nil,
+                repository: Components.Schemas.Repository? = nil,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                authorAssociation: Components.Schemas.AuthorAssociation? = nil,
+                reactions: Components.Schemas.ReactionRollup? = nil,
+                subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
+                parentIssueUrl: Swift.String? = nil,
+                issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary? = nil,
+                issueFieldValues: [Components.Schemas.IssueFieldValue]? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.repositoryUrl = repositoryUrl
+                self.labelsUrl = labelsUrl
+                self.commentsUrl = commentsUrl
+                self.eventsUrl = eventsUrl
+                self.htmlUrl = htmlUrl
+                self.number = number
+                self.state = state
+                self.stateReason = stateReason
+                self.title = title
+                self.body = body
+                self.user = user
+                self.labels = labels
+                self.assignee = assignee
+                self.assignees = assignees
+                self.milestone = milestone
+                self.locked = locked
+                self.activeLockReason = activeLockReason
+                self.comments = comments
+                self.pullRequest = pullRequest
+                self.closedAt = closedAt
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.draft = draft
+                self.closedBy = closedBy
+                self.bodyHtml = bodyHtml
+                self.bodyText = bodyText
+                self.timelineUrl = timelineUrl
+                self._type = _type
+                self.repository = repository
+                self.performedViaGithubApp = performedViaGithubApp
+                self.authorAssociation = authorAssociation
+                self.reactions = reactions
+                self.subIssuesSummary = subIssuesSummary
+                self.parentIssueUrl = parentIssueUrl
+                self.issueDependenciesSummary = issueDependenciesSummary
+                self.issueFieldValues = issueFieldValues
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case repositoryUrl = "repository_url"
+                case labelsUrl = "labels_url"
+                case commentsUrl = "comments_url"
+                case eventsUrl = "events_url"
+                case htmlUrl = "html_url"
+                case number
+                case state
+                case stateReason = "state_reason"
+                case title
+                case body
+                case user
+                case labels
+                case assignee
+                case assignees
+                case milestone
+                case locked
+                case activeLockReason = "active_lock_reason"
+                case comments
+                case pullRequest = "pull_request"
+                case closedAt = "closed_at"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case draft
+                case closedBy = "closed_by"
+                case bodyHtml = "body_html"
+                case bodyText = "body_text"
+                case timelineUrl = "timeline_url"
+                case _type = "type"
+                case repository
+                case performedViaGithubApp = "performed_via_github_app"
+                case authorAssociation = "author_association"
+                case reactions
+                case subIssuesSummary = "sub_issues_summary"
+                case parentIssueUrl = "parent_issue_url"
+                case issueDependenciesSummary = "issue_dependencies_summary"
+                case issueFieldValues = "issue_field_values"
+            }
+        }
+        /// Groups of organization members that gives permissions on specified repositories.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-team-simple`.
+        public struct NullableTeamSimple: Codable, Hashable, Sendable {
+            /// Unique identifier of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/node_id`.
+            public var nodeId: Swift.String
+            /// URL for the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/members_url`.
+            public var membersUrl: Swift.String
+            /// Name of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/name`.
+            public var name: Swift.String
+            /// Description of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/description`.
+            public var description: Swift.String?
+            /// Permission that the team will have for its repositories
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/permission`.
+            public var permission: Swift.String
+            /// The level of privacy this team should have
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/privacy`.
+            public var privacy: Swift.String?
+            /// The notification setting the team has set
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/notification_setting`.
+            public var notificationSetting: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/repositories_url`.
+            public var repositoriesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/slug`.
+            public var slug: Swift.String
+            /// Distinguished Name (DN) that team maps to within LDAP environment
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/ldap_dn`.
+            public var ldapDn: Swift.String?
+            /// Creates a new `NullableTeamSimple`.
+            ///
+            /// - Parameters:
+            ///   - id: Unique identifier of the team
+            ///   - nodeId:
+            ///   - url: URL for the team
+            ///   - membersUrl:
+            ///   - name: Name of the team
+            ///   - description: Description of the team
+            ///   - permission: Permission that the team will have for its repositories
+            ///   - privacy: The level of privacy this team should have
+            ///   - notificationSetting: The notification setting the team has set
+            ///   - htmlUrl:
+            ///   - repositoriesUrl:
+            ///   - slug:
+            ///   - ldapDn: Distinguished Name (DN) that team maps to within LDAP environment
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                membersUrl: Swift.String,
+                name: Swift.String,
+                description: Swift.String? = nil,
+                permission: Swift.String,
+                privacy: Swift.String? = nil,
+                notificationSetting: Swift.String? = nil,
+                htmlUrl: Swift.String,
+                repositoriesUrl: Swift.String,
+                slug: Swift.String,
+                ldapDn: Swift.String? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.membersUrl = membersUrl
+                self.name = name
+                self.description = description
+                self.permission = permission
+                self.privacy = privacy
+                self.notificationSetting = notificationSetting
+                self.htmlUrl = htmlUrl
+                self.repositoriesUrl = repositoriesUrl
+                self.slug = slug
+                self.ldapDn = ldapDn
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case membersUrl = "members_url"
+                case name
+                case description
+                case permission
+                case privacy
+                case notificationSetting = "notification_setting"
+                case htmlUrl = "html_url"
+                case repositoriesUrl = "repositories_url"
+                case slug
+                case ldapDn = "ldap_dn"
+            }
+        }
+        /// Groups of organization members that gives permissions on specified repositories.
+        ///
+        /// - Remark: Generated from `#/components/schemas/team`.
+        public struct Team: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/team/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/team/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team/name`.
+            public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team/slug`.
+            public var slug: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/team/privacy`.
+            public var privacy: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/team/notification_setting`.
+            public var notificationSetting: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/team/permission`.
+            public var permission: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team/permissions`.
+            public struct PermissionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/team/permissions/pull`.
+                public var pull: Swift.Bool
+                /// - Remark: Generated from `#/components/schemas/team/permissions/triage`.
+                public var triage: Swift.Bool
+                /// - Remark: Generated from `#/components/schemas/team/permissions/push`.
+                public var push: Swift.Bool
+                /// - Remark: Generated from `#/components/schemas/team/permissions/maintain`.
+                public var maintain: Swift.Bool
+                /// - Remark: Generated from `#/components/schemas/team/permissions/admin`.
+                public var admin: Swift.Bool
+                /// Creates a new `PermissionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - pull:
+                ///   - triage:
+                ///   - push:
+                ///   - maintain:
+                ///   - admin:
+                public init(
+                    pull: Swift.Bool,
+                    triage: Swift.Bool,
+                    push: Swift.Bool,
+                    maintain: Swift.Bool,
+                    admin: Swift.Bool
+                ) {
+                    self.pull = pull
+                    self.triage = triage
+                    self.push = push
+                    self.maintain = maintain
+                    self.admin = admin
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case pull
+                    case triage
+                    case push
+                    case maintain
+                    case admin
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/team/permissions`.
+            public var permissions: Components.Schemas.Team.PermissionsPayload?
+            /// - Remark: Generated from `#/components/schemas/team/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team/members_url`.
+            public var membersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team/repositories_url`.
+            public var repositoriesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team/parent`.
+            public var parent: Components.Schemas.NullableTeamSimple?
+            /// Creates a new `Team`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - name:
+            ///   - slug:
+            ///   - description:
+            ///   - privacy:
+            ///   - notificationSetting:
+            ///   - permission:
+            ///   - permissions:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - membersUrl:
+            ///   - repositoriesUrl:
+            ///   - parent:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                name: Swift.String,
+                slug: Swift.String,
+                description: Swift.String? = nil,
+                privacy: Swift.String? = nil,
+                notificationSetting: Swift.String? = nil,
+                permission: Swift.String,
+                permissions: Components.Schemas.Team.PermissionsPayload? = nil,
+                url: Swift.String,
+                htmlUrl: Swift.String,
+                membersUrl: Swift.String,
+                repositoriesUrl: Swift.String,
+                parent: Components.Schemas.NullableTeamSimple? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.slug = slug
+                self.description = description
+                self.privacy = privacy
+                self.notificationSetting = notificationSetting
+                self.permission = permission
+                self.permissions = permissions
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.membersUrl = membersUrl
+                self.repositoriesUrl = repositoriesUrl
+                self.parent = parent
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case name
+                case slug
+                case description
+                case privacy
+                case notificationSetting = "notification_setting"
+                case permission
+                case permissions
+                case url
+                case htmlUrl = "html_url"
+                case membersUrl = "members_url"
+                case repositoriesUrl = "repositories_url"
+                case parent
+            }
+        }
+        /// An status update belonging to a project
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update`.
+        public struct NullableProjectsV2StatusUpdate: Codable, Hashable, Sendable {
+            /// The unique identifier of the status update.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update/id`.
+            public var id: Swift.Double
+            /// The node ID of the status update.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update/node_id`.
+            public var nodeId: Swift.String
+            /// The node ID of the project that this status update belongs to.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update/project_node_id`.
+            public var projectNodeId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update/creator`.
+            public var creator: Components.Schemas.SimpleUser?
+            /// The time when the status update was created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update/created_at`.
+            public var createdAt: Foundation.Date
+            /// The time when the status update was last updated.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// The current status.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update/status`.
+            @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case inactive = "INACTIVE"
+                case onTrack = "ON_TRACK"
+                case atRisk = "AT_RISK"
+                case offTrack = "OFF_TRACK"
+                case complete = "COMPLETE"
+            }
+            /// The current status.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update/status`.
+            public var status: Components.Schemas.NullableProjectsV2StatusUpdate.StatusPayload?
+            /// The start date of the period covered by the update.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update/start_date`.
+            public var startDate: Swift.String?
+            /// The target date associated with the update.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update/target_date`.
+            public var targetDate: Swift.String?
+            /// Body of the status update
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-projects-v2-status-update/body`.
+            public var body: Swift.String?
+            /// Creates a new `NullableProjectsV2StatusUpdate`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the status update.
+            ///   - nodeId: The node ID of the status update.
+            ///   - projectNodeId: The node ID of the project that this status update belongs to.
+            ///   - creator:
+            ///   - createdAt: The time when the status update was created.
+            ///   - updatedAt: The time when the status update was last updated.
+            ///   - status: The current status.
+            ///   - startDate: The start date of the period covered by the update.
+            ///   - targetDate: The target date associated with the update.
+            ///   - body: Body of the status update
+            public init(
+                id: Swift.Double,
+                nodeId: Swift.String,
+                projectNodeId: Swift.String? = nil,
+                creator: Components.Schemas.SimpleUser? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                status: Components.Schemas.NullableProjectsV2StatusUpdate.StatusPayload? = nil,
+                startDate: Swift.String? = nil,
+                targetDate: Swift.String? = nil,
+                body: Swift.String? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.projectNodeId = projectNodeId
+                self.creator = creator
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.status = status
+                self.startDate = startDate
+                self.targetDate = targetDate
+                self.body = body
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case projectNodeId = "project_node_id"
+                case creator
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case status
+                case startDate = "start_date"
+                case targetDate = "target_date"
+                case body
+            }
+        }
+        /// A projects v2 project
+        ///
+        /// - Remark: Generated from `#/components/schemas/projects-v2`.
+        public struct ProjectsV2: Codable, Hashable, Sendable {
+            /// The unique identifier of the project.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/id`.
+            public var id: Swift.Double
+            /// The node ID of the project.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/projects-v2/owner`.
+            public var owner: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/projects-v2/creator`.
+            public var creator: Components.Schemas.SimpleUser
+            /// The project title.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/title`.
+            public var title: Swift.String
+            /// A short description of the project.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/description`.
+            public var description: Swift.String?
+            /// Whether the project is visible to anyone with access to the owner.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/public`.
+            public var _public: Swift.Bool
+            /// The time when the project was closed.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/closed_at`.
+            public var closedAt: Foundation.Date?
+            /// The time when the project was created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/created_at`.
+            public var createdAt: Foundation.Date
+            /// The time when the project was last updated.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// The project number.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/number`.
+            public var number: Swift.Int
+            /// A concise summary of the project.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/short_description`.
+            public var shortDescription: Swift.String?
+            /// The time when the project was deleted.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/deleted_at`.
+            public var deletedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/projects-v2/deleted_by`.
+            public var deletedBy: Components.Schemas.NullableSimpleUser?
+            /// The current state of the project.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/state`.
+            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case open = "open"
+                case closed = "closed"
+            }
+            /// The current state of the project.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/state`.
+            public var state: Components.Schemas.ProjectsV2.StatePayload?
+            /// - Remark: Generated from `#/components/schemas/projects-v2/latest_status_update`.
+            public var latestStatusUpdate: Components.Schemas.NullableProjectsV2StatusUpdate?
+            /// Whether this project is a template
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2/is_template`.
+            public var isTemplate: Swift.Bool?
+            /// Creates a new `ProjectsV2`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the project.
+            ///   - nodeId: The node ID of the project.
+            ///   - owner:
+            ///   - creator:
+            ///   - title: The project title.
+            ///   - description: A short description of the project.
+            ///   - _public: Whether the project is visible to anyone with access to the owner.
+            ///   - closedAt: The time when the project was closed.
+            ///   - createdAt: The time when the project was created.
+            ///   - updatedAt: The time when the project was last updated.
+            ///   - number: The project number.
+            ///   - shortDescription: A concise summary of the project.
+            ///   - deletedAt: The time when the project was deleted.
+            ///   - deletedBy:
+            ///   - state: The current state of the project.
+            ///   - latestStatusUpdate:
+            ///   - isTemplate: Whether this project is a template
+            public init(
+                id: Swift.Double,
+                nodeId: Swift.String,
+                owner: Components.Schemas.SimpleUser,
+                creator: Components.Schemas.SimpleUser,
+                title: Swift.String,
+                description: Swift.String? = nil,
+                _public: Swift.Bool,
+                closedAt: Foundation.Date? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                number: Swift.Int,
+                shortDescription: Swift.String? = nil,
+                deletedAt: Foundation.Date? = nil,
+                deletedBy: Components.Schemas.NullableSimpleUser? = nil,
+                state: Components.Schemas.ProjectsV2.StatePayload? = nil,
+                latestStatusUpdate: Components.Schemas.NullableProjectsV2StatusUpdate? = nil,
+                isTemplate: Swift.Bool? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.owner = owner
+                self.creator = creator
+                self.title = title
+                self.description = description
+                self._public = _public
+                self.closedAt = closedAt
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.number = number
+                self.shortDescription = shortDescription
+                self.deletedAt = deletedAt
+                self.deletedBy = deletedBy
+                self.state = state
+                self.latestStatusUpdate = latestStatusUpdate
+                self.isTemplate = isTemplate
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case owner
+                case creator
+                case title
+                case description
+                case _public = "public"
+                case closedAt = "closed_at"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case number
+                case shortDescription = "short_description"
+                case deletedAt = "deleted_at"
+                case deletedBy = "deleted_by"
+                case state
+                case latestStatusUpdate = "latest_status_update"
+                case isTemplate = "is_template"
+            }
+        }
+        /// An option for a single select field
+        ///
+        /// - Remark: Generated from `#/components/schemas/projects-v2-single-select-options`.
+        public struct ProjectsV2SingleSelectOptions: Codable, Hashable, Sendable {
+            /// The unique identifier of the option.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-single-select-options/id`.
+            public var id: Swift.String
+            /// The display name of the option, in raw text and HTML formats.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-single-select-options/name`.
+            public struct NamePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/projects-v2-single-select-options/name/raw`.
+                public var raw: Swift.String
+                /// - Remark: Generated from `#/components/schemas/projects-v2-single-select-options/name/html`.
+                public var html: Swift.String
+                /// Creates a new `NamePayload`.
+                ///
+                /// - Parameters:
+                ///   - raw:
+                ///   - html:
+                public init(
+                    raw: Swift.String,
+                    html: Swift.String
+                ) {
+                    self.raw = raw
+                    self.html = html
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case raw
+                    case html
+                }
+            }
+            /// The display name of the option, in raw text and HTML formats.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-single-select-options/name`.
+            public var name: Components.Schemas.ProjectsV2SingleSelectOptions.NamePayload
+            /// The description of the option, in raw text and HTML formats.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-single-select-options/description`.
+            public struct DescriptionPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/projects-v2-single-select-options/description/raw`.
+                public var raw: Swift.String
+                /// - Remark: Generated from `#/components/schemas/projects-v2-single-select-options/description/html`.
+                public var html: Swift.String
+                /// Creates a new `DescriptionPayload`.
+                ///
+                /// - Parameters:
+                ///   - raw:
+                ///   - html:
+                public init(
+                    raw: Swift.String,
+                    html: Swift.String
+                ) {
+                    self.raw = raw
+                    self.html = html
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case raw
+                    case html
+                }
+            }
+            /// The description of the option, in raw text and HTML formats.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-single-select-options/description`.
+            public var description: Components.Schemas.ProjectsV2SingleSelectOptions.DescriptionPayload
+            /// The color associated with the option.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-single-select-options/color`.
+            public var color: Swift.String
+            /// Creates a new `ProjectsV2SingleSelectOptions`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the option.
+            ///   - name: The display name of the option, in raw text and HTML formats.
+            ///   - description: The description of the option, in raw text and HTML formats.
+            ///   - color: The color associated with the option.
+            public init(
+                id: Swift.String,
+                name: Components.Schemas.ProjectsV2SingleSelectOptions.NamePayload,
+                description: Components.Schemas.ProjectsV2SingleSelectOptions.DescriptionPayload,
+                color: Swift.String
+            ) {
+                self.id = id
+                self.name = name
+                self.description = description
+                self.color = color
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case name
+                case description
+                case color
+            }
+        }
+        /// An iteration setting for an iteration field
+        ///
+        /// - Remark: Generated from `#/components/schemas/projects-v2-iteration-settings`.
+        public struct ProjectsV2IterationSettings: Codable, Hashable, Sendable {
+            /// The unique identifier of the iteration setting.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-iteration-settings/id`.
+            public var id: Swift.String
+            /// The start date of the iteration.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-iteration-settings/start_date`.
+            public var startDate: Swift.String
+            /// The duration of the iteration in days.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-iteration-settings/duration`.
+            public var duration: Swift.Int
+            /// The iteration title, in raw text and HTML formats.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-iteration-settings/title`.
+            public struct TitlePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/projects-v2-iteration-settings/title/raw`.
+                public var raw: Swift.String
+                /// - Remark: Generated from `#/components/schemas/projects-v2-iteration-settings/title/html`.
+                public var html: Swift.String
+                /// Creates a new `TitlePayload`.
+                ///
+                /// - Parameters:
+                ///   - raw:
+                ///   - html:
+                public init(
+                    raw: Swift.String,
+                    html: Swift.String
+                ) {
+                    self.raw = raw
+                    self.html = html
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case raw
+                    case html
+                }
+            }
+            /// The iteration title, in raw text and HTML formats.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-iteration-settings/title`.
+            public var title: Components.Schemas.ProjectsV2IterationSettings.TitlePayload
+            /// Whether the iteration has been completed.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-iteration-settings/completed`.
+            public var completed: Swift.Bool
+            /// Creates a new `ProjectsV2IterationSettings`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the iteration setting.
+            ///   - startDate: The start date of the iteration.
+            ///   - duration: The duration of the iteration in days.
+            ///   - title: The iteration title, in raw text and HTML formats.
+            ///   - completed: Whether the iteration has been completed.
+            public init(
+                id: Swift.String,
+                startDate: Swift.String,
+                duration: Swift.Int,
+                title: Components.Schemas.ProjectsV2IterationSettings.TitlePayload,
+                completed: Swift.Bool
+            ) {
+                self.id = id
+                self.startDate = startDate
+                self.duration = duration
+                self.title = title
+                self.completed = completed
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case startDate = "start_date"
+                case duration
+                case title
+                case completed
+            }
+        }
+        /// A field inside a projects v2 project
+        ///
+        /// - Remark: Generated from `#/components/schemas/projects-v2-field`.
+        public struct ProjectsV2Field: Codable, Hashable, Sendable {
+            /// The unique identifier of the field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-field/id`.
+            public var id: Swift.Int
+            /// The node ID of the field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-field/node_id`.
+            public var nodeId: Swift.String?
+            /// The API URL of the project that contains the field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-field/project_url`.
+            public var projectUrl: Swift.String
+            /// The name of the field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-field/name`.
+            public var name: Swift.String
+            /// The field's data type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-field/data_type`.
+            @frozen public enum DataTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case assignees = "assignees"
+                case linkedPullRequests = "linked_pull_requests"
+                case reviewers = "reviewers"
+                case labels = "labels"
+                case milestone = "milestone"
+                case repository = "repository"
+                case title = "title"
+                case text = "text"
+                case singleSelect = "single_select"
+                case number = "number"
+                case date = "date"
+                case iteration = "iteration"
+                case issueType = "issue_type"
+                case parentIssue = "parent_issue"
+                case subIssuesProgress = "sub_issues_progress"
+            }
+            /// The field's data type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-field/data_type`.
+            public var dataType: Components.Schemas.ProjectsV2Field.DataTypePayload
+            /// The options available for single select fields.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-field/options`.
+            public var options: [Components.Schemas.ProjectsV2SingleSelectOptions]?
+            /// Configuration for iteration fields.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-field/configuration`.
+            public struct ConfigurationPayload: Codable, Hashable, Sendable {
+                /// The day of the week when the iteration starts.
+                ///
+                /// - Remark: Generated from `#/components/schemas/projects-v2-field/configuration/start_day`.
+                public var startDay: Swift.Int?
+                /// The duration of the iteration in days.
+                ///
+                /// - Remark: Generated from `#/components/schemas/projects-v2-field/configuration/duration`.
+                public var duration: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/projects-v2-field/configuration/iterations`.
+                public var iterations: [Components.Schemas.ProjectsV2IterationSettings]?
+                /// Creates a new `ConfigurationPayload`.
+                ///
+                /// - Parameters:
+                ///   - startDay: The day of the week when the iteration starts.
+                ///   - duration: The duration of the iteration in days.
+                ///   - iterations:
+                public init(
+                    startDay: Swift.Int? = nil,
+                    duration: Swift.Int? = nil,
+                    iterations: [Components.Schemas.ProjectsV2IterationSettings]? = nil
+                ) {
+                    self.startDay = startDay
+                    self.duration = duration
+                    self.iterations = iterations
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case startDay = "start_day"
+                    case duration
+                    case iterations
+                }
+            }
+            /// Configuration for iteration fields.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-field/configuration`.
+            public var configuration: Components.Schemas.ProjectsV2Field.ConfigurationPayload?
+            /// The time when the field was created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-field/created_at`.
+            public var createdAt: Foundation.Date
+            /// The time when the field was last updated.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-field/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// Creates a new `ProjectsV2Field`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the field.
+            ///   - nodeId: The node ID of the field.
+            ///   - projectUrl: The API URL of the project that contains the field.
+            ///   - name: The name of the field.
+            ///   - dataType: The field's data type.
+            ///   - options: The options available for single select fields.
+            ///   - configuration: Configuration for iteration fields.
+            ///   - createdAt: The time when the field was created.
+            ///   - updatedAt: The time when the field was last updated.
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String? = nil,
+                projectUrl: Swift.String,
+                name: Swift.String,
+                dataType: Components.Schemas.ProjectsV2Field.DataTypePayload,
+                options: [Components.Schemas.ProjectsV2SingleSelectOptions]? = nil,
+                configuration: Components.Schemas.ProjectsV2Field.ConfigurationPayload? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.projectUrl = projectUrl
+                self.name = name
+                self.dataType = dataType
+                self.options = options
+                self.configuration = configuration
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case projectUrl = "project_url"
+                case name
+                case dataType = "data_type"
+                case options
+                case configuration
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+            }
+        }
+        /// The type of content tracked in a project item
+        ///
+        /// - Remark: Generated from `#/components/schemas/projects-v2-item-content-type`.
+        @frozen public enum ProjectsV2ItemContentType: String, Codable, Hashable, Sendable, CaseIterable {
+            case issue = "Issue"
+            case pullRequest = "PullRequest"
+            case draftIssue = "DraftIssue"
+        }
+        /// An item belonging to a project
+        ///
+        /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content`.
+        public struct ProjectsV2ItemWithContent: Codable, Hashable, Sendable {
+            /// The unique identifier of the project item.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/id`.
+            public var id: Swift.Double
+            /// The node ID of the project item.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/node_id`.
+            public var nodeId: Swift.String?
+            /// The API URL of the project that contains this item.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/project_url`.
+            public var projectUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/content_type`.
+            public var contentType: Components.Schemas.ProjectsV2ItemContentType
+            /// The content of the item, which varies by content type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/content`.
+            public struct ContentPayload: Codable, Hashable, Sendable {
+                /// A container of undocumented properties.
+                public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                /// Creates a new `ContentPayload`.
+                ///
+                /// - Parameters:
+                ///   - additionalProperties: A container of undocumented properties.
+                public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                    self.additionalProperties = additionalProperties
+                }
+                public init(from decoder: any Decoder) throws {
+                    additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    try encoder.encodeAdditionalProperties(additionalProperties)
+                }
+            }
+            /// The content of the item, which varies by content type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/content`.
+            public var content: Components.Schemas.ProjectsV2ItemWithContent.ContentPayload?
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/creator`.
+            public var creator: Components.Schemas.SimpleUser?
+            /// The time when the item was created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/created_at`.
+            public var createdAt: Foundation.Date
+            /// The time when the item was last updated.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// The time when the item was archived.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/archived_at`.
+            public var archivedAt: Foundation.Date?
+            /// The API URL of this item.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/item_url`.
+            public var itemUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/FieldsPayload`.
+            public struct FieldsPayloadPayload: Codable, Hashable, Sendable {
+                /// A container of undocumented properties.
+                public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                /// Creates a new `FieldsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - additionalProperties: A container of undocumented properties.
+                public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                    self.additionalProperties = additionalProperties
+                }
+                public init(from decoder: any Decoder) throws {
+                    additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    try encoder.encodeAdditionalProperties(additionalProperties)
+                }
+            }
+            /// The fields and values associated with this item.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/fields`.
+            public typealias FieldsPayload = [Components.Schemas.ProjectsV2ItemWithContent.FieldsPayloadPayload]
+            /// The fields and values associated with this item.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-with-content/fields`.
+            public var fields: Components.Schemas.ProjectsV2ItemWithContent.FieldsPayload?
+            /// Creates a new `ProjectsV2ItemWithContent`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the project item.
+            ///   - nodeId: The node ID of the project item.
+            ///   - projectUrl: The API URL of the project that contains this item.
+            ///   - contentType:
+            ///   - content: The content of the item, which varies by content type.
+            ///   - creator:
+            ///   - createdAt: The time when the item was created.
+            ///   - updatedAt: The time when the item was last updated.
+            ///   - archivedAt: The time when the item was archived.
+            ///   - itemUrl: The API URL of this item.
+            ///   - fields: The fields and values associated with this item.
+            public init(
+                id: Swift.Double,
+                nodeId: Swift.String? = nil,
+                projectUrl: Swift.String? = nil,
+                contentType: Components.Schemas.ProjectsV2ItemContentType,
+                content: Components.Schemas.ProjectsV2ItemWithContent.ContentPayload? = nil,
+                creator: Components.Schemas.SimpleUser? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                archivedAt: Foundation.Date? = nil,
+                itemUrl: Swift.String? = nil,
+                fields: Components.Schemas.ProjectsV2ItemWithContent.FieldsPayload? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.projectUrl = projectUrl
+                self.contentType = contentType
+                self.content = content
+                self.creator = creator
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.archivedAt = archivedAt
+                self.itemUrl = itemUrl
+                self.fields = fields
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case projectUrl = "project_url"
+                case contentType = "content_type"
+                case content
+                case creator
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case archivedAt = "archived_at"
+                case itemUrl = "item_url"
+                case fields
+            }
+        }
+        /// Hypermedia Link
+        ///
+        /// - Remark: Generated from `#/components/schemas/link`.
+        public struct Link: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/link/href`.
+            public var href: Swift.String
+            /// Creates a new `Link`.
+            ///
+            /// - Parameters:
+            ///   - href:
+            public init(href: Swift.String) {
+                self.href = href
+            }
+            public enum CodingKeys: String, CodingKey {
+                case href
+            }
+        }
+        /// The status of auto merging a pull request.
+        ///
+        /// - Remark: Generated from `#/components/schemas/auto-merge`.
+        public struct AutoMerge: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/auto-merge/enabled_by`.
+            public var enabledBy: Components.Schemas.SimpleUser
+            /// The merge method to use.
+            ///
+            /// - Remark: Generated from `#/components/schemas/auto-merge/merge_method`.
+            @frozen public enum MergeMethodPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case merge = "merge"
+                case squash = "squash"
+                case rebase = "rebase"
+            }
+            /// The merge method to use.
+            ///
+            /// - Remark: Generated from `#/components/schemas/auto-merge/merge_method`.
+            public var mergeMethod: Components.Schemas.AutoMerge.MergeMethodPayload
+            /// Title for the merge commit message.
+            ///
+            /// - Remark: Generated from `#/components/schemas/auto-merge/commit_title`.
+            public var commitTitle: Swift.String
+            /// Commit message for the merge commit.
+            ///
+            /// - Remark: Generated from `#/components/schemas/auto-merge/commit_message`.
+            public var commitMessage: Swift.String
+            /// Creates a new `AutoMerge`.
+            ///
+            /// - Parameters:
+            ///   - enabledBy:
+            ///   - mergeMethod: The merge method to use.
+            ///   - commitTitle: Title for the merge commit message.
+            ///   - commitMessage: Commit message for the merge commit.
+            public init(
+                enabledBy: Components.Schemas.SimpleUser,
+                mergeMethod: Components.Schemas.AutoMerge.MergeMethodPayload,
+                commitTitle: Swift.String,
+                commitMessage: Swift.String
+            ) {
+                self.enabledBy = enabledBy
+                self.mergeMethod = mergeMethod
+                self.commitTitle = commitTitle
+                self.commitMessage = commitMessage
+            }
+            public enum CodingKeys: String, CodingKey {
+                case enabledBy = "enabled_by"
+                case mergeMethod = "merge_method"
+                case commitTitle = "commit_title"
+                case commitMessage = "commit_message"
+            }
+        }
+        /// Pull Request Simple
+        ///
+        /// - Remark: Generated from `#/components/schemas/pull-request-simple`.
+        public struct PullRequestSimple: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/diff_url`.
+            public var diffUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/patch_url`.
+            public var patchUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/issue_url`.
+            public var issueUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/commits_url`.
+            public var commitsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/review_comments_url`.
+            public var reviewCommentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/review_comment_url`.
+            public var reviewCommentUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/comments_url`.
+            public var commentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/statuses_url`.
+            public var statusesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/number`.
+            public var number: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/state`.
+            public var state: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/locked`.
+            public var locked: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/title`.
+            public var title: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/user`.
+            public var user: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/body`.
+            public var body: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload`.
+            public struct LabelsPayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/id`.
+                public var id: Swift.Int64
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/node_id`.
+                public var nodeId: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/url`.
+                public var url: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/name`.
+                public var name: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/description`.
+                public var description: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/color`.
+                public var color: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/default`.
+                public var _default: Swift.Bool
+                /// Creates a new `LabelsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - id:
+                ///   - nodeId:
+                ///   - url:
+                ///   - name:
+                ///   - description:
+                ///   - color:
+                ///   - _default:
+                public init(
+                    id: Swift.Int64,
+                    nodeId: Swift.String,
+                    url: Swift.String,
+                    name: Swift.String,
+                    description: Swift.String,
+                    color: Swift.String,
+                    _default: Swift.Bool
+                ) {
+                    self.id = id
+                    self.nodeId = nodeId
+                    self.url = url
+                    self.name = name
+                    self.description = description
+                    self.color = color
+                    self._default = _default
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case nodeId = "node_id"
+                    case url
+                    case name
+                    case description
+                    case color
+                    case _default = "default"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/labels`.
+            public typealias LabelsPayload = [Components.Schemas.PullRequestSimple.LabelsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/labels`.
+            public var labels: Components.Schemas.PullRequestSimple.LabelsPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/milestone`.
+            public var milestone: Components.Schemas.NullableMilestone?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/active_lock_reason`.
+            public var activeLockReason: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/closed_at`.
+            public var closedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/merged_at`.
+            public var mergedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/merge_commit_sha`.
+            public var mergeCommitSha: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/assignee`.
+            public var assignee: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/assignees`.
+            public var assignees: [Components.Schemas.SimpleUser]?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/requested_reviewers`.
+            public var requestedReviewers: [Components.Schemas.SimpleUser]?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/requested_teams`.
+            public var requestedTeams: [Components.Schemas.Team]?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/head`.
+            public struct HeadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/label`.
+                public var label: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/repo`.
+                public var repo: Components.Schemas.Repository
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/user`.
+                public var user: Components.Schemas.NullableSimpleUser?
+                /// Creates a new `HeadPayload`.
+                ///
+                /// - Parameters:
+                ///   - label:
+                ///   - ref:
+                ///   - repo:
+                ///   - sha:
+                ///   - user:
+                public init(
+                    label: Swift.String,
+                    ref: Swift.String,
+                    repo: Components.Schemas.Repository,
+                    sha: Swift.String,
+                    user: Components.Schemas.NullableSimpleUser? = nil
+                ) {
+                    self.label = label
+                    self.ref = ref
+                    self.repo = repo
+                    self.sha = sha
+                    self.user = user
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case label
+                    case ref
+                    case repo
+                    case sha
+                    case user
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/head`.
+            public var head: Components.Schemas.PullRequestSimple.HeadPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/label`.
+                public var label: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/repo`.
+                public var repo: Components.Schemas.Repository
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/user`.
+                public var user: Components.Schemas.NullableSimpleUser?
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - label:
+                ///   - ref:
+                ///   - repo:
+                ///   - sha:
+                ///   - user:
+                public init(
+                    label: Swift.String,
+                    ref: Swift.String,
+                    repo: Components.Schemas.Repository,
+                    sha: Swift.String,
+                    user: Components.Schemas.NullableSimpleUser? = nil
+                ) {
+                    self.label = label
+                    self.ref = ref
+                    self.repo = repo
+                    self.sha = sha
+                    self.user = user
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case label
+                    case ref
+                    case repo
+                    case sha
+                    case user
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/base`.
+            public var base: Components.Schemas.PullRequestSimple.BasePayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links`.
+            public struct _LinksPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/comments`.
+                public var comments: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/commits`.
+                public var commits: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/statuses`.
+                public var statuses: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/html`.
+                public var html: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/issue`.
+                public var issue: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/review_comments`.
+                public var reviewComments: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/review_comment`.
+                public var reviewComment: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/self`.
+                public var _self: Components.Schemas.Link
+                /// Creates a new `_LinksPayload`.
+                ///
+                /// - Parameters:
+                ///   - comments:
+                ///   - commits:
+                ///   - statuses:
+                ///   - html:
+                ///   - issue:
+                ///   - reviewComments:
+                ///   - reviewComment:
+                ///   - _self:
+                public init(
+                    comments: Components.Schemas.Link,
+                    commits: Components.Schemas.Link,
+                    statuses: Components.Schemas.Link,
+                    html: Components.Schemas.Link,
+                    issue: Components.Schemas.Link,
+                    reviewComments: Components.Schemas.Link,
+                    reviewComment: Components.Schemas.Link,
+                    _self: Components.Schemas.Link
+                ) {
+                    self.comments = comments
+                    self.commits = commits
+                    self.statuses = statuses
+                    self.html = html
+                    self.issue = issue
+                    self.reviewComments = reviewComments
+                    self.reviewComment = reviewComment
+                    self._self = _self
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case comments
+                    case commits
+                    case statuses
+                    case html
+                    case issue
+                    case reviewComments = "review_comments"
+                    case reviewComment = "review_comment"
+                    case _self = "self"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links`.
+            public var _links: Components.Schemas.PullRequestSimple._LinksPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/author_association`.
+            public var authorAssociation: Components.Schemas.AuthorAssociation
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/auto_merge`.
+            public var autoMerge: Components.Schemas.AutoMerge?
+            /// Indicates whether or not the pull request is a draft.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/draft`.
+            public var draft: Swift.Bool?
+            /// Creates a new `PullRequestSimple`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - id:
+            ///   - nodeId:
+            ///   - htmlUrl:
+            ///   - diffUrl:
+            ///   - patchUrl:
+            ///   - issueUrl:
+            ///   - commitsUrl:
+            ///   - reviewCommentsUrl:
+            ///   - reviewCommentUrl:
+            ///   - commentsUrl:
+            ///   - statusesUrl:
+            ///   - number:
+            ///   - state:
+            ///   - locked:
+            ///   - title:
+            ///   - user:
+            ///   - body:
+            ///   - labels:
+            ///   - milestone:
+            ///   - activeLockReason:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - closedAt:
+            ///   - mergedAt:
+            ///   - mergeCommitSha:
+            ///   - assignee:
+            ///   - assignees:
+            ///   - requestedReviewers:
+            ///   - requestedTeams:
+            ///   - head:
+            ///   - base:
+            ///   - _links:
+            ///   - authorAssociation:
+            ///   - autoMerge:
+            ///   - draft: Indicates whether or not the pull request is a draft.
+            public init(
+                url: Swift.String,
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                htmlUrl: Swift.String,
+                diffUrl: Swift.String,
+                patchUrl: Swift.String,
+                issueUrl: Swift.String,
+                commitsUrl: Swift.String,
+                reviewCommentsUrl: Swift.String,
+                reviewCommentUrl: Swift.String,
+                commentsUrl: Swift.String,
+                statusesUrl: Swift.String,
+                number: Swift.Int,
+                state: Swift.String,
+                locked: Swift.Bool,
+                title: Swift.String,
+                user: Components.Schemas.NullableSimpleUser? = nil,
+                body: Swift.String? = nil,
+                labels: Components.Schemas.PullRequestSimple.LabelsPayload,
+                milestone: Components.Schemas.NullableMilestone? = nil,
+                activeLockReason: Swift.String? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                closedAt: Foundation.Date? = nil,
+                mergedAt: Foundation.Date? = nil,
+                mergeCommitSha: Swift.String? = nil,
+                assignee: Components.Schemas.NullableSimpleUser? = nil,
+                assignees: [Components.Schemas.SimpleUser]? = nil,
+                requestedReviewers: [Components.Schemas.SimpleUser]? = nil,
+                requestedTeams: [Components.Schemas.Team]? = nil,
+                head: Components.Schemas.PullRequestSimple.HeadPayload,
+                base: Components.Schemas.PullRequestSimple.BasePayload,
+                _links: Components.Schemas.PullRequestSimple._LinksPayload,
+                authorAssociation: Components.Schemas.AuthorAssociation,
+                autoMerge: Components.Schemas.AutoMerge? = nil,
+                draft: Swift.Bool? = nil
+            ) {
+                self.url = url
+                self.id = id
+                self.nodeId = nodeId
+                self.htmlUrl = htmlUrl
+                self.diffUrl = diffUrl
+                self.patchUrl = patchUrl
+                self.issueUrl = issueUrl
+                self.commitsUrl = commitsUrl
+                self.reviewCommentsUrl = reviewCommentsUrl
+                self.reviewCommentUrl = reviewCommentUrl
+                self.commentsUrl = commentsUrl
+                self.statusesUrl = statusesUrl
+                self.number = number
+                self.state = state
+                self.locked = locked
+                self.title = title
+                self.user = user
+                self.body = body
+                self.labels = labels
+                self.milestone = milestone
+                self.activeLockReason = activeLockReason
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.closedAt = closedAt
+                self.mergedAt = mergedAt
+                self.mergeCommitSha = mergeCommitSha
+                self.assignee = assignee
+                self.assignees = assignees
+                self.requestedReviewers = requestedReviewers
+                self.requestedTeams = requestedTeams
+                self.head = head
+                self.base = base
+                self._links = _links
+                self.authorAssociation = authorAssociation
+                self.autoMerge = autoMerge
+                self.draft = draft
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case id
+                case nodeId = "node_id"
+                case htmlUrl = "html_url"
+                case diffUrl = "diff_url"
+                case patchUrl = "patch_url"
+                case issueUrl = "issue_url"
+                case commitsUrl = "commits_url"
+                case reviewCommentsUrl = "review_comments_url"
+                case reviewCommentUrl = "review_comment_url"
+                case commentsUrl = "comments_url"
+                case statusesUrl = "statuses_url"
+                case number
+                case state
+                case locked
+                case title
+                case user
+                case body
+                case labels
+                case milestone
+                case activeLockReason = "active_lock_reason"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case closedAt = "closed_at"
+                case mergedAt = "merged_at"
+                case mergeCommitSha = "merge_commit_sha"
+                case assignee
+                case assignees
+                case requestedReviewers = "requested_reviewers"
+                case requestedTeams = "requested_teams"
+                case head
+                case base
+                case _links
+                case authorAssociation = "author_association"
+                case autoMerge = "auto_merge"
+                case draft
+            }
+        }
+        /// A draft issue in a project
+        ///
+        /// - Remark: Generated from `#/components/schemas/projects-v2-draft-issue`.
+        public struct ProjectsV2DraftIssue: Codable, Hashable, Sendable {
+            /// The ID of the draft issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-draft-issue/id`.
+            public var id: Swift.Double
+            /// The node ID of the draft issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-draft-issue/node_id`.
+            public var nodeId: Swift.String
+            /// The title of the draft issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-draft-issue/title`.
+            public var title: Swift.String
+            /// The body content of the draft issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-draft-issue/body`.
+            public var body: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/projects-v2-draft-issue/user`.
+            public var user: Components.Schemas.NullableSimpleUser?
+            /// The time the draft issue was created
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-draft-issue/created_at`.
+            public var createdAt: Foundation.Date
+            /// The time the draft issue was last updated
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-draft-issue/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// Creates a new `ProjectsV2DraftIssue`.
+            ///
+            /// - Parameters:
+            ///   - id: The ID of the draft issue
+            ///   - nodeId: The node ID of the draft issue
+            ///   - title: The title of the draft issue
+            ///   - body: The body content of the draft issue
+            ///   - user:
+            ///   - createdAt: The time the draft issue was created
+            ///   - updatedAt: The time the draft issue was last updated
+            public init(
+                id: Swift.Double,
+                nodeId: Swift.String,
+                title: Swift.String,
+                body: Swift.String? = nil,
+                user: Components.Schemas.NullableSimpleUser? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.title = title
+                self.body = body
+                self.user = user
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case title
+                case body
+                case user
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+            }
+        }
+        /// An item belonging to a project
+        ///
+        /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple`.
+        public struct ProjectsV2ItemSimple: Codable, Hashable, Sendable {
+            /// The unique identifier of the project item.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/id`.
+            public var id: Swift.Double
+            /// The node ID of the project item.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/node_id`.
+            public var nodeId: Swift.String?
+            /// The content represented by the item.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/content`.
+            @frozen public enum ContentPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/content/case1`.
+                case Issue(Components.Schemas.Issue)
+                /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/content/case2`.
+                case PullRequestSimple(Components.Schemas.PullRequestSimple)
+                /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/content/case3`.
+                case ProjectsV2DraftIssue(Components.Schemas.ProjectsV2DraftIssue)
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self = .Issue(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .PullRequestSimple(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .ProjectsV2DraftIssue(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    switch self {
+                    case let .Issue(value):
+                        try value.encode(to: encoder)
+                    case let .PullRequestSimple(value):
+                        try value.encode(to: encoder)
+                    case let .ProjectsV2DraftIssue(value):
+                        try value.encode(to: encoder)
+                    }
+                }
+            }
+            /// The content represented by the item.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/content`.
+            public var content: Components.Schemas.ProjectsV2ItemSimple.ContentPayload?
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/content_type`.
+            public var contentType: Components.Schemas.ProjectsV2ItemContentType
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/creator`.
+            public var creator: Components.Schemas.SimpleUser?
+            /// The time when the item was created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/created_at`.
+            public var createdAt: Foundation.Date
+            /// The time when the item was last updated.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// The time when the item was archived.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/archived_at`.
+            public var archivedAt: Foundation.Date?
+            /// The URL of the project this item belongs to.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/project_url`.
+            public var projectUrl: Swift.String?
+            /// The URL of the item in the project.
+            ///
+            /// - Remark: Generated from `#/components/schemas/projects-v2-item-simple/item_url`.
+            public var itemUrl: Swift.String?
+            /// Creates a new `ProjectsV2ItemSimple`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the project item.
+            ///   - nodeId: The node ID of the project item.
+            ///   - content: The content represented by the item.
+            ///   - contentType:
+            ///   - creator:
+            ///   - createdAt: The time when the item was created.
+            ///   - updatedAt: The time when the item was last updated.
+            ///   - archivedAt: The time when the item was archived.
+            ///   - projectUrl: The URL of the project this item belongs to.
+            ///   - itemUrl: The URL of the item in the project.
+            public init(
+                id: Swift.Double,
+                nodeId: Swift.String? = nil,
+                content: Components.Schemas.ProjectsV2ItemSimple.ContentPayload? = nil,
+                contentType: Components.Schemas.ProjectsV2ItemContentType,
+                creator: Components.Schemas.SimpleUser? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                archivedAt: Foundation.Date? = nil,
+                projectUrl: Swift.String? = nil,
+                itemUrl: Swift.String? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.content = content
+                self.contentType = contentType
+                self.creator = creator
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.archivedAt = archivedAt
+                self.projectUrl = projectUrl
+                self.itemUrl = itemUrl
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case content
+                case contentType = "content_type"
+                case creator
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case archivedAt = "archived_at"
+                case projectUrl = "project_url"
+                case itemUrl = "item_url"
+            }
+        }
+    }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
-    public enum Parameters {}
+    public enum Parameters {
+        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+        ///
+        /// - Remark: Generated from `#/components/parameters/pagination-before`.
+        public typealias PaginationBefore = Swift.String
+        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+        ///
+        /// - Remark: Generated from `#/components/parameters/pagination-after`.
+        public typealias PaginationAfter = Swift.String
+        /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+        ///
+        /// - Remark: Generated from `#/components/parameters/per-page`.
+        public typealias PerPage = Swift.Int
+        /// The organization name. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/org`.
+        public typealias Org = Swift.String
+        /// The handle for the GitHub user account.
+        ///
+        /// - Remark: Generated from `#/components/parameters/username`.
+        public typealias Username = Swift.String
+        /// The project's number.
+        ///
+        /// - Remark: Generated from `#/components/parameters/project-number`.
+        public typealias ProjectNumber = Swift.Int
+        /// The unique identifier of the field.
+        ///
+        /// - Remark: Generated from `#/components/parameters/field-id`.
+        public typealias FieldId = Swift.Int
+        /// The unique identifier of the project item.
+        ///
+        /// - Remark: Generated from `#/components/parameters/item-id`.
+        public typealias ItemId = Swift.Int
+        /// The unique identifier of the user.
+        ///
+        /// - Remark: Generated from `#/components/parameters/user-id`.
+        public typealias UserId = Swift.String
+    }
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}
     /// Types generated from the `#/components/responses` section of the OpenAPI document.
-    public enum Responses {}
+    public enum Responses {
+        public struct NotFound: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/not_found/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/not_found/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.NotFound.Body
+            /// Creates a new `NotFound`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.NotFound.Body) {
+                self.body = body
+            }
+        }
+        public struct ValidationFailed: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/validation_failed/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/validation_failed/content/application\/json`.
+                case json(Components.Schemas.ValidationError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.ValidationError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.ValidationFailed.Body
+            /// Creates a new `ValidationFailed`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.ValidationFailed.Body) {
+                self.body = body
+            }
+        }
+        public struct NotModified: Sendable, Hashable {
+            /// Creates a new `NotModified`.
+            public init() {}
+        }
+        public struct RequiresAuthentication: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/requires_authentication/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/requires_authentication/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.RequiresAuthentication.Body
+            /// Creates a new `RequiresAuthentication`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.RequiresAuthentication.Body) {
+                self.body = body
+            }
+        }
+        public struct Forbidden: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/forbidden/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/forbidden/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.Forbidden.Body
+            /// Creates a new `Forbidden`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.Forbidden.Body) {
+                self.body = body
+            }
+        }
+    }
     /// Types generated from the `#/components/headers` section of the OpenAPI document.
-    public enum Headers {}
+    public enum Headers {
+        /// - Remark: Generated from `#/components/headers/link`.
+        public typealias Link = Swift.String
+    }
 }
 
 /// API operations, with input and output types, generated from `#/paths` in the OpenAPI document.
-public enum Operations {}
+public enum Operations {
+    /// List projects for organization
+    ///
+    /// List all projects owned by a specific organization accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/get(projects/list-for-org)`.
+    public enum ProjectsListForOrg {
+        public static let id: Swift.String = "projects/list-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ProjectsListForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// Limit results to projects of the specified type.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/query/q`.
+                public var q: Swift.String?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/query/before`.
+                public var before: Components.Parameters.PaginationBefore?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - q: Limit results to projects of the specified type.
+                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    q: Swift.String? = nil,
+                    before: Components.Parameters.PaginationBefore? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil,
+                    perPage: Components.Parameters.PerPage? = nil
+                ) {
+                    self.q = q
+                    self.before = before
+                    self.after = after
+                    self.perPage = perPage
+                }
+            }
+            public var query: Operations.ProjectsListForOrg.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsListForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsListForOrg.Input.Path,
+                query: Operations.ProjectsListForOrg.Input.Query = .init(),
+                headers: Operations.ProjectsListForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsListForOrg.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.ProjectsV2])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.ProjectsV2] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsListForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsListForOrg.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsListForOrg.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/get(projects/list-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsListForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsListForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/get(projects/list-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/get(projects/list-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/get(projects/list-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/get(projects/list-for-org)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get project for organization
+    ///
+    /// Get a specific organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/get(projects/get-for-org)`.
+    public enum ProjectsGetForOrg {
+        public static let id: Swift.String = "projects/get-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/GET/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    org: Components.Parameters.Org
+                ) {
+                    self.projectNumber = projectNumber
+                    self.org = org
+                }
+            }
+            public var path: Operations.ProjectsGetForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsGetForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsGetForOrg.Input.Path,
+                headers: Operations.ProjectsGetForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsGetForOrg.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ProjectsV2)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ProjectsV2 {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsGetForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsGetForOrg.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsGetForOrg.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/get(projects/get-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsGetForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsGetForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/get(projects/get-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/get(projects/get-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/get(projects/get-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/get(projects/get-for-org)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List project fields for organization
+    ///
+    /// List all fields for a specific organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/fields`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/get(projects/list-fields-for-org)`.
+    public enum ProjectsListFieldsForOrg {
+        public static let id: Swift.String = "projects/list-fields-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    org: Components.Parameters.Org
+                ) {
+                    self.projectNumber = projectNumber
+                    self.org = org
+                }
+            }
+            public var path: Operations.ProjectsListFieldsForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/query/before`.
+                public var before: Components.Parameters.PaginationBefore?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    before: Components.Parameters.PaginationBefore? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil
+                ) {
+                    self.perPage = perPage
+                    self.before = before
+                    self.after = after
+                }
+            }
+            public var query: Operations.ProjectsListFieldsForOrg.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListFieldsForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListFieldsForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsListFieldsForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsListFieldsForOrg.Input.Path,
+                query: Operations.ProjectsListFieldsForOrg.Input.Query = .init(),
+                headers: Operations.ProjectsListFieldsForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsListFieldsForOrg.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.ProjectsV2Field])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.ProjectsV2Field] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsListFieldsForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsListFieldsForOrg.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsListFieldsForOrg.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/get(projects/list-fields-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsListFieldsForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsListFieldsForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/get(projects/list-fields-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/get(projects/list-fields-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/get(projects/list-fields-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/get(projects/list-fields-for-org)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get project field for organization
+    ///
+    /// Get a specific field for an organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/fields/{field_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-org)`.
+    public enum ProjectsGetFieldForOrg {
+        public static let id: Swift.String = "projects/get-field-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/{field_id}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/{field_id}/GET/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The unique identifier of the field.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/{field_id}/GET/path/field_id`.
+                public var fieldId: Components.Parameters.FieldId
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/{field_id}/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - fieldId: The unique identifier of the field.
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    fieldId: Components.Parameters.FieldId,
+                    org: Components.Parameters.Org
+                ) {
+                    self.projectNumber = projectNumber
+                    self.fieldId = fieldId
+                    self.org = org
+                }
+            }
+            public var path: Operations.ProjectsGetFieldForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/{field_id}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetFieldForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetFieldForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsGetFieldForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsGetFieldForOrg.Input.Path,
+                headers: Operations.ProjectsGetFieldForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/{field_id}/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/{field_id}/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsGetFieldForOrg.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/{field_id}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/fields/{field_id}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ProjectsV2Field)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ProjectsV2Field {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsGetFieldForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsGetFieldForOrg.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsGetFieldForOrg.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsGetFieldForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsGetFieldForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-org)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List items for an organization owned project
+    ///
+    /// List all items for a specific organization-owned project accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/get(projects/list-items-for-org)`.
+    public enum ProjectsListItemsForOrg {
+        public static let id: Swift.String = "projects/list-items-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    org: Components.Parameters.Org
+                ) {
+                    self.projectNumber = projectNumber
+                    self.org = org
+                }
+            }
+            public var path: Operations.ProjectsListItemsForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// Search query to filter items, see [Filtering projects](https://docs.github.com/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/filtering-projects) for more information.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query/q`.
+                public var q: Swift.String?
+                /// Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query/fields`.
+                public var fields: [Swift.String]?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query/before`.
+                public var before: Components.Parameters.PaginationBefore?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - q: Search query to filter items, see [Filtering projects](https://docs.github.com/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/filtering-projects) for more information.
+                ///   - fields: Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    q: Swift.String? = nil,
+                    fields: [Swift.String]? = nil,
+                    before: Components.Parameters.PaginationBefore? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil,
+                    perPage: Components.Parameters.PerPage? = nil
+                ) {
+                    self.q = q
+                    self.fields = fields
+                    self.before = before
+                    self.after = after
+                    self.perPage = perPage
+                }
+            }
+            public var query: Operations.ProjectsListItemsForOrg.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListItemsForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListItemsForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsListItemsForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsListItemsForOrg.Input.Path,
+                query: Operations.ProjectsListItemsForOrg.Input.Query = .init(),
+                headers: Operations.ProjectsListItemsForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsListItemsForOrg.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.ProjectsV2ItemWithContent])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.ProjectsV2ItemWithContent] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsListItemsForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsListItemsForOrg.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsListItemsForOrg.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/get(projects/list-items-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsListItemsForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsListItemsForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/get(projects/list-items-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/get(projects/list-items-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/get(projects/list-items-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/get(projects/list-items-for-org)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Add item to organization owned project
+    ///
+    /// Add an issue or pull request item to the specified organization owned project.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/post(projects/add-item-for-org)`.
+    public enum ProjectsAddItemForOrg {
+        public static let id: Swift.String = "projects/add-item-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/path/org`.
+                public var org: Components.Parameters.Org
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - projectNumber: The project's number.
+                public init(
+                    org: Components.Parameters.Org,
+                    projectNumber: Components.Parameters.ProjectNumber
+                ) {
+                    self.org = org
+                    self.projectNumber = projectNumber
+                }
+            }
+            public var path: Operations.ProjectsAddItemForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsAddItemForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsAddItemForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsAddItemForOrg.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The type of item to add to the project. Must be either Issue or PullRequest.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/requestBody/json/type`.
+                    @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case issue = "Issue"
+                        case pullRequest = "PullRequest"
+                    }
+                    /// The type of item to add to the project. Must be either Issue or PullRequest.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/requestBody/json/type`.
+                    public var _type: Operations.ProjectsAddItemForOrg.Input.Body.JsonPayload._TypePayload
+                    /// The numeric ID of the issue or pull request to add to the project.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/requestBody/json/id`.
+                    public var id: Swift.Int
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - _type: The type of item to add to the project. Must be either Issue or PullRequest.
+                    ///   - id: The numeric ID of the issue or pull request to add to the project.
+                    public init(
+                        _type: Operations.ProjectsAddItemForOrg.Input.Body.JsonPayload._TypePayload,
+                        id: Swift.Int
+                    ) {
+                        self._type = _type
+                        self.id = id
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case _type = "type"
+                        case id
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/requestBody/content/application\/json`.
+                case json(Operations.ProjectsAddItemForOrg.Input.Body.JsonPayload)
+            }
+            public var body: Operations.ProjectsAddItemForOrg.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ProjectsAddItemForOrg.Input.Path,
+                headers: Operations.ProjectsAddItemForOrg.Input.Headers = .init(),
+                body: Operations.ProjectsAddItemForOrg.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/responses/201/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/POST/responses/201/content/application\/json`.
+                    case json(Components.Schemas.ProjectsV2ItemSimple)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ProjectsV2ItemSimple {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsAddItemForOrg.Output.Created.Body
+                /// Creates a new `Created`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ProjectsAddItemForOrg.Output.Created.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/post(projects/add-item-for-org)/responses/201`.
+            ///
+            /// HTTP response code: `201 created`.
+            case created(Operations.ProjectsAddItemForOrg.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
+            ///
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.ProjectsAddItemForOrg.Output.Created {
+                get throws {
+                    switch self {
+                    case let .created(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/post(projects/add-item-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/post(projects/add-item-for-org)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/post(projects/add-item-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/post(projects/add-item-for-org)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get an item for an organization owned project
+    ///
+    /// Get a specific item from an organization-owned project.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/get(projects/get-org-item)`.
+    public enum ProjectsGetOrgItem {
+        public static let id: Swift.String = "projects/get-org-item"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// The unique identifier of the project item.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/path/item_id`.
+                public var itemId: Components.Parameters.ItemId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - itemId: The unique identifier of the project item.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    org: Components.Parameters.Org,
+                    itemId: Components.Parameters.ItemId
+                ) {
+                    self.projectNumber = projectNumber
+                    self.org = org
+                    self.itemId = itemId
+                }
+            }
+            public var path: Operations.ProjectsGetOrgItem.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/query/fields`.
+                public var fields: [Swift.String]?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - fields: Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+                public init(fields: [Swift.String]? = nil) {
+                    self.fields = fields
+                }
+            }
+            public var query: Operations.ProjectsGetOrgItem.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetOrgItem.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetOrgItem.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsGetOrgItem.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsGetOrgItem.Input.Path,
+                query: Operations.ProjectsGetOrgItem.Input.Query = .init(),
+                headers: Operations.ProjectsGetOrgItem.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsGetOrgItem.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ProjectsV2ItemWithContent)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ProjectsV2ItemWithContent {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsGetOrgItem.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsGetOrgItem.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsGetOrgItem.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/get(projects/get-org-item)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsGetOrgItem.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsGetOrgItem.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/get(projects/get-org-item)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/get(projects/get-org-item)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/get(projects/get-org-item)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/get(projects/get-org-item)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Update project item for organization
+    ///
+    /// Update a specific item in an organization-owned project.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-org)`.
+    public enum ProjectsUpdateItemForOrg {
+        public static let id: Swift.String = "projects/update-item-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/path/org`.
+                public var org: Components.Parameters.Org
+                /// The unique identifier of the project item.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/path/item_id`.
+                public var itemId: Components.Parameters.ItemId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - itemId: The unique identifier of the project item.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    org: Components.Parameters.Org,
+                    itemId: Components.Parameters.ItemId
+                ) {
+                    self.projectNumber = projectNumber
+                    self.org = org
+                    self.itemId = itemId
+                }
+            }
+            public var path: Operations.ProjectsUpdateItemForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsUpdateItemForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsUpdateItemForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsUpdateItemForOrg.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload`.
+                    public struct FieldsPayloadPayload: Codable, Hashable, Sendable {
+                        /// The ID of the project field to update.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload/id`.
+                        public var id: Swift.Int
+                        /// The new value for the field:
+                        /// - For text, number, and date fields, provide the new value directly.
+                        /// - For single select and iteration fields, provide the ID of the option or iteration.
+                        /// - To clear the field, set this to null.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload/value`.
+                        @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload/value/case1`.
+                            case case1(Swift.String)
+                            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload/value/case2`.
+                            case case2(Swift.Double)
+                            public init(from decoder: any Decoder) throws {
+                                var errors: [any Error] = []
+                                do {
+                                    self = .case1(try decoder.decodeFromSingleValueContainer())
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                do {
+                                    self = .case2(try decoder.decodeFromSingleValueContainer())
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                    type: Self.self,
+                                    codingPath: decoder.codingPath,
+                                    errors: errors
+                                )
+                            }
+                            public func encode(to encoder: any Encoder) throws {
+                                switch self {
+                                case let .case1(value):
+                                    try encoder.encodeToSingleValueContainer(value)
+                                case let .case2(value):
+                                    try encoder.encodeToSingleValueContainer(value)
+                                }
+                            }
+                        }
+                        /// The new value for the field:
+                        /// - For text, number, and date fields, provide the new value directly.
+                        /// - For single select and iteration fields, provide the ID of the option or iteration.
+                        /// - To clear the field, set this to null.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload/value`.
+                        public var value: Operations.ProjectsUpdateItemForOrg.Input.Body.JsonPayload.FieldsPayloadPayload.ValuePayload?
+                        /// Creates a new `FieldsPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - id: The ID of the project field to update.
+                        ///   - value: The new value for the field:
+                        public init(
+                            id: Swift.Int,
+                            value: Operations.ProjectsUpdateItemForOrg.Input.Body.JsonPayload.FieldsPayloadPayload.ValuePayload? = nil
+                        ) {
+                            self.id = id
+                            self.value = value
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case id
+                            case value
+                        }
+                    }
+                    /// A list of field updates to apply.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/fields`.
+                    public typealias FieldsPayload = [Operations.ProjectsUpdateItemForOrg.Input.Body.JsonPayload.FieldsPayloadPayload]
+                    /// A list of field updates to apply.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/fields`.
+                    public var fields: Operations.ProjectsUpdateItemForOrg.Input.Body.JsonPayload.FieldsPayload
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - fields: A list of field updates to apply.
+                    public init(fields: Operations.ProjectsUpdateItemForOrg.Input.Body.JsonPayload.FieldsPayload) {
+                        self.fields = fields
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case fields
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/content/application\/json`.
+                case json(Operations.ProjectsUpdateItemForOrg.Input.Body.JsonPayload)
+            }
+            public var body: Operations.ProjectsUpdateItemForOrg.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ProjectsUpdateItemForOrg.Input.Path,
+                headers: Operations.ProjectsUpdateItemForOrg.Input.Headers = .init(),
+                body: Operations.ProjectsUpdateItemForOrg.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/PATCH/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ProjectsV2ItemWithContent)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ProjectsV2ItemWithContent {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsUpdateItemForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ProjectsUpdateItemForOrg.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsUpdateItemForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsUpdateItemForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-org)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-org)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-org)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Delete project item for organization
+    ///
+    /// Delete a specific item from an organization-owned project.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-org)`.
+    public enum ProjectsDeleteItemForOrg {
+        public static let id: Swift.String = "projects/delete-item-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/DELETE/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/DELETE/path/org`.
+                public var org: Components.Parameters.Org
+                /// The unique identifier of the project item.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/DELETE/path/item_id`.
+                public var itemId: Components.Parameters.ItemId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - itemId: The unique identifier of the project item.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    org: Components.Parameters.Org,
+                    itemId: Components.Parameters.ItemId
+                ) {
+                    self.projectNumber = projectNumber
+                    self.org = org
+                    self.itemId = itemId
+                }
+            }
+            public var path: Operations.ProjectsDeleteItemForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsDeleteItemForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsDeleteItemForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsDeleteItemForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsDeleteItemForOrg.Input.Path,
+                headers: Operations.ProjectsDeleteItemForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-org)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ProjectsDeleteItemForOrg.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-org)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ProjectsDeleteItemForOrg.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-org)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get project for user
+    ///
+    /// Get a specific user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/get(projects/get-for-user)`.
+    public enum ProjectsGetForUser {
+        public static let id: Swift.String = "projects/get-for-user"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/GET/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The unique identifier of the user.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/GET/path/user_id`.
+                public var userId: Components.Parameters.UserId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - userId: The unique identifier of the user.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    userId: Components.Parameters.UserId
+                ) {
+                    self.projectNumber = projectNumber
+                    self.userId = userId
+                }
+            }
+            public var path: Operations.ProjectsGetForUser.Input.Path
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetForUser.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetForUser.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsGetForUser.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsGetForUser.Input.Path,
+                headers: Operations.ProjectsGetForUser.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsGetForUser.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ProjectsV2)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ProjectsV2 {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsGetForUser.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsGetForUser.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsGetForUser.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/get(projects/get-for-user)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsGetForUser.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsGetForUser.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/get(projects/get-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/get(projects/get-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/get(projects/get-for-user)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/get(projects/get-for-user)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List project fields for user
+    ///
+    /// List all fields for a specific user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/fields`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/get(projects/list-fields-for-user)`.
+    public enum ProjectsListFieldsForUser {
+        public static let id: Swift.String = "projects/list-fields-for-user"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The unique identifier of the user.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/path/user_id`.
+                public var userId: Components.Parameters.UserId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - userId: The unique identifier of the user.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    userId: Components.Parameters.UserId
+                ) {
+                    self.projectNumber = projectNumber
+                    self.userId = userId
+                }
+            }
+            public var path: Operations.ProjectsListFieldsForUser.Input.Path
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/query/before`.
+                public var before: Components.Parameters.PaginationBefore?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    before: Components.Parameters.PaginationBefore? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil
+                ) {
+                    self.perPage = perPage
+                    self.before = before
+                    self.after = after
+                }
+            }
+            public var query: Operations.ProjectsListFieldsForUser.Input.Query
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListFieldsForUser.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListFieldsForUser.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsListFieldsForUser.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsListFieldsForUser.Input.Path,
+                query: Operations.ProjectsListFieldsForUser.Input.Query = .init(),
+                headers: Operations.ProjectsListFieldsForUser.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsListFieldsForUser.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.ProjectsV2Field])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.ProjectsV2Field] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsListFieldsForUser.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsListFieldsForUser.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsListFieldsForUser.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/get(projects/list-fields-for-user)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsListFieldsForUser.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsListFieldsForUser.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/get(projects/list-fields-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/get(projects/list-fields-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/get(projects/list-fields-for-user)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/get(projects/list-fields-for-user)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get project field for user
+    ///
+    /// Get a specific field for a user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/fields/{field_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-user)`.
+    public enum ProjectsGetFieldForUser {
+        public static let id: Swift.String = "projects/get-field-for-user"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/{field_id}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/{field_id}/GET/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The unique identifier of the field.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/{field_id}/GET/path/field_id`.
+                public var fieldId: Components.Parameters.FieldId
+                /// The unique identifier of the user.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/{field_id}/GET/path/user_id`.
+                public var userId: Components.Parameters.UserId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - fieldId: The unique identifier of the field.
+                ///   - userId: The unique identifier of the user.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    fieldId: Components.Parameters.FieldId,
+                    userId: Components.Parameters.UserId
+                ) {
+                    self.projectNumber = projectNumber
+                    self.fieldId = fieldId
+                    self.userId = userId
+                }
+            }
+            public var path: Operations.ProjectsGetFieldForUser.Input.Path
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/{field_id}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetFieldForUser.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetFieldForUser.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsGetFieldForUser.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsGetFieldForUser.Input.Path,
+                headers: Operations.ProjectsGetFieldForUser.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/{field_id}/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/{field_id}/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsGetFieldForUser.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/{field_id}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/fields/{field_id}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ProjectsV2Field)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ProjectsV2Field {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsGetFieldForUser.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsGetFieldForUser.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsGetFieldForUser.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-user)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsGetFieldForUser.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsGetFieldForUser.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-user)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-user)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List items for a user owned project
+    ///
+    /// List all items for a specific user-owned project accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/get(projects/list-items-for-user)`.
+    public enum ProjectsListItemsForUser {
+        public static let id: Swift.String = "projects/list-items-for-user"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The unique identifier of the user.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/path/user_id`.
+                public var userId: Components.Parameters.UserId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - userId: The unique identifier of the user.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    userId: Components.Parameters.UserId
+                ) {
+                    self.projectNumber = projectNumber
+                    self.userId = userId
+                }
+            }
+            public var path: Operations.ProjectsListItemsForUser.Input.Path
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/query/before`.
+                public var before: Components.Parameters.PaginationBefore?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// Search query to filter items, see [Filtering projects](https://docs.github.com/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/filtering-projects) for more information.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/query/q`.
+                public var q: Swift.String?
+                /// Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/query/fields`.
+                public var fields: [Swift.String]?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - q: Search query to filter items, see [Filtering projects](https://docs.github.com/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/filtering-projects) for more information.
+                ///   - fields: Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+                public init(
+                    before: Components.Parameters.PaginationBefore? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil,
+                    perPage: Components.Parameters.PerPage? = nil,
+                    q: Swift.String? = nil,
+                    fields: [Swift.String]? = nil
+                ) {
+                    self.before = before
+                    self.after = after
+                    self.perPage = perPage
+                    self.q = q
+                    self.fields = fields
+                }
+            }
+            public var query: Operations.ProjectsListItemsForUser.Input.Query
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListItemsForUser.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListItemsForUser.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsListItemsForUser.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsListItemsForUser.Input.Path,
+                query: Operations.ProjectsListItemsForUser.Input.Query = .init(),
+                headers: Operations.ProjectsListItemsForUser.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsListItemsForUser.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.ProjectsV2ItemWithContent])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.ProjectsV2ItemWithContent] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsListItemsForUser.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsListItemsForUser.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsListItemsForUser.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/get(projects/list-items-for-user)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsListItemsForUser.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsListItemsForUser.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/get(projects/list-items-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/get(projects/list-items-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/get(projects/list-items-for-user)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/get(projects/list-items-for-user)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Add item to user owned project
+    ///
+    /// Add an issue or pull request item to the specified user owned project.
+    ///
+    /// - Remark: HTTP `POST /users/{user_id}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/post(projects/add-item-for-user)`.
+    public enum ProjectsAddItemForUser {
+        public static let id: Swift.String = "projects/add-item-for-user"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The unique identifier of the user.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/path/user_id`.
+                public var userId: Components.Parameters.UserId
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - userId: The unique identifier of the user.
+                ///   - projectNumber: The project's number.
+                public init(
+                    userId: Components.Parameters.UserId,
+                    projectNumber: Components.Parameters.ProjectNumber
+                ) {
+                    self.userId = userId
+                    self.projectNumber = projectNumber
+                }
+            }
+            public var path: Operations.ProjectsAddItemForUser.Input.Path
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsAddItemForUser.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsAddItemForUser.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsAddItemForUser.Input.Headers
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The type of item to add to the project. Must be either Issue or PullRequest.
+                    ///
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/requestBody/json/type`.
+                    @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case issue = "Issue"
+                        case pullRequest = "PullRequest"
+                    }
+                    /// The type of item to add to the project. Must be either Issue or PullRequest.
+                    ///
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/requestBody/json/type`.
+                    public var _type: Operations.ProjectsAddItemForUser.Input.Body.JsonPayload._TypePayload
+                    /// The numeric ID of the issue or pull request to add to the project.
+                    ///
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/requestBody/json/id`.
+                    public var id: Swift.Int
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - _type: The type of item to add to the project. Must be either Issue or PullRequest.
+                    ///   - id: The numeric ID of the issue or pull request to add to the project.
+                    public init(
+                        _type: Operations.ProjectsAddItemForUser.Input.Body.JsonPayload._TypePayload,
+                        id: Swift.Int
+                    ) {
+                        self._type = _type
+                        self.id = id
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case _type = "type"
+                        case id
+                    }
+                }
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/requestBody/content/application\/json`.
+                case json(Operations.ProjectsAddItemForUser.Input.Body.JsonPayload)
+            }
+            public var body: Operations.ProjectsAddItemForUser.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ProjectsAddItemForUser.Input.Path,
+                headers: Operations.ProjectsAddItemForUser.Input.Headers = .init(),
+                body: Operations.ProjectsAddItemForUser.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/responses/201/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/POST/responses/201/content/application\/json`.
+                    case json(Components.Schemas.ProjectsV2ItemSimple)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ProjectsV2ItemSimple {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsAddItemForUser.Output.Created.Body
+                /// Creates a new `Created`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ProjectsAddItemForUser.Output.Created.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/post(projects/add-item-for-user)/responses/201`.
+            ///
+            /// HTTP response code: `201 created`.
+            case created(Operations.ProjectsAddItemForUser.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
+            ///
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.ProjectsAddItemForUser.Output.Created {
+                get throws {
+                    switch self {
+                    case let .created(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/post(projects/add-item-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/post(projects/add-item-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/post(projects/add-item-for-user)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/post(projects/add-item-for-user)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get an item for a user owned project
+    ///
+    /// Get a specific item from a user-owned project.
+    ///
+    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/get(projects/get-user-item)`.
+    public enum ProjectsGetUserItem {
+        public static let id: Swift.String = "projects/get-user-item"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/GET/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The unique identifier of the user.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/GET/path/user_id`.
+                public var userId: Components.Parameters.UserId
+                /// The unique identifier of the project item.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/GET/path/item_id`.
+                public var itemId: Components.Parameters.ItemId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - userId: The unique identifier of the user.
+                ///   - itemId: The unique identifier of the project item.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    userId: Components.Parameters.UserId,
+                    itemId: Components.Parameters.ItemId
+                ) {
+                    self.projectNumber = projectNumber
+                    self.userId = userId
+                    self.itemId = itemId
+                }
+            }
+            public var path: Operations.ProjectsGetUserItem.Input.Path
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/GET/query/fields`.
+                public var fields: [Swift.String]?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - fields: Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
+                public init(fields: [Swift.String]? = nil) {
+                    self.fields = fields
+                }
+            }
+            public var query: Operations.ProjectsGetUserItem.Input.Query
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetUserItem.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsGetUserItem.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsGetUserItem.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsGetUserItem.Input.Path,
+                query: Operations.ProjectsGetUserItem.Input.Query = .init(),
+                headers: Operations.ProjectsGetUserItem.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsGetUserItem.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ProjectsV2ItemWithContent)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ProjectsV2ItemWithContent {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsGetUserItem.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsGetUserItem.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsGetUserItem.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/get(projects/get-user-item)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsGetUserItem.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsGetUserItem.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/get(projects/get-user-item)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/get(projects/get-user-item)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/get(projects/get-user-item)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/get(projects/get-user-item)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Update project item for user
+    ///
+    /// Update a specific item in a user-owned project.
+    ///
+    /// - Remark: HTTP `PATCH /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-user)`.
+    public enum ProjectsUpdateItemForUser {
+        public static let id: Swift.String = "projects/update-item-for-user"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The unique identifier of the user.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/path/user_id`.
+                public var userId: Components.Parameters.UserId
+                /// The unique identifier of the project item.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/path/item_id`.
+                public var itemId: Components.Parameters.ItemId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - userId: The unique identifier of the user.
+                ///   - itemId: The unique identifier of the project item.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    userId: Components.Parameters.UserId,
+                    itemId: Components.Parameters.ItemId
+                ) {
+                    self.projectNumber = projectNumber
+                    self.userId = userId
+                    self.itemId = itemId
+                }
+            }
+            public var path: Operations.ProjectsUpdateItemForUser.Input.Path
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsUpdateItemForUser.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsUpdateItemForUser.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsUpdateItemForUser.Input.Headers
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload`.
+                    public struct FieldsPayloadPayload: Codable, Hashable, Sendable {
+                        /// The ID of the project field to update.
+                        ///
+                        /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload/id`.
+                        public var id: Swift.Int
+                        /// The new value for the field:
+                        /// - For text, number, and date fields, provide the new value directly.
+                        /// - For single select and iteration fields, provide the ID of the option or iteration.
+                        /// - To clear the field, set this to null.
+                        ///
+                        /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload/value`.
+                        @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload/value/case1`.
+                            case case1(Swift.String)
+                            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload/value/case2`.
+                            case case2(Swift.Double)
+                            public init(from decoder: any Decoder) throws {
+                                var errors: [any Error] = []
+                                do {
+                                    self = .case1(try decoder.decodeFromSingleValueContainer())
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                do {
+                                    self = .case2(try decoder.decodeFromSingleValueContainer())
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                    type: Self.self,
+                                    codingPath: decoder.codingPath,
+                                    errors: errors
+                                )
+                            }
+                            public func encode(to encoder: any Encoder) throws {
+                                switch self {
+                                case let .case1(value):
+                                    try encoder.encodeToSingleValueContainer(value)
+                                case let .case2(value):
+                                    try encoder.encodeToSingleValueContainer(value)
+                                }
+                            }
+                        }
+                        /// The new value for the field:
+                        /// - For text, number, and date fields, provide the new value directly.
+                        /// - For single select and iteration fields, provide the ID of the option or iteration.
+                        /// - To clear the field, set this to null.
+                        ///
+                        /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/FieldsPayload/value`.
+                        public var value: Operations.ProjectsUpdateItemForUser.Input.Body.JsonPayload.FieldsPayloadPayload.ValuePayload?
+                        /// Creates a new `FieldsPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - id: The ID of the project field to update.
+                        ///   - value: The new value for the field:
+                        public init(
+                            id: Swift.Int,
+                            value: Operations.ProjectsUpdateItemForUser.Input.Body.JsonPayload.FieldsPayloadPayload.ValuePayload? = nil
+                        ) {
+                            self.id = id
+                            self.value = value
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case id
+                            case value
+                        }
+                    }
+                    /// A list of field updates to apply.
+                    ///
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/fields`.
+                    public typealias FieldsPayload = [Operations.ProjectsUpdateItemForUser.Input.Body.JsonPayload.FieldsPayloadPayload]
+                    /// A list of field updates to apply.
+                    ///
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/json/fields`.
+                    public var fields: Operations.ProjectsUpdateItemForUser.Input.Body.JsonPayload.FieldsPayload
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - fields: A list of field updates to apply.
+                    public init(fields: Operations.ProjectsUpdateItemForUser.Input.Body.JsonPayload.FieldsPayload) {
+                        self.fields = fields
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case fields
+                    }
+                }
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/requestBody/content/application\/json`.
+                case json(Operations.ProjectsUpdateItemForUser.Input.Body.JsonPayload)
+            }
+            public var body: Operations.ProjectsUpdateItemForUser.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ProjectsUpdateItemForUser.Input.Path,
+                headers: Operations.ProjectsUpdateItemForUser.Input.Headers = .init(),
+                body: Operations.ProjectsUpdateItemForUser.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/PATCH/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ProjectsV2ItemWithContent)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ProjectsV2ItemWithContent {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsUpdateItemForUser.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ProjectsUpdateItemForUser.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-user)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsUpdateItemForUser.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsUpdateItemForUser.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-user)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-user)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-user)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-user)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Delete project item for user
+    ///
+    /// Delete a specific item from a user-owned project.
+    ///
+    /// - Remark: HTTP `DELETE /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-user)`.
+    public enum ProjectsDeleteItemForUser {
+        public static let id: Swift.String = "projects/delete-item-for-user"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The project's number.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/DELETE/path/project_number`.
+                public var projectNumber: Components.Parameters.ProjectNumber
+                /// The unique identifier of the user.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/DELETE/path/user_id`.
+                public var userId: Components.Parameters.UserId
+                /// The unique identifier of the project item.
+                ///
+                /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/DELETE/path/item_id`.
+                public var itemId: Components.Parameters.ItemId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - projectNumber: The project's number.
+                ///   - userId: The unique identifier of the user.
+                ///   - itemId: The unique identifier of the project item.
+                public init(
+                    projectNumber: Components.Parameters.ProjectNumber,
+                    userId: Components.Parameters.UserId,
+                    itemId: Components.Parameters.ItemId
+                ) {
+                    self.projectNumber = projectNumber
+                    self.userId = userId
+                    self.itemId = itemId
+                }
+            }
+            public var path: Operations.ProjectsDeleteItemForUser.Input.Path
+            /// - Remark: Generated from `#/paths/users/{user_id}/projectsV2/{project_number}/items/{item_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsDeleteItemForUser.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsDeleteItemForUser.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsDeleteItemForUser.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsDeleteItemForUser.Input.Path,
+                headers: Operations.ProjectsDeleteItemForUser.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-user)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ProjectsDeleteItemForUser.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-user)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ProjectsDeleteItemForUser.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-user)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-user)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List projects for user
+    ///
+    /// List all projects owned by a specific user accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /users/{username}/projectsV2`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/get(projects/list-for-user)`.
+    public enum ProjectsListForUser {
+        public static let id: Swift.String = "projects/list-for-user"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The handle for the GitHub user account.
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/path/username`.
+                public var username: Components.Parameters.Username
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - username: The handle for the GitHub user account.
+                public init(username: Components.Parameters.Username) {
+                    self.username = username
+                }
+            }
+            public var path: Operations.ProjectsListForUser.Input.Path
+            /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// Limit results to projects of the specified type.
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/query/q`.
+                public var q: Swift.String?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/query/before`.
+                public var before: Components.Parameters.PaginationBefore?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - q: Limit results to projects of the specified type.
+                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    q: Swift.String? = nil,
+                    before: Components.Parameters.PaginationBefore? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil,
+                    perPage: Components.Parameters.PerPage? = nil
+                ) {
+                    self.q = q
+                    self.before = before
+                    self.after = after
+                    self.perPage = perPage
+                }
+            }
+            public var query: Operations.ProjectsListForUser.Input.Query
+            /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListForUser.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ProjectsListForUser.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ProjectsListForUser.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ProjectsListForUser.Input.Path,
+                query: Operations.ProjectsListForUser.Input.Query = .init(),
+                headers: Operations.ProjectsListForUser.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ProjectsListForUser.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/users/{username}/projectsV2/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.ProjectsV2])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.ProjectsV2] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ProjectsListForUser.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ProjectsListForUser.Output.Ok.Headers = .init(),
+                    body: Operations.ProjectsListForUser.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/projectsV2/get(projects/list-for-user)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ProjectsListForUser.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ProjectsListForUser.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/projectsV2/get(projects/list-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            case notModified(Components.Responses.NotModified)
+            /// Not modified
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/projectsV2/get(projects/list-for-user)/responses/304`.
+            ///
+            /// HTTP response code: `304 notModified`.
+            public static var notModified: Self {
+                .notModified(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notModified`.
+            ///
+            /// - Throws: An error if `self` is not `.notModified`.
+            /// - SeeAlso: `.notModified`.
+            public var notModified: Components.Responses.NotModified {
+                get throws {
+                    switch self {
+                    case let .notModified(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/projectsV2/get(projects/list-for-user)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//users/{username}/projectsV2/get(projects/list-for-user)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+}
