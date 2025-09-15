@@ -2939,452 +2939,6 @@ public enum Components {
                 case ldapDn = "ldap_dn"
             }
         }
-        /// Metaproperties for Git author/committer information.
-        ///
-        /// - Remark: Generated from `#/components/schemas/nullable-git-user`.
-        public struct NullableGitUser: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/nullable-git-user/name`.
-            public var name: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/nullable-git-user/email`.
-            public var email: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/nullable-git-user/date`.
-            public var date: Swift.String?
-            /// Creates a new `NullableGitUser`.
-            ///
-            /// - Parameters:
-            ///   - name:
-            ///   - email:
-            ///   - date:
-            public init(
-                name: Swift.String? = nil,
-                email: Swift.String? = nil,
-                date: Swift.String? = nil
-            ) {
-                self.name = name
-                self.email = email
-                self.date = date
-            }
-            public enum CodingKeys: String, CodingKey {
-                case name
-                case email
-                case date
-            }
-        }
-        /// - Remark: Generated from `#/components/schemas/verification`.
-        public struct Verification: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/verification/verified`.
-            public var verified: Swift.Bool
-            /// - Remark: Generated from `#/components/schemas/verification/reason`.
-            public var reason: Swift.String
-            /// - Remark: Generated from `#/components/schemas/verification/payload`.
-            public var payload: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/verification/signature`.
-            public var signature: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/verification/verified_at`.
-            public var verifiedAt: Swift.String?
-            /// Creates a new `Verification`.
-            ///
-            /// - Parameters:
-            ///   - verified:
-            ///   - reason:
-            ///   - payload:
-            ///   - signature:
-            ///   - verifiedAt:
-            public init(
-                verified: Swift.Bool,
-                reason: Swift.String,
-                payload: Swift.String? = nil,
-                signature: Swift.String? = nil,
-                verifiedAt: Swift.String? = nil
-            ) {
-                self.verified = verified
-                self.reason = reason
-                self.payload = payload
-                self.signature = signature
-                self.verifiedAt = verifiedAt
-            }
-            public enum CodingKeys: String, CodingKey {
-                case verified
-                case reason
-                case payload
-                case signature
-                case verifiedAt = "verified_at"
-            }
-        }
-        /// Diff Entry
-        ///
-        /// - Remark: Generated from `#/components/schemas/diff-entry`.
-        public struct DiffEntry: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/diff-entry/sha`.
-            public var sha: Swift.String
-            /// - Remark: Generated from `#/components/schemas/diff-entry/filename`.
-            public var filename: Swift.String
-            /// - Remark: Generated from `#/components/schemas/diff-entry/status`.
-            @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case added = "added"
-                case removed = "removed"
-                case modified = "modified"
-                case renamed = "renamed"
-                case copied = "copied"
-                case changed = "changed"
-                case unchanged = "unchanged"
-            }
-            /// - Remark: Generated from `#/components/schemas/diff-entry/status`.
-            public var status: Components.Schemas.DiffEntry.StatusPayload
-            /// - Remark: Generated from `#/components/schemas/diff-entry/additions`.
-            public var additions: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/diff-entry/deletions`.
-            public var deletions: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/diff-entry/changes`.
-            public var changes: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/diff-entry/blob_url`.
-            public var blobUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/diff-entry/raw_url`.
-            public var rawUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/diff-entry/contents_url`.
-            public var contentsUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/diff-entry/patch`.
-            public var patch: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/diff-entry/previous_filename`.
-            public var previousFilename: Swift.String?
-            /// Creates a new `DiffEntry`.
-            ///
-            /// - Parameters:
-            ///   - sha:
-            ///   - filename:
-            ///   - status:
-            ///   - additions:
-            ///   - deletions:
-            ///   - changes:
-            ///   - blobUrl:
-            ///   - rawUrl:
-            ///   - contentsUrl:
-            ///   - patch:
-            ///   - previousFilename:
-            public init(
-                sha: Swift.String,
-                filename: Swift.String,
-                status: Components.Schemas.DiffEntry.StatusPayload,
-                additions: Swift.Int,
-                deletions: Swift.Int,
-                changes: Swift.Int,
-                blobUrl: Swift.String,
-                rawUrl: Swift.String,
-                contentsUrl: Swift.String,
-                patch: Swift.String? = nil,
-                previousFilename: Swift.String? = nil
-            ) {
-                self.sha = sha
-                self.filename = filename
-                self.status = status
-                self.additions = additions
-                self.deletions = deletions
-                self.changes = changes
-                self.blobUrl = blobUrl
-                self.rawUrl = rawUrl
-                self.contentsUrl = contentsUrl
-                self.patch = patch
-                self.previousFilename = previousFilename
-            }
-            public enum CodingKeys: String, CodingKey {
-                case sha
-                case filename
-                case status
-                case additions
-                case deletions
-                case changes
-                case blobUrl = "blob_url"
-                case rawUrl = "raw_url"
-                case contentsUrl = "contents_url"
-                case patch
-                case previousFilename = "previous_filename"
-            }
-        }
-        /// Commit
-        ///
-        /// - Remark: Generated from `#/components/schemas/commit`.
-        public struct Commit: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/commit/url`.
-            public var url: Swift.String
-            /// - Remark: Generated from `#/components/schemas/commit/sha`.
-            public var sha: Swift.String
-            /// - Remark: Generated from `#/components/schemas/commit/node_id`.
-            public var nodeId: Swift.String
-            /// - Remark: Generated from `#/components/schemas/commit/html_url`.
-            public var htmlUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/commit/comments_url`.
-            public var commentsUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/commit/commit`.
-            public struct CommitPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/commit/commit/url`.
-                public var url: Swift.String
-                /// - Remark: Generated from `#/components/schemas/commit/commit/author`.
-                public var author: Components.Schemas.NullableGitUser?
-                /// - Remark: Generated from `#/components/schemas/commit/commit/committer`.
-                public var committer: Components.Schemas.NullableGitUser?
-                /// - Remark: Generated from `#/components/schemas/commit/commit/message`.
-                public var message: Swift.String
-                /// - Remark: Generated from `#/components/schemas/commit/commit/comment_count`.
-                public var commentCount: Swift.Int
-                /// - Remark: Generated from `#/components/schemas/commit/commit/tree`.
-                public struct TreePayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/components/schemas/commit/commit/tree/sha`.
-                    public var sha: Swift.String
-                    /// - Remark: Generated from `#/components/schemas/commit/commit/tree/url`.
-                    public var url: Swift.String
-                    /// Creates a new `TreePayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - sha:
-                    ///   - url:
-                    public init(
-                        sha: Swift.String,
-                        url: Swift.String
-                    ) {
-                        self.sha = sha
-                        self.url = url
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case sha
-                        case url
-                    }
-                }
-                /// - Remark: Generated from `#/components/schemas/commit/commit/tree`.
-                public var tree: Components.Schemas.Commit.CommitPayload.TreePayload
-                /// - Remark: Generated from `#/components/schemas/commit/commit/verification`.
-                public var verification: Components.Schemas.Verification?
-                /// Creates a new `CommitPayload`.
-                ///
-                /// - Parameters:
-                ///   - url:
-                ///   - author:
-                ///   - committer:
-                ///   - message:
-                ///   - commentCount:
-                ///   - tree:
-                ///   - verification:
-                public init(
-                    url: Swift.String,
-                    author: Components.Schemas.NullableGitUser? = nil,
-                    committer: Components.Schemas.NullableGitUser? = nil,
-                    message: Swift.String,
-                    commentCount: Swift.Int,
-                    tree: Components.Schemas.Commit.CommitPayload.TreePayload,
-                    verification: Components.Schemas.Verification? = nil
-                ) {
-                    self.url = url
-                    self.author = author
-                    self.committer = committer
-                    self.message = message
-                    self.commentCount = commentCount
-                    self.tree = tree
-                    self.verification = verification
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case url
-                    case author
-                    case committer
-                    case message
-                    case commentCount = "comment_count"
-                    case tree
-                    case verification
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/commit/commit`.
-            public var commit: Components.Schemas.Commit.CommitPayload
-            /// - Remark: Generated from `#/components/schemas/commit/author`.
-            @frozen public enum AuthorPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/commit/author/case1`.
-                case SimpleUser(Components.Schemas.SimpleUser)
-                /// - Remark: Generated from `#/components/schemas/commit/author/case2`.
-                case EmptyObject(Components.Schemas.EmptyObject)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
-                    do {
-                        self = .SimpleUser(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .EmptyObject(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
-                        type: Self.self,
-                        codingPath: decoder.codingPath,
-                        errors: errors
-                    )
-                }
-                public func encode(to encoder: any Encoder) throws {
-                    switch self {
-                    case let .SimpleUser(value):
-                        try value.encode(to: encoder)
-                    case let .EmptyObject(value):
-                        try value.encode(to: encoder)
-                    }
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/commit/author`.
-            public var author: Components.Schemas.Commit.AuthorPayload?
-            /// - Remark: Generated from `#/components/schemas/commit/committer`.
-            @frozen public enum CommitterPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/commit/committer/case1`.
-                case SimpleUser(Components.Schemas.SimpleUser)
-                /// - Remark: Generated from `#/components/schemas/commit/committer/case2`.
-                case EmptyObject(Components.Schemas.EmptyObject)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
-                    do {
-                        self = .SimpleUser(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .EmptyObject(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
-                        type: Self.self,
-                        codingPath: decoder.codingPath,
-                        errors: errors
-                    )
-                }
-                public func encode(to encoder: any Encoder) throws {
-                    switch self {
-                    case let .SimpleUser(value):
-                        try value.encode(to: encoder)
-                    case let .EmptyObject(value):
-                        try value.encode(to: encoder)
-                    }
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/commit/committer`.
-            public var committer: Components.Schemas.Commit.CommitterPayload?
-            /// - Remark: Generated from `#/components/schemas/commit/ParentsPayload`.
-            public struct ParentsPayloadPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/commit/ParentsPayload/sha`.
-                public var sha: Swift.String
-                /// - Remark: Generated from `#/components/schemas/commit/ParentsPayload/url`.
-                public var url: Swift.String
-                /// - Remark: Generated from `#/components/schemas/commit/ParentsPayload/html_url`.
-                public var htmlUrl: Swift.String?
-                /// Creates a new `ParentsPayloadPayload`.
-                ///
-                /// - Parameters:
-                ///   - sha:
-                ///   - url:
-                ///   - htmlUrl:
-                public init(
-                    sha: Swift.String,
-                    url: Swift.String,
-                    htmlUrl: Swift.String? = nil
-                ) {
-                    self.sha = sha
-                    self.url = url
-                    self.htmlUrl = htmlUrl
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case sha
-                    case url
-                    case htmlUrl = "html_url"
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/commit/parents`.
-            public typealias ParentsPayload = [Components.Schemas.Commit.ParentsPayloadPayload]
-            /// - Remark: Generated from `#/components/schemas/commit/parents`.
-            public var parents: Components.Schemas.Commit.ParentsPayload
-            /// - Remark: Generated from `#/components/schemas/commit/stats`.
-            public struct StatsPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/commit/stats/additions`.
-                public var additions: Swift.Int?
-                /// - Remark: Generated from `#/components/schemas/commit/stats/deletions`.
-                public var deletions: Swift.Int?
-                /// - Remark: Generated from `#/components/schemas/commit/stats/total`.
-                public var total: Swift.Int?
-                /// Creates a new `StatsPayload`.
-                ///
-                /// - Parameters:
-                ///   - additions:
-                ///   - deletions:
-                ///   - total:
-                public init(
-                    additions: Swift.Int? = nil,
-                    deletions: Swift.Int? = nil,
-                    total: Swift.Int? = nil
-                ) {
-                    self.additions = additions
-                    self.deletions = deletions
-                    self.total = total
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case additions
-                    case deletions
-                    case total
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/commit/stats`.
-            public var stats: Components.Schemas.Commit.StatsPayload?
-            /// - Remark: Generated from `#/components/schemas/commit/files`.
-            public var files: [Components.Schemas.DiffEntry]?
-            /// Creates a new `Commit`.
-            ///
-            /// - Parameters:
-            ///   - url:
-            ///   - sha:
-            ///   - nodeId:
-            ///   - htmlUrl:
-            ///   - commentsUrl:
-            ///   - commit:
-            ///   - author:
-            ///   - committer:
-            ///   - parents:
-            ///   - stats:
-            ///   - files:
-            public init(
-                url: Swift.String,
-                sha: Swift.String,
-                nodeId: Swift.String,
-                htmlUrl: Swift.String,
-                commentsUrl: Swift.String,
-                commit: Components.Schemas.Commit.CommitPayload,
-                author: Components.Schemas.Commit.AuthorPayload? = nil,
-                committer: Components.Schemas.Commit.CommitterPayload? = nil,
-                parents: Components.Schemas.Commit.ParentsPayload,
-                stats: Components.Schemas.Commit.StatsPayload? = nil,
-                files: [Components.Schemas.DiffEntry]? = nil
-            ) {
-                self.url = url
-                self.sha = sha
-                self.nodeId = nodeId
-                self.htmlUrl = htmlUrl
-                self.commentsUrl = commentsUrl
-                self.commit = commit
-                self.author = author
-                self.committer = committer
-                self.parents = parents
-                self.stats = stats
-                self.files = files
-            }
-            public enum CodingKeys: String, CodingKey {
-                case url
-                case sha
-                case nodeId = "node_id"
-                case htmlUrl = "html_url"
-                case commentsUrl = "comments_url"
-                case commit
-                case author
-                case committer
-                case parents
-                case stats
-                case files
-            }
-        }
         /// Hypermedia Link
         ///
         /// - Remark: Generated from `#/components/schemas/link`.
@@ -3878,6 +3432,452 @@ public enum Components {
                 case authorAssociation = "author_association"
                 case autoMerge = "auto_merge"
                 case draft
+            }
+        }
+        /// Metaproperties for Git author/committer information.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-git-user`.
+        public struct NullableGitUser: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/nullable-git-user/name`.
+            public var name: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-git-user/email`.
+            public var email: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-git-user/date`.
+            public var date: Swift.String?
+            /// Creates a new `NullableGitUser`.
+            ///
+            /// - Parameters:
+            ///   - name:
+            ///   - email:
+            ///   - date:
+            public init(
+                name: Swift.String? = nil,
+                email: Swift.String? = nil,
+                date: Swift.String? = nil
+            ) {
+                self.name = name
+                self.email = email
+                self.date = date
+            }
+            public enum CodingKeys: String, CodingKey {
+                case name
+                case email
+                case date
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/verification`.
+        public struct Verification: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/verification/verified`.
+            public var verified: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/verification/reason`.
+            public var reason: Swift.String
+            /// - Remark: Generated from `#/components/schemas/verification/payload`.
+            public var payload: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/verification/signature`.
+            public var signature: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/verification/verified_at`.
+            public var verifiedAt: Swift.String?
+            /// Creates a new `Verification`.
+            ///
+            /// - Parameters:
+            ///   - verified:
+            ///   - reason:
+            ///   - payload:
+            ///   - signature:
+            ///   - verifiedAt:
+            public init(
+                verified: Swift.Bool,
+                reason: Swift.String,
+                payload: Swift.String? = nil,
+                signature: Swift.String? = nil,
+                verifiedAt: Swift.String? = nil
+            ) {
+                self.verified = verified
+                self.reason = reason
+                self.payload = payload
+                self.signature = signature
+                self.verifiedAt = verifiedAt
+            }
+            public enum CodingKeys: String, CodingKey {
+                case verified
+                case reason
+                case payload
+                case signature
+                case verifiedAt = "verified_at"
+            }
+        }
+        /// Diff Entry
+        ///
+        /// - Remark: Generated from `#/components/schemas/diff-entry`.
+        public struct DiffEntry: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/diff-entry/sha`.
+            public var sha: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/diff-entry/filename`.
+            public var filename: Swift.String
+            /// - Remark: Generated from `#/components/schemas/diff-entry/status`.
+            @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case added = "added"
+                case removed = "removed"
+                case modified = "modified"
+                case renamed = "renamed"
+                case copied = "copied"
+                case changed = "changed"
+                case unchanged = "unchanged"
+            }
+            /// - Remark: Generated from `#/components/schemas/diff-entry/status`.
+            public var status: Components.Schemas.DiffEntry.StatusPayload
+            /// - Remark: Generated from `#/components/schemas/diff-entry/additions`.
+            public var additions: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/diff-entry/deletions`.
+            public var deletions: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/diff-entry/changes`.
+            public var changes: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/diff-entry/blob_url`.
+            public var blobUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/diff-entry/raw_url`.
+            public var rawUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/diff-entry/contents_url`.
+            public var contentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/diff-entry/patch`.
+            public var patch: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/diff-entry/previous_filename`.
+            public var previousFilename: Swift.String?
+            /// Creates a new `DiffEntry`.
+            ///
+            /// - Parameters:
+            ///   - sha:
+            ///   - filename:
+            ///   - status:
+            ///   - additions:
+            ///   - deletions:
+            ///   - changes:
+            ///   - blobUrl:
+            ///   - rawUrl:
+            ///   - contentsUrl:
+            ///   - patch:
+            ///   - previousFilename:
+            public init(
+                sha: Swift.String? = nil,
+                filename: Swift.String,
+                status: Components.Schemas.DiffEntry.StatusPayload,
+                additions: Swift.Int,
+                deletions: Swift.Int,
+                changes: Swift.Int,
+                blobUrl: Swift.String,
+                rawUrl: Swift.String,
+                contentsUrl: Swift.String,
+                patch: Swift.String? = nil,
+                previousFilename: Swift.String? = nil
+            ) {
+                self.sha = sha
+                self.filename = filename
+                self.status = status
+                self.additions = additions
+                self.deletions = deletions
+                self.changes = changes
+                self.blobUrl = blobUrl
+                self.rawUrl = rawUrl
+                self.contentsUrl = contentsUrl
+                self.patch = patch
+                self.previousFilename = previousFilename
+            }
+            public enum CodingKeys: String, CodingKey {
+                case sha
+                case filename
+                case status
+                case additions
+                case deletions
+                case changes
+                case blobUrl = "blob_url"
+                case rawUrl = "raw_url"
+                case contentsUrl = "contents_url"
+                case patch
+                case previousFilename = "previous_filename"
+            }
+        }
+        /// Commit
+        ///
+        /// - Remark: Generated from `#/components/schemas/commit`.
+        public struct Commit: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/commit/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/commit/sha`.
+            public var sha: Swift.String
+            /// - Remark: Generated from `#/components/schemas/commit/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/commit/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/commit/comments_url`.
+            public var commentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/commit/commit`.
+            public struct CommitPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/commit/commit/url`.
+                public var url: Swift.String
+                /// - Remark: Generated from `#/components/schemas/commit/commit/author`.
+                public var author: Components.Schemas.NullableGitUser?
+                /// - Remark: Generated from `#/components/schemas/commit/commit/committer`.
+                public var committer: Components.Schemas.NullableGitUser?
+                /// - Remark: Generated from `#/components/schemas/commit/commit/message`.
+                public var message: Swift.String
+                /// - Remark: Generated from `#/components/schemas/commit/commit/comment_count`.
+                public var commentCount: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/commit/commit/tree`.
+                public struct TreePayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/commit/commit/tree/sha`.
+                    public var sha: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/commit/commit/tree/url`.
+                    public var url: Swift.String
+                    /// Creates a new `TreePayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - sha:
+                    ///   - url:
+                    public init(
+                        sha: Swift.String,
+                        url: Swift.String
+                    ) {
+                        self.sha = sha
+                        self.url = url
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case sha
+                        case url
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/commit/commit/tree`.
+                public var tree: Components.Schemas.Commit.CommitPayload.TreePayload
+                /// - Remark: Generated from `#/components/schemas/commit/commit/verification`.
+                public var verification: Components.Schemas.Verification?
+                /// Creates a new `CommitPayload`.
+                ///
+                /// - Parameters:
+                ///   - url:
+                ///   - author:
+                ///   - committer:
+                ///   - message:
+                ///   - commentCount:
+                ///   - tree:
+                ///   - verification:
+                public init(
+                    url: Swift.String,
+                    author: Components.Schemas.NullableGitUser? = nil,
+                    committer: Components.Schemas.NullableGitUser? = nil,
+                    message: Swift.String,
+                    commentCount: Swift.Int,
+                    tree: Components.Schemas.Commit.CommitPayload.TreePayload,
+                    verification: Components.Schemas.Verification? = nil
+                ) {
+                    self.url = url
+                    self.author = author
+                    self.committer = committer
+                    self.message = message
+                    self.commentCount = commentCount
+                    self.tree = tree
+                    self.verification = verification
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case url
+                    case author
+                    case committer
+                    case message
+                    case commentCount = "comment_count"
+                    case tree
+                    case verification
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/commit/commit`.
+            public var commit: Components.Schemas.Commit.CommitPayload
+            /// - Remark: Generated from `#/components/schemas/commit/author`.
+            @frozen public enum AuthorPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/commit/author/case1`.
+                case SimpleUser(Components.Schemas.SimpleUser)
+                /// - Remark: Generated from `#/components/schemas/commit/author/case2`.
+                case EmptyObject(Components.Schemas.EmptyObject)
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self = .SimpleUser(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .EmptyObject(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    switch self {
+                    case let .SimpleUser(value):
+                        try value.encode(to: encoder)
+                    case let .EmptyObject(value):
+                        try value.encode(to: encoder)
+                    }
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/commit/author`.
+            public var author: Components.Schemas.Commit.AuthorPayload?
+            /// - Remark: Generated from `#/components/schemas/commit/committer`.
+            @frozen public enum CommitterPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/commit/committer/case1`.
+                case SimpleUser(Components.Schemas.SimpleUser)
+                /// - Remark: Generated from `#/components/schemas/commit/committer/case2`.
+                case EmptyObject(Components.Schemas.EmptyObject)
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self = .SimpleUser(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .EmptyObject(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    switch self {
+                    case let .SimpleUser(value):
+                        try value.encode(to: encoder)
+                    case let .EmptyObject(value):
+                        try value.encode(to: encoder)
+                    }
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/commit/committer`.
+            public var committer: Components.Schemas.Commit.CommitterPayload?
+            /// - Remark: Generated from `#/components/schemas/commit/ParentsPayload`.
+            public struct ParentsPayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/commit/ParentsPayload/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/commit/ParentsPayload/url`.
+                public var url: Swift.String
+                /// - Remark: Generated from `#/components/schemas/commit/ParentsPayload/html_url`.
+                public var htmlUrl: Swift.String?
+                /// Creates a new `ParentsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - sha:
+                ///   - url:
+                ///   - htmlUrl:
+                public init(
+                    sha: Swift.String,
+                    url: Swift.String,
+                    htmlUrl: Swift.String? = nil
+                ) {
+                    self.sha = sha
+                    self.url = url
+                    self.htmlUrl = htmlUrl
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case sha
+                    case url
+                    case htmlUrl = "html_url"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/commit/parents`.
+            public typealias ParentsPayload = [Components.Schemas.Commit.ParentsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/commit/parents`.
+            public var parents: Components.Schemas.Commit.ParentsPayload
+            /// - Remark: Generated from `#/components/schemas/commit/stats`.
+            public struct StatsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/commit/stats/additions`.
+                public var additions: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/commit/stats/deletions`.
+                public var deletions: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/commit/stats/total`.
+                public var total: Swift.Int?
+                /// Creates a new `StatsPayload`.
+                ///
+                /// - Parameters:
+                ///   - additions:
+                ///   - deletions:
+                ///   - total:
+                public init(
+                    additions: Swift.Int? = nil,
+                    deletions: Swift.Int? = nil,
+                    total: Swift.Int? = nil
+                ) {
+                    self.additions = additions
+                    self.deletions = deletions
+                    self.total = total
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case additions
+                    case deletions
+                    case total
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/commit/stats`.
+            public var stats: Components.Schemas.Commit.StatsPayload?
+            /// - Remark: Generated from `#/components/schemas/commit/files`.
+            public var files: [Components.Schemas.DiffEntry]?
+            /// Creates a new `Commit`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - sha:
+            ///   - nodeId:
+            ///   - htmlUrl:
+            ///   - commentsUrl:
+            ///   - commit:
+            ///   - author:
+            ///   - committer:
+            ///   - parents:
+            ///   - stats:
+            ///   - files:
+            public init(
+                url: Swift.String,
+                sha: Swift.String,
+                nodeId: Swift.String,
+                htmlUrl: Swift.String,
+                commentsUrl: Swift.String,
+                commit: Components.Schemas.Commit.CommitPayload,
+                author: Components.Schemas.Commit.AuthorPayload? = nil,
+                committer: Components.Schemas.Commit.CommitterPayload? = nil,
+                parents: Components.Schemas.Commit.ParentsPayload,
+                stats: Components.Schemas.Commit.StatsPayload? = nil,
+                files: [Components.Schemas.DiffEntry]? = nil
+            ) {
+                self.url = url
+                self.sha = sha
+                self.nodeId = nodeId
+                self.htmlUrl = htmlUrl
+                self.commentsUrl = commentsUrl
+                self.commit = commit
+                self.author = author
+                self.committer = committer
+                self.parents = parents
+                self.stats = stats
+                self.files = files
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case sha
+                case nodeId = "node_id"
+                case htmlUrl = "html_url"
+                case commentsUrl = "comments_url"
+                case commit
+                case author
+                case committer
+                case parents
+                case stats
+                case files
             }
         }
         /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
