@@ -9681,6 +9681,501 @@ public enum Components {
                 case parent
             }
         }
+        /// Hypermedia Link
+        ///
+        /// - Remark: Generated from `#/components/schemas/link`.
+        public struct Link: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/link/href`.
+            public var href: Swift.String
+            /// Creates a new `Link`.
+            ///
+            /// - Parameters:
+            ///   - href:
+            public init(href: Swift.String) {
+                self.href = href
+            }
+            public enum CodingKeys: String, CodingKey {
+                case href
+            }
+        }
+        /// The status of auto merging a pull request.
+        ///
+        /// - Remark: Generated from `#/components/schemas/auto-merge`.
+        public struct AutoMerge: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/auto-merge/enabled_by`.
+            public var enabledBy: Components.Schemas.SimpleUser
+            /// The merge method to use.
+            ///
+            /// - Remark: Generated from `#/components/schemas/auto-merge/merge_method`.
+            @frozen public enum MergeMethodPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case merge = "merge"
+                case squash = "squash"
+                case rebase = "rebase"
+            }
+            /// The merge method to use.
+            ///
+            /// - Remark: Generated from `#/components/schemas/auto-merge/merge_method`.
+            public var mergeMethod: Components.Schemas.AutoMerge.MergeMethodPayload
+            /// Title for the merge commit message.
+            ///
+            /// - Remark: Generated from `#/components/schemas/auto-merge/commit_title`.
+            public var commitTitle: Swift.String
+            /// Commit message for the merge commit.
+            ///
+            /// - Remark: Generated from `#/components/schemas/auto-merge/commit_message`.
+            public var commitMessage: Swift.String
+            /// Creates a new `AutoMerge`.
+            ///
+            /// - Parameters:
+            ///   - enabledBy:
+            ///   - mergeMethod: The merge method to use.
+            ///   - commitTitle: Title for the merge commit message.
+            ///   - commitMessage: Commit message for the merge commit.
+            public init(
+                enabledBy: Components.Schemas.SimpleUser,
+                mergeMethod: Components.Schemas.AutoMerge.MergeMethodPayload,
+                commitTitle: Swift.String,
+                commitMessage: Swift.String
+            ) {
+                self.enabledBy = enabledBy
+                self.mergeMethod = mergeMethod
+                self.commitTitle = commitTitle
+                self.commitMessage = commitMessage
+            }
+            public enum CodingKeys: String, CodingKey {
+                case enabledBy = "enabled_by"
+                case mergeMethod = "merge_method"
+                case commitTitle = "commit_title"
+                case commitMessage = "commit_message"
+            }
+        }
+        /// Pull Request Simple
+        ///
+        /// - Remark: Generated from `#/components/schemas/pull-request-simple`.
+        public struct PullRequestSimple: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/diff_url`.
+            public var diffUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/patch_url`.
+            public var patchUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/issue_url`.
+            public var issueUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/commits_url`.
+            public var commitsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/review_comments_url`.
+            public var reviewCommentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/review_comment_url`.
+            public var reviewCommentUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/comments_url`.
+            public var commentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/statuses_url`.
+            public var statusesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/number`.
+            public var number: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/state`.
+            public var state: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/locked`.
+            public var locked: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/title`.
+            public var title: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/user`.
+            public var user: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/body`.
+            public var body: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload`.
+            public struct LabelsPayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/id`.
+                public var id: Swift.Int64
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/node_id`.
+                public var nodeId: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/url`.
+                public var url: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/name`.
+                public var name: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/description`.
+                public var description: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/color`.
+                public var color: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/default`.
+                public var _default: Swift.Bool
+                /// Creates a new `LabelsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - id:
+                ///   - nodeId:
+                ///   - url:
+                ///   - name:
+                ///   - description:
+                ///   - color:
+                ///   - _default:
+                public init(
+                    id: Swift.Int64,
+                    nodeId: Swift.String,
+                    url: Swift.String,
+                    name: Swift.String,
+                    description: Swift.String,
+                    color: Swift.String,
+                    _default: Swift.Bool
+                ) {
+                    self.id = id
+                    self.nodeId = nodeId
+                    self.url = url
+                    self.name = name
+                    self.description = description
+                    self.color = color
+                    self._default = _default
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case nodeId = "node_id"
+                    case url
+                    case name
+                    case description
+                    case color
+                    case _default = "default"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/labels`.
+            public typealias LabelsPayload = [Components.Schemas.PullRequestSimple.LabelsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/labels`.
+            public var labels: Components.Schemas.PullRequestSimple.LabelsPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/milestone`.
+            public var milestone: Components.Schemas.NullableMilestone?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/active_lock_reason`.
+            public var activeLockReason: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/closed_at`.
+            public var closedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/merged_at`.
+            public var mergedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/merge_commit_sha`.
+            public var mergeCommitSha: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/assignee`.
+            public var assignee: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/assignees`.
+            public var assignees: [Components.Schemas.SimpleUser]?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/requested_reviewers`.
+            public var requestedReviewers: [Components.Schemas.SimpleUser]?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/requested_teams`.
+            public var requestedTeams: [Components.Schemas.Team]?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/head`.
+            public struct HeadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/label`.
+                public var label: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/repo`.
+                public var repo: Components.Schemas.Repository
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/user`.
+                public var user: Components.Schemas.NullableSimpleUser?
+                /// Creates a new `HeadPayload`.
+                ///
+                /// - Parameters:
+                ///   - label:
+                ///   - ref:
+                ///   - repo:
+                ///   - sha:
+                ///   - user:
+                public init(
+                    label: Swift.String,
+                    ref: Swift.String,
+                    repo: Components.Schemas.Repository,
+                    sha: Swift.String,
+                    user: Components.Schemas.NullableSimpleUser? = nil
+                ) {
+                    self.label = label
+                    self.ref = ref
+                    self.repo = repo
+                    self.sha = sha
+                    self.user = user
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case label
+                    case ref
+                    case repo
+                    case sha
+                    case user
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/head`.
+            public var head: Components.Schemas.PullRequestSimple.HeadPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/label`.
+                public var label: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/repo`.
+                public var repo: Components.Schemas.Repository
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/user`.
+                public var user: Components.Schemas.NullableSimpleUser?
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - label:
+                ///   - ref:
+                ///   - repo:
+                ///   - sha:
+                ///   - user:
+                public init(
+                    label: Swift.String,
+                    ref: Swift.String,
+                    repo: Components.Schemas.Repository,
+                    sha: Swift.String,
+                    user: Components.Schemas.NullableSimpleUser? = nil
+                ) {
+                    self.label = label
+                    self.ref = ref
+                    self.repo = repo
+                    self.sha = sha
+                    self.user = user
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case label
+                    case ref
+                    case repo
+                    case sha
+                    case user
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/base`.
+            public var base: Components.Schemas.PullRequestSimple.BasePayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links`.
+            public struct _LinksPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/comments`.
+                public var comments: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/commits`.
+                public var commits: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/statuses`.
+                public var statuses: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/html`.
+                public var html: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/issue`.
+                public var issue: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/review_comments`.
+                public var reviewComments: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/review_comment`.
+                public var reviewComment: Components.Schemas.Link
+                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/self`.
+                public var _self: Components.Schemas.Link
+                /// Creates a new `_LinksPayload`.
+                ///
+                /// - Parameters:
+                ///   - comments:
+                ///   - commits:
+                ///   - statuses:
+                ///   - html:
+                ///   - issue:
+                ///   - reviewComments:
+                ///   - reviewComment:
+                ///   - _self:
+                public init(
+                    comments: Components.Schemas.Link,
+                    commits: Components.Schemas.Link,
+                    statuses: Components.Schemas.Link,
+                    html: Components.Schemas.Link,
+                    issue: Components.Schemas.Link,
+                    reviewComments: Components.Schemas.Link,
+                    reviewComment: Components.Schemas.Link,
+                    _self: Components.Schemas.Link
+                ) {
+                    self.comments = comments
+                    self.commits = commits
+                    self.statuses = statuses
+                    self.html = html
+                    self.issue = issue
+                    self.reviewComments = reviewComments
+                    self.reviewComment = reviewComment
+                    self._self = _self
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case comments
+                    case commits
+                    case statuses
+                    case html
+                    case issue
+                    case reviewComments = "review_comments"
+                    case reviewComment = "review_comment"
+                    case _self = "self"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links`.
+            public var _links: Components.Schemas.PullRequestSimple._LinksPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/author_association`.
+            public var authorAssociation: Components.Schemas.AuthorAssociation
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/auto_merge`.
+            public var autoMerge: Components.Schemas.AutoMerge?
+            /// Indicates whether or not the pull request is a draft.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/draft`.
+            public var draft: Swift.Bool?
+            /// Creates a new `PullRequestSimple`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - id:
+            ///   - nodeId:
+            ///   - htmlUrl:
+            ///   - diffUrl:
+            ///   - patchUrl:
+            ///   - issueUrl:
+            ///   - commitsUrl:
+            ///   - reviewCommentsUrl:
+            ///   - reviewCommentUrl:
+            ///   - commentsUrl:
+            ///   - statusesUrl:
+            ///   - number:
+            ///   - state:
+            ///   - locked:
+            ///   - title:
+            ///   - user:
+            ///   - body:
+            ///   - labels:
+            ///   - milestone:
+            ///   - activeLockReason:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - closedAt:
+            ///   - mergedAt:
+            ///   - mergeCommitSha:
+            ///   - assignee:
+            ///   - assignees:
+            ///   - requestedReviewers:
+            ///   - requestedTeams:
+            ///   - head:
+            ///   - base:
+            ///   - _links:
+            ///   - authorAssociation:
+            ///   - autoMerge:
+            ///   - draft: Indicates whether or not the pull request is a draft.
+            public init(
+                url: Swift.String,
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                htmlUrl: Swift.String,
+                diffUrl: Swift.String,
+                patchUrl: Swift.String,
+                issueUrl: Swift.String,
+                commitsUrl: Swift.String,
+                reviewCommentsUrl: Swift.String,
+                reviewCommentUrl: Swift.String,
+                commentsUrl: Swift.String,
+                statusesUrl: Swift.String,
+                number: Swift.Int,
+                state: Swift.String,
+                locked: Swift.Bool,
+                title: Swift.String,
+                user: Components.Schemas.NullableSimpleUser? = nil,
+                body: Swift.String? = nil,
+                labels: Components.Schemas.PullRequestSimple.LabelsPayload,
+                milestone: Components.Schemas.NullableMilestone? = nil,
+                activeLockReason: Swift.String? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                closedAt: Foundation.Date? = nil,
+                mergedAt: Foundation.Date? = nil,
+                mergeCommitSha: Swift.String? = nil,
+                assignee: Components.Schemas.NullableSimpleUser? = nil,
+                assignees: [Components.Schemas.SimpleUser]? = nil,
+                requestedReviewers: [Components.Schemas.SimpleUser]? = nil,
+                requestedTeams: [Components.Schemas.Team]? = nil,
+                head: Components.Schemas.PullRequestSimple.HeadPayload,
+                base: Components.Schemas.PullRequestSimple.BasePayload,
+                _links: Components.Schemas.PullRequestSimple._LinksPayload,
+                authorAssociation: Components.Schemas.AuthorAssociation,
+                autoMerge: Components.Schemas.AutoMerge? = nil,
+                draft: Swift.Bool? = nil
+            ) {
+                self.url = url
+                self.id = id
+                self.nodeId = nodeId
+                self.htmlUrl = htmlUrl
+                self.diffUrl = diffUrl
+                self.patchUrl = patchUrl
+                self.issueUrl = issueUrl
+                self.commitsUrl = commitsUrl
+                self.reviewCommentsUrl = reviewCommentsUrl
+                self.reviewCommentUrl = reviewCommentUrl
+                self.commentsUrl = commentsUrl
+                self.statusesUrl = statusesUrl
+                self.number = number
+                self.state = state
+                self.locked = locked
+                self.title = title
+                self.user = user
+                self.body = body
+                self.labels = labels
+                self.milestone = milestone
+                self.activeLockReason = activeLockReason
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.closedAt = closedAt
+                self.mergedAt = mergedAt
+                self.mergeCommitSha = mergeCommitSha
+                self.assignee = assignee
+                self.assignees = assignees
+                self.requestedReviewers = requestedReviewers
+                self.requestedTeams = requestedTeams
+                self.head = head
+                self.base = base
+                self._links = _links
+                self.authorAssociation = authorAssociation
+                self.autoMerge = autoMerge
+                self.draft = draft
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case id
+                case nodeId = "node_id"
+                case htmlUrl = "html_url"
+                case diffUrl = "diff_url"
+                case patchUrl = "patch_url"
+                case issueUrl = "issue_url"
+                case commitsUrl = "commits_url"
+                case reviewCommentsUrl = "review_comments_url"
+                case reviewCommentUrl = "review_comment_url"
+                case commentsUrl = "comments_url"
+                case statusesUrl = "statuses_url"
+                case number
+                case state
+                case locked
+                case title
+                case user
+                case body
+                case labels
+                case milestone
+                case activeLockReason = "active_lock_reason"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case closedAt = "closed_at"
+                case mergedAt = "merged_at"
+                case mergeCommitSha = "merge_commit_sha"
+                case assignee
+                case assignees
+                case requestedReviewers = "requested_reviewers"
+                case requestedTeams = "requested_teams"
+                case head
+                case base
+                case _links
+                case authorAssociation = "author_association"
+                case autoMerge = "auto_merge"
+                case draft
+            }
+        }
         /// Custom property name and associated value
         ///
         /// - Remark: Generated from `#/components/schemas/custom-property-value`.
@@ -11355,14 +11850,15 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repository-ruleset-bypass-actor/actor_type`.
             public var actorType: Components.Schemas.RepositoryRulesetBypassActor.ActorTypePayload
-            /// When the specified actor can bypass the ruleset. `pull_request` means that an actor can only bypass rules on pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only applicable to branch rulesets.
+            /// When the specified actor can bypass the ruleset. `pull_request` means that an actor can only bypass rules on pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only applicable to branch rulesets. When `bypass_mode` is `exempt`, rules will not be run for that actor and a bypass audit entry will not be created.
             ///
             /// - Remark: Generated from `#/components/schemas/repository-ruleset-bypass-actor/bypass_mode`.
             @frozen public enum BypassModePayload: String, Codable, Hashable, Sendable, CaseIterable {
                 case always = "always"
                 case pullRequest = "pull_request"
+                case exempt = "exempt"
             }
-            /// When the specified actor can bypass the ruleset. `pull_request` means that an actor can only bypass rules on pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only applicable to branch rulesets.
+            /// When the specified actor can bypass the ruleset. `pull_request` means that an actor can only bypass rules on pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only applicable to branch rulesets. When `bypass_mode` is `exempt`, rules will not be run for that actor and a bypass audit entry will not be created.
             ///
             /// - Remark: Generated from `#/components/schemas/repository-ruleset-bypass-actor/bypass_mode`.
             public var bypassMode: Components.Schemas.RepositoryRulesetBypassActor.BypassModePayload?
@@ -11371,7 +11867,7 @@ public enum Components {
             /// - Parameters:
             ///   - actorId: The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, and `Team` actor types. If `actor_type` is `OrganizationAdmin`, this should be `1`. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
             ///   - actorType: The type of actor that can bypass a ruleset.
-            ///   - bypassMode: When the specified actor can bypass the ruleset. `pull_request` means that an actor can only bypass rules on pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only applicable to branch rulesets.
+            ///   - bypassMode: When the specified actor can bypass the ruleset. `pull_request` means that an actor can only bypass rules on pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only applicable to branch rulesets. When `bypass_mode` is `exempt`, rules will not be run for that actor and a bypass audit entry will not be created.
             public init(
                 actorId: Swift.Int? = nil,
                 actorType: Components.Schemas.RepositoryRulesetBypassActor.ActorTypePayload,
@@ -13329,6 +13825,7 @@ public enum Components {
                 case always = "always"
                 case pullRequestsOnly = "pull_requests_only"
                 case never = "never"
+                case exempt = "exempt"
             }
             /// The bypass type of the user making the API request for this ruleset. This field is only returned when
             /// querying the repository-level endpoint.
@@ -13864,11 +14361,11 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/rule-suite/actor_name`.
             public var actorName: Swift.String?
-            /// The first commit sha before the push evaluation.
+            /// The previous commit SHA of the ref.
             ///
             /// - Remark: Generated from `#/components/schemas/rule-suite/before_sha`.
             public var beforeSha: Swift.String?
-            /// The last commit sha in the push evaluation.
+            /// The new commit SHA of the ref.
             ///
             /// - Remark: Generated from `#/components/schemas/rule-suite/after_sha`.
             public var afterSha: Swift.String?
@@ -14023,8 +14520,8 @@ public enum Components {
             ///   - id: The unique identifier of the rule insight.
             ///   - actorId: The number that identifies the user.
             ///   - actorName: The handle for the GitHub user account.
-            ///   - beforeSha: The first commit sha before the push evaluation.
-            ///   - afterSha: The last commit sha in the push evaluation.
+            ///   - beforeSha: The previous commit SHA of the ref.
+            ///   - afterSha: The new commit SHA of the ref.
             ///   - ref: The ref name that the evaluation ran on.
             ///   - repositoryId: The ID of the repository associated with the rule evaluation.
             ///   - repositoryName: The name of the repository without the `.git` extension.
@@ -14920,99 +15417,8 @@ public enum Components {
             public typealias UsersPayload = [Components.Schemas.BranchRestrictionPolicy.UsersPayloadPayload]
             /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/users`.
             public var users: Components.Schemas.BranchRestrictionPolicy.UsersPayload
-            /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload`.
-            public struct TeamsPayloadPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/id`.
-                public var id: Swift.Int?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/node_id`.
-                public var nodeId: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/url`.
-                public var url: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/html_url`.
-                public var htmlUrl: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/name`.
-                public var name: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/slug`.
-                public var slug: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/description`.
-                public var description: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/privacy`.
-                public var privacy: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/notification_setting`.
-                public var notificationSetting: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/permission`.
-                public var permission: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/members_url`.
-                public var membersUrl: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/repositories_url`.
-                public var repositoriesUrl: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/TeamsPayload/parent`.
-                public var parent: Swift.String?
-                /// Creates a new `TeamsPayloadPayload`.
-                ///
-                /// - Parameters:
-                ///   - id:
-                ///   - nodeId:
-                ///   - url:
-                ///   - htmlUrl:
-                ///   - name:
-                ///   - slug:
-                ///   - description:
-                ///   - privacy:
-                ///   - notificationSetting:
-                ///   - permission:
-                ///   - membersUrl:
-                ///   - repositoriesUrl:
-                ///   - parent:
-                public init(
-                    id: Swift.Int? = nil,
-                    nodeId: Swift.String? = nil,
-                    url: Swift.String? = nil,
-                    htmlUrl: Swift.String? = nil,
-                    name: Swift.String? = nil,
-                    slug: Swift.String? = nil,
-                    description: Swift.String? = nil,
-                    privacy: Swift.String? = nil,
-                    notificationSetting: Swift.String? = nil,
-                    permission: Swift.String? = nil,
-                    membersUrl: Swift.String? = nil,
-                    repositoriesUrl: Swift.String? = nil,
-                    parent: Swift.String? = nil
-                ) {
-                    self.id = id
-                    self.nodeId = nodeId
-                    self.url = url
-                    self.htmlUrl = htmlUrl
-                    self.name = name
-                    self.slug = slug
-                    self.description = description
-                    self.privacy = privacy
-                    self.notificationSetting = notificationSetting
-                    self.permission = permission
-                    self.membersUrl = membersUrl
-                    self.repositoriesUrl = repositoriesUrl
-                    self.parent = parent
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case id
-                    case nodeId = "node_id"
-                    case url
-                    case htmlUrl = "html_url"
-                    case name
-                    case slug
-                    case description
-                    case privacy
-                    case notificationSetting = "notification_setting"
-                    case permission
-                    case membersUrl = "members_url"
-                    case repositoriesUrl = "repositories_url"
-                    case parent
-                }
-            }
             /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/teams`.
-            public typealias TeamsPayload = [Components.Schemas.BranchRestrictionPolicy.TeamsPayloadPayload]
-            /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/teams`.
-            public var teams: Components.Schemas.BranchRestrictionPolicy.TeamsPayload
+            public var teams: [Components.Schemas.Team]
             /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/AppsPayload`.
             public struct AppsPayloadPayload: Codable, Hashable, Sendable {
                 /// - Remark: Generated from `#/components/schemas/branch-restriction-policy/AppsPayload/id`.
@@ -15312,7 +15718,7 @@ public enum Components {
                 teamsUrl: Swift.String,
                 appsUrl: Swift.String,
                 users: Components.Schemas.BranchRestrictionPolicy.UsersPayload,
-                teams: Components.Schemas.BranchRestrictionPolicy.TeamsPayload,
+                teams: [Components.Schemas.Team],
                 apps: Components.Schemas.BranchRestrictionPolicy.AppsPayload
             ) {
                 self.url = url
@@ -15721,7 +16127,7 @@ public enum Components {
         /// - Remark: Generated from `#/components/schemas/diff-entry`.
         public struct DiffEntry: Codable, Hashable, Sendable {
             /// - Remark: Generated from `#/components/schemas/diff-entry/sha`.
-            public var sha: Swift.String
+            public var sha: Swift.String?
             /// - Remark: Generated from `#/components/schemas/diff-entry/filename`.
             public var filename: Swift.String
             /// - Remark: Generated from `#/components/schemas/diff-entry/status`.
@@ -15767,7 +16173,7 @@ public enum Components {
             ///   - patch:
             ///   - previousFilename:
             public init(
-                sha: Swift.String,
+                sha: Swift.String? = nil,
                 filename: Swift.String,
                 status: Components.Schemas.DiffEntry.StatusPayload,
                 additions: Swift.Int,
@@ -17449,501 +17855,6 @@ public enum Components {
                 case name
                 case commit
                 case protected
-            }
-        }
-        /// Hypermedia Link
-        ///
-        /// - Remark: Generated from `#/components/schemas/link`.
-        public struct Link: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/link/href`.
-            public var href: Swift.String
-            /// Creates a new `Link`.
-            ///
-            /// - Parameters:
-            ///   - href:
-            public init(href: Swift.String) {
-                self.href = href
-            }
-            public enum CodingKeys: String, CodingKey {
-                case href
-            }
-        }
-        /// The status of auto merging a pull request.
-        ///
-        /// - Remark: Generated from `#/components/schemas/auto-merge`.
-        public struct AutoMerge: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/auto-merge/enabled_by`.
-            public var enabledBy: Components.Schemas.SimpleUser
-            /// The merge method to use.
-            ///
-            /// - Remark: Generated from `#/components/schemas/auto-merge/merge_method`.
-            @frozen public enum MergeMethodPayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case merge = "merge"
-                case squash = "squash"
-                case rebase = "rebase"
-            }
-            /// The merge method to use.
-            ///
-            /// - Remark: Generated from `#/components/schemas/auto-merge/merge_method`.
-            public var mergeMethod: Components.Schemas.AutoMerge.MergeMethodPayload
-            /// Title for the merge commit message.
-            ///
-            /// - Remark: Generated from `#/components/schemas/auto-merge/commit_title`.
-            public var commitTitle: Swift.String
-            /// Commit message for the merge commit.
-            ///
-            /// - Remark: Generated from `#/components/schemas/auto-merge/commit_message`.
-            public var commitMessage: Swift.String
-            /// Creates a new `AutoMerge`.
-            ///
-            /// - Parameters:
-            ///   - enabledBy:
-            ///   - mergeMethod: The merge method to use.
-            ///   - commitTitle: Title for the merge commit message.
-            ///   - commitMessage: Commit message for the merge commit.
-            public init(
-                enabledBy: Components.Schemas.SimpleUser,
-                mergeMethod: Components.Schemas.AutoMerge.MergeMethodPayload,
-                commitTitle: Swift.String,
-                commitMessage: Swift.String
-            ) {
-                self.enabledBy = enabledBy
-                self.mergeMethod = mergeMethod
-                self.commitTitle = commitTitle
-                self.commitMessage = commitMessage
-            }
-            public enum CodingKeys: String, CodingKey {
-                case enabledBy = "enabled_by"
-                case mergeMethod = "merge_method"
-                case commitTitle = "commit_title"
-                case commitMessage = "commit_message"
-            }
-        }
-        /// Pull Request Simple
-        ///
-        /// - Remark: Generated from `#/components/schemas/pull-request-simple`.
-        public struct PullRequestSimple: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/url`.
-            public var url: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/id`.
-            public var id: Swift.Int64
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/node_id`.
-            public var nodeId: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/html_url`.
-            public var htmlUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/diff_url`.
-            public var diffUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/patch_url`.
-            public var patchUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/issue_url`.
-            public var issueUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/commits_url`.
-            public var commitsUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/review_comments_url`.
-            public var reviewCommentsUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/review_comment_url`.
-            public var reviewCommentUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/comments_url`.
-            public var commentsUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/statuses_url`.
-            public var statusesUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/number`.
-            public var number: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/state`.
-            public var state: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/locked`.
-            public var locked: Swift.Bool
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/title`.
-            public var title: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/user`.
-            public var user: Components.Schemas.NullableSimpleUser?
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/body`.
-            public var body: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload`.
-            public struct LabelsPayloadPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/id`.
-                public var id: Swift.Int64
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/node_id`.
-                public var nodeId: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/url`.
-                public var url: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/name`.
-                public var name: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/description`.
-                public var description: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/color`.
-                public var color: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/LabelsPayload/default`.
-                public var _default: Swift.Bool
-                /// Creates a new `LabelsPayloadPayload`.
-                ///
-                /// - Parameters:
-                ///   - id:
-                ///   - nodeId:
-                ///   - url:
-                ///   - name:
-                ///   - description:
-                ///   - color:
-                ///   - _default:
-                public init(
-                    id: Swift.Int64,
-                    nodeId: Swift.String,
-                    url: Swift.String,
-                    name: Swift.String,
-                    description: Swift.String,
-                    color: Swift.String,
-                    _default: Swift.Bool
-                ) {
-                    self.id = id
-                    self.nodeId = nodeId
-                    self.url = url
-                    self.name = name
-                    self.description = description
-                    self.color = color
-                    self._default = _default
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case id
-                    case nodeId = "node_id"
-                    case url
-                    case name
-                    case description
-                    case color
-                    case _default = "default"
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/labels`.
-            public typealias LabelsPayload = [Components.Schemas.PullRequestSimple.LabelsPayloadPayload]
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/labels`.
-            public var labels: Components.Schemas.PullRequestSimple.LabelsPayload
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/milestone`.
-            public var milestone: Components.Schemas.NullableMilestone?
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/active_lock_reason`.
-            public var activeLockReason: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/created_at`.
-            public var createdAt: Foundation.Date
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/updated_at`.
-            public var updatedAt: Foundation.Date
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/closed_at`.
-            public var closedAt: Foundation.Date?
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/merged_at`.
-            public var mergedAt: Foundation.Date?
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/merge_commit_sha`.
-            public var mergeCommitSha: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/assignee`.
-            public var assignee: Components.Schemas.NullableSimpleUser?
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/assignees`.
-            public var assignees: [Components.Schemas.SimpleUser]?
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/requested_reviewers`.
-            public var requestedReviewers: [Components.Schemas.SimpleUser]?
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/requested_teams`.
-            public var requestedTeams: [Components.Schemas.Team]?
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/head`.
-            public struct HeadPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/label`.
-                public var label: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/ref`.
-                public var ref: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/repo`.
-                public var repo: Components.Schemas.Repository
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/sha`.
-                public var sha: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/head/user`.
-                public var user: Components.Schemas.NullableSimpleUser?
-                /// Creates a new `HeadPayload`.
-                ///
-                /// - Parameters:
-                ///   - label:
-                ///   - ref:
-                ///   - repo:
-                ///   - sha:
-                ///   - user:
-                public init(
-                    label: Swift.String,
-                    ref: Swift.String,
-                    repo: Components.Schemas.Repository,
-                    sha: Swift.String,
-                    user: Components.Schemas.NullableSimpleUser? = nil
-                ) {
-                    self.label = label
-                    self.ref = ref
-                    self.repo = repo
-                    self.sha = sha
-                    self.user = user
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case label
-                    case ref
-                    case repo
-                    case sha
-                    case user
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/head`.
-            public var head: Components.Schemas.PullRequestSimple.HeadPayload
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/base`.
-            public struct BasePayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/label`.
-                public var label: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/ref`.
-                public var ref: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/repo`.
-                public var repo: Components.Schemas.Repository
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/sha`.
-                public var sha: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/base/user`.
-                public var user: Components.Schemas.NullableSimpleUser?
-                /// Creates a new `BasePayload`.
-                ///
-                /// - Parameters:
-                ///   - label:
-                ///   - ref:
-                ///   - repo:
-                ///   - sha:
-                ///   - user:
-                public init(
-                    label: Swift.String,
-                    ref: Swift.String,
-                    repo: Components.Schemas.Repository,
-                    sha: Swift.String,
-                    user: Components.Schemas.NullableSimpleUser? = nil
-                ) {
-                    self.label = label
-                    self.ref = ref
-                    self.repo = repo
-                    self.sha = sha
-                    self.user = user
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case label
-                    case ref
-                    case repo
-                    case sha
-                    case user
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/base`.
-            public var base: Components.Schemas.PullRequestSimple.BasePayload
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links`.
-            public struct _LinksPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/comments`.
-                public var comments: Components.Schemas.Link
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/commits`.
-                public var commits: Components.Schemas.Link
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/statuses`.
-                public var statuses: Components.Schemas.Link
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/html`.
-                public var html: Components.Schemas.Link
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/issue`.
-                public var issue: Components.Schemas.Link
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/review_comments`.
-                public var reviewComments: Components.Schemas.Link
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/review_comment`.
-                public var reviewComment: Components.Schemas.Link
-                /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links/self`.
-                public var _self: Components.Schemas.Link
-                /// Creates a new `_LinksPayload`.
-                ///
-                /// - Parameters:
-                ///   - comments:
-                ///   - commits:
-                ///   - statuses:
-                ///   - html:
-                ///   - issue:
-                ///   - reviewComments:
-                ///   - reviewComment:
-                ///   - _self:
-                public init(
-                    comments: Components.Schemas.Link,
-                    commits: Components.Schemas.Link,
-                    statuses: Components.Schemas.Link,
-                    html: Components.Schemas.Link,
-                    issue: Components.Schemas.Link,
-                    reviewComments: Components.Schemas.Link,
-                    reviewComment: Components.Schemas.Link,
-                    _self: Components.Schemas.Link
-                ) {
-                    self.comments = comments
-                    self.commits = commits
-                    self.statuses = statuses
-                    self.html = html
-                    self.issue = issue
-                    self.reviewComments = reviewComments
-                    self.reviewComment = reviewComment
-                    self._self = _self
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case comments
-                    case commits
-                    case statuses
-                    case html
-                    case issue
-                    case reviewComments = "review_comments"
-                    case reviewComment = "review_comment"
-                    case _self = "self"
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/_links`.
-            public var _links: Components.Schemas.PullRequestSimple._LinksPayload
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/author_association`.
-            public var authorAssociation: Components.Schemas.AuthorAssociation
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/auto_merge`.
-            public var autoMerge: Components.Schemas.AutoMerge?
-            /// Indicates whether or not the pull request is a draft.
-            ///
-            /// - Remark: Generated from `#/components/schemas/pull-request-simple/draft`.
-            public var draft: Swift.Bool?
-            /// Creates a new `PullRequestSimple`.
-            ///
-            /// - Parameters:
-            ///   - url:
-            ///   - id:
-            ///   - nodeId:
-            ///   - htmlUrl:
-            ///   - diffUrl:
-            ///   - patchUrl:
-            ///   - issueUrl:
-            ///   - commitsUrl:
-            ///   - reviewCommentsUrl:
-            ///   - reviewCommentUrl:
-            ///   - commentsUrl:
-            ///   - statusesUrl:
-            ///   - number:
-            ///   - state:
-            ///   - locked:
-            ///   - title:
-            ///   - user:
-            ///   - body:
-            ///   - labels:
-            ///   - milestone:
-            ///   - activeLockReason:
-            ///   - createdAt:
-            ///   - updatedAt:
-            ///   - closedAt:
-            ///   - mergedAt:
-            ///   - mergeCommitSha:
-            ///   - assignee:
-            ///   - assignees:
-            ///   - requestedReviewers:
-            ///   - requestedTeams:
-            ///   - head:
-            ///   - base:
-            ///   - _links:
-            ///   - authorAssociation:
-            ///   - autoMerge:
-            ///   - draft: Indicates whether or not the pull request is a draft.
-            public init(
-                url: Swift.String,
-                id: Swift.Int64,
-                nodeId: Swift.String,
-                htmlUrl: Swift.String,
-                diffUrl: Swift.String,
-                patchUrl: Swift.String,
-                issueUrl: Swift.String,
-                commitsUrl: Swift.String,
-                reviewCommentsUrl: Swift.String,
-                reviewCommentUrl: Swift.String,
-                commentsUrl: Swift.String,
-                statusesUrl: Swift.String,
-                number: Swift.Int,
-                state: Swift.String,
-                locked: Swift.Bool,
-                title: Swift.String,
-                user: Components.Schemas.NullableSimpleUser? = nil,
-                body: Swift.String? = nil,
-                labels: Components.Schemas.PullRequestSimple.LabelsPayload,
-                milestone: Components.Schemas.NullableMilestone? = nil,
-                activeLockReason: Swift.String? = nil,
-                createdAt: Foundation.Date,
-                updatedAt: Foundation.Date,
-                closedAt: Foundation.Date? = nil,
-                mergedAt: Foundation.Date? = nil,
-                mergeCommitSha: Swift.String? = nil,
-                assignee: Components.Schemas.NullableSimpleUser? = nil,
-                assignees: [Components.Schemas.SimpleUser]? = nil,
-                requestedReviewers: [Components.Schemas.SimpleUser]? = nil,
-                requestedTeams: [Components.Schemas.Team]? = nil,
-                head: Components.Schemas.PullRequestSimple.HeadPayload,
-                base: Components.Schemas.PullRequestSimple.BasePayload,
-                _links: Components.Schemas.PullRequestSimple._LinksPayload,
-                authorAssociation: Components.Schemas.AuthorAssociation,
-                autoMerge: Components.Schemas.AutoMerge? = nil,
-                draft: Swift.Bool? = nil
-            ) {
-                self.url = url
-                self.id = id
-                self.nodeId = nodeId
-                self.htmlUrl = htmlUrl
-                self.diffUrl = diffUrl
-                self.patchUrl = patchUrl
-                self.issueUrl = issueUrl
-                self.commitsUrl = commitsUrl
-                self.reviewCommentsUrl = reviewCommentsUrl
-                self.reviewCommentUrl = reviewCommentUrl
-                self.commentsUrl = commentsUrl
-                self.statusesUrl = statusesUrl
-                self.number = number
-                self.state = state
-                self.locked = locked
-                self.title = title
-                self.user = user
-                self.body = body
-                self.labels = labels
-                self.milestone = milestone
-                self.activeLockReason = activeLockReason
-                self.createdAt = createdAt
-                self.updatedAt = updatedAt
-                self.closedAt = closedAt
-                self.mergedAt = mergedAt
-                self.mergeCommitSha = mergeCommitSha
-                self.assignee = assignee
-                self.assignees = assignees
-                self.requestedReviewers = requestedReviewers
-                self.requestedTeams = requestedTeams
-                self.head = head
-                self.base = base
-                self._links = _links
-                self.authorAssociation = authorAssociation
-                self.autoMerge = autoMerge
-                self.draft = draft
-            }
-            public enum CodingKeys: String, CodingKey {
-                case url
-                case id
-                case nodeId = "node_id"
-                case htmlUrl = "html_url"
-                case diffUrl = "diff_url"
-                case patchUrl = "patch_url"
-                case issueUrl = "issue_url"
-                case commitsUrl = "commits_url"
-                case reviewCommentsUrl = "review_comments_url"
-                case reviewCommentUrl = "review_comment_url"
-                case commentsUrl = "comments_url"
-                case statusesUrl = "statuses_url"
-                case number
-                case state
-                case locked
-                case title
-                case user
-                case body
-                case labels
-                case milestone
-                case activeLockReason = "active_lock_reason"
-                case createdAt = "created_at"
-                case updatedAt = "updated_at"
-                case closedAt = "closed_at"
-                case mergedAt = "merged_at"
-                case mergeCommitSha = "merge_commit_sha"
-                case assignee
-                case assignees
-                case requestedReviewers = "requested_reviewers"
-                case requestedTeams = "requested_teams"
-                case head
-                case base
-                case _links
-                case authorAssociation = "author_association"
-                case autoMerge = "auto_merge"
-                case draft
             }
         }
         /// - Remark: Generated from `#/components/schemas/simple-commit-status`.
