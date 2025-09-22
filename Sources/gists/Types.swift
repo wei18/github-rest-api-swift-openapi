@@ -2437,6 +2437,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/since`.
         public typealias Since = Foundation.Date
+        /// The handle for the GitHub user account.
+        ///
+        /// - Remark: Generated from `#/components/parameters/username`.
+        public typealias Username = Swift.String
         /// The unique identifier of the gist.
         ///
         /// - Remark: Generated from `#/components/parameters/gist-id`.
@@ -2445,10 +2449,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/comment-id`.
         public typealias CommentId = Swift.Int64
-        /// The handle for the GitHub user account.
-        ///
-        /// - Remark: Generated from `#/components/parameters/username`.
-        public typealias Username = Swift.String
     }
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}
