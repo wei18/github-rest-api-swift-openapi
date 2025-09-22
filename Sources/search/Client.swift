@@ -393,6 +393,13 @@ public struct Client: APIProtocol {
                     name: "advanced_search",
                     value: input.query.advancedSearch
                 )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "search_type",
+                    value: input.query.searchType
+                )
                 converter.setAcceptHeader(
                     in: &request.headerFields,
                     contentTypes: input.headers.accept

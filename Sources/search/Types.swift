@@ -5255,6 +5255,12 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/issues-advanced-search`.
         public typealias IssuesAdvancedSearch = Swift.String
+        /// The type of search to perform. Set to `semantic` to perform a semantic search.
+        ///
+        /// - Remark: Generated from `#/components/parameters/search-type`.
+        @frozen public enum SearchType: String, Codable, Hashable, Sendable, CaseIterable {
+            case semantic = "semantic"
+        }
     }
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}
@@ -6029,6 +6035,14 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/search/issues/GET/query/advanced_search`.
                 public var advancedSearch: Components.Parameters.IssuesAdvancedSearch?
+                /// - Remark: Generated from `#/components/parameters/search-type`.
+                @frozen public enum SearchType: String, Codable, Hashable, Sendable, CaseIterable {
+                    case semantic = "semantic"
+                }
+                /// The type of search to perform. Set to `semantic` to perform a semantic search.
+                ///
+                /// - Remark: Generated from `#/paths/search/issues/GET/query/search_type`.
+                public var searchType: Components.Parameters.SearchType?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -6038,13 +6052,15 @@ public enum Operations {
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - advancedSearch: Set to `true` to use advanced search.
+                ///   - searchType: The type of search to perform. Set to `semantic` to perform a semantic search.
                 public init(
                     q: Swift.String,
                     sort: Operations.SearchIssuesAndPullRequests.Input.Query.SortPayload? = nil,
                     order: Components.Parameters.Order? = nil,
                     perPage: Components.Parameters.PerPage? = nil,
                     page: Components.Parameters.Page? = nil,
-                    advancedSearch: Components.Parameters.IssuesAdvancedSearch? = nil
+                    advancedSearch: Components.Parameters.IssuesAdvancedSearch? = nil,
+                    searchType: Components.Parameters.SearchType? = nil
                 ) {
                     self.q = q
                     self.sort = sort
@@ -6052,6 +6068,7 @@ public enum Operations {
                     self.perPage = perPage
                     self.page = page
                     self.advancedSearch = advancedSearch
+                    self.searchType = searchType
                 }
             }
             public var query: Operations.SearchIssuesAndPullRequests.Input.Query
