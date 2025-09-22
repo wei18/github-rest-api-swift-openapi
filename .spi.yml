@@ -19,6 +19,7 @@ builder:
     - GitHubRestAPIDependency_Graph
     - GitHubRestAPIDesktop
     - GitHubRestAPIEmojis
+    - GitHubRestAPIEnterprise_Team_Memberships
     - GitHubRestAPIEnterprise_Teams
     - GitHubRestAPIGists
     - GitHubRestAPIGit
