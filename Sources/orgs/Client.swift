@@ -7275,11 +7275,11 @@ public struct Client: APIProtocol {
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/schema`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/get-all-custom-properties)`.
-    public func orgsGetAllCustomProperties(_ input: Operations.OrgsGetAllCustomProperties.Input) async throws -> Operations.OrgsGetAllCustomProperties.Output {
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/custom-properties-for-repos-get-organization-definitions)`.
+    public func orgsCustomPropertiesForReposGetOrganizationDefinitions(_ input: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Input) async throws -> Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.OrgsGetAllCustomProperties.id,
+            forOperation: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.id,
             serializer: { input in
                 let path = try converter.renderedPath(
                     template: "/orgs/{}/properties/schema",
@@ -7302,7 +7302,7 @@ public struct Client: APIProtocol {
                 switch response.status.code {
                 case 200:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.OrgsGetAllCustomProperties.Output.Ok.Body
+                    let body: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Output.Ok.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -7391,11 +7391,11 @@ public struct Client: APIProtocol {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `PATCH /orgs/{org}/properties/schema`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/create-or-update-custom-properties)`.
-    public func orgsCreateOrUpdateCustomProperties(_ input: Operations.OrgsCreateOrUpdateCustomProperties.Input) async throws -> Operations.OrgsCreateOrUpdateCustomProperties.Output {
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/custom-properties-for-repos-create-or-update-organization-definitions)`.
+    public func orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions(_ input: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input) async throws -> Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.OrgsCreateOrUpdateCustomProperties.id,
+            forOperation: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.id,
             serializer: { input in
                 let path = try converter.renderedPath(
                     template: "/orgs/{}/properties/schema",
@@ -7427,7 +7427,7 @@ public struct Client: APIProtocol {
                 switch response.status.code {
                 case 200:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.OrgsCreateOrUpdateCustomProperties.Output.Ok.Body
+                    let body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Output.Ok.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -7509,11 +7509,11 @@ public struct Client: APIProtocol {
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/get-custom-property)`.
-    public func orgsGetCustomProperty(_ input: Operations.OrgsGetCustomProperty.Input) async throws -> Operations.OrgsGetCustomProperty.Output {
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/custom-properties-for-repos-get-organization-definition)`.
+    public func orgsCustomPropertiesForReposGetOrganizationDefinition(_ input: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Input) async throws -> Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.OrgsGetCustomProperty.id,
+            forOperation: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.id,
             serializer: { input in
                 let path = try converter.renderedPath(
                     template: "/orgs/{}/properties/schema/{}",
@@ -7537,7 +7537,7 @@ public struct Client: APIProtocol {
                 switch response.status.code {
                 case 200:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.OrgsGetCustomProperty.Output.Ok.Body
+                    let body: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Output.Ok.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -7622,11 +7622,11 @@ public struct Client: APIProtocol {
     /// - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/create-or-update-custom-property)`.
-    public func orgsCreateOrUpdateCustomProperty(_ input: Operations.OrgsCreateOrUpdateCustomProperty.Input) async throws -> Operations.OrgsCreateOrUpdateCustomProperty.Output {
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/custom-properties-for-repos-create-or-update-organization-definition)`.
+    public func orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition(_ input: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input) async throws -> Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.OrgsCreateOrUpdateCustomProperty.id,
+            forOperation: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.id,
             serializer: { input in
                 let path = try converter.renderedPath(
                     template: "/orgs/{}/properties/schema/{}",
@@ -7659,7 +7659,7 @@ public struct Client: APIProtocol {
                 switch response.status.code {
                 case 200:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.OrgsCreateOrUpdateCustomProperty.Output.Ok.Body
+                    let body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Output.Ok.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -7744,11 +7744,11 @@ public struct Client: APIProtocol {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `DELETE /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/remove-custom-property)`.
-    public func orgsRemoveCustomProperty(_ input: Operations.OrgsRemoveCustomProperty.Input) async throws -> Operations.OrgsRemoveCustomProperty.Output {
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/custom-properties-for-repos-delete-organization-definition)`.
+    public func orgsCustomPropertiesForReposDeleteOrganizationDefinition(_ input: Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Input) async throws -> Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.OrgsRemoveCustomProperty.id,
+            forOperation: Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.id,
             serializer: { input in
                 let path = try converter.renderedPath(
                     template: "/orgs/{}/properties/schema/{}",
@@ -7834,11 +7834,11 @@ public struct Client: APIProtocol {
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/values`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/list-custom-properties-values-for-repos)`.
-    public func orgsListCustomPropertiesValuesForRepos(_ input: Operations.OrgsListCustomPropertiesValuesForRepos.Input) async throws -> Operations.OrgsListCustomPropertiesValuesForRepos.Output {
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/custom-properties-for-repos-get-organization-values)`.
+    public func orgsCustomPropertiesForReposGetOrganizationValues(_ input: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input) async throws -> Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.OrgsListCustomPropertiesValuesForRepos.id,
+            forOperation: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.id,
             serializer: { input in
                 let path = try converter.renderedPath(
                     template: "/orgs/{}/properties/values",
@@ -7881,13 +7881,13 @@ public struct Client: APIProtocol {
             deserializer: { response, responseBody in
                 switch response.status.code {
                 case 200:
-                    let headers: Operations.OrgsListCustomPropertiesValuesForRepos.Output.Ok.Headers = .init(link: try converter.getOptionalHeaderFieldAsURI(
+                    let headers: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Output.Ok.Headers = .init(link: try converter.getOptionalHeaderFieldAsURI(
                         in: response.headerFields,
                         name: "Link",
                         as: Components.Headers.Link.self
                     ))
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.OrgsListCustomPropertiesValuesForRepos.Output.Ok.Body
+                    let body: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Output.Ok.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -7980,11 +7980,11 @@ public struct Client: APIProtocol {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_values_editor` in the organization.
     ///
     /// - Remark: HTTP `PATCH /orgs/{org}/properties/values`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/create-or-update-custom-properties-values-for-repos)`.
-    public func orgsCreateOrUpdateCustomPropertiesValuesForRepos(_ input: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input) async throws -> Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Output {
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/custom-properties-for-repos-create-or-update-organization-values)`.
+    public func orgsCustomPropertiesForReposCreateOrUpdateOrganizationValues(_ input: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input) async throws -> Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.id,
+            forOperation: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.id,
             serializer: { input in
                 let path = try converter.renderedPath(
                     template: "/orgs/{}/properties/values",

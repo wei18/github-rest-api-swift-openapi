@@ -727,8 +727,8 @@ public protocol APIProtocol: Sendable {
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/schema`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/get-all-custom-properties)`.
-    func orgsGetAllCustomProperties(_ input: Operations.OrgsGetAllCustomProperties.Input) async throws -> Operations.OrgsGetAllCustomProperties.Output
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/custom-properties-for-repos-get-organization-definitions)`.
+    func orgsCustomPropertiesForReposGetOrganizationDefinitions(_ input: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Input) async throws -> Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Output
     /// Create or update custom properties for an organization
     ///
     /// Creates new or updates existing custom properties defined for an organization in a batch.
@@ -742,16 +742,16 @@ public protocol APIProtocol: Sendable {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `PATCH /orgs/{org}/properties/schema`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/create-or-update-custom-properties)`.
-    func orgsCreateOrUpdateCustomProperties(_ input: Operations.OrgsCreateOrUpdateCustomProperties.Input) async throws -> Operations.OrgsCreateOrUpdateCustomProperties.Output
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/custom-properties-for-repos-create-or-update-organization-definitions)`.
+    func orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions(_ input: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input) async throws -> Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Output
     /// Get a custom property for an organization
     ///
     /// Gets a custom property that is defined for an organization.
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/get-custom-property)`.
-    func orgsGetCustomProperty(_ input: Operations.OrgsGetCustomProperty.Input) async throws -> Operations.OrgsGetCustomProperty.Output
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/custom-properties-for-repos-get-organization-definition)`.
+    func orgsCustomPropertiesForReposGetOrganizationDefinition(_ input: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Input) async throws -> Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Output
     /// Create or update a custom property for an organization
     ///
     /// Creates a new or updates an existing custom property that is defined for an organization.
@@ -761,8 +761,8 @@ public protocol APIProtocol: Sendable {
     /// - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/create-or-update-custom-property)`.
-    func orgsCreateOrUpdateCustomProperty(_ input: Operations.OrgsCreateOrUpdateCustomProperty.Input) async throws -> Operations.OrgsCreateOrUpdateCustomProperty.Output
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/custom-properties-for-repos-create-or-update-organization-definition)`.
+    func orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition(_ input: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input) async throws -> Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Output
     /// Remove a custom property for an organization
     ///
     /// Removes a custom property that is defined for an organization.
@@ -772,16 +772,16 @@ public protocol APIProtocol: Sendable {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `DELETE /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/remove-custom-property)`.
-    func orgsRemoveCustomProperty(_ input: Operations.OrgsRemoveCustomProperty.Input) async throws -> Operations.OrgsRemoveCustomProperty.Output
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/custom-properties-for-repos-delete-organization-definition)`.
+    func orgsCustomPropertiesForReposDeleteOrganizationDefinition(_ input: Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Input) async throws -> Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Output
     /// List custom property values for organization repositories
     ///
     /// Lists organization repositories with all of their custom property values.
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/values`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/list-custom-properties-values-for-repos)`.
-    func orgsListCustomPropertiesValuesForRepos(_ input: Operations.OrgsListCustomPropertiesValuesForRepos.Input) async throws -> Operations.OrgsListCustomPropertiesValuesForRepos.Output
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/custom-properties-for-repos-get-organization-values)`.
+    func orgsCustomPropertiesForReposGetOrganizationValues(_ input: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input) async throws -> Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Output
     /// Create or update custom property values for organization repositories
     ///
     /// Create new or update existing custom property values for repositories in a batch that belong to an organization.
@@ -796,8 +796,8 @@ public protocol APIProtocol: Sendable {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_values_editor` in the organization.
     ///
     /// - Remark: HTTP `PATCH /orgs/{org}/properties/values`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/create-or-update-custom-properties-values-for-repos)`.
-    func orgsCreateOrUpdateCustomPropertiesValuesForRepos(_ input: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input) async throws -> Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Output
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/custom-properties-for-repos-create-or-update-organization-values)`.
+    func orgsCustomPropertiesForReposCreateOrUpdateOrganizationValues(_ input: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input) async throws -> Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Output
     /// List public organization members
     ///
     /// Members of an organization can choose to have their membership publicized or not.
@@ -2258,12 +2258,12 @@ extension APIProtocol {
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/schema`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/get-all-custom-properties)`.
-    public func orgsGetAllCustomProperties(
-        path: Operations.OrgsGetAllCustomProperties.Input.Path,
-        headers: Operations.OrgsGetAllCustomProperties.Input.Headers = .init()
-    ) async throws -> Operations.OrgsGetAllCustomProperties.Output {
-        try await orgsGetAllCustomProperties(Operations.OrgsGetAllCustomProperties.Input(
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/custom-properties-for-repos-get-organization-definitions)`.
+    public func orgsCustomPropertiesForReposGetOrganizationDefinitions(
+        path: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Input.Path,
+        headers: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Input.Headers = .init()
+    ) async throws -> Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Output {
+        try await orgsCustomPropertiesForReposGetOrganizationDefinitions(Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Input(
             path: path,
             headers: headers
         ))
@@ -2281,13 +2281,13 @@ extension APIProtocol {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `PATCH /orgs/{org}/properties/schema`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/create-or-update-custom-properties)`.
-    public func orgsCreateOrUpdateCustomProperties(
-        path: Operations.OrgsCreateOrUpdateCustomProperties.Input.Path,
-        headers: Operations.OrgsCreateOrUpdateCustomProperties.Input.Headers = .init(),
-        body: Operations.OrgsCreateOrUpdateCustomProperties.Input.Body
-    ) async throws -> Operations.OrgsCreateOrUpdateCustomProperties.Output {
-        try await orgsCreateOrUpdateCustomProperties(Operations.OrgsCreateOrUpdateCustomProperties.Input(
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/custom-properties-for-repos-create-or-update-organization-definitions)`.
+    public func orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions(
+        path: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input.Path,
+        headers: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input.Headers = .init(),
+        body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input.Body
+    ) async throws -> Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Output {
+        try await orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions(Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input(
             path: path,
             headers: headers,
             body: body
@@ -2299,12 +2299,12 @@ extension APIProtocol {
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/get-custom-property)`.
-    public func orgsGetCustomProperty(
-        path: Operations.OrgsGetCustomProperty.Input.Path,
-        headers: Operations.OrgsGetCustomProperty.Input.Headers = .init()
-    ) async throws -> Operations.OrgsGetCustomProperty.Output {
-        try await orgsGetCustomProperty(Operations.OrgsGetCustomProperty.Input(
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/custom-properties-for-repos-get-organization-definition)`.
+    public func orgsCustomPropertiesForReposGetOrganizationDefinition(
+        path: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Input.Path,
+        headers: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Input.Headers = .init()
+    ) async throws -> Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Output {
+        try await orgsCustomPropertiesForReposGetOrganizationDefinition(Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Input(
             path: path,
             headers: headers
         ))
@@ -2318,13 +2318,13 @@ extension APIProtocol {
     /// - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/create-or-update-custom-property)`.
-    public func orgsCreateOrUpdateCustomProperty(
-        path: Operations.OrgsCreateOrUpdateCustomProperty.Input.Path,
-        headers: Operations.OrgsCreateOrUpdateCustomProperty.Input.Headers = .init(),
-        body: Operations.OrgsCreateOrUpdateCustomProperty.Input.Body
-    ) async throws -> Operations.OrgsCreateOrUpdateCustomProperty.Output {
-        try await orgsCreateOrUpdateCustomProperty(Operations.OrgsCreateOrUpdateCustomProperty.Input(
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/custom-properties-for-repos-create-or-update-organization-definition)`.
+    public func orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition(
+        path: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input.Path,
+        headers: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input.Headers = .init(),
+        body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input.Body
+    ) async throws -> Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Output {
+        try await orgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition(Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input(
             path: path,
             headers: headers,
             body: body
@@ -2339,12 +2339,12 @@ extension APIProtocol {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `DELETE /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/remove-custom-property)`.
-    public func orgsRemoveCustomProperty(
-        path: Operations.OrgsRemoveCustomProperty.Input.Path,
-        headers: Operations.OrgsRemoveCustomProperty.Input.Headers = .init()
-    ) async throws -> Operations.OrgsRemoveCustomProperty.Output {
-        try await orgsRemoveCustomProperty(Operations.OrgsRemoveCustomProperty.Input(
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/custom-properties-for-repos-delete-organization-definition)`.
+    public func orgsCustomPropertiesForReposDeleteOrganizationDefinition(
+        path: Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Input.Path,
+        headers: Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Input.Headers = .init()
+    ) async throws -> Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Output {
+        try await orgsCustomPropertiesForReposDeleteOrganizationDefinition(Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Input(
             path: path,
             headers: headers
         ))
@@ -2355,13 +2355,13 @@ extension APIProtocol {
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/values`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/list-custom-properties-values-for-repos)`.
-    public func orgsListCustomPropertiesValuesForRepos(
-        path: Operations.OrgsListCustomPropertiesValuesForRepos.Input.Path,
-        query: Operations.OrgsListCustomPropertiesValuesForRepos.Input.Query = .init(),
-        headers: Operations.OrgsListCustomPropertiesValuesForRepos.Input.Headers = .init()
-    ) async throws -> Operations.OrgsListCustomPropertiesValuesForRepos.Output {
-        try await orgsListCustomPropertiesValuesForRepos(Operations.OrgsListCustomPropertiesValuesForRepos.Input(
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/custom-properties-for-repos-get-organization-values)`.
+    public func orgsCustomPropertiesForReposGetOrganizationValues(
+        path: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input.Path,
+        query: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input.Query = .init(),
+        headers: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input.Headers = .init()
+    ) async throws -> Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Output {
+        try await orgsCustomPropertiesForReposGetOrganizationValues(Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input(
             path: path,
             query: query,
             headers: headers
@@ -2381,13 +2381,13 @@ extension APIProtocol {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_values_editor` in the organization.
     ///
     /// - Remark: HTTP `PATCH /orgs/{org}/properties/values`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/create-or-update-custom-properties-values-for-repos)`.
-    public func orgsCreateOrUpdateCustomPropertiesValuesForRepos(
-        path: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input.Path,
-        headers: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input.Headers = .init(),
-        body: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input.Body
-    ) async throws -> Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Output {
-        try await orgsCreateOrUpdateCustomPropertiesValuesForRepos(Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input(
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/custom-properties-for-repos-create-or-update-organization-values)`.
+    public func orgsCustomPropertiesForReposCreateOrUpdateOrganizationValues(
+        path: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input.Path,
+        headers: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input.Headers = .init(),
+        body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input.Body
+    ) async throws -> Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Output {
+        try await orgsCustomPropertiesForReposCreateOrUpdateOrganizationValues(Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input(
             path: path,
             headers: headers,
             body: body
@@ -6263,6 +6263,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/nullable-team-simple/ldap_dn`.
             public var ldapDn: Swift.String?
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case enterprise = "enterprise"
+                case organization = "organization"
+            }
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/type`.
+            public var _type: Components.Schemas.NullableTeamSimple._TypePayload
+            /// Unique identifier of the organization to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/organization_id`.
+            public var organizationId: Swift.Int?
+            /// Unique identifier of the enterprise to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/enterprise_id`.
+            public var enterpriseId: Swift.Int?
             /// Creates a new `NullableTeamSimple`.
             ///
             /// - Parameters:
@@ -6279,6 +6298,9 @@ public enum Components {
             ///   - repositoriesUrl:
             ///   - slug:
             ///   - ldapDn: Distinguished Name (DN) that team maps to within LDAP environment
+            ///   - _type: The ownership type of the team
+            ///   - organizationId: Unique identifier of the organization to which this team belongs
+            ///   - enterpriseId: Unique identifier of the enterprise to which this team belongs
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -6292,7 +6314,10 @@ public enum Components {
                 htmlUrl: Swift.String,
                 repositoriesUrl: Swift.String,
                 slug: Swift.String,
-                ldapDn: Swift.String? = nil
+                ldapDn: Swift.String? = nil,
+                _type: Components.Schemas.NullableTeamSimple._TypePayload,
+                organizationId: Swift.Int? = nil,
+                enterpriseId: Swift.Int? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -6307,6 +6332,9 @@ public enum Components {
                 self.repositoriesUrl = repositoriesUrl
                 self.slug = slug
                 self.ldapDn = ldapDn
+                self._type = _type
+                self.organizationId = organizationId
+                self.enterpriseId = enterpriseId
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -6322,6 +6350,9 @@ public enum Components {
                 case repositoriesUrl = "repositories_url"
                 case slug
                 case ldapDn = "ldap_dn"
+                case _type = "type"
+                case organizationId = "organization_id"
+                case enterpriseId = "enterprise_id"
             }
         }
         /// Groups of organization members that gives permissions on specified repositories.
@@ -6395,6 +6426,25 @@ public enum Components {
             public var membersUrl: Swift.String
             /// - Remark: Generated from `#/components/schemas/team/repositories_url`.
             public var repositoriesUrl: Swift.String
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case enterprise = "enterprise"
+                case organization = "organization"
+            }
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/type`.
+            public var _type: Components.Schemas.Team._TypePayload
+            /// Unique identifier of the organization to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/organization_id`.
+            public var organizationId: Swift.Int?
+            /// Unique identifier of the enterprise to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/enterprise_id`.
+            public var enterpriseId: Swift.Int?
             /// - Remark: Generated from `#/components/schemas/team/parent`.
             public var parent: Components.Schemas.NullableTeamSimple?
             /// Creates a new `Team`.
@@ -6413,6 +6463,9 @@ public enum Components {
             ///   - htmlUrl:
             ///   - membersUrl:
             ///   - repositoriesUrl:
+            ///   - _type: The ownership type of the team
+            ///   - organizationId: Unique identifier of the organization to which this team belongs
+            ///   - enterpriseId: Unique identifier of the enterprise to which this team belongs
             ///   - parent:
             public init(
                 id: Swift.Int,
@@ -6428,6 +6481,9 @@ public enum Components {
                 htmlUrl: Swift.String,
                 membersUrl: Swift.String,
                 repositoriesUrl: Swift.String,
+                _type: Components.Schemas.Team._TypePayload,
+                organizationId: Swift.Int? = nil,
+                enterpriseId: Swift.Int? = nil,
                 parent: Components.Schemas.NullableTeamSimple? = nil
             ) {
                 self.id = id
@@ -6443,6 +6499,9 @@ public enum Components {
                 self.htmlUrl = htmlUrl
                 self.membersUrl = membersUrl
                 self.repositoriesUrl = repositoriesUrl
+                self._type = _type
+                self.organizationId = organizationId
+                self.enterpriseId = enterpriseId
                 self.parent = parent
             }
             public enum CodingKeys: String, CodingKey {
@@ -6459,6 +6518,9 @@ public enum Components {
                 case htmlUrl = "html_url"
                 case membersUrl = "members_url"
                 case repositoriesUrl = "repositories_url"
+                case _type = "type"
+                case organizationId = "organization_id"
+                case enterpriseId = "enterprise_id"
                 case parent
             }
         }
@@ -7312,6 +7374,25 @@ public enum Components {
             public var repositoriesUrl: Swift.String
             /// - Remark: Generated from `#/components/schemas/team-role-assignment/parent`.
             public var parent: Components.Schemas.NullableTeamSimple?
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-role-assignment/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case enterprise = "enterprise"
+                case organization = "organization"
+            }
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-role-assignment/type`.
+            public var _type: Components.Schemas.TeamRoleAssignment._TypePayload
+            /// Unique identifier of the organization to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-role-assignment/organization_id`.
+            public var organizationId: Swift.Int?
+            /// Unique identifier of the enterprise to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-role-assignment/enterprise_id`.
+            public var enterpriseId: Swift.Int?
             /// Creates a new `TeamRoleAssignment`.
             ///
             /// - Parameters:
@@ -7330,6 +7411,9 @@ public enum Components {
             ///   - membersUrl:
             ///   - repositoriesUrl:
             ///   - parent:
+            ///   - _type: The ownership type of the team
+            ///   - organizationId: Unique identifier of the organization to which this team belongs
+            ///   - enterpriseId: Unique identifier of the enterprise to which this team belongs
             public init(
                 assignment: Components.Schemas.TeamRoleAssignment.AssignmentPayload? = nil,
                 id: Swift.Int,
@@ -7345,7 +7429,10 @@ public enum Components {
                 htmlUrl: Swift.String,
                 membersUrl: Swift.String,
                 repositoriesUrl: Swift.String,
-                parent: Components.Schemas.NullableTeamSimple? = nil
+                parent: Components.Schemas.NullableTeamSimple? = nil,
+                _type: Components.Schemas.TeamRoleAssignment._TypePayload,
+                organizationId: Swift.Int? = nil,
+                enterpriseId: Swift.Int? = nil
             ) {
                 self.assignment = assignment
                 self.id = id
@@ -7362,6 +7449,9 @@ public enum Components {
                 self.membersUrl = membersUrl
                 self.repositoriesUrl = repositoriesUrl
                 self.parent = parent
+                self._type = _type
+                self.organizationId = organizationId
+                self.enterpriseId = enterpriseId
             }
             public enum CodingKeys: String, CodingKey {
                 case assignment
@@ -7379,6 +7469,9 @@ public enum Components {
                 case membersUrl = "members_url"
                 case repositoriesUrl = "repositories_url"
                 case parent
+                case _type = "type"
+                case organizationId = "organization_id"
+                case enterpriseId = "enterprise_id"
             }
         }
         /// Groups of organization members that gives permissions on specified repositories.
@@ -7427,6 +7520,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/team-simple/ldap_dn`.
             public var ldapDn: Swift.String?
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-simple/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case enterprise = "enterprise"
+                case organization = "organization"
+            }
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-simple/type`.
+            public var _type: Components.Schemas.TeamSimple._TypePayload
+            /// Unique identifier of the organization to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-simple/organization_id`.
+            public var organizationId: Swift.Int?
+            /// Unique identifier of the enterprise to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-simple/enterprise_id`.
+            public var enterpriseId: Swift.Int?
             /// Creates a new `TeamSimple`.
             ///
             /// - Parameters:
@@ -7443,6 +7555,9 @@ public enum Components {
             ///   - repositoriesUrl:
             ///   - slug:
             ///   - ldapDn: Distinguished Name (DN) that team maps to within LDAP environment
+            ///   - _type: The ownership type of the team
+            ///   - organizationId: Unique identifier of the organization to which this team belongs
+            ///   - enterpriseId: Unique identifier of the enterprise to which this team belongs
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -7456,7 +7571,10 @@ public enum Components {
                 htmlUrl: Swift.String,
                 repositoriesUrl: Swift.String,
                 slug: Swift.String,
-                ldapDn: Swift.String? = nil
+                ldapDn: Swift.String? = nil,
+                _type: Components.Schemas.TeamSimple._TypePayload,
+                organizationId: Swift.Int? = nil,
+                enterpriseId: Swift.Int? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -7471,6 +7589,9 @@ public enum Components {
                 self.repositoriesUrl = repositoriesUrl
                 self.slug = slug
                 self.ldapDn = ldapDn
+                self._type = _type
+                self.organizationId = organizationId
+                self.enterpriseId = enterpriseId
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -7486,6 +7607,9 @@ public enum Components {
                 case repositoriesUrl = "repositories_url"
                 case slug
                 case ldapDn = "ldap_dn"
+                case _type = "type"
+                case organizationId = "organization_id"
+                case enterpriseId = "enterprise_id"
             }
         }
         /// The Relationship a User has with a role.
@@ -8551,6 +8675,14 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/page`.
         public typealias Page = Swift.Int
+        /// The handle for the GitHub user account.
+        ///
+        /// - Remark: Generated from `#/components/parameters/username`.
+        public typealias Username = Swift.String
+        /// The slug of the team name.
+        ///
+        /// - Remark: Generated from `#/components/parameters/team-slug`.
+        public typealias TeamSlug = Swift.String
         /// An organization ID. Only return organizations with an ID greater than this ID.
         ///
         /// - Remark: Generated from `#/components/parameters/since-org`.
@@ -8559,10 +8691,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/org`.
         public typealias Org = Swift.String
-        /// The handle for the GitHub user account.
-        ///
-        /// - Remark: Generated from `#/components/parameters/username`.
-        public typealias Username = Swift.String
         /// The unique identifier of the hook. You can find this value in the `X-GitHub-Hook-ID` header of a webhook delivery.
         ///
         /// - Remark: Generated from `#/components/parameters/hook-id`.
@@ -8642,10 +8770,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/issue-type-id`.
         public typealias IssueTypeId = Swift.Int
-        /// The slug of the team name.
-        ///
-        /// - Remark: Generated from `#/components/parameters/team-slug`.
-        public typealias TeamSlug = Swift.String
         /// The unique identifier of the role.
         ///
         /// - Remark: Generated from `#/components/parameters/role-id`.
@@ -24021,9 +24145,9 @@ public enum Operations {
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/schema`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/get-all-custom-properties)`.
-    public enum OrgsGetAllCustomProperties {
-        public static let id: Swift.String = "orgs/get-all-custom-properties"
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/custom-properties-for-repos-get-organization-definitions)`.
+    public enum OrgsCustomPropertiesForReposGetOrganizationDefinitions {
+        public static let id: Swift.String = "orgs/custom-properties-for-repos-get-organization-definitions"
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/GET/path`.
             public struct Path: Sendable, Hashable {
@@ -24039,27 +24163,27 @@ public enum Operations {
                     self.org = org
                 }
             }
-            public var path: Operations.OrgsGetAllCustomProperties.Input.Path
+            public var path: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Input.Path
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/GET/header`.
             public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsGetAllCustomProperties.AcceptableContentType>]
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.AcceptableContentType>]
                 /// Creates a new `Headers`.
                 ///
                 /// - Parameters:
                 ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsGetAllCustomProperties.AcceptableContentType>] = .defaultValues()) {
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.AcceptableContentType>] = .defaultValues()) {
                     self.accept = accept
                 }
             }
-            public var headers: Operations.OrgsGetAllCustomProperties.Input.Headers
+            public var headers: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Input.Headers
             /// Creates a new `Input`.
             ///
             /// - Parameters:
             ///   - path:
             ///   - headers:
             public init(
-                path: Operations.OrgsGetAllCustomProperties.Input.Path,
-                headers: Operations.OrgsGetAllCustomProperties.Input.Headers = .init()
+                path: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Input.Path,
+                headers: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Input.Headers = .init()
             ) {
                 self.path = path
                 self.headers = headers
@@ -24085,26 +24209,26 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.OrgsGetAllCustomProperties.Output.Ok.Body
+                public var body: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Output.Ok.Body
                 /// Creates a new `Ok`.
                 ///
                 /// - Parameters:
                 ///   - body: Received HTTP response body
-                public init(body: Operations.OrgsGetAllCustomProperties.Output.Ok.Body) {
+                public init(body: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Output.Ok.Body) {
                     self.body = body
                 }
             }
             /// Response
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/get-all-custom-properties)/responses/200`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/custom-properties-for-repos-get-organization-definitions)/responses/200`.
             ///
             /// HTTP response code: `200 ok`.
-            case ok(Operations.OrgsGetAllCustomProperties.Output.Ok)
+            case ok(Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Output.Ok)
             /// The associated value of the enum case if `self` is `.ok`.
             ///
             /// - Throws: An error if `self` is not `.ok`.
             /// - SeeAlso: `.ok`.
-            public var ok: Operations.OrgsGetAllCustomProperties.Output.Ok {
+            public var ok: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinitions.Output.Ok {
                 get throws {
                     switch self {
                     case let .ok(response):
@@ -24119,7 +24243,7 @@ public enum Operations {
             }
             /// Forbidden
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/get-all-custom-properties)/responses/403`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/custom-properties-for-repos-get-organization-definitions)/responses/403`.
             ///
             /// HTTP response code: `403 forbidden`.
             case forbidden(Components.Responses.Forbidden)
@@ -24142,7 +24266,7 @@ public enum Operations {
             }
             /// Resource not found
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/get-all-custom-properties)/responses/404`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/get(orgs/custom-properties-for-repos-get-organization-definitions)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
@@ -24207,9 +24331,9 @@ public enum Operations {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `PATCH /orgs/{org}/properties/schema`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/create-or-update-custom-properties)`.
-    public enum OrgsCreateOrUpdateCustomProperties {
-        public static let id: Swift.String = "orgs/create-or-update-custom-properties"
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/custom-properties-for-repos-create-or-update-organization-definitions)`.
+    public enum OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions {
+        public static let id: Swift.String = "orgs/custom-properties-for-repos-create-or-update-organization-definitions"
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/PATCH/path`.
             public struct Path: Sendable, Hashable {
@@ -24225,19 +24349,19 @@ public enum Operations {
                     self.org = org
                 }
             }
-            public var path: Operations.OrgsCreateOrUpdateCustomProperties.Input.Path
+            public var path: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input.Path
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/PATCH/header`.
             public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateOrUpdateCustomProperties.AcceptableContentType>]
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.AcceptableContentType>]
                 /// Creates a new `Headers`.
                 ///
                 /// - Parameters:
                 ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateOrUpdateCustomProperties.AcceptableContentType>] = .defaultValues()) {
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.AcceptableContentType>] = .defaultValues()) {
                     self.accept = accept
                 }
             }
-            public var headers: Operations.OrgsCreateOrUpdateCustomProperties.Input.Headers
+            public var headers: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input.Headers
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/PATCH/requestBody`.
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/PATCH/requestBody/json`.
@@ -24258,9 +24382,9 @@ public enum Operations {
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/PATCH/requestBody/content/application\/json`.
-                case json(Operations.OrgsCreateOrUpdateCustomProperties.Input.Body.JsonPayload)
+                case json(Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input.Body.JsonPayload)
             }
-            public var body: Operations.OrgsCreateOrUpdateCustomProperties.Input.Body
+            public var body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input.Body
             /// Creates a new `Input`.
             ///
             /// - Parameters:
@@ -24268,9 +24392,9 @@ public enum Operations {
             ///   - headers:
             ///   - body:
             public init(
-                path: Operations.OrgsCreateOrUpdateCustomProperties.Input.Path,
-                headers: Operations.OrgsCreateOrUpdateCustomProperties.Input.Headers = .init(),
-                body: Operations.OrgsCreateOrUpdateCustomProperties.Input.Body
+                path: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input.Path,
+                headers: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input.Headers = .init(),
+                body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Input.Body
             ) {
                 self.path = path
                 self.headers = headers
@@ -24297,26 +24421,26 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.OrgsCreateOrUpdateCustomProperties.Output.Ok.Body
+                public var body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Output.Ok.Body
                 /// Creates a new `Ok`.
                 ///
                 /// - Parameters:
                 ///   - body: Received HTTP response body
-                public init(body: Operations.OrgsCreateOrUpdateCustomProperties.Output.Ok.Body) {
+                public init(body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Output.Ok.Body) {
                     self.body = body
                 }
             }
             /// Response
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/create-or-update-custom-properties)/responses/200`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/custom-properties-for-repos-create-or-update-organization-definitions)/responses/200`.
             ///
             /// HTTP response code: `200 ok`.
-            case ok(Operations.OrgsCreateOrUpdateCustomProperties.Output.Ok)
+            case ok(Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Output.Ok)
             /// The associated value of the enum case if `self` is `.ok`.
             ///
             /// - Throws: An error if `self` is not `.ok`.
             /// - SeeAlso: `.ok`.
-            public var ok: Operations.OrgsCreateOrUpdateCustomProperties.Output.Ok {
+            public var ok: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinitions.Output.Ok {
                 get throws {
                     switch self {
                     case let .ok(response):
@@ -24331,7 +24455,7 @@ public enum Operations {
             }
             /// Forbidden
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/create-or-update-custom-properties)/responses/403`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/custom-properties-for-repos-create-or-update-organization-definitions)/responses/403`.
             ///
             /// HTTP response code: `403 forbidden`.
             case forbidden(Components.Responses.Forbidden)
@@ -24354,7 +24478,7 @@ public enum Operations {
             }
             /// Resource not found
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/create-or-update-custom-properties)/responses/404`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/patch(orgs/custom-properties-for-repos-create-or-update-organization-definitions)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
@@ -24412,9 +24536,9 @@ public enum Operations {
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/get-custom-property)`.
-    public enum OrgsGetCustomProperty {
-        public static let id: Swift.String = "orgs/get-custom-property"
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/custom-properties-for-repos-get-organization-definition)`.
+    public enum OrgsCustomPropertiesForReposGetOrganizationDefinition {
+        public static let id: Swift.String = "orgs/custom-properties-for-repos-get-organization-definition"
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/{custom_property_name}/GET/path`.
             public struct Path: Sendable, Hashable {
@@ -24439,27 +24563,27 @@ public enum Operations {
                     self.customPropertyName = customPropertyName
                 }
             }
-            public var path: Operations.OrgsGetCustomProperty.Input.Path
+            public var path: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Input.Path
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/{custom_property_name}/GET/header`.
             public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsGetCustomProperty.AcceptableContentType>]
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.AcceptableContentType>]
                 /// Creates a new `Headers`.
                 ///
                 /// - Parameters:
                 ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsGetCustomProperty.AcceptableContentType>] = .defaultValues()) {
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.AcceptableContentType>] = .defaultValues()) {
                     self.accept = accept
                 }
             }
-            public var headers: Operations.OrgsGetCustomProperty.Input.Headers
+            public var headers: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Input.Headers
             /// Creates a new `Input`.
             ///
             /// - Parameters:
             ///   - path:
             ///   - headers:
             public init(
-                path: Operations.OrgsGetCustomProperty.Input.Path,
-                headers: Operations.OrgsGetCustomProperty.Input.Headers = .init()
+                path: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Input.Path,
+                headers: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Input.Headers = .init()
             ) {
                 self.path = path
                 self.headers = headers
@@ -24485,26 +24609,26 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.OrgsGetCustomProperty.Output.Ok.Body
+                public var body: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Output.Ok.Body
                 /// Creates a new `Ok`.
                 ///
                 /// - Parameters:
                 ///   - body: Received HTTP response body
-                public init(body: Operations.OrgsGetCustomProperty.Output.Ok.Body) {
+                public init(body: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Output.Ok.Body) {
                     self.body = body
                 }
             }
             /// Response
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/get-custom-property)/responses/200`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/custom-properties-for-repos-get-organization-definition)/responses/200`.
             ///
             /// HTTP response code: `200 ok`.
-            case ok(Operations.OrgsGetCustomProperty.Output.Ok)
+            case ok(Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Output.Ok)
             /// The associated value of the enum case if `self` is `.ok`.
             ///
             /// - Throws: An error if `self` is not `.ok`.
             /// - SeeAlso: `.ok`.
-            public var ok: Operations.OrgsGetCustomProperty.Output.Ok {
+            public var ok: Operations.OrgsCustomPropertiesForReposGetOrganizationDefinition.Output.Ok {
                 get throws {
                     switch self {
                     case let .ok(response):
@@ -24519,7 +24643,7 @@ public enum Operations {
             }
             /// Forbidden
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/get-custom-property)/responses/403`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/custom-properties-for-repos-get-organization-definition)/responses/403`.
             ///
             /// HTTP response code: `403 forbidden`.
             case forbidden(Components.Responses.Forbidden)
@@ -24542,7 +24666,7 @@ public enum Operations {
             }
             /// Resource not found
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/get-custom-property)/responses/404`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/get(orgs/custom-properties-for-repos-get-organization-definition)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
@@ -24603,9 +24727,9 @@ public enum Operations {
     /// - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/create-or-update-custom-property)`.
-    public enum OrgsCreateOrUpdateCustomProperty {
-        public static let id: Swift.String = "orgs/create-or-update-custom-property"
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/custom-properties-for-repos-create-or-update-organization-definition)`.
+    public enum OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition {
+        public static let id: Swift.String = "orgs/custom-properties-for-repos-create-or-update-organization-definition"
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/{custom_property_name}/PUT/path`.
             public struct Path: Sendable, Hashable {
@@ -24630,25 +24754,25 @@ public enum Operations {
                     self.customPropertyName = customPropertyName
                 }
             }
-            public var path: Operations.OrgsCreateOrUpdateCustomProperty.Input.Path
+            public var path: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input.Path
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/{custom_property_name}/PUT/header`.
             public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateOrUpdateCustomProperty.AcceptableContentType>]
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.AcceptableContentType>]
                 /// Creates a new `Headers`.
                 ///
                 /// - Parameters:
                 ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateOrUpdateCustomProperty.AcceptableContentType>] = .defaultValues()) {
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.AcceptableContentType>] = .defaultValues()) {
                     self.accept = accept
                 }
             }
-            public var headers: Operations.OrgsCreateOrUpdateCustomProperty.Input.Headers
+            public var headers: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input.Headers
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/{custom_property_name}/PUT/requestBody`.
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/{custom_property_name}/PUT/requestBody/content/application\/json`.
                 case json(Components.Schemas.CustomPropertySetPayload)
             }
-            public var body: Operations.OrgsCreateOrUpdateCustomProperty.Input.Body
+            public var body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input.Body
             /// Creates a new `Input`.
             ///
             /// - Parameters:
@@ -24656,9 +24780,9 @@ public enum Operations {
             ///   - headers:
             ///   - body:
             public init(
-                path: Operations.OrgsCreateOrUpdateCustomProperty.Input.Path,
-                headers: Operations.OrgsCreateOrUpdateCustomProperty.Input.Headers = .init(),
-                body: Operations.OrgsCreateOrUpdateCustomProperty.Input.Body
+                path: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input.Path,
+                headers: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input.Headers = .init(),
+                body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Input.Body
             ) {
                 self.path = path
                 self.headers = headers
@@ -24685,26 +24809,26 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.OrgsCreateOrUpdateCustomProperty.Output.Ok.Body
+                public var body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Output.Ok.Body
                 /// Creates a new `Ok`.
                 ///
                 /// - Parameters:
                 ///   - body: Received HTTP response body
-                public init(body: Operations.OrgsCreateOrUpdateCustomProperty.Output.Ok.Body) {
+                public init(body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Output.Ok.Body) {
                     self.body = body
                 }
             }
             /// Response
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/create-or-update-custom-property)/responses/200`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/custom-properties-for-repos-create-or-update-organization-definition)/responses/200`.
             ///
             /// HTTP response code: `200 ok`.
-            case ok(Operations.OrgsCreateOrUpdateCustomProperty.Output.Ok)
+            case ok(Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Output.Ok)
             /// The associated value of the enum case if `self` is `.ok`.
             ///
             /// - Throws: An error if `self` is not `.ok`.
             /// - SeeAlso: `.ok`.
-            public var ok: Operations.OrgsCreateOrUpdateCustomProperty.Output.Ok {
+            public var ok: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationDefinition.Output.Ok {
                 get throws {
                     switch self {
                     case let .ok(response):
@@ -24719,7 +24843,7 @@ public enum Operations {
             }
             /// Forbidden
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/create-or-update-custom-property)/responses/403`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/custom-properties-for-repos-create-or-update-organization-definition)/responses/403`.
             ///
             /// HTTP response code: `403 forbidden`.
             case forbidden(Components.Responses.Forbidden)
@@ -24742,7 +24866,7 @@ public enum Operations {
             }
             /// Resource not found
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/create-or-update-custom-property)/responses/404`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/put(orgs/custom-properties-for-repos-create-or-update-organization-definition)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
@@ -24803,9 +24927,9 @@ public enum Operations {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_definitions_manager` in the organization.
     ///
     /// - Remark: HTTP `DELETE /orgs/{org}/properties/schema/{custom_property_name}`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/remove-custom-property)`.
-    public enum OrgsRemoveCustomProperty {
-        public static let id: Swift.String = "orgs/remove-custom-property"
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/custom-properties-for-repos-delete-organization-definition)`.
+    public enum OrgsCustomPropertiesForReposDeleteOrganizationDefinition {
+        public static let id: Swift.String = "orgs/custom-properties-for-repos-delete-organization-definition"
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/{custom_property_name}/DELETE/path`.
             public struct Path: Sendable, Hashable {
@@ -24830,27 +24954,27 @@ public enum Operations {
                     self.customPropertyName = customPropertyName
                 }
             }
-            public var path: Operations.OrgsRemoveCustomProperty.Input.Path
+            public var path: Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Input.Path
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/schema/{custom_property_name}/DELETE/header`.
             public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsRemoveCustomProperty.AcceptableContentType>]
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.AcceptableContentType>]
                 /// Creates a new `Headers`.
                 ///
                 /// - Parameters:
                 ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsRemoveCustomProperty.AcceptableContentType>] = .defaultValues()) {
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.AcceptableContentType>] = .defaultValues()) {
                     self.accept = accept
                 }
             }
-            public var headers: Operations.OrgsRemoveCustomProperty.Input.Headers
+            public var headers: Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Input.Headers
             /// Creates a new `Input`.
             ///
             /// - Parameters:
             ///   - path:
             ///   - headers:
             public init(
-                path: Operations.OrgsRemoveCustomProperty.Input.Path,
-                headers: Operations.OrgsRemoveCustomProperty.Input.Headers = .init()
+                path: Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Input.Path,
+                headers: Operations.OrgsCustomPropertiesForReposDeleteOrganizationDefinition.Input.Headers = .init()
             ) {
                 self.path = path
                 self.headers = headers
@@ -24859,13 +24983,13 @@ public enum Operations {
         @frozen public enum Output: Sendable, Hashable {
             /// A header with no content is returned.
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/remove-custom-property)/responses/204`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/custom-properties-for-repos-delete-organization-definition)/responses/204`.
             ///
             /// HTTP response code: `204 noContent`.
             case noContent(Components.Responses.NoContent)
             /// A header with no content is returned.
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/remove-custom-property)/responses/204`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/custom-properties-for-repos-delete-organization-definition)/responses/204`.
             ///
             /// HTTP response code: `204 noContent`.
             public static var noContent: Self {
@@ -24890,7 +25014,7 @@ public enum Operations {
             }
             /// Forbidden
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/remove-custom-property)/responses/403`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/custom-properties-for-repos-delete-organization-definition)/responses/403`.
             ///
             /// HTTP response code: `403 forbidden`.
             case forbidden(Components.Responses.Forbidden)
@@ -24913,7 +25037,7 @@ public enum Operations {
             }
             /// Resource not found
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/remove-custom-property)/responses/404`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/schema/{custom_property_name}/delete(orgs/custom-properties-for-repos-delete-organization-definition)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
@@ -24971,9 +25095,9 @@ public enum Operations {
     /// Organization members can read these properties.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/properties/values`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/list-custom-properties-values-for-repos)`.
-    public enum OrgsListCustomPropertiesValuesForRepos {
-        public static let id: Swift.String = "orgs/list-custom-properties-values-for-repos"
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/custom-properties-for-repos-get-organization-values)`.
+    public enum OrgsCustomPropertiesForReposGetOrganizationValues {
+        public static let id: Swift.String = "orgs/custom-properties-for-repos-get-organization-values"
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/values/GET/path`.
             public struct Path: Sendable, Hashable {
@@ -24989,7 +25113,7 @@ public enum Operations {
                     self.org = org
                 }
             }
-            public var path: Operations.OrgsListCustomPropertiesValuesForRepos.Input.Path
+            public var path: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input.Path
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/values/GET/query`.
             public struct Query: Sendable, Hashable {
                 /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
@@ -25020,19 +25144,19 @@ public enum Operations {
                     self.repositoryQuery = repositoryQuery
                 }
             }
-            public var query: Operations.OrgsListCustomPropertiesValuesForRepos.Input.Query
+            public var query: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input.Query
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/values/GET/header`.
             public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListCustomPropertiesValuesForRepos.AcceptableContentType>]
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposGetOrganizationValues.AcceptableContentType>]
                 /// Creates a new `Headers`.
                 ///
                 /// - Parameters:
                 ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListCustomPropertiesValuesForRepos.AcceptableContentType>] = .defaultValues()) {
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposGetOrganizationValues.AcceptableContentType>] = .defaultValues()) {
                     self.accept = accept
                 }
             }
-            public var headers: Operations.OrgsListCustomPropertiesValuesForRepos.Input.Headers
+            public var headers: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input.Headers
             /// Creates a new `Input`.
             ///
             /// - Parameters:
@@ -25040,9 +25164,9 @@ public enum Operations {
             ///   - query:
             ///   - headers:
             public init(
-                path: Operations.OrgsListCustomPropertiesValuesForRepos.Input.Path,
-                query: Operations.OrgsListCustomPropertiesValuesForRepos.Input.Query = .init(),
-                headers: Operations.OrgsListCustomPropertiesValuesForRepos.Input.Headers = .init()
+                path: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input.Path,
+                query: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input.Query = .init(),
+                headers: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Input.Headers = .init()
             ) {
                 self.path = path
                 self.query = query
@@ -25064,7 +25188,7 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response headers
-                public var headers: Operations.OrgsListCustomPropertiesValuesForRepos.Output.Ok.Headers
+                public var headers: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Output.Ok.Headers
                 /// - Remark: Generated from `#/paths/orgs/{org}/properties/values/GET/responses/200/content`.
                 @frozen public enum Body: Sendable, Hashable {
                     /// - Remark: Generated from `#/paths/orgs/{org}/properties/values/GET/responses/200/content/application\/json`.
@@ -25083,15 +25207,15 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.OrgsListCustomPropertiesValuesForRepos.Output.Ok.Body
+                public var body: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Output.Ok.Body
                 /// Creates a new `Ok`.
                 ///
                 /// - Parameters:
                 ///   - headers: Received HTTP response headers
                 ///   - body: Received HTTP response body
                 public init(
-                    headers: Operations.OrgsListCustomPropertiesValuesForRepos.Output.Ok.Headers = .init(),
-                    body: Operations.OrgsListCustomPropertiesValuesForRepos.Output.Ok.Body
+                    headers: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Output.Ok.Headers = .init(),
+                    body: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Output.Ok.Body
                 ) {
                     self.headers = headers
                     self.body = body
@@ -25099,15 +25223,15 @@ public enum Operations {
             }
             /// Response
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/list-custom-properties-values-for-repos)/responses/200`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/custom-properties-for-repos-get-organization-values)/responses/200`.
             ///
             /// HTTP response code: `200 ok`.
-            case ok(Operations.OrgsListCustomPropertiesValuesForRepos.Output.Ok)
+            case ok(Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Output.Ok)
             /// The associated value of the enum case if `self` is `.ok`.
             ///
             /// - Throws: An error if `self` is not `.ok`.
             /// - SeeAlso: `.ok`.
-            public var ok: Operations.OrgsListCustomPropertiesValuesForRepos.Output.Ok {
+            public var ok: Operations.OrgsCustomPropertiesForReposGetOrganizationValues.Output.Ok {
                 get throws {
                     switch self {
                     case let .ok(response):
@@ -25122,7 +25246,7 @@ public enum Operations {
             }
             /// Forbidden
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/list-custom-properties-values-for-repos)/responses/403`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/custom-properties-for-repos-get-organization-values)/responses/403`.
             ///
             /// HTTP response code: `403 forbidden`.
             case forbidden(Components.Responses.Forbidden)
@@ -25145,7 +25269,7 @@ public enum Operations {
             }
             /// Resource not found
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/list-custom-properties-values-for-repos)/responses/404`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/get(orgs/custom-properties-for-repos-get-organization-values)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
@@ -25211,9 +25335,9 @@ public enum Operations {
     ///   - A user, or a user on a team, with the fine-grained permission of `custom_properties_org_values_editor` in the organization.
     ///
     /// - Remark: HTTP `PATCH /orgs/{org}/properties/values`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/create-or-update-custom-properties-values-for-repos)`.
-    public enum OrgsCreateOrUpdateCustomPropertiesValuesForRepos {
-        public static let id: Swift.String = "orgs/create-or-update-custom-properties-values-for-repos"
+    /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/custom-properties-for-repos-create-or-update-organization-values)`.
+    public enum OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues {
+        public static let id: Swift.String = "orgs/custom-properties-for-repos-create-or-update-organization-values"
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/values/PATCH/path`.
             public struct Path: Sendable, Hashable {
@@ -25229,19 +25353,19 @@ public enum Operations {
                     self.org = org
                 }
             }
-            public var path: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input.Path
+            public var path: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input.Path
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/values/PATCH/header`.
             public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.AcceptableContentType>]
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.AcceptableContentType>]
                 /// Creates a new `Headers`.
                 ///
                 /// - Parameters:
                 ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.AcceptableContentType>] = .defaultValues()) {
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.AcceptableContentType>] = .defaultValues()) {
                     self.accept = accept
                 }
             }
-            public var headers: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input.Headers
+            public var headers: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input.Headers
             /// - Remark: Generated from `#/paths/orgs/{org}/properties/values/PATCH/requestBody`.
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/orgs/{org}/properties/values/PATCH/requestBody/json`.
@@ -25272,9 +25396,9 @@ public enum Operations {
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/properties/values/PATCH/requestBody/content/application\/json`.
-                case json(Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input.Body.JsonPayload)
+                case json(Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input.Body.JsonPayload)
             }
-            public var body: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input.Body
+            public var body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input.Body
             /// Creates a new `Input`.
             ///
             /// - Parameters:
@@ -25282,9 +25406,9 @@ public enum Operations {
             ///   - headers:
             ///   - body:
             public init(
-                path: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input.Path,
-                headers: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input.Headers = .init(),
-                body: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Input.Body
+                path: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input.Path,
+                headers: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input.Headers = .init(),
+                body: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Input.Body
             ) {
                 self.path = path
                 self.headers = headers
@@ -25298,13 +25422,13 @@ public enum Operations {
             }
             /// No Content when custom property values are successfully created or updated
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/create-or-update-custom-properties-values-for-repos)/responses/204`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/custom-properties-for-repos-create-or-update-organization-values)/responses/204`.
             ///
             /// HTTP response code: `204 noContent`.
-            case noContent(Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Output.NoContent)
+            case noContent(Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Output.NoContent)
             /// No Content when custom property values are successfully created or updated
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/create-or-update-custom-properties-values-for-repos)/responses/204`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/custom-properties-for-repos-create-or-update-organization-values)/responses/204`.
             ///
             /// HTTP response code: `204 noContent`.
             public static var noContent: Self {
@@ -25314,7 +25438,7 @@ public enum Operations {
             ///
             /// - Throws: An error if `self` is not `.noContent`.
             /// - SeeAlso: `.noContent`.
-            public var noContent: Operations.OrgsCreateOrUpdateCustomPropertiesValuesForRepos.Output.NoContent {
+            public var noContent: Operations.OrgsCustomPropertiesForReposCreateOrUpdateOrganizationValues.Output.NoContent {
                 get throws {
                     switch self {
                     case let .noContent(response):
@@ -25329,7 +25453,7 @@ public enum Operations {
             }
             /// Forbidden
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/create-or-update-custom-properties-values-for-repos)/responses/403`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/custom-properties-for-repos-create-or-update-organization-values)/responses/403`.
             ///
             /// HTTP response code: `403 forbidden`.
             case forbidden(Components.Responses.Forbidden)
@@ -25352,7 +25476,7 @@ public enum Operations {
             }
             /// Resource not found
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/create-or-update-custom-properties-values-for-repos)/responses/404`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/custom-properties-for-repos-create-or-update-organization-values)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
@@ -25375,7 +25499,7 @@ public enum Operations {
             }
             /// Validation failed, or the endpoint has been spammed.
             ///
-            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/create-or-update-custom-properties-values-for-repos)/responses/422`.
+            /// - Remark: Generated from `#/paths//orgs/{org}/properties/values/patch(orgs/custom-properties-for-repos-create-or-update-organization-values)/responses/422`.
             ///
             /// HTTP response code: `422 unprocessableContent`.
             case unprocessableContent(Components.Responses.ValidationFailed)
