@@ -4790,6 +4790,10 @@ public enum Components {
         public typealias ClientId = Swift.String
         /// - Remark: Generated from `#/components/parameters/app-slug`.
         public typealias AppSlug = Swift.String
+        /// The handle for the GitHub user account.
+        ///
+        /// - Remark: Generated from `#/components/parameters/username`.
+        public typealias Username = Swift.String
         /// account_id parameter
         ///
         /// - Remark: Generated from `#/components/parameters/account-id`.
@@ -4821,10 +4825,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/repository-id`.
         public typealias RepositoryId = Swift.Int
-        /// The handle for the GitHub user account.
-        ///
-        /// - Remark: Generated from `#/components/parameters/username`.
-        public typealias Username = Swift.String
     }
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}
