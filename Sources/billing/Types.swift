@@ -831,6 +831,10 @@ public enum Components {
     }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
     public enum Parameters {
+        /// The handle for the GitHub user account.
+        ///
+        /// - Remark: Generated from `#/components/parameters/username`.
+        public typealias Username = Swift.String
         /// The organization name. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/org`.
@@ -851,10 +855,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/billing-usage-report-hour`.
         public typealias BillingUsageReportHour = Swift.Int
-        /// The handle for the GitHub user account.
-        ///
-        /// - Remark: Generated from `#/components/parameters/username`.
-        public typealias Username = Swift.String
     }
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}
