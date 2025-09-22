@@ -3513,6 +3513,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/nullable-team-simple/ldap_dn`.
             public var ldapDn: Swift.String?
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case enterprise = "enterprise"
+                case organization = "organization"
+            }
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/type`.
+            public var _type: Components.Schemas.NullableTeamSimple._TypePayload
+            /// Unique identifier of the organization to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/organization_id`.
+            public var organizationId: Swift.Int?
+            /// Unique identifier of the enterprise to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/enterprise_id`.
+            public var enterpriseId: Swift.Int?
             /// Creates a new `NullableTeamSimple`.
             ///
             /// - Parameters:
@@ -3529,6 +3548,9 @@ public enum Components {
             ///   - repositoriesUrl:
             ///   - slug:
             ///   - ldapDn: Distinguished Name (DN) that team maps to within LDAP environment
+            ///   - _type: The ownership type of the team
+            ///   - organizationId: Unique identifier of the organization to which this team belongs
+            ///   - enterpriseId: Unique identifier of the enterprise to which this team belongs
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -3542,7 +3564,10 @@ public enum Components {
                 htmlUrl: Swift.String,
                 repositoriesUrl: Swift.String,
                 slug: Swift.String,
-                ldapDn: Swift.String? = nil
+                ldapDn: Swift.String? = nil,
+                _type: Components.Schemas.NullableTeamSimple._TypePayload,
+                organizationId: Swift.Int? = nil,
+                enterpriseId: Swift.Int? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -3557,6 +3582,9 @@ public enum Components {
                 self.repositoriesUrl = repositoriesUrl
                 self.slug = slug
                 self.ldapDn = ldapDn
+                self._type = _type
+                self.organizationId = organizationId
+                self.enterpriseId = enterpriseId
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -3572,6 +3600,9 @@ public enum Components {
                 case repositoriesUrl = "repositories_url"
                 case slug
                 case ldapDn = "ldap_dn"
+                case _type = "type"
+                case organizationId = "organization_id"
+                case enterpriseId = "enterprise_id"
             }
         }
         /// Groups of organization members that gives permissions on specified repositories.
@@ -3645,6 +3676,25 @@ public enum Components {
             public var membersUrl: Swift.String
             /// - Remark: Generated from `#/components/schemas/team/repositories_url`.
             public var repositoriesUrl: Swift.String
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case enterprise = "enterprise"
+                case organization = "organization"
+            }
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/type`.
+            public var _type: Components.Schemas.Team._TypePayload
+            /// Unique identifier of the organization to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/organization_id`.
+            public var organizationId: Swift.Int?
+            /// Unique identifier of the enterprise to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/enterprise_id`.
+            public var enterpriseId: Swift.Int?
             /// - Remark: Generated from `#/components/schemas/team/parent`.
             public var parent: Components.Schemas.NullableTeamSimple?
             /// Creates a new `Team`.
@@ -3663,6 +3713,9 @@ public enum Components {
             ///   - htmlUrl:
             ///   - membersUrl:
             ///   - repositoriesUrl:
+            ///   - _type: The ownership type of the team
+            ///   - organizationId: Unique identifier of the organization to which this team belongs
+            ///   - enterpriseId: Unique identifier of the enterprise to which this team belongs
             ///   - parent:
             public init(
                 id: Swift.Int,
@@ -3678,6 +3731,9 @@ public enum Components {
                 htmlUrl: Swift.String,
                 membersUrl: Swift.String,
                 repositoriesUrl: Swift.String,
+                _type: Components.Schemas.Team._TypePayload,
+                organizationId: Swift.Int? = nil,
+                enterpriseId: Swift.Int? = nil,
                 parent: Components.Schemas.NullableTeamSimple? = nil
             ) {
                 self.id = id
@@ -3693,6 +3749,9 @@ public enum Components {
                 self.htmlUrl = htmlUrl
                 self.membersUrl = membersUrl
                 self.repositoriesUrl = repositoriesUrl
+                self._type = _type
+                self.organizationId = organizationId
+                self.enterpriseId = enterpriseId
                 self.parent = parent
             }
             public enum CodingKeys: String, CodingKey {
@@ -3709,6 +3768,9 @@ public enum Components {
                 case htmlUrl = "html_url"
                 case membersUrl = "members_url"
                 case repositoriesUrl = "repositories_url"
+                case _type = "type"
+                case organizationId = "organization_id"
+                case enterpriseId = "enterprise_id"
                 case parent
             }
         }
@@ -4145,6 +4207,10 @@ public enum Components {
                 case archivedAt = "archived_at"
             }
         }
+        /// The [distinguished name](https://www.ldap.com/ldap-dns-and-rdns) (DN) of the LDAP entry to map to a team.
+        ///
+        /// - Remark: Generated from `#/components/schemas/ldap-dn`.
+        public typealias LdapDn = Swift.String
         /// Groups of organization members that gives permissions on specified repositories.
         ///
         /// - Remark: Generated from `#/components/schemas/team-full`.
@@ -4211,10 +4277,27 @@ public enum Components {
             public var updatedAt: Foundation.Date
             /// - Remark: Generated from `#/components/schemas/team-full/organization`.
             public var organization: Components.Schemas.TeamOrganization
-            /// Distinguished Name (DN) that team maps to within LDAP environment
-            ///
             /// - Remark: Generated from `#/components/schemas/team-full/ldap_dn`.
-            public var ldapDn: Swift.String?
+            public var ldapDn: Components.Schemas.LdapDn?
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-full/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case enterprise = "enterprise"
+                case organization = "organization"
+            }
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-full/type`.
+            public var _type: Components.Schemas.TeamFull._TypePayload
+            /// Unique identifier of the organization to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-full/organization_id`.
+            public var organizationId: Swift.Int?
+            /// Unique identifier of the enterprise to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-full/enterprise_id`.
+            public var enterpriseId: Swift.Int?
             /// Creates a new `TeamFull`.
             ///
             /// - Parameters:
@@ -4236,7 +4319,10 @@ public enum Components {
             ///   - createdAt:
             ///   - updatedAt:
             ///   - organization:
-            ///   - ldapDn: Distinguished Name (DN) that team maps to within LDAP environment
+            ///   - ldapDn:
+            ///   - _type: The ownership type of the team
+            ///   - organizationId: Unique identifier of the organization to which this team belongs
+            ///   - enterpriseId: Unique identifier of the enterprise to which this team belongs
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -4256,7 +4342,10 @@ public enum Components {
                 createdAt: Foundation.Date,
                 updatedAt: Foundation.Date,
                 organization: Components.Schemas.TeamOrganization,
-                ldapDn: Swift.String? = nil
+                ldapDn: Components.Schemas.LdapDn? = nil,
+                _type: Components.Schemas.TeamFull._TypePayload,
+                organizationId: Swift.Int? = nil,
+                enterpriseId: Swift.Int? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -4277,6 +4366,9 @@ public enum Components {
                 self.updatedAt = updatedAt
                 self.organization = organization
                 self.ldapDn = ldapDn
+                self._type = _type
+                self.organizationId = organizationId
+                self.enterpriseId = enterpriseId
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -4298,6 +4390,9 @@ public enum Components {
                 case updatedAt = "updated_at"
                 case organization
                 case ldapDn = "ldap_dn"
+                case _type = "type"
+                case organizationId = "organization_id"
+                case enterpriseId = "enterprise_id"
             }
         }
         /// A team discussion is a persistent record of a free-form conversation within a team.
@@ -5365,6 +5460,14 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/page`.
         public typealias Page = Swift.Int
+        /// The handle for the GitHub user account.
+        ///
+        /// - Remark: Generated from `#/components/parameters/username`.
+        public typealias Username = Swift.String
+        /// The slug of the team name.
+        ///
+        /// - Remark: Generated from `#/components/parameters/team-slug`.
+        public typealias TeamSlug = Swift.String
         /// The account owner of the repository. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/owner`.
@@ -5377,14 +5480,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/org`.
         public typealias Org = Swift.String
-        /// The handle for the GitHub user account.
-        ///
-        /// - Remark: Generated from `#/components/parameters/username`.
-        public typealias Username = Swift.String
-        /// The slug of the team name.
-        ///
-        /// - Remark: Generated from `#/components/parameters/team-slug`.
-        public typealias TeamSlug = Swift.String
         /// The number that identifies the discussion.
         ///
         /// - Remark: Generated from `#/components/parameters/discussion-number`.

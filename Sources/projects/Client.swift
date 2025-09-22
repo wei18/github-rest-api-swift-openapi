@@ -1217,12 +1217,158 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// List projects for user
+    ///
+    /// List all projects owned by a specific user accessible by the authenticated user.
+    ///
+    /// - Remark: HTTP `GET /users/{username}/projectsV2`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/get(projects/list-for-user)`.
+    public func projectsListForUser(_ input: Operations.ProjectsListForUser.Input) async throws -> Operations.ProjectsListForUser.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ProjectsListForUser.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/users/{}/projectsV2",
+                    parameters: [
+                        input.path.username
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "q",
+                    value: input.query.q
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "before",
+                    value: input.query.before
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "after",
+                    value: input.query.after
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "per_page",
+                    value: input.query.perPage
+                )
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let headers: Operations.ProjectsListForUser.Output.Ok.Headers = .init(link: try converter.getOptionalHeaderFieldAsURI(
+                        in: response.headerFields,
+                        name: "Link",
+                        as: Components.Headers.Link.self
+                    ))
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.ProjectsListForUser.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            [Components.Schemas.ProjectsV2].self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(
+                        headers: headers,
+                        body: body
+                    ))
+                case 304:
+                    return .notModified(.init())
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                case 401:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.RequiresAuthentication.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .unauthorized(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// Get project for user
     ///
     /// Get a specific user-owned project.
     ///
-    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}`.
-    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/get(projects/get-for-user)`.
+    /// - Remark: HTTP `GET /users/{username}/projectsV2/{project_number}`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/{project_number}/get(projects/get-for-user)`.
     public func projectsGetForUser(_ input: Operations.ProjectsGetForUser.Input) async throws -> Operations.ProjectsGetForUser.Output {
         try await client.send(
             input: input,
@@ -1231,7 +1377,7 @@ public struct Client: APIProtocol {
                 let path = try converter.renderedPath(
                     template: "/users/{}/projectsV2/{}",
                     parameters: [
-                        input.path.userId,
+                        input.path.username,
                         input.path.projectNumber
                     ]
                 )
@@ -1340,8 +1486,8 @@ public struct Client: APIProtocol {
     ///
     /// List all fields for a specific user-owned project.
     ///
-    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/fields`.
-    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/get(projects/list-fields-for-user)`.
+    /// - Remark: HTTP `GET /users/{username}/projectsV2/{project_number}/fields`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/{project_number}/fields/get(projects/list-fields-for-user)`.
     public func projectsListFieldsForUser(_ input: Operations.ProjectsListFieldsForUser.Input) async throws -> Operations.ProjectsListFieldsForUser.Output {
         try await client.send(
             input: input,
@@ -1350,7 +1496,7 @@ public struct Client: APIProtocol {
                 let path = try converter.renderedPath(
                     template: "/users/{}/projectsV2/{}/fields",
                     parameters: [
-                        input.path.userId,
+                        input.path.username,
                         input.path.projectNumber
                     ]
                 )
@@ -1480,8 +1626,8 @@ public struct Client: APIProtocol {
     ///
     /// Get a specific field for a user-owned project.
     ///
-    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/fields/{field_id}`.
-    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-user)`.
+    /// - Remark: HTTP `GET /users/{username}/projectsV2/{project_number}/fields/{field_id}`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/{project_number}/fields/{field_id}/get(projects/get-field-for-user)`.
     public func projectsGetFieldForUser(_ input: Operations.ProjectsGetFieldForUser.Input) async throws -> Operations.ProjectsGetFieldForUser.Output {
         try await client.send(
             input: input,
@@ -1490,7 +1636,7 @@ public struct Client: APIProtocol {
                 let path = try converter.renderedPath(
                     template: "/users/{}/projectsV2/{}/fields/{}",
                     parameters: [
-                        input.path.userId,
+                        input.path.username,
                         input.path.projectNumber,
                         input.path.fieldId
                     ]
@@ -1600,8 +1746,8 @@ public struct Client: APIProtocol {
     ///
     /// List all items for a specific user-owned project accessible by the authenticated user.
     ///
-    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/items`.
-    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/get(projects/list-items-for-user)`.
+    /// - Remark: HTTP `GET /users/{username}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/{project_number}/items/get(projects/list-items-for-user)`.
     public func projectsListItemsForUser(_ input: Operations.ProjectsListItemsForUser.Input) async throws -> Operations.ProjectsListItemsForUser.Output {
         try await client.send(
             input: input,
@@ -1610,7 +1756,7 @@ public struct Client: APIProtocol {
                 let path = try converter.renderedPath(
                     template: "/users/{}/projectsV2/{}/items",
                     parameters: [
-                        input.path.userId,
+                        input.path.username,
                         input.path.projectNumber
                     ]
                 )
@@ -1754,8 +1900,8 @@ public struct Client: APIProtocol {
     ///
     /// Add an issue or pull request item to the specified user owned project.
     ///
-    /// - Remark: HTTP `POST /users/{user_id}/projectsV2/{project_number}/items`.
-    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/post(projects/add-item-for-user)`.
+    /// - Remark: HTTP `POST /users/{username}/projectsV2/{project_number}/items`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/{project_number}/items/post(projects/add-item-for-user)`.
     public func projectsAddItemForUser(_ input: Operations.ProjectsAddItemForUser.Input) async throws -> Operations.ProjectsAddItemForUser.Output {
         try await client.send(
             input: input,
@@ -1764,7 +1910,7 @@ public struct Client: APIProtocol {
                 let path = try converter.renderedPath(
                     template: "/users/{}/projectsV2/{}/items",
                     parameters: [
-                        input.path.userId,
+                        input.path.username,
                         input.path.projectNumber
                     ]
                 )
@@ -1874,8 +2020,8 @@ public struct Client: APIProtocol {
     ///
     /// Get a specific item from a user-owned project.
     ///
-    /// - Remark: HTTP `GET /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
-    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/get(projects/get-user-item)`.
+    /// - Remark: HTTP `GET /users/{username}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/{project_number}/items/{item_id}/get(projects/get-user-item)`.
     public func projectsGetUserItem(_ input: Operations.ProjectsGetUserItem.Input) async throws -> Operations.ProjectsGetUserItem.Output {
         try await client.send(
             input: input,
@@ -1884,7 +2030,7 @@ public struct Client: APIProtocol {
                 let path = try converter.renderedPath(
                     template: "/users/{}/projectsV2/{}/items/{}",
                     parameters: [
-                        input.path.userId,
+                        input.path.username,
                         input.path.projectNumber,
                         input.path.itemId
                     ]
@@ -2001,8 +2147,8 @@ public struct Client: APIProtocol {
     ///
     /// Update a specific item in a user-owned project.
     ///
-    /// - Remark: HTTP `PATCH /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
-    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-user)`.
+    /// - Remark: HTTP `PATCH /users/{username}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/{project_number}/items/{item_id}/patch(projects/update-item-for-user)`.
     public func projectsUpdateItemForUser(_ input: Operations.ProjectsUpdateItemForUser.Input) async throws -> Operations.ProjectsUpdateItemForUser.Output {
         try await client.send(
             input: input,
@@ -2011,7 +2157,7 @@ public struct Client: APIProtocol {
                 let path = try converter.renderedPath(
                     template: "/users/{}/projectsV2/{}/items/{}",
                     parameters: [
-                        input.path.userId,
+                        input.path.username,
                         input.path.projectNumber,
                         input.path.itemId
                     ]
@@ -2164,8 +2310,8 @@ public struct Client: APIProtocol {
     ///
     /// Delete a specific item from a user-owned project.
     ///
-    /// - Remark: HTTP `DELETE /users/{user_id}/projectsV2/{project_number}/items/{item_id}`.
-    /// - Remark: Generated from `#/paths//users/{user_id}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-user)`.
+    /// - Remark: HTTP `DELETE /users/{username}/projectsV2/{project_number}/items/{item_id}`.
+    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/{project_number}/items/{item_id}/delete(projects/delete-item-for-user)`.
     public func projectsDeleteItemForUser(_ input: Operations.ProjectsDeleteItemForUser.Input) async throws -> Operations.ProjectsDeleteItemForUser.Output {
         try await client.send(
             input: input,
@@ -2174,7 +2320,7 @@ public struct Client: APIProtocol {
                 let path = try converter.renderedPath(
                     template: "/users/{}/projectsV2/{}/items/{}",
                     parameters: [
-                        input.path.userId,
+                        input.path.username,
                         input.path.projectNumber,
                         input.path.itemId
                     ]
@@ -2194,152 +2340,6 @@ public struct Client: APIProtocol {
                 switch response.status.code {
                 case 204:
                     return .noContent(.init())
-                case 403:
-                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Components.Responses.Forbidden.Body
-                    let chosenContentType = try converter.bestContentType(
-                        received: contentType,
-                        options: [
-                            "application/json"
-                        ]
-                    )
-                    switch chosenContentType {
-                    case "application/json":
-                        body = try await converter.getResponseBodyAsJSON(
-                            Components.Schemas.BasicError.self,
-                            from: responseBody,
-                            transforming: { value in
-                                .json(value)
-                            }
-                        )
-                    default:
-                        preconditionFailure("bestContentType chose an invalid content type.")
-                    }
-                    return .forbidden(.init(body: body))
-                case 401:
-                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Components.Responses.RequiresAuthentication.Body
-                    let chosenContentType = try converter.bestContentType(
-                        received: contentType,
-                        options: [
-                            "application/json"
-                        ]
-                    )
-                    switch chosenContentType {
-                    case "application/json":
-                        body = try await converter.getResponseBodyAsJSON(
-                            Components.Schemas.BasicError.self,
-                            from: responseBody,
-                            transforming: { value in
-                                .json(value)
-                            }
-                        )
-                    default:
-                        preconditionFailure("bestContentType chose an invalid content type.")
-                    }
-                    return .unauthorized(.init(body: body))
-                default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
-                        )
-                    )
-                }
-            }
-        )
-    }
-    /// List projects for user
-    ///
-    /// List all projects owned by a specific user accessible by the authenticated user.
-    ///
-    /// - Remark: HTTP `GET /users/{username}/projectsV2`.
-    /// - Remark: Generated from `#/paths//users/{username}/projectsV2/get(projects/list-for-user)`.
-    public func projectsListForUser(_ input: Operations.ProjectsListForUser.Input) async throws -> Operations.ProjectsListForUser.Output {
-        try await client.send(
-            input: input,
-            forOperation: Operations.ProjectsListForUser.id,
-            serializer: { input in
-                let path = try converter.renderedPath(
-                    template: "/users/{}/projectsV2",
-                    parameters: [
-                        input.path.username
-                    ]
-                )
-                var request: HTTPTypes.HTTPRequest = .init(
-                    soar_path: path,
-                    method: .get
-                )
-                suppressMutabilityWarning(&request)
-                try converter.setQueryItemAsURI(
-                    in: &request,
-                    style: .form,
-                    explode: true,
-                    name: "q",
-                    value: input.query.q
-                )
-                try converter.setQueryItemAsURI(
-                    in: &request,
-                    style: .form,
-                    explode: true,
-                    name: "before",
-                    value: input.query.before
-                )
-                try converter.setQueryItemAsURI(
-                    in: &request,
-                    style: .form,
-                    explode: true,
-                    name: "after",
-                    value: input.query.after
-                )
-                try converter.setQueryItemAsURI(
-                    in: &request,
-                    style: .form,
-                    explode: true,
-                    name: "per_page",
-                    value: input.query.perPage
-                )
-                converter.setAcceptHeader(
-                    in: &request.headerFields,
-                    contentTypes: input.headers.accept
-                )
-                return (request, nil)
-            },
-            deserializer: { response, responseBody in
-                switch response.status.code {
-                case 200:
-                    let headers: Operations.ProjectsListForUser.Output.Ok.Headers = .init(link: try converter.getOptionalHeaderFieldAsURI(
-                        in: response.headerFields,
-                        name: "Link",
-                        as: Components.Headers.Link.self
-                    ))
-                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.ProjectsListForUser.Output.Ok.Body
-                    let chosenContentType = try converter.bestContentType(
-                        received: contentType,
-                        options: [
-                            "application/json"
-                        ]
-                    )
-                    switch chosenContentType {
-                    case "application/json":
-                        body = try await converter.getResponseBodyAsJSON(
-                            [Components.Schemas.ProjectsV2].self,
-                            from: responseBody,
-                            transforming: { value in
-                                .json(value)
-                            }
-                        )
-                    default:
-                        preconditionFailure("bestContentType chose an invalid content type.")
-                    }
-                    return .ok(.init(
-                        headers: headers,
-                        body: body
-                    ))
-                case 304:
-                    return .notModified(.init())
                 case 403:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.Forbidden.Body

@@ -5066,6 +5066,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/since`.
         public typealias Since = Foundation.Date
+        /// The handle for the GitHub user account.
+        ///
+        /// - Remark: Generated from `#/components/parameters/username`.
+        public typealias Username = Swift.String
         /// The account owner of the repository. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/owner`.
@@ -5094,10 +5098,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/org`.
         public typealias Org = Swift.String
-        /// The handle for the GitHub user account.
-        ///
-        /// - Remark: Generated from `#/components/parameters/username`.
-        public typealias Username = Swift.String
         /// The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to.
         ///
         /// - Remark: Generated from `#/components/parameters/sort-starred`.

@@ -2834,14 +2834,14 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/page`.
         public typealias Page = Swift.Int
-        /// account_id parameter
-        ///
-        /// - Remark: Generated from `#/components/parameters/account-id`.
-        public typealias AccountId = Swift.Int
         /// The handle for the GitHub user account.
         ///
         /// - Remark: Generated from `#/components/parameters/username`.
         public typealias Username = Swift.String
+        /// account_id parameter
+        ///
+        /// - Remark: Generated from `#/components/parameters/account-id`.
+        public typealias AccountId = Swift.Int
         /// A user ID. Only return users with an ID greater than this ID.
         ///
         /// - Remark: Generated from `#/components/parameters/since-user`.

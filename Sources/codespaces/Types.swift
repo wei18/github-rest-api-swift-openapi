@@ -6406,6 +6406,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/page`.
         public typealias Page = Swift.Int
+        /// The handle for the GitHub user account.
+        ///
+        /// - Remark: Generated from `#/components/parameters/username`.
+        public typealias Username = Swift.String
         /// The account owner of the repository. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/owner`.
@@ -6422,10 +6426,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/secret-name`.
         public typealias SecretName = Swift.String
-        /// The handle for the GitHub user account.
-        ///
-        /// - Remark: Generated from `#/components/parameters/username`.
-        public typealias Username = Swift.String
         /// The name of the codespace.
         ///
         /// - Remark: Generated from `#/components/parameters/codespace-name`.

@@ -28,6 +28,7 @@ let package = Package(
         .library(name: "GitHubRestAPIDependency_Graph", targets: ["GitHubRestAPIDependency_Graph"]),
         .library(name: "GitHubRestAPIDesktop", targets: ["GitHubRestAPIDesktop"]),
         .library(name: "GitHubRestAPIEmojis", targets: ["GitHubRestAPIEmojis"]),
+        .library(name: "GitHubRestAPIEnterprise_Team_Memberships", targets: ["GitHubRestAPIEnterprise_Team_Memberships"]),
         .library(name: "GitHubRestAPIEnterprise_Teams", targets: ["GitHubRestAPIEnterprise_Teams"]),
         .library(name: "GitHubRestAPIGists", targets: ["GitHubRestAPIGists"]),
         .library(name: "GitHubRestAPIGit", targets: ["GitHubRestAPIGit"]),
@@ -196,6 +197,14 @@ let package = Package(
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
             ],
             path: "Sources/emojis"
+        ),
+        .target(
+            name: "GitHubRestAPIEnterprise_Team_Memberships",
+            dependencies: [
+                .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
+                .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
+            ],
+            path: "Sources/enterprise-team-memberships"
         ),
         .target(
             name: "GitHubRestAPIEnterprise_Teams",

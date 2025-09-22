@@ -14473,11 +14473,11 @@ public struct Client: APIProtocol {
     /// Users with read access to the repository can use this endpoint.
     ///
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/properties/values`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/get-custom-properties-values)`.
-    public func reposGetCustomPropertiesValues(_ input: Operations.ReposGetCustomPropertiesValues.Input) async throws -> Operations.ReposGetCustomPropertiesValues.Output {
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/custom-properties-for-repos-get-repository-values)`.
+    public func reposCustomPropertiesForReposGetRepositoryValues(_ input: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Input) async throws -> Operations.ReposCustomPropertiesForReposGetRepositoryValues.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.ReposGetCustomPropertiesValues.id,
+            forOperation: Operations.ReposCustomPropertiesForReposGetRepositoryValues.id,
             serializer: { input in
                 let path = try converter.renderedPath(
                     template: "/repos/{}/{}/properties/values",
@@ -14501,7 +14501,7 @@ public struct Client: APIProtocol {
                 switch response.status.code {
                 case 200:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.ReposGetCustomPropertiesValues.Output.Ok.Body
+                    let body: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Output.Ok.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -14585,11 +14585,11 @@ public struct Client: APIProtocol {
     /// Repository admins and other users with the repository-level "edit custom property values" fine-grained permission can use this endpoint.
     ///
     /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/properties/values`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/create-or-update-custom-properties-values)`.
-    public func reposCreateOrUpdateCustomPropertiesValues(_ input: Operations.ReposCreateOrUpdateCustomPropertiesValues.Input) async throws -> Operations.ReposCreateOrUpdateCustomPropertiesValues.Output {
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/custom-properties-for-repos-create-or-update-repository-values)`.
+    public func reposCustomPropertiesForReposCreateOrUpdateRepositoryValues(_ input: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input) async throws -> Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.ReposCreateOrUpdateCustomPropertiesValues.id,
+            forOperation: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.id,
             serializer: { input in
                 let path = try converter.renderedPath(
                     template: "/repos/{}/{}/properties/values",

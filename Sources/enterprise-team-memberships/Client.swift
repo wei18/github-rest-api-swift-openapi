@@ -38,21 +38,22 @@ public struct Client: APIProtocol {
     private var converter: Converter {
         client.converter
     }
-    /// List enterprise teams
+    /// List members in an enterprise team
     ///
-    /// List all teams in the enterprise for the authenticated user
+    /// Lists all team members in an enterprise team.
     ///
-    /// - Remark: HTTP `GET /enterprises/{enterprise}/teams`.
-    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/get(enterprise-teams/list)`.
-    public func enterpriseTeamsList(_ input: Operations.EnterpriseTeamsList.Input) async throws -> Operations.EnterpriseTeamsList.Output {
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/teams/{enterprise-team}/memberships`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{enterprise-team}/memberships/get(enterprise-team-memberships/list)`.
+    public func enterpriseTeamMembershipsList(_ input: Operations.EnterpriseTeamMembershipsList.Input) async throws -> Operations.EnterpriseTeamMembershipsList.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.EnterpriseTeamsList.id,
+            forOperation: Operations.EnterpriseTeamMembershipsList.id,
             serializer: { input in
                 let path = try converter.renderedPath(
-                    template: "/enterprises/{}/teams",
+                    template: "/enterprises/{}/teams/{}/memberships",
                     parameters: [
-                        input.path.enterprise
+                        input.path.enterprise,
+                        input.path.enterpriseTeam
                     ]
                 )
                 var request: HTTPTypes.HTTPRequest = .init(
@@ -83,13 +84,13 @@ public struct Client: APIProtocol {
             deserializer: { response, responseBody in
                 switch response.status.code {
                 case 200:
-                    let headers: Operations.EnterpriseTeamsList.Output.Ok.Headers = .init(link: try converter.getOptionalHeaderFieldAsURI(
+                    let headers: Operations.EnterpriseTeamMembershipsList.Output.Ok.Headers = .init(link: try converter.getOptionalHeaderFieldAsURI(
                         in: response.headerFields,
                         name: "Link",
                         as: Components.Headers.Link.self
                     ))
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.EnterpriseTeamsList.Output.Ok.Body
+                    let body: Operations.EnterpriseTeamMembershipsList.Output.Ok.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -99,7 +100,7 @@ public struct Client: APIProtocol {
                     switch chosenContentType {
                     case "application/json":
                         body = try await converter.getResponseBodyAsJSON(
-                            [Components.Schemas.EnterpriseTeam].self,
+                            [Components.Schemas.SimpleUser].self,
                             from: responseBody,
                             transforming: { value in
                                 .json(value)
@@ -112,28 +113,6 @@ public struct Client: APIProtocol {
                         headers: headers,
                         body: body
                     ))
-                case 403:
-                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Components.Responses.Forbidden.Body
-                    let chosenContentType = try converter.bestContentType(
-                        received: contentType,
-                        options: [
-                            "application/json"
-                        ]
-                    )
-                    switch chosenContentType {
-                    case "application/json":
-                        body = try await converter.getResponseBodyAsJSON(
-                            Components.Schemas.BasicError.self,
-                            from: responseBody,
-                            transforming: { value in
-                                .json(value)
-                            }
-                        )
-                    default:
-                        preconditionFailure("bestContentType chose an invalid content type.")
-                    }
-                    return .forbidden(.init(body: body))
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -146,21 +125,22 @@ public struct Client: APIProtocol {
             }
         )
     }
-    /// Create an enterprise team
+    /// Bulk add team members
     ///
-    /// To create an enterprise team, the authenticated user must be an owner of the enterprise.
+    /// Add multiple team members to an enterprise team.
     ///
-    /// - Remark: HTTP `POST /enterprises/{enterprise}/teams`.
-    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/post(enterprise-teams/create)`.
-    public func enterpriseTeamsCreate(_ input: Operations.EnterpriseTeamsCreate.Input) async throws -> Operations.EnterpriseTeamsCreate.Output {
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/teams/{enterprise-team}/memberships/add`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{enterprise-team}/memberships/add/post(enterprise-team-memberships/bulk-add)`.
+    public func enterpriseTeamMembershipsBulkAdd(_ input: Operations.EnterpriseTeamMembershipsBulkAdd.Input) async throws -> Operations.EnterpriseTeamMembershipsBulkAdd.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.EnterpriseTeamsCreate.id,
+            forOperation: Operations.EnterpriseTeamMembershipsBulkAdd.id,
             serializer: { input in
                 let path = try converter.renderedPath(
-                    template: "/enterprises/{}/teams",
+                    template: "/enterprises/{}/teams/{}/memberships/add",
                     parameters: [
-                        input.path.enterprise
+                        input.path.enterprise,
+                        input.path.enterpriseTeam
                     ]
                 )
                 var request: HTTPTypes.HTTPRequest = .init(
@@ -185,9 +165,9 @@ public struct Client: APIProtocol {
             },
             deserializer: { response, responseBody in
                 switch response.status.code {
-                case 201:
+                case 200:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.EnterpriseTeamsCreate.Output.Created.Body
+                    let body: Operations.EnterpriseTeamMembershipsBulkAdd.Output.Ok.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -197,7 +177,213 @@ public struct Client: APIProtocol {
                     switch chosenContentType {
                     case "application/json":
                         body = try await converter.getResponseBodyAsJSON(
-                            Components.Schemas.EnterpriseTeam.self,
+                            [Components.Schemas.SimpleUser].self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Bulk remove team members
+    ///
+    /// Remove multiple team members from an enterprise team.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/teams/{enterprise-team}/memberships/remove`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{enterprise-team}/memberships/remove/post(enterprise-team-memberships/bulk-remove)`.
+    public func enterpriseTeamMembershipsBulkRemove(_ input: Operations.EnterpriseTeamMembershipsBulkRemove.Input) async throws -> Operations.EnterpriseTeamMembershipsBulkRemove.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.EnterpriseTeamMembershipsBulkRemove.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/enterprises/{}/teams/{}/memberships/remove",
+                    parameters: [
+                        input.path.enterprise,
+                        input.path.enterpriseTeam
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .post
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.EnterpriseTeamMembershipsBulkRemove.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            [Components.Schemas.SimpleUser].self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Get enterprise team membership
+    ///
+    /// Returns whether the user is a member of the enterprise team.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/teams/{enterprise-team}/memberships/{username}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{enterprise-team}/memberships/{username}/get(enterprise-team-memberships/get)`.
+    public func enterpriseTeamMembershipsGet(_ input: Operations.EnterpriseTeamMembershipsGet.Input) async throws -> Operations.EnterpriseTeamMembershipsGet.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.EnterpriseTeamMembershipsGet.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/enterprises/{}/teams/{}/memberships/{}",
+                    parameters: [
+                        input.path.enterprise,
+                        input.path.enterpriseTeam,
+                        input.path.username
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.EnterpriseTeamMembershipsGet.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.SimpleUser.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Add team member
+    ///
+    /// Add a team member to an enterprise team.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/teams/{enterprise-team}/memberships/{username}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{enterprise-team}/memberships/{username}/put(enterprise-team-memberships/add)`.
+    public func enterpriseTeamMembershipsAdd(_ input: Operations.EnterpriseTeamMembershipsAdd.Input) async throws -> Operations.EnterpriseTeamMembershipsAdd.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.EnterpriseTeamMembershipsAdd.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/enterprises/{}/teams/{}/memberships/{}",
+                    parameters: [
+                        input.path.enterprise,
+                        input.path.enterpriseTeam,
+                        input.path.username
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .put
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 201:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.EnterpriseTeamMembershipsAdd.Output.Created.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.SimpleUser.self,
                             from: responseBody,
                             transforming: { value in
                                 .json(value)
@@ -219,223 +405,23 @@ public struct Client: APIProtocol {
             }
         )
     }
-    /// Get an enterprise team
+    /// Remove team membership
     ///
-    /// Gets a team using the team's slug. To create the slug, GitHub replaces special characters in the name string, changes all words to lowercase, and replaces spaces with a `-` separator and adds the "ent:" prefix. For example, "My TEam Näme" would become `ent:my-team-name`.
+    /// Remove membership of a specific user from a particular team in an enterprise.
     ///
-    /// - Remark: HTTP `GET /enterprises/{enterprise}/teams/{team_slug}`.
-    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/get(enterprise-teams/get)`.
-    public func enterpriseTeamsGet(_ input: Operations.EnterpriseTeamsGet.Input) async throws -> Operations.EnterpriseTeamsGet.Output {
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/teams/{enterprise-team}/memberships/{username}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{enterprise-team}/memberships/{username}/delete(enterprise-team-memberships/remove)`.
+    public func enterpriseTeamMembershipsRemove(_ input: Operations.EnterpriseTeamMembershipsRemove.Input) async throws -> Operations.EnterpriseTeamMembershipsRemove.Output {
         try await client.send(
             input: input,
-            forOperation: Operations.EnterpriseTeamsGet.id,
+            forOperation: Operations.EnterpriseTeamMembershipsRemove.id,
             serializer: { input in
                 let path = try converter.renderedPath(
-                    template: "/enterprises/{}/teams/{}",
+                    template: "/enterprises/{}/teams/{}/memberships/{}",
                     parameters: [
                         input.path.enterprise,
-                        input.path.teamSlug
-                    ]
-                )
-                var request: HTTPTypes.HTTPRequest = .init(
-                    soar_path: path,
-                    method: .get
-                )
-                suppressMutabilityWarning(&request)
-                converter.setAcceptHeader(
-                    in: &request.headerFields,
-                    contentTypes: input.headers.accept
-                )
-                return (request, nil)
-            },
-            deserializer: { response, responseBody in
-                switch response.status.code {
-                case 200:
-                    let headers: Operations.EnterpriseTeamsGet.Output.Ok.Headers = .init(link: try converter.getOptionalHeaderFieldAsURI(
-                        in: response.headerFields,
-                        name: "Link",
-                        as: Components.Headers.Link.self
-                    ))
-                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.EnterpriseTeamsGet.Output.Ok.Body
-                    let chosenContentType = try converter.bestContentType(
-                        received: contentType,
-                        options: [
-                            "application/json"
-                        ]
-                    )
-                    switch chosenContentType {
-                    case "application/json":
-                        body = try await converter.getResponseBodyAsJSON(
-                            Components.Schemas.EnterpriseTeam.self,
-                            from: responseBody,
-                            transforming: { value in
-                                .json(value)
-                            }
-                        )
-                    default:
-                        preconditionFailure("bestContentType chose an invalid content type.")
-                    }
-                    return .ok(.init(
-                        headers: headers,
-                        body: body
-                    ))
-                case 403:
-                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Components.Responses.Forbidden.Body
-                    let chosenContentType = try converter.bestContentType(
-                        received: contentType,
-                        options: [
-                            "application/json"
-                        ]
-                    )
-                    switch chosenContentType {
-                    case "application/json":
-                        body = try await converter.getResponseBodyAsJSON(
-                            Components.Schemas.BasicError.self,
-                            from: responseBody,
-                            transforming: { value in
-                                .json(value)
-                            }
-                        )
-                    default:
-                        preconditionFailure("bestContentType chose an invalid content type.")
-                    }
-                    return .forbidden(.init(body: body))
-                default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
-                        )
-                    )
-                }
-            }
-        )
-    }
-    /// Update an enterprise team
-    ///
-    /// To edit a team, the authenticated user must be an enterprise owner.
-    ///
-    /// - Remark: HTTP `PATCH /enterprises/{enterprise}/teams/{team_slug}`.
-    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/patch(enterprise-teams/update)`.
-    public func enterpriseTeamsUpdate(_ input: Operations.EnterpriseTeamsUpdate.Input) async throws -> Operations.EnterpriseTeamsUpdate.Output {
-        try await client.send(
-            input: input,
-            forOperation: Operations.EnterpriseTeamsUpdate.id,
-            serializer: { input in
-                let path = try converter.renderedPath(
-                    template: "/enterprises/{}/teams/{}",
-                    parameters: [
-                        input.path.enterprise,
-                        input.path.teamSlug
-                    ]
-                )
-                var request: HTTPTypes.HTTPRequest = .init(
-                    soar_path: path,
-                    method: .patch
-                )
-                suppressMutabilityWarning(&request)
-                converter.setAcceptHeader(
-                    in: &request.headerFields,
-                    contentTypes: input.headers.accept
-                )
-                let body: OpenAPIRuntime.HTTPBody?
-                switch input.body {
-                case let .json(value):
-                    body = try converter.setRequiredRequestBodyAsJSON(
-                        value,
-                        headerFields: &request.headerFields,
-                        contentType: "application/json; charset=utf-8"
-                    )
-                }
-                return (request, body)
-            },
-            deserializer: { response, responseBody in
-                switch response.status.code {
-                case 200:
-                    let headers: Operations.EnterpriseTeamsUpdate.Output.Ok.Headers = .init(link: try converter.getOptionalHeaderFieldAsURI(
-                        in: response.headerFields,
-                        name: "Link",
-                        as: Components.Headers.Link.self
-                    ))
-                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.EnterpriseTeamsUpdate.Output.Ok.Body
-                    let chosenContentType = try converter.bestContentType(
-                        received: contentType,
-                        options: [
-                            "application/json"
-                        ]
-                    )
-                    switch chosenContentType {
-                    case "application/json":
-                        body = try await converter.getResponseBodyAsJSON(
-                            Components.Schemas.EnterpriseTeam.self,
-                            from: responseBody,
-                            transforming: { value in
-                                .json(value)
-                            }
-                        )
-                    default:
-                        preconditionFailure("bestContentType chose an invalid content type.")
-                    }
-                    return .ok(.init(
-                        headers: headers,
-                        body: body
-                    ))
-                case 403:
-                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Components.Responses.Forbidden.Body
-                    let chosenContentType = try converter.bestContentType(
-                        received: contentType,
-                        options: [
-                            "application/json"
-                        ]
-                    )
-                    switch chosenContentType {
-                    case "application/json":
-                        body = try await converter.getResponseBodyAsJSON(
-                            Components.Schemas.BasicError.self,
-                            from: responseBody,
-                            transforming: { value in
-                                .json(value)
-                            }
-                        )
-                    default:
-                        preconditionFailure("bestContentType chose an invalid content type.")
-                    }
-                    return .forbidden(.init(body: body))
-                default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
-                        )
-                    )
-                }
-            }
-        )
-    }
-    /// Delete an enterprise team
-    ///
-    /// To delete an enterprise team, the authenticated user must be an enterprise owner.
-    ///
-    /// If you are an enterprise owner, deleting an enterprise team will delete all of its IdP mappings as well.
-    ///
-    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/teams/{team_slug}`.
-    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/delete(enterprise-teams/delete)`.
-    public func enterpriseTeamsDelete(_ input: Operations.EnterpriseTeamsDelete.Input) async throws -> Operations.EnterpriseTeamsDelete.Output {
-        try await client.send(
-            input: input,
-            forOperation: Operations.EnterpriseTeamsDelete.id,
-            serializer: { input in
-                let path = try converter.renderedPath(
-                    template: "/enterprises/{}/teams/{}",
-                    parameters: [
-                        input.path.enterprise,
-                        input.path.teamSlug
+                        input.path.enterpriseTeam,
+                        input.path.username
                     ]
                 )
                 var request: HTTPTypes.HTTPRequest = .init(

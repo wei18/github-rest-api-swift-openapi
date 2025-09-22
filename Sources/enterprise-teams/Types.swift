@@ -10,10 +10,131 @@ import struct Foundation.Data
 import struct Foundation.Date
 #endif
 /// A type that performs HTTP operations defined by the OpenAPI document.
-public protocol APIProtocol: Sendable {}
+public protocol APIProtocol: Sendable {
+    /// List enterprise teams
+    ///
+    /// List all teams in the enterprise for the authenticated user
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/teams`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/get(enterprise-teams/list)`.
+    func enterpriseTeamsList(_ input: Operations.EnterpriseTeamsList.Input) async throws -> Operations.EnterpriseTeamsList.Output
+    /// Create an enterprise team
+    ///
+    /// To create an enterprise team, the authenticated user must be an owner of the enterprise.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/teams`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/post(enterprise-teams/create)`.
+    func enterpriseTeamsCreate(_ input: Operations.EnterpriseTeamsCreate.Input) async throws -> Operations.EnterpriseTeamsCreate.Output
+    /// Get an enterprise team
+    ///
+    /// Gets a team using the team's slug. To create the slug, GitHub replaces special characters in the name string, changes all words to lowercase, and replaces spaces with a `-` separator and adds the "ent:" prefix. For example, "My TEam Näme" would become `ent:my-team-name`.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/teams/{team_slug}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/get(enterprise-teams/get)`.
+    func enterpriseTeamsGet(_ input: Operations.EnterpriseTeamsGet.Input) async throws -> Operations.EnterpriseTeamsGet.Output
+    /// Update an enterprise team
+    ///
+    /// To edit a team, the authenticated user must be an enterprise owner.
+    ///
+    /// - Remark: HTTP `PATCH /enterprises/{enterprise}/teams/{team_slug}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/patch(enterprise-teams/update)`.
+    func enterpriseTeamsUpdate(_ input: Operations.EnterpriseTeamsUpdate.Input) async throws -> Operations.EnterpriseTeamsUpdate.Output
+    /// Delete an enterprise team
+    ///
+    /// To delete an enterprise team, the authenticated user must be an enterprise owner.
+    ///
+    /// If you are an enterprise owner, deleting an enterprise team will delete all of its IdP mappings as well.
+    ///
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/teams/{team_slug}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/delete(enterprise-teams/delete)`.
+    func enterpriseTeamsDelete(_ input: Operations.EnterpriseTeamsDelete.Input) async throws -> Operations.EnterpriseTeamsDelete.Output
+}
 
 /// Convenience overloads for operation inputs.
 extension APIProtocol {
+    /// List enterprise teams
+    ///
+    /// List all teams in the enterprise for the authenticated user
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/teams`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/get(enterprise-teams/list)`.
+    public func enterpriseTeamsList(
+        path: Operations.EnterpriseTeamsList.Input.Path,
+        query: Operations.EnterpriseTeamsList.Input.Query = .init(),
+        headers: Operations.EnterpriseTeamsList.Input.Headers = .init()
+    ) async throws -> Operations.EnterpriseTeamsList.Output {
+        try await enterpriseTeamsList(Operations.EnterpriseTeamsList.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Create an enterprise team
+    ///
+    /// To create an enterprise team, the authenticated user must be an owner of the enterprise.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/teams`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/post(enterprise-teams/create)`.
+    public func enterpriseTeamsCreate(
+        path: Operations.EnterpriseTeamsCreate.Input.Path,
+        headers: Operations.EnterpriseTeamsCreate.Input.Headers = .init(),
+        body: Operations.EnterpriseTeamsCreate.Input.Body
+    ) async throws -> Operations.EnterpriseTeamsCreate.Output {
+        try await enterpriseTeamsCreate(Operations.EnterpriseTeamsCreate.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get an enterprise team
+    ///
+    /// Gets a team using the team's slug. To create the slug, GitHub replaces special characters in the name string, changes all words to lowercase, and replaces spaces with a `-` separator and adds the "ent:" prefix. For example, "My TEam Näme" would become `ent:my-team-name`.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/teams/{team_slug}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/get(enterprise-teams/get)`.
+    public func enterpriseTeamsGet(
+        path: Operations.EnterpriseTeamsGet.Input.Path,
+        headers: Operations.EnterpriseTeamsGet.Input.Headers = .init()
+    ) async throws -> Operations.EnterpriseTeamsGet.Output {
+        try await enterpriseTeamsGet(Operations.EnterpriseTeamsGet.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Update an enterprise team
+    ///
+    /// To edit a team, the authenticated user must be an enterprise owner.
+    ///
+    /// - Remark: HTTP `PATCH /enterprises/{enterprise}/teams/{team_slug}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/patch(enterprise-teams/update)`.
+    public func enterpriseTeamsUpdate(
+        path: Operations.EnterpriseTeamsUpdate.Input.Path,
+        headers: Operations.EnterpriseTeamsUpdate.Input.Headers = .init(),
+        body: Operations.EnterpriseTeamsUpdate.Input.Body
+    ) async throws -> Operations.EnterpriseTeamsUpdate.Output {
+        try await enterpriseTeamsUpdate(Operations.EnterpriseTeamsUpdate.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Delete an enterprise team
+    ///
+    /// To delete an enterprise team, the authenticated user must be an enterprise owner.
+    ///
+    /// If you are an enterprise owner, deleting an enterprise team will delete all of its IdP mappings as well.
+    ///
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/teams/{team_slug}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/delete(enterprise-teams/delete)`.
+    public func enterpriseTeamsDelete(
+        path: Operations.EnterpriseTeamsDelete.Input.Path,
+        headers: Operations.EnterpriseTeamsDelete.Input.Headers = .init()
+    ) async throws -> Operations.EnterpriseTeamsDelete.Output {
+        try await enterpriseTeamsDelete(Operations.EnterpriseTeamsDelete.Input(
+            path: path,
+            headers: headers
+        ))
+    }
 }
 
 /// Server URLs defined in the OpenAPI document.
@@ -38,16 +159,1178 @@ public enum Servers {
 /// Types generated from the components section of the OpenAPI document.
 public enum Components {
     /// Types generated from the `#/components/schemas` section of the OpenAPI document.
-    public enum Schemas {}
+    public enum Schemas {
+        /// Basic Error
+        ///
+        /// - Remark: Generated from `#/components/schemas/basic-error`.
+        public struct BasicError: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/basic-error/message`.
+            public var message: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/documentation_url`.
+            public var documentationUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/url`.
+            public var url: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/status`.
+            public var status: Swift.String?
+            /// Creates a new `BasicError`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - url:
+            ///   - status:
+            public init(
+                message: Swift.String? = nil,
+                documentationUrl: Swift.String? = nil,
+                url: Swift.String? = nil,
+                status: Swift.String? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.url = url
+                self.status = status
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case url
+                case status
+            }
+        }
+        /// Group of enterprise owners and/or members
+        ///
+        /// - Remark: Generated from `#/components/schemas/enterprise-team`.
+        public struct EnterpriseTeam: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/name`.
+            public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/slug`.
+            public var slug: Swift.String
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/url`.
+            public var url: Swift.String
+            /// Retired: this field will not be returned with GHEC enterprise teams.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/sync_to_organizations`.
+            public var syncToOrganizations: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/organization_selection_type`.
+            public var organizationSelectionType: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/group_id`.
+            public var groupId: Swift.String?
+            /// Retired: this field will not be returned with GHEC enterprise teams.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/group_name`.
+            public var groupName: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/members_url`.
+            public var membersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// Creates a new `EnterpriseTeam`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - name:
+            ///   - description:
+            ///   - slug:
+            ///   - url:
+            ///   - syncToOrganizations: Retired: this field will not be returned with GHEC enterprise teams.
+            ///   - organizationSelectionType:
+            ///   - groupId:
+            ///   - groupName: Retired: this field will not be returned with GHEC enterprise teams.
+            ///   - htmlUrl:
+            ///   - membersUrl:
+            ///   - createdAt:
+            ///   - updatedAt:
+            public init(
+                id: Swift.Int64,
+                name: Swift.String,
+                description: Swift.String? = nil,
+                slug: Swift.String,
+                url: Swift.String,
+                syncToOrganizations: Swift.String? = nil,
+                organizationSelectionType: Swift.String? = nil,
+                groupId: Swift.String? = nil,
+                groupName: Swift.String? = nil,
+                htmlUrl: Swift.String,
+                membersUrl: Swift.String,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date
+            ) {
+                self.id = id
+                self.name = name
+                self.description = description
+                self.slug = slug
+                self.url = url
+                self.syncToOrganizations = syncToOrganizations
+                self.organizationSelectionType = organizationSelectionType
+                self.groupId = groupId
+                self.groupName = groupName
+                self.htmlUrl = htmlUrl
+                self.membersUrl = membersUrl
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case name
+                case description
+                case slug
+                case url
+                case syncToOrganizations = "sync_to_organizations"
+                case organizationSelectionType = "organization_selection_type"
+                case groupId = "group_id"
+                case groupName = "group_name"
+                case htmlUrl = "html_url"
+                case membersUrl = "members_url"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+            }
+        }
+    }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
-    public enum Parameters {}
+    public enum Parameters {
+        /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+        ///
+        /// - Remark: Generated from `#/components/parameters/per-page`.
+        public typealias PerPage = Swift.Int
+        /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+        ///
+        /// - Remark: Generated from `#/components/parameters/page`.
+        public typealias Page = Swift.Int
+        /// The slug version of the enterprise name.
+        ///
+        /// - Remark: Generated from `#/components/parameters/enterprise`.
+        public typealias Enterprise = Swift.String
+        /// The slug of the team name.
+        ///
+        /// - Remark: Generated from `#/components/parameters/team-slug`.
+        public typealias TeamSlug = Swift.String
+    }
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}
     /// Types generated from the `#/components/responses` section of the OpenAPI document.
-    public enum Responses {}
+    public enum Responses {
+        public struct Forbidden: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/forbidden/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/forbidden/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.Forbidden.Body
+            /// Creates a new `Forbidden`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.Forbidden.Body) {
+                self.body = body
+            }
+        }
+    }
     /// Types generated from the `#/components/headers` section of the OpenAPI document.
-    public enum Headers {}
+    public enum Headers {
+        /// - Remark: Generated from `#/components/headers/link`.
+        public typealias Link = Swift.String
+    }
 }
 
 /// API operations, with input and output types, generated from `#/paths` in the OpenAPI document.
-public enum Operations {}
+public enum Operations {
+    /// List enterprise teams
+    ///
+    /// List all teams in the enterprise for the authenticated user
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/teams`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/get(enterprise-teams/list)`.
+    public enum EnterpriseTeamsList {
+        public static let id: Swift.String = "enterprise-teams/list"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/GET/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.EnterpriseTeamsList.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/GET/query/page`.
+                public var page: Components.Parameters.Page?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    page: Components.Parameters.Page? = nil
+                ) {
+                    self.perPage = perPage
+                    self.page = page
+                }
+            }
+            public var query: Operations.EnterpriseTeamsList.Input.Query
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.EnterpriseTeamsList.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.EnterpriseTeamsList.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.EnterpriseTeamsList.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.EnterpriseTeamsList.Input.Path,
+                query: Operations.EnterpriseTeamsList.Input.Query = .init(),
+                headers: Operations.EnterpriseTeamsList.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.EnterpriseTeamsList.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.EnterpriseTeam])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.EnterpriseTeam] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.EnterpriseTeamsList.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.EnterpriseTeamsList.Output.Ok.Headers = .init(),
+                    body: Operations.EnterpriseTeamsList.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/get(enterprise-teams/list)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.EnterpriseTeamsList.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.EnterpriseTeamsList.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/get(enterprise-teams/list)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Create an enterprise team
+    ///
+    /// To create an enterprise team, the authenticated user must be an owner of the enterprise.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/teams`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/post(enterprise-teams/create)`.
+    public enum EnterpriseTeamsCreate {
+        public static let id: Swift.String = "enterprise-teams/create"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.EnterpriseTeamsCreate.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.EnterpriseTeamsCreate.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.EnterpriseTeamsCreate.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.EnterpriseTeamsCreate.Input.Headers
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The name of the team.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/name`.
+                    public var name: Swift.String
+                    /// A description of the team.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/description`.
+                    public var description: Swift.String?
+                    /// Retired: this field is no longer supported.
+                    /// Whether the enterprise team should be reflected in each organization.
+                    /// This value cannot be set.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/sync_to_organizations`.
+                    @frozen public enum SyncToOrganizationsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case all = "all"
+                        case disabled = "disabled"
+                    }
+                    /// Retired: this field is no longer supported.
+                    /// Whether the enterprise team should be reflected in each organization.
+                    /// This value cannot be set.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/sync_to_organizations`.
+                    public var syncToOrganizations: Operations.EnterpriseTeamsCreate.Input.Body.JsonPayload.SyncToOrganizationsPayload?
+                    /// The ID of the IdP group to assign team membership with. You can get this value from the [REST API endpoints for SCIM](https://docs.github.com/rest/scim#list-provisioned-scim-groups-for-an-enterprise).
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/group_id`.
+                    public var groupId: Swift.String?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - name: The name of the team.
+                    ///   - description: A description of the team.
+                    ///   - syncToOrganizations: Retired: this field is no longer supported.
+                    ///   - groupId: The ID of the IdP group to assign team membership with. You can get this value from the [REST API endpoints for SCIM](https://docs.github.com/rest/scim#list-provisioned-scim-groups-for-an-enterprise).
+                    public init(
+                        name: Swift.String,
+                        description: Swift.String? = nil,
+                        syncToOrganizations: Operations.EnterpriseTeamsCreate.Input.Body.JsonPayload.SyncToOrganizationsPayload? = nil,
+                        groupId: Swift.String? = nil
+                    ) {
+                        self.name = name
+                        self.description = description
+                        self.syncToOrganizations = syncToOrganizations
+                        self.groupId = groupId
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case name
+                        case description
+                        case syncToOrganizations = "sync_to_organizations"
+                        case groupId = "group_id"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/content/application\/json`.
+                case json(Operations.EnterpriseTeamsCreate.Input.Body.JsonPayload)
+            }
+            public var body: Operations.EnterpriseTeamsCreate.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.EnterpriseTeamsCreate.Input.Path,
+                headers: Operations.EnterpriseTeamsCreate.Input.Headers = .init(),
+                body: Operations.EnterpriseTeamsCreate.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/responses/201/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/responses/201/content/application\/json`.
+                    case json(Components.Schemas.EnterpriseTeam)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.EnterpriseTeam {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.EnterpriseTeamsCreate.Output.Created.Body
+                /// Creates a new `Created`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.EnterpriseTeamsCreate.Output.Created.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/post(enterprise-teams/create)/responses/201`.
+            ///
+            /// HTTP response code: `201 created`.
+            case created(Operations.EnterpriseTeamsCreate.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
+            ///
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.EnterpriseTeamsCreate.Output.Created {
+                get throws {
+                    switch self {
+                    case let .created(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get an enterprise team
+    ///
+    /// Gets a team using the team's slug. To create the slug, GitHub replaces special characters in the name string, changes all words to lowercase, and replaces spaces with a `-` separator and adds the "ent:" prefix. For example, "My TEam Näme" would become `ent:my-team-name`.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/teams/{team_slug}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/get(enterprise-teams/get)`.
+    public enum EnterpriseTeamsGet {
+        public static let id: Swift.String = "enterprise-teams/get"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/GET/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// The slug of the team name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/GET/path/team_slug`.
+                public var teamSlug: Components.Parameters.TeamSlug
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                ///   - teamSlug: The slug of the team name.
+                public init(
+                    enterprise: Components.Parameters.Enterprise,
+                    teamSlug: Components.Parameters.TeamSlug
+                ) {
+                    self.enterprise = enterprise
+                    self.teamSlug = teamSlug
+                }
+            }
+            public var path: Operations.EnterpriseTeamsGet.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.EnterpriseTeamsGet.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.EnterpriseTeamsGet.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.EnterpriseTeamsGet.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.EnterpriseTeamsGet.Input.Path,
+                headers: Operations.EnterpriseTeamsGet.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.EnterpriseTeamsGet.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.EnterpriseTeam)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.EnterpriseTeam {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.EnterpriseTeamsGet.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.EnterpriseTeamsGet.Output.Ok.Headers = .init(),
+                    body: Operations.EnterpriseTeamsGet.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/get(enterprise-teams/get)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.EnterpriseTeamsGet.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.EnterpriseTeamsGet.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/get(enterprise-teams/get)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Update an enterprise team
+    ///
+    /// To edit a team, the authenticated user must be an enterprise owner.
+    ///
+    /// - Remark: HTTP `PATCH /enterprises/{enterprise}/teams/{team_slug}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/patch(enterprise-teams/update)`.
+    public enum EnterpriseTeamsUpdate {
+        public static let id: Swift.String = "enterprise-teams/update"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// The slug of the team name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/path/team_slug`.
+                public var teamSlug: Components.Parameters.TeamSlug
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                ///   - teamSlug: The slug of the team name.
+                public init(
+                    enterprise: Components.Parameters.Enterprise,
+                    teamSlug: Components.Parameters.TeamSlug
+                ) {
+                    self.enterprise = enterprise
+                    self.teamSlug = teamSlug
+                }
+            }
+            public var path: Operations.EnterpriseTeamsUpdate.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.EnterpriseTeamsUpdate.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.EnterpriseTeamsUpdate.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.EnterpriseTeamsUpdate.Input.Headers
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// A new name for the team.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/name`.
+                    public var name: Swift.String?
+                    /// A new description for the team.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/description`.
+                    public var description: Swift.String?
+                    /// Retired: this field is no longer supported.
+                    /// Whether the enterprise team should be reflected in each organization.
+                    /// This value cannot be changed.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/sync_to_organizations`.
+                    @frozen public enum SyncToOrganizationsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case all = "all"
+                        case disabled = "disabled"
+                    }
+                    /// Retired: this field is no longer supported.
+                    /// Whether the enterprise team should be reflected in each organization.
+                    /// This value cannot be changed.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/sync_to_organizations`.
+                    public var syncToOrganizations: Operations.EnterpriseTeamsUpdate.Input.Body.JsonPayload.SyncToOrganizationsPayload?
+                    /// The ID of the IdP group to assign team membership with. The new IdP group will replace the existing one, or replace existing direct members if the team isn't currently linked to an IdP group.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/group_id`.
+                    public var groupId: Swift.String?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - name: A new name for the team.
+                    ///   - description: A new description for the team.
+                    ///   - syncToOrganizations: Retired: this field is no longer supported.
+                    ///   - groupId: The ID of the IdP group to assign team membership with. The new IdP group will replace the existing one, or replace existing direct members if the team isn't currently linked to an IdP group.
+                    public init(
+                        name: Swift.String? = nil,
+                        description: Swift.String? = nil,
+                        syncToOrganizations: Operations.EnterpriseTeamsUpdate.Input.Body.JsonPayload.SyncToOrganizationsPayload? = nil,
+                        groupId: Swift.String? = nil
+                    ) {
+                        self.name = name
+                        self.description = description
+                        self.syncToOrganizations = syncToOrganizations
+                        self.groupId = groupId
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case name
+                        case description
+                        case syncToOrganizations = "sync_to_organizations"
+                        case groupId = "group_id"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/content/application\/json`.
+                case json(Operations.EnterpriseTeamsUpdate.Input.Body.JsonPayload)
+            }
+            public var body: Operations.EnterpriseTeamsUpdate.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.EnterpriseTeamsUpdate.Input.Path,
+                headers: Operations.EnterpriseTeamsUpdate.Input.Headers = .init(),
+                body: Operations.EnterpriseTeamsUpdate.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.EnterpriseTeamsUpdate.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/responses/200/content/application\/json`.
+                    case json(Components.Schemas.EnterpriseTeam)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.EnterpriseTeam {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.EnterpriseTeamsUpdate.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.EnterpriseTeamsUpdate.Output.Ok.Headers = .init(),
+                    body: Operations.EnterpriseTeamsUpdate.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/patch(enterprise-teams/update)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.EnterpriseTeamsUpdate.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.EnterpriseTeamsUpdate.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/patch(enterprise-teams/update)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Delete an enterprise team
+    ///
+    /// To delete an enterprise team, the authenticated user must be an enterprise owner.
+    ///
+    /// If you are an enterprise owner, deleting an enterprise team will delete all of its IdP mappings as well.
+    ///
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/teams/{team_slug}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/delete(enterprise-teams/delete)`.
+    public enum EnterpriseTeamsDelete {
+        public static let id: Swift.String = "enterprise-teams/delete"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/DELETE/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// The slug of the team name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/DELETE/path/team_slug`.
+                public var teamSlug: Components.Parameters.TeamSlug
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                ///   - teamSlug: The slug of the team name.
+                public init(
+                    enterprise: Components.Parameters.Enterprise,
+                    teamSlug: Components.Parameters.TeamSlug
+                ) {
+                    self.enterprise = enterprise
+                    self.teamSlug = teamSlug
+                }
+            }
+            public var path: Operations.EnterpriseTeamsDelete.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.EnterpriseTeamsDelete.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.EnterpriseTeamsDelete.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.EnterpriseTeamsDelete.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.EnterpriseTeamsDelete.Input.Path,
+                headers: Operations.EnterpriseTeamsDelete.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/delete(enterprise-teams/delete)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.EnterpriseTeamsDelete.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/delete(enterprise-teams/delete)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.EnterpriseTeamsDelete.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/teams/{team_slug}/delete(enterprise-teams/delete)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+}
