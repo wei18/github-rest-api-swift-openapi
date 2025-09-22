@@ -1590,8 +1590,8 @@ public protocol APIProtocol: Sendable {
     /// Users with read access to the repository can use this endpoint.
     ///
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/properties/values`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/get-custom-properties-values)`.
-    func reposGetCustomPropertiesValues(_ input: Operations.ReposGetCustomPropertiesValues.Input) async throws -> Operations.ReposGetCustomPropertiesValues.Output
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/custom-properties-for-repos-get-repository-values)`.
+    func reposCustomPropertiesForReposGetRepositoryValues(_ input: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Input) async throws -> Operations.ReposCustomPropertiesForReposGetRepositoryValues.Output
     /// Create or update custom property values for a repository
     ///
     /// Create new or update existing custom property values for a repository.
@@ -1600,8 +1600,8 @@ public protocol APIProtocol: Sendable {
     /// Repository admins and other users with the repository-level "edit custom property values" fine-grained permission can use this endpoint.
     ///
     /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/properties/values`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/create-or-update-custom-properties-values)`.
-    func reposCreateOrUpdateCustomPropertiesValues(_ input: Operations.ReposCreateOrUpdateCustomPropertiesValues.Input) async throws -> Operations.ReposCreateOrUpdateCustomPropertiesValues.Output
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/custom-properties-for-repos-create-or-update-repository-values)`.
+    func reposCustomPropertiesForReposCreateOrUpdateRepositoryValues(_ input: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input) async throws -> Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Output
     /// Get a repository README
     ///
     /// Gets the preferred README for a repository.
@@ -4926,12 +4926,12 @@ extension APIProtocol {
     /// Users with read access to the repository can use this endpoint.
     ///
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/properties/values`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/get-custom-properties-values)`.
-    public func reposGetCustomPropertiesValues(
-        path: Operations.ReposGetCustomPropertiesValues.Input.Path,
-        headers: Operations.ReposGetCustomPropertiesValues.Input.Headers = .init()
-    ) async throws -> Operations.ReposGetCustomPropertiesValues.Output {
-        try await reposGetCustomPropertiesValues(Operations.ReposGetCustomPropertiesValues.Input(
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/custom-properties-for-repos-get-repository-values)`.
+    public func reposCustomPropertiesForReposGetRepositoryValues(
+        path: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Input.Path,
+        headers: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Input.Headers = .init()
+    ) async throws -> Operations.ReposCustomPropertiesForReposGetRepositoryValues.Output {
+        try await reposCustomPropertiesForReposGetRepositoryValues(Operations.ReposCustomPropertiesForReposGetRepositoryValues.Input(
             path: path,
             headers: headers
         ))
@@ -4944,13 +4944,13 @@ extension APIProtocol {
     /// Repository admins and other users with the repository-level "edit custom property values" fine-grained permission can use this endpoint.
     ///
     /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/properties/values`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/create-or-update-custom-properties-values)`.
-    public func reposCreateOrUpdateCustomPropertiesValues(
-        path: Operations.ReposCreateOrUpdateCustomPropertiesValues.Input.Path,
-        headers: Operations.ReposCreateOrUpdateCustomPropertiesValues.Input.Headers = .init(),
-        body: Operations.ReposCreateOrUpdateCustomPropertiesValues.Input.Body
-    ) async throws -> Operations.ReposCreateOrUpdateCustomPropertiesValues.Output {
-        try await reposCreateOrUpdateCustomPropertiesValues(Operations.ReposCreateOrUpdateCustomPropertiesValues.Input(
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/custom-properties-for-repos-create-or-update-repository-values)`.
+    public func reposCustomPropertiesForReposCreateOrUpdateRepositoryValues(
+        path: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input.Path,
+        headers: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input.Headers = .init(),
+        body: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input.Body
+    ) async throws -> Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Output {
+        try await reposCustomPropertiesForReposCreateOrUpdateRepositoryValues(Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input(
             path: path,
             headers: headers,
             body: body
@@ -9482,6 +9482,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/nullable-team-simple/ldap_dn`.
             public var ldapDn: Swift.String?
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case enterprise = "enterprise"
+                case organization = "organization"
+            }
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/type`.
+            public var _type: Components.Schemas.NullableTeamSimple._TypePayload
+            /// Unique identifier of the organization to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/organization_id`.
+            public var organizationId: Swift.Int?
+            /// Unique identifier of the enterprise to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-team-simple/enterprise_id`.
+            public var enterpriseId: Swift.Int?
             /// Creates a new `NullableTeamSimple`.
             ///
             /// - Parameters:
@@ -9498,6 +9517,9 @@ public enum Components {
             ///   - repositoriesUrl:
             ///   - slug:
             ///   - ldapDn: Distinguished Name (DN) that team maps to within LDAP environment
+            ///   - _type: The ownership type of the team
+            ///   - organizationId: Unique identifier of the organization to which this team belongs
+            ///   - enterpriseId: Unique identifier of the enterprise to which this team belongs
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -9511,7 +9533,10 @@ public enum Components {
                 htmlUrl: Swift.String,
                 repositoriesUrl: Swift.String,
                 slug: Swift.String,
-                ldapDn: Swift.String? = nil
+                ldapDn: Swift.String? = nil,
+                _type: Components.Schemas.NullableTeamSimple._TypePayload,
+                organizationId: Swift.Int? = nil,
+                enterpriseId: Swift.Int? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -9526,6 +9551,9 @@ public enum Components {
                 self.repositoriesUrl = repositoriesUrl
                 self.slug = slug
                 self.ldapDn = ldapDn
+                self._type = _type
+                self.organizationId = organizationId
+                self.enterpriseId = enterpriseId
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -9541,6 +9569,9 @@ public enum Components {
                 case repositoriesUrl = "repositories_url"
                 case slug
                 case ldapDn = "ldap_dn"
+                case _type = "type"
+                case organizationId = "organization_id"
+                case enterpriseId = "enterprise_id"
             }
         }
         /// Groups of organization members that gives permissions on specified repositories.
@@ -9614,6 +9645,25 @@ public enum Components {
             public var membersUrl: Swift.String
             /// - Remark: Generated from `#/components/schemas/team/repositories_url`.
             public var repositoriesUrl: Swift.String
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case enterprise = "enterprise"
+                case organization = "organization"
+            }
+            /// The ownership type of the team
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/type`.
+            public var _type: Components.Schemas.Team._TypePayload
+            /// Unique identifier of the organization to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/organization_id`.
+            public var organizationId: Swift.Int?
+            /// Unique identifier of the enterprise to which this team belongs
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/enterprise_id`.
+            public var enterpriseId: Swift.Int?
             /// - Remark: Generated from `#/components/schemas/team/parent`.
             public var parent: Components.Schemas.NullableTeamSimple?
             /// Creates a new `Team`.
@@ -9632,6 +9682,9 @@ public enum Components {
             ///   - htmlUrl:
             ///   - membersUrl:
             ///   - repositoriesUrl:
+            ///   - _type: The ownership type of the team
+            ///   - organizationId: Unique identifier of the organization to which this team belongs
+            ///   - enterpriseId: Unique identifier of the enterprise to which this team belongs
             ///   - parent:
             public init(
                 id: Swift.Int,
@@ -9647,6 +9700,9 @@ public enum Components {
                 htmlUrl: Swift.String,
                 membersUrl: Swift.String,
                 repositoriesUrl: Swift.String,
+                _type: Components.Schemas.Team._TypePayload,
+                organizationId: Swift.Int? = nil,
+                enterpriseId: Swift.Int? = nil,
                 parent: Components.Schemas.NullableTeamSimple? = nil
             ) {
                 self.id = id
@@ -9662,6 +9718,9 @@ public enum Components {
                 self.htmlUrl = htmlUrl
                 self.membersUrl = membersUrl
                 self.repositoriesUrl = repositoriesUrl
+                self._type = _type
+                self.organizationId = organizationId
+                self.enterpriseId = enterpriseId
                 self.parent = parent
             }
             public enum CodingKeys: String, CodingKey {
@@ -9678,6 +9737,9 @@ public enum Components {
                 case htmlUrl = "html_url"
                 case membersUrl = "members_url"
                 case repositoriesUrl = "repositories_url"
+                case _type = "type"
+                case organizationId = "organization_id"
+                case enterpriseId = "enterprise_id"
                 case parent
             }
         }
@@ -13543,6 +13605,62 @@ public enum Components {
                 case parameters
             }
         }
+        /// Request Copilot code review for new pull requests automatically if the author has access to Copilot code review.
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-rule-copilot-code-review`.
+        public struct RepositoryRuleCopilotCodeReview: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/repository-rule-copilot-code-review/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case copilotCodeReview = "copilot_code_review"
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-copilot-code-review/type`.
+            public var _type: Components.Schemas.RepositoryRuleCopilotCodeReview._TypePayload
+            /// - Remark: Generated from `#/components/schemas/repository-rule-copilot-code-review/parameters`.
+            public struct ParametersPayload: Codable, Hashable, Sendable {
+                /// Copilot automatically reviews draft pull requests before they are marked as ready for review.
+                ///
+                /// - Remark: Generated from `#/components/schemas/repository-rule-copilot-code-review/parameters/review_draft_pull_requests`.
+                public var reviewDraftPullRequests: Swift.Bool?
+                /// Copilot automatically reviews each new push to the pull request.
+                ///
+                /// - Remark: Generated from `#/components/schemas/repository-rule-copilot-code-review/parameters/review_on_push`.
+                public var reviewOnPush: Swift.Bool?
+                /// Creates a new `ParametersPayload`.
+                ///
+                /// - Parameters:
+                ///   - reviewDraftPullRequests: Copilot automatically reviews draft pull requests before they are marked as ready for review.
+                ///   - reviewOnPush: Copilot automatically reviews each new push to the pull request.
+                public init(
+                    reviewDraftPullRequests: Swift.Bool? = nil,
+                    reviewOnPush: Swift.Bool? = nil
+                ) {
+                    self.reviewDraftPullRequests = reviewDraftPullRequests
+                    self.reviewOnPush = reviewOnPush
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case reviewDraftPullRequests = "review_draft_pull_requests"
+                    case reviewOnPush = "review_on_push"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-copilot-code-review/parameters`.
+            public var parameters: Components.Schemas.RepositoryRuleCopilotCodeReview.ParametersPayload?
+            /// Creates a new `RepositoryRuleCopilotCodeReview`.
+            ///
+            /// - Parameters:
+            ///   - _type:
+            ///   - parameters:
+            public init(
+                _type: Components.Schemas.RepositoryRuleCopilotCodeReview._TypePayload,
+                parameters: Components.Schemas.RepositoryRuleCopilotCodeReview.ParametersPayload? = nil
+            ) {
+                self._type = _type
+                self.parameters = parameters
+            }
+            public enum CodingKeys: String, CodingKey {
+                case _type = "type"
+                case parameters
+            }
+        }
         /// A repository rule.
         ///
         /// - Remark: Generated from `#/components/schemas/repository-rule`.
@@ -13589,6 +13707,8 @@ public enum Components {
             case RepositoryRuleWorkflows(Components.Schemas.RepositoryRuleWorkflows)
             /// - Remark: Generated from `#/components/schemas/repository-rule/case21`.
             case RepositoryRuleCodeScanning(Components.Schemas.RepositoryRuleCodeScanning)
+            /// - Remark: Generated from `#/components/schemas/repository-rule/case22`.
+            case RepositoryRuleCopilotCodeReview(Components.Schemas.RepositoryRuleCopilotCodeReview)
             public init(from decoder: any Decoder) throws {
                 var errors: [any Error] = []
                 do {
@@ -13717,6 +13837,12 @@ public enum Components {
                 } catch {
                     errors.append(error)
                 }
+                do {
+                    self = .RepositoryRuleCopilotCodeReview(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
                 throw Swift.DecodingError.failedToDecodeOneOfSchema(
                     type: Self.self,
                     codingPath: decoder.codingPath,
@@ -13766,6 +13892,8 @@ public enum Components {
                 case let .RepositoryRuleWorkflows(value):
                     try value.encode(to: encoder)
                 case let .RepositoryRuleCodeScanning(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleCopilotCodeReview(value):
                     try value.encode(to: encoder)
                 }
             }
@@ -22318,6 +22446,35 @@ public enum Components {
             }
             /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21`.
             case case21(Components.Schemas.RepositoryRuleDetailed.Case21Payload)
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22`.
+            public struct Case22Payload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22/value1`.
+                public var value1: Components.Schemas.RepositoryRuleCopilotCodeReview
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22/value2`.
+                public var value2: Components.Schemas.RepositoryRuleRulesetInfo
+                /// Creates a new `Case22Payload`.
+                ///
+                /// - Parameters:
+                ///   - value1:
+                ///   - value2:
+                public init(
+                    value1: Components.Schemas.RepositoryRuleCopilotCodeReview,
+                    value2: Components.Schemas.RepositoryRuleRulesetInfo
+                ) {
+                    self.value1 = value1
+                    self.value2 = value2
+                }
+                public init(from decoder: any Decoder) throws {
+                    self.value1 = try .init(from: decoder)
+                    self.value2 = try .init(from: decoder)
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    try self.value1.encode(to: encoder)
+                    try self.value2.encode(to: encoder)
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22`.
+            case case22(Components.Schemas.RepositoryRuleDetailed.Case22Payload)
             public init(from decoder: any Decoder) throws {
                 var errors: [any Error] = []
                 do {
@@ -22446,6 +22603,12 @@ public enum Components {
                 } catch {
                     errors.append(error)
                 }
+                do {
+                    self = .case22(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
                 throw Swift.DecodingError.failedToDecodeOneOfSchema(
                     type: Self.self,
                     codingPath: decoder.codingPath,
@@ -22495,6 +22658,8 @@ public enum Components {
                 case let .case20(value):
                     try value.encode(to: encoder)
                 case let .case21(value):
+                    try value.encode(to: encoder)
+                case let .case22(value):
                     try value.encode(to: encoder)
                 }
             }
@@ -22942,6 +23107,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/page`.
         public typealias Page = Swift.Int
+        /// The handle for the GitHub user account.
+        ///
+        /// - Remark: Generated from `#/components/parameters/username`.
+        public typealias Username = Swift.String
         /// The unique identifier of the comment.
         ///
         /// - Remark: Generated from `#/components/parameters/comment-id`.
@@ -22958,10 +23127,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/org`.
         public typealias Org = Swift.String
-        /// The handle for the GitHub user account.
-        ///
-        /// - Remark: Generated from `#/components/parameters/username`.
-        public typealias Username = Swift.String
         /// The unique identifier of the hook. You can find this value in the `X-GitHub-Hook-ID` header of a webhook delivery.
         ///
         /// - Remark: Generated from `#/components/parameters/hook-id`.
@@ -54350,9 +54515,9 @@ public enum Operations {
     /// Users with read access to the repository can use this endpoint.
     ///
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/properties/values`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/get-custom-properties-values)`.
-    public enum ReposGetCustomPropertiesValues {
-        public static let id: Swift.String = "repos/get-custom-properties-values"
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/custom-properties-for-repos-get-repository-values)`.
+    public enum ReposCustomPropertiesForReposGetRepositoryValues {
+        public static let id: Swift.String = "repos/custom-properties-for-repos-get-repository-values"
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/properties/values/GET/path`.
             public struct Path: Sendable, Hashable {
@@ -54377,27 +54542,27 @@ public enum Operations {
                     self.repo = repo
                 }
             }
-            public var path: Operations.ReposGetCustomPropertiesValues.Input.Path
+            public var path: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Input.Path
             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/properties/values/GET/header`.
             public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposGetCustomPropertiesValues.AcceptableContentType>]
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposCustomPropertiesForReposGetRepositoryValues.AcceptableContentType>]
                 /// Creates a new `Headers`.
                 ///
                 /// - Parameters:
                 ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposGetCustomPropertiesValues.AcceptableContentType>] = .defaultValues()) {
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposCustomPropertiesForReposGetRepositoryValues.AcceptableContentType>] = .defaultValues()) {
                     self.accept = accept
                 }
             }
-            public var headers: Operations.ReposGetCustomPropertiesValues.Input.Headers
+            public var headers: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Input.Headers
             /// Creates a new `Input`.
             ///
             /// - Parameters:
             ///   - path:
             ///   - headers:
             public init(
-                path: Operations.ReposGetCustomPropertiesValues.Input.Path,
-                headers: Operations.ReposGetCustomPropertiesValues.Input.Headers = .init()
+                path: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Input.Path,
+                headers: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Input.Headers = .init()
             ) {
                 self.path = path
                 self.headers = headers
@@ -54423,26 +54588,26 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.ReposGetCustomPropertiesValues.Output.Ok.Body
+                public var body: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Output.Ok.Body
                 /// Creates a new `Ok`.
                 ///
                 /// - Parameters:
                 ///   - body: Received HTTP response body
-                public init(body: Operations.ReposGetCustomPropertiesValues.Output.Ok.Body) {
+                public init(body: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Output.Ok.Body) {
                     self.body = body
                 }
             }
             /// Response
             ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/get-custom-properties-values)/responses/200`.
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/custom-properties-for-repos-get-repository-values)/responses/200`.
             ///
             /// HTTP response code: `200 ok`.
-            case ok(Operations.ReposGetCustomPropertiesValues.Output.Ok)
+            case ok(Operations.ReposCustomPropertiesForReposGetRepositoryValues.Output.Ok)
             /// The associated value of the enum case if `self` is `.ok`.
             ///
             /// - Throws: An error if `self` is not `.ok`.
             /// - SeeAlso: `.ok`.
-            public var ok: Operations.ReposGetCustomPropertiesValues.Output.Ok {
+            public var ok: Operations.ReposCustomPropertiesForReposGetRepositoryValues.Output.Ok {
                 get throws {
                     switch self {
                     case let .ok(response):
@@ -54457,7 +54622,7 @@ public enum Operations {
             }
             /// Forbidden
             ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/get-custom-properties-values)/responses/403`.
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/custom-properties-for-repos-get-repository-values)/responses/403`.
             ///
             /// HTTP response code: `403 forbidden`.
             case forbidden(Components.Responses.Forbidden)
@@ -54480,7 +54645,7 @@ public enum Operations {
             }
             /// Resource not found
             ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/get-custom-properties-values)/responses/404`.
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/get(repos/custom-properties-for-repos-get-repository-values)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
@@ -54540,9 +54705,9 @@ public enum Operations {
     /// Repository admins and other users with the repository-level "edit custom property values" fine-grained permission can use this endpoint.
     ///
     /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/properties/values`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/create-or-update-custom-properties-values)`.
-    public enum ReposCreateOrUpdateCustomPropertiesValues {
-        public static let id: Swift.String = "repos/create-or-update-custom-properties-values"
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/custom-properties-for-repos-create-or-update-repository-values)`.
+    public enum ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues {
+        public static let id: Swift.String = "repos/custom-properties-for-repos-create-or-update-repository-values"
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/properties/values/PATCH/path`.
             public struct Path: Sendable, Hashable {
@@ -54567,19 +54732,19 @@ public enum Operations {
                     self.repo = repo
                 }
             }
-            public var path: Operations.ReposCreateOrUpdateCustomPropertiesValues.Input.Path
+            public var path: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input.Path
             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/properties/values/PATCH/header`.
             public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposCreateOrUpdateCustomPropertiesValues.AcceptableContentType>]
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.AcceptableContentType>]
                 /// Creates a new `Headers`.
                 ///
                 /// - Parameters:
                 ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposCreateOrUpdateCustomPropertiesValues.AcceptableContentType>] = .defaultValues()) {
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.AcceptableContentType>] = .defaultValues()) {
                     self.accept = accept
                 }
             }
-            public var headers: Operations.ReposCreateOrUpdateCustomPropertiesValues.Input.Headers
+            public var headers: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input.Headers
             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/properties/values/PATCH/requestBody`.
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/properties/values/PATCH/requestBody/json`.
@@ -54600,9 +54765,9 @@ public enum Operations {
                     }
                 }
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/properties/values/PATCH/requestBody/content/application\/json`.
-                case json(Operations.ReposCreateOrUpdateCustomPropertiesValues.Input.Body.JsonPayload)
+                case json(Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input.Body.JsonPayload)
             }
-            public var body: Operations.ReposCreateOrUpdateCustomPropertiesValues.Input.Body
+            public var body: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input.Body
             /// Creates a new `Input`.
             ///
             /// - Parameters:
@@ -54610,9 +54775,9 @@ public enum Operations {
             ///   - headers:
             ///   - body:
             public init(
-                path: Operations.ReposCreateOrUpdateCustomPropertiesValues.Input.Path,
-                headers: Operations.ReposCreateOrUpdateCustomPropertiesValues.Input.Headers = .init(),
-                body: Operations.ReposCreateOrUpdateCustomPropertiesValues.Input.Body
+                path: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input.Path,
+                headers: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input.Headers = .init(),
+                body: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Input.Body
             ) {
                 self.path = path
                 self.headers = headers
@@ -54626,13 +54791,13 @@ public enum Operations {
             }
             /// No Content when custom property values are successfully created or updated
             ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/create-or-update-custom-properties-values)/responses/204`.
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/custom-properties-for-repos-create-or-update-repository-values)/responses/204`.
             ///
             /// HTTP response code: `204 noContent`.
-            case noContent(Operations.ReposCreateOrUpdateCustomPropertiesValues.Output.NoContent)
+            case noContent(Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Output.NoContent)
             /// No Content when custom property values are successfully created or updated
             ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/create-or-update-custom-properties-values)/responses/204`.
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/custom-properties-for-repos-create-or-update-repository-values)/responses/204`.
             ///
             /// HTTP response code: `204 noContent`.
             public static var noContent: Self {
@@ -54642,7 +54807,7 @@ public enum Operations {
             ///
             /// - Throws: An error if `self` is not `.noContent`.
             /// - SeeAlso: `.noContent`.
-            public var noContent: Operations.ReposCreateOrUpdateCustomPropertiesValues.Output.NoContent {
+            public var noContent: Operations.ReposCustomPropertiesForReposCreateOrUpdateRepositoryValues.Output.NoContent {
                 get throws {
                     switch self {
                     case let .noContent(response):
@@ -54657,7 +54822,7 @@ public enum Operations {
             }
             /// Forbidden
             ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/create-or-update-custom-properties-values)/responses/403`.
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/custom-properties-for-repos-create-or-update-repository-values)/responses/403`.
             ///
             /// HTTP response code: `403 forbidden`.
             case forbidden(Components.Responses.Forbidden)
@@ -54680,7 +54845,7 @@ public enum Operations {
             }
             /// Resource not found
             ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/create-or-update-custom-properties-values)/responses/404`.
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/custom-properties-for-repos-create-or-update-repository-values)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
@@ -54703,7 +54868,7 @@ public enum Operations {
             }
             /// Validation failed, or the endpoint has been spammed.
             ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/create-or-update-custom-properties-values)/responses/422`.
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/properties/values/patch(repos/custom-properties-for-repos-create-or-update-repository-values)/responses/422`.
             ///
             /// HTTP response code: `422 unprocessableContent`.
             case unprocessableContent(Components.Responses.ValidationFailed)
