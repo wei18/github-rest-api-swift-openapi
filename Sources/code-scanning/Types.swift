@@ -2058,6 +2058,8 @@ public enum Components {
             public var repository: Components.Schemas.SimpleRepository
             /// - Remark: Generated from `#/components/schemas/code-scanning-organization-alert-items/dismissal_approved_by`.
             public var dismissalApprovedBy: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/code-scanning-organization-alert-items/assignees`.
+            public var assignees: [Components.Schemas.SimpleUser]?
             /// Creates a new `CodeScanningOrganizationAlertItems`.
             ///
             /// - Parameters:
@@ -2078,6 +2080,7 @@ public enum Components {
             ///   - mostRecentInstance:
             ///   - repository:
             ///   - dismissalApprovedBy:
+            ///   - assignees:
             public init(
                 number: Components.Schemas.AlertNumber,
                 createdAt: Components.Schemas.AlertCreatedAt,
@@ -2095,7 +2098,8 @@ public enum Components {
                 tool: Components.Schemas.CodeScanningAnalysisTool,
                 mostRecentInstance: Components.Schemas.CodeScanningAlertInstance,
                 repository: Components.Schemas.SimpleRepository,
-                dismissalApprovedBy: Components.Schemas.NullableSimpleUser? = nil
+                dismissalApprovedBy: Components.Schemas.NullableSimpleUser? = nil,
+                assignees: [Components.Schemas.SimpleUser]? = nil
             ) {
                 self.number = number
                 self.createdAt = createdAt
@@ -2114,6 +2118,7 @@ public enum Components {
                 self.mostRecentInstance = mostRecentInstance
                 self.repository = repository
                 self.dismissalApprovedBy = dismissalApprovedBy
+                self.assignees = assignees
             }
             public enum CodingKeys: String, CodingKey {
                 case number
@@ -2133,6 +2138,7 @@ public enum Components {
                 case mostRecentInstance = "most_recent_instance"
                 case repository
                 case dismissalApprovedBy = "dismissal_approved_by"
+                case assignees
             }
         }
         /// - Remark: Generated from `#/components/schemas/code-scanning-alert-items`.
@@ -2169,6 +2175,8 @@ public enum Components {
             public var mostRecentInstance: Components.Schemas.CodeScanningAlertInstance
             /// - Remark: Generated from `#/components/schemas/code-scanning-alert-items/dismissal_approved_by`.
             public var dismissalApprovedBy: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-items/assignees`.
+            public var assignees: [Components.Schemas.SimpleUser]?
             /// Creates a new `CodeScanningAlertItems`.
             ///
             /// - Parameters:
@@ -2188,6 +2196,7 @@ public enum Components {
             ///   - tool:
             ///   - mostRecentInstance:
             ///   - dismissalApprovedBy:
+            ///   - assignees:
             public init(
                 number: Components.Schemas.AlertNumber,
                 createdAt: Components.Schemas.AlertCreatedAt,
@@ -2204,7 +2213,8 @@ public enum Components {
                 rule: Components.Schemas.CodeScanningAlertRuleSummary,
                 tool: Components.Schemas.CodeScanningAnalysisTool,
                 mostRecentInstance: Components.Schemas.CodeScanningAlertInstance,
-                dismissalApprovedBy: Components.Schemas.NullableSimpleUser? = nil
+                dismissalApprovedBy: Components.Schemas.NullableSimpleUser? = nil,
+                assignees: [Components.Schemas.SimpleUser]? = nil
             ) {
                 self.number = number
                 self.createdAt = createdAt
@@ -2222,6 +2232,7 @@ public enum Components {
                 self.tool = tool
                 self.mostRecentInstance = mostRecentInstance
                 self.dismissalApprovedBy = dismissalApprovedBy
+                self.assignees = assignees
             }
             public enum CodingKeys: String, CodingKey {
                 case number
@@ -2240,6 +2251,7 @@ public enum Components {
                 case tool
                 case mostRecentInstance = "most_recent_instance"
                 case dismissalApprovedBy = "dismissal_approved_by"
+                case assignees
             }
         }
         /// - Remark: Generated from `#/components/schemas/code-scanning-alert-rule`.
@@ -2377,6 +2389,8 @@ public enum Components {
             public var mostRecentInstance: Components.Schemas.CodeScanningAlertInstance
             /// - Remark: Generated from `#/components/schemas/code-scanning-alert/dismissal_approved_by`.
             public var dismissalApprovedBy: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert/assignees`.
+            public var assignees: [Components.Schemas.SimpleUser]?
             /// Creates a new `CodeScanningAlert`.
             ///
             /// - Parameters:
@@ -2396,6 +2410,7 @@ public enum Components {
             ///   - tool:
             ///   - mostRecentInstance:
             ///   - dismissalApprovedBy:
+            ///   - assignees:
             public init(
                 number: Components.Schemas.AlertNumber,
                 createdAt: Components.Schemas.AlertCreatedAt,
@@ -2412,7 +2427,8 @@ public enum Components {
                 rule: Components.Schemas.CodeScanningAlertRule,
                 tool: Components.Schemas.CodeScanningAnalysisTool,
                 mostRecentInstance: Components.Schemas.CodeScanningAlertInstance,
-                dismissalApprovedBy: Components.Schemas.NullableSimpleUser? = nil
+                dismissalApprovedBy: Components.Schemas.NullableSimpleUser? = nil,
+                assignees: [Components.Schemas.SimpleUser]? = nil
             ) {
                 self.number = number
                 self.createdAt = createdAt
@@ -2430,6 +2446,7 @@ public enum Components {
                 self.tool = tool
                 self.mostRecentInstance = mostRecentInstance
                 self.dismissalApprovedBy = dismissalApprovedBy
+                self.assignees = assignees
             }
             public enum CodingKeys: String, CodingKey {
                 case number
@@ -2448,6 +2465,7 @@ public enum Components {
                 case tool
                 case mostRecentInstance = "most_recent_instance"
                 case dismissalApprovedBy = "dismissal_approved_by"
+                case assignees
             }
         }
         /// Sets the state of the code scanning alert. You must provide `dismissed_reason` when you set the state to `dismissed`.
