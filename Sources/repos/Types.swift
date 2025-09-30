@@ -27966,25 +27966,31 @@ public enum Operations {
                             public var repositoryId: Swift.Int?
                             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/attestations/{subject_digest}/GET/responses/200/content/json/AttestationsPayload/bundle_url`.
                             public var bundleUrl: Swift.String?
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/attestations/{subject_digest}/GET/responses/200/content/json/AttestationsPayload/initiator`.
+                            public var initiator: Swift.String?
                             /// Creates a new `AttestationsPayloadPayload`.
                             ///
                             /// - Parameters:
                             ///   - bundle: The attestation's Sigstore Bundle.
                             ///   - repositoryId:
                             ///   - bundleUrl:
+                            ///   - initiator:
                             public init(
                                 bundle: Operations.ReposListAttestations.Output.Ok.Body.JsonPayload.AttestationsPayloadPayload.BundlePayload? = nil,
                                 repositoryId: Swift.Int? = nil,
-                                bundleUrl: Swift.String? = nil
+                                bundleUrl: Swift.String? = nil,
+                                initiator: Swift.String? = nil
                             ) {
                                 self.bundle = bundle
                                 self.repositoryId = repositoryId
                                 self.bundleUrl = bundleUrl
+                                self.initiator = initiator
                             }
                             public enum CodingKeys: String, CodingKey {
                                 case bundle
                                 case repositoryId = "repository_id"
                                 case bundleUrl = "bundle_url"
+                                case initiator
                             }
                         }
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/attestations/{subject_digest}/GET/responses/200/content/json/attestations`.
