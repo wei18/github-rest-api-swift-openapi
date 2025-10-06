@@ -1890,6 +1890,8 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/has_more_locations`.
             public var hasMoreLocations: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/assigned_to`.
+            public var assignedTo: Components.Schemas.NullableSimpleUser?
             /// Creates a new `OrganizationSecretScanningAlert`.
             ///
             /// - Parameters:
@@ -1921,6 +1923,7 @@ public enum Components {
             ///   - isBase64Encoded: A boolean value representing whether or not alert is base64 encoded
             ///   - firstLocationDetected:
             ///   - hasMoreLocations: A boolean value representing whether or not the token in the alert was detected in more than one location.
+            ///   - assignedTo:
             public init(
                 number: Components.Schemas.AlertNumber? = nil,
                 createdAt: Components.Schemas.AlertCreatedAt? = nil,
@@ -1949,7 +1952,8 @@ public enum Components {
                 multiRepo: Swift.Bool? = nil,
                 isBase64Encoded: Swift.Bool? = nil,
                 firstLocationDetected: Components.Schemas.NullableSecretScanningFirstDetectedLocation? = nil,
-                hasMoreLocations: Swift.Bool? = nil
+                hasMoreLocations: Swift.Bool? = nil,
+                assignedTo: Components.Schemas.NullableSimpleUser? = nil
             ) {
                 self.number = number
                 self.createdAt = createdAt
@@ -1979,6 +1983,7 @@ public enum Components {
                 self.isBase64Encoded = isBase64Encoded
                 self.firstLocationDetected = firstLocationDetected
                 self.hasMoreLocations = hasMoreLocations
+                self.assignedTo = assignedTo
             }
             public enum CodingKeys: String, CodingKey {
                 case number
@@ -2009,6 +2014,7 @@ public enum Components {
                 case isBase64Encoded = "is_base64_encoded"
                 case firstLocationDetected = "first_location_detected"
                 case hasMoreLocations = "has_more_locations"
+                case assignedTo = "assigned_to"
             }
         }
         /// The version of the entity. This is used to confirm you're updating the current version of the entity and mitigate unintentionally overriding someone else's update.
@@ -2281,6 +2287,8 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/has_more_locations`.
             public var hasMoreLocations: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/assigned_to`.
+            public var assignedTo: Components.Schemas.NullableSimpleUser?
             /// Creates a new `SecretScanningAlert`.
             ///
             /// - Parameters:
@@ -2311,6 +2319,7 @@ public enum Components {
             ///   - isBase64Encoded: A boolean value representing whether or not alert is base64 encoded
             ///   - firstLocationDetected:
             ///   - hasMoreLocations: A boolean value representing whether or not the token in the alert was detected in more than one location.
+            ///   - assignedTo:
             public init(
                 number: Components.Schemas.AlertNumber? = nil,
                 createdAt: Components.Schemas.AlertCreatedAt? = nil,
@@ -2338,7 +2347,8 @@ public enum Components {
                 multiRepo: Swift.Bool? = nil,
                 isBase64Encoded: Swift.Bool? = nil,
                 firstLocationDetected: Components.Schemas.NullableSecretScanningFirstDetectedLocation? = nil,
-                hasMoreLocations: Swift.Bool? = nil
+                hasMoreLocations: Swift.Bool? = nil,
+                assignedTo: Components.Schemas.NullableSimpleUser? = nil
             ) {
                 self.number = number
                 self.createdAt = createdAt
@@ -2367,6 +2377,7 @@ public enum Components {
                 self.isBase64Encoded = isBase64Encoded
                 self.firstLocationDetected = firstLocationDetected
                 self.hasMoreLocations = hasMoreLocations
+                self.assignedTo = assignedTo
             }
             public enum CodingKeys: String, CodingKey {
                 case number
@@ -2396,6 +2407,7 @@ public enum Components {
                 case isBase64Encoded = "is_base64_encoded"
                 case firstLocationDetected = "first_location_detected"
                 case hasMoreLocations = "has_more_locations"
+                case assignedTo = "assigned_to"
             }
         }
         /// An optional comment when closing or reopening an alert. Cannot be updated or deleted.
