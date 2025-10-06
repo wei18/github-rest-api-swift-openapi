@@ -2531,7 +2531,7 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_custom_org_roles`.
             public var organizationCustomOrgRoles: Components.Schemas.AppPermissions.OrganizationCustomOrgRolesPayload?
-            /// The level of permission to grant the access token for custom property management.
+            /// The level of permission to grant the access token for repository custom properties management at the organization level.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_custom_properties`.
             @frozen public enum OrganizationCustomPropertiesPayload: String, Codable, Hashable, Sendable, CaseIterable {
@@ -2539,7 +2539,7 @@ public enum Components {
                 case write = "write"
                 case admin = "admin"
             }
-            /// The level of permission to grant the access token for custom property management.
+            /// The level of permission to grant the access token for repository custom properties management at the organization level.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_custom_properties`.
             public var organizationCustomProperties: Components.Schemas.AppPermissions.OrganizationCustomPropertiesPayload?
@@ -2790,7 +2790,7 @@ public enum Components {
             ///   - organizationAdministration: The level of permission to grant the access token to manage access to an organization.
             ///   - organizationCustomRoles: The level of permission to grant the access token for custom repository roles management.
             ///   - organizationCustomOrgRoles: The level of permission to grant the access token for custom organization roles management.
-            ///   - organizationCustomProperties: The level of permission to grant the access token for custom property management.
+            ///   - organizationCustomProperties: The level of permission to grant the access token for repository custom properties management at the organization level.
             ///   - organizationCopilotSeatManagement: The level of permission to grant the access token for managing access to GitHub Copilot for members of an organization with a Copilot Business subscription. This property is in public preview and is subject to change.
             ///   - organizationAnnouncementBanners: The level of permission to grant the access token to view and manage announcement banners for an organization.
             ///   - organizationEvents: The level of permission to grant the access token to view events triggered by an activity in an organization.
