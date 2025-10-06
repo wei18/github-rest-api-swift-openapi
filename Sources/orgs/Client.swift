@@ -8718,6 +8718,340 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// Get immutable releases settings for an organization
+    ///
+    /// Gets the immutable releases policy for repositories in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/settings/immutable-releases`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/get(orgs/get-immutable-releases-settings)`.
+    public func orgsGetImmutableReleasesSettings(_ input: Operations.OrgsGetImmutableReleasesSettings.Input) async throws -> Operations.OrgsGetImmutableReleasesSettings.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsGetImmutableReleasesSettings.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/settings/immutable-releases",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsGetImmutableReleasesSettings.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ImmutableReleasesOrganizationSettings.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Set immutable releases settings for an organization
+    ///
+    /// Sets the immutable releases policy for repositories in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/put(orgs/set-immutable-releases-settings)`.
+    public func orgsSetImmutableReleasesSettings(_ input: Operations.OrgsSetImmutableReleasesSettings.Input) async throws -> Operations.OrgsSetImmutableReleasesSettings.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsSetImmutableReleasesSettings.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/settings/immutable-releases",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .put
+                )
+                suppressMutabilityWarning(&request)
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// List selected repositories for immutable releases enforcement
+    ///
+    /// List all of the repositories that have been selected for immutable releases enforcement in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/settings/immutable-releases/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/get(orgs/get-immutable-releases-settings-repositories)`.
+    public func orgsGetImmutableReleasesSettingsRepositories(_ input: Operations.OrgsGetImmutableReleasesSettingsRepositories.Input) async throws -> Operations.OrgsGetImmutableReleasesSettingsRepositories.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsGetImmutableReleasesSettingsRepositories.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/settings/immutable-releases/repositories",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "page",
+                    value: input.query.page
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "per_page",
+                    value: input.query.perPage
+                )
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsGetImmutableReleasesSettingsRepositories.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.OrgsGetImmutableReleasesSettingsRepositories.Output.Ok.Body.JsonPayload.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Set selected repositories for immutable releases enforcement
+    ///
+    /// Replaces all repositories that have been selected for immutable releases enforcement in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/put(orgs/set-immutable-releases-settings-repositories)`.
+    public func orgsSetImmutableReleasesSettingsRepositories(_ input: Operations.OrgsSetImmutableReleasesSettingsRepositories.Input) async throws -> Operations.OrgsSetImmutableReleasesSettingsRepositories.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsSetImmutableReleasesSettingsRepositories.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/settings/immutable-releases/repositories",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .put
+                )
+                suppressMutabilityWarning(&request)
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Enable a selected repository for immutable releases in an organization
+    ///
+    /// Adds a repository to the list of selected repositories that are enforced for immutable releases in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/put(orgs/enable-selected-repository-immutable-releases-organization)`.
+    public func orgsEnableSelectedRepositoryImmutableReleasesOrganization(_ input: Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.Input) async throws -> Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/settings/immutable-releases/repositories/{}",
+                    parameters: [
+                        input.path.org,
+                        input.path.repositoryId
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .put
+                )
+                suppressMutabilityWarning(&request)
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Disable a selected repository for immutable releases in an organization
+    ///
+    /// Removes a repository from the list of selected repositories that are enforced for immutable releases in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/settings/immutable-releases/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/delete(orgs/disable-selected-repository-immutable-releases-organization)`.
+    public func orgsDisableSelectedRepositoryImmutableReleasesOrganization(_ input: Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.Input) async throws -> Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/settings/immutable-releases/repositories/{}",
+                    parameters: [
+                        input.path.org,
+                        input.path.repositoryId
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .delete
+                )
+                suppressMutabilityWarning(&request)
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// Enable or disable a security feature for an organization
     ///
     /// > [!WARNING]

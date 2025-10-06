@@ -869,6 +869,60 @@ public protocol APIProtocol: Sendable {
     /// - Remark: Generated from `#/paths//orgs/{org}/security-managers/teams/{team_slug}/delete(orgs/remove-security-manager-team)`.
     @available(*, deprecated)
     func orgsRemoveSecurityManagerTeam(_ input: Operations.OrgsRemoveSecurityManagerTeam.Input) async throws -> Operations.OrgsRemoveSecurityManagerTeam.Output
+    /// Get immutable releases settings for an organization
+    ///
+    /// Gets the immutable releases policy for repositories in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/settings/immutable-releases`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/get(orgs/get-immutable-releases-settings)`.
+    func orgsGetImmutableReleasesSettings(_ input: Operations.OrgsGetImmutableReleasesSettings.Input) async throws -> Operations.OrgsGetImmutableReleasesSettings.Output
+    /// Set immutable releases settings for an organization
+    ///
+    /// Sets the immutable releases policy for repositories in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/put(orgs/set-immutable-releases-settings)`.
+    func orgsSetImmutableReleasesSettings(_ input: Operations.OrgsSetImmutableReleasesSettings.Input) async throws -> Operations.OrgsSetImmutableReleasesSettings.Output
+    /// List selected repositories for immutable releases enforcement
+    ///
+    /// List all of the repositories that have been selected for immutable releases enforcement in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/settings/immutable-releases/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/get(orgs/get-immutable-releases-settings-repositories)`.
+    func orgsGetImmutableReleasesSettingsRepositories(_ input: Operations.OrgsGetImmutableReleasesSettingsRepositories.Input) async throws -> Operations.OrgsGetImmutableReleasesSettingsRepositories.Output
+    /// Set selected repositories for immutable releases enforcement
+    ///
+    /// Replaces all repositories that have been selected for immutable releases enforcement in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/put(orgs/set-immutable-releases-settings-repositories)`.
+    func orgsSetImmutableReleasesSettingsRepositories(_ input: Operations.OrgsSetImmutableReleasesSettingsRepositories.Input) async throws -> Operations.OrgsSetImmutableReleasesSettingsRepositories.Output
+    /// Enable a selected repository for immutable releases in an organization
+    ///
+    /// Adds a repository to the list of selected repositories that are enforced for immutable releases in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/put(orgs/enable-selected-repository-immutable-releases-organization)`.
+    func orgsEnableSelectedRepositoryImmutableReleasesOrganization(_ input: Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.Input) async throws -> Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.Output
+    /// Disable a selected repository for immutable releases in an organization
+    ///
+    /// Removes a repository from the list of selected repositories that are enforced for immutable releases in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/settings/immutable-releases/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/delete(orgs/disable-selected-repository-immutable-releases-organization)`.
+    func orgsDisableSelectedRepositoryImmutableReleasesOrganization(_ input: Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.Input) async throws -> Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.Output
     /// Enable or disable a security feature for an organization
     ///
     /// > [!WARNING]
@@ -2516,6 +2570,98 @@ extension APIProtocol {
     public func orgsRemoveSecurityManagerTeam(path: Operations.OrgsRemoveSecurityManagerTeam.Input.Path) async throws -> Operations.OrgsRemoveSecurityManagerTeam.Output {
         try await orgsRemoveSecurityManagerTeam(Operations.OrgsRemoveSecurityManagerTeam.Input(path: path))
     }
+    /// Get immutable releases settings for an organization
+    ///
+    /// Gets the immutable releases policy for repositories in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/settings/immutable-releases`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/get(orgs/get-immutable-releases-settings)`.
+    public func orgsGetImmutableReleasesSettings(
+        path: Operations.OrgsGetImmutableReleasesSettings.Input.Path,
+        headers: Operations.OrgsGetImmutableReleasesSettings.Input.Headers = .init()
+    ) async throws -> Operations.OrgsGetImmutableReleasesSettings.Output {
+        try await orgsGetImmutableReleasesSettings(Operations.OrgsGetImmutableReleasesSettings.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set immutable releases settings for an organization
+    ///
+    /// Sets the immutable releases policy for repositories in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/put(orgs/set-immutable-releases-settings)`.
+    public func orgsSetImmutableReleasesSettings(
+        path: Operations.OrgsSetImmutableReleasesSettings.Input.Path,
+        body: Operations.OrgsSetImmutableReleasesSettings.Input.Body
+    ) async throws -> Operations.OrgsSetImmutableReleasesSettings.Output {
+        try await orgsSetImmutableReleasesSettings(Operations.OrgsSetImmutableReleasesSettings.Input(
+            path: path,
+            body: body
+        ))
+    }
+    /// List selected repositories for immutable releases enforcement
+    ///
+    /// List all of the repositories that have been selected for immutable releases enforcement in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/settings/immutable-releases/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/get(orgs/get-immutable-releases-settings-repositories)`.
+    public func orgsGetImmutableReleasesSettingsRepositories(
+        path: Operations.OrgsGetImmutableReleasesSettingsRepositories.Input.Path,
+        query: Operations.OrgsGetImmutableReleasesSettingsRepositories.Input.Query = .init(),
+        headers: Operations.OrgsGetImmutableReleasesSettingsRepositories.Input.Headers = .init()
+    ) async throws -> Operations.OrgsGetImmutableReleasesSettingsRepositories.Output {
+        try await orgsGetImmutableReleasesSettingsRepositories(Operations.OrgsGetImmutableReleasesSettingsRepositories.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Set selected repositories for immutable releases enforcement
+    ///
+    /// Replaces all repositories that have been selected for immutable releases enforcement in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/put(orgs/set-immutable-releases-settings-repositories)`.
+    public func orgsSetImmutableReleasesSettingsRepositories(
+        path: Operations.OrgsSetImmutableReleasesSettingsRepositories.Input.Path,
+        body: Operations.OrgsSetImmutableReleasesSettingsRepositories.Input.Body
+    ) async throws -> Operations.OrgsSetImmutableReleasesSettingsRepositories.Output {
+        try await orgsSetImmutableReleasesSettingsRepositories(Operations.OrgsSetImmutableReleasesSettingsRepositories.Input(
+            path: path,
+            body: body
+        ))
+    }
+    /// Enable a selected repository for immutable releases in an organization
+    ///
+    /// Adds a repository to the list of selected repositories that are enforced for immutable releases in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/put(orgs/enable-selected-repository-immutable-releases-organization)`.
+    public func orgsEnableSelectedRepositoryImmutableReleasesOrganization(path: Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.Input.Path) async throws -> Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.Output {
+        try await orgsEnableSelectedRepositoryImmutableReleasesOrganization(Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.Input(path: path))
+    }
+    /// Disable a selected repository for immutable releases in an organization
+    ///
+    /// Removes a repository from the list of selected repositories that are enforced for immutable releases in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/settings/immutable-releases/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/delete(orgs/disable-selected-repository-immutable-releases-organization)`.
+    public func orgsDisableSelectedRepositoryImmutableReleasesOrganization(path: Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.Input.Path) async throws -> Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.Output {
+        try await orgsDisableSelectedRepositoryImmutableReleasesOrganization(Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.Input(path: path))
+    }
     /// Enable or disable a security feature for an organization
     ///
     /// > [!WARNING]
@@ -3859,7 +4005,7 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_custom_org_roles`.
             public var organizationCustomOrgRoles: Components.Schemas.AppPermissions.OrganizationCustomOrgRolesPayload?
-            /// The level of permission to grant the access token for custom property management.
+            /// The level of permission to grant the access token for repository custom properties management at the organization level.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_custom_properties`.
             @frozen public enum OrganizationCustomPropertiesPayload: String, Codable, Hashable, Sendable, CaseIterable {
@@ -3867,7 +4013,7 @@ public enum Components {
                 case write = "write"
                 case admin = "admin"
             }
-            /// The level of permission to grant the access token for custom property management.
+            /// The level of permission to grant the access token for repository custom properties management at the organization level.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_custom_properties`.
             public var organizationCustomProperties: Components.Schemas.AppPermissions.OrganizationCustomPropertiesPayload?
@@ -4118,7 +4264,7 @@ public enum Components {
             ///   - organizationAdministration: The level of permission to grant the access token to manage access to an organization.
             ///   - organizationCustomRoles: The level of permission to grant the access token for custom repository roles management.
             ///   - organizationCustomOrgRoles: The level of permission to grant the access token for custom organization roles management.
-            ///   - organizationCustomProperties: The level of permission to grant the access token for custom property management.
+            ///   - organizationCustomProperties: The level of permission to grant the access token for repository custom properties management at the organization level.
             ///   - organizationCopilotSeatManagement: The level of permission to grant the access token for managing access to GitHub Copilot for members of an organization with a Copilot Business subscription. This property is in public preview and is subject to change.
             ///   - organizationAnnouncementBanners: The level of permission to grant the access token to view and manage announcement banners for an organization.
             ///   - organizationEvents: The level of permission to grant the access token to view events triggered by an activity in an organization.
@@ -8643,6 +8789,43 @@ public enum Components {
                 try self.value2.encode(to: encoder)
             }
         }
+        /// Check immutable releases settings for an organization.
+        ///
+        /// - Remark: Generated from `#/components/schemas/immutable-releases-organization-settings`.
+        public struct ImmutableReleasesOrganizationSettings: Codable, Hashable, Sendable {
+            /// The policy that controls how immutable releases are enforced in the organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/immutable-releases-organization-settings/enforced_repositories`.
+            @frozen public enum EnforcedRepositoriesPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case none = "none"
+                case selected = "selected"
+            }
+            /// The policy that controls how immutable releases are enforced in the organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/immutable-releases-organization-settings/enforced_repositories`.
+            public var enforcedRepositories: Components.Schemas.ImmutableReleasesOrganizationSettings.EnforcedRepositoriesPayload
+            /// The API URL to use to get or set the selected repositories for immutable releases enforcement, when `enforced_repositories` is set to `selected`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/immutable-releases-organization-settings/selected_repositories_url`.
+            public var selectedRepositoriesUrl: Swift.String?
+            /// Creates a new `ImmutableReleasesOrganizationSettings`.
+            ///
+            /// - Parameters:
+            ///   - enforcedRepositories: The policy that controls how immutable releases are enforced in the organization.
+            ///   - selectedRepositoriesUrl: The API URL to use to get or set the selected repositories for immutable releases enforcement, when `enforced_repositories` is set to `selected`.
+            public init(
+                enforcedRepositories: Components.Schemas.ImmutableReleasesOrganizationSettings.EnforcedRepositoriesPayload,
+                selectedRepositoriesUrl: Swift.String? = nil
+            ) {
+                self.enforcedRepositories = enforcedRepositories
+                self.selectedRepositoriesUrl = selectedRepositoriesUrl
+            }
+            public enum CodingKeys: String, CodingKey {
+                case enforcedRepositories = "enforced_repositories"
+                case selectedRepositoriesUrl = "selected_repositories_url"
+            }
+        }
     }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
     public enum Parameters {
@@ -8691,6 +8874,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/org`.
         public typealias Org = Swift.String
+        /// The unique identifier of the repository.
+        ///
+        /// - Remark: Generated from `#/components/parameters/repository-id`.
+        public typealias RepositoryId = Swift.Int
         /// The unique identifier of the hook. You can find this value in the `X-GitHub-Hook-ID` header of a webhook delivery.
         ///
         /// - Remark: Generated from `#/components/parameters/hook-id`.
@@ -26777,6 +26964,720 @@ public enum Operations {
             /// - Throws: An error if `self` is not `.noContent`.
             /// - SeeAlso: `.noContent`.
             public var noContent: Operations.OrgsRemoveSecurityManagerTeam.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+    }
+    /// Get immutable releases settings for an organization
+    ///
+    /// Gets the immutable releases policy for repositories in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/settings/immutable-releases`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/get(orgs/get-immutable-releases-settings)`.
+    public enum OrgsGetImmutableReleasesSettings {
+        public static let id: Swift.String = "orgs/get-immutable-releases-settings"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsGetImmutableReleasesSettings.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsGetImmutableReleasesSettings.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsGetImmutableReleasesSettings.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsGetImmutableReleasesSettings.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.OrgsGetImmutableReleasesSettings.Input.Path,
+                headers: Operations.OrgsGetImmutableReleasesSettings.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ImmutableReleasesOrganizationSettings)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ImmutableReleasesOrganizationSettings {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsGetImmutableReleasesSettings.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsGetImmutableReleasesSettings.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Immutable releases settings response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/get(orgs/get-immutable-releases-settings)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsGetImmutableReleasesSettings.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsGetImmutableReleasesSettings.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set immutable releases settings for an organization
+    ///
+    /// Sets the immutable releases policy for repositories in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/put(orgs/set-immutable-releases-settings)`.
+    public enum OrgsSetImmutableReleasesSettings {
+        public static let id: Swift.String = "orgs/set-immutable-releases-settings"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsSetImmutableReleasesSettings.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The policy that controls how immutable releases are enforced in the organization.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/PUT/requestBody/json/enforced_repositories`.
+                    @frozen public enum EnforcedRepositoriesPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case all = "all"
+                        case none = "none"
+                        case selected = "selected"
+                    }
+                    /// The policy that controls how immutable releases are enforced in the organization.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/PUT/requestBody/json/enforced_repositories`.
+                    public var enforcedRepositories: Operations.OrgsSetImmutableReleasesSettings.Input.Body.JsonPayload.EnforcedRepositoriesPayload
+                    /// An array of repository ids for which immutable releases enforcement should be applied. You can only provide a list of repository ids when the `enforced_repositories` is set to `selected`. You can add and remove individual repositories using the [Enable a selected repository for immutable releases in an organization](https://docs.github.com/rest/orgs/orgs#enable-a-selected-repository-for-immutable-releases-in-an-organization) and [Disable a selected repository for immutable releases in an organization](https://docs.github.com/rest/orgs/orgs#disable-a-selected-repository-for-immutable-releases-in-an-organization) endpoints.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/PUT/requestBody/json/selected_repository_ids`.
+                    public var selectedRepositoryIds: [Swift.Int]?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - enforcedRepositories: The policy that controls how immutable releases are enforced in the organization.
+                    ///   - selectedRepositoryIds: An array of repository ids for which immutable releases enforcement should be applied. You can only provide a list of repository ids when the `enforced_repositories` is set to `selected`. You can add and remove individual repositories using the [Enable a selected repository for immutable releases in an organization](https://docs.github.com/rest/orgs/orgs#enable-a-selected-repository-for-immutable-releases-in-an-organization) and [Disable a selected repository for immutable releases in an organization](https://docs.github.com/rest/orgs/orgs#disable-a-selected-repository-for-immutable-releases-in-an-organization) endpoints.
+                    public init(
+                        enforcedRepositories: Operations.OrgsSetImmutableReleasesSettings.Input.Body.JsonPayload.EnforcedRepositoriesPayload,
+                        selectedRepositoryIds: [Swift.Int]? = nil
+                    ) {
+                        self.enforcedRepositories = enforcedRepositories
+                        self.selectedRepositoryIds = selectedRepositoryIds
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case enforcedRepositories = "enforced_repositories"
+                        case selectedRepositoryIds = "selected_repository_ids"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/PUT/requestBody/content/application\/json`.
+                case json(Operations.OrgsSetImmutableReleasesSettings.Input.Body.JsonPayload)
+            }
+            public var body: Operations.OrgsSetImmutableReleasesSettings.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - body:
+            public init(
+                path: Operations.OrgsSetImmutableReleasesSettings.Input.Path,
+                body: Operations.OrgsSetImmutableReleasesSettings.Input.Body
+            ) {
+                self.path = path
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/put(orgs/set-immutable-releases-settings)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.OrgsSetImmutableReleasesSettings.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/put(orgs/set-immutable-releases-settings)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.OrgsSetImmutableReleasesSettings.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+    }
+    /// List selected repositories for immutable releases enforcement
+    ///
+    /// List all of the repositories that have been selected for immutable releases enforcement in an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/settings/immutable-releases/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/get(orgs/get-immutable-releases-settings-repositories)`.
+    public enum OrgsGetImmutableReleasesSettingsRepositories {
+        public static let id: Swift.String = "orgs/get-immutable-releases-settings-repositories"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsGetImmutableReleasesSettingsRepositories.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/GET/query/page`.
+                public var page: Components.Parameters.Page?
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    page: Components.Parameters.Page? = nil,
+                    perPage: Components.Parameters.PerPage? = nil
+                ) {
+                    self.page = page
+                    self.perPage = perPage
+                }
+            }
+            public var query: Operations.OrgsGetImmutableReleasesSettingsRepositories.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsGetImmutableReleasesSettingsRepositories.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsGetImmutableReleasesSettingsRepositories.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsGetImmutableReleasesSettingsRepositories.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.OrgsGetImmutableReleasesSettingsRepositories.Input.Path,
+                query: Operations.OrgsGetImmutableReleasesSettingsRepositories.Input.Query = .init(),
+                headers: Operations.OrgsGetImmutableReleasesSettingsRepositories.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/GET/responses/200/content/json/total_count`.
+                        public var totalCount: Swift.Int
+                        /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/GET/responses/200/content/json/repositories`.
+                        public var repositories: [Components.Schemas.MinimalRepository]
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - totalCount:
+                        ///   - repositories:
+                        public init(
+                            totalCount: Swift.Int,
+                            repositories: [Components.Schemas.MinimalRepository]
+                        ) {
+                            self.totalCount = totalCount
+                            self.repositories = repositories
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case totalCount = "total_count"
+                            case repositories
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/GET/responses/200/content/application\/json`.
+                    case json(Operations.OrgsGetImmutableReleasesSettingsRepositories.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.OrgsGetImmutableReleasesSettingsRepositories.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsGetImmutableReleasesSettingsRepositories.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsGetImmutableReleasesSettingsRepositories.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/get(orgs/get-immutable-releases-settings-repositories)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsGetImmutableReleasesSettingsRepositories.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsGetImmutableReleasesSettingsRepositories.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set selected repositories for immutable releases enforcement
+    ///
+    /// Replaces all repositories that have been selected for immutable releases enforcement in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/put(orgs/set-immutable-releases-settings-repositories)`.
+    public enum OrgsSetImmutableReleasesSettingsRepositories {
+        public static let id: Swift.String = "orgs/set-immutable-releases-settings-repositories"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsSetImmutableReleasesSettingsRepositories.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// An array of repository ids for which immutable releases enforcement should be applied. You can only provide a list of repository ids when the `enforced_repositories` is set to `selected`. You can add and remove individual repositories using the [Enable a selected repository for immutable releases in an organization](https://docs.github.com/rest/orgs/orgs#enable-a-selected-repository-for-immutable-releases-in-an-organization) and [Disable a selected repository for immutable releases in an organization](https://docs.github.com/rest/orgs/orgs#disable-a-selected-repository-for-immutable-releases-in-an-organization) endpoints.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/PUT/requestBody/json/selected_repository_ids`.
+                    public var selectedRepositoryIds: [Swift.Int]
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - selectedRepositoryIds: An array of repository ids for which immutable releases enforcement should be applied. You can only provide a list of repository ids when the `enforced_repositories` is set to `selected`. You can add and remove individual repositories using the [Enable a selected repository for immutable releases in an organization](https://docs.github.com/rest/orgs/orgs#enable-a-selected-repository-for-immutable-releases-in-an-organization) and [Disable a selected repository for immutable releases in an organization](https://docs.github.com/rest/orgs/orgs#disable-a-selected-repository-for-immutable-releases-in-an-organization) endpoints.
+                    public init(selectedRepositoryIds: [Swift.Int]) {
+                        self.selectedRepositoryIds = selectedRepositoryIds
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case selectedRepositoryIds = "selected_repository_ids"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/PUT/requestBody/content/application\/json`.
+                case json(Operations.OrgsSetImmutableReleasesSettingsRepositories.Input.Body.JsonPayload)
+            }
+            public var body: Operations.OrgsSetImmutableReleasesSettingsRepositories.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - body:
+            public init(
+                path: Operations.OrgsSetImmutableReleasesSettingsRepositories.Input.Path,
+                body: Operations.OrgsSetImmutableReleasesSettingsRepositories.Input.Body
+            ) {
+                self.path = path
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/put(orgs/set-immutable-releases-settings-repositories)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.OrgsSetImmutableReleasesSettingsRepositories.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/put(orgs/set-immutable-releases-settings-repositories)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.OrgsSetImmutableReleasesSettingsRepositories.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+    }
+    /// Enable a selected repository for immutable releases in an organization
+    ///
+    /// Adds a repository to the list of selected repositories that are enforced for immutable releases in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/settings/immutable-releases/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/put(orgs/enable-selected-repository-immutable-releases-organization)`.
+    public enum OrgsEnableSelectedRepositoryImmutableReleasesOrganization {
+        public static let id: Swift.String = "orgs/enable-selected-repository-immutable-releases-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/{repository_id}/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/{repository_id}/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// The unique identifier of the repository.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/{repository_id}/PUT/path/repository_id`.
+                public var repositoryId: Components.Parameters.RepositoryId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - repositoryId: The unique identifier of the repository.
+                public init(
+                    org: Components.Parameters.Org,
+                    repositoryId: Components.Parameters.RepositoryId
+                ) {
+                    self.org = org
+                    self.repositoryId = repositoryId
+                }
+            }
+            public var path: Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.Input.Path
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            public init(path: Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.Input.Path) {
+                self.path = path
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/put(orgs/enable-selected-repository-immutable-releases-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/put(orgs/enable-selected-repository-immutable-releases-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.OrgsEnableSelectedRepositoryImmutableReleasesOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+    }
+    /// Disable a selected repository for immutable releases in an organization
+    ///
+    /// Removes a repository from the list of selected repositories that are enforced for immutable releases in an organization. To use this endpoint, the organization immutable releases policy for `enforced_repositories` must be configured to `selected`.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/settings/immutable-releases/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/delete(orgs/disable-selected-repository-immutable-releases-organization)`.
+    public enum OrgsDisableSelectedRepositoryImmutableReleasesOrganization {
+        public static let id: Swift.String = "orgs/disable-selected-repository-immutable-releases-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/{repository_id}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/{repository_id}/DELETE/path/org`.
+                public var org: Components.Parameters.Org
+                /// The unique identifier of the repository.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/settings/immutable-releases/repositories/{repository_id}/DELETE/path/repository_id`.
+                public var repositoryId: Components.Parameters.RepositoryId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - repositoryId: The unique identifier of the repository.
+                public init(
+                    org: Components.Parameters.Org,
+                    repositoryId: Components.Parameters.RepositoryId
+                ) {
+                    self.org = org
+                    self.repositoryId = repositoryId
+                }
+            }
+            public var path: Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.Input.Path
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            public init(path: Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.Input.Path) {
+                self.path = path
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/delete(orgs/disable-selected-repository-immutable-releases-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/settings/immutable-releases/repositories/{repository_id}/delete(orgs/disable-selected-repository-immutable-releases-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.OrgsDisableSelectedRepositoryImmutableReleasesOrganization.Output.NoContent {
                 get throws {
                     switch self {
                     case let .noContent(response):
