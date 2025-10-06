@@ -1375,6 +1375,28 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `POST /repos/{owner}/{repo}/hooks/{hook_id}/tests`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hooks/{hook_id}/tests/post(repos/test-push-webhook)`.
     func reposTestPushWebhook(_ input: Operations.ReposTestPushWebhook.Input) async throws -> Operations.ReposTestPushWebhook.Output
+    /// Check if immutable releases are enabled for a repository
+    ///
+    /// Shows whether immutable releases are enabled or disabled. Also identifies whether immutability is being
+    /// enforced by the repository owner.  The authenticated user must have admin read access to the repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/get(repos/check-immutable-releases)`.
+    func reposCheckImmutableReleases(_ input: Operations.ReposCheckImmutableReleases.Input) async throws -> Operations.ReposCheckImmutableReleases.Output
+    /// Enable immutable releases
+    ///
+    /// Enables immutable releases for a repository. The authenticated user must have admin access to the repository.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/put(repos/enable-immutable-releases)`.
+    func reposEnableImmutableReleases(_ input: Operations.ReposEnableImmutableReleases.Input) async throws -> Operations.ReposEnableImmutableReleases.Output
+    /// Disable immutable releases
+    ///
+    /// Disables immutable releases for a repository. The authenticated user must have admin access to the repository.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/delete(repos/disable-immutable-releases)`.
+    func reposDisableImmutableReleases(_ input: Operations.ReposDisableImmutableReleases.Input) async throws -> Operations.ReposDisableImmutableReleases.Output
     /// List repository invitations
     ///
     /// When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.
@@ -4499,6 +4521,52 @@ extension APIProtocol {
         headers: Operations.ReposTestPushWebhook.Input.Headers = .init()
     ) async throws -> Operations.ReposTestPushWebhook.Output {
         try await reposTestPushWebhook(Operations.ReposTestPushWebhook.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Check if immutable releases are enabled for a repository
+    ///
+    /// Shows whether immutable releases are enabled or disabled. Also identifies whether immutability is being
+    /// enforced by the repository owner.  The authenticated user must have admin read access to the repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/get(repos/check-immutable-releases)`.
+    public func reposCheckImmutableReleases(
+        path: Operations.ReposCheckImmutableReleases.Input.Path,
+        headers: Operations.ReposCheckImmutableReleases.Input.Headers = .init()
+    ) async throws -> Operations.ReposCheckImmutableReleases.Output {
+        try await reposCheckImmutableReleases(Operations.ReposCheckImmutableReleases.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Enable immutable releases
+    ///
+    /// Enables immutable releases for a repository. The authenticated user must have admin access to the repository.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/put(repos/enable-immutable-releases)`.
+    public func reposEnableImmutableReleases(
+        path: Operations.ReposEnableImmutableReleases.Input.Path,
+        headers: Operations.ReposEnableImmutableReleases.Input.Headers = .init()
+    ) async throws -> Operations.ReposEnableImmutableReleases.Output {
+        try await reposEnableImmutableReleases(Operations.ReposEnableImmutableReleases.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Disable immutable releases
+    ///
+    /// Disables immutable releases for a repository. The authenticated user must have admin access to the repository.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/delete(repos/disable-immutable-releases)`.
+    public func reposDisableImmutableReleases(
+        path: Operations.ReposDisableImmutableReleases.Input.Path,
+        headers: Operations.ReposDisableImmutableReleases.Input.Headers = .init()
+    ) async throws -> Operations.ReposDisableImmutableReleases.Output {
+        try await reposDisableImmutableReleases(Operations.ReposDisableImmutableReleases.Input(
             path: path,
             headers: headers
         ))
@@ -20543,6 +20611,35 @@ public enum Components {
                 case pingUrl = "ping_url"
                 case deliveriesUrl = "deliveries_url"
                 case lastResponse = "last_response"
+            }
+        }
+        /// Check immutable releases
+        ///
+        /// - Remark: Generated from `#/components/schemas/check-immutable-releases`.
+        public struct CheckImmutableReleases: Codable, Hashable, Sendable {
+            /// Whether immutable releases are enabled for the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/check-immutable-releases/enabled`.
+            public var enabled: Swift.Bool
+            /// Whether immutable releases are enforced by the repository owner.
+            ///
+            /// - Remark: Generated from `#/components/schemas/check-immutable-releases/enforced_by_owner`.
+            public var enforcedByOwner: Swift.Bool
+            /// Creates a new `CheckImmutableReleases`.
+            ///
+            /// - Parameters:
+            ///   - enabled: Whether immutable releases are enabled for the repository.
+            ///   - enforcedByOwner: Whether immutable releases are enforced by the repository owner.
+            public init(
+                enabled: Swift.Bool,
+                enforcedByOwner: Swift.Bool
+            ) {
+                self.enabled = enabled
+                self.enforcedByOwner = enforcedByOwner
+            }
+            public enum CodingKeys: String, CodingKey {
+                case enabled
+                case enforcedByOwner = "enforced_by_owner"
             }
         }
         /// An SSH key granting access to a single repository.
@@ -49610,6 +49707,471 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Check if immutable releases are enabled for a repository
+    ///
+    /// Shows whether immutable releases are enabled or disabled. Also identifies whether immutability is being
+    /// enforced by the repository owner.  The authenticated user must have admin read access to the repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/get(repos/check-immutable-releases)`.
+    public enum ReposCheckImmutableReleases {
+        public static let id: Swift.String = "repos/check-immutable-releases"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ReposCheckImmutableReleases.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposCheckImmutableReleases.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposCheckImmutableReleases.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ReposCheckImmutableReleases.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ReposCheckImmutableReleases.Input.Path,
+                headers: Operations.ReposCheckImmutableReleases.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.CheckImmutableReleases)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.CheckImmutableReleases {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ReposCheckImmutableReleases.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ReposCheckImmutableReleases.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response if immutable releases are enabled
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/get(repos/check-immutable-releases)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ReposCheckImmutableReleases.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ReposCheckImmutableReleases.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct NotFound: Sendable, Hashable {
+                /// Creates a new `NotFound`.
+                public init() {}
+            }
+            /// Not Found if immutable releases are not enabled for the repository
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/get(repos/check-immutable-releases)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Operations.ReposCheckImmutableReleases.Output.NotFound)
+            /// Not Found if immutable releases are not enabled for the repository
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/get(repos/check-immutable-releases)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            public static var notFound: Self {
+                .notFound(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Operations.ReposCheckImmutableReleases.Output.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Enable immutable releases
+    ///
+    /// Enables immutable releases for a repository. The authenticated user must have admin access to the repository.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/put(repos/enable-immutable-releases)`.
+    public enum ReposEnableImmutableReleases {
+        public static let id: Swift.String = "repos/enable-immutable-releases"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/PUT/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/PUT/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ReposEnableImmutableReleases.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposEnableImmutableReleases.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposEnableImmutableReleases.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ReposEnableImmutableReleases.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ReposEnableImmutableReleases.Input.Path,
+                headers: Operations.ReposEnableImmutableReleases.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/put(repos/enable-immutable-releases)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Components.Responses.NoContent)
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/put(repos/enable-immutable-releases)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Components.Responses.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Conflict
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/put(repos/enable-immutable-releases)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Disable immutable releases
+    ///
+    /// Disables immutable releases for a repository. The authenticated user must have admin access to the repository.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/delete(repos/disable-immutable-releases)`.
+    public enum ReposDisableImmutableReleases {
+        public static let id: Swift.String = "repos/disable-immutable-releases"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/DELETE/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/DELETE/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ReposDisableImmutableReleases.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/immutable-releases/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposDisableImmutableReleases.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposDisableImmutableReleases.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ReposDisableImmutableReleases.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ReposDisableImmutableReleases.Input.Path,
+                headers: Operations.ReposDisableImmutableReleases.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/delete(repos/disable-immutable-releases)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Components.Responses.NoContent)
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/delete(repos/disable-immutable-releases)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Components.Responses.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Conflict
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/delete(repos/disable-immutable-releases)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
                             response: self
                         )
                     }

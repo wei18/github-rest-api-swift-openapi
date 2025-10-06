@@ -12245,6 +12245,208 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// Check if immutable releases are enabled for a repository
+    ///
+    /// Shows whether immutable releases are enabled or disabled. Also identifies whether immutability is being
+    /// enforced by the repository owner.  The authenticated user must have admin read access to the repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/get(repos/check-immutable-releases)`.
+    public func reposCheckImmutableReleases(_ input: Operations.ReposCheckImmutableReleases.Input) async throws -> Operations.ReposCheckImmutableReleases.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ReposCheckImmutableReleases.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/repos/{}/{}/immutable-releases",
+                    parameters: [
+                        input.path.owner,
+                        input.path.repo
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.ReposCheckImmutableReleases.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.CheckImmutableReleases.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                case 404:
+                    return .notFound(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Enable immutable releases
+    ///
+    /// Enables immutable releases for a repository. The authenticated user must have admin access to the repository.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/put(repos/enable-immutable-releases)`.
+    public func reposEnableImmutableReleases(_ input: Operations.ReposEnableImmutableReleases.Input) async throws -> Operations.ReposEnableImmutableReleases.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ReposEnableImmutableReleases.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/repos/{}/{}/immutable-releases",
+                    parameters: [
+                        input.path.owner,
+                        input.path.repo
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .put
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                case 409:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Conflict.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .conflict(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Disable immutable releases
+    ///
+    /// Disables immutable releases for a repository. The authenticated user must have admin access to the repository.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/immutable-releases`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/immutable-releases/delete(repos/disable-immutable-releases)`.
+    public func reposDisableImmutableReleases(_ input: Operations.ReposDisableImmutableReleases.Input) async throws -> Operations.ReposDisableImmutableReleases.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ReposDisableImmutableReleases.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/repos/{}/{}/immutable-releases",
+                    parameters: [
+                        input.path.owner,
+                        input.path.repo
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .delete
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                case 409:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Conflict.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .conflict(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// List repository invitations
     ///
     /// When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.

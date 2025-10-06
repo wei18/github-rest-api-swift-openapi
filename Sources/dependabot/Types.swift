@@ -4322,6 +4322,57 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-artifact-registry`.
         public typealias DependabotAlertCommaSeparatedArtifactRegistry = Swift.String
+        /// Filters the list of alerts based on whether the alert has the given value. If specified, only alerts meeting this criterion will be returned.
+        /// Multiple `has` filters can be passed to filter for alerts that have all of the values.
+        ///
+        /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has`.
+        @frozen public enum DependabotAlertOrgScopeCommaSeparatedHas: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has/case1`.
+            case case1(Swift.String)
+            /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has/Case2Payload`.
+            @frozen public enum Case2PayloadPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case patch = "patch"
+                case deployment = "deployment"
+            }
+            /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has/case2`.
+            public typealias Case2Payload = [Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas.Case2PayloadPayload]
+            /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has/case2`.
+            case case2(Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas.Case2Payload)
+            public init(from decoder: any Decoder) throws {
+                var errors: [any Error] = []
+                do {
+                    self = .case1(try decoder.decodeFromSingleValueContainer())
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .case2(try decoder.decodeFromSingleValueContainer())
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                    type: Self.self,
+                    codingPath: decoder.codingPath,
+                    errors: errors
+                )
+            }
+            public func encode(to encoder: any Encoder) throws {
+                switch self {
+                case let .case1(value):
+                    try encoder.encodeToSingleValueContainer(value)
+                case let .case2(value):
+                    try encoder.encodeToSingleValueContainer(value)
+                }
+            }
+        }
+        /// A comma-separated list of runtime risk strings. If specified, only alerts for repositories with deployment records matching these risks will be returned.
+        ///
+        /// Can be: `critical-resource`, `internet-exposed`, `sensitive-data`, `lateral-movement`
+        ///
+        /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-runtime-risk`.
+        public typealias DependabotAlertCommaSeparatedRuntimeRisk = Swift.String
         /// A comma-separated list of full manifest paths. If specified, only alerts for these manifests will be returned.
         ///
         /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-manifests`.
@@ -5631,18 +5682,19 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/artifact_registry`.
                 public var artifactRegistry: Components.Parameters.DependabotAlertCommaSeparatedArtifactRegistry?
-                /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-has`.
-                @frozen public enum DependabotAlertCommaSeparatedHas: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-has/case1`.
+                /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has`.
+                @frozen public enum DependabotAlertOrgScopeCommaSeparatedHas: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has/case1`.
                     case case1(Swift.String)
-                    /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-has/Case2Payload`.
+                    /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has/Case2Payload`.
                     @frozen public enum Case2PayloadPayload: String, Codable, Hashable, Sendable, CaseIterable {
                         case patch = "patch"
+                        case deployment = "deployment"
                     }
-                    /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-has/case2`.
-                    public typealias Case2Payload = [Components.Parameters.DependabotAlertCommaSeparatedHas.Case2PayloadPayload]
-                    /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-has/case2`.
-                    case case2(Components.Parameters.DependabotAlertCommaSeparatedHas.Case2Payload)
+                    /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has/case2`.
+                    public typealias Case2Payload = [Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas.Case2PayloadPayload]
+                    /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has/case2`.
+                    case case2(Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas.Case2Payload)
                     public init(from decoder: any Decoder) throws {
                         var errors: [any Error] = []
                         do {
@@ -5673,10 +5725,16 @@ public enum Operations {
                     }
                 }
                 /// Filters the list of alerts based on whether the alert has the given value. If specified, only alerts meeting this criterion will be returned.
-                /// Multiple `has` filters can be passed to filter for alerts that have all of the values. Currently, only `patch` is supported.
+                /// Multiple `has` filters can be passed to filter for alerts that have all of the values.
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/has`.
-                public var has: Components.Parameters.DependabotAlertCommaSeparatedHas?
+                public var has: Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas?
+                /// A comma-separated list of runtime risk strings. If specified, only alerts for repositories with deployment records matching these risks will be returned.
+                ///
+                /// Can be: `critical-resource`, `internet-exposed`, `sensitive-data`, `lateral-movement`
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/runtime_risk`.
+                public var runtimeRisk: Components.Parameters.DependabotAlertCommaSeparatedRuntimeRisk?
                 /// - Remark: Generated from `#/components/parameters/dependabot-alert-scope`.
                 @frozen public enum DependabotAlertScope: String, Codable, Hashable, Sendable, CaseIterable {
                     case development = "development"
@@ -5743,6 +5801,7 @@ public enum Operations {
                 ///   - artifactRegistryUrl: A comma-separated list of artifact registry URLs. If specified, only alerts for repositories with storage records matching these URLs will be returned.
                 ///   - artifactRegistry: A comma-separated list of Artifact Registry name strings. If specified, only alerts for repositories with storage records matching these registries will be returned.
                 ///   - has: Filters the list of alerts based on whether the alert has the given value. If specified, only alerts meeting this criterion will be returned.
+                ///   - runtimeRisk: A comma-separated list of runtime risk strings. If specified, only alerts for repositories with deployment records matching these risks will be returned.
                 ///   - scope: The scope of the vulnerable dependency. If specified, only alerts with this scope will be returned.
                 ///   - sort: The property by which to sort the results.
                 ///   - direction: The direction to sort the results by.
@@ -5759,7 +5818,8 @@ public enum Operations {
                     epssPercentage: Components.Parameters.DependabotAlertCommaSeparatedEpss? = nil,
                     artifactRegistryUrl: Components.Parameters.DependabotAlertCommaSeparatedArtifactRegistryUrls? = nil,
                     artifactRegistry: Components.Parameters.DependabotAlertCommaSeparatedArtifactRegistry? = nil,
-                    has: Components.Parameters.DependabotAlertCommaSeparatedHas? = nil,
+                    has: Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas? = nil,
+                    runtimeRisk: Components.Parameters.DependabotAlertCommaSeparatedRuntimeRisk? = nil,
                     scope: Components.Parameters.DependabotAlertScope? = nil,
                     sort: Components.Parameters.DependabotAlertSort? = nil,
                     direction: Components.Parameters.Direction? = nil,
@@ -5777,6 +5837,7 @@ public enum Operations {
                     self.artifactRegistryUrl = artifactRegistryUrl
                     self.artifactRegistry = artifactRegistry
                     self.has = has
+                    self.runtimeRisk = runtimeRisk
                     self.scope = scope
                     self.sort = sort
                     self.direction = direction
@@ -6582,22 +6643,73 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/secrets/{secret_name}/PUT/requestBody/json/visibility`.
                     public var visibility: Operations.DependabotCreateOrUpdateOrgSecret.Input.Body.JsonPayload.VisibilityPayload
-                    /// An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/dependabot/secrets#remove-selected-repository-from-an-organization-secret) endpoints.
+                    /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/secrets/{secret_name}/PUT/requestBody/json/SelectedRepositoryIdsPayload`.
+                    public struct SelectedRepositoryIdsPayloadPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/secrets/{secret_name}/PUT/requestBody/json/SelectedRepositoryIdsPayload/value1`.
+                        public var value1: Swift.Int?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/secrets/{secret_name}/PUT/requestBody/json/SelectedRepositoryIdsPayload/value2`.
+                        public var value2: Swift.String?
+                        /// Creates a new `SelectedRepositoryIdsPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - value1:
+                        ///   - value2:
+                        public init(
+                            value1: Swift.Int? = nil,
+                            value2: Swift.String? = nil
+                        ) {
+                            self.value1 = value1
+                            self.value2 = value2
+                        }
+                        public init(from decoder: any Decoder) throws {
+                            var errors: [any Error] = []
+                            do {
+                                self.value1 = try decoder.decodeFromSingleValueContainer()
+                            } catch {
+                                errors.append(error)
+                            }
+                            do {
+                                self.value2 = try decoder.decodeFromSingleValueContainer()
+                            } catch {
+                                errors.append(error)
+                            }
+                            try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
+                                [
+                                    self.value1,
+                                    self.value2
+                                ],
+                                type: Self.self,
+                                codingPath: decoder.codingPath,
+                                errors: errors
+                            )
+                        }
+                        public func encode(to encoder: any Encoder) throws {
+                            try encoder.encodeFirstNonNilValueToSingleValueContainer([
+                                self.value1,
+                                self.value2
+                            ])
+                        }
+                    }
+                    /// An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/dependabot/secrets#remove-selected-repository-from-an-organization-secret) endpoints. Use integers when possible, as strings are supported only to maintain backwards compatibility and may be removed in the future.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/secrets/{secret_name}/PUT/requestBody/json/selected_repository_ids`.
-                    public var selectedRepositoryIds: [Swift.String]?
+                    public typealias SelectedRepositoryIdsPayload = [Operations.DependabotCreateOrUpdateOrgSecret.Input.Body.JsonPayload.SelectedRepositoryIdsPayloadPayload]
+                    /// An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/dependabot/secrets#remove-selected-repository-from-an-organization-secret) endpoints. Use integers when possible, as strings are supported only to maintain backwards compatibility and may be removed in the future.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/secrets/{secret_name}/PUT/requestBody/json/selected_repository_ids`.
+                    public var selectedRepositoryIds: Operations.DependabotCreateOrUpdateOrgSecret.Input.Body.JsonPayload.SelectedRepositoryIdsPayload?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - encryptedValue: Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get an organization public key](https://docs.github.com/rest/dependabot/secrets#get-an-organization-public-key) endpoint.
                     ///   - keyId: ID of the key you used to encrypt the secret.
                     ///   - visibility: Which type of organization repositories have access to the organization secret. `selected` means only the repositories specified by `selected_repository_ids` can access the secret.
-                    ///   - selectedRepositoryIds: An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/dependabot/secrets#remove-selected-repository-from-an-organization-secret) endpoints.
+                    ///   - selectedRepositoryIds: An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/dependabot/secrets#remove-selected-repository-from-an-organization-secret) endpoints. Use integers when possible, as strings are supported only to maintain backwards compatibility and may be removed in the future.
                     public init(
                         encryptedValue: Swift.String? = nil,
                         keyId: Swift.String? = nil,
                         visibility: Operations.DependabotCreateOrUpdateOrgSecret.Input.Body.JsonPayload.VisibilityPayload,
-                        selectedRepositoryIds: [Swift.String]? = nil
+                        selectedRepositoryIds: Operations.DependabotCreateOrUpdateOrgSecret.Input.Body.JsonPayload.SelectedRepositoryIdsPayload? = nil
                     ) {
                         self.encryptedValue = encryptedValue
                         self.keyId = keyId
