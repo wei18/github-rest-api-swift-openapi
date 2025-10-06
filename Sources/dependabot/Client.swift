@@ -697,6 +697,13 @@ public struct Client: APIProtocol {
                     in: &request,
                     style: .form,
                     explode: true,
+                    name: "runtime_risk",
+                    value: input.query.runtimeRisk
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
                     name: "scope",
                     value: input.query.scope
                 )
