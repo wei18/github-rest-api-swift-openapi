@@ -972,6 +972,163 @@ public enum Components {
                 case installationsCount = "installations_count"
             }
         }
+        /// - Remark: Generated from `#/components/schemas/pull-request-minimal`.
+        public struct PullRequestMinimal: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/number`.
+            public var number: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public struct HeadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                /// Creates a new `HeadPayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public var head: Components.Schemas.PullRequestMinimal.HeadPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public var base: Components.Schemas.PullRequestMinimal.BasePayload
+            /// Creates a new `PullRequestMinimal`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - number:
+            ///   - url:
+            ///   - head:
+            ///   - base:
+            public init(
+                id: Swift.Int64,
+                number: Swift.Int,
+                url: Swift.String,
+                head: Components.Schemas.PullRequestMinimal.HeadPayload,
+                base: Components.Schemas.PullRequestMinimal.BasePayload
+            ) {
+                self.id = id
+                self.number = number
+                self.url = url
+                self.head = head
+                self.base = base
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case number
+                case url
+                case head
+                case base
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
         public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
             /// Enable or disable GitHub Advanced Security for the repository.
@@ -1838,163 +1995,6 @@ public enum Components {
             public init() {}
             public init(from decoder: any Decoder) throws {
                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
-            }
-        }
-        /// - Remark: Generated from `#/components/schemas/pull-request-minimal`.
-        public struct PullRequestMinimal: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/id`.
-            public var id: Swift.Int64
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/number`.
-            public var number: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/url`.
-            public var url: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
-            public struct HeadPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/ref`.
-                public var ref: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/sha`.
-                public var sha: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
-                public struct RepoPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/id`.
-                    public var id: Swift.Int64
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/url`.
-                    public var url: Swift.String
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/name`.
-                    public var name: Swift.String
-                    /// Creates a new `RepoPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - id:
-                    ///   - url:
-                    ///   - name:
-                    public init(
-                        id: Swift.Int64,
-                        url: Swift.String,
-                        name: Swift.String
-                    ) {
-                        self.id = id
-                        self.url = url
-                        self.name = name
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case id
-                        case url
-                        case name
-                    }
-                }
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
-                public var repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
-                /// Creates a new `HeadPayload`.
-                ///
-                /// - Parameters:
-                ///   - ref:
-                ///   - sha:
-                ///   - repo:
-                public init(
-                    ref: Swift.String,
-                    sha: Swift.String,
-                    repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
-                ) {
-                    self.ref = ref
-                    self.sha = sha
-                    self.repo = repo
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case ref
-                    case sha
-                    case repo
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
-            public var head: Components.Schemas.PullRequestMinimal.HeadPayload
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
-            public struct BasePayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/ref`.
-                public var ref: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/sha`.
-                public var sha: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
-                public struct RepoPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/id`.
-                    public var id: Swift.Int64
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/url`.
-                    public var url: Swift.String
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/name`.
-                    public var name: Swift.String
-                    /// Creates a new `RepoPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - id:
-                    ///   - url:
-                    ///   - name:
-                    public init(
-                        id: Swift.Int64,
-                        url: Swift.String,
-                        name: Swift.String
-                    ) {
-                        self.id = id
-                        self.url = url
-                        self.name = name
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case id
-                        case url
-                        case name
-                    }
-                }
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
-                public var repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
-                /// Creates a new `BasePayload`.
-                ///
-                /// - Parameters:
-                ///   - ref:
-                ///   - sha:
-                ///   - repo:
-                public init(
-                    ref: Swift.String,
-                    sha: Swift.String,
-                    repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
-                ) {
-                    self.ref = ref
-                    self.sha = sha
-                    self.repo = repo
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case ref
-                    case sha
-                    case repo
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
-            public var base: Components.Schemas.PullRequestMinimal.BasePayload
-            /// Creates a new `PullRequestMinimal`.
-            ///
-            /// - Parameters:
-            ///   - id:
-            ///   - number:
-            ///   - url:
-            ///   - head:
-            ///   - base:
-            public init(
-                id: Swift.Int64,
-                number: Swift.Int,
-                url: Swift.String,
-                head: Components.Schemas.PullRequestMinimal.HeadPayload,
-                base: Components.Schemas.PullRequestMinimal.BasePayload
-            ) {
-                self.id = id
-                self.number = number
-                self.url = url
-                self.head = head
-                self.base = base
-            }
-            public enum CodingKeys: String, CodingKey {
-                case id
-                case number
-                case url
-                case head
-                case base
             }
         }
         /// A deployment created as the result of an Actions check run from a workflow that references an environment
