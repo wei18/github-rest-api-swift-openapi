@@ -3245,6 +3245,73 @@ public enum Components {
                 case codeSearchIndexStatus = "code_search_index_status"
             }
         }
+        /// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
+        ///
+        /// - Remark: Generated from `#/components/schemas/label`.
+        public struct Label: Codable, Hashable, Sendable {
+            /// Unique identifier for the label.
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/label/node_id`.
+            public var nodeId: Swift.String
+            /// URL for the label
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/url`.
+            public var url: Swift.String
+            /// The name of the label.
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/name`.
+            public var name: Swift.String
+            /// Optional description of the label, such as its purpose.
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/description`.
+            public var description: Swift.String?
+            /// 6-character hex code, without the leading #, identifying the color
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/color`.
+            public var color: Swift.String
+            /// Whether this label comes by default in a new repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/default`.
+            public var _default: Swift.Bool
+            /// Creates a new `Label`.
+            ///
+            /// - Parameters:
+            ///   - id: Unique identifier for the label.
+            ///   - nodeId:
+            ///   - url: URL for the label
+            ///   - name: The name of the label.
+            ///   - description: Optional description of the label, such as its purpose.
+            ///   - color: 6-character hex code, without the leading #, identifying the color
+            ///   - _default: Whether this label comes by default in a new repository.
+            public init(
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                url: Swift.String,
+                name: Swift.String,
+                description: Swift.String? = nil,
+                color: Swift.String,
+                _default: Swift.Bool
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.name = name
+                self.description = description
+                self.color = color
+                self._default = _default
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case name
+                case description
+                case color
+                case _default = "default"
+            }
+        }
         /// A collection of related issues and pull requests.
         ///
         /// - Remark: Generated from `#/components/schemas/nullable-milestone`.
@@ -4447,7 +4514,7 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/issue-comment/issue_url`.
             public var issueUrl: Swift.String
             /// - Remark: Generated from `#/components/schemas/issue-comment/author_association`.
-            public var authorAssociation: Components.Schemas.AuthorAssociation
+            public var authorAssociation: Components.Schemas.AuthorAssociation?
             /// - Remark: Generated from `#/components/schemas/issue-comment/performed_via_github_app`.
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/issue-comment/reactions`.
@@ -4481,7 +4548,7 @@ public enum Components {
                 createdAt: Foundation.Date,
                 updatedAt: Foundation.Date,
                 issueUrl: Swift.String,
-                authorAssociation: Components.Schemas.AuthorAssociation,
+                authorAssociation: Components.Schemas.AuthorAssociation? = nil,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
                 reactions: Components.Schemas.ReactionRollup? = nil
             ) {
@@ -7276,73 +7343,6 @@ public enum Components {
                 try self.value13?.encode(to: encoder)
                 try self.value14?.encode(to: encoder)
                 try self.value15?.encode(to: encoder)
-            }
-        }
-        /// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
-        ///
-        /// - Remark: Generated from `#/components/schemas/label`.
-        public struct Label: Codable, Hashable, Sendable {
-            /// Unique identifier for the label.
-            ///
-            /// - Remark: Generated from `#/components/schemas/label/id`.
-            public var id: Swift.Int64
-            /// - Remark: Generated from `#/components/schemas/label/node_id`.
-            public var nodeId: Swift.String
-            /// URL for the label
-            ///
-            /// - Remark: Generated from `#/components/schemas/label/url`.
-            public var url: Swift.String
-            /// The name of the label.
-            ///
-            /// - Remark: Generated from `#/components/schemas/label/name`.
-            public var name: Swift.String
-            /// Optional description of the label, such as its purpose.
-            ///
-            /// - Remark: Generated from `#/components/schemas/label/description`.
-            public var description: Swift.String?
-            /// 6-character hex code, without the leading #, identifying the color
-            ///
-            /// - Remark: Generated from `#/components/schemas/label/color`.
-            public var color: Swift.String
-            /// Whether this label comes by default in a new repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/label/default`.
-            public var _default: Swift.Bool
-            /// Creates a new `Label`.
-            ///
-            /// - Parameters:
-            ///   - id: Unique identifier for the label.
-            ///   - nodeId:
-            ///   - url: URL for the label
-            ///   - name: The name of the label.
-            ///   - description: Optional description of the label, such as its purpose.
-            ///   - color: 6-character hex code, without the leading #, identifying the color
-            ///   - _default: Whether this label comes by default in a new repository.
-            public init(
-                id: Swift.Int64,
-                nodeId: Swift.String,
-                url: Swift.String,
-                name: Swift.String,
-                description: Swift.String? = nil,
-                color: Swift.String,
-                _default: Swift.Bool
-            ) {
-                self.id = id
-                self.nodeId = nodeId
-                self.url = url
-                self.name = name
-                self.description = description
-                self.color = color
-                self._default = _default
-            }
-            public enum CodingKeys: String, CodingKey {
-                case id
-                case nodeId = "node_id"
-                case url
-                case name
-                case description
-                case color
-                case _default = "default"
             }
         }
         /// Timeline Comment Event
