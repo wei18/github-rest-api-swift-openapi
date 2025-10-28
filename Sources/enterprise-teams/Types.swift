@@ -620,6 +620,26 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/sync_to_organizations`.
                     public var syncToOrganizations: Operations.EnterpriseTeamsCreate.Input.Body.JsonPayload.SyncToOrganizationsPayload?
+                    /// Specifies which organizations in the enterprise should have access to this team. Can be one of `disabled`, `selected`, or `all`.
+                    /// `disabled`: The team is not assigned to any organizations. This is the default when you create a new team.
+                    /// `selected`: The team is assigned to specific organizations. You can then use the [add organization assignments API](https://docs.github.com/rest/enterprise-teams/enterprise-team-organizations#add-organization-assignments) endpoint.
+                    /// `all`: The team is assigned to all current and future organizations in the enterprise.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/organization_selection_type`.
+                    @frozen public enum OrganizationSelectionTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case disabled = "disabled"
+                        case selected = "selected"
+                        case all = "all"
+                    }
+                    /// Specifies which organizations in the enterprise should have access to this team. Can be one of `disabled`, `selected`, or `all`.
+                    /// `disabled`: The team is not assigned to any organizations. This is the default when you create a new team.
+                    /// `selected`: The team is assigned to specific organizations. You can then use the [add organization assignments API](https://docs.github.com/rest/enterprise-teams/enterprise-team-organizations#add-organization-assignments) endpoint.
+                    /// `all`: The team is assigned to all current and future organizations in the enterprise.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/organization_selection_type`.
+                    public var organizationSelectionType: Operations.EnterpriseTeamsCreate.Input.Body.JsonPayload.OrganizationSelectionTypePayload?
                     /// The ID of the IdP group to assign team membership with. You can get this value from the [REST API endpoints for SCIM](https://docs.github.com/rest/scim#list-provisioned-scim-groups-for-an-enterprise).
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/group_id`.
@@ -630,22 +650,26 @@ public enum Operations {
                     ///   - name: The name of the team.
                     ///   - description: A description of the team.
                     ///   - syncToOrganizations: Retired: this field is no longer supported.
+                    ///   - organizationSelectionType: Specifies which organizations in the enterprise should have access to this team. Can be one of `disabled`, `selected`, or `all`.
                     ///   - groupId: The ID of the IdP group to assign team membership with. You can get this value from the [REST API endpoints for SCIM](https://docs.github.com/rest/scim#list-provisioned-scim-groups-for-an-enterprise).
                     public init(
                         name: Swift.String,
                         description: Swift.String? = nil,
                         syncToOrganizations: Operations.EnterpriseTeamsCreate.Input.Body.JsonPayload.SyncToOrganizationsPayload? = nil,
+                        organizationSelectionType: Operations.EnterpriseTeamsCreate.Input.Body.JsonPayload.OrganizationSelectionTypePayload? = nil,
                         groupId: Swift.String? = nil
                     ) {
                         self.name = name
                         self.description = description
                         self.syncToOrganizations = syncToOrganizations
+                        self.organizationSelectionType = organizationSelectionType
                         self.groupId = groupId
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
                         case description
                         case syncToOrganizations = "sync_to_organizations"
+                        case organizationSelectionType = "organization_selection_type"
                         case groupId = "group_id"
                     }
                 }
@@ -1009,6 +1033,26 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/sync_to_organizations`.
                     public var syncToOrganizations: Operations.EnterpriseTeamsUpdate.Input.Body.JsonPayload.SyncToOrganizationsPayload?
+                    /// Specifies which organizations in the enterprise should have access to this team. Can be one of `disabled`, `selected`, or `all`.
+                    /// `disabled`: The team is not assigned to any organizations. This is the default when you create a new team.
+                    /// `selected`: The team is assigned to specific organizations. You can then use the [add organization assignments API](https://docs.github.com/rest/enterprise-teams/enterprise-team-organizations#add-organization-assignments).
+                    /// `all`: The team is assigned to all current and future organizations in the enterprise.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/organization_selection_type`.
+                    @frozen public enum OrganizationSelectionTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case disabled = "disabled"
+                        case selected = "selected"
+                        case all = "all"
+                    }
+                    /// Specifies which organizations in the enterprise should have access to this team. Can be one of `disabled`, `selected`, or `all`.
+                    /// `disabled`: The team is not assigned to any organizations. This is the default when you create a new team.
+                    /// `selected`: The team is assigned to specific organizations. You can then use the [add organization assignments API](https://docs.github.com/rest/enterprise-teams/enterprise-team-organizations#add-organization-assignments).
+                    /// `all`: The team is assigned to all current and future organizations in the enterprise.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/organization_selection_type`.
+                    public var organizationSelectionType: Operations.EnterpriseTeamsUpdate.Input.Body.JsonPayload.OrganizationSelectionTypePayload?
                     /// The ID of the IdP group to assign team membership with. The new IdP group will replace the existing one, or replace existing direct members if the team isn't currently linked to an IdP group.
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/group_id`.
@@ -1019,22 +1063,26 @@ public enum Operations {
                     ///   - name: A new name for the team.
                     ///   - description: A new description for the team.
                     ///   - syncToOrganizations: Retired: this field is no longer supported.
+                    ///   - organizationSelectionType: Specifies which organizations in the enterprise should have access to this team. Can be one of `disabled`, `selected`, or `all`.
                     ///   - groupId: The ID of the IdP group to assign team membership with. The new IdP group will replace the existing one, or replace existing direct members if the team isn't currently linked to an IdP group.
                     public init(
                         name: Swift.String? = nil,
                         description: Swift.String? = nil,
                         syncToOrganizations: Operations.EnterpriseTeamsUpdate.Input.Body.JsonPayload.SyncToOrganizationsPayload? = nil,
+                        organizationSelectionType: Operations.EnterpriseTeamsUpdate.Input.Body.JsonPayload.OrganizationSelectionTypePayload? = nil,
                         groupId: Swift.String? = nil
                     ) {
                         self.name = name
                         self.description = description
                         self.syncToOrganizations = syncToOrganizations
+                        self.organizationSelectionType = organizationSelectionType
                         self.groupId = groupId
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
                         case description
                         case syncToOrganizations = "sync_to_organizations"
+                        case organizationSelectionType = "organization_selection_type"
                         case groupId = "group_id"
                     }
                 }
