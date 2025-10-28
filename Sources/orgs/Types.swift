@@ -21,6 +21,35 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /organizations`.
     /// - Remark: Generated from `#/paths//organizations/get(orgs/list)`.
     func orgsList(_ input: Operations.OrgsList.Input) async throws -> Operations.OrgsList.Output
+    /// Get all custom property values for an organization
+    ///
+    /// Gets all custom property values that are set for an organization.
+    ///
+    /// The organization must belong to an enterprise.
+    ///
+    /// Access requirements:
+    /// - Organization admins
+    /// - OAuth tokens and personal access tokens (classic) with the `read:org` scope
+    /// - Actors with the organization-level "read custom properties for an organization" fine-grained permission or above
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/org-properties/values`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)`.
+    func orgsCustomPropertiesForOrgsGetOrganizationValues(_ input: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input) async throws -> Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output
+    /// Create or update custom property values for an organization
+    ///
+    /// Create new or update existing custom property values for an organization.
+    /// To remove a custom property value from an organization, set the property value to `null`.
+    ///
+    /// The organization must belong to an enterprise.
+    ///
+    /// Access requirements:
+    /// - Organization admins
+    /// - OAuth tokens and personal access tokens (classic) with the `admin:org` scope
+    /// - Actors with the organization-level "edit custom properties for an organization" fine-grained permission
+    ///
+    /// - Remark: HTTP `PATCH /organizations/{org}/org-properties/values`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)`.
+    func orgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues(_ input: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input) async throws -> Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Output
     /// Get an organization
     ///
     /// Gets information about an organization.
@@ -109,6 +138,14 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `DELETE /orgs/{org}/attestations/digest/{subject_digest}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/attestations/digest/{subject_digest}/delete(orgs/delete-attestations-by-subject-digest)`.
     func orgsDeleteAttestationsBySubjectDigest(_ input: Operations.OrgsDeleteAttestationsBySubjectDigest.Input) async throws -> Operations.OrgsDeleteAttestationsBySubjectDigest.Output
+    /// List attestation repositories
+    ///
+    /// List repositories owned by the provided organization that have created at least one attested artifact
+    /// Results will be sorted in ascending order by repository ID
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/attestations/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/attestations/repositories/get(orgs/list-attestation-repositories)`.
+    func orgsListAttestationRepositories(_ input: Operations.OrgsListAttestationRepositories.Input) async throws -> Operations.OrgsListAttestationRepositories.Output
     /// Delete attestations by ID
     ///
     /// Delete an artifact attestation by unique ID that is associated with a repository owned by an org.
@@ -1002,6 +1039,53 @@ extension APIProtocol {
             headers: headers
         ))
     }
+    /// Get all custom property values for an organization
+    ///
+    /// Gets all custom property values that are set for an organization.
+    ///
+    /// The organization must belong to an enterprise.
+    ///
+    /// Access requirements:
+    /// - Organization admins
+    /// - OAuth tokens and personal access tokens (classic) with the `read:org` scope
+    /// - Actors with the organization-level "read custom properties for an organization" fine-grained permission or above
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/org-properties/values`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)`.
+    public func orgsCustomPropertiesForOrgsGetOrganizationValues(
+        path: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Path,
+        headers: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Headers = .init()
+    ) async throws -> Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output {
+        try await orgsCustomPropertiesForOrgsGetOrganizationValues(Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Create or update custom property values for an organization
+    ///
+    /// Create new or update existing custom property values for an organization.
+    /// To remove a custom property value from an organization, set the property value to `null`.
+    ///
+    /// The organization must belong to an enterprise.
+    ///
+    /// Access requirements:
+    /// - Organization admins
+    /// - OAuth tokens and personal access tokens (classic) with the `admin:org` scope
+    /// - Actors with the organization-level "edit custom properties for an organization" fine-grained permission
+    ///
+    /// - Remark: HTTP `PATCH /organizations/{org}/org-properties/values`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)`.
+    public func orgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues(
+        path: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Path,
+        headers: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Headers = .init(),
+        body: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Body
+    ) async throws -> Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Output {
+        try await orgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues(Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
     /// Get an organization
     ///
     /// Gets information about an organization.
@@ -1161,6 +1245,24 @@ extension APIProtocol {
     ) async throws -> Operations.OrgsDeleteAttestationsBySubjectDigest.Output {
         try await orgsDeleteAttestationsBySubjectDigest(Operations.OrgsDeleteAttestationsBySubjectDigest.Input(
             path: path,
+            headers: headers
+        ))
+    }
+    /// List attestation repositories
+    ///
+    /// List repositories owned by the provided organization that have created at least one attested artifact
+    /// Results will be sorted in ascending order by repository ID
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/attestations/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/attestations/repositories/get(orgs/list-attestation-repositories)`.
+    public func orgsListAttestationRepositories(
+        path: Operations.OrgsListAttestationRepositories.Input.Path,
+        query: Operations.OrgsListAttestationRepositories.Input.Query = .init(),
+        headers: Operations.OrgsListAttestationRepositories.Input.Headers = .init()
+    ) async throws -> Operations.OrgsListAttestationRepositories.Output {
+        try await orgsListAttestationRepositories(Operations.OrgsListAttestationRepositories.Input(
+            path: path,
+            query: query,
             headers: headers
         ))
     }
@@ -3961,6 +4063,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/workflows`.
             public var workflows: Components.Schemas.AppPermissions.WorkflowsPayload?
+            /// The level of permission to grant the access token to view and edit custom properties for an organization, when allowed by the property.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/custom_properties_for_organizations`.
+            @frozen public enum CustomPropertiesForOrganizationsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to grant the access token to view and edit custom properties for an organization, when allowed by the property.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/custom_properties_for_organizations`.
+            public var customPropertiesForOrganizations: Components.Schemas.AppPermissions.CustomPropertiesForOrganizationsPayload?
             /// The level of permission to grant the access token for organization teams and members.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/members`.
@@ -4234,6 +4347,18 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/starring`.
             public var starring: Components.Schemas.AppPermissions.StarringPayload?
+            /// The level of permission to grant the access token for organization custom properties management at the enterprise level.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/enterprise_custom_properties_for_organizations`.
+            @frozen public enum EnterpriseCustomPropertiesForOrganizationsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+                case admin = "admin"
+            }
+            /// The level of permission to grant the access token for organization custom properties management at the enterprise level.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/enterprise_custom_properties_for_organizations`.
+            public var enterpriseCustomPropertiesForOrganizations: Components.Schemas.AppPermissions.EnterpriseCustomPropertiesForOrganizationsPayload?
             /// Creates a new `AppPermissions`.
             ///
             /// - Parameters:
@@ -4260,6 +4385,7 @@ public enum Components {
             ///   - statuses: The level of permission to grant the access token for commit statuses.
             ///   - vulnerabilityAlerts: The level of permission to grant the access token to manage Dependabot alerts.
             ///   - workflows: The level of permission to grant the access token to update GitHub Actions workflow files.
+            ///   - customPropertiesForOrganizations: The level of permission to grant the access token to view and edit custom properties for an organization, when allowed by the property.
             ///   - members: The level of permission to grant the access token for organization teams and members.
             ///   - organizationAdministration: The level of permission to grant the access token to manage access to an organization.
             ///   - organizationCustomRoles: The level of permission to grant the access token for custom repository roles management.
@@ -4285,6 +4411,7 @@ public enum Components {
             ///   - interactionLimits: The level of permission to grant the access token to view and manage interaction limits on a repository.
             ///   - profile: The level of permission to grant the access token to manage the profile settings belonging to a user.
             ///   - starring: The level of permission to grant the access token to list and manage repositories a user is starring.
+            ///   - enterpriseCustomPropertiesForOrganizations: The level of permission to grant the access token for organization custom properties management at the enterprise level.
             public init(
                 actions: Components.Schemas.AppPermissions.ActionsPayload? = nil,
                 administration: Components.Schemas.AppPermissions.AdministrationPayload? = nil,
@@ -4309,6 +4436,7 @@ public enum Components {
                 statuses: Components.Schemas.AppPermissions.StatusesPayload? = nil,
                 vulnerabilityAlerts: Components.Schemas.AppPermissions.VulnerabilityAlertsPayload? = nil,
                 workflows: Components.Schemas.AppPermissions.WorkflowsPayload? = nil,
+                customPropertiesForOrganizations: Components.Schemas.AppPermissions.CustomPropertiesForOrganizationsPayload? = nil,
                 members: Components.Schemas.AppPermissions.MembersPayload? = nil,
                 organizationAdministration: Components.Schemas.AppPermissions.OrganizationAdministrationPayload? = nil,
                 organizationCustomRoles: Components.Schemas.AppPermissions.OrganizationCustomRolesPayload? = nil,
@@ -4333,7 +4461,8 @@ public enum Components {
                 gpgKeys: Components.Schemas.AppPermissions.GpgKeysPayload? = nil,
                 interactionLimits: Components.Schemas.AppPermissions.InteractionLimitsPayload? = nil,
                 profile: Components.Schemas.AppPermissions.ProfilePayload? = nil,
-                starring: Components.Schemas.AppPermissions.StarringPayload? = nil
+                starring: Components.Schemas.AppPermissions.StarringPayload? = nil,
+                enterpriseCustomPropertiesForOrganizations: Components.Schemas.AppPermissions.EnterpriseCustomPropertiesForOrganizationsPayload? = nil
             ) {
                 self.actions = actions
                 self.administration = administration
@@ -4358,6 +4487,7 @@ public enum Components {
                 self.statuses = statuses
                 self.vulnerabilityAlerts = vulnerabilityAlerts
                 self.workflows = workflows
+                self.customPropertiesForOrganizations = customPropertiesForOrganizations
                 self.members = members
                 self.organizationAdministration = organizationAdministration
                 self.organizationCustomRoles = organizationCustomRoles
@@ -4383,6 +4513,7 @@ public enum Components {
                 self.interactionLimits = interactionLimits
                 self.profile = profile
                 self.starring = starring
+                self.enterpriseCustomPropertiesForOrganizations = enterpriseCustomPropertiesForOrganizations
             }
             public enum CodingKeys: String, CodingKey {
                 case actions
@@ -4408,6 +4539,7 @@ public enum Components {
                 case statuses
                 case vulnerabilityAlerts = "vulnerability_alerts"
                 case workflows
+                case customPropertiesForOrganizations = "custom_properties_for_organizations"
                 case members
                 case organizationAdministration = "organization_administration"
                 case organizationCustomRoles = "organization_custom_roles"
@@ -4433,6 +4565,7 @@ public enum Components {
                 case interactionLimits = "interaction_limits"
                 case profile
                 case starring
+                case enterpriseCustomPropertiesForOrganizations = "enterprise_custom_properties_for_organizations"
             }
         }
         /// A GitHub user.
@@ -4818,6 +4951,91 @@ public enum Components {
                 case url
                 case body
                 case htmlUrl = "html_url"
+            }
+        }
+        /// A GitHub organization.
+        ///
+        /// - Remark: Generated from `#/components/schemas/organization-simple`.
+        public struct OrganizationSimple: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/organization-simple/login`.
+            public var login: Swift.String
+            /// - Remark: Generated from `#/components/schemas/organization-simple/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/organization-simple/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/organization-simple/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/organization-simple/repos_url`.
+            public var reposUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/organization-simple/events_url`.
+            public var eventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/organization-simple/hooks_url`.
+            public var hooksUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/organization-simple/issues_url`.
+            public var issuesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/organization-simple/members_url`.
+            public var membersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/organization-simple/public_members_url`.
+            public var publicMembersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/organization-simple/avatar_url`.
+            public var avatarUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/organization-simple/description`.
+            public var description: Swift.String?
+            /// Creates a new `OrganizationSimple`.
+            ///
+            /// - Parameters:
+            ///   - login:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - reposUrl:
+            ///   - eventsUrl:
+            ///   - hooksUrl:
+            ///   - issuesUrl:
+            ///   - membersUrl:
+            ///   - publicMembersUrl:
+            ///   - avatarUrl:
+            ///   - description:
+            public init(
+                login: Swift.String,
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                reposUrl: Swift.String,
+                eventsUrl: Swift.String,
+                hooksUrl: Swift.String,
+                issuesUrl: Swift.String,
+                membersUrl: Swift.String,
+                publicMembersUrl: Swift.String,
+                avatarUrl: Swift.String,
+                description: Swift.String? = nil
+            ) {
+                self.login = login
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.reposUrl = reposUrl
+                self.eventsUrl = eventsUrl
+                self.hooksUrl = hooksUrl
+                self.issuesUrl = issuesUrl
+                self.membersUrl = membersUrl
+                self.publicMembersUrl = publicMembersUrl
+                self.avatarUrl = avatarUrl
+                self.description = description
+            }
+            public enum CodingKeys: String, CodingKey {
+                case login
+                case id
+                case nodeId = "node_id"
+                case url
+                case reposUrl = "repos_url"
+                case eventsUrl = "events_url"
+                case hooksUrl = "hooks_url"
+                case issuesUrl = "issues_url"
+                case membersUrl = "members_url"
+                case publicMembersUrl = "public_members_url"
+                case avatarUrl = "avatar_url"
+                case description
             }
         }
         /// The type of issue.
@@ -5768,89 +5986,70 @@ public enum Components {
                 case customProperties = "custom_properties"
             }
         }
-        /// A GitHub organization.
+        /// Custom property name and associated value
         ///
-        /// - Remark: Generated from `#/components/schemas/organization-simple`.
-        public struct OrganizationSimple: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/organization-simple/login`.
-            public var login: Swift.String
-            /// - Remark: Generated from `#/components/schemas/organization-simple/id`.
-            public var id: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/organization-simple/node_id`.
-            public var nodeId: Swift.String
-            /// - Remark: Generated from `#/components/schemas/organization-simple/url`.
-            public var url: Swift.String
-            /// - Remark: Generated from `#/components/schemas/organization-simple/repos_url`.
-            public var reposUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/organization-simple/events_url`.
-            public var eventsUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/organization-simple/hooks_url`.
-            public var hooksUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/organization-simple/issues_url`.
-            public var issuesUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/organization-simple/members_url`.
-            public var membersUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/organization-simple/public_members_url`.
-            public var publicMembersUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/organization-simple/avatar_url`.
-            public var avatarUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/organization-simple/description`.
-            public var description: Swift.String?
-            /// Creates a new `OrganizationSimple`.
+        /// - Remark: Generated from `#/components/schemas/custom-property-value`.
+        public struct CustomPropertyValue: Codable, Hashable, Sendable {
+            /// The name of the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/property_name`.
+            public var propertyName: Swift.String
+            /// The value assigned to the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
+            @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case1`.
+                case case1(Swift.String)
+                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case2`.
+                case case2([Swift.String])
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self = .case1(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .case2(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    switch self {
+                    case let .case1(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    case let .case2(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    }
+                }
+            }
+            /// The value assigned to the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
+            public var value: Components.Schemas.CustomPropertyValue.ValuePayload?
+            /// Creates a new `CustomPropertyValue`.
             ///
             /// - Parameters:
-            ///   - login:
-            ///   - id:
-            ///   - nodeId:
-            ///   - url:
-            ///   - reposUrl:
-            ///   - eventsUrl:
-            ///   - hooksUrl:
-            ///   - issuesUrl:
-            ///   - membersUrl:
-            ///   - publicMembersUrl:
-            ///   - avatarUrl:
-            ///   - description:
+            ///   - propertyName: The name of the property
+            ///   - value: The value assigned to the property
             public init(
-                login: Swift.String,
-                id: Swift.Int,
-                nodeId: Swift.String,
-                url: Swift.String,
-                reposUrl: Swift.String,
-                eventsUrl: Swift.String,
-                hooksUrl: Swift.String,
-                issuesUrl: Swift.String,
-                membersUrl: Swift.String,
-                publicMembersUrl: Swift.String,
-                avatarUrl: Swift.String,
-                description: Swift.String? = nil
+                propertyName: Swift.String,
+                value: Components.Schemas.CustomPropertyValue.ValuePayload? = nil
             ) {
-                self.login = login
-                self.id = id
-                self.nodeId = nodeId
-                self.url = url
-                self.reposUrl = reposUrl
-                self.eventsUrl = eventsUrl
-                self.hooksUrl = hooksUrl
-                self.issuesUrl = issuesUrl
-                self.membersUrl = membersUrl
-                self.publicMembersUrl = publicMembersUrl
-                self.avatarUrl = avatarUrl
-                self.description = description
+                self.propertyName = propertyName
+                self.value = value
             }
             public enum CodingKeys: String, CodingKey {
-                case login
-                case id
-                case nodeId = "node_id"
-                case url
-                case reposUrl = "repos_url"
-                case eventsUrl = "events_url"
-                case hooksUrl = "hooks_url"
-                case issuesUrl = "issues_url"
-                case membersUrl = "members_url"
-                case publicMembersUrl = "public_members_url"
-                case avatarUrl = "avatar_url"
-                case description
+                case propertyName = "property_name"
+                case value
             }
         }
         /// Organization Full
@@ -8580,72 +8779,6 @@ public enum Components {
                 case valuesEditableBy = "values_editable_by"
             }
         }
-        /// Custom property name and associated value
-        ///
-        /// - Remark: Generated from `#/components/schemas/custom-property-value`.
-        public struct CustomPropertyValue: Codable, Hashable, Sendable {
-            /// The name of the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/property_name`.
-            public var propertyName: Swift.String
-            /// The value assigned to the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
-            @frozen public enum ValuePayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case1`.
-                case case1(Swift.String)
-                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case2`.
-                case case2([Swift.String])
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
-                    do {
-                        self = .case1(try decoder.decodeFromSingleValueContainer())
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case2(try decoder.decodeFromSingleValueContainer())
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
-                        type: Self.self,
-                        codingPath: decoder.codingPath,
-                        errors: errors
-                    )
-                }
-                public func encode(to encoder: any Encoder) throws {
-                    switch self {
-                    case let .case1(value):
-                        try encoder.encodeToSingleValueContainer(value)
-                    case let .case2(value):
-                        try encoder.encodeToSingleValueContainer(value)
-                    }
-                }
-            }
-            /// The value assigned to the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
-            public var value: Components.Schemas.CustomPropertyValue.ValuePayload?
-            /// Creates a new `CustomPropertyValue`.
-            ///
-            /// - Parameters:
-            ///   - propertyName: The name of the property
-            ///   - value: The value assigned to the property
-            public init(
-                propertyName: Swift.String,
-                value: Components.Schemas.CustomPropertyValue.ValuePayload? = nil
-            ) {
-                self.propertyName = propertyName
-                self.value = value
-            }
-            public enum CodingKeys: String, CodingKey {
-                case propertyName = "property_name"
-                case value
-            }
-        }
         /// List of custom property values for a repository
         ///
         /// - Remark: Generated from `#/components/schemas/org-repo-custom-property-values`.
@@ -8862,6 +8995,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/username`.
         public typealias Username = Swift.String
+        /// The organization name. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/org`.
+        public typealias Org = Swift.String
         /// The slug of the team name.
         ///
         /// - Remark: Generated from `#/components/parameters/team-slug`.
@@ -8870,10 +9007,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/since-org`.
         public typealias SinceOrg = Swift.Int
-        /// The organization name. The name is not case sensitive.
-        ///
-        /// - Remark: Generated from `#/components/parameters/org`.
-        public typealias Org = Swift.String
         /// The unique identifier of the repository.
         ///
         /// - Remark: Generated from `#/components/parameters/repository-id`.
@@ -9478,6 +9611,410 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "notModified",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get all custom property values for an organization
+    ///
+    /// Gets all custom property values that are set for an organization.
+    ///
+    /// The organization must belong to an enterprise.
+    ///
+    /// Access requirements:
+    /// - Organization admins
+    /// - OAuth tokens and personal access tokens (classic) with the `read:org` scope
+    /// - Actors with the organization-level "read custom properties for an organization" fine-grained permission or above
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/org-properties/values`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)`.
+    public enum OrgsCustomPropertiesForOrgsGetOrganizationValues {
+        public static let id: Swift.String = "orgs/custom-properties-for-orgs-get-organization-values"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Path,
+                headers: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.CustomPropertyValue])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.CustomPropertyValue] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Create or update custom property values for an organization
+    ///
+    /// Create new or update existing custom property values for an organization.
+    /// To remove a custom property value from an organization, set the property value to `null`.
+    ///
+    /// The organization must belong to an enterprise.
+    ///
+    /// Access requirements:
+    /// - Organization admins
+    /// - OAuth tokens and personal access tokens (classic) with the `admin:org` scope
+    /// - Actors with the organization-level "edit custom properties for an organization" fine-grained permission
+    ///
+    /// - Remark: HTTP `PATCH /organizations/{org}/org-properties/values`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)`.
+    public enum OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues {
+        public static let id: Swift.String = "orgs/custom-properties-for-orgs-create-or-update-organization-values"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Headers
+            /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// A list of custom property names and associated values to apply to the organization.
+                    ///
+                    /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/requestBody/json/properties`.
+                    public var properties: [Components.Schemas.CustomPropertyValue]
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - properties: A list of custom property names and associated values to apply to the organization.
+                    public init(properties: [Components.Schemas.CustomPropertyValue]) {
+                        self.properties = properties
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case properties
+                    }
+                }
+                /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/requestBody/content/application\/json`.
+                case json(Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Body.JsonPayload)
+            }
+            public var body: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Path,
+                headers: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Headers = .init(),
+                body: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// No Content when custom property values are successfully created or updated
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Output.NoContent)
+            /// No Content when custom property values are successfully created or updated
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
                             response: self
                         )
                     }
@@ -11026,7 +11563,8 @@ public enum Operations {
                     /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/requestBody/json/subject_digests`.
                     public var subjectDigests: [Swift.String]
                     /// Optional filter for fetching attestations with a given predicate type.
-                    /// This option accepts `provenance`, `sbom`, or freeform text for custom predicate types.
+                    /// This option accepts `provenance`, `sbom`, `release`, or freeform text
+                    /// for custom predicate types.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/attestations/bulk-list/POST/requestBody/json/predicate_type`.
                     public var predicateType: Swift.String?
@@ -11747,6 +12285,207 @@ public enum Operations {
             }
         }
     }
+    /// List attestation repositories
+    ///
+    /// List repositories owned by the provided organization that have created at least one attested artifact
+    /// Results will be sorted in ascending order by repository ID
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/attestations/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/attestations/repositories/get(orgs/list-attestation-repositories)`.
+    public enum OrgsListAttestationRepositories {
+        public static let id: Swift.String = "orgs/list-attestation-repositories"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsListAttestationRepositories.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/query/before`.
+                public var before: Components.Parameters.PaginationBefore?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// Optional filter for fetching attestations with a given predicate type.
+                /// This option accepts `provenance`, `sbom`, `release`, or freeform text
+                /// for custom predicate types.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/query/predicate_type`.
+                public var predicateType: Swift.String?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - predicateType: Optional filter for fetching attestations with a given predicate type.
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    before: Components.Parameters.PaginationBefore? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil,
+                    predicateType: Swift.String? = nil
+                ) {
+                    self.perPage = perPage
+                    self.before = before
+                    self.after = after
+                    self.predicateType = predicateType
+                }
+            }
+            public var query: Operations.OrgsListAttestationRepositories.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListAttestationRepositories.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListAttestationRepositories.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsListAttestationRepositories.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.OrgsListAttestationRepositories.Input.Path,
+                query: Operations.OrgsListAttestationRepositories.Input.Query = .init(),
+                headers: Operations.OrgsListAttestationRepositories.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/responses/200/content/JsonPayload`.
+                    public struct JsonPayloadPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/responses/200/content/JsonPayload/id`.
+                        public var id: Swift.Int?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/responses/200/content/JsonPayload/name`.
+                        public var name: Swift.String?
+                        /// Creates a new `JsonPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - id:
+                        ///   - name:
+                        public init(
+                            id: Swift.Int? = nil,
+                            name: Swift.String? = nil
+                        ) {
+                            self.id = id
+                            self.name = name
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case id
+                            case name
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/responses/200/content/json`.
+                    public typealias JsonPayload = [Operations.OrgsListAttestationRepositories.Output.Ok.Body.JsonPayloadPayload]
+                    /// - Remark: Generated from `#/paths/orgs/{org}/attestations/repositories/GET/responses/200/content/application\/json`.
+                    case json(Operations.OrgsListAttestationRepositories.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.OrgsListAttestationRepositories.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsListAttestationRepositories.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsListAttestationRepositories.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/attestations/repositories/get(orgs/list-attestation-repositories)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsListAttestationRepositories.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsListAttestationRepositories.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// Delete attestations by ID
     ///
     /// Delete an artifact attestation by unique ID that is associated with a repository owned by an org.
@@ -12005,7 +12744,8 @@ public enum Operations {
                 /// - Remark: Generated from `#/paths/orgs/{org}/attestations/{subject_digest}/GET/query/after`.
                 public var after: Components.Parameters.PaginationAfter?
                 /// Optional filter for fetching attestations with a given predicate type.
-                /// This option accepts `provenance`, `sbom`, or freeform text for custom predicate types.
+                /// This option accepts `provenance`, `sbom`, `release`, or freeform text
+                /// for custom predicate types.
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/attestations/{subject_digest}/GET/query/predicate_type`.
                 public var predicateType: Swift.String?
