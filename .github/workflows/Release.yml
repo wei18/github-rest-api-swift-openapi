@@ -9,39 +9,36 @@ concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
 
+env:
+  RELEASE_BRANCH: release
+
 jobs:
 
   create-git-branch-release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    env:
-      RELEASE_BRANCH: release
-    outputs:
-      branch: ${{ env.RELEASE_BRANCH }}
     steps:
-    - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
 
-    - name: Create release branch
-      run: git checkout -B $RELEASE_BRANCH
-    
-    - name: Remove submodule (if exists)
-      env:
-        SUBMODULE_PATH: Submodule/github/rest-api-description
-      run: |
-        if [ -d "$SUBMODULE_PATH" ]; then
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git submodule deinit -f $SUBMODULE_PATH || true
-          git rm -f $SUBMODULE_PATH || true
-          rm -rf .git/modules/$SUBMODULE_PATH || true
-          git commit -m "Remove submodule"
-        else
-          echo "Submodule not found, skipping removal."
-        fi
-
-    - name: Push release branch
-      run: git push --force --set-upstream origin $RELEASE_BRANCH
+      - name: Remove submodule to improve Swift Package experience
+        env:
+          SUBMODULE_PATH: Submodule/github/rest-api-description
+        run: |
+          if [ -d "$SUBMODULE_PATH" ]; then
+            # 
+            git config user.name "${GITHUB_ACTOR}"
+            git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+            #
+            git checkout -B $RELEASE_BRANCH
+            #
+            git rm $SUBMODULE_PATH            
+            git commit -m "Remove submodule to improve Swift Package experience"
+            git push --set-upstream origin $RELEASE_BRANCH
+          else
+            echo "::error ::Submodule not found, skipping removal."
+            exit 1
+          fi
 
   create-github-release:
     needs: create-git-branch-release
@@ -49,10 +46,44 @@ jobs:
     permissions:
       contents: write
     steps:
-    - uses: Wei18/GitHubSwiftActions/Actions/Release@1.0.9
-      with:
-        owner: ${{ github.repository_owner }}
-        repo: ${{ github.event.repository.name }}
-        token: ${{ secrets.GITHUB_TOKEN }}
-        ref: ${{ needs.create-git-branch-release.outputs.branch }}
-        type: "patch"
+      - uses: Wei18/GitHubSwiftActions/Actions/Release@1.0.9
+        with:
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.event.repository.name }}
+          token: ${{ github.token }}
+          ref: ${{ env.RELEASE_BRANCH }}
+          type: "patch"
+
+  create-pull-request:
+    needs: create-github-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ env.RELEASE_BRANCH }}
+
+      - name: Revert previous commit
+        run: |
+          if [ ! -d "$SUBMODULE_PATH" ]; then
+            # 
+            git config user.name "${GITHUB_ACTOR}"
+            git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+            #
+            git revert --no-edit HEAD
+            git push
+          else
+            echo "::error ::Submodule already exists, skipping restore."
+            exit 1
+          fi
+
+      - name: Create pull request
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          PR_URL="$(gh pr create --head $RELEASE_BRANCH --title 'Bump patch version' --body 'Automated monthly release merge')"
+          gh pr merge --auto --merge "$PR_URL"
+          gh pr merge --merge --admin "$PR_URL" 
