@@ -8636,289 +8636,6 @@ public enum Components {
                 case rocket
             }
         }
-        /// Data related to a release.
-        ///
-        /// - Remark: Generated from `#/components/schemas/release-asset`.
-        public struct ReleaseAsset: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/release-asset/url`.
-            public var url: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release-asset/browser_download_url`.
-            public var browserDownloadUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release-asset/id`.
-            public var id: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/release-asset/node_id`.
-            public var nodeId: Swift.String
-            /// The file name of the asset.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release-asset/name`.
-            public var name: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release-asset/label`.
-            public var label: Swift.String?
-            /// State of the release asset.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release-asset/state`.
-            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case uploaded = "uploaded"
-                case open = "open"
-            }
-            /// State of the release asset.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release-asset/state`.
-            public var state: Components.Schemas.ReleaseAsset.StatePayload
-            /// - Remark: Generated from `#/components/schemas/release-asset/content_type`.
-            public var contentType: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release-asset/size`.
-            public var size: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/release-asset/digest`.
-            public var digest: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release-asset/download_count`.
-            public var downloadCount: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/release-asset/created_at`.
-            public var createdAt: Foundation.Date
-            /// - Remark: Generated from `#/components/schemas/release-asset/updated_at`.
-            public var updatedAt: Foundation.Date
-            /// - Remark: Generated from `#/components/schemas/release-asset/uploader`.
-            public var uploader: Components.Schemas.NullableSimpleUser?
-            /// Creates a new `ReleaseAsset`.
-            ///
-            /// - Parameters:
-            ///   - url:
-            ///   - browserDownloadUrl:
-            ///   - id:
-            ///   - nodeId:
-            ///   - name: The file name of the asset.
-            ///   - label:
-            ///   - state: State of the release asset.
-            ///   - contentType:
-            ///   - size:
-            ///   - digest:
-            ///   - downloadCount:
-            ///   - createdAt:
-            ///   - updatedAt:
-            ///   - uploader:
-            public init(
-                url: Swift.String,
-                browserDownloadUrl: Swift.String,
-                id: Swift.Int,
-                nodeId: Swift.String,
-                name: Swift.String,
-                label: Swift.String? = nil,
-                state: Components.Schemas.ReleaseAsset.StatePayload,
-                contentType: Swift.String,
-                size: Swift.Int,
-                digest: Swift.String? = nil,
-                downloadCount: Swift.Int,
-                createdAt: Foundation.Date,
-                updatedAt: Foundation.Date,
-                uploader: Components.Schemas.NullableSimpleUser? = nil
-            ) {
-                self.url = url
-                self.browserDownloadUrl = browserDownloadUrl
-                self.id = id
-                self.nodeId = nodeId
-                self.name = name
-                self.label = label
-                self.state = state
-                self.contentType = contentType
-                self.size = size
-                self.digest = digest
-                self.downloadCount = downloadCount
-                self.createdAt = createdAt
-                self.updatedAt = updatedAt
-                self.uploader = uploader
-            }
-            public enum CodingKeys: String, CodingKey {
-                case url
-                case browserDownloadUrl = "browser_download_url"
-                case id
-                case nodeId = "node_id"
-                case name
-                case label
-                case state
-                case contentType = "content_type"
-                case size
-                case digest
-                case downloadCount = "download_count"
-                case createdAt = "created_at"
-                case updatedAt = "updated_at"
-                case uploader
-            }
-        }
-        /// A release.
-        ///
-        /// - Remark: Generated from `#/components/schemas/release`.
-        public struct Release: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/release/url`.
-            public var url: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release/html_url`.
-            public var htmlUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release/assets_url`.
-            public var assetsUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release/upload_url`.
-            public var uploadUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release/tarball_url`.
-            public var tarballUrl: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/zipball_url`.
-            public var zipballUrl: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/id`.
-            public var id: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/release/node_id`.
-            public var nodeId: Swift.String
-            /// The name of the tag.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/tag_name`.
-            public var tagName: Swift.String
-            /// Specifies the commitish value that determines where the Git tag is created from.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/target_commitish`.
-            public var targetCommitish: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release/name`.
-            public var name: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/body`.
-            public var body: Swift.String?
-            /// true to create a draft (unpublished) release, false to create a published one.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/draft`.
-            public var draft: Swift.Bool
-            /// Whether to identify the release as a prerelease or a full release.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/prerelease`.
-            public var prerelease: Swift.Bool
-            /// Whether or not the release is immutable.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/immutable`.
-            public var immutable: Swift.Bool?
-            /// - Remark: Generated from `#/components/schemas/release/created_at`.
-            public var createdAt: Foundation.Date
-            /// - Remark: Generated from `#/components/schemas/release/published_at`.
-            public var publishedAt: Foundation.Date?
-            /// - Remark: Generated from `#/components/schemas/release/updated_at`.
-            public var updatedAt: Foundation.Date?
-            /// - Remark: Generated from `#/components/schemas/release/author`.
-            public var author: Components.Schemas.SimpleUser
-            /// - Remark: Generated from `#/components/schemas/release/assets`.
-            public var assets: [Components.Schemas.ReleaseAsset]
-            /// - Remark: Generated from `#/components/schemas/release/body_html`.
-            public var bodyHtml: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/body_text`.
-            public var bodyText: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/mentions_count`.
-            public var mentionsCount: Swift.Int?
-            /// The URL of the release discussion.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/discussion_url`.
-            public var discussionUrl: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/reactions`.
-            public var reactions: Components.Schemas.ReactionRollup?
-            /// Creates a new `Release`.
-            ///
-            /// - Parameters:
-            ///   - url:
-            ///   - htmlUrl:
-            ///   - assetsUrl:
-            ///   - uploadUrl:
-            ///   - tarballUrl:
-            ///   - zipballUrl:
-            ///   - id:
-            ///   - nodeId:
-            ///   - tagName: The name of the tag.
-            ///   - targetCommitish: Specifies the commitish value that determines where the Git tag is created from.
-            ///   - name:
-            ///   - body:
-            ///   - draft: true to create a draft (unpublished) release, false to create a published one.
-            ///   - prerelease: Whether to identify the release as a prerelease or a full release.
-            ///   - immutable: Whether or not the release is immutable.
-            ///   - createdAt:
-            ///   - publishedAt:
-            ///   - updatedAt:
-            ///   - author:
-            ///   - assets:
-            ///   - bodyHtml:
-            ///   - bodyText:
-            ///   - mentionsCount:
-            ///   - discussionUrl: The URL of the release discussion.
-            ///   - reactions:
-            public init(
-                url: Swift.String,
-                htmlUrl: Swift.String,
-                assetsUrl: Swift.String,
-                uploadUrl: Swift.String,
-                tarballUrl: Swift.String? = nil,
-                zipballUrl: Swift.String? = nil,
-                id: Swift.Int,
-                nodeId: Swift.String,
-                tagName: Swift.String,
-                targetCommitish: Swift.String,
-                name: Swift.String? = nil,
-                body: Swift.String? = nil,
-                draft: Swift.Bool,
-                prerelease: Swift.Bool,
-                immutable: Swift.Bool? = nil,
-                createdAt: Foundation.Date,
-                publishedAt: Foundation.Date? = nil,
-                updatedAt: Foundation.Date? = nil,
-                author: Components.Schemas.SimpleUser,
-                assets: [Components.Schemas.ReleaseAsset],
-                bodyHtml: Swift.String? = nil,
-                bodyText: Swift.String? = nil,
-                mentionsCount: Swift.Int? = nil,
-                discussionUrl: Swift.String? = nil,
-                reactions: Components.Schemas.ReactionRollup? = nil
-            ) {
-                self.url = url
-                self.htmlUrl = htmlUrl
-                self.assetsUrl = assetsUrl
-                self.uploadUrl = uploadUrl
-                self.tarballUrl = tarballUrl
-                self.zipballUrl = zipballUrl
-                self.id = id
-                self.nodeId = nodeId
-                self.tagName = tagName
-                self.targetCommitish = targetCommitish
-                self.name = name
-                self.body = body
-                self.draft = draft
-                self.prerelease = prerelease
-                self.immutable = immutable
-                self.createdAt = createdAt
-                self.publishedAt = publishedAt
-                self.updatedAt = updatedAt
-                self.author = author
-                self.assets = assets
-                self.bodyHtml = bodyHtml
-                self.bodyText = bodyText
-                self.mentionsCount = mentionsCount
-                self.discussionUrl = discussionUrl
-                self.reactions = reactions
-            }
-            public enum CodingKeys: String, CodingKey {
-                case url
-                case htmlUrl = "html_url"
-                case assetsUrl = "assets_url"
-                case uploadUrl = "upload_url"
-                case tarballUrl = "tarball_url"
-                case zipballUrl = "zipball_url"
-                case id
-                case nodeId = "node_id"
-                case tagName = "tag_name"
-                case targetCommitish = "target_commitish"
-                case name
-                case body
-                case draft
-                case prerelease
-                case immutable
-                case createdAt = "created_at"
-                case publishedAt = "published_at"
-                case updatedAt = "updated_at"
-                case author
-                case assets
-                case bodyHtml = "body_html"
-                case bodyText = "body_text"
-                case mentionsCount = "mentions_count"
-                case discussionUrl = "discussion_url"
-                case reactions
-            }
-        }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
         public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
             /// Enable or disable GitHub Advanced Security for the repository.
@@ -9777,6 +9494,72 @@ public enum Components {
                 case customProperties = "custom_properties"
             }
         }
+        /// Custom property name and associated value
+        ///
+        /// - Remark: Generated from `#/components/schemas/custom-property-value`.
+        public struct CustomPropertyValue: Codable, Hashable, Sendable {
+            /// The name of the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/property_name`.
+            public var propertyName: Swift.String
+            /// The value assigned to the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
+            @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case1`.
+                case case1(Swift.String)
+                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case2`.
+                case case2([Swift.String])
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self = .case1(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .case2(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    switch self {
+                    case let .case1(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    case let .case2(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    }
+                }
+            }
+            /// The value assigned to the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
+            public var value: Components.Schemas.CustomPropertyValue.ValuePayload?
+            /// Creates a new `CustomPropertyValue`.
+            ///
+            /// - Parameters:
+            ///   - propertyName: The name of the property
+            ///   - value: The value assigned to the property
+            public init(
+                propertyName: Swift.String,
+                value: Components.Schemas.CustomPropertyValue.ValuePayload? = nil
+            ) {
+                self.propertyName = propertyName
+                self.value = value
+            }
+            public enum CodingKeys: String, CodingKey {
+                case propertyName = "property_name"
+                case value
+            }
+        }
         /// An object without any properties.
         ///
         /// - Remark: Generated from `#/components/schemas/empty-object`.
@@ -10587,72 +10370,6 @@ public enum Components {
                 case authorAssociation = "author_association"
                 case autoMerge = "auto_merge"
                 case draft
-            }
-        }
-        /// Custom property name and associated value
-        ///
-        /// - Remark: Generated from `#/components/schemas/custom-property-value`.
-        public struct CustomPropertyValue: Codable, Hashable, Sendable {
-            /// The name of the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/property_name`.
-            public var propertyName: Swift.String
-            /// The value assigned to the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
-            @frozen public enum ValuePayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case1`.
-                case case1(Swift.String)
-                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case2`.
-                case case2([Swift.String])
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
-                    do {
-                        self = .case1(try decoder.decodeFromSingleValueContainer())
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case2(try decoder.decodeFromSingleValueContainer())
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
-                        type: Self.self,
-                        codingPath: decoder.codingPath,
-                        errors: errors
-                    )
-                }
-                public func encode(to encoder: any Encoder) throws {
-                    switch self {
-                    case let .case1(value):
-                        try encoder.encodeToSingleValueContainer(value)
-                    case let .case2(value):
-                        try encoder.encodeToSingleValueContainer(value)
-                    }
-                }
-            }
-            /// The value assigned to the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
-            public var value: Components.Schemas.CustomPropertyValue.ValuePayload?
-            /// Creates a new `CustomPropertyValue`.
-            ///
-            /// - Parameters:
-            ///   - propertyName: The name of the property
-            ///   - value: The value assigned to the property
-            public init(
-                propertyName: Swift.String,
-                value: Components.Schemas.CustomPropertyValue.ValuePayload? = nil
-            ) {
-                self.propertyName = propertyName
-                self.value = value
-            }
-            public enum CodingKeys: String, CodingKey {
-                case propertyName = "property_name"
-                case value
             }
         }
         /// A repository on GitHub.
@@ -21857,6 +21574,289 @@ public enum Components {
                 case altDomain = "alt_domain"
             }
         }
+        /// Data related to a release.
+        ///
+        /// - Remark: Generated from `#/components/schemas/release-asset`.
+        public struct ReleaseAsset: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/release-asset/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/browser_download_url`.
+            public var browserDownloadUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release-asset/node_id`.
+            public var nodeId: Swift.String
+            /// The file name of the asset.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release-asset/name`.
+            public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/label`.
+            public var label: Swift.String?
+            /// State of the release asset.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release-asset/state`.
+            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case uploaded = "uploaded"
+                case open = "open"
+            }
+            /// State of the release asset.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release-asset/state`.
+            public var state: Components.Schemas.ReleaseAsset.StatePayload
+            /// - Remark: Generated from `#/components/schemas/release-asset/content_type`.
+            public var contentType: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/size`.
+            public var size: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release-asset/digest`.
+            public var digest: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release-asset/download_count`.
+            public var downloadCount: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release-asset/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/release-asset/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/release-asset/uploader`.
+            public var uploader: Components.Schemas.NullableSimpleUser?
+            /// Creates a new `ReleaseAsset`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - browserDownloadUrl:
+            ///   - id:
+            ///   - nodeId:
+            ///   - name: The file name of the asset.
+            ///   - label:
+            ///   - state: State of the release asset.
+            ///   - contentType:
+            ///   - size:
+            ///   - digest:
+            ///   - downloadCount:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - uploader:
+            public init(
+                url: Swift.String,
+                browserDownloadUrl: Swift.String,
+                id: Swift.Int,
+                nodeId: Swift.String,
+                name: Swift.String,
+                label: Swift.String? = nil,
+                state: Components.Schemas.ReleaseAsset.StatePayload,
+                contentType: Swift.String,
+                size: Swift.Int,
+                digest: Swift.String? = nil,
+                downloadCount: Swift.Int,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                uploader: Components.Schemas.NullableSimpleUser? = nil
+            ) {
+                self.url = url
+                self.browserDownloadUrl = browserDownloadUrl
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.label = label
+                self.state = state
+                self.contentType = contentType
+                self.size = size
+                self.digest = digest
+                self.downloadCount = downloadCount
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.uploader = uploader
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case browserDownloadUrl = "browser_download_url"
+                case id
+                case nodeId = "node_id"
+                case name
+                case label
+                case state
+                case contentType = "content_type"
+                case size
+                case digest
+                case downloadCount = "download_count"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case uploader
+            }
+        }
+        /// A release.
+        ///
+        /// - Remark: Generated from `#/components/schemas/release`.
+        public struct Release: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/release/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/assets_url`.
+            public var assetsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/upload_url`.
+            public var uploadUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/tarball_url`.
+            public var tarballUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/zipball_url`.
+            public var zipballUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the tag.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/tag_name`.
+            public var tagName: Swift.String
+            /// Specifies the commitish value that determines where the Git tag is created from.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/target_commitish`.
+            public var targetCommitish: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/name`.
+            public var name: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/body`.
+            public var body: Swift.String?
+            /// true to create a draft (unpublished) release, false to create a published one.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/draft`.
+            public var draft: Swift.Bool
+            /// Whether to identify the release as a prerelease or a full release.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/prerelease`.
+            public var prerelease: Swift.Bool
+            /// Whether or not the release is immutable.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/immutable`.
+            public var immutable: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/release/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/release/published_at`.
+            public var publishedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/release/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/release/author`.
+            public var author: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/release/assets`.
+            public var assets: [Components.Schemas.ReleaseAsset]
+            /// - Remark: Generated from `#/components/schemas/release/body_html`.
+            public var bodyHtml: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/body_text`.
+            public var bodyText: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/mentions_count`.
+            public var mentionsCount: Swift.Int?
+            /// The URL of the release discussion.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/discussion_url`.
+            public var discussionUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/reactions`.
+            public var reactions: Components.Schemas.ReactionRollup?
+            /// Creates a new `Release`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - assetsUrl:
+            ///   - uploadUrl:
+            ///   - tarballUrl:
+            ///   - zipballUrl:
+            ///   - id:
+            ///   - nodeId:
+            ///   - tagName: The name of the tag.
+            ///   - targetCommitish: Specifies the commitish value that determines where the Git tag is created from.
+            ///   - name:
+            ///   - body:
+            ///   - draft: true to create a draft (unpublished) release, false to create a published one.
+            ///   - prerelease: Whether to identify the release as a prerelease or a full release.
+            ///   - immutable: Whether or not the release is immutable.
+            ///   - createdAt:
+            ///   - publishedAt:
+            ///   - updatedAt:
+            ///   - author:
+            ///   - assets:
+            ///   - bodyHtml:
+            ///   - bodyText:
+            ///   - mentionsCount:
+            ///   - discussionUrl: The URL of the release discussion.
+            ///   - reactions:
+            public init(
+                url: Swift.String,
+                htmlUrl: Swift.String,
+                assetsUrl: Swift.String,
+                uploadUrl: Swift.String,
+                tarballUrl: Swift.String? = nil,
+                zipballUrl: Swift.String? = nil,
+                id: Swift.Int,
+                nodeId: Swift.String,
+                tagName: Swift.String,
+                targetCommitish: Swift.String,
+                name: Swift.String? = nil,
+                body: Swift.String? = nil,
+                draft: Swift.Bool,
+                prerelease: Swift.Bool,
+                immutable: Swift.Bool? = nil,
+                createdAt: Foundation.Date,
+                publishedAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil,
+                author: Components.Schemas.SimpleUser,
+                assets: [Components.Schemas.ReleaseAsset],
+                bodyHtml: Swift.String? = nil,
+                bodyText: Swift.String? = nil,
+                mentionsCount: Swift.Int? = nil,
+                discussionUrl: Swift.String? = nil,
+                reactions: Components.Schemas.ReactionRollup? = nil
+            ) {
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.assetsUrl = assetsUrl
+                self.uploadUrl = uploadUrl
+                self.tarballUrl = tarballUrl
+                self.zipballUrl = zipballUrl
+                self.id = id
+                self.nodeId = nodeId
+                self.tagName = tagName
+                self.targetCommitish = targetCommitish
+                self.name = name
+                self.body = body
+                self.draft = draft
+                self.prerelease = prerelease
+                self.immutable = immutable
+                self.createdAt = createdAt
+                self.publishedAt = publishedAt
+                self.updatedAt = updatedAt
+                self.author = author
+                self.assets = assets
+                self.bodyHtml = bodyHtml
+                self.bodyText = bodyText
+                self.mentionsCount = mentionsCount
+                self.discussionUrl = discussionUrl
+                self.reactions = reactions
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case htmlUrl = "html_url"
+                case assetsUrl = "assets_url"
+                case uploadUrl = "upload_url"
+                case tarballUrl = "tarball_url"
+                case zipballUrl = "zipball_url"
+                case id
+                case nodeId = "node_id"
+                case tagName = "tag_name"
+                case targetCommitish = "target_commitish"
+                case name
+                case body
+                case draft
+                case prerelease
+                case immutable
+                case createdAt = "created_at"
+                case publishedAt = "published_at"
+                case updatedAt = "updated_at"
+                case author
+                case assets
+                case bodyHtml = "body_html"
+                case bodyText = "body_text"
+                case mentionsCount = "mentions_count"
+                case discussionUrl = "discussion_url"
+                case reactions
+            }
+        }
         /// Generated name and body describing a release
         ///
         /// - Remark: Generated from `#/components/schemas/release-notes-content`.
@@ -23208,6 +23208,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/username`.
         public typealias Username = Swift.String
+        /// The organization name. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/org`.
+        public typealias Org = Swift.String
         /// The unique identifier of the comment.
         ///
         /// - Remark: Generated from `#/components/parameters/comment-id`.
@@ -23220,10 +23224,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/repo`.
         public typealias Repo = Swift.String
-        /// The organization name. The name is not case sensitive.
-        ///
-        /// - Remark: Generated from `#/components/parameters/org`.
-        public typealias Org = Swift.String
         /// The unique identifier of the hook. You can find this value in the `X-GitHub-Hook-ID` header of a webhook delivery.
         ///
         /// - Remark: Generated from `#/components/parameters/hook-id`.
@@ -27926,7 +27926,8 @@ public enum Operations {
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/attestations/{subject_digest}/GET/query/after`.
                 public var after: Components.Parameters.PaginationAfter?
                 /// Optional filter for fetching attestations with a given predicate type.
-                /// This option accepts `provenance`, `sbom`, or freeform text for custom predicate types.
+                /// This option accepts `provenance`, `sbom`, `release`, or freeform text
+                /// for custom predicate types.
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/attestations/{subject_digest}/GET/query/predicate_type`.
                 public var predicateType: Swift.String?
