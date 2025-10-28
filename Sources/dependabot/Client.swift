@@ -147,20 +147,6 @@ public struct Client: APIProtocol {
                     in: &request,
                     style: .form,
                     explode: true,
-                    name: "first",
-                    value: input.query.first
-                )
-                try converter.setQueryItemAsURI(
-                    in: &request,
-                    style: .form,
-                    explode: true,
-                    name: "last",
-                    value: input.query.last
-                )
-                try converter.setQueryItemAsURI(
-                    in: &request,
-                    style: .form,
-                    explode: true,
                     name: "per_page",
                     value: input.query.perPage
                 )
@@ -734,20 +720,6 @@ public struct Client: APIProtocol {
                     explode: true,
                     name: "after",
                     value: input.query.after
-                )
-                try converter.setQueryItemAsURI(
-                    in: &request,
-                    style: .form,
-                    explode: true,
-                    name: "first",
-                    value: input.query.first
-                )
-                try converter.setQueryItemAsURI(
-                    in: &request,
-                    style: .form,
-                    explode: true,
-                    name: "last",
-                    value: input.query.last
                 )
                 try converter.setQueryItemAsURI(
                     in: &request,
@@ -1571,13 +1543,6 @@ public struct Client: APIProtocol {
                     in: &request,
                     style: .form,
                     explode: true,
-                    name: "page",
-                    value: input.query.page
-                )
-                try converter.setQueryItemAsURI(
-                    in: &request,
-                    style: .form,
-                    explode: true,
                     name: "per_page",
                     value: input.query.perPage
                 )
@@ -1594,20 +1559,6 @@ public struct Client: APIProtocol {
                     explode: true,
                     name: "after",
                     value: input.query.after
-                )
-                try converter.setQueryItemAsURI(
-                    in: &request,
-                    style: .form,
-                    explode: true,
-                    name: "first",
-                    value: input.query.first
-                )
-                try converter.setQueryItemAsURI(
-                    in: &request,
-                    style: .form,
-                    explode: true,
-                    name: "last",
-                    value: input.query.last
                 )
                 converter.setAcceptHeader(
                     in: &request.headerFields,

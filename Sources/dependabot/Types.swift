@@ -4284,18 +4284,10 @@ public enum Components {
             case updated = "updated"
             case epssPercentage = "epss_percentage"
         }
-        /// **Deprecated**. The number of results per page (max 100), starting from the first matching result.
-        /// This parameter must not be used in combination with `last`.
-        /// Instead, use `per_page` in combination with `after` to fetch the first page of results.
+        /// The organization name. The name is not case sensitive.
         ///
-        /// - Remark: Generated from `#/components/parameters/pagination-first`.
-        public typealias PaginationFirst = Swift.Int
-        /// **Deprecated**. The number of results per page (max 100), starting from the last matching result.
-        /// This parameter must not be used in combination with `first`.
-        /// Instead, use `per_page` in combination with `before` to fetch the last page of results.
-        ///
-        /// - Remark: Generated from `#/components/parameters/pagination-last`.
-        public typealias PaginationLast = Swift.Int
+        /// - Remark: Generated from `#/components/parameters/org`.
+        public typealias Org = Swift.String
         /// The account owner of the repository. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/owner`.
@@ -4304,10 +4296,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/repo`.
         public typealias Repo = Swift.String
-        /// The organization name. The name is not case sensitive.
-        ///
-        /// - Remark: Generated from `#/components/parameters/org`.
-        public typealias Org = Swift.String
         /// The name of the secret.
         ///
         /// - Remark: Generated from `#/components/parameters/secret-name`.
@@ -4715,18 +4703,6 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/alerts/GET/query/after`.
                 public var after: Components.Parameters.PaginationAfter?
-                /// **Deprecated**. The number of results per page (max 100), starting from the first matching result.
-                /// This parameter must not be used in combination with `last`.
-                /// Instead, use `per_page` in combination with `after` to fetch the first page of results.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/alerts/GET/query/first`.
-                public var first: Components.Parameters.PaginationFirst?
-                /// **Deprecated**. The number of results per page (max 100), starting from the last matching result.
-                /// This parameter must not be used in combination with `first`.
-                /// Instead, use `per_page` in combination with `before` to fetch the last page of results.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/alerts/GET/query/last`.
-                public var last: Components.Parameters.PaginationLast?
                 /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/alerts/GET/query/per_page`.
@@ -4745,8 +4721,6 @@ public enum Operations {
                 ///   - direction: The direction to sort the results by.
                 ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///   - first: **Deprecated**. The number of results per page (max 100), starting from the first matching result.
-                ///   - last: **Deprecated**. The number of results per page (max 100), starting from the last matching result.
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
                     state: Components.Parameters.DependabotAlertCommaSeparatedStates? = nil,
@@ -4760,8 +4734,6 @@ public enum Operations {
                     direction: Components.Parameters.Direction? = nil,
                     before: Components.Parameters.PaginationBefore? = nil,
                     after: Components.Parameters.PaginationAfter? = nil,
-                    first: Components.Parameters.PaginationFirst? = nil,
-                    last: Components.Parameters.PaginationLast? = nil,
                     perPage: Components.Parameters.PerPage? = nil
                 ) {
                     self.state = state
@@ -4775,8 +4747,6 @@ public enum Operations {
                     self.direction = direction
                     self.before = before
                     self.after = after
-                    self.first = first
-                    self.last = last
                     self.perPage = perPage
                 }
             }
@@ -5774,18 +5744,6 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/after`.
                 public var after: Components.Parameters.PaginationAfter?
-                /// **Deprecated**. The number of results per page (max 100), starting from the first matching result.
-                /// This parameter must not be used in combination with `last`.
-                /// Instead, use `per_page` in combination with `after` to fetch the first page of results.
-                ///
-                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/first`.
-                public var first: Components.Parameters.PaginationFirst?
-                /// **Deprecated**. The number of results per page (max 100), starting from the last matching result.
-                /// This parameter must not be used in combination with `first`.
-                /// Instead, use `per_page` in combination with `before` to fetch the last page of results.
-                ///
-                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/last`.
-                public var last: Components.Parameters.PaginationLast?
                 /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/per_page`.
@@ -5807,8 +5765,6 @@ public enum Operations {
                 ///   - direction: The direction to sort the results by.
                 ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///   - first: **Deprecated**. The number of results per page (max 100), starting from the first matching result.
-                ///   - last: **Deprecated**. The number of results per page (max 100), starting from the last matching result.
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
                     state: Components.Parameters.DependabotAlertCommaSeparatedStates? = nil,
@@ -5825,8 +5781,6 @@ public enum Operations {
                     direction: Components.Parameters.Direction? = nil,
                     before: Components.Parameters.PaginationBefore? = nil,
                     after: Components.Parameters.PaginationAfter? = nil,
-                    first: Components.Parameters.PaginationFirst? = nil,
-                    last: Components.Parameters.PaginationLast? = nil,
                     perPage: Components.Parameters.PerPage? = nil
                 ) {
                     self.state = state
@@ -5843,8 +5797,6 @@ public enum Operations {
                     self.direction = direction
                     self.before = before
                     self.after = after
-                    self.first = first
-                    self.last = last
                     self.perPage = perPage
                 }
             }
@@ -7656,11 +7608,6 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/direction`.
                 public var direction: Components.Parameters.Direction?
-                /// **Closing down notice**. Page number of the results to fetch. Use cursor-based pagination with `before` or `after` instead.
-                ///
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/page`.
-                @available(*, deprecated)
-                public var page: Swift.Int?
                 /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/per_page`.
@@ -7674,18 +7621,6 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/after`.
                 public var after: Components.Parameters.PaginationAfter?
-                /// **Deprecated**. The number of results per page (max 100), starting from the first matching result.
-                /// This parameter must not be used in combination with `last`.
-                /// Instead, use `per_page` in combination with `after` to fetch the first page of results.
-                ///
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/first`.
-                public var first: Components.Parameters.PaginationFirst?
-                /// **Deprecated**. The number of results per page (max 100), starting from the last matching result.
-                /// This parameter must not be used in combination with `first`.
-                /// Instead, use `per_page` in combination with `before` to fetch the last page of results.
-                ///
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/last`.
-                public var last: Components.Parameters.PaginationLast?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -7699,12 +7634,9 @@ public enum Operations {
                 ///   - scope: The scope of the vulnerable dependency. If specified, only alerts with this scope will be returned.
                 ///   - sort: The property by which to sort the results.
                 ///   - direction: The direction to sort the results by.
-                ///   - page: **Closing down notice**. Page number of the results to fetch. Use cursor-based pagination with `before` or `after` instead.
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///   - first: **Deprecated**. The number of results per page (max 100), starting from the first matching result.
-                ///   - last: **Deprecated**. The number of results per page (max 100), starting from the last matching result.
                 public init(
                     state: Components.Parameters.DependabotAlertCommaSeparatedStates? = nil,
                     severity: Components.Parameters.DependabotAlertCommaSeparatedSeverities? = nil,
@@ -7716,12 +7648,9 @@ public enum Operations {
                     scope: Components.Parameters.DependabotAlertScope? = nil,
                     sort: Components.Parameters.DependabotAlertSort? = nil,
                     direction: Components.Parameters.Direction? = nil,
-                    page: Swift.Int? = nil,
                     perPage: Swift.Int? = nil,
                     before: Components.Parameters.PaginationBefore? = nil,
-                    after: Components.Parameters.PaginationAfter? = nil,
-                    first: Components.Parameters.PaginationFirst? = nil,
-                    last: Components.Parameters.PaginationLast? = nil
+                    after: Components.Parameters.PaginationAfter? = nil
                 ) {
                     self.state = state
                     self.severity = severity
@@ -7733,12 +7662,9 @@ public enum Operations {
                     self.scope = scope
                     self.sort = sort
                     self.direction = direction
-                    self.page = page
                     self.perPage = perPage
                     self.before = before
                     self.after = after
-                    self.first = first
-                    self.last = last
                 }
             }
             public var query: Operations.DependabotListAlertsForRepo.Input.Query
