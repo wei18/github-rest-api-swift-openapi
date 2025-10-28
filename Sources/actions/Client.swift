@@ -364,6 +364,361 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// List custom images for an organization
+    ///
+    /// List custom images for an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/get(actions/list-custom-images-for-org)`.
+    public func actionsListCustomImagesForOrg(_ input: Operations.ActionsListCustomImagesForOrg.Input) async throws -> Operations.ActionsListCustomImagesForOrg.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ActionsListCustomImagesForOrg.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/actions/hosted-runners/images/custom",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.ActionsListCustomImagesForOrg.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.ActionsListCustomImagesForOrg.Output.Ok.Body.JsonPayload.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Get a custom image definition for GitHub Actions Hosted Runners
+    ///
+    /// Get a custom image definition for GitHub Actions Hosted Runners.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/get(actions/get-custom-image-for-org)`.
+    public func actionsGetCustomImageForOrg(_ input: Operations.ActionsGetCustomImageForOrg.Input) async throws -> Operations.ActionsGetCustomImageForOrg.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ActionsGetCustomImageForOrg.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/actions/hosted-runners/images/custom/{}",
+                    parameters: [
+                        input.path.org,
+                        input.path.imageDefinitionId
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.ActionsGetCustomImageForOrg.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ActionsHostedRunnerCustomImage.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Delete a custom image from the organization
+    ///
+    /// Delete a custom image from the organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/delete(actions/delete-custom-image-from-org)`.
+    public func actionsDeleteCustomImageFromOrg(_ input: Operations.ActionsDeleteCustomImageFromOrg.Input) async throws -> Operations.ActionsDeleteCustomImageFromOrg.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ActionsDeleteCustomImageFromOrg.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/actions/hosted-runners/images/custom/{}",
+                    parameters: [
+                        input.path.org,
+                        input.path.imageDefinitionId
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .delete
+                )
+                suppressMutabilityWarning(&request)
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// List image versions of a custom image for an organization
+    ///
+    /// List image versions of a custom image for an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/get(actions/list-custom-image-versions-for-org)`.
+    public func actionsListCustomImageVersionsForOrg(_ input: Operations.ActionsListCustomImageVersionsForOrg.Input) async throws -> Operations.ActionsListCustomImageVersionsForOrg.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ActionsListCustomImageVersionsForOrg.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/actions/hosted-runners/images/custom/{}/versions",
+                    parameters: [
+                        input.path.org,
+                        input.path.imageDefinitionId
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.ActionsListCustomImageVersionsForOrg.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.ActionsListCustomImageVersionsForOrg.Output.Ok.Body.JsonPayload.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Get an image version of a custom image for GitHub Actions Hosted Runners
+    ///
+    /// Get an image version of a custom image for GitHub Actions Hosted Runners.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/get(actions/get-custom-image-version-for-org)`.
+    public func actionsGetCustomImageVersionForOrg(_ input: Operations.ActionsGetCustomImageVersionForOrg.Input) async throws -> Operations.ActionsGetCustomImageVersionForOrg.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ActionsGetCustomImageVersionForOrg.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/actions/hosted-runners/images/custom/{}/versions/{}",
+                    parameters: [
+                        input.path.org,
+                        input.path.imageDefinitionId,
+                        input.path.version
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.ActionsGetCustomImageVersionForOrg.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ActionsHostedRunnerCustomImageVersion.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Delete an image version of custom image from the organization
+    ///
+    /// Delete an image version of custom image from the organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/delete(actions/delete-custom-image-version-from-org)`.
+    public func actionsDeleteCustomImageVersionFromOrg(_ input: Operations.ActionsDeleteCustomImageVersionFromOrg.Input) async throws -> Operations.ActionsDeleteCustomImageVersionFromOrg.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ActionsDeleteCustomImageVersionFromOrg.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/actions/hosted-runners/images/custom/{}/versions/{}",
+                    parameters: [
+                        input.path.org,
+                        input.path.imageDefinitionId,
+                        input.path.version
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .delete
+                )
+                suppressMutabilityWarning(&request)
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// Get GitHub-owned images for GitHub-hosted runners in an organization
     ///
     /// Get the list of GitHub-owned images available for GitHub-hosted runners for an organization.
