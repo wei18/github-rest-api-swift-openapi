@@ -20,6 +20,7 @@ builder:
     - GitHubRestAPIDesktop
     - GitHubRestAPIEmojis
     - GitHubRestAPIEnterprise_Team_Memberships
+    - GitHubRestAPIEnterprise_Team_Organizations
     - GitHubRestAPIEnterprise_Teams
     - GitHubRestAPIGists
     - GitHubRestAPIGit
