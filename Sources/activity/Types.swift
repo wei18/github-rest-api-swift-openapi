@@ -1034,6 +1034,89 @@ public enum Components {
                 case status
             }
         }
+        /// An enterprise on GitHub.
+        ///
+        /// - Remark: Generated from `#/components/schemas/enterprise`.
+        public struct Enterprise: Codable, Hashable, Sendable {
+            /// A short description of the enterprise.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/enterprise/html_url`.
+            public var htmlUrl: Swift.String
+            /// The enterprise's website URL.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise/website_url`.
+            public var websiteUrl: Swift.String?
+            /// Unique identifier of the enterprise
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/enterprise/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the enterprise.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise/name`.
+            public var name: Swift.String
+            /// The slug url identifier for the enterprise.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise/slug`.
+            public var slug: Swift.String
+            /// - Remark: Generated from `#/components/schemas/enterprise/created_at`.
+            public var createdAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/enterprise/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/enterprise/avatar_url`.
+            public var avatarUrl: Swift.String
+            /// Creates a new `Enterprise`.
+            ///
+            /// - Parameters:
+            ///   - description: A short description of the enterprise.
+            ///   - htmlUrl:
+            ///   - websiteUrl: The enterprise's website URL.
+            ///   - id: Unique identifier of the enterprise
+            ///   - nodeId:
+            ///   - name: The name of the enterprise.
+            ///   - slug: The slug url identifier for the enterprise.
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - avatarUrl:
+            public init(
+                description: Swift.String? = nil,
+                htmlUrl: Swift.String,
+                websiteUrl: Swift.String? = nil,
+                id: Swift.Int,
+                nodeId: Swift.String,
+                name: Swift.String,
+                slug: Swift.String,
+                createdAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil,
+                avatarUrl: Swift.String
+            ) {
+                self.description = description
+                self.htmlUrl = htmlUrl
+                self.websiteUrl = websiteUrl
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.slug = slug
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.avatarUrl = avatarUrl
+            }
+            public enum CodingKeys: String, CodingKey {
+                case description
+                case htmlUrl = "html_url"
+                case websiteUrl = "website_url"
+                case id
+                case nodeId = "node_id"
+                case name
+                case slug
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case avatarUrl = "avatar_url"
+            }
+        }
         /// Validation Error
         ///
         /// - Remark: Generated from `#/components/schemas/validation-error`.
@@ -2218,6 +2301,1278 @@ public enum Components {
                 case avatarUrl = "avatar_url"
             }
         }
+        /// A collection of related issues and pull requests.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-milestone`.
+        public struct NullableMilestone: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/labels_url`.
+            public var labelsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/node_id`.
+            public var nodeId: Swift.String
+            /// The number of the milestone.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/number`.
+            public var number: Swift.Int
+            /// The state of the milestone.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/state`.
+            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case open = "open"
+                case closed = "closed"
+            }
+            /// The state of the milestone.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/state`.
+            public var state: Components.Schemas.NullableMilestone.StatePayload
+            /// The title of the milestone.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/title`.
+            public var title: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/creator`.
+            public var creator: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/open_issues`.
+            public var openIssues: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/closed_issues`.
+            public var closedIssues: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/closed_at`.
+            public var closedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/nullable-milestone/due_on`.
+            public var dueOn: Foundation.Date?
+            /// Creates a new `NullableMilestone`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - labelsUrl:
+            ///   - id:
+            ///   - nodeId:
+            ///   - number: The number of the milestone.
+            ///   - state: The state of the milestone.
+            ///   - title: The title of the milestone.
+            ///   - description:
+            ///   - creator:
+            ///   - openIssues:
+            ///   - closedIssues:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - closedAt:
+            ///   - dueOn:
+            public init(
+                url: Swift.String,
+                htmlUrl: Swift.String,
+                labelsUrl: Swift.String,
+                id: Swift.Int,
+                nodeId: Swift.String,
+                number: Swift.Int,
+                state: Components.Schemas.NullableMilestone.StatePayload,
+                title: Swift.String,
+                description: Swift.String? = nil,
+                creator: Components.Schemas.NullableSimpleUser? = nil,
+                openIssues: Swift.Int,
+                closedIssues: Swift.Int,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                closedAt: Foundation.Date? = nil,
+                dueOn: Foundation.Date? = nil
+            ) {
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.labelsUrl = labelsUrl
+                self.id = id
+                self.nodeId = nodeId
+                self.number = number
+                self.state = state
+                self.title = title
+                self.description = description
+                self.creator = creator
+                self.openIssues = openIssues
+                self.closedIssues = closedIssues
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.closedAt = closedAt
+                self.dueOn = dueOn
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case htmlUrl = "html_url"
+                case labelsUrl = "labels_url"
+                case id
+                case nodeId = "node_id"
+                case number
+                case state
+                case title
+                case description
+                case creator
+                case openIssues = "open_issues"
+                case closedIssues = "closed_issues"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case closedAt = "closed_at"
+                case dueOn = "due_on"
+            }
+        }
+        /// The type of issue.
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-type`.
+        public struct IssueType: Codable, Hashable, Sendable {
+            /// The unique identifier of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/id`.
+            public var id: Swift.Int
+            /// The node identifier of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/name`.
+            public var name: Swift.String
+            /// The description of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/description`.
+            public var description: Swift.String?
+            /// The color of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/color`.
+            @frozen public enum ColorPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case gray = "gray"
+                case blue = "blue"
+                case green = "green"
+                case yellow = "yellow"
+                case orange = "orange"
+                case red = "red"
+                case pink = "pink"
+                case purple = "purple"
+            }
+            /// The color of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/color`.
+            public var color: Components.Schemas.IssueType.ColorPayload?
+            /// The time the issue type created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/created_at`.
+            public var createdAt: Foundation.Date?
+            /// The time the issue type last updated.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// The enabled state of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/is_enabled`.
+            public var isEnabled: Swift.Bool?
+            /// Creates a new `IssueType`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the issue type.
+            ///   - nodeId: The node identifier of the issue type.
+            ///   - name: The name of the issue type.
+            ///   - description: The description of the issue type.
+            ///   - color: The color of the issue type.
+            ///   - createdAt: The time the issue type created.
+            ///   - updatedAt: The time the issue type last updated.
+            ///   - isEnabled: The enabled state of the issue type.
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                name: Swift.String,
+                description: Swift.String? = nil,
+                color: Components.Schemas.IssueType.ColorPayload? = nil,
+                createdAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil,
+                isEnabled: Swift.Bool? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.description = description
+                self.color = color
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.isEnabled = isEnabled
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case name
+                case description
+                case color
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case isEnabled = "is_enabled"
+            }
+        }
+        /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-integration`.
+        public struct NullableIntegration: Codable, Hashable, Sendable {
+            /// Unique identifier of the GitHub app
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/id`.
+            public var id: Swift.Int
+            /// The slug name of the GitHub app
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/slug`.
+            public var slug: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/client_id`.
+            public var clientId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/owner`.
+            @frozen public enum OwnerPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/owner/case1`.
+                case SimpleUser(Components.Schemas.SimpleUser)
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/owner/case2`.
+                case Enterprise(Components.Schemas.Enterprise)
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self = .SimpleUser(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .Enterprise(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    switch self {
+                    case let .SimpleUser(value):
+                        try value.encode(to: encoder)
+                    case let .Enterprise(value):
+                        try value.encode(to: encoder)
+                    }
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/owner`.
+            public var owner: Components.Schemas.NullableIntegration.OwnerPayload
+            /// The name of the GitHub app
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/name`.
+            public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/external_url`.
+            public var externalUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// The set of permissions for the GitHub app
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions`.
+            public struct PermissionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions/issues`.
+                public var issues: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions/checks`.
+                public var checks: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions/metadata`.
+                public var metadata: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions/contents`.
+                public var contents: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions/deployments`.
+                public var deployments: Swift.String?
+                /// A container of undocumented properties.
+                public var additionalProperties: [String: Swift.String]
+                /// Creates a new `PermissionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - issues:
+                ///   - checks:
+                ///   - metadata:
+                ///   - contents:
+                ///   - deployments:
+                ///   - additionalProperties: A container of undocumented properties.
+                public init(
+                    issues: Swift.String? = nil,
+                    checks: Swift.String? = nil,
+                    metadata: Swift.String? = nil,
+                    contents: Swift.String? = nil,
+                    deployments: Swift.String? = nil,
+                    additionalProperties: [String: Swift.String] = .init()
+                ) {
+                    self.issues = issues
+                    self.checks = checks
+                    self.metadata = metadata
+                    self.contents = contents
+                    self.deployments = deployments
+                    self.additionalProperties = additionalProperties
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case issues
+                    case checks
+                    case metadata
+                    case contents
+                    case deployments
+                }
+                public init(from decoder: any Decoder) throws {
+                    let container = try decoder.container(keyedBy: CodingKeys.self)
+                    self.issues = try container.decodeIfPresent(
+                        Swift.String.self,
+                        forKey: .issues
+                    )
+                    self.checks = try container.decodeIfPresent(
+                        Swift.String.self,
+                        forKey: .checks
+                    )
+                    self.metadata = try container.decodeIfPresent(
+                        Swift.String.self,
+                        forKey: .metadata
+                    )
+                    self.contents = try container.decodeIfPresent(
+                        Swift.String.self,
+                        forKey: .contents
+                    )
+                    self.deployments = try container.decodeIfPresent(
+                        Swift.String.self,
+                        forKey: .deployments
+                    )
+                    additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [
+                        "issues",
+                        "checks",
+                        "metadata",
+                        "contents",
+                        "deployments"
+                    ])
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    var container = encoder.container(keyedBy: CodingKeys.self)
+                    try container.encodeIfPresent(
+                        self.issues,
+                        forKey: .issues
+                    )
+                    try container.encodeIfPresent(
+                        self.checks,
+                        forKey: .checks
+                    )
+                    try container.encodeIfPresent(
+                        self.metadata,
+                        forKey: .metadata
+                    )
+                    try container.encodeIfPresent(
+                        self.contents,
+                        forKey: .contents
+                    )
+                    try container.encodeIfPresent(
+                        self.deployments,
+                        forKey: .deployments
+                    )
+                    try encoder.encodeAdditionalProperties(additionalProperties)
+                }
+            }
+            /// The set of permissions for the GitHub app
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/permissions`.
+            public var permissions: Components.Schemas.NullableIntegration.PermissionsPayload
+            /// The list of events for the GitHub app. Note that the `installation_target`, `security_advisory`, and `meta` events are not included because they are global events and not specific to an installation.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/events`.
+            public var events: [Swift.String]
+            /// The number of installations associated with the GitHub app. Only returned when the integration is requesting details about itself.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-integration/installations_count`.
+            public var installationsCount: Swift.Int?
+            /// Creates a new `NullableIntegration`.
+            ///
+            /// - Parameters:
+            ///   - id: Unique identifier of the GitHub app
+            ///   - slug: The slug name of the GitHub app
+            ///   - nodeId:
+            ///   - clientId:
+            ///   - owner:
+            ///   - name: The name of the GitHub app
+            ///   - description:
+            ///   - externalUrl:
+            ///   - htmlUrl:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - permissions: The set of permissions for the GitHub app
+            ///   - events: The list of events for the GitHub app. Note that the `installation_target`, `security_advisory`, and `meta` events are not included because they are global events and not specific to an installation.
+            ///   - installationsCount: The number of installations associated with the GitHub app. Only returned when the integration is requesting details about itself.
+            public init(
+                id: Swift.Int,
+                slug: Swift.String? = nil,
+                nodeId: Swift.String,
+                clientId: Swift.String? = nil,
+                owner: Components.Schemas.NullableIntegration.OwnerPayload,
+                name: Swift.String,
+                description: Swift.String? = nil,
+                externalUrl: Swift.String,
+                htmlUrl: Swift.String,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                permissions: Components.Schemas.NullableIntegration.PermissionsPayload,
+                events: [Swift.String],
+                installationsCount: Swift.Int? = nil
+            ) {
+                self.id = id
+                self.slug = slug
+                self.nodeId = nodeId
+                self.clientId = clientId
+                self.owner = owner
+                self.name = name
+                self.description = description
+                self.externalUrl = externalUrl
+                self.htmlUrl = htmlUrl
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.permissions = permissions
+                self.events = events
+                self.installationsCount = installationsCount
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case slug
+                case nodeId = "node_id"
+                case clientId = "client_id"
+                case owner
+                case name
+                case description
+                case externalUrl = "external_url"
+                case htmlUrl = "html_url"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case permissions
+                case events
+                case installationsCount = "installations_count"
+            }
+        }
+        /// How the author is associated with the repository.
+        ///
+        /// - Remark: Generated from `#/components/schemas/author-association`.
+        @frozen public enum AuthorAssociation: String, Codable, Hashable, Sendable, CaseIterable {
+            case collaborator = "COLLABORATOR"
+            case contributor = "CONTRIBUTOR"
+            case firstTimer = "FIRST_TIMER"
+            case firstTimeContributor = "FIRST_TIME_CONTRIBUTOR"
+            case mannequin = "MANNEQUIN"
+            case member = "MEMBER"
+            case none = "NONE"
+            case owner = "OWNER"
+        }
+        /// - Remark: Generated from `#/components/schemas/reaction-rollup`.
+        public struct ReactionRollup: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/total_count`.
+            public var totalCount: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/+1`.
+            public var _plus_1: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/-1`.
+            public var _hyphen_1: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/laugh`.
+            public var laugh: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/confused`.
+            public var confused: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/heart`.
+            public var heart: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/hooray`.
+            public var hooray: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/eyes`.
+            public var eyes: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/reaction-rollup/rocket`.
+            public var rocket: Swift.Int
+            /// Creates a new `ReactionRollup`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - totalCount:
+            ///   - _plus_1:
+            ///   - _hyphen_1:
+            ///   - laugh:
+            ///   - confused:
+            ///   - heart:
+            ///   - hooray:
+            ///   - eyes:
+            ///   - rocket:
+            public init(
+                url: Swift.String,
+                totalCount: Swift.Int,
+                _plus_1: Swift.Int,
+                _hyphen_1: Swift.Int,
+                laugh: Swift.Int,
+                confused: Swift.Int,
+                heart: Swift.Int,
+                hooray: Swift.Int,
+                eyes: Swift.Int,
+                rocket: Swift.Int
+            ) {
+                self.url = url
+                self.totalCount = totalCount
+                self._plus_1 = _plus_1
+                self._hyphen_1 = _hyphen_1
+                self.laugh = laugh
+                self.confused = confused
+                self.heart = heart
+                self.hooray = hooray
+                self.eyes = eyes
+                self.rocket = rocket
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case totalCount = "total_count"
+                case _plus_1 = "+1"
+                case _hyphen_1 = "-1"
+                case laugh
+                case confused
+                case heart
+                case hooray
+                case eyes
+                case rocket
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/sub-issues-summary`.
+        public struct SubIssuesSummary: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/sub-issues-summary/total`.
+            public var total: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/sub-issues-summary/completed`.
+            public var completed: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/sub-issues-summary/percent_completed`.
+            public var percentCompleted: Swift.Int
+            /// Creates a new `SubIssuesSummary`.
+            ///
+            /// - Parameters:
+            ///   - total:
+            ///   - completed:
+            ///   - percentCompleted:
+            public init(
+                total: Swift.Int,
+                completed: Swift.Int,
+                percentCompleted: Swift.Int
+            ) {
+                self.total = total
+                self.completed = completed
+                self.percentCompleted = percentCompleted
+            }
+            public enum CodingKeys: String, CodingKey {
+                case total
+                case completed
+                case percentCompleted = "percent_completed"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary`.
+        public struct IssueDependenciesSummary: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/blocked_by`.
+            public var blockedBy: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/blocking`.
+            public var blocking: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/total_blocked_by`.
+            public var totalBlockedBy: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/total_blocking`.
+            public var totalBlocking: Swift.Int
+            /// Creates a new `IssueDependenciesSummary`.
+            ///
+            /// - Parameters:
+            ///   - blockedBy:
+            ///   - blocking:
+            ///   - totalBlockedBy:
+            ///   - totalBlocking:
+            public init(
+                blockedBy: Swift.Int,
+                blocking: Swift.Int,
+                totalBlockedBy: Swift.Int,
+                totalBlocking: Swift.Int
+            ) {
+                self.blockedBy = blockedBy
+                self.blocking = blocking
+                self.totalBlockedBy = totalBlockedBy
+                self.totalBlocking = totalBlocking
+            }
+            public enum CodingKeys: String, CodingKey {
+                case blockedBy = "blocked_by"
+                case blocking
+                case totalBlockedBy = "total_blocked_by"
+                case totalBlocking = "total_blocking"
+            }
+        }
+        /// A value assigned to an issue field
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-field-value`.
+        public struct IssueFieldValue: Codable, Hashable, Sendable {
+            /// Unique identifier for the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/issue_field_id`.
+            public var issueFieldId: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/node_id`.
+            public var nodeId: Swift.String
+            /// The data type of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/data_type`.
+            @frozen public enum DataTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case text = "text"
+                case singleSelect = "single_select"
+                case number = "number"
+                case date = "date"
+            }
+            /// The data type of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/data_type`.
+            public var dataType: Components.Schemas.IssueFieldValue.DataTypePayload
+            /// The value of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/value`.
+            public struct ValuePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/value/value1`.
+                public var value1: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/value/value2`.
+                public var value2: Swift.Double?
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/value/value3`.
+                public var value3: Swift.Int?
+                /// Creates a new `ValuePayload`.
+                ///
+                /// - Parameters:
+                ///   - value1:
+                ///   - value2:
+                ///   - value3:
+                public init(
+                    value1: Swift.String? = nil,
+                    value2: Swift.Double? = nil,
+                    value3: Swift.Int? = nil
+                ) {
+                    self.value1 = value1
+                    self.value2 = value2
+                    self.value3 = value3
+                }
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self.value1 = try decoder.decodeFromSingleValueContainer()
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self.value2 = try decoder.decodeFromSingleValueContainer()
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self.value3 = try decoder.decodeFromSingleValueContainer()
+                    } catch {
+                        errors.append(error)
+                    }
+                    try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
+                        [
+                            self.value1,
+                            self.value2,
+                            self.value3
+                        ],
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    try encoder.encodeFirstNonNilValueToSingleValueContainer([
+                        self.value1,
+                        self.value2,
+                        self.value3
+                    ])
+                }
+            }
+            /// The value of the issue field
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/value`.
+            public var value: Components.Schemas.IssueFieldValue.ValuePayload?
+            /// Details about the selected option (only present for single_select fields)
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option`.
+            public struct SingleSelectOptionPayload: Codable, Hashable, Sendable {
+                /// Unique identifier for the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option/id`.
+                public var id: Swift.Int64
+                /// The name of the option
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option/name`.
+                public var name: Swift.String
+                /// The color of the option
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option/color`.
+                public var color: Swift.String
+                /// Creates a new `SingleSelectOptionPayload`.
+                ///
+                /// - Parameters:
+                ///   - id: Unique identifier for the option.
+                ///   - name: The name of the option
+                ///   - color: The color of the option
+                public init(
+                    id: Swift.Int64,
+                    name: Swift.String,
+                    color: Swift.String
+                ) {
+                    self.id = id
+                    self.name = name
+                    self.color = color
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case name
+                    case color
+                }
+            }
+            /// Details about the selected option (only present for single_select fields)
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option`.
+            public var singleSelectOption: Components.Schemas.IssueFieldValue.SingleSelectOptionPayload?
+            /// Creates a new `IssueFieldValue`.
+            ///
+            /// - Parameters:
+            ///   - issueFieldId: Unique identifier for the issue field.
+            ///   - nodeId:
+            ///   - dataType: The data type of the issue field
+            ///   - value: The value of the issue field
+            ///   - singleSelectOption: Details about the selected option (only present for single_select fields)
+            public init(
+                issueFieldId: Swift.Int64,
+                nodeId: Swift.String,
+                dataType: Components.Schemas.IssueFieldValue.DataTypePayload,
+                value: Components.Schemas.IssueFieldValue.ValuePayload? = nil,
+                singleSelectOption: Components.Schemas.IssueFieldValue.SingleSelectOptionPayload? = nil
+            ) {
+                self.issueFieldId = issueFieldId
+                self.nodeId = nodeId
+                self.dataType = dataType
+                self.value = value
+                self.singleSelectOption = singleSelectOption
+            }
+            public enum CodingKeys: String, CodingKey {
+                case issueFieldId = "issue_field_id"
+                case nodeId = "node_id"
+                case dataType = "data_type"
+                case value
+                case singleSelectOption = "single_select_option"
+            }
+        }
+        /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue`.
+        public struct Issue: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issue/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/issue/node_id`.
+            public var nodeId: Swift.String
+            /// URL for the issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue/repository_url`.
+            public var repositoryUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue/labels_url`.
+            public var labelsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue/comments_url`.
+            public var commentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue/events_url`.
+            public var eventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue/html_url`.
+            public var htmlUrl: Swift.String
+            /// Number uniquely identifying the issue within its repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/number`.
+            public var number: Swift.Int
+            /// State of the issue; either 'open' or 'closed'
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/state`.
+            public var state: Swift.String
+            /// The reason for the current state
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/state_reason`.
+            @frozen public enum StateReasonPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case completed = "completed"
+                case reopened = "reopened"
+                case notPlanned = "not_planned"
+                case duplicate = "duplicate"
+            }
+            /// The reason for the current state
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/state_reason`.
+            public var stateReason: Components.Schemas.Issue.StateReasonPayload?
+            /// Title of the issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/title`.
+            public var title: Swift.String
+            /// Contents of the issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/body`.
+            public var body: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/user`.
+            public var user: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload`.
+            @frozen public enum LabelsPayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case1`.
+                case case1(Swift.String)
+                /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2`.
+                public struct Case2Payload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/id`.
+                    public var id: Swift.Int64?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/node_id`.
+                    public var nodeId: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/url`.
+                    public var url: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/name`.
+                    public var name: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/description`.
+                    public var description: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/color`.
+                    public var color: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2/default`.
+                    public var _default: Swift.Bool?
+                    /// Creates a new `Case2Payload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - nodeId:
+                    ///   - url:
+                    ///   - name:
+                    ///   - description:
+                    ///   - color:
+                    ///   - _default:
+                    public init(
+                        id: Swift.Int64? = nil,
+                        nodeId: Swift.String? = nil,
+                        url: Swift.String? = nil,
+                        name: Swift.String? = nil,
+                        description: Swift.String? = nil,
+                        color: Swift.String? = nil,
+                        _default: Swift.Bool? = nil
+                    ) {
+                        self.id = id
+                        self.nodeId = nodeId
+                        self.url = url
+                        self.name = name
+                        self.description = description
+                        self.color = color
+                        self._default = _default
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case nodeId = "node_id"
+                        case url
+                        case name
+                        case description
+                        case color
+                        case _default = "default"
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2`.
+                case case2(Components.Schemas.Issue.LabelsPayloadPayload.Case2Payload)
+                public init(from decoder: any Decoder) throws {
+                    var errors: [any Error] = []
+                    do {
+                        self = .case1(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .case2(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Encoder) throws {
+                    switch self {
+                    case let .case1(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    case let .case2(value):
+                        try value.encode(to: encoder)
+                    }
+                }
+            }
+            /// Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/labels`.
+            public typealias LabelsPayload = [Components.Schemas.Issue.LabelsPayloadPayload]
+            /// Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/labels`.
+            public var labels: Components.Schemas.Issue.LabelsPayload
+            /// - Remark: Generated from `#/components/schemas/issue/assignee`.
+            public var assignee: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/issue/assignees`.
+            public var assignees: [Components.Schemas.SimpleUser]?
+            /// - Remark: Generated from `#/components/schemas/issue/milestone`.
+            public var milestone: Components.Schemas.NullableMilestone?
+            /// - Remark: Generated from `#/components/schemas/issue/locked`.
+            public var locked: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/issue/active_lock_reason`.
+            public var activeLockReason: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/comments`.
+            public var comments: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue/pull_request`.
+            public struct PullRequestPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/issue/pull_request/merged_at`.
+                public var mergedAt: Foundation.Date?
+                /// - Remark: Generated from `#/components/schemas/issue/pull_request/diff_url`.
+                public var diffUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/issue/pull_request/html_url`.
+                public var htmlUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/issue/pull_request/patch_url`.
+                public var patchUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/issue/pull_request/url`.
+                public var url: Swift.String?
+                /// Creates a new `PullRequestPayload`.
+                ///
+                /// - Parameters:
+                ///   - mergedAt:
+                ///   - diffUrl:
+                ///   - htmlUrl:
+                ///   - patchUrl:
+                ///   - url:
+                public init(
+                    mergedAt: Foundation.Date? = nil,
+                    diffUrl: Swift.String? = nil,
+                    htmlUrl: Swift.String? = nil,
+                    patchUrl: Swift.String? = nil,
+                    url: Swift.String? = nil
+                ) {
+                    self.mergedAt = mergedAt
+                    self.diffUrl = diffUrl
+                    self.htmlUrl = htmlUrl
+                    self.patchUrl = patchUrl
+                    self.url = url
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case mergedAt = "merged_at"
+                    case diffUrl = "diff_url"
+                    case htmlUrl = "html_url"
+                    case patchUrl = "patch_url"
+                    case url
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/issue/pull_request`.
+            public var pullRequest: Components.Schemas.Issue.PullRequestPayload?
+            /// - Remark: Generated from `#/components/schemas/issue/closed_at`.
+            public var closedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/issue/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/issue/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/issue/draft`.
+            public var draft: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/issue/closed_by`.
+            public var closedBy: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/issue/body_html`.
+            public var bodyHtml: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/body_text`.
+            public var bodyText: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/timeline_url`.
+            public var timelineUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/type`.
+            public var _type: Components.Schemas.IssueType?
+            /// - Remark: Generated from `#/components/schemas/issue/repository`.
+            public var repository: Components.Schemas.Repository?
+            /// - Remark: Generated from `#/components/schemas/issue/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/issue/author_association`.
+            public var authorAssociation: Components.Schemas.AuthorAssociation?
+            /// - Remark: Generated from `#/components/schemas/issue/reactions`.
+            public var reactions: Components.Schemas.ReactionRollup?
+            /// - Remark: Generated from `#/components/schemas/issue/sub_issues_summary`.
+            public var subIssuesSummary: Components.Schemas.SubIssuesSummary?
+            /// URL to get the parent issue of this issue, if it is a sub-issue
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue/parent_issue_url`.
+            public var parentIssueUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/issue_dependencies_summary`.
+            public var issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary?
+            /// - Remark: Generated from `#/components/schemas/issue/issue_field_values`.
+            public var issueFieldValues: [Components.Schemas.IssueFieldValue]?
+            /// Creates a new `Issue`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url: URL for the issue
+            ///   - repositoryUrl:
+            ///   - labelsUrl:
+            ///   - commentsUrl:
+            ///   - eventsUrl:
+            ///   - htmlUrl:
+            ///   - number: Number uniquely identifying the issue within its repository
+            ///   - state: State of the issue; either 'open' or 'closed'
+            ///   - stateReason: The reason for the current state
+            ///   - title: Title of the issue
+            ///   - body: Contents of the issue
+            ///   - user:
+            ///   - labels: Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
+            ///   - assignee:
+            ///   - assignees:
+            ///   - milestone:
+            ///   - locked:
+            ///   - activeLockReason:
+            ///   - comments:
+            ///   - pullRequest:
+            ///   - closedAt:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - draft:
+            ///   - closedBy:
+            ///   - bodyHtml:
+            ///   - bodyText:
+            ///   - timelineUrl:
+            ///   - _type:
+            ///   - repository:
+            ///   - performedViaGithubApp:
+            ///   - authorAssociation:
+            ///   - reactions:
+            ///   - subIssuesSummary:
+            ///   - parentIssueUrl: URL to get the parent issue of this issue, if it is a sub-issue
+            ///   - issueDependenciesSummary:
+            ///   - issueFieldValues:
+            public init(
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                url: Swift.String,
+                repositoryUrl: Swift.String,
+                labelsUrl: Swift.String,
+                commentsUrl: Swift.String,
+                eventsUrl: Swift.String,
+                htmlUrl: Swift.String,
+                number: Swift.Int,
+                state: Swift.String,
+                stateReason: Components.Schemas.Issue.StateReasonPayload? = nil,
+                title: Swift.String,
+                body: Swift.String? = nil,
+                user: Components.Schemas.NullableSimpleUser? = nil,
+                labels: Components.Schemas.Issue.LabelsPayload,
+                assignee: Components.Schemas.NullableSimpleUser? = nil,
+                assignees: [Components.Schemas.SimpleUser]? = nil,
+                milestone: Components.Schemas.NullableMilestone? = nil,
+                locked: Swift.Bool,
+                activeLockReason: Swift.String? = nil,
+                comments: Swift.Int,
+                pullRequest: Components.Schemas.Issue.PullRequestPayload? = nil,
+                closedAt: Foundation.Date? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                draft: Swift.Bool? = nil,
+                closedBy: Components.Schemas.NullableSimpleUser? = nil,
+                bodyHtml: Swift.String? = nil,
+                bodyText: Swift.String? = nil,
+                timelineUrl: Swift.String? = nil,
+                _type: Components.Schemas.IssueType? = nil,
+                repository: Components.Schemas.Repository? = nil,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                authorAssociation: Components.Schemas.AuthorAssociation? = nil,
+                reactions: Components.Schemas.ReactionRollup? = nil,
+                subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
+                parentIssueUrl: Swift.String? = nil,
+                issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary? = nil,
+                issueFieldValues: [Components.Schemas.IssueFieldValue]? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.repositoryUrl = repositoryUrl
+                self.labelsUrl = labelsUrl
+                self.commentsUrl = commentsUrl
+                self.eventsUrl = eventsUrl
+                self.htmlUrl = htmlUrl
+                self.number = number
+                self.state = state
+                self.stateReason = stateReason
+                self.title = title
+                self.body = body
+                self.user = user
+                self.labels = labels
+                self.assignee = assignee
+                self.assignees = assignees
+                self.milestone = milestone
+                self.locked = locked
+                self.activeLockReason = activeLockReason
+                self.comments = comments
+                self.pullRequest = pullRequest
+                self.closedAt = closedAt
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.draft = draft
+                self.closedBy = closedBy
+                self.bodyHtml = bodyHtml
+                self.bodyText = bodyText
+                self.timelineUrl = timelineUrl
+                self._type = _type
+                self.repository = repository
+                self.performedViaGithubApp = performedViaGithubApp
+                self.authorAssociation = authorAssociation
+                self.reactions = reactions
+                self.subIssuesSummary = subIssuesSummary
+                self.parentIssueUrl = parentIssueUrl
+                self.issueDependenciesSummary = issueDependenciesSummary
+                self.issueFieldValues = issueFieldValues
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case repositoryUrl = "repository_url"
+                case labelsUrl = "labels_url"
+                case commentsUrl = "comments_url"
+                case eventsUrl = "events_url"
+                case htmlUrl = "html_url"
+                case number
+                case state
+                case stateReason = "state_reason"
+                case title
+                case body
+                case user
+                case labels
+                case assignee
+                case assignees
+                case milestone
+                case locked
+                case activeLockReason = "active_lock_reason"
+                case comments
+                case pullRequest = "pull_request"
+                case closedAt = "closed_at"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case draft
+                case closedBy = "closed_by"
+                case bodyHtml = "body_html"
+                case bodyText = "body_text"
+                case timelineUrl = "timeline_url"
+                case _type = "type"
+                case repository
+                case performedViaGithubApp = "performed_via_github_app"
+                case authorAssociation = "author_association"
+                case reactions
+                case subIssuesSummary = "sub_issues_summary"
+                case parentIssueUrl = "parent_issue_url"
+                case issueDependenciesSummary = "issue_dependencies_summary"
+                case issueFieldValues = "issue_field_values"
+            }
+        }
+        /// Comments provide a way for people to collaborate on an issue.
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-comment`.
+        public struct IssueComment: Codable, Hashable, Sendable {
+            /// Unique identifier of the issue comment
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-comment/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/issue-comment/node_id`.
+            public var nodeId: Swift.String
+            /// URL for the issue comment
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-comment/url`.
+            public var url: Swift.String
+            /// Contents of the issue comment
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-comment/body`.
+            public var body: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue-comment/body_text`.
+            public var bodyText: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue-comment/body_html`.
+            public var bodyHtml: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue-comment/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-comment/user`.
+            public var user: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/issue-comment/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/issue-comment/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/issue-comment/issue_url`.
+            public var issueUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-comment/author_association`.
+            public var authorAssociation: Components.Schemas.AuthorAssociation
+            /// - Remark: Generated from `#/components/schemas/issue-comment/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/issue-comment/reactions`.
+            public var reactions: Components.Schemas.ReactionRollup?
+            /// Creates a new `IssueComment`.
+            ///
+            /// - Parameters:
+            ///   - id: Unique identifier of the issue comment
+            ///   - nodeId:
+            ///   - url: URL for the issue comment
+            ///   - body: Contents of the issue comment
+            ///   - bodyText:
+            ///   - bodyHtml:
+            ///   - htmlUrl:
+            ///   - user:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - issueUrl:
+            ///   - authorAssociation:
+            ///   - performedViaGithubApp:
+            ///   - reactions:
+            public init(
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                url: Swift.String,
+                body: Swift.String? = nil,
+                bodyText: Swift.String? = nil,
+                bodyHtml: Swift.String? = nil,
+                htmlUrl: Swift.String,
+                user: Components.Schemas.NullableSimpleUser? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                issueUrl: Swift.String,
+                authorAssociation: Components.Schemas.AuthorAssociation,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                reactions: Components.Schemas.ReactionRollup? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.body = body
+                self.bodyText = bodyText
+                self.bodyHtml = bodyHtml
+                self.htmlUrl = htmlUrl
+                self.user = user
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.issueUrl = issueUrl
+                self.authorAssociation = authorAssociation
+                self.performedViaGithubApp = performedViaGithubApp
+                self.reactions = reactions
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case body
+                case bodyText = "body_text"
+                case bodyHtml = "body_html"
+                case htmlUrl = "html_url"
+                case user
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case issueUrl = "issue_url"
+                case authorAssociation = "author_association"
+                case performedViaGithubApp = "performed_via_github_app"
+                case reactions
+            }
+        }
         /// Event
         ///
         /// - Remark: Generated from `#/components/schemas/event`.
@@ -2262,178 +3617,87 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/event/org`.
             public var org: Components.Schemas.Actor?
             /// - Remark: Generated from `#/components/schemas/event/payload`.
-            @frozen public enum PayloadPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/event/payload/case1`.
-                case case1(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case2`.
-                case case2(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case3`.
-                case case3(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case4`.
-                case case4(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case5`.
-                case case5(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case6`.
-                case case6(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case7`.
-                case case7(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case8`.
-                case case8(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case9`.
-                case case9(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case10`.
-                case case10(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case11`.
-                case case11(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case12`.
-                case case12(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case13`.
-                case case13(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case14`.
-                case case14(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case15`.
-                case case15(OpenAPIRuntime.OpenAPIValueContainer)
-                /// - Remark: Generated from `#/components/schemas/event/payload/case16`.
-                case case16(OpenAPIRuntime.OpenAPIValueContainer)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
-                    do {
-                        self = .case1(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
+            public struct PayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/event/payload/action`.
+                public var action: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/event/payload/issue`.
+                public var issue: Components.Schemas.Issue?
+                /// - Remark: Generated from `#/components/schemas/event/payload/comment`.
+                public var comment: Components.Schemas.IssueComment?
+                /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload`.
+                public struct PagesPayloadPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/page_name`.
+                    public var pageName: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/title`.
+                    public var title: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/summary`.
+                    public var summary: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/action`.
+                    public var action: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/sha`.
+                    public var sha: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/html_url`.
+                    public var htmlUrl: Swift.String?
+                    /// Creates a new `PagesPayloadPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - pageName:
+                    ///   - title:
+                    ///   - summary:
+                    ///   - action:
+                    ///   - sha:
+                    ///   - htmlUrl:
+                    public init(
+                        pageName: Swift.String? = nil,
+                        title: Swift.String? = nil,
+                        summary: Swift.String? = nil,
+                        action: Swift.String? = nil,
+                        sha: Swift.String? = nil,
+                        htmlUrl: Swift.String? = nil
+                    ) {
+                        self.pageName = pageName
+                        self.title = title
+                        self.summary = summary
+                        self.action = action
+                        self.sha = sha
+                        self.htmlUrl = htmlUrl
                     }
-                    do {
-                        self = .case2(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
+                    public enum CodingKeys: String, CodingKey {
+                        case pageName = "page_name"
+                        case title
+                        case summary
+                        case action
+                        case sha
+                        case htmlUrl = "html_url"
                     }
-                    do {
-                        self = .case3(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case4(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case5(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case6(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case7(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case8(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case9(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case10(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case11(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case12(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case13(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case14(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case15(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case16(try .init(from: decoder))
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
-                        type: Self.self,
-                        codingPath: decoder.codingPath,
-                        errors: errors
-                    )
                 }
-                public func encode(to encoder: any Encoder) throws {
-                    switch self {
-                    case let .case1(value):
-                        try value.encode(to: encoder)
-                    case let .case2(value):
-                        try value.encode(to: encoder)
-                    case let .case3(value):
-                        try value.encode(to: encoder)
-                    case let .case4(value):
-                        try value.encode(to: encoder)
-                    case let .case5(value):
-                        try value.encode(to: encoder)
-                    case let .case6(value):
-                        try value.encode(to: encoder)
-                    case let .case7(value):
-                        try value.encode(to: encoder)
-                    case let .case8(value):
-                        try value.encode(to: encoder)
-                    case let .case9(value):
-                        try value.encode(to: encoder)
-                    case let .case10(value):
-                        try value.encode(to: encoder)
-                    case let .case11(value):
-                        try value.encode(to: encoder)
-                    case let .case12(value):
-                        try value.encode(to: encoder)
-                    case let .case13(value):
-                        try value.encode(to: encoder)
-                    case let .case14(value):
-                        try value.encode(to: encoder)
-                    case let .case15(value):
-                        try value.encode(to: encoder)
-                    case let .case16(value):
-                        try value.encode(to: encoder)
-                    }
+                /// - Remark: Generated from `#/components/schemas/event/payload/pages`.
+                public typealias PagesPayload = [Components.Schemas.Event.PayloadPayload.PagesPayloadPayload]
+                /// - Remark: Generated from `#/components/schemas/event/payload/pages`.
+                public var pages: Components.Schemas.Event.PayloadPayload.PagesPayload?
+                /// Creates a new `PayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - action:
+                ///   - issue:
+                ///   - comment:
+                ///   - pages:
+                public init(
+                    action: Swift.String? = nil,
+                    issue: Components.Schemas.Issue? = nil,
+                    comment: Components.Schemas.IssueComment? = nil,
+                    pages: Components.Schemas.Event.PayloadPayload.PagesPayload? = nil
+                ) {
+                    self.action = action
+                    self.issue = issue
+                    self.comment = comment
+                    self.pages = pages
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case action
+                    case issue
+                    case comment
+                    case pages
                 }
             }
             /// - Remark: Generated from `#/components/schemas/event/payload`.
@@ -3806,6 +5070,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/username`.
         public typealias Username = Swift.String
+        /// The organization name. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/org`.
+        public typealias Org = Swift.String
         /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
         ///
         /// - Remark: Generated from `#/components/parameters/public-events-per-page`.
@@ -3834,10 +5102,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/thread-id`.
         public typealias ThreadId = Swift.Int
-        /// The organization name. The name is not case sensitive.
-        ///
-        /// - Remark: Generated from `#/components/parameters/org`.
-        public typealias Org = Swift.String
         /// The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to.
         ///
         /// - Remark: Generated from `#/components/parameters/sort-starred`.
