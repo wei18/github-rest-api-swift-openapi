@@ -1295,169 +1295,48 @@ public enum Operations {
             /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody`.
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json`.
-                public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// The name of the campaign
-                    ///
-                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/name`.
-                    public var name: Swift.String
-                    /// A description for the campaign
-                    ///
-                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/description`.
-                    public var description: Swift.String
-                    /// The logins of the users to set as the campaign managers. At this time, only a single manager can be supplied.
-                    ///
-                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/managers`.
-                    public var managers: [Swift.String]?
-                    /// The slugs of the teams to set as the campaign managers.
-                    ///
-                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/team_managers`.
-                    public var teamManagers: [Swift.String]?
-                    /// The end date and time of the campaign. The date must be in the future.
-                    ///
-                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/ends_at`.
-                    public var endsAt: Foundation.Date
-                    /// The contact link of the campaign. Must be a URI.
-                    ///
-                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/contact_link`.
-                    public var contactLink: Swift.String?
-                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/CodeScanningAlertsPayload`.
-                    public struct CodeScanningAlertsPayloadPayload: Codable, Hashable, Sendable {
-                        /// The repository id
-                        ///
-                        /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/CodeScanningAlertsPayload/repository_id`.
-                        public var repositoryId: Swift.Int
-                        /// The alert numbers
-                        ///
-                        /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/CodeScanningAlertsPayload/alert_numbers`.
-                        public var alertNumbers: [Swift.Int]
-                        /// Creates a new `CodeScanningAlertsPayloadPayload`.
-                        ///
-                        /// - Parameters:
-                        ///   - repositoryId: The repository id
-                        ///   - alertNumbers: The alert numbers
-                        public init(
-                            repositoryId: Swift.Int,
-                            alertNumbers: [Swift.Int]
-                        ) {
-                            self.repositoryId = repositoryId
-                            self.alertNumbers = alertNumbers
-                        }
-                        public enum CodingKeys: String, CodingKey {
-                            case repositoryId = "repository_id"
-                            case alertNumbers = "alert_numbers"
-                        }
-                        public init(from decoder: any Decoder) throws {
-                            let container = try decoder.container(keyedBy: CodingKeys.self)
-                            self.repositoryId = try container.decode(
-                                Swift.Int.self,
-                                forKey: .repositoryId
-                            )
-                            self.alertNumbers = try container.decode(
-                                [Swift.Int].self,
-                                forKey: .alertNumbers
-                            )
-                            try decoder.ensureNoAdditionalProperties(knownKeys: [
-                                "repository_id",
-                                "alert_numbers"
-                            ])
-                        }
+                @frozen public enum JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/case1`.
+                    public struct Case1Payload: Codable, Hashable, Sendable {
+                        /// Creates a new `Case1Payload`.
+                        public init() {}
                     }
-                    /// The code scanning alerts to include in this campaign
-                    ///
-                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/code_scanning_alerts`.
-                    public typealias CodeScanningAlertsPayload = [Operations.CampaignsCreateCampaign.Input.Body.JsonPayload.CodeScanningAlertsPayloadPayload]
-                    /// The code scanning alerts to include in this campaign
-                    ///
-                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/code_scanning_alerts`.
-                    public var codeScanningAlerts: Operations.CampaignsCreateCampaign.Input.Body.JsonPayload.CodeScanningAlertsPayload
-                    /// If true, will automatically generate issues for the campaign. The default is false.
-                    ///
-                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/generate_issues`.
-                    public var generateIssues: Swift.Bool?
-                    /// Creates a new `JsonPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - name: The name of the campaign
-                    ///   - description: A description for the campaign
-                    ///   - managers: The logins of the users to set as the campaign managers. At this time, only a single manager can be supplied.
-                    ///   - teamManagers: The slugs of the teams to set as the campaign managers.
-                    ///   - endsAt: The end date and time of the campaign. The date must be in the future.
-                    ///   - contactLink: The contact link of the campaign. Must be a URI.
-                    ///   - codeScanningAlerts: The code scanning alerts to include in this campaign
-                    ///   - generateIssues: If true, will automatically generate issues for the campaign. The default is false.
-                    public init(
-                        name: Swift.String,
-                        description: Swift.String,
-                        managers: [Swift.String]? = nil,
-                        teamManagers: [Swift.String]? = nil,
-                        endsAt: Foundation.Date,
-                        contactLink: Swift.String? = nil,
-                        codeScanningAlerts: Operations.CampaignsCreateCampaign.Input.Body.JsonPayload.CodeScanningAlertsPayload,
-                        generateIssues: Swift.Bool? = nil
-                    ) {
-                        self.name = name
-                        self.description = description
-                        self.managers = managers
-                        self.teamManagers = teamManagers
-                        self.endsAt = endsAt
-                        self.contactLink = contactLink
-                        self.codeScanningAlerts = codeScanningAlerts
-                        self.generateIssues = generateIssues
+                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/case1`.
+                    case case1(Operations.CampaignsCreateCampaign.Input.Body.JsonPayload.Case1Payload)
+                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/case2`.
+                    public struct Case2Payload: Codable, Hashable, Sendable {
+                        /// Creates a new `Case2Payload`.
+                        public init() {}
                     }
-                    public enum CodingKeys: String, CodingKey {
-                        case name
-                        case description
-                        case managers
-                        case teamManagers = "team_managers"
-                        case endsAt = "ends_at"
-                        case contactLink = "contact_link"
-                        case codeScanningAlerts = "code_scanning_alerts"
-                        case generateIssues = "generate_issues"
-                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/case2`.
+                    case case2(Operations.CampaignsCreateCampaign.Input.Body.JsonPayload.Case2Payload)
                     public init(from decoder: any Decoder) throws {
-                        let container = try decoder.container(keyedBy: CodingKeys.self)
-                        self.name = try container.decode(
-                            Swift.String.self,
-                            forKey: .name
+                        var errors: [any Error] = []
+                        do {
+                            self = .case1(try .init(from: decoder))
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case2(try .init(from: decoder))
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
                         )
-                        self.description = try container.decode(
-                            Swift.String.self,
-                            forKey: .description
-                        )
-                        self.managers = try container.decodeIfPresent(
-                            [Swift.String].self,
-                            forKey: .managers
-                        )
-                        self.teamManagers = try container.decodeIfPresent(
-                            [Swift.String].self,
-                            forKey: .teamManagers
-                        )
-                        self.endsAt = try container.decode(
-                            Foundation.Date.self,
-                            forKey: .endsAt
-                        )
-                        self.contactLink = try container.decodeIfPresent(
-                            Swift.String.self,
-                            forKey: .contactLink
-                        )
-                        self.codeScanningAlerts = try container.decode(
-                            Operations.CampaignsCreateCampaign.Input.Body.JsonPayload.CodeScanningAlertsPayload.self,
-                            forKey: .codeScanningAlerts
-                        )
-                        self.generateIssues = try container.decodeIfPresent(
-                            Swift.Bool.self,
-                            forKey: .generateIssues
-                        )
-                        try decoder.ensureNoAdditionalProperties(knownKeys: [
-                            "name",
-                            "description",
-                            "managers",
-                            "team_managers",
-                            "ends_at",
-                            "contact_link",
-                            "code_scanning_alerts",
-                            "generate_issues"
-                        ])
+                    }
+                    public func encode(to encoder: any Encoder) throws {
+                        switch self {
+                        case let .case1(value):
+                            try value.encode(to: encoder)
+                        case let .case2(value):
+                            try value.encode(to: encoder)
+                        }
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/content/application\/json`.
