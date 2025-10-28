@@ -42,6 +42,8 @@ public struct Client: APIProtocol {
     ///
     /// Gets a report of premium request usage for an organization. To use this endpoint, you must be an administrator of an organization within an enterprise or an organization account.
     ///
+    /// **Note:** Only data from the past 24 months is accessible via this endpoint.
+    ///
     /// - Remark: HTTP `GET /organizations/{org}/settings/billing/premium_request/usage`.
     /// - Remark: Generated from `#/paths//organizations/{org}/settings/billing/premium_request/usage/get(billing/get-github-billing-premium-request-usage-report-org)`.
     public func billingGetGithubBillingPremiumRequestUsageReportOrg(_ input: Operations.BillingGetGithubBillingPremiumRequestUsageReportOrg.Input) async throws -> Operations.BillingGetGithubBillingPremiumRequestUsageReportOrg.Output {
@@ -797,6 +799,8 @@ public struct Client: APIProtocol {
     /// Get billing premium request usage report for a user
     ///
     /// Gets a report of premium request usage for a user.
+    ///
+    /// **Note:** Only data from the past 24 months is accessible via this endpoint.
     ///
     /// - Remark: HTTP `GET /users/{username}/settings/billing/premium_request/usage`.
     /// - Remark: Generated from `#/paths//users/{username}/settings/billing/premium_request/usage/get(billing/get-github-billing-premium-request-usage-report-user)`.

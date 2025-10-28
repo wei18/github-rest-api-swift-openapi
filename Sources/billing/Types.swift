@@ -15,6 +15,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// Gets a report of premium request usage for an organization. To use this endpoint, you must be an administrator of an organization within an enterprise or an organization account.
     ///
+    /// **Note:** Only data from the past 24 months is accessible via this endpoint.
+    ///
     /// - Remark: HTTP `GET /organizations/{org}/settings/billing/premium_request/usage`.
     /// - Remark: Generated from `#/paths//organizations/{org}/settings/billing/premium_request/usage/get(billing/get-github-billing-premium-request-usage-report-org)`.
     func billingGetGithubBillingPremiumRequestUsageReportOrg(_ input: Operations.BillingGetGithubBillingPremiumRequestUsageReportOrg.Input) async throws -> Operations.BillingGetGithubBillingPremiumRequestUsageReportOrg.Output
@@ -86,6 +88,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// Gets a report of premium request usage for a user.
     ///
+    /// **Note:** Only data from the past 24 months is accessible via this endpoint.
+    ///
     /// - Remark: HTTP `GET /users/{username}/settings/billing/premium_request/usage`.
     /// - Remark: Generated from `#/paths//users/{username}/settings/billing/premium_request/usage/get(billing/get-github-billing-premium-request-usage-report-user)`.
     func billingGetGithubBillingPremiumRequestUsageReportUser(_ input: Operations.BillingGetGithubBillingPremiumRequestUsageReportUser.Input) async throws -> Operations.BillingGetGithubBillingPremiumRequestUsageReportUser.Output
@@ -116,6 +120,8 @@ extension APIProtocol {
     /// Get billing premium request usage report for an organization
     ///
     /// Gets a report of premium request usage for an organization. To use this endpoint, you must be an administrator of an organization within an enterprise or an organization account.
+    ///
+    /// **Note:** Only data from the past 24 months is accessible via this endpoint.
     ///
     /// - Remark: HTTP `GET /organizations/{org}/settings/billing/premium_request/usage`.
     /// - Remark: Generated from `#/paths//organizations/{org}/settings/billing/premium_request/usage/get(billing/get-github-billing-premium-request-usage-report-org)`.
@@ -247,6 +253,8 @@ extension APIProtocol {
     /// Get billing premium request usage report for a user
     ///
     /// Gets a report of premium request usage for a user.
+    ///
+    /// **Note:** Only data from the past 24 months is accessible via this endpoint.
     ///
     /// - Remark: HTTP `GET /users/{username}/settings/billing/premium_request/usage`.
     /// - Remark: Generated from `#/paths//users/{username}/settings/billing/premium_request/usage/get(billing/get-github-billing-premium-request-usage-report-user)`.
@@ -490,7 +498,7 @@ public enum Components {
                 /// Gross quantity of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-org/UsageItemsPayload/grossQuantity`.
-                public var grossQuantity: Swift.Int
+                public var grossQuantity: Swift.Double
                 /// Gross amount of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-org/UsageItemsPayload/grossAmount`.
@@ -498,7 +506,7 @@ public enum Components {
                 /// Discount quantity of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-org/UsageItemsPayload/discountQuantity`.
-                public var discountQuantity: Swift.Int
+                public var discountQuantity: Swift.Double
                 /// Discount amount of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-org/UsageItemsPayload/discountAmount`.
@@ -506,7 +514,7 @@ public enum Components {
                 /// Net quantity of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-org/UsageItemsPayload/netQuantity`.
-                public var netQuantity: Swift.Int
+                public var netQuantity: Swift.Double
                 /// Net amount of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-org/UsageItemsPayload/netAmount`.
@@ -531,11 +539,11 @@ public enum Components {
                     model: Swift.String,
                     unitType: Swift.String,
                     pricePerUnit: Swift.Double,
-                    grossQuantity: Swift.Int,
+                    grossQuantity: Swift.Double,
                     grossAmount: Swift.Double,
-                    discountQuantity: Swift.Int,
+                    discountQuantity: Swift.Double,
                     discountAmount: Swift.Double,
-                    netQuantity: Swift.Int,
+                    netQuantity: Swift.Double,
                     netAmount: Swift.Double
                 ) {
                     self.product = product
@@ -1035,7 +1043,7 @@ public enum Components {
                 /// Gross quantity of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-user/UsageItemsPayload/grossQuantity`.
-                public var grossQuantity: Swift.Int
+                public var grossQuantity: Swift.Double
                 /// Gross amount of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-user/UsageItemsPayload/grossAmount`.
@@ -1043,7 +1051,7 @@ public enum Components {
                 /// Discount quantity of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-user/UsageItemsPayload/discountQuantity`.
-                public var discountQuantity: Swift.Int
+                public var discountQuantity: Swift.Double
                 /// Discount amount of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-user/UsageItemsPayload/discountAmount`.
@@ -1051,7 +1059,7 @@ public enum Components {
                 /// Net quantity of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-user/UsageItemsPayload/netQuantity`.
-                public var netQuantity: Swift.Int
+                public var netQuantity: Swift.Double
                 /// Net amount of the usage line item.
                 ///
                 /// - Remark: Generated from `#/components/schemas/billing-premium-request-usage-report-user/UsageItemsPayload/netAmount`.
@@ -1076,11 +1084,11 @@ public enum Components {
                     model: Swift.String,
                     unitType: Swift.String,
                     pricePerUnit: Swift.Double,
-                    grossQuantity: Swift.Int,
+                    grossQuantity: Swift.Double,
                     grossAmount: Swift.Double,
-                    discountQuantity: Swift.Int,
+                    discountQuantity: Swift.Double,
                     discountAmount: Swift.Double,
-                    netQuantity: Swift.Int,
+                    netQuantity: Swift.Double,
                     netAmount: Swift.Double
                 ) {
                     self.product = product
@@ -1613,6 +1621,8 @@ public enum Operations {
     /// Get billing premium request usage report for an organization
     ///
     /// Gets a report of premium request usage for an organization. To use this endpoint, you must be an administrator of an organization within an enterprise or an organization account.
+    ///
+    /// **Note:** Only data from the past 24 months is accessible via this endpoint.
     ///
     /// - Remark: HTTP `GET /organizations/{org}/settings/billing/premium_request/usage`.
     /// - Remark: Generated from `#/paths//organizations/{org}/settings/billing/premium_request/usage/get(billing/get-github-billing-premium-request-usage-report-org)`.
@@ -2818,6 +2828,8 @@ public enum Operations {
     /// Get billing premium request usage report for a user
     ///
     /// Gets a report of premium request usage for a user.
+    ///
+    /// **Note:** Only data from the past 24 months is accessible via this endpoint.
     ///
     /// - Remark: HTTP `GET /users/{username}/settings/billing/premium_request/usage`.
     /// - Remark: Generated from `#/paths//users/{username}/settings/billing/premium_request/usage/get(billing/get-github-billing-premium-request-usage-report-user)`.
