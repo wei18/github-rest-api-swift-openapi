@@ -48,6 +48,60 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `POST /orgs/{org}/actions/hosted-runners`.
     /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/post(actions/create-hosted-runner-for-org)`.
     func actionsCreateHostedRunnerForOrg(_ input: Operations.ActionsCreateHostedRunnerForOrg.Input) async throws -> Operations.ActionsCreateHostedRunnerForOrg.Output
+    /// List custom images for an organization
+    ///
+    /// List custom images for an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/get(actions/list-custom-images-for-org)`.
+    func actionsListCustomImagesForOrg(_ input: Operations.ActionsListCustomImagesForOrg.Input) async throws -> Operations.ActionsListCustomImagesForOrg.Output
+    /// Get a custom image definition for GitHub Actions Hosted Runners
+    ///
+    /// Get a custom image definition for GitHub Actions Hosted Runners.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/get(actions/get-custom-image-for-org)`.
+    func actionsGetCustomImageForOrg(_ input: Operations.ActionsGetCustomImageForOrg.Input) async throws -> Operations.ActionsGetCustomImageForOrg.Output
+    /// Delete a custom image from the organization
+    ///
+    /// Delete a custom image from the organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/delete(actions/delete-custom-image-from-org)`.
+    func actionsDeleteCustomImageFromOrg(_ input: Operations.ActionsDeleteCustomImageFromOrg.Input) async throws -> Operations.ActionsDeleteCustomImageFromOrg.Output
+    /// List image versions of a custom image for an organization
+    ///
+    /// List image versions of a custom image for an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/get(actions/list-custom-image-versions-for-org)`.
+    func actionsListCustomImageVersionsForOrg(_ input: Operations.ActionsListCustomImageVersionsForOrg.Input) async throws -> Operations.ActionsListCustomImageVersionsForOrg.Output
+    /// Get an image version of a custom image for GitHub Actions Hosted Runners
+    ///
+    /// Get an image version of a custom image for GitHub Actions Hosted Runners.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/get(actions/get-custom-image-version-for-org)`.
+    func actionsGetCustomImageVersionForOrg(_ input: Operations.ActionsGetCustomImageVersionForOrg.Input) async throws -> Operations.ActionsGetCustomImageVersionForOrg.Output
+    /// Delete an image version of custom image from the organization
+    ///
+    /// Delete an image version of custom image from the organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/delete(actions/delete-custom-image-version-from-org)`.
+    func actionsDeleteCustomImageVersionFromOrg(_ input: Operations.ActionsDeleteCustomImageVersionFromOrg.Input) async throws -> Operations.ActionsDeleteCustomImageVersionFromOrg.Output
     /// Get GitHub-owned images for GitHub-hosted runners in an organization
     ///
     /// Get the list of GitHub-owned images available for GitHub-hosted runners for an organization.
@@ -1834,6 +1888,96 @@ extension APIProtocol {
             headers: headers,
             body: body
         ))
+    }
+    /// List custom images for an organization
+    ///
+    /// List custom images for an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/get(actions/list-custom-images-for-org)`.
+    public func actionsListCustomImagesForOrg(
+        path: Operations.ActionsListCustomImagesForOrg.Input.Path,
+        headers: Operations.ActionsListCustomImagesForOrg.Input.Headers = .init()
+    ) async throws -> Operations.ActionsListCustomImagesForOrg.Output {
+        try await actionsListCustomImagesForOrg(Operations.ActionsListCustomImagesForOrg.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Get a custom image definition for GitHub Actions Hosted Runners
+    ///
+    /// Get a custom image definition for GitHub Actions Hosted Runners.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/get(actions/get-custom-image-for-org)`.
+    public func actionsGetCustomImageForOrg(
+        path: Operations.ActionsGetCustomImageForOrg.Input.Path,
+        headers: Operations.ActionsGetCustomImageForOrg.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetCustomImageForOrg.Output {
+        try await actionsGetCustomImageForOrg(Operations.ActionsGetCustomImageForOrg.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Delete a custom image from the organization
+    ///
+    /// Delete a custom image from the organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/delete(actions/delete-custom-image-from-org)`.
+    public func actionsDeleteCustomImageFromOrg(path: Operations.ActionsDeleteCustomImageFromOrg.Input.Path) async throws -> Operations.ActionsDeleteCustomImageFromOrg.Output {
+        try await actionsDeleteCustomImageFromOrg(Operations.ActionsDeleteCustomImageFromOrg.Input(path: path))
+    }
+    /// List image versions of a custom image for an organization
+    ///
+    /// List image versions of a custom image for an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/get(actions/list-custom-image-versions-for-org)`.
+    public func actionsListCustomImageVersionsForOrg(
+        path: Operations.ActionsListCustomImageVersionsForOrg.Input.Path,
+        headers: Operations.ActionsListCustomImageVersionsForOrg.Input.Headers = .init()
+    ) async throws -> Operations.ActionsListCustomImageVersionsForOrg.Output {
+        try await actionsListCustomImageVersionsForOrg(Operations.ActionsListCustomImageVersionsForOrg.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Get an image version of a custom image for GitHub Actions Hosted Runners
+    ///
+    /// Get an image version of a custom image for GitHub Actions Hosted Runners.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/get(actions/get-custom-image-version-for-org)`.
+    public func actionsGetCustomImageVersionForOrg(
+        path: Operations.ActionsGetCustomImageVersionForOrg.Input.Path,
+        headers: Operations.ActionsGetCustomImageVersionForOrg.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetCustomImageVersionForOrg.Output {
+        try await actionsGetCustomImageVersionForOrg(Operations.ActionsGetCustomImageVersionForOrg.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Delete an image version of custom image from the organization
+    ///
+    /// Delete an image version of custom image from the organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/delete(actions/delete-custom-image-version-from-org)`.
+    public func actionsDeleteCustomImageVersionFromOrg(path: Operations.ActionsDeleteCustomImageVersionFromOrg.Input.Path) async throws -> Operations.ActionsDeleteCustomImageVersionFromOrg.Output {
+        try await actionsDeleteCustomImageVersionFromOrg(Operations.ActionsDeleteCustomImageVersionFromOrg.Input(path: path))
     }
     /// Get GitHub-owned images for GitHub-hosted runners in an organization
     ///
@@ -6554,163 +6698,6 @@ public enum Components {
                 case installationsCount = "installations_count"
             }
         }
-        /// - Remark: Generated from `#/components/schemas/pull-request-minimal`.
-        public struct PullRequestMinimal: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/id`.
-            public var id: Swift.Int64
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/number`.
-            public var number: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/url`.
-            public var url: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
-            public struct HeadPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/ref`.
-                public var ref: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/sha`.
-                public var sha: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
-                public struct RepoPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/id`.
-                    public var id: Swift.Int64
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/url`.
-                    public var url: Swift.String
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/name`.
-                    public var name: Swift.String
-                    /// Creates a new `RepoPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - id:
-                    ///   - url:
-                    ///   - name:
-                    public init(
-                        id: Swift.Int64,
-                        url: Swift.String,
-                        name: Swift.String
-                    ) {
-                        self.id = id
-                        self.url = url
-                        self.name = name
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case id
-                        case url
-                        case name
-                    }
-                }
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
-                public var repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
-                /// Creates a new `HeadPayload`.
-                ///
-                /// - Parameters:
-                ///   - ref:
-                ///   - sha:
-                ///   - repo:
-                public init(
-                    ref: Swift.String,
-                    sha: Swift.String,
-                    repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
-                ) {
-                    self.ref = ref
-                    self.sha = sha
-                    self.repo = repo
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case ref
-                    case sha
-                    case repo
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
-            public var head: Components.Schemas.PullRequestMinimal.HeadPayload
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
-            public struct BasePayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/ref`.
-                public var ref: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/sha`.
-                public var sha: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
-                public struct RepoPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/id`.
-                    public var id: Swift.Int64
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/url`.
-                    public var url: Swift.String
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/name`.
-                    public var name: Swift.String
-                    /// Creates a new `RepoPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - id:
-                    ///   - url:
-                    ///   - name:
-                    public init(
-                        id: Swift.Int64,
-                        url: Swift.String,
-                        name: Swift.String
-                    ) {
-                        self.id = id
-                        self.url = url
-                        self.name = name
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case id
-                        case url
-                        case name
-                    }
-                }
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
-                public var repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
-                /// Creates a new `BasePayload`.
-                ///
-                /// - Parameters:
-                ///   - ref:
-                ///   - sha:
-                ///   - repo:
-                public init(
-                    ref: Swift.String,
-                    sha: Swift.String,
-                    repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
-                ) {
-                    self.ref = ref
-                    self.sha = sha
-                    self.repo = repo
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case ref
-                    case sha
-                    case repo
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
-            public var base: Components.Schemas.PullRequestMinimal.BasePayload
-            /// Creates a new `PullRequestMinimal`.
-            ///
-            /// - Parameters:
-            ///   - id:
-            ///   - number:
-            ///   - url:
-            ///   - head:
-            ///   - base:
-            public init(
-                id: Swift.Int64,
-                number: Swift.Int,
-                url: Swift.String,
-                head: Components.Schemas.PullRequestMinimal.HeadPayload,
-                base: Components.Schemas.PullRequestMinimal.BasePayload
-            ) {
-                self.id = id
-                self.number = number
-                self.url = url
-                self.head = head
-                self.base = base
-            }
-            public enum CodingKeys: String, CodingKey {
-                case id
-                case number
-                case url
-                case head
-                case base
-            }
-        }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
         public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
             /// Enable or disable GitHub Advanced Security for the repository.
@@ -7661,6 +7648,10 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/nullable-actions-hosted-runner-pool-image/source`.
             public var source: Components.Schemas.NullableActionsHostedRunnerPoolImage.SourcePayload
+            /// The image version of the hosted runner pool.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-actions-hosted-runner-pool-image/version`.
+            public var version: Swift.String?
             /// Creates a new `NullableActionsHostedRunnerPoolImage`.
             ///
             /// - Parameters:
@@ -7668,22 +7659,26 @@ public enum Components {
             ///   - sizeGb: Image size in GB.
             ///   - displayName: Display name for this image.
             ///   - source: The image provider.
+            ///   - version: The image version of the hosted runner pool.
             public init(
                 id: Swift.String,
                 sizeGb: Swift.Int,
                 displayName: Swift.String,
-                source: Components.Schemas.NullableActionsHostedRunnerPoolImage.SourcePayload
+                source: Components.Schemas.NullableActionsHostedRunnerPoolImage.SourcePayload,
+                version: Swift.String? = nil
             ) {
                 self.id = id
                 self.sizeGb = sizeGb
                 self.displayName = displayName
                 self.source = source
+                self.version = version
             }
             public enum CodingKeys: String, CodingKey {
                 case id
                 case sizeGb = "size_gb"
                 case displayName = "display_name"
                 case source
+                case version
             }
         }
         /// Provides details of a particular machine spec.
@@ -7822,6 +7817,10 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/actions-hosted-runner/last_active_on`.
             public var lastActiveOn: Foundation.Date?
+            /// Whether custom image generation is enabled for the hosted runners.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner/image_gen`.
+            public var imageGen: Swift.Bool?
             /// Creates a new `ActionsHostedRunner`.
             ///
             /// - Parameters:
@@ -7836,6 +7835,7 @@ public enum Components {
             ///   - publicIpEnabled: Whether public IP is enabled for the hosted runners.
             ///   - publicIps: The public IP ranges when public IP is enabled for the hosted runners.
             ///   - lastActiveOn: The time at which the runner was last used, in ISO 8601 format.
+            ///   - imageGen: Whether custom image generation is enabled for the hosted runners.
             public init(
                 id: Swift.Int,
                 name: Swift.String,
@@ -7847,7 +7847,8 @@ public enum Components {
                 maximumRunners: Swift.Int? = nil,
                 publicIpEnabled: Swift.Bool,
                 publicIps: [Components.Schemas.PublicIp]? = nil,
-                lastActiveOn: Foundation.Date? = nil
+                lastActiveOn: Foundation.Date? = nil,
+                imageGen: Swift.Bool? = nil
             ) {
                 self.id = id
                 self.name = name
@@ -7860,6 +7861,7 @@ public enum Components {
                 self.publicIpEnabled = publicIpEnabled
                 self.publicIps = publicIps
                 self.lastActiveOn = lastActiveOn
+                self.imageGen = imageGen
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -7873,6 +7875,137 @@ public enum Components {
                 case publicIpEnabled = "public_ip_enabled"
                 case publicIps = "public_ips"
                 case lastActiveOn = "last_active_on"
+                case imageGen = "image_gen"
+            }
+        }
+        /// Provides details of a custom runner image
+        ///
+        /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image`.
+        public struct ActionsHostedRunnerCustomImage: Codable, Hashable, Sendable {
+            /// The ID of the image. Use this ID for the `image` parameter when creating a new larger runner.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image/id`.
+            public var id: Swift.Int
+            /// The operating system of the image.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image/platform`.
+            public var platform: Swift.String
+            /// Total size of all the image versions in GB.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image/total_versions_size`.
+            public var totalVersionsSize: Swift.Int
+            /// Display name for this image.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image/name`.
+            public var name: Swift.String
+            /// The image provider.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image/source`.
+            public var source: Swift.String
+            /// The number of image versions associated with the image.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image/versions_count`.
+            public var versionsCount: Swift.Int
+            /// The latest image version associated with the image.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image/latest_version`.
+            public var latestVersion: Swift.String
+            /// The number of image versions associated with the image.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image/state`.
+            public var state: Swift.String
+            /// Creates a new `ActionsHostedRunnerCustomImage`.
+            ///
+            /// - Parameters:
+            ///   - id: The ID of the image. Use this ID for the `image` parameter when creating a new larger runner.
+            ///   - platform: The operating system of the image.
+            ///   - totalVersionsSize: Total size of all the image versions in GB.
+            ///   - name: Display name for this image.
+            ///   - source: The image provider.
+            ///   - versionsCount: The number of image versions associated with the image.
+            ///   - latestVersion: The latest image version associated with the image.
+            ///   - state: The number of image versions associated with the image.
+            public init(
+                id: Swift.Int,
+                platform: Swift.String,
+                totalVersionsSize: Swift.Int,
+                name: Swift.String,
+                source: Swift.String,
+                versionsCount: Swift.Int,
+                latestVersion: Swift.String,
+                state: Swift.String
+            ) {
+                self.id = id
+                self.platform = platform
+                self.totalVersionsSize = totalVersionsSize
+                self.name = name
+                self.source = source
+                self.versionsCount = versionsCount
+                self.latestVersion = latestVersion
+                self.state = state
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case platform
+                case totalVersionsSize = "total_versions_size"
+                case name
+                case source
+                case versionsCount = "versions_count"
+                case latestVersion = "latest_version"
+                case state
+            }
+        }
+        /// Provides details of a hosted runner custom image version
+        ///
+        /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image-version`.
+        public struct ActionsHostedRunnerCustomImageVersion: Codable, Hashable, Sendable {
+            /// The version of image.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image-version/version`.
+            public var version: Swift.String
+            /// The state of image version.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image-version/state`.
+            public var state: Swift.String
+            /// Image version size in GB.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image-version/size_gb`.
+            public var sizeGb: Swift.Int
+            /// The creation date time of the image version.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image-version/created_on`.
+            public var createdOn: Swift.String
+            /// The image version status details.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-hosted-runner-custom-image-version/state_details`.
+            public var stateDetails: Swift.String
+            /// Creates a new `ActionsHostedRunnerCustomImageVersion`.
+            ///
+            /// - Parameters:
+            ///   - version: The version of image.
+            ///   - state: The state of image version.
+            ///   - sizeGb: Image version size in GB.
+            ///   - createdOn: The creation date time of the image version.
+            ///   - stateDetails: The image version status details.
+            public init(
+                version: Swift.String,
+                state: Swift.String,
+                sizeGb: Swift.Int,
+                createdOn: Swift.String,
+                stateDetails: Swift.String
+            ) {
+                self.version = version
+                self.state = state
+                self.sizeGb = sizeGb
+                self.createdOn = createdOn
+                self.stateDetails = stateDetails
+            }
+            public enum CodingKeys: String, CodingKey {
+                case version
+                case state
+                case sizeGb = "size_gb"
+                case createdOn = "created_on"
+                case stateDetails = "state_details"
             }
         }
         /// Provides details of a hosted runner image
@@ -9866,6 +9999,163 @@ public enum Components {
                 case ref
             }
         }
+        /// - Remark: Generated from `#/components/schemas/pull-request-minimal`.
+        public struct PullRequestMinimal: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/number`.
+            public var number: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public struct HeadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                /// Creates a new `HeadPayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public var head: Components.Schemas.PullRequestMinimal.HeadPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public var base: Components.Schemas.PullRequestMinimal.BasePayload
+            /// Creates a new `PullRequestMinimal`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - number:
+            ///   - url:
+            ///   - head:
+            ///   - base:
+            public init(
+                id: Swift.Int64,
+                number: Swift.Int,
+                url: Swift.String,
+                head: Components.Schemas.PullRequestMinimal.HeadPayload,
+                base: Components.Schemas.PullRequestMinimal.BasePayload
+            ) {
+                self.id = id
+                self.number = number
+                self.url = url
+                self.head = head
+                self.base = base
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case number
+                case url
+                case head
+                case base
+            }
+        }
         /// A commit.
         ///
         /// - Remark: Generated from `#/components/schemas/nullable-simple-commit`.
@@ -11214,6 +11504,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/page`.
         public typealias Page = Swift.Int
+        /// The organization name. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/org`.
+        public typealias Org = Swift.String
         /// The account owner of the repository. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/owner`.
@@ -11222,10 +11516,14 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/repo`.
         public typealias Repo = Swift.String
-        /// The organization name. The name is not case sensitive.
+        /// Image definition ID of custom image
         ///
-        /// - Remark: Generated from `#/components/parameters/org`.
-        public typealias Org = Swift.String
+        /// - Remark: Generated from `#/components/parameters/actions-custom-image-definition-id`.
+        public typealias ActionsCustomImageDefinitionId = Swift.Int
+        /// Version of a custom image
+        ///
+        /// - Remark: Generated from `#/components/parameters/actions-custom-image-version`.
+        public typealias ActionsCustomImageVersion = Swift.String
         /// Unique identifier of the GitHub-hosted runner.
         ///
         /// - Remark: Generated from `#/components/parameters/hosted-runner-id`.
@@ -12440,21 +12738,29 @@ public enum Operations {
                         ///
                         /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/POST/requestBody/json/image/source`.
                         public var source: Operations.ActionsCreateHostedRunnerForOrg.Input.Body.JsonPayload.ImagePayload.SourcePayload?
+                        /// The version of the runner image to deploy. This is relevant only for runners using custom images.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/POST/requestBody/json/image/version`.
+                        public var version: Swift.String?
                         /// Creates a new `ImagePayload`.
                         ///
                         /// - Parameters:
                         ///   - id: The unique identifier of the runner image.
                         ///   - source: The source of the runner image.
+                        ///   - version: The version of the runner image to deploy. This is relevant only for runners using custom images.
                         public init(
                             id: Swift.String? = nil,
-                            source: Operations.ActionsCreateHostedRunnerForOrg.Input.Body.JsonPayload.ImagePayload.SourcePayload? = nil
+                            source: Operations.ActionsCreateHostedRunnerForOrg.Input.Body.JsonPayload.ImagePayload.SourcePayload? = nil,
+                            version: Swift.String? = nil
                         ) {
                             self.id = id
                             self.source = source
+                            self.version = version
                         }
                         public enum CodingKeys: String, CodingKey {
                             case id
                             case source
+                            case version
                         }
                     }
                     /// The image of runner. To list all available images, use `GET /actions/hosted-runners/images/github-owned` or `GET /actions/hosted-runners/images/partner`.
@@ -12477,6 +12783,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/POST/requestBody/json/enable_static_ip`.
                     public var enableStaticIp: Swift.Bool?
+                    /// Whether this runner should be used to generate custom images.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/POST/requestBody/json/image_gen`.
+                    public var imageGen: Swift.Bool?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -12486,13 +12796,15 @@ public enum Operations {
                     ///   - runnerGroupId: The existing runner group to add this runner to.
                     ///   - maximumRunners: The maximum amount of runners to scale up to. Runners will not auto-scale above this number. Use this setting to limit your cost.
                     ///   - enableStaticIp: Whether this runner should be created with a static public IP. Note limit on account. To list limits on account, use `GET actions/hosted-runners/limits`
+                    ///   - imageGen: Whether this runner should be used to generate custom images.
                     public init(
                         name: Swift.String,
                         image: Operations.ActionsCreateHostedRunnerForOrg.Input.Body.JsonPayload.ImagePayload,
                         size: Swift.String,
                         runnerGroupId: Swift.Int,
                         maximumRunners: Swift.Int? = nil,
-                        enableStaticIp: Swift.Bool? = nil
+                        enableStaticIp: Swift.Bool? = nil,
+                        imageGen: Swift.Bool? = nil
                     ) {
                         self.name = name
                         self.image = image
@@ -12500,6 +12812,7 @@ public enum Operations {
                         self.runnerGroupId = runnerGroupId
                         self.maximumRunners = maximumRunners
                         self.enableStaticIp = enableStaticIp
+                        self.imageGen = imageGen
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
@@ -12508,6 +12821,7 @@ public enum Operations {
                         case runnerGroupId = "runner_group_id"
                         case maximumRunners = "maximum_runners"
                         case enableStaticIp = "enable_static_ip"
+                        case imageGen = "image_gen"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/POST/requestBody/content/application\/json`.
@@ -12611,6 +12925,799 @@ public enum Operations {
                     .json
                 ]
             }
+        }
+    }
+    /// List custom images for an organization
+    ///
+    /// List custom images for an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/get(actions/list-custom-images-for-org)`.
+    public enum ActionsListCustomImagesForOrg {
+        public static let id: Swift.String = "actions/list-custom-images-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsListCustomImagesForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsListCustomImagesForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsListCustomImagesForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsListCustomImagesForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsListCustomImagesForOrg.Input.Path,
+                headers: Operations.ActionsListCustomImagesForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/GET/responses/200/content/json/total_count`.
+                        public var totalCount: Swift.Int
+                        /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/GET/responses/200/content/json/images`.
+                        public var images: [Components.Schemas.ActionsHostedRunnerCustomImage]
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - totalCount:
+                        ///   - images:
+                        public init(
+                            totalCount: Swift.Int,
+                            images: [Components.Schemas.ActionsHostedRunnerCustomImage]
+                        ) {
+                            self.totalCount = totalCount
+                            self.images = images
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case totalCount = "total_count"
+                            case images
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/GET/responses/200/content/application\/json`.
+                    case json(Operations.ActionsListCustomImagesForOrg.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.ActionsListCustomImagesForOrg.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsListCustomImagesForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsListCustomImagesForOrg.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/get(actions/list-custom-images-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsListCustomImagesForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsListCustomImagesForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get a custom image definition for GitHub Actions Hosted Runners
+    ///
+    /// Get a custom image definition for GitHub Actions Hosted Runners.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/get(actions/get-custom-image-for-org)`.
+    public enum ActionsGetCustomImageForOrg {
+        public static let id: Swift.String = "actions/get-custom-image-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Image definition ID of custom image
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/GET/path/image_definition_id`.
+                public var imageDefinitionId: Components.Parameters.ActionsCustomImageDefinitionId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - imageDefinitionId: Image definition ID of custom image
+                public init(
+                    org: Components.Parameters.Org,
+                    imageDefinitionId: Components.Parameters.ActionsCustomImageDefinitionId
+                ) {
+                    self.org = org
+                    self.imageDefinitionId = imageDefinitionId
+                }
+            }
+            public var path: Operations.ActionsGetCustomImageForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetCustomImageForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetCustomImageForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetCustomImageForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetCustomImageForOrg.Input.Path,
+                headers: Operations.ActionsGetCustomImageForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsHostedRunnerCustomImage)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsHostedRunnerCustomImage {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetCustomImageForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetCustomImageForOrg.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/get(actions/get-custom-image-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetCustomImageForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetCustomImageForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Delete a custom image from the organization
+    ///
+    /// Delete a custom image from the organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/delete(actions/delete-custom-image-from-org)`.
+    public enum ActionsDeleteCustomImageFromOrg {
+        public static let id: Swift.String = "actions/delete-custom-image-from-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/DELETE/path/org`.
+                public var org: Components.Parameters.Org
+                /// Image definition ID of custom image
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/DELETE/path/image_definition_id`.
+                public var imageDefinitionId: Components.Parameters.ActionsCustomImageDefinitionId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - imageDefinitionId: Image definition ID of custom image
+                public init(
+                    org: Components.Parameters.Org,
+                    imageDefinitionId: Components.Parameters.ActionsCustomImageDefinitionId
+                ) {
+                    self.org = org
+                    self.imageDefinitionId = imageDefinitionId
+                }
+            }
+            public var path: Operations.ActionsDeleteCustomImageFromOrg.Input.Path
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            public init(path: Operations.ActionsDeleteCustomImageFromOrg.Input.Path) {
+                self.path = path
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/delete(actions/delete-custom-image-from-org)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsDeleteCustomImageFromOrg.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/delete(actions/delete-custom-image-from-org)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsDeleteCustomImageFromOrg.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+    }
+    /// List image versions of a custom image for an organization
+    ///
+    /// List image versions of a custom image for an organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/get(actions/list-custom-image-versions-for-org)`.
+    public enum ActionsListCustomImageVersionsForOrg {
+        public static let id: Swift.String = "actions/list-custom-image-versions-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// Image definition ID of custom image
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/GET/path/image_definition_id`.
+                public var imageDefinitionId: Components.Parameters.ActionsCustomImageDefinitionId
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - imageDefinitionId: Image definition ID of custom image
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(
+                    imageDefinitionId: Components.Parameters.ActionsCustomImageDefinitionId,
+                    org: Components.Parameters.Org
+                ) {
+                    self.imageDefinitionId = imageDefinitionId
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsListCustomImageVersionsForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsListCustomImageVersionsForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsListCustomImageVersionsForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsListCustomImageVersionsForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsListCustomImageVersionsForOrg.Input.Path,
+                headers: Operations.ActionsListCustomImageVersionsForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/GET/responses/200/content/json/total_count`.
+                        public var totalCount: Swift.Int
+                        /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/GET/responses/200/content/json/image_versions`.
+                        public var imageVersions: [Components.Schemas.ActionsHostedRunnerCustomImageVersion]
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - totalCount:
+                        ///   - imageVersions:
+                        public init(
+                            totalCount: Swift.Int,
+                            imageVersions: [Components.Schemas.ActionsHostedRunnerCustomImageVersion]
+                        ) {
+                            self.totalCount = totalCount
+                            self.imageVersions = imageVersions
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case totalCount = "total_count"
+                            case imageVersions = "image_versions"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/GET/responses/200/content/application\/json`.
+                    case json(Operations.ActionsListCustomImageVersionsForOrg.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.ActionsListCustomImageVersionsForOrg.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsListCustomImageVersionsForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsListCustomImageVersionsForOrg.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/get(actions/list-custom-image-versions-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsListCustomImageVersionsForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsListCustomImageVersionsForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get an image version of a custom image for GitHub Actions Hosted Runners
+    ///
+    /// Get an image version of a custom image for GitHub Actions Hosted Runners.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/get(actions/get-custom-image-version-for-org)`.
+    public enum ActionsGetCustomImageVersionForOrg {
+        public static let id: Swift.String = "actions/get-custom-image-version-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Image definition ID of custom image
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/GET/path/image_definition_id`.
+                public var imageDefinitionId: Components.Parameters.ActionsCustomImageDefinitionId
+                /// Version of a custom image
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/GET/path/version`.
+                public var version: Components.Parameters.ActionsCustomImageVersion
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - imageDefinitionId: Image definition ID of custom image
+                ///   - version: Version of a custom image
+                public init(
+                    org: Components.Parameters.Org,
+                    imageDefinitionId: Components.Parameters.ActionsCustomImageDefinitionId,
+                    version: Components.Parameters.ActionsCustomImageVersion
+                ) {
+                    self.org = org
+                    self.imageDefinitionId = imageDefinitionId
+                    self.version = version
+                }
+            }
+            public var path: Operations.ActionsGetCustomImageVersionForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetCustomImageVersionForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetCustomImageVersionForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetCustomImageVersionForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetCustomImageVersionForOrg.Input.Path,
+                headers: Operations.ActionsGetCustomImageVersionForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsHostedRunnerCustomImageVersion)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsHostedRunnerCustomImageVersion {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetCustomImageVersionForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetCustomImageVersionForOrg.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/get(actions/get-custom-image-version-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetCustomImageVersionForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetCustomImageVersionForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Delete an image version of custom image from the organization
+    ///
+    /// Delete an image version of custom image from the organization.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `manage_runners:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/delete(actions/delete-custom-image-version-from-org)`.
+    public enum ActionsDeleteCustomImageVersionFromOrg {
+        public static let id: Swift.String = "actions/delete-custom-image-version-from-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/DELETE/path/org`.
+                public var org: Components.Parameters.Org
+                /// Image definition ID of custom image
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/DELETE/path/image_definition_id`.
+                public var imageDefinitionId: Components.Parameters.ActionsCustomImageDefinitionId
+                /// Version of a custom image
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/DELETE/path/version`.
+                public var version: Components.Parameters.ActionsCustomImageVersion
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - imageDefinitionId: Image definition ID of custom image
+                ///   - version: Version of a custom image
+                public init(
+                    org: Components.Parameters.Org,
+                    imageDefinitionId: Components.Parameters.ActionsCustomImageDefinitionId,
+                    version: Components.Parameters.ActionsCustomImageVersion
+                ) {
+                    self.org = org
+                    self.imageDefinitionId = imageDefinitionId
+                    self.version = version
+                }
+            }
+            public var path: Operations.ActionsDeleteCustomImageVersionFromOrg.Input.Path
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            public init(path: Operations.ActionsDeleteCustomImageVersionFromOrg.Input.Path) {
+                self.path = path
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/delete(actions/delete-custom-image-version-from-org)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsDeleteCustomImageVersionFromOrg.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/hosted-runners/images/custom/{image_definition_id}/versions/{version}/delete(actions/delete-custom-image-version-from-org)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsDeleteCustomImageVersionFromOrg.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
         }
     }
     /// Get GitHub-owned images for GitHub-hosted runners in an organization
@@ -13593,6 +14700,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/enable_static_ip`.
                     public var enableStaticIp: Swift.Bool?
+                    /// The version of the runner image to deploy. This is relevant only for runners using custom images.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/image_version`.
+                    public var imageVersion: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -13600,22 +14711,26 @@ public enum Operations {
                     ///   - runnerGroupId: The existing runner group to add this runner to.
                     ///   - maximumRunners: The maximum amount of runners to scale up to. Runners will not auto-scale above this number. Use this setting to limit your cost.
                     ///   - enableStaticIp: Whether this runner should be updated with a static public IP. Note limit on account. To list limits on account, use `GET actions/hosted-runners/limits`
+                    ///   - imageVersion: The version of the runner image to deploy. This is relevant only for runners using custom images.
                     public init(
                         name: Swift.String? = nil,
                         runnerGroupId: Swift.Int? = nil,
                         maximumRunners: Swift.Int? = nil,
-                        enableStaticIp: Swift.Bool? = nil
+                        enableStaticIp: Swift.Bool? = nil,
+                        imageVersion: Swift.String? = nil
                     ) {
                         self.name = name
                         self.runnerGroupId = runnerGroupId
                         self.maximumRunners = maximumRunners
                         self.enableStaticIp = enableStaticIp
+                        self.imageVersion = imageVersion
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
                         case runnerGroupId = "runner_group_id"
                         case maximumRunners = "maximum_runners"
                         case enableStaticIp = "enable_static_ip"
+                        case imageVersion = "image_version"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/content/application\/json`.

@@ -11485,7 +11485,8 @@ public enum Operations {
                     /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/requestBody/json/subject_digests`.
                     public var subjectDigests: [Swift.String]
                     /// Optional filter for fetching attestations with a given predicate type.
-                    /// This option accepts `provenance`, `sbom`, or freeform text for custom predicate types.
+                    /// This option accepts `provenance`, `sbom`, `release`, or freeform text
+                    /// for custom predicate types.
                     ///
                     /// - Remark: Generated from `#/paths/users/{username}/attestations/bulk-list/POST/requestBody/json/predicate_type`.
                     public var predicateType: Swift.String?
@@ -12464,7 +12465,8 @@ public enum Operations {
                 /// - Remark: Generated from `#/paths/users/{username}/attestations/{subject_digest}/GET/query/after`.
                 public var after: Components.Parameters.PaginationAfter?
                 /// Optional filter for fetching attestations with a given predicate type.
-                /// This option accepts `provenance`, `sbom`, or freeform text for custom predicate types.
+                /// This option accepts `provenance`, `sbom`, `release`, or freeform text
+                /// for custom predicate types.
                 ///
                 /// - Remark: Generated from `#/paths/users/{username}/attestations/{subject_digest}/GET/query/predicate_type`.
                 public var predicateType: Swift.String?

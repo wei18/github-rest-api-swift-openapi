@@ -1306,6 +1306,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/username`.
         public typealias Username = Swift.String
+        /// The organization name. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/org`.
+        public typealias Org = Swift.String
         /// The account owner of the repository. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/owner`.
@@ -1314,10 +1318,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/repo`.
         public typealias Repo = Swift.String
-        /// The organization name. The name is not case sensitive.
-        ///
-        /// - Remark: Generated from `#/components/parameters/org`.
-        public typealias Org = Swift.String
         /// The unique identifier of the project.
         ///
         /// - Remark: Generated from `#/components/parameters/project-id`.

@@ -29,6 +29,7 @@ let package = Package(
         .library(name: "GitHubRestAPIDesktop", targets: ["GitHubRestAPIDesktop"]),
         .library(name: "GitHubRestAPIEmojis", targets: ["GitHubRestAPIEmojis"]),
         .library(name: "GitHubRestAPIEnterprise_Team_Memberships", targets: ["GitHubRestAPIEnterprise_Team_Memberships"]),
+        .library(name: "GitHubRestAPIEnterprise_Team_Organizations", targets: ["GitHubRestAPIEnterprise_Team_Organizations"]),
         .library(name: "GitHubRestAPIEnterprise_Teams", targets: ["GitHubRestAPIEnterprise_Teams"]),
         .library(name: "GitHubRestAPIGists", targets: ["GitHubRestAPIGists"]),
         .library(name: "GitHubRestAPIGit", targets: ["GitHubRestAPIGit"]),
@@ -205,6 +206,14 @@ let package = Package(
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
             ],
             path: "Sources/enterprise-team-memberships"
+        ),
+        .target(
+            name: "GitHubRestAPIEnterprise_Team_Organizations",
+            dependencies: [
+                .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
+                .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
+            ],
+            path: "Sources/enterprise-team-organizations"
         ),
         .target(
             name: "GitHubRestAPIEnterprise_Teams",

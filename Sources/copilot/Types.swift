@@ -2458,14 +2458,14 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/username`.
         public typealias Username = Swift.String
-        /// The slug of the team name.
-        ///
-        /// - Remark: Generated from `#/components/parameters/team-slug`.
-        public typealias TeamSlug = Swift.String
         /// The organization name. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/org`.
         public typealias Org = Swift.String
+        /// The slug of the team name.
+        ///
+        /// - Remark: Generated from `#/components/parameters/team-slug`.
+        public typealias TeamSlug = Swift.String
     }
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}

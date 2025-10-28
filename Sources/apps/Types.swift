@@ -2487,6 +2487,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/workflows`.
             public var workflows: Components.Schemas.AppPermissions.WorkflowsPayload?
+            /// The level of permission to grant the access token to view and edit custom properties for an organization, when allowed by the property.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/custom_properties_for_organizations`.
+            @frozen public enum CustomPropertiesForOrganizationsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to grant the access token to view and edit custom properties for an organization, when allowed by the property.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/custom_properties_for_organizations`.
+            public var customPropertiesForOrganizations: Components.Schemas.AppPermissions.CustomPropertiesForOrganizationsPayload?
             /// The level of permission to grant the access token for organization teams and members.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/members`.
@@ -2760,6 +2771,18 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/starring`.
             public var starring: Components.Schemas.AppPermissions.StarringPayload?
+            /// The level of permission to grant the access token for organization custom properties management at the enterprise level.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/enterprise_custom_properties_for_organizations`.
+            @frozen public enum EnterpriseCustomPropertiesForOrganizationsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+                case admin = "admin"
+            }
+            /// The level of permission to grant the access token for organization custom properties management at the enterprise level.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/enterprise_custom_properties_for_organizations`.
+            public var enterpriseCustomPropertiesForOrganizations: Components.Schemas.AppPermissions.EnterpriseCustomPropertiesForOrganizationsPayload?
             /// Creates a new `AppPermissions`.
             ///
             /// - Parameters:
@@ -2786,6 +2809,7 @@ public enum Components {
             ///   - statuses: The level of permission to grant the access token for commit statuses.
             ///   - vulnerabilityAlerts: The level of permission to grant the access token to manage Dependabot alerts.
             ///   - workflows: The level of permission to grant the access token to update GitHub Actions workflow files.
+            ///   - customPropertiesForOrganizations: The level of permission to grant the access token to view and edit custom properties for an organization, when allowed by the property.
             ///   - members: The level of permission to grant the access token for organization teams and members.
             ///   - organizationAdministration: The level of permission to grant the access token to manage access to an organization.
             ///   - organizationCustomRoles: The level of permission to grant the access token for custom repository roles management.
@@ -2811,6 +2835,7 @@ public enum Components {
             ///   - interactionLimits: The level of permission to grant the access token to view and manage interaction limits on a repository.
             ///   - profile: The level of permission to grant the access token to manage the profile settings belonging to a user.
             ///   - starring: The level of permission to grant the access token to list and manage repositories a user is starring.
+            ///   - enterpriseCustomPropertiesForOrganizations: The level of permission to grant the access token for organization custom properties management at the enterprise level.
             public init(
                 actions: Components.Schemas.AppPermissions.ActionsPayload? = nil,
                 administration: Components.Schemas.AppPermissions.AdministrationPayload? = nil,
@@ -2835,6 +2860,7 @@ public enum Components {
                 statuses: Components.Schemas.AppPermissions.StatusesPayload? = nil,
                 vulnerabilityAlerts: Components.Schemas.AppPermissions.VulnerabilityAlertsPayload? = nil,
                 workflows: Components.Schemas.AppPermissions.WorkflowsPayload? = nil,
+                customPropertiesForOrganizations: Components.Schemas.AppPermissions.CustomPropertiesForOrganizationsPayload? = nil,
                 members: Components.Schemas.AppPermissions.MembersPayload? = nil,
                 organizationAdministration: Components.Schemas.AppPermissions.OrganizationAdministrationPayload? = nil,
                 organizationCustomRoles: Components.Schemas.AppPermissions.OrganizationCustomRolesPayload? = nil,
@@ -2859,7 +2885,8 @@ public enum Components {
                 gpgKeys: Components.Schemas.AppPermissions.GpgKeysPayload? = nil,
                 interactionLimits: Components.Schemas.AppPermissions.InteractionLimitsPayload? = nil,
                 profile: Components.Schemas.AppPermissions.ProfilePayload? = nil,
-                starring: Components.Schemas.AppPermissions.StarringPayload? = nil
+                starring: Components.Schemas.AppPermissions.StarringPayload? = nil,
+                enterpriseCustomPropertiesForOrganizations: Components.Schemas.AppPermissions.EnterpriseCustomPropertiesForOrganizationsPayload? = nil
             ) {
                 self.actions = actions
                 self.administration = administration
@@ -2884,6 +2911,7 @@ public enum Components {
                 self.statuses = statuses
                 self.vulnerabilityAlerts = vulnerabilityAlerts
                 self.workflows = workflows
+                self.customPropertiesForOrganizations = customPropertiesForOrganizations
                 self.members = members
                 self.organizationAdministration = organizationAdministration
                 self.organizationCustomRoles = organizationCustomRoles
@@ -2909,6 +2937,7 @@ public enum Components {
                 self.interactionLimits = interactionLimits
                 self.profile = profile
                 self.starring = starring
+                self.enterpriseCustomPropertiesForOrganizations = enterpriseCustomPropertiesForOrganizations
             }
             public enum CodingKeys: String, CodingKey {
                 case actions
@@ -2934,6 +2963,7 @@ public enum Components {
                 case statuses
                 case vulnerabilityAlerts = "vulnerability_alerts"
                 case workflows
+                case customPropertiesForOrganizations = "custom_properties_for_organizations"
                 case members
                 case organizationAdministration = "organization_administration"
                 case organizationCustomRoles = "organization_custom_roles"
@@ -2959,6 +2989,7 @@ public enum Components {
                 case interactionLimits = "interaction_limits"
                 case profile
                 case starring
+                case enterpriseCustomPropertiesForOrganizations = "enterprise_custom_properties_for_organizations"
             }
         }
         /// A GitHub user.
@@ -4794,6 +4825,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/username`.
         public typealias Username = Swift.String
+        /// The organization name. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/org`.
+        public typealias Org = Swift.String
         /// account_id parameter
         ///
         /// - Remark: Generated from `#/components/parameters/account-id`.
@@ -4817,10 +4852,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/repo`.
         public typealias Repo = Swift.String
-        /// The organization name. The name is not case sensitive.
-        ///
-        /// - Remark: Generated from `#/components/parameters/org`.
-        public typealias Org = Swift.String
         /// The unique identifier of the repository.
         ///
         /// - Remark: Generated from `#/components/parameters/repository-id`.

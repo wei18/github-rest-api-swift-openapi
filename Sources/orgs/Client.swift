@@ -127,6 +127,248 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// Get all custom property values for an organization
+    ///
+    /// Gets all custom property values that are set for an organization.
+    ///
+    /// The organization must belong to an enterprise.
+    ///
+    /// Access requirements:
+    /// - Organization admins
+    /// - OAuth tokens and personal access tokens (classic) with the `read:org` scope
+    /// - Actors with the organization-level "read custom properties for an organization" fine-grained permission or above
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/org-properties/values`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)`.
+    public func orgsCustomPropertiesForOrgsGetOrganizationValues(_ input: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input) async throws -> Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/organizations/{}/org-properties/values",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            [Components.Schemas.CustomPropertyValue].self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Create or update custom property values for an organization
+    ///
+    /// Create new or update existing custom property values for an organization.
+    /// To remove a custom property value from an organization, set the property value to `null`.
+    ///
+    /// The organization must belong to an enterprise.
+    ///
+    /// Access requirements:
+    /// - Organization admins
+    /// - OAuth tokens and personal access tokens (classic) with the `admin:org` scope
+    /// - Actors with the organization-level "edit custom properties for an organization" fine-grained permission
+    ///
+    /// - Remark: HTTP `PATCH /organizations/{org}/org-properties/values`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)`.
+    public func orgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues(_ input: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input) async throws -> Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/organizations/{}/org-properties/values",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .patch
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                case 422:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ValidationFailed.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ValidationError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .unprocessableContent(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// Get an organization
     ///
     /// Gets information about an organization.
@@ -836,6 +1078,99 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .notFound(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// List attestation repositories
+    ///
+    /// List repositories owned by the provided organization that have created at least one attested artifact
+    /// Results will be sorted in ascending order by repository ID
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/attestations/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/attestations/repositories/get(orgs/list-attestation-repositories)`.
+    public func orgsListAttestationRepositories(_ input: Operations.OrgsListAttestationRepositories.Input) async throws -> Operations.OrgsListAttestationRepositories.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsListAttestationRepositories.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/attestations/repositories",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "per_page",
+                    value: input.query.perPage
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "before",
+                    value: input.query.before
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "after",
+                    value: input.query.after
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "predicate_type",
+                    value: input.query.predicateType
+                )
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsListAttestationRepositories.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.OrgsListAttestationRepositories.Output.Ok.Body.JsonPayload.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
                 default:
                     return .undocumented(
                         statusCode: response.status.code,

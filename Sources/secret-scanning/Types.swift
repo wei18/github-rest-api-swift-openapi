@@ -11,19 +11,6 @@ import struct Foundation.Date
 #endif
 /// A type that performs HTTP operations defined by the OpenAPI document.
 public protocol APIProtocol: Sendable {
-    /// List secret scanning alerts for an enterprise
-    ///
-    /// Lists secret scanning alerts for eligible repositories in an enterprise, from newest to oldest.
-    ///
-    /// Alerts are only returned for organizations in the enterprise for which the authenticated user is an organization owner or a [security manager](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization).
-    ///
-    /// The authenticated user must be a member of the enterprise in order to use this endpoint.
-    ///
-    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope or `security_events` scope to use this endpoint.
-    ///
-    /// - Remark: HTTP `GET /enterprises/{enterprise}/secret-scanning/alerts`.
-    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/secret-scanning/alerts/get(secret-scanning/list-alerts-for-enterprise)`.
-    func secretScanningListAlertsForEnterprise(_ input: Operations.SecretScanningListAlertsForEnterprise.Input) async throws -> Operations.SecretScanningListAlertsForEnterprise.Output
     /// List secret scanning alerts for an organization
     ///
     /// Lists secret scanning alerts for eligible repositories in an organization, from newest to oldest.
@@ -112,6 +99,9 @@ public protocol APIProtocol: Sendable {
     ///
     /// Lists the latest default incremental and backfill scans by type for a repository. Scans from Copilot Secret Scanning are not included.
     ///
+    /// > [!NOTE]
+    /// > This endpoint requires [GitHub Advanced Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security)."
+    ///
     /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
     ///
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/secret-scanning/scan-history`.
@@ -121,29 +111,6 @@ public protocol APIProtocol: Sendable {
 
 /// Convenience overloads for operation inputs.
 extension APIProtocol {
-    /// List secret scanning alerts for an enterprise
-    ///
-    /// Lists secret scanning alerts for eligible repositories in an enterprise, from newest to oldest.
-    ///
-    /// Alerts are only returned for organizations in the enterprise for which the authenticated user is an organization owner or a [security manager](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization).
-    ///
-    /// The authenticated user must be a member of the enterprise in order to use this endpoint.
-    ///
-    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope or `security_events` scope to use this endpoint.
-    ///
-    /// - Remark: HTTP `GET /enterprises/{enterprise}/secret-scanning/alerts`.
-    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/secret-scanning/alerts/get(secret-scanning/list-alerts-for-enterprise)`.
-    public func secretScanningListAlertsForEnterprise(
-        path: Operations.SecretScanningListAlertsForEnterprise.Input.Path,
-        query: Operations.SecretScanningListAlertsForEnterprise.Input.Query = .init(),
-        headers: Operations.SecretScanningListAlertsForEnterprise.Input.Headers = .init()
-    ) async throws -> Operations.SecretScanningListAlertsForEnterprise.Output {
-        try await secretScanningListAlertsForEnterprise(Operations.SecretScanningListAlertsForEnterprise.Input(
-            path: path,
-            query: query,
-            headers: headers
-        ))
-    }
     /// List secret scanning alerts for an organization
     ///
     /// Lists secret scanning alerts for eligible repositories in an organization, from newest to oldest.
@@ -309,6 +276,9 @@ extension APIProtocol {
     /// Get secret scanning scan history for a repository
     ///
     /// Lists the latest default incremental and backfill scans by type for a repository. Scans from Copilot Secret Scanning are not included.
+    ///
+    /// > [!NOTE]
+    /// > This endpoint requires [GitHub Advanced Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security)."
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
     ///
@@ -2782,14 +2752,6 @@ public enum Components {
     }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
     public enum Parameters {
-        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-        ///
-        /// - Remark: Generated from `#/components/parameters/pagination-before`.
-        public typealias PaginationBefore = Swift.String
-        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-        ///
-        /// - Remark: Generated from `#/components/parameters/pagination-after`.
-        public typealias PaginationAfter = Swift.String
         /// The direction to sort the results by.
         ///
         /// - Remark: Generated from `#/components/parameters/direction`.
@@ -2805,10 +2767,18 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/page`.
         public typealias Page = Swift.Int
-        /// The slug version of the enterprise name.
+        /// The organization name. The name is not case sensitive.
         ///
-        /// - Remark: Generated from `#/components/parameters/enterprise`.
-        public typealias Enterprise = Swift.String
+        /// - Remark: Generated from `#/components/parameters/org`.
+        public typealias Org = Swift.String
+        /// The account owner of the repository. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/owner`.
+        public typealias Owner = Swift.String
+        /// The name of the repository without the `.git` extension. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/repo`.
+        public typealias Repo = Swift.String
         /// Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
         ///
         /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-state`.
@@ -2831,6 +2801,14 @@ public enum Components {
             case created = "created"
             case updated = "updated"
         }
+        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for events before this cursor. To receive an initial cursor on your first request, include an empty "before" query string.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-pagination-before-org-repo`.
+        public typealias SecretScanningPaginationBeforeOrgRepo = Swift.String
+        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for events after this cursor.  To receive an initial cursor on your first request, include an empty "after" query string.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-pagination-after-org-repo`.
+        public typealias SecretScanningPaginationAfterOrgRepo = Swift.String
         /// A comma-separated list of validities that, when present, will return alerts that match the validities in this list. Valid options are `active`, `inactive`, and `unknown`.
         ///
         /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-validity`.
@@ -2847,26 +2825,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-hide-secret`.
         public typealias SecretScanningAlertHideSecret = Swift.Bool
-        /// The account owner of the repository. The name is not case sensitive.
-        ///
-        /// - Remark: Generated from `#/components/parameters/owner`.
-        public typealias Owner = Swift.String
-        /// The name of the repository without the `.git` extension. The name is not case sensitive.
-        ///
-        /// - Remark: Generated from `#/components/parameters/repo`.
-        public typealias Repo = Swift.String
-        /// The organization name. The name is not case sensitive.
-        ///
-        /// - Remark: Generated from `#/components/parameters/org`.
-        public typealias Org = Swift.String
-        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for events before this cursor. To receive an initial cursor on your first request, include an empty "before" query string.
-        ///
-        /// - Remark: Generated from `#/components/parameters/secret-scanning-pagination-before-org-repo`.
-        public typealias SecretScanningPaginationBeforeOrgRepo = Swift.String
-        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for events after this cursor.  To receive an initial cursor on your first request, include an empty "after" query string.
-        ///
-        /// - Remark: Generated from `#/components/parameters/secret-scanning-pagination-after-org-repo`.
-        public typealias SecretScanningPaginationAfterOrgRepo = Swift.String
         /// The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
         ///
         /// - Remark: Generated from `#/components/parameters/alert-number`.
@@ -3111,321 +3069,6 @@ public enum Components {
 
 /// API operations, with input and output types, generated from `#/paths` in the OpenAPI document.
 public enum Operations {
-    /// List secret scanning alerts for an enterprise
-    ///
-    /// Lists secret scanning alerts for eligible repositories in an enterprise, from newest to oldest.
-    ///
-    /// Alerts are only returned for organizations in the enterprise for which the authenticated user is an organization owner or a [security manager](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/managing-security-managers-in-your-organization).
-    ///
-    /// The authenticated user must be a member of the enterprise in order to use this endpoint.
-    ///
-    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope or `security_events` scope to use this endpoint.
-    ///
-    /// - Remark: HTTP `GET /enterprises/{enterprise}/secret-scanning/alerts`.
-    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/secret-scanning/alerts/get(secret-scanning/list-alerts-for-enterprise)`.
-    public enum SecretScanningListAlertsForEnterprise {
-        public static let id: Swift.String = "secret-scanning/list-alerts-for-enterprise"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/path`.
-            public struct Path: Sendable, Hashable {
-                /// The slug version of the enterprise name.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/path/enterprise`.
-                public var enterprise: Components.Parameters.Enterprise
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - enterprise: The slug version of the enterprise name.
-                public init(enterprise: Components.Parameters.Enterprise) {
-                    self.enterprise = enterprise
-                }
-            }
-            public var path: Operations.SecretScanningListAlertsForEnterprise.Input.Path
-            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query`.
-            public struct Query: Sendable, Hashable {
-                /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-state`.
-                @frozen public enum SecretScanningAlertState: String, Codable, Hashable, Sendable, CaseIterable {
-                    case open = "open"
-                    case resolved = "resolved"
-                }
-                /// Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/state`.
-                public var state: Components.Parameters.SecretScanningAlertState?
-                /// A comma-separated list of secret types to return. All default secret patterns are returned. To return generic patterns, pass the token name(s) in the parameter. See "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)" for a complete list of secret types.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/secret_type`.
-                public var secretType: Components.Parameters.SecretScanningAlertSecretType?
-                /// A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/resolution`.
-                public var resolution: Components.Parameters.SecretScanningAlertResolution?
-                /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-sort`.
-                @frozen public enum SecretScanningAlertSort: String, Codable, Hashable, Sendable, CaseIterable {
-                    case created = "created"
-                    case updated = "updated"
-                }
-                /// The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/sort`.
-                public var sort: Components.Parameters.SecretScanningAlertSort?
-                /// - Remark: Generated from `#/components/parameters/direction`.
-                @frozen public enum Direction: String, Codable, Hashable, Sendable, CaseIterable {
-                    case asc = "asc"
-                    case desc = "desc"
-                }
-                /// The direction to sort the results by.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/direction`.
-                public var direction: Components.Parameters.Direction?
-                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/per_page`.
-                public var perPage: Components.Parameters.PerPage?
-                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/before`.
-                public var before: Components.Parameters.PaginationBefore?
-                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/after`.
-                public var after: Components.Parameters.PaginationAfter?
-                /// A comma-separated list of validities that, when present, will return alerts that match the validities in this list. Valid options are `active`, `inactive`, and `unknown`.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/validity`.
-                public var validity: Components.Parameters.SecretScanningAlertValidity?
-                /// A boolean value representing whether or not to filter alerts by the publicly-leaked tag being present.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/is_publicly_leaked`.
-                public var isPubliclyLeaked: Components.Parameters.SecretScanningAlertPubliclyLeaked?
-                /// A boolean value representing whether or not to filter alerts by the multi-repo tag being present.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/is_multi_repo`.
-                public var isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo?
-                /// A boolean value representing whether or not to hide literal secrets in the results.
-                ///
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/query/hide_secret`.
-                public var hideSecret: Components.Parameters.SecretScanningAlertHideSecret?
-                /// Creates a new `Query`.
-                ///
-                /// - Parameters:
-                ///   - state: Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
-                ///   - secretType: A comma-separated list of secret types to return. All default secret patterns are returned. To return generic patterns, pass the token name(s) in the parameter. See "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)" for a complete list of secret types.
-                ///   - resolution: A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
-                ///   - sort: The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
-                ///   - direction: The direction to sort the results by.
-                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///   - validity: A comma-separated list of validities that, when present, will return alerts that match the validities in this list. Valid options are `active`, `inactive`, and `unknown`.
-                ///   - isPubliclyLeaked: A boolean value representing whether or not to filter alerts by the publicly-leaked tag being present.
-                ///   - isMultiRepo: A boolean value representing whether or not to filter alerts by the multi-repo tag being present.
-                ///   - hideSecret: A boolean value representing whether or not to hide literal secrets in the results.
-                public init(
-                    state: Components.Parameters.SecretScanningAlertState? = nil,
-                    secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
-                    resolution: Components.Parameters.SecretScanningAlertResolution? = nil,
-                    sort: Components.Parameters.SecretScanningAlertSort? = nil,
-                    direction: Components.Parameters.Direction? = nil,
-                    perPage: Components.Parameters.PerPage? = nil,
-                    before: Components.Parameters.PaginationBefore? = nil,
-                    after: Components.Parameters.PaginationAfter? = nil,
-                    validity: Components.Parameters.SecretScanningAlertValidity? = nil,
-                    isPubliclyLeaked: Components.Parameters.SecretScanningAlertPubliclyLeaked? = nil,
-                    isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo? = nil,
-                    hideSecret: Components.Parameters.SecretScanningAlertHideSecret? = nil
-                ) {
-                    self.state = state
-                    self.secretType = secretType
-                    self.resolution = resolution
-                    self.sort = sort
-                    self.direction = direction
-                    self.perPage = perPage
-                    self.before = before
-                    self.after = after
-                    self.validity = validity
-                    self.isPubliclyLeaked = isPubliclyLeaked
-                    self.isMultiRepo = isMultiRepo
-                    self.hideSecret = hideSecret
-                }
-            }
-            public var query: Operations.SecretScanningListAlertsForEnterprise.Input.Query
-            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningListAlertsForEnterprise.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningListAlertsForEnterprise.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.SecretScanningListAlertsForEnterprise.Input.Headers
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - query:
-            ///   - headers:
-            public init(
-                path: Operations.SecretScanningListAlertsForEnterprise.Input.Path,
-                query: Operations.SecretScanningListAlertsForEnterprise.Input.Query = .init(),
-                headers: Operations.SecretScanningListAlertsForEnterprise.Input.Headers = .init()
-            ) {
-                self.path = path
-                self.query = query
-                self.headers = headers
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/responses/200/headers`.
-                public struct Headers: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/responses/200/headers/Link`.
-                    public var link: Components.Headers.Link?
-                    /// Creates a new `Headers`.
-                    ///
-                    /// - Parameters:
-                    ///   - link:
-                    public init(link: Components.Headers.Link? = nil) {
-                        self.link = link
-                    }
-                }
-                /// Received HTTP response headers
-                public var headers: Operations.SecretScanningListAlertsForEnterprise.Output.Ok.Headers
-                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/responses/200/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/secret-scanning/alerts/GET/responses/200/content/application\/json`.
-                    case json([Components.Schemas.OrganizationSecretScanningAlert])
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: [Components.Schemas.OrganizationSecretScanningAlert] {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.SecretScanningListAlertsForEnterprise.Output.Ok.Body
-                /// Creates a new `Ok`.
-                ///
-                /// - Parameters:
-                ///   - headers: Received HTTP response headers
-                ///   - body: Received HTTP response body
-                public init(
-                    headers: Operations.SecretScanningListAlertsForEnterprise.Output.Ok.Headers = .init(),
-                    body: Operations.SecretScanningListAlertsForEnterprise.Output.Ok.Body
-                ) {
-                    self.headers = headers
-                    self.body = body
-                }
-            }
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/secret-scanning/alerts/get(secret-scanning/list-alerts-for-enterprise)/responses/200`.
-            ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.SecretScanningListAlertsForEnterprise.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
-            ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.SecretScanningListAlertsForEnterprise.Output.Ok {
-                get throws {
-                    switch self {
-                    case let .ok(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/secret-scanning/alerts/get(secret-scanning/list-alerts-for-enterprise)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Service unavailable
-            ///
-            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/secret-scanning/alerts/get(secret-scanning/list-alerts-for-enterprise)/responses/503`.
-            ///
-            /// HTTP response code: `503 serviceUnavailable`.
-            case serviceUnavailable(Components.Responses.ServiceUnavailable)
-            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
-            ///
-            /// - Throws: An error if `self` is not `.serviceUnavailable`.
-            /// - SeeAlso: `.serviceUnavailable`.
-            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
-                get throws {
-                    switch self {
-                    case let .serviceUnavailable(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "serviceUnavailable",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
-        }
-    }
     /// List secret scanning alerts for an organization
     ///
     /// Lists secret scanning alerts for eligible repositories in an organization, from newest to oldest.
@@ -5786,6 +5429,9 @@ public enum Operations {
     /// Get secret scanning scan history for a repository
     ///
     /// Lists the latest default incremental and backfill scans by type for a repository. Scans from Copilot Secret Scanning are not included.
+    ///
+    /// > [!NOTE]
+    /// > This endpoint requires [GitHub Advanced Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security)."
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
     ///

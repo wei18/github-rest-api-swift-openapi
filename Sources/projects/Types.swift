@@ -5926,10 +5926,47 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query/q`.
                 public var q: Swift.String?
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query/fields`.
+                @frozen public enum FieldsPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query/fields/case1`.
+                    case case1(Swift.String)
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query/fields/case2`.
+                    case case2([Swift.String])
+                    public init(from decoder: any Decoder) throws {
+                        var errors: [any Error] = []
+                        do {
+                            self = .case1(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case2(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
+                    }
+                    public func encode(to encoder: any Encoder) throws {
+                        switch self {
+                        case let .case1(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case2(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        }
+                    }
+                }
                 /// Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
                 ///
+                /// Example: `fields[]=123&fields[]=456&fields[]=789` or `fields=123,456,789`
+                ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query/fields`.
-                public var fields: [Swift.String]?
+                public var fields: Operations.ProjectsListItemsForOrg.Input.Query.FieldsPayload?
                 /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/GET/query/before`.
@@ -5952,7 +5989,7 @@ public enum Operations {
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
                     q: Swift.String? = nil,
-                    fields: [Swift.String]? = nil,
+                    fields: Operations.ProjectsListItemsForOrg.Input.Query.FieldsPayload? = nil,
                     before: Components.Parameters.PaginationBefore? = nil,
                     after: Components.Parameters.PaginationAfter? = nil,
                     perPage: Components.Parameters.PerPage? = nil
@@ -6475,15 +6512,52 @@ public enum Operations {
             public var path: Operations.ProjectsGetOrgItem.Input.Path
             /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/query`.
             public struct Query: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/query/fields`.
+                @frozen public enum FieldsPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/query/fields/case1`.
+                    case case1(Swift.String)
+                    /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/query/fields/case2`.
+                    case case2([Swift.String])
+                    public init(from decoder: any Decoder) throws {
+                        var errors: [any Error] = []
+                        do {
+                            self = .case1(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case2(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
+                    }
+                    public func encode(to encoder: any Encoder) throws {
+                        switch self {
+                        case let .case1(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case2(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        }
+                    }
+                }
                 /// Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
                 ///
+                /// Example: fields[]=123&fields[]=456&fields[]=789 or fields=123,456,789
+                ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/projectsV2/{project_number}/items/{item_id}/GET/query/fields`.
-                public var fields: [Swift.String]?
+                public var fields: Operations.ProjectsGetOrgItem.Input.Query.FieldsPayload?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
                 ///   - fields: Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
-                public init(fields: [Swift.String]? = nil) {
+                public init(fields: Operations.ProjectsGetOrgItem.Input.Query.FieldsPayload? = nil) {
                     self.fields = fields
                 }
             }
@@ -8285,10 +8359,47 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/users/{username}/projectsV2/{project_number}/items/GET/query/q`.
                 public var q: Swift.String?
+                /// - Remark: Generated from `#/paths/users/{username}/projectsV2/{project_number}/items/GET/query/fields`.
+                @frozen public enum FieldsPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/users/{username}/projectsV2/{project_number}/items/GET/query/fields/case1`.
+                    case case1(Swift.String)
+                    /// - Remark: Generated from `#/paths/users/{username}/projectsV2/{project_number}/items/GET/query/fields/case2`.
+                    case case2([Swift.String])
+                    public init(from decoder: any Decoder) throws {
+                        var errors: [any Error] = []
+                        do {
+                            self = .case1(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case2(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
+                    }
+                    public func encode(to encoder: any Encoder) throws {
+                        switch self {
+                        case let .case1(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case2(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        }
+                    }
+                }
                 /// Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
                 ///
+                /// Example: `fields[]=123&fields[]=456&fields[]=789` or `fields=123,456,789`
+                ///
                 /// - Remark: Generated from `#/paths/users/{username}/projectsV2/{project_number}/items/GET/query/fields`.
-                public var fields: [Swift.String]?
+                public var fields: Operations.ProjectsListItemsForUser.Input.Query.FieldsPayload?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -8302,7 +8413,7 @@ public enum Operations {
                     after: Components.Parameters.PaginationAfter? = nil,
                     perPage: Components.Parameters.PerPage? = nil,
                     q: Swift.String? = nil,
-                    fields: [Swift.String]? = nil
+                    fields: Operations.ProjectsListItemsForUser.Input.Query.FieldsPayload? = nil
                 ) {
                     self.before = before
                     self.after = after
@@ -8822,15 +8933,52 @@ public enum Operations {
             public var path: Operations.ProjectsGetUserItem.Input.Path
             /// - Remark: Generated from `#/paths/users/{username}/projectsV2/{project_number}/items/{item_id}/GET/query`.
             public struct Query: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/users/{username}/projectsV2/{project_number}/items/{item_id}/GET/query/fields`.
+                @frozen public enum FieldsPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/users/{username}/projectsV2/{project_number}/items/{item_id}/GET/query/fields/case1`.
+                    case case1(Swift.String)
+                    /// - Remark: Generated from `#/paths/users/{username}/projectsV2/{project_number}/items/{item_id}/GET/query/fields/case2`.
+                    case case2([Swift.String])
+                    public init(from decoder: any Decoder) throws {
+                        var errors: [any Error] = []
+                        do {
+                            self = .case1(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case2(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
+                    }
+                    public func encode(to encoder: any Encoder) throws {
+                        switch self {
+                        case let .case1(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case2(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        }
+                    }
+                }
                 /// Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
                 ///
+                /// Example: fields[]=123&fields[]=456&fields[]=789 or fields=123,456,789
+                ///
                 /// - Remark: Generated from `#/paths/users/{username}/projectsV2/{project_number}/items/{item_id}/GET/query/fields`.
-                public var fields: [Swift.String]?
+                public var fields: Operations.ProjectsGetUserItem.Input.Query.FieldsPayload?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
                 ///   - fields: Limit results to specific fields, by their IDs. If not specified, the title field will be returned.
-                public init(fields: [Swift.String]? = nil) {
+                public init(fields: Operations.ProjectsGetUserItem.Input.Query.FieldsPayload? = nil) {
                     self.fields = fields
                 }
             }
