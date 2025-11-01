@@ -12,6 +12,8 @@ runs:
   using: 'composite'
   steps:
     - uses: jdx/mise-action@v2
+      env:
+        MISE_DATA_DIR: ${{ runner.temp }}/${{ github.action }}/mise
       with:
         mise_toml: |
           [tools]

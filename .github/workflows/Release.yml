@@ -65,6 +65,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           ref: ${{ env.RELEASE_BRANCH }}
+          fetch-depth: 2
 
       - name: Revert previous commit
         run: |
