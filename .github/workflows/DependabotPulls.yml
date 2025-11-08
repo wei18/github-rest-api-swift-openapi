@@ -23,7 +23,7 @@ jobs:
           - 5
           # - 6
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 60
+    timeout-minutes: 100
     steps:
       - uses: actions/checkout@v5
         with:
