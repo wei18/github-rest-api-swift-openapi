@@ -11,26 +11,24 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: jdx/mise-action@v2
+    - uses: jdx/mise-action@v4
       env:
         MISE_DATA_DIR: ${{ runner.temp }}/${{ github.action }}/mise
       with:
         mise_toml: |
           [tools]
           swift = "${{ inputs.swift }}"
+          "spm:apple/swift-openapi-generator" = "latest"
           [settings]
           experimental = true
 
-    - uses: irgaly/setup-mint@v1
-      with:
-        mint-executable-directory: $HOME/.mint/bin
-    
     - name: "Xcode Cache"
       if: contains(inputs.os, 'macos')
       uses: irgaly/xcode-cache@v1
       with:
-        key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
-        restore-keys: xcode-cache-deriveddata-${{ github.workflow }}-
+        key: xcode-cache-deriveddata-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-xcode-cache-deriveddata-
   
     # - name: "Set IgnoreFileSystemDeviceInodeChanges flag"
     #   if: contains(inputs.os, 'macos')
@@ -38,7 +36,7 @@ runs:
     #   run: defaults write com.apple.dt.XCBuild IgnoreFileSystemDeviceInodeChanges -bool YES
       
     - name: "Swift Package Manager Cache"
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: .build
         key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
@@ -46,7 +44,7 @@ runs:
           ${{ runner.os }}-spm-
   
     - name: "Compiling Cache"
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ~/Library/Caches/org.swift.swiftpm/
         key: ${{ runner.os }}-swift-build-${{ github.ref_name }}

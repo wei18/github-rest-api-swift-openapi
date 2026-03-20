@@ -14,9 +14,3 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-
-  - package-ecosystem: "swift"
-    directories:
-      - "/.github/dependabot-mintfile/**/"
-    schedule:
-      interval: "weekly"
