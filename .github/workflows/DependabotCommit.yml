@@ -1,4 +1,4 @@
-name: Dependabot update commit
+name: Dependabot Commit
 
 on:
   pull_request:
