@@ -42,7 +42,7 @@ jobs:
 
       - name: "Commit new sources"
         run: |
-          make -j 3 install
+          make install
           git push
           
       - name: "Update pr metadata"
