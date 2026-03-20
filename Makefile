@@ -51,7 +51,7 @@ Submodule:
 ifdef GITHUB_ACTIONS ## https://docs.github.com/en/actions/learn-github-actions/variables
 	@touch "$(OPENAPI_PATH)"
 else
-	@git submodule update --recursive --remote
+	@git submodule update --remote
 	@$(MAKE) commit file="$@"
 	# @touch "$(OPENAPI_PATH)" # Uncomment to force-install
 endif

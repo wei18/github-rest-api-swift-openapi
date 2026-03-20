@@ -8,7 +8,11 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   Sync:
     if: github.actor == 'dependabot[bot]'
@@ -26,29 +30,28 @@ jobs:
       - uses: actions/checkout@v6
         with:
           submodules: true
+          ref: ${{ github.head_ref }}
+
       - uses: ./.github/composites/setup
         with:
           swift: ${{ matrix.swift }}
           os: ${{ matrix.os }}
 
-      - name: "gh pr checkout and git config"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "git config"
         run: |
-          gh pr checkout ${{ github.event.pull_request.number }}
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          
-      - name: "Update Sources"
+          git config user.name "${{ github.token }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: "Commit new sources"
         run: |
           make -j 3 install
+          git push
           
-      - name: "git push, gh pr auto merge"
+      - name: "Update pr metadata"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git push
           gh pr merge --auto --merge "$PR_URL"
           gh pr review --approve "$PR_URL"
           
