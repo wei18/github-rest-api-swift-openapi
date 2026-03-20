@@ -1,0 +1,11 @@
+name: Git config
+
+runs:
+  using: 'composite'
+  steps:
+
+    - name: "Update git config"
+      shell: bash
+      run: |
+        git config user.name "${{ github.actor }}"
+        git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"

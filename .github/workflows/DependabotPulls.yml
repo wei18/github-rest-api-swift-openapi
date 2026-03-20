@@ -37,10 +37,7 @@ jobs:
           swift: ${{ matrix.swift }}
           os: ${{ matrix.os }}
 
-      - name: "git config"
-        run: |
-          git config user.name "${{ github.token }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
+      - uses: ./.github/composites/git-config
 
       - name: "Commit new sources"
         run: |

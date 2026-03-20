@@ -21,14 +21,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: ./.github/composites/git-config
       - name: Remove submodule to improve Swift Package experience
         env:
           SUBMODULE_PATH: Submodule/github/rest-api-description
         run: |
           if [ -d "$SUBMODULE_PATH" ]; then
-            # 
-            git config user.name "${GITHUB_ACTOR}"
-            git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
             #
             git checkout -B $RELEASE_BRANCH
             #
@@ -66,12 +64,10 @@ jobs:
         with:
           ref: ${{ env.RELEASE_BRANCH }}
           fetch-depth: 2
-
+      
+      - uses: ./.github/composites/git-config
       - name: Revert previous commit
         run: |
-          # 
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           #
           git revert --no-edit HEAD
           git push
