@@ -14,7 +14,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  Sync:
+  
+  generate-sources:
     if: github.actor == 'dependabot[bot]'
     strategy:
       matrix:

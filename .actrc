@@ -1,0 +1,5 @@
+--container-architecture linux/amd64
+--pull=false
+--reuse
+-P ubuntu-latest=catthehacker/ubuntu:act-latest
+-P macos-latest=-self-hosted

@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
 
-  Test:
+  test:
     strategy:
       matrix:
         os:
@@ -33,11 +33,5 @@ jobs:
           swift: ${{ matrix.swift }}
           os: ${{ matrix.os }}
       
-      - uses: ./.github/composites/git-config
-
-      - name: "Test Scripts work on ${{ matrix.os }}"
-        run: swift Scripts/SPIManifestBuilder.swift
-      - name: "Test Swift Package"
-        run: |
-          swift build
-          swift test
+      - run: swift build
+      - run: swift test
