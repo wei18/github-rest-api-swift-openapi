@@ -18,6 +18,13 @@ struct ErrorMessage: LocalizedError {
 /// A struct that parses a JSON file containing a "tags" array, extracting the "name" field from each element.
 struct PackageTargetsParser {
 
+    struct Root: Decodable {
+        struct Tag: Decodable {
+            let name: String
+        }
+        let tags: [Tag]
+    }
+
     /// Parses the provided JSON file and extracts the "name" values from the "tags" array.
     ///
     /// - Parameter path: The path to the JSON file to be parsed.
@@ -42,12 +49,8 @@ struct PackageTargetsParser {
     /// ```
     func parse(from path: String) throws -> [String] {
         let data = try Data(contentsOf: URL(fileURLWithPath: path))
-        let json = try JSONSerialization.jsonObject(with: data, options: [])
-        if let dict = json as? [String: Any], let tags = dict["tags"] as? [[String: Any]] {
-            return tags.compactMap { $0["name"] as? String }
-        } else {
-            throw ErrorMessage(message: "Properties not found.")
-        }
+        let root = try JSONDecoder().decode(Root.self, from: data)
+        return root.tags.map(\.name)
     }
 }
 
