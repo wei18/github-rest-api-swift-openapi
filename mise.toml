@@ -1,0 +1,6 @@
+[tools]
+swift = "6"
+"spm:apple/swift-openapi-generator" = "latest"
+
+[settings]
+experimental = true

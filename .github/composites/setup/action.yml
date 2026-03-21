@@ -3,8 +3,6 @@ name: Setup
 description: Setup for swift, cache, etc.
 
 inputs:
-  swift:
-    required: true
   os:
     required: true
 
@@ -15,14 +13,7 @@ runs:
     - uses: jdx/mise-action@v4
       env:
         MISE_DATA_DIR: ${{ runner.temp }}/${{ github.action }}/mise
-      with:
-        mise_toml: |
-          [tools]
-          swift = "${{ inputs.swift }}"
-          "spm:apple/swift-openapi-generator" = "latest"
-          [settings]
-          experimental = true
-
+     
     - name: "Xcode Cache"
       if: contains(inputs.os, 'macos')
       uses: irgaly/xcode-cache@v1

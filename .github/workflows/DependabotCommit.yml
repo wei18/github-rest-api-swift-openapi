@@ -23,8 +23,7 @@ jobs:
           - ubuntu-latest
           # - macos-latest #Fix: The macos-latest workflow label currently uses the macOS 12 runner image.
           # - macos-13
-        swift: 
-          - 6
+
     runs-on: ${{ matrix.os }}
     timeout-minutes: 100
     steps:
@@ -35,7 +34,6 @@ jobs:
 
       - uses: ./.github/composites/setup
         with:
-          swift: ${{ matrix.swift }}
           os: ${{ matrix.os }}
 
       - uses: ./.github/composites/git-config
