@@ -11,6 +11,86 @@ import struct Foundation.Date
 #endif
 /// A type that performs HTTP operations defined by the OpenAPI document.
 public protocol APIProtocol: Sendable {
+    /// Get GitHub Actions cache retention limit for an enterprise
+    ///
+    /// Gets GitHub Actions cache retention limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-enterprise)`.
+    func actionsGetActionsCacheRetentionLimitForEnterprise(_ input: Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Input) async throws -> Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Output
+    /// Set GitHub Actions cache retention limit for an enterprise
+    ///
+    /// Sets GitHub Actions cache retention limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-enterprise)`.
+    func actionsSetActionsCacheRetentionLimitForEnterprise(_ input: Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Input) async throws -> Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Output
+    /// Get GitHub Actions cache storage limit for an enterprise
+    ///
+    /// Gets GitHub Actions cache storage limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-enterprise)`.
+    func actionsGetActionsCacheStorageLimitForEnterprise(_ input: Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Input) async throws -> Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Output
+    /// Set GitHub Actions cache storage limit for an enterprise
+    ///
+    /// Sets GitHub Actions cache storage limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-enterprise)`.
+    func actionsSetActionsCacheStorageLimitForEnterprise(_ input: Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Input) async throws -> Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Output
+    /// Get GitHub Actions cache retention limit for an organization
+    ///
+    /// Gets GitHub Actions cache retention limit for an organization. All repositories under this
+    /// organization may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-organization)`.
+    func actionsGetActionsCacheRetentionLimitForOrganization(_ input: Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Input) async throws -> Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Output
+    /// Set GitHub Actions cache retention limit for an organization
+    ///
+    /// Sets GitHub Actions cache retention limit for an organization. All repositories under this
+    /// organization may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-organization)`.
+    func actionsSetActionsCacheRetentionLimitForOrganization(_ input: Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Input) async throws -> Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Output
+    /// Get GitHub Actions cache storage limit for an organization
+    ///
+    /// Gets GitHub Actions cache storage limit for an organization. All repositories under this
+    /// organization may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-organization)`.
+    func actionsGetActionsCacheStorageLimitForOrganization(_ input: Operations.ActionsGetActionsCacheStorageLimitForOrganization.Input) async throws -> Operations.ActionsGetActionsCacheStorageLimitForOrganization.Output
+    /// Set GitHub Actions cache storage limit for an organization
+    ///
+    /// Sets GitHub Actions cache storage limit for an organization. All organizations and repositories under this
+    /// organization may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-organization)`.
+    func actionsSetActionsCacheStorageLimitForOrganization(_ input: Operations.ActionsSetActionsCacheStorageLimitForOrganization.Input) async throws -> Operations.ActionsSetActionsCacheStorageLimitForOrganization.Output
     /// Get GitHub Actions cache usage for an organization
     ///
     /// Gets the total GitHub Actions cache usage for an organization.
@@ -890,6 +970,46 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}/get(actions/download-artifact)`.
     func actionsDownloadArtifact(_ input: Operations.ActionsDownloadArtifact.Input) async throws -> Operations.ActionsDownloadArtifact.Output
+    /// Get GitHub Actions cache retention limit for a repository
+    ///
+    /// Gets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained for, if
+    /// not manually removed or evicted due to size constraints.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-repository)`.
+    func actionsGetActionsCacheRetentionLimitForRepository(_ input: Operations.ActionsGetActionsCacheRetentionLimitForRepository.Input) async throws -> Operations.ActionsGetActionsCacheRetentionLimitForRepository.Output
+    /// Set GitHub Actions cache retention limit for a repository
+    ///
+    /// Sets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained for, if
+    /// not manually removed or evicted due to size constraints.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-repository)`.
+    func actionsSetActionsCacheRetentionLimitForRepository(_ input: Operations.ActionsSetActionsCacheRetentionLimitForRepository.Input) async throws -> Operations.ActionsSetActionsCacheRetentionLimitForRepository.Output
+    /// Get GitHub Actions cache storage limit for a repository
+    ///
+    /// Gets GitHub Actions cache storage limit for a repository. This determines the maximum size of caches that can be
+    /// stored before eviction occurs.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-repository)`.
+    func actionsGetActionsCacheStorageLimitForRepository(_ input: Operations.ActionsGetActionsCacheStorageLimitForRepository.Input) async throws -> Operations.ActionsGetActionsCacheStorageLimitForRepository.Output
+    /// Set GitHub Actions cache storage limit for a repository
+    ///
+    /// Sets GitHub Actions cache storage limit for a repository. This determines the maximum size of caches that can be
+    /// stored before eviction occurs.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-repository)`.
+    func actionsSetActionsCacheStorageLimitForRepository(_ input: Operations.ActionsSetActionsCacheStorageLimitForRepository.Input) async throws -> Operations.ActionsSetActionsCacheStorageLimitForRepository.Output
     /// Get GitHub Actions cache usage for a repository
     ///
     /// Gets GitHub Actions cache usage for a repository.
@@ -1814,6 +1934,158 @@ public protocol APIProtocol: Sendable {
 
 /// Convenience overloads for operation inputs.
 extension APIProtocol {
+    /// Get GitHub Actions cache retention limit for an enterprise
+    ///
+    /// Gets GitHub Actions cache retention limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-enterprise)`.
+    public func actionsGetActionsCacheRetentionLimitForEnterprise(
+        path: Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Input.Path,
+        headers: Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Output {
+        try await actionsGetActionsCacheRetentionLimitForEnterprise(Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set GitHub Actions cache retention limit for an enterprise
+    ///
+    /// Sets GitHub Actions cache retention limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-enterprise)`.
+    public func actionsSetActionsCacheRetentionLimitForEnterprise(
+        path: Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Input.Path,
+        headers: Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Input.Headers = .init(),
+        body: Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Input.Body
+    ) async throws -> Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Output {
+        try await actionsSetActionsCacheRetentionLimitForEnterprise(Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get GitHub Actions cache storage limit for an enterprise
+    ///
+    /// Gets GitHub Actions cache storage limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-enterprise)`.
+    public func actionsGetActionsCacheStorageLimitForEnterprise(
+        path: Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Input.Path,
+        headers: Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Output {
+        try await actionsGetActionsCacheStorageLimitForEnterprise(Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set GitHub Actions cache storage limit for an enterprise
+    ///
+    /// Sets GitHub Actions cache storage limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-enterprise)`.
+    public func actionsSetActionsCacheStorageLimitForEnterprise(
+        path: Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Input.Path,
+        headers: Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Input.Headers = .init(),
+        body: Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Input.Body
+    ) async throws -> Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Output {
+        try await actionsSetActionsCacheStorageLimitForEnterprise(Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get GitHub Actions cache retention limit for an organization
+    ///
+    /// Gets GitHub Actions cache retention limit for an organization. All repositories under this
+    /// organization may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-organization)`.
+    public func actionsGetActionsCacheRetentionLimitForOrganization(
+        path: Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Input.Path,
+        headers: Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Output {
+        try await actionsGetActionsCacheRetentionLimitForOrganization(Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set GitHub Actions cache retention limit for an organization
+    ///
+    /// Sets GitHub Actions cache retention limit for an organization. All repositories under this
+    /// organization may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-organization)`.
+    public func actionsSetActionsCacheRetentionLimitForOrganization(
+        path: Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Input.Path,
+        headers: Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Input.Headers = .init(),
+        body: Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Input.Body
+    ) async throws -> Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Output {
+        try await actionsSetActionsCacheRetentionLimitForOrganization(Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get GitHub Actions cache storage limit for an organization
+    ///
+    /// Gets GitHub Actions cache storage limit for an organization. All repositories under this
+    /// organization may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-organization)`.
+    public func actionsGetActionsCacheStorageLimitForOrganization(
+        path: Operations.ActionsGetActionsCacheStorageLimitForOrganization.Input.Path,
+        headers: Operations.ActionsGetActionsCacheStorageLimitForOrganization.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetActionsCacheStorageLimitForOrganization.Output {
+        try await actionsGetActionsCacheStorageLimitForOrganization(Operations.ActionsGetActionsCacheStorageLimitForOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set GitHub Actions cache storage limit for an organization
+    ///
+    /// Sets GitHub Actions cache storage limit for an organization. All organizations and repositories under this
+    /// organization may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-organization)`.
+    public func actionsSetActionsCacheStorageLimitForOrganization(
+        path: Operations.ActionsSetActionsCacheStorageLimitForOrganization.Input.Path,
+        headers: Operations.ActionsSetActionsCacheStorageLimitForOrganization.Input.Headers = .init(),
+        body: Operations.ActionsSetActionsCacheStorageLimitForOrganization.Input.Body
+    ) async throws -> Operations.ActionsSetActionsCacheStorageLimitForOrganization.Output {
+        try await actionsSetActionsCacheStorageLimitForOrganization(Operations.ActionsSetActionsCacheStorageLimitForOrganization.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
     /// Get GitHub Actions cache usage for an organization
     ///
     /// Gets the total GitHub Actions cache usage for an organization.
@@ -3357,6 +3629,82 @@ extension APIProtocol {
             headers: headers
         ))
     }
+    /// Get GitHub Actions cache retention limit for a repository
+    ///
+    /// Gets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained for, if
+    /// not manually removed or evicted due to size constraints.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-repository)`.
+    public func actionsGetActionsCacheRetentionLimitForRepository(
+        path: Operations.ActionsGetActionsCacheRetentionLimitForRepository.Input.Path,
+        headers: Operations.ActionsGetActionsCacheRetentionLimitForRepository.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetActionsCacheRetentionLimitForRepository.Output {
+        try await actionsGetActionsCacheRetentionLimitForRepository(Operations.ActionsGetActionsCacheRetentionLimitForRepository.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set GitHub Actions cache retention limit for a repository
+    ///
+    /// Sets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained for, if
+    /// not manually removed or evicted due to size constraints.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-repository)`.
+    public func actionsSetActionsCacheRetentionLimitForRepository(
+        path: Operations.ActionsSetActionsCacheRetentionLimitForRepository.Input.Path,
+        headers: Operations.ActionsSetActionsCacheRetentionLimitForRepository.Input.Headers = .init(),
+        body: Operations.ActionsSetActionsCacheRetentionLimitForRepository.Input.Body
+    ) async throws -> Operations.ActionsSetActionsCacheRetentionLimitForRepository.Output {
+        try await actionsSetActionsCacheRetentionLimitForRepository(Operations.ActionsSetActionsCacheRetentionLimitForRepository.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get GitHub Actions cache storage limit for a repository
+    ///
+    /// Gets GitHub Actions cache storage limit for a repository. This determines the maximum size of caches that can be
+    /// stored before eviction occurs.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-repository)`.
+    public func actionsGetActionsCacheStorageLimitForRepository(
+        path: Operations.ActionsGetActionsCacheStorageLimitForRepository.Input.Path,
+        headers: Operations.ActionsGetActionsCacheStorageLimitForRepository.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetActionsCacheStorageLimitForRepository.Output {
+        try await actionsGetActionsCacheStorageLimitForRepository(Operations.ActionsGetActionsCacheStorageLimitForRepository.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set GitHub Actions cache storage limit for a repository
+    ///
+    /// Sets GitHub Actions cache storage limit for a repository. This determines the maximum size of caches that can be
+    /// stored before eviction occurs.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-repository)`.
+    public func actionsSetActionsCacheStorageLimitForRepository(
+        path: Operations.ActionsSetActionsCacheStorageLimitForRepository.Input.Path,
+        headers: Operations.ActionsSetActionsCacheStorageLimitForRepository.Input.Headers = .init(),
+        body: Operations.ActionsSetActionsCacheStorageLimitForRepository.Input.Body
+    ) async throws -> Operations.ActionsSetActionsCacheStorageLimitForRepository.Output {
+        try await actionsSetActionsCacheStorageLimitForRepository(Operations.ActionsSetActionsCacheStorageLimitForRepository.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
     /// Get GitHub Actions cache usage for a repository
     ///
     /// Gets GitHub Actions cache usage for a repository.
@@ -4693,10 +5041,12 @@ extension APIProtocol {
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/post(actions/create-workflow-dispatch)`.
     public func actionsCreateWorkflowDispatch(
         path: Operations.ActionsCreateWorkflowDispatch.Input.Path,
+        headers: Operations.ActionsCreateWorkflowDispatch.Input.Headers = .init(),
         body: Operations.ActionsCreateWorkflowDispatch.Input.Body
     ) async throws -> Operations.ActionsCreateWorkflowDispatch.Output {
         try await actionsCreateWorkflowDispatch(Operations.ActionsCreateWorkflowDispatch.Input(
             path: path,
+            headers: headers,
             body: body
         ))
     }
@@ -5345,8 +5695,8 @@ public enum Components {
                     case case2(Swift.Int?)
                     /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
                     case case3([Swift.String]?)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -5371,7 +5721,7 @@ public enum Components {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -5844,6 +6194,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repository/has_discussions`.
             public var hasDiscussions: Swift.Bool?
+            /// Whether pull requests are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload?
+            /// Whether commit comments are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// Whether the repository is archived.
             ///
             /// - Remark: Generated from `#/components/schemas/repository/archived`.
@@ -6089,6 +6458,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads: Whether downloads are enabled.
             ///   - hasDiscussions: Whether discussions are enabled.
+            ///   - hasPullRequests: Whether pull requests are enabled.
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments: Whether commit comments are enabled.
             ///   - archived: Whether the repository is archived.
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -6186,6 +6558,9 @@ public enum Components {
                 hasPages: Swift.Bool,
                 hasDownloads: Swift.Bool,
                 hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -6283,6 +6658,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -6381,6 +6759,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -6452,6 +6833,44 @@ public enum Components {
                 case htmlUrl = "html_url"
             }
         }
+        /// GitHub Actions cache retention policy for an enterprise.
+        ///
+        /// - Remark: Generated from `#/components/schemas/actions-cache-retention-limit-for-enterprise`.
+        public struct ActionsCacheRetentionLimitForEnterprise: Codable, Hashable, Sendable {
+            /// For repositories & organizations in an enterprise, the maximum duration, in days, for which caches in a repository may be retained.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-cache-retention-limit-for-enterprise/max_cache_retention_days`.
+            public var maxCacheRetentionDays: Swift.Int?
+            /// Creates a new `ActionsCacheRetentionLimitForEnterprise`.
+            ///
+            /// - Parameters:
+            ///   - maxCacheRetentionDays: For repositories & organizations in an enterprise, the maximum duration, in days, for which caches in a repository may be retained.
+            public init(maxCacheRetentionDays: Swift.Int? = nil) {
+                self.maxCacheRetentionDays = maxCacheRetentionDays
+            }
+            public enum CodingKeys: String, CodingKey {
+                case maxCacheRetentionDays = "max_cache_retention_days"
+            }
+        }
+        /// GitHub Actions cache storage policy for an enterprise.
+        ///
+        /// - Remark: Generated from `#/components/schemas/actions-cache-storage-limit-for-enterprise`.
+        public struct ActionsCacheStorageLimitForEnterprise: Codable, Hashable, Sendable {
+            /// For repositories & organizations in an enterprise, the maximum size limit for the sum of all caches in a repository, in gigabytes.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-cache-storage-limit-for-enterprise/max_cache_size_gb`.
+            public var maxCacheSizeGb: Swift.Int?
+            /// Creates a new `ActionsCacheStorageLimitForEnterprise`.
+            ///
+            /// - Parameters:
+            ///   - maxCacheSizeGb: For repositories & organizations in an enterprise, the maximum size limit for the sum of all caches in a repository, in gigabytes.
+            public init(maxCacheSizeGb: Swift.Int? = nil) {
+                self.maxCacheSizeGb = maxCacheSizeGb
+            }
+            public enum CodingKeys: String, CodingKey {
+                case maxCacheSizeGb = "max_cache_size_gb"
+            }
+        }
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
         ///
         /// - Remark: Generated from `#/components/schemas/nullable-integration`.
@@ -6474,8 +6893,8 @@ public enum Components {
                 case SimpleUser(Components.Schemas.SimpleUser)
                 /// - Remark: Generated from `#/components/schemas/nullable-integration/owner/case2`.
                 case Enterprise(Components.Schemas.Enterprise)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .SimpleUser(try .init(from: decoder))
                         return
@@ -6494,7 +6913,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .SimpleUser(value):
                         try value.encode(to: encoder)
@@ -6566,7 +6985,7 @@ public enum Components {
                     case contents
                     case deployments
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.issues = try container.decodeIfPresent(
                         Swift.String.self,
@@ -6596,7 +7015,7 @@ public enum Components {
                         "deployments"
                     ])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     try container.encodeIfPresent(
                         self.issues,
@@ -6696,6 +7115,163 @@ public enum Components {
                 case permissions
                 case events
                 case installationsCount = "installations_count"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/pull-request-minimal`.
+        public struct PullRequestMinimal: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/number`.
+            public var number: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public struct HeadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                /// Creates a new `HeadPayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public var head: Components.Schemas.PullRequestMinimal.HeadPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public var base: Components.Schemas.PullRequestMinimal.BasePayload
+            /// Creates a new `PullRequestMinimal`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - number:
+            ///   - url:
+            ///   - head:
+            ///   - base:
+            public init(
+                id: Swift.Int64,
+                number: Swift.Int,
+                url: Swift.String,
+                head: Components.Schemas.PullRequestMinimal.HeadPayload,
+                base: Components.Schemas.PullRequestMinimal.BasePayload
+            ) {
+                self.id = id
+                self.number = number
+                self.url = url
+                self.head = head
+                self.base = base
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case number
+                case url
+                case head
+                case base
             }
         }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
@@ -6872,6 +7448,107 @@ public enum Components {
             }
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_ai_detection`.
             public var secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public struct SecretScanningDelegatedAlertDismissalPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedAlertDismissalPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public var secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public struct SecretScanningDelegatedBypassPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedBypassPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public var secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public struct SecretScanningDelegatedBypassOptionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload`.
+                public struct ReviewersPayloadPayload: Codable, Hashable, Sendable {
+                    /// The ID of the team or role selected as a bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_id`.
+                    public var reviewerId: Swift.Int
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    @frozen public enum ReviewerTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case team = "TEAM"
+                        case role = "ROLE"
+                    }
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    public var reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    /// Creates a new `ReviewersPayloadPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
+                    ///   - reviewerType: The type of the bypass reviewer
+                    public init(
+                        reviewerId: Swift.Int,
+                        reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    ) {
+                        self.reviewerId = reviewerId
+                        self.reviewerType = reviewerType
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case reviewerId = "reviewer_id"
+                        case reviewerType = "reviewer_type"
+                    }
+                }
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public typealias ReviewersPayload = [Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload]
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public var reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload?
+                /// Creates a new `SecretScanningDelegatedBypassOptionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - reviewers: The bypass reviewers for secret scanning delegated bypass
+                public init(reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload? = nil) {
+                    self.reviewers = reviewers
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case reviewers
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public var secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload?
             /// Creates a new `SecurityAndAnalysis`.
             ///
             /// - Parameters:
@@ -6882,6 +7559,9 @@ public enum Components {
             ///   - secretScanningPushProtection:
             ///   - secretScanningNonProviderPatterns:
             ///   - secretScanningAiDetection:
+            ///   - secretScanningDelegatedAlertDismissal:
+            ///   - secretScanningDelegatedBypass:
+            ///   - secretScanningDelegatedBypassOptions:
             public init(
                 advancedSecurity: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload? = nil,
                 codeSecurity: Components.Schemas.SecurityAndAnalysis.CodeSecurityPayload? = nil,
@@ -6889,7 +7569,10 @@ public enum Components {
                 secretScanning: Components.Schemas.SecurityAndAnalysis.SecretScanningPayload? = nil,
                 secretScanningPushProtection: Components.Schemas.SecurityAndAnalysis.SecretScanningPushProtectionPayload? = nil,
                 secretScanningNonProviderPatterns: Components.Schemas.SecurityAndAnalysis.SecretScanningNonProviderPatternsPayload? = nil,
-                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil
+                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil,
+                secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload? = nil,
+                secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload? = nil
             ) {
                 self.advancedSecurity = advancedSecurity
                 self.codeSecurity = codeSecurity
@@ -6898,6 +7581,9 @@ public enum Components {
                 self.secretScanningPushProtection = secretScanningPushProtection
                 self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
                 self.secretScanningAiDetection = secretScanningAiDetection
+                self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                self.secretScanningDelegatedBypass = secretScanningDelegatedBypass
+                self.secretScanningDelegatedBypassOptions = secretScanningDelegatedBypassOptions
             }
             public enum CodingKeys: String, CodingKey {
                 case advancedSecurity = "advanced_security"
@@ -6907,6 +7593,9 @@ public enum Components {
                 case secretScanningPushProtection = "secret_scanning_push_protection"
                 case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
                 case secretScanningAiDetection = "secret_scanning_ai_detection"
+                case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                case secretScanningDelegatedBypass = "secret_scanning_delegated_bypass"
+                case secretScanningDelegatedBypassOptions = "secret_scanning_delegated_bypass_options"
             }
         }
         /// Minimal Repository
@@ -7049,6 +7738,21 @@ public enum Components {
             public var hasDownloads: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/has_discussions`.
             public var hasDiscussions: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/archived`.
             public var archived: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/disabled`.
@@ -7184,10 +7888,10 @@ public enum Components {
                 public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                     self.additionalProperties = additionalProperties
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeAdditionalProperties(additionalProperties)
                 }
             }
@@ -7265,6 +7969,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads:
             ///   - hasDiscussions:
+            ///   - hasPullRequests:
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled:
             ///   - visibility:
@@ -7354,6 +8061,9 @@ public enum Components {
                 hasPages: Swift.Bool? = nil,
                 hasDownloads: Swift.Bool? = nil,
                 hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool? = nil,
                 disabled: Swift.Bool? = nil,
                 visibility: Swift.String? = nil,
@@ -7443,6 +8153,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -7533,6 +8246,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -7554,6 +8270,44 @@ public enum Components {
                 case webCommitSignoffRequired = "web_commit_signoff_required"
                 case securityAndAnalysis = "security_and_analysis"
                 case customProperties = "custom_properties"
+            }
+        }
+        /// GitHub Actions cache retention policy for an organization.
+        ///
+        /// - Remark: Generated from `#/components/schemas/actions-cache-retention-limit-for-organization`.
+        public struct ActionsCacheRetentionLimitForOrganization: Codable, Hashable, Sendable {
+            /// For repositories in this organization, the maximum duration, in days, for which caches in a repository may be retained.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-cache-retention-limit-for-organization/max_cache_retention_days`.
+            public var maxCacheRetentionDays: Swift.Int?
+            /// Creates a new `ActionsCacheRetentionLimitForOrganization`.
+            ///
+            /// - Parameters:
+            ///   - maxCacheRetentionDays: For repositories in this organization, the maximum duration, in days, for which caches in a repository may be retained.
+            public init(maxCacheRetentionDays: Swift.Int? = nil) {
+                self.maxCacheRetentionDays = maxCacheRetentionDays
+            }
+            public enum CodingKeys: String, CodingKey {
+                case maxCacheRetentionDays = "max_cache_retention_days"
+            }
+        }
+        /// GitHub Actions cache storage policy for an organization.
+        ///
+        /// - Remark: Generated from `#/components/schemas/actions-cache-storage-limit-for-organization`.
+        public struct ActionsCacheStorageLimitForOrganization: Codable, Hashable, Sendable {
+            /// For repositories in the organization, the maximum size limit for the sum of all caches in a repository, in gigabytes.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-cache-storage-limit-for-organization/max_cache_size_gb`.
+            public var maxCacheSizeGb: Swift.Int?
+            /// Creates a new `ActionsCacheStorageLimitForOrganization`.
+            ///
+            /// - Parameters:
+            ///   - maxCacheSizeGb: For repositories in the organization, the maximum size limit for the sum of all caches in a repository, in gigabytes.
+            public init(maxCacheSizeGb: Swift.Int? = nil) {
+                self.maxCacheSizeGb = maxCacheSizeGb
+            }
+            public enum CodingKeys: String, CodingKey {
+                case maxCacheSizeGb = "max_cache_size_gb"
             }
         }
         /// - Remark: Generated from `#/components/schemas/actions-cache-usage-org-enterprise`.
@@ -8121,7 +8875,7 @@ public enum Components {
         public struct EmptyObject: Codable, Hashable, Sendable {
             /// Creates a new `EmptyObject`.
             public init() {}
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
             }
         }
@@ -9428,6 +10182,44 @@ public enum Components {
                 case workflowRun = "workflow_run"
             }
         }
+        /// GitHub Actions cache retention policy for a repository.
+        ///
+        /// - Remark: Generated from `#/components/schemas/actions-cache-retention-limit-for-repository`.
+        public struct ActionsCacheRetentionLimitForRepository: Codable, Hashable, Sendable {
+            /// The maximum number of days to keep caches in this repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-cache-retention-limit-for-repository/max_cache_retention_days`.
+            public var maxCacheRetentionDays: Swift.Int?
+            /// Creates a new `ActionsCacheRetentionLimitForRepository`.
+            ///
+            /// - Parameters:
+            ///   - maxCacheRetentionDays: The maximum number of days to keep caches in this repository.
+            public init(maxCacheRetentionDays: Swift.Int? = nil) {
+                self.maxCacheRetentionDays = maxCacheRetentionDays
+            }
+            public enum CodingKeys: String, CodingKey {
+                case maxCacheRetentionDays = "max_cache_retention_days"
+            }
+        }
+        /// GitHub Actions cache storage policy for a repository.
+        ///
+        /// - Remark: Generated from `#/components/schemas/actions-cache-storage-limit-for-repository`.
+        public struct ActionsCacheStorageLimitForRepository: Codable, Hashable, Sendable {
+            /// The maximum total cache size for this repository, in gigabytes.
+            ///
+            /// - Remark: Generated from `#/components/schemas/actions-cache-storage-limit-for-repository/max_cache_size_gb`.
+            public var maxCacheSizeGb: Swift.Int?
+            /// Creates a new `ActionsCacheStorageLimitForRepository`.
+            ///
+            /// - Parameters:
+            ///   - maxCacheSizeGb: The maximum total cache size for this repository, in gigabytes.
+            public init(maxCacheSizeGb: Swift.Int? = nil) {
+                self.maxCacheSizeGb = maxCacheSizeGb
+            }
+            public enum CodingKeys: String, CodingKey {
+                case maxCacheSizeGb = "max_cache_size_gb"
+            }
+        }
         /// Repository actions caches
         ///
         /// - Remark: Generated from `#/components/schemas/actions-cache-list`.
@@ -9997,163 +10789,6 @@ public enum Components {
                 case path
                 case sha
                 case ref
-            }
-        }
-        /// - Remark: Generated from `#/components/schemas/pull-request-minimal`.
-        public struct PullRequestMinimal: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/id`.
-            public var id: Swift.Int64
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/number`.
-            public var number: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/url`.
-            public var url: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
-            public struct HeadPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/ref`.
-                public var ref: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/sha`.
-                public var sha: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
-                public struct RepoPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/id`.
-                    public var id: Swift.Int64
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/url`.
-                    public var url: Swift.String
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/name`.
-                    public var name: Swift.String
-                    /// Creates a new `RepoPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - id:
-                    ///   - url:
-                    ///   - name:
-                    public init(
-                        id: Swift.Int64,
-                        url: Swift.String,
-                        name: Swift.String
-                    ) {
-                        self.id = id
-                        self.url = url
-                        self.name = name
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case id
-                        case url
-                        case name
-                    }
-                }
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
-                public var repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
-                /// Creates a new `HeadPayload`.
-                ///
-                /// - Parameters:
-                ///   - ref:
-                ///   - sha:
-                ///   - repo:
-                public init(
-                    ref: Swift.String,
-                    sha: Swift.String,
-                    repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
-                ) {
-                    self.ref = ref
-                    self.sha = sha
-                    self.repo = repo
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case ref
-                    case sha
-                    case repo
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
-            public var head: Components.Schemas.PullRequestMinimal.HeadPayload
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
-            public struct BasePayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/ref`.
-                public var ref: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/sha`.
-                public var sha: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
-                public struct RepoPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/id`.
-                    public var id: Swift.Int64
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/url`.
-                    public var url: Swift.String
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/name`.
-                    public var name: Swift.String
-                    /// Creates a new `RepoPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - id:
-                    ///   - url:
-                    ///   - name:
-                    public init(
-                        id: Swift.Int64,
-                        url: Swift.String,
-                        name: Swift.String
-                    ) {
-                        self.id = id
-                        self.url = url
-                        self.name = name
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case id
-                        case url
-                        case name
-                    }
-                }
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
-                public var repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
-                /// Creates a new `BasePayload`.
-                ///
-                /// - Parameters:
-                ///   - ref:
-                ///   - sha:
-                ///   - repo:
-                public init(
-                    ref: Swift.String,
-                    sha: Swift.String,
-                    repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
-                ) {
-                    self.ref = ref
-                    self.sha = sha
-                    self.repo = repo
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case ref
-                    case sha
-                    case repo
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
-            public var base: Components.Schemas.PullRequestMinimal.BasePayload
-            /// Creates a new `PullRequestMinimal`.
-            ///
-            /// - Parameters:
-            ///   - id:
-            ///   - number:
-            ///   - url:
-            ///   - head:
-            ///   - base:
-            public init(
-                id: Swift.Int64,
-                number: Swift.Int,
-                url: Swift.String,
-                head: Components.Schemas.PullRequestMinimal.HeadPayload,
-                base: Components.Schemas.PullRequestMinimal.BasePayload
-            ) {
-                self.id = id
-                self.number = number
-                self.url = url
-                self.head = head
-                self.base = base
-            }
-            public enum CodingKeys: String, CodingKey {
-                case id
-                case number
-                case url
-                case head
-                case base
             }
         }
         /// A commit.
@@ -10823,8 +11458,8 @@ public enum Components {
                         self.value1 = value1
                         self.value2 = value2
                     }
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self.value1 = try .init(from: decoder)
                         } catch {
@@ -10845,7 +11480,7 @@ public enum Components {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try self.value1?.encode(to: encoder)
                         try self.value2?.encode(to: encoder)
                     }
@@ -10941,10 +11576,10 @@ public enum Components {
                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -10952,8 +11587,8 @@ public enum Components {
                 case case1(Components.Schemas.Deployment.PayloadPayload.Case1Payload)
                 /// - Remark: Generated from `#/components/schemas/deployment/payload/case2`.
                 case case2(Swift.String)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .case1(try .init(from: decoder))
                         return
@@ -10972,7 +11607,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .case1(value):
                         try value.encode(to: encoder)
@@ -11395,6 +12030,43 @@ public enum Components {
                 case deletedAt = "deleted_at"
             }
         }
+        /// The ID of the workflow run.
+        ///
+        /// - Remark: Generated from `#/components/schemas/workflow-run-id`.
+        public typealias WorkflowRunId = Swift.Int64
+        /// Response containing the workflow run ID and URLs.
+        ///
+        /// - Remark: Generated from `#/components/schemas/workflow-dispatch-response`.
+        public struct WorkflowDispatchResponse: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/workflow-dispatch-response/workflow_run_id`.
+            public var workflowRunId: Components.Schemas.WorkflowRunId
+            /// The URL to the workflow run.
+            ///
+            /// - Remark: Generated from `#/components/schemas/workflow-dispatch-response/run_url`.
+            public var runUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/workflow-dispatch-response/html_url`.
+            public var htmlUrl: Swift.String
+            /// Creates a new `WorkflowDispatchResponse`.
+            ///
+            /// - Parameters:
+            ///   - workflowRunId:
+            ///   - runUrl: The URL to the workflow run.
+            ///   - htmlUrl:
+            public init(
+                workflowRunId: Components.Schemas.WorkflowRunId,
+                runUrl: Swift.String,
+                htmlUrl: Swift.String
+            ) {
+                self.workflowRunId = workflowRunId
+                self.runUrl = runUrl
+                self.htmlUrl = htmlUrl
+            }
+            public enum CodingKeys: String, CodingKey {
+                case workflowRunId = "workflow_run_id"
+                case runUrl = "run_url"
+                case htmlUrl = "html_url"
+            }
+        }
         /// Workflow Usage
         ///
         /// - Remark: Generated from `#/components/schemas/workflow-usage`.
@@ -11504,6 +12176,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/page`.
         public typealias Page = Swift.Int
+        /// The slug version of the enterprise name.
+        ///
+        /// - Remark: Generated from `#/components/parameters/enterprise`.
+        public typealias Enterprise = Swift.String
         /// The organization name. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/org`.
@@ -11659,8 +12335,8 @@ public enum Components {
             case case1(Swift.Int)
             /// - Remark: Generated from `#/components/parameters/workflow-id/case2`.
             case case2(Swift.String)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .case1(try decoder.decodeFromSingleValueContainer())
                     return
@@ -11679,7 +12355,7 @@ public enum Components {
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .case1(value):
                     try encoder.encodeToSingleValueContainer(value)
@@ -12112,6 +12788,1542 @@ public enum Components {
 
 /// API operations, with input and output types, generated from `#/paths` in the OpenAPI document.
 public enum Operations {
+    /// Get GitHub Actions cache retention limit for an enterprise
+    ///
+    /// Gets GitHub Actions cache retention limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-enterprise)`.
+    public enum ActionsGetActionsCacheRetentionLimitForEnterprise {
+        public static let id: Swift.String = "actions/get-actions-cache-retention-limit-for-enterprise"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/retention-limit/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/retention-limit/GET/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/retention-limit/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Input.Path,
+                headers: Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/retention-limit/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/retention-limit/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsCacheRetentionLimitForEnterprise)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsCacheRetentionLimitForEnterprise {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-enterprise)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetActionsCacheRetentionLimitForEnterprise.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-enterprise)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-enterprise)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set GitHub Actions cache retention limit for an enterprise
+    ///
+    /// Sets GitHub Actions cache retention limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-enterprise)`.
+    public enum ActionsSetActionsCacheRetentionLimitForEnterprise {
+        public static let id: Swift.String = "actions/set-actions-cache-retention-limit-for-enterprise"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/retention-limit/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/retention-limit/PUT/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/retention-limit/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Input.Headers
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/retention-limit/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/retention-limit/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsCacheRetentionLimitForEnterprise)
+            }
+            public var body: Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Input.Path,
+                headers: Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Input.Headers = .init(),
+                body: Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-enterprise)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-enterprise)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetActionsCacheRetentionLimitForEnterprise.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-enterprise)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-enterprise)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-enterprise)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Get GitHub Actions cache storage limit for an enterprise
+    ///
+    /// Gets GitHub Actions cache storage limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-enterprise)`.
+    public enum ActionsGetActionsCacheStorageLimitForEnterprise {
+        public static let id: Swift.String = "actions/get-actions-cache-storage-limit-for-enterprise"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/storage-limit/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/storage-limit/GET/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/storage-limit/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheStorageLimitForEnterprise.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheStorageLimitForEnterprise.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Input.Path,
+                headers: Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/storage-limit/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/storage-limit/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsCacheStorageLimitForEnterprise)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsCacheStorageLimitForEnterprise {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-enterprise)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetActionsCacheStorageLimitForEnterprise.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-enterprise)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-enterprise)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set GitHub Actions cache storage limit for an enterprise
+    ///
+    /// Sets GitHub Actions cache storage limit for an enterprise. All organizations and repositories under this
+    /// enterprise may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-enterprise)`.
+    public enum ActionsSetActionsCacheStorageLimitForEnterprise {
+        public static let id: Swift.String = "actions/set-actions-cache-storage-limit-for-enterprise"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/storage-limit/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/storage-limit/PUT/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/storage-limit/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheStorageLimitForEnterprise.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheStorageLimitForEnterprise.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Input.Headers
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/storage-limit/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/cache/storage-limit/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsCacheStorageLimitForEnterprise)
+            }
+            public var body: Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Input.Path,
+                headers: Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Input.Headers = .init(),
+                body: Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-enterprise)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-enterprise)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetActionsCacheStorageLimitForEnterprise.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-enterprise)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-enterprise)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-enterprise)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Get GitHub Actions cache retention limit for an organization
+    ///
+    /// Gets GitHub Actions cache retention limit for an organization. All repositories under this
+    /// organization may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-organization)`.
+    public enum ActionsGetActionsCacheRetentionLimitForOrganization {
+        public static let id: Swift.String = "actions/get-actions-cache-retention-limit-for-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/retention-limit/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/retention-limit/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/retention-limit/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheRetentionLimitForOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheRetentionLimitForOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Input.Path,
+                headers: Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/retention-limit/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/retention-limit/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsCacheRetentionLimitForOrganization)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsCacheRetentionLimitForOrganization {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-organization)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetActionsCacheRetentionLimitForOrganization.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set GitHub Actions cache retention limit for an organization
+    ///
+    /// Sets GitHub Actions cache retention limit for an organization. All repositories under this
+    /// organization may not set a higher cache retention limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-organization)`.
+    public enum ActionsSetActionsCacheRetentionLimitForOrganization {
+        public static let id: Swift.String = "actions/set-actions-cache-retention-limit-for-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/retention-limit/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/retention-limit/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/retention-limit/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheRetentionLimitForOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheRetentionLimitForOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Input.Headers
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/retention-limit/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/retention-limit/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsCacheRetentionLimitForOrganization)
+            }
+            public var body: Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Input.Path,
+                headers: Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Input.Headers = .init(),
+                body: Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetActionsCacheRetentionLimitForOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-organization)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Get GitHub Actions cache storage limit for an organization
+    ///
+    /// Gets GitHub Actions cache storage limit for an organization. All repositories under this
+    /// organization may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /organizations/{org}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-organization)`.
+    public enum ActionsGetActionsCacheStorageLimitForOrganization {
+        public static let id: Swift.String = "actions/get-actions-cache-storage-limit-for-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/storage-limit/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/storage-limit/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsGetActionsCacheStorageLimitForOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/storage-limit/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheStorageLimitForOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheStorageLimitForOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetActionsCacheStorageLimitForOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetActionsCacheStorageLimitForOrganization.Input.Path,
+                headers: Operations.ActionsGetActionsCacheStorageLimitForOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/storage-limit/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/storage-limit/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsCacheStorageLimitForOrganization)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsCacheStorageLimitForOrganization {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetActionsCacheStorageLimitForOrganization.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetActionsCacheStorageLimitForOrganization.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-organization)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetActionsCacheStorageLimitForOrganization.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetActionsCacheStorageLimitForOrganization.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set GitHub Actions cache storage limit for an organization
+    ///
+    /// Sets GitHub Actions cache storage limit for an organization. All organizations and repositories under this
+    /// organization may not set a higher cache storage limit.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:organization` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /organizations/{org}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-organization)`.
+    public enum ActionsSetActionsCacheStorageLimitForOrganization {
+        public static let id: Swift.String = "actions/set-actions-cache-storage-limit-for-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/storage-limit/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/storage-limit/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.ActionsSetActionsCacheStorageLimitForOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/storage-limit/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheStorageLimitForOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheStorageLimitForOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetActionsCacheStorageLimitForOrganization.Input.Headers
+            /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/storage-limit/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/organizations/{org}/actions/cache/storage-limit/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsCacheStorageLimitForOrganization)
+            }
+            public var body: Operations.ActionsSetActionsCacheStorageLimitForOrganization.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetActionsCacheStorageLimitForOrganization.Input.Path,
+                headers: Operations.ActionsSetActionsCacheStorageLimitForOrganization.Input.Headers = .init(),
+                body: Operations.ActionsSetActionsCacheStorageLimitForOrganization.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetActionsCacheStorageLimitForOrganization.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetActionsCacheStorageLimitForOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-organization)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//organizations/{org}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
     /// Get GitHub Actions cache usage for an organization
     ///
     /// Gets the total GitHub Actions cache usage for an organization.
@@ -14700,6 +16912,14 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/enable_static_ip`.
                     public var enableStaticIp: Swift.Bool?
+                    /// The machine size of the runner. To list available sizes, use `GET actions/hosted-runners/machine-sizes`
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/size`.
+                    public var size: Swift.String?
+                    /// The unique identifier of the runner image. To list available images, use `GET /actions/hosted-runners/images/github-owned`, `GET /actions/hosted-runners/images/partner`, or `GET /actions/hosted-runners/images/custom`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/image_id`.
+                    public var imageId: Swift.String?
                     /// The version of the runner image to deploy. This is relevant only for runners using custom images.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/image_version`.
@@ -14711,18 +16931,24 @@ public enum Operations {
                     ///   - runnerGroupId: The existing runner group to add this runner to.
                     ///   - maximumRunners: The maximum amount of runners to scale up to. Runners will not auto-scale above this number. Use this setting to limit your cost.
                     ///   - enableStaticIp: Whether this runner should be updated with a static public IP. Note limit on account. To list limits on account, use `GET actions/hosted-runners/limits`
+                    ///   - size: The machine size of the runner. To list available sizes, use `GET actions/hosted-runners/machine-sizes`
+                    ///   - imageId: The unique identifier of the runner image. To list available images, use `GET /actions/hosted-runners/images/github-owned`, `GET /actions/hosted-runners/images/partner`, or `GET /actions/hosted-runners/images/custom`.
                     ///   - imageVersion: The version of the runner image to deploy. This is relevant only for runners using custom images.
                     public init(
                         name: Swift.String? = nil,
                         runnerGroupId: Swift.Int? = nil,
                         maximumRunners: Swift.Int? = nil,
                         enableStaticIp: Swift.Bool? = nil,
+                        size: Swift.String? = nil,
+                        imageId: Swift.String? = nil,
                         imageVersion: Swift.String? = nil
                     ) {
                         self.name = name
                         self.runnerGroupId = runnerGroupId
                         self.maximumRunners = maximumRunners
                         self.enableStaticIp = enableStaticIp
+                        self.size = size
+                        self.imageId = imageId
                         self.imageVersion = imageVersion
                     }
                     public enum CodingKeys: String, CodingKey {
@@ -14730,6 +16956,8 @@ public enum Operations {
                         case runnerGroupId = "runner_group_id"
                         case maximumRunners = "maximum_runners"
                         case enableStaticIp = "enable_static_ip"
+                        case size
+                        case imageId = "image_id"
                         case imageVersion = "image_version"
                     }
                 }
@@ -26080,6 +28308,810 @@ public enum Operations {
             }
         }
     }
+    /// Get GitHub Actions cache retention limit for a repository
+    ///
+    /// Gets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained for, if
+    /// not manually removed or evicted due to size constraints.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-repository)`.
+    public enum ActionsGetActionsCacheRetentionLimitForRepository {
+        public static let id: Swift.String = "actions/get-actions-cache-retention-limit-for-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ActionsGetActionsCacheRetentionLimitForRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheRetentionLimitForRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheRetentionLimitForRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetActionsCacheRetentionLimitForRepository.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetActionsCacheRetentionLimitForRepository.Input.Path,
+                headers: Operations.ActionsGetActionsCacheRetentionLimitForRepository.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsCacheRetentionLimitForRepository)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsCacheRetentionLimitForRepository {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetActionsCacheRetentionLimitForRepository.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetActionsCacheRetentionLimitForRepository.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-repository)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetActionsCacheRetentionLimitForRepository.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetActionsCacheRetentionLimitForRepository.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-repository)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/get(actions/get-actions-cache-retention-limit-for-repository)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set GitHub Actions cache retention limit for a repository
+    ///
+    /// Sets GitHub Actions cache retention limit for a repository. This determines how long caches will be retained for, if
+    /// not manually removed or evicted due to size constraints.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/cache/retention-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-repository)`.
+    public enum ActionsSetActionsCacheRetentionLimitForRepository {
+        public static let id: Swift.String = "actions/set-actions-cache-retention-limit-for-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/PUT/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/PUT/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ActionsSetActionsCacheRetentionLimitForRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheRetentionLimitForRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheRetentionLimitForRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetActionsCacheRetentionLimitForRepository.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/retention-limit/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsCacheRetentionLimitForRepository)
+            }
+            public var body: Operations.ActionsSetActionsCacheRetentionLimitForRepository.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetActionsCacheRetentionLimitForRepository.Input.Path,
+                headers: Operations.ActionsSetActionsCacheRetentionLimitForRepository.Input.Headers = .init(),
+                body: Operations.ActionsSetActionsCacheRetentionLimitForRepository.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-repository)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetActionsCacheRetentionLimitForRepository.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-repository)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetActionsCacheRetentionLimitForRepository.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-repository)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-repository)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/retention-limit/put(actions/set-actions-cache-retention-limit-for-repository)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Get GitHub Actions cache storage limit for a repository
+    ///
+    /// Gets GitHub Actions cache storage limit for a repository. This determines the maximum size of caches that can be
+    /// stored before eviction occurs.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-repository)`.
+    public enum ActionsGetActionsCacheStorageLimitForRepository {
+        public static let id: Swift.String = "actions/get-actions-cache-storage-limit-for-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ActionsGetActionsCacheStorageLimitForRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheStorageLimitForRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetActionsCacheStorageLimitForRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetActionsCacheStorageLimitForRepository.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetActionsCacheStorageLimitForRepository.Input.Path,
+                headers: Operations.ActionsGetActionsCacheStorageLimitForRepository.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ActionsCacheStorageLimitForRepository)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ActionsCacheStorageLimitForRepository {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetActionsCacheStorageLimitForRepository.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetActionsCacheStorageLimitForRepository.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-repository)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetActionsCacheStorageLimitForRepository.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetActionsCacheStorageLimitForRepository.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-repository)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/get(actions/get-actions-cache-storage-limit-for-repository)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set GitHub Actions cache storage limit for a repository
+    ///
+    /// Sets GitHub Actions cache storage limit for a repository. This determines the maximum size of caches that can be
+    /// stored before eviction occurs.
+    ///
+    /// OAuth tokens and personal access tokens (classic) need the `admin:repository` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/actions/cache/storage-limit`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-repository)`.
+    public enum ActionsSetActionsCacheStorageLimitForRepository {
+        public static let id: Swift.String = "actions/set-actions-cache-storage-limit-for-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/PUT/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/PUT/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ActionsSetActionsCacheStorageLimitForRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheStorageLimitForRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsSetActionsCacheStorageLimitForRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsSetActionsCacheStorageLimitForRepository.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/cache/storage-limit/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.ActionsCacheStorageLimitForRepository)
+            }
+            public var body: Operations.ActionsSetActionsCacheStorageLimitForRepository.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.ActionsSetActionsCacheStorageLimitForRepository.Input.Path,
+                headers: Operations.ActionsSetActionsCacheStorageLimitForRepository.Input.Headers = .init(),
+                body: Operations.ActionsSetActionsCacheStorageLimitForRepository.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-repository)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.ActionsSetActionsCacheStorageLimitForRepository.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-repository)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.ActionsSetActionsCacheStorageLimitForRepository.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-repository)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-repository)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/cache/storage-limit/put(actions/set-actions-cache-storage-limit-for-repository)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
     /// Get GitHub Actions cache usage for a repository
     ///
     /// Gets GitHub Actions cache usage for a repository.
@@ -33191,20 +36223,32 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts/GET/query/name`.
                 public var name: Components.Parameters.ArtifactName?
+                /// - Remark: Generated from `#/components/parameters/direction`.
+                @frozen public enum Direction: String, Codable, Hashable, Sendable, CaseIterable {
+                    case asc = "asc"
+                    case desc = "desc"
+                }
+                /// The direction to sort the results by.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts/GET/query/direction`.
+                public var direction: Components.Parameters.Direction?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - name: The name field of an artifact. When specified, only artifacts with this name will be returned.
+                ///   - direction: The direction to sort the results by.
                 public init(
                     perPage: Components.Parameters.PerPage? = nil,
                     page: Components.Parameters.Page? = nil,
-                    name: Components.Parameters.ArtifactName? = nil
+                    name: Components.Parameters.ArtifactName? = nil,
+                    direction: Components.Parameters.Direction? = nil
                 ) {
                     self.perPage = perPage
                     self.page = page
                     self.name = name
+                    self.direction = direction
                 }
             }
             public var query: Operations.ActionsListWorkflowRunArtifacts.Input.Query
@@ -34141,8 +37185,8 @@ public enum Operations {
                         self.value1 = value1
                         self.value2 = value2
                     }
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self.value1 = try .init(from: decoder)
                         } catch {
@@ -34163,7 +37207,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try self.value1?.encode(to: encoder)
                         try self.value2?.encode(to: encoder)
                     }
@@ -37631,8 +40675,8 @@ public enum Operations {
                     case case1(Swift.Int)
                     /// - Remark: Generated from `#/components/parameters/workflow-id/case2`.
                     case case2(Swift.String)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -37651,7 +40695,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -37816,8 +40860,8 @@ public enum Operations {
                     case case1(Swift.Int)
                     /// - Remark: Generated from `#/components/parameters/workflow-id/case2`.
                     case case2(Swift.String)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -37836,7 +40880,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -37945,8 +40989,8 @@ public enum Operations {
                     case case1(Swift.Int)
                     /// - Remark: Generated from `#/components/parameters/workflow-id/case2`.
                     case case2(Swift.String)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -37965,7 +41009,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -37995,6 +41039,18 @@ public enum Operations {
                 }
             }
             public var path: Operations.ActionsCreateWorkflowDispatch.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsCreateWorkflowDispatch.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsCreateWorkflowDispatch.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsCreateWorkflowDispatch.Input.Headers
             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/POST/requestBody`.
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/POST/requestBody/json`.
@@ -38003,7 +41059,7 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/POST/requestBody/json/ref`.
                     public var ref: Swift.String
-                    /// Input keys and values configured in the workflow file. The maximum number of properties is 10. Any default properties configured in the workflow file will be used when `inputs` are omitted.
+                    /// Input keys and values configured in the workflow file. The maximum number of properties is 25. Any default properties configured in the workflow file will be used when `inputs` are omitted.
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/POST/requestBody/json/inputs`.
                     public struct InputsPayload: Codable, Hashable, Sendable {
@@ -38016,32 +41072,40 @@ public enum Operations {
                         public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                             self.additionalProperties = additionalProperties
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }
-                    /// Input keys and values configured in the workflow file. The maximum number of properties is 10. Any default properties configured in the workflow file will be used when `inputs` are omitted.
+                    /// Input keys and values configured in the workflow file. The maximum number of properties is 25. Any default properties configured in the workflow file will be used when `inputs` are omitted.
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/POST/requestBody/json/inputs`.
                     public var inputs: Operations.ActionsCreateWorkflowDispatch.Input.Body.JsonPayload.InputsPayload?
+                    /// Whether the response should include the workflow run ID and URLs.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/POST/requestBody/json/return_run_details`.
+                    public var returnRunDetails: Swift.Bool?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - ref: The git reference for the workflow. The reference can be a branch or tag name.
-                    ///   - inputs: Input keys and values configured in the workflow file. The maximum number of properties is 10. Any default properties configured in the workflow file will be used when `inputs` are omitted.
+                    ///   - inputs: Input keys and values configured in the workflow file. The maximum number of properties is 25. Any default properties configured in the workflow file will be used when `inputs` are omitted.
+                    ///   - returnRunDetails: Whether the response should include the workflow run ID and URLs.
                     public init(
                         ref: Swift.String,
-                        inputs: Operations.ActionsCreateWorkflowDispatch.Input.Body.JsonPayload.InputsPayload? = nil
+                        inputs: Operations.ActionsCreateWorkflowDispatch.Input.Body.JsonPayload.InputsPayload? = nil,
+                        returnRunDetails: Swift.Bool? = nil
                     ) {
                         self.ref = ref
                         self.inputs = inputs
+                        self.returnRunDetails = returnRunDetails
                     }
                     public enum CodingKeys: String, CodingKey {
                         case ref
                         case inputs
+                        case returnRunDetails = "return_run_details"
                     }
                 }
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/POST/requestBody/content/application\/json`.
@@ -38052,12 +41116,15 @@ public enum Operations {
             ///
             /// - Parameters:
             ///   - path:
+            ///   - headers:
             ///   - body:
             public init(
                 path: Operations.ActionsCreateWorkflowDispatch.Input.Path,
+                headers: Operations.ActionsCreateWorkflowDispatch.Input.Headers = .init(),
                 body: Operations.ActionsCreateWorkflowDispatch.Input.Body
             ) {
                 self.path = path
+                self.headers = headers
                 self.body = body
             }
         }
@@ -38066,13 +41133,13 @@ public enum Operations {
                 /// Creates a new `NoContent`.
                 public init() {}
             }
-            /// Response
+            /// Empty response when `return_run_details` parameter is `false`.
             ///
             /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/post(actions/create-workflow-dispatch)/responses/204`.
             ///
             /// HTTP response code: `204 noContent`.
             case noContent(Operations.ActionsCreateWorkflowDispatch.Output.NoContent)
-            /// Response
+            /// Empty response when `return_run_details` parameter is `false`.
             ///
             /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/post(actions/create-workflow-dispatch)/responses/204`.
             ///
@@ -38097,10 +41164,86 @@ public enum Operations {
                     }
                 }
             }
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/POST/responses/200/content/application\/json`.
+                    case json(Components.Schemas.WorkflowDispatchResponse)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.WorkflowDispatchResponse {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsCreateWorkflowDispatch.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsCreateWorkflowDispatch.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response including the workflow run ID and URLs when `return_run_details` parameter is `true`.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches/post(actions/create-workflow-dispatch)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsCreateWorkflowDispatch.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsCreateWorkflowDispatch.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
             case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
         }
     }
     /// Enable a workflow
@@ -38130,8 +41273,8 @@ public enum Operations {
                     case case1(Swift.Int)
                     /// - Remark: Generated from `#/components/parameters/workflow-id/case2`.
                     case case2(Swift.String)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -38150,7 +41293,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -38261,8 +41404,8 @@ public enum Operations {
                     case case1(Swift.Int)
                     /// - Remark: Generated from `#/components/parameters/workflow-id/case2`.
                     case case2(Swift.String)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -38281,7 +41424,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -38595,8 +41738,8 @@ public enum Operations {
                     case case1(Swift.Int)
                     /// - Remark: Generated from `#/components/parameters/workflow-id/case2`.
                     case case2(Swift.String)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -38615,7 +41758,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
