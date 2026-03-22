@@ -26,6 +26,11 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 100
+
+    env:
+      PR_URL: ${{ github.event.pull_request.html_url }}
+      GITHUB_TOKEN: ${{ github.token }}
+          
     steps:
       - uses: actions/checkout@v6
         with:
@@ -46,9 +51,6 @@ jobs:
           git push
           
       - name: "Update pr metadata"
-        env:
-          PR_URL: ${{ github.event.pull_request.html_url }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr merge --auto --merge "$PR_URL"
           gh pr review --approve "$PR_URL"

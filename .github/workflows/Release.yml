@@ -59,6 +59,9 @@ jobs:
       contents: write
       pull-requests: write
 
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+
     steps:
       - uses: actions/checkout@v6
         with:
@@ -73,9 +76,11 @@ jobs:
           git push
 
       - name: Create pull request
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
         run: |
           PR_URL="$(gh pr create --head $RELEASE_BRANCH --title 'Bump patch version' --body 'Automated monthly release merge')"
+          echo "PR_URL=$PR_URL" >> $GITHUB_ENV
+
+      - name: "Update pr metadata"
+        run: |
           gh pr merge --auto --merge "$PR_URL"
-          gh pr merge --merge --admin "$PR_URL" 
+          gh pr review --approve "$PR_URL"
