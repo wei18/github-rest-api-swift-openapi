@@ -5,7 +5,7 @@
 # [Special-Targets](https://www.gnu.org/software/make/manual/html_node/Special-Targets.html)
 .DEFAULT_GOAL  := install
 OPENAPI_PATH   := Submodule/github/rest-api-description/descriptions/api.github.com/api.github.com.json
-FILTERED_NAMES  = $(shell jq -r '.tags[].name' $(OPENAPI_PATH))
+FILTERED_NAMES  = $(shell swift Scripts/PackageTargetsParser.swift $(OPENAPI_PATH))
 SOURCE_DIRS     = $(addprefix Sources/, $(FILTERED_NAMES))
 PACKAGE_PATHS  := Package.swift
 
