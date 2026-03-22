@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'Sources/**'
+    paths-ignore:
+      - 'Submodule/**'
+
   workflow_dispatch:
 
 concurrency:
@@ -30,5 +31,4 @@ jobs:
         with:
           os: ${{ matrix.os }}
       
-      - run: swift build
       - run: swift test

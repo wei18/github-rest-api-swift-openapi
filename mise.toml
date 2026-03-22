@@ -1,5 +1,5 @@
 [tools]
-swift = "6"
+# swift = "6"
 "spm:apple/swift-openapi-generator" = "latest"
 
 [settings]

@@ -10,6 +10,10 @@ runs:
   using: 'composite'
   steps:
 
+    - uses: swift-actions/setup-swift@v3
+      with:
+        skip-verify-signature: true
+
     - uses: jdx/mise-action@v4
       env:
         MISE_DATA_DIR: ${{ runner.temp }}/${{ github.action }}/mise
