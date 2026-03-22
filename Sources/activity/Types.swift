@@ -1145,8 +1145,8 @@ public enum Components {
                     case case2(Swift.Int?)
                     /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
                     case case3([Swift.String]?)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -1171,7 +1171,7 @@ public enum Components {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -1644,6 +1644,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repository/has_discussions`.
             public var hasDiscussions: Swift.Bool?
+            /// Whether pull requests are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload?
+            /// Whether commit comments are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// Whether the repository is archived.
             ///
             /// - Remark: Generated from `#/components/schemas/repository/archived`.
@@ -1889,6 +1908,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads: Whether downloads are enabled.
             ///   - hasDiscussions: Whether discussions are enabled.
+            ///   - hasPullRequests: Whether pull requests are enabled.
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments: Whether commit comments are enabled.
             ///   - archived: Whether the repository is archived.
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -1986,6 +2008,9 @@ public enum Components {
                 hasPages: Swift.Bool,
                 hasDownloads: Swift.Bool,
                 hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -2083,6 +2108,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -2181,6 +2209,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -2299,6 +2330,706 @@ public enum Components {
                 case gravatarId = "gravatar_id"
                 case url
                 case avatarUrl = "avatar_url"
+            }
+        }
+        /// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
+        ///
+        /// - Remark: Generated from `#/components/schemas/label`.
+        public struct Label: Codable, Hashable, Sendable {
+            /// Unique identifier for the label.
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/label/node_id`.
+            public var nodeId: Swift.String
+            /// URL for the label
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/url`.
+            public var url: Swift.String
+            /// The name of the label.
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/name`.
+            public var name: Swift.String
+            /// Optional description of the label, such as its purpose.
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/description`.
+            public var description: Swift.String?
+            /// 6-character hex code, without the leading #, identifying the color
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/color`.
+            public var color: Swift.String
+            /// Whether this label comes by default in a new repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/label/default`.
+            public var _default: Swift.Bool
+            /// Creates a new `Label`.
+            ///
+            /// - Parameters:
+            ///   - id: Unique identifier for the label.
+            ///   - nodeId:
+            ///   - url: URL for the label
+            ///   - name: The name of the label.
+            ///   - description: Optional description of the label, such as its purpose.
+            ///   - color: 6-character hex code, without the leading #, identifying the color
+            ///   - _default: Whether this label comes by default in a new repository.
+            public init(
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                url: Swift.String,
+                name: Swift.String,
+                description: Swift.String? = nil,
+                color: Swift.String,
+                _default: Swift.Bool
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.name = name
+                self.description = description
+                self.color = color
+                self._default = _default
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case name
+                case description
+                case color
+                case _default = "default"
+            }
+        }
+        /// A Discussion in a repository.
+        ///
+        /// - Remark: Generated from `#/components/schemas/discussion`.
+        public struct Discussion: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/discussion/active_lock_reason`.
+            public var activeLockReason: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_at`.
+            public var answerChosenAt: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by`.
+            public struct AnswerChosenByPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/avatar_url`.
+                public var avatarUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/deleted`.
+                public var deleted: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/email`.
+                public var email: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/events_url`.
+                public var eventsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/followers_url`.
+                public var followersUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/following_url`.
+                public var followingUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/gists_url`.
+                public var gistsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/gravatar_id`.
+                public var gravatarId: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/html_url`.
+                public var htmlUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/id`.
+                public var id: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/login`.
+                public var login: Swift.String
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/name`.
+                public var name: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/node_id`.
+                public var nodeId: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/organizations_url`.
+                public var organizationsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/received_events_url`.
+                public var receivedEventsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/repos_url`.
+                public var reposUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/site_admin`.
+                public var siteAdmin: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/starred_url`.
+                public var starredUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/subscriptions_url`.
+                public var subscriptionsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/type`.
+                @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case bot = "Bot"
+                    case user = "User"
+                    case organization = "Organization"
+                }
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/type`.
+                public var _type: Components.Schemas.Discussion.AnswerChosenByPayload._TypePayload?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/url`.
+                public var url: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by/user_view_type`.
+                public var userViewType: Swift.String?
+                /// Creates a new `AnswerChosenByPayload`.
+                ///
+                /// - Parameters:
+                ///   - avatarUrl:
+                ///   - deleted:
+                ///   - email:
+                ///   - eventsUrl:
+                ///   - followersUrl:
+                ///   - followingUrl:
+                ///   - gistsUrl:
+                ///   - gravatarId:
+                ///   - htmlUrl:
+                ///   - id:
+                ///   - login:
+                ///   - name:
+                ///   - nodeId:
+                ///   - organizationsUrl:
+                ///   - receivedEventsUrl:
+                ///   - reposUrl:
+                ///   - siteAdmin:
+                ///   - starredUrl:
+                ///   - subscriptionsUrl:
+                ///   - _type:
+                ///   - url:
+                ///   - userViewType:
+                public init(
+                    avatarUrl: Swift.String? = nil,
+                    deleted: Swift.Bool? = nil,
+                    email: Swift.String? = nil,
+                    eventsUrl: Swift.String? = nil,
+                    followersUrl: Swift.String? = nil,
+                    followingUrl: Swift.String? = nil,
+                    gistsUrl: Swift.String? = nil,
+                    gravatarId: Swift.String? = nil,
+                    htmlUrl: Swift.String? = nil,
+                    id: Swift.Int,
+                    login: Swift.String,
+                    name: Swift.String? = nil,
+                    nodeId: Swift.String? = nil,
+                    organizationsUrl: Swift.String? = nil,
+                    receivedEventsUrl: Swift.String? = nil,
+                    reposUrl: Swift.String? = nil,
+                    siteAdmin: Swift.Bool? = nil,
+                    starredUrl: Swift.String? = nil,
+                    subscriptionsUrl: Swift.String? = nil,
+                    _type: Components.Schemas.Discussion.AnswerChosenByPayload._TypePayload? = nil,
+                    url: Swift.String? = nil,
+                    userViewType: Swift.String? = nil
+                ) {
+                    self.avatarUrl = avatarUrl
+                    self.deleted = deleted
+                    self.email = email
+                    self.eventsUrl = eventsUrl
+                    self.followersUrl = followersUrl
+                    self.followingUrl = followingUrl
+                    self.gistsUrl = gistsUrl
+                    self.gravatarId = gravatarId
+                    self.htmlUrl = htmlUrl
+                    self.id = id
+                    self.login = login
+                    self.name = name
+                    self.nodeId = nodeId
+                    self.organizationsUrl = organizationsUrl
+                    self.receivedEventsUrl = receivedEventsUrl
+                    self.reposUrl = reposUrl
+                    self.siteAdmin = siteAdmin
+                    self.starredUrl = starredUrl
+                    self.subscriptionsUrl = subscriptionsUrl
+                    self._type = _type
+                    self.url = url
+                    self.userViewType = userViewType
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case avatarUrl = "avatar_url"
+                    case deleted
+                    case email
+                    case eventsUrl = "events_url"
+                    case followersUrl = "followers_url"
+                    case followingUrl = "following_url"
+                    case gistsUrl = "gists_url"
+                    case gravatarId = "gravatar_id"
+                    case htmlUrl = "html_url"
+                    case id
+                    case login
+                    case name
+                    case nodeId = "node_id"
+                    case organizationsUrl = "organizations_url"
+                    case receivedEventsUrl = "received_events_url"
+                    case reposUrl = "repos_url"
+                    case siteAdmin = "site_admin"
+                    case starredUrl = "starred_url"
+                    case subscriptionsUrl = "subscriptions_url"
+                    case _type = "type"
+                    case url
+                    case userViewType = "user_view_type"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/discussion/answer_chosen_by`.
+            public var answerChosenBy: Components.Schemas.Discussion.AnswerChosenByPayload?
+            /// - Remark: Generated from `#/components/schemas/discussion/answer_html_url`.
+            public var answerHtmlUrl: Swift.String?
+            /// How the author is associated with the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/discussion/author_association`.
+            @frozen public enum AuthorAssociationPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case collaborator = "COLLABORATOR"
+                case contributor = "CONTRIBUTOR"
+                case firstTimer = "FIRST_TIMER"
+                case firstTimeContributor = "FIRST_TIME_CONTRIBUTOR"
+                case mannequin = "MANNEQUIN"
+                case member = "MEMBER"
+                case none = "NONE"
+                case owner = "OWNER"
+            }
+            /// How the author is associated with the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/discussion/author_association`.
+            public var authorAssociation: Components.Schemas.Discussion.AuthorAssociationPayload?
+            /// - Remark: Generated from `#/components/schemas/discussion/body`.
+            public var body: Swift.String
+            /// - Remark: Generated from `#/components/schemas/discussion/category`.
+            public struct CategoryPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/discussion/category/created_at`.
+                public var createdAt: Foundation.Date
+                /// - Remark: Generated from `#/components/schemas/discussion/category/description`.
+                public var description: Swift.String
+                /// - Remark: Generated from `#/components/schemas/discussion/category/emoji`.
+                public var emoji: Swift.String
+                /// - Remark: Generated from `#/components/schemas/discussion/category/id`.
+                public var id: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/category/is_answerable`.
+                public var isAnswerable: Swift.Bool
+                /// - Remark: Generated from `#/components/schemas/discussion/category/name`.
+                public var name: Swift.String
+                /// - Remark: Generated from `#/components/schemas/discussion/category/node_id`.
+                public var nodeId: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/category/repository_id`.
+                public var repositoryId: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/category/slug`.
+                public var slug: Swift.String
+                /// - Remark: Generated from `#/components/schemas/discussion/category/updated_at`.
+                public var updatedAt: Swift.String
+                /// Creates a new `CategoryPayload`.
+                ///
+                /// - Parameters:
+                ///   - createdAt:
+                ///   - description:
+                ///   - emoji:
+                ///   - id:
+                ///   - isAnswerable:
+                ///   - name:
+                ///   - nodeId:
+                ///   - repositoryId:
+                ///   - slug:
+                ///   - updatedAt:
+                public init(
+                    createdAt: Foundation.Date,
+                    description: Swift.String,
+                    emoji: Swift.String,
+                    id: Swift.Int,
+                    isAnswerable: Swift.Bool,
+                    name: Swift.String,
+                    nodeId: Swift.String? = nil,
+                    repositoryId: Swift.Int,
+                    slug: Swift.String,
+                    updatedAt: Swift.String
+                ) {
+                    self.createdAt = createdAt
+                    self.description = description
+                    self.emoji = emoji
+                    self.id = id
+                    self.isAnswerable = isAnswerable
+                    self.name = name
+                    self.nodeId = nodeId
+                    self.repositoryId = repositoryId
+                    self.slug = slug
+                    self.updatedAt = updatedAt
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case createdAt = "created_at"
+                    case description
+                    case emoji
+                    case id
+                    case isAnswerable = "is_answerable"
+                    case name
+                    case nodeId = "node_id"
+                    case repositoryId = "repository_id"
+                    case slug
+                    case updatedAt = "updated_at"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/discussion/category`.
+            public var category: Components.Schemas.Discussion.CategoryPayload
+            /// - Remark: Generated from `#/components/schemas/discussion/comments`.
+            public var comments: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/discussion/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/discussion/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/discussion/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/discussion/locked`.
+            public var locked: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/discussion/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/discussion/number`.
+            public var number: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/discussion/reactions`.
+            public struct ReactionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/discussion/reactions/+1`.
+                public var _plus_1: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/reactions/-1`.
+                public var _hyphen_1: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/reactions/confused`.
+                public var confused: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/reactions/eyes`.
+                public var eyes: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/reactions/heart`.
+                public var heart: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/reactions/hooray`.
+                public var hooray: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/reactions/laugh`.
+                public var laugh: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/reactions/rocket`.
+                public var rocket: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/reactions/total_count`.
+                public var totalCount: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/discussion/reactions/url`.
+                public var url: Swift.String
+                /// Creates a new `ReactionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - _plus_1:
+                ///   - _hyphen_1:
+                ///   - confused:
+                ///   - eyes:
+                ///   - heart:
+                ///   - hooray:
+                ///   - laugh:
+                ///   - rocket:
+                ///   - totalCount:
+                ///   - url:
+                public init(
+                    _plus_1: Swift.Int,
+                    _hyphen_1: Swift.Int,
+                    confused: Swift.Int,
+                    eyes: Swift.Int,
+                    heart: Swift.Int,
+                    hooray: Swift.Int,
+                    laugh: Swift.Int,
+                    rocket: Swift.Int,
+                    totalCount: Swift.Int,
+                    url: Swift.String
+                ) {
+                    self._plus_1 = _plus_1
+                    self._hyphen_1 = _hyphen_1
+                    self.confused = confused
+                    self.eyes = eyes
+                    self.heart = heart
+                    self.hooray = hooray
+                    self.laugh = laugh
+                    self.rocket = rocket
+                    self.totalCount = totalCount
+                    self.url = url
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case _plus_1 = "+1"
+                    case _hyphen_1 = "-1"
+                    case confused
+                    case eyes
+                    case heart
+                    case hooray
+                    case laugh
+                    case rocket
+                    case totalCount = "total_count"
+                    case url
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/discussion/reactions`.
+            public var reactions: Components.Schemas.Discussion.ReactionsPayload?
+            /// - Remark: Generated from `#/components/schemas/discussion/repository_url`.
+            public var repositoryUrl: Swift.String
+            /// The current state of the discussion.
+            /// `converting` means that the discussion is being converted from an issue.
+            /// `transferring` means that the discussion is being transferred from another repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/discussion/state`.
+            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case open = "open"
+                case closed = "closed"
+                case locked = "locked"
+                case converting = "converting"
+                case transferring = "transferring"
+            }
+            /// The current state of the discussion.
+            /// `converting` means that the discussion is being converted from an issue.
+            /// `transferring` means that the discussion is being transferred from another repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/discussion/state`.
+            public var state: Components.Schemas.Discussion.StatePayload
+            /// The reason for the current state
+            ///
+            /// - Remark: Generated from `#/components/schemas/discussion/state_reason`.
+            @frozen public enum StateReasonPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case resolved = "resolved"
+                case outdated = "outdated"
+                case duplicate = "duplicate"
+                case reopened = "reopened"
+            }
+            /// The reason for the current state
+            ///
+            /// - Remark: Generated from `#/components/schemas/discussion/state_reason`.
+            public var stateReason: Components.Schemas.Discussion.StateReasonPayload?
+            /// - Remark: Generated from `#/components/schemas/discussion/timeline_url`.
+            public var timelineUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/discussion/title`.
+            public var title: Swift.String
+            /// - Remark: Generated from `#/components/schemas/discussion/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/discussion/user`.
+            public struct UserPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/discussion/user/avatar_url`.
+                public var avatarUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/deleted`.
+                public var deleted: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/email`.
+                public var email: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/events_url`.
+                public var eventsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/followers_url`.
+                public var followersUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/following_url`.
+                public var followingUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/gists_url`.
+                public var gistsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/gravatar_id`.
+                public var gravatarId: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/html_url`.
+                public var htmlUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/id`.
+                public var id: Swift.Int64
+                /// - Remark: Generated from `#/components/schemas/discussion/user/login`.
+                public var login: Swift.String
+                /// - Remark: Generated from `#/components/schemas/discussion/user/name`.
+                public var name: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/node_id`.
+                public var nodeId: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/organizations_url`.
+                public var organizationsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/received_events_url`.
+                public var receivedEventsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/repos_url`.
+                public var reposUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/site_admin`.
+                public var siteAdmin: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/starred_url`.
+                public var starredUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/subscriptions_url`.
+                public var subscriptionsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/type`.
+                @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case bot = "Bot"
+                    case user = "User"
+                    case organization = "Organization"
+                }
+                /// - Remark: Generated from `#/components/schemas/discussion/user/type`.
+                public var _type: Components.Schemas.Discussion.UserPayload._TypePayload?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/url`.
+                public var url: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/discussion/user/user_view_type`.
+                public var userViewType: Swift.String?
+                /// Creates a new `UserPayload`.
+                ///
+                /// - Parameters:
+                ///   - avatarUrl:
+                ///   - deleted:
+                ///   - email:
+                ///   - eventsUrl:
+                ///   - followersUrl:
+                ///   - followingUrl:
+                ///   - gistsUrl:
+                ///   - gravatarId:
+                ///   - htmlUrl:
+                ///   - id:
+                ///   - login:
+                ///   - name:
+                ///   - nodeId:
+                ///   - organizationsUrl:
+                ///   - receivedEventsUrl:
+                ///   - reposUrl:
+                ///   - siteAdmin:
+                ///   - starredUrl:
+                ///   - subscriptionsUrl:
+                ///   - _type:
+                ///   - url:
+                ///   - userViewType:
+                public init(
+                    avatarUrl: Swift.String? = nil,
+                    deleted: Swift.Bool? = nil,
+                    email: Swift.String? = nil,
+                    eventsUrl: Swift.String? = nil,
+                    followersUrl: Swift.String? = nil,
+                    followingUrl: Swift.String? = nil,
+                    gistsUrl: Swift.String? = nil,
+                    gravatarId: Swift.String? = nil,
+                    htmlUrl: Swift.String? = nil,
+                    id: Swift.Int64,
+                    login: Swift.String,
+                    name: Swift.String? = nil,
+                    nodeId: Swift.String? = nil,
+                    organizationsUrl: Swift.String? = nil,
+                    receivedEventsUrl: Swift.String? = nil,
+                    reposUrl: Swift.String? = nil,
+                    siteAdmin: Swift.Bool? = nil,
+                    starredUrl: Swift.String? = nil,
+                    subscriptionsUrl: Swift.String? = nil,
+                    _type: Components.Schemas.Discussion.UserPayload._TypePayload? = nil,
+                    url: Swift.String? = nil,
+                    userViewType: Swift.String? = nil
+                ) {
+                    self.avatarUrl = avatarUrl
+                    self.deleted = deleted
+                    self.email = email
+                    self.eventsUrl = eventsUrl
+                    self.followersUrl = followersUrl
+                    self.followingUrl = followingUrl
+                    self.gistsUrl = gistsUrl
+                    self.gravatarId = gravatarId
+                    self.htmlUrl = htmlUrl
+                    self.id = id
+                    self.login = login
+                    self.name = name
+                    self.nodeId = nodeId
+                    self.organizationsUrl = organizationsUrl
+                    self.receivedEventsUrl = receivedEventsUrl
+                    self.reposUrl = reposUrl
+                    self.siteAdmin = siteAdmin
+                    self.starredUrl = starredUrl
+                    self.subscriptionsUrl = subscriptionsUrl
+                    self._type = _type
+                    self.url = url
+                    self.userViewType = userViewType
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case avatarUrl = "avatar_url"
+                    case deleted
+                    case email
+                    case eventsUrl = "events_url"
+                    case followersUrl = "followers_url"
+                    case followingUrl = "following_url"
+                    case gistsUrl = "gists_url"
+                    case gravatarId = "gravatar_id"
+                    case htmlUrl = "html_url"
+                    case id
+                    case login
+                    case name
+                    case nodeId = "node_id"
+                    case organizationsUrl = "organizations_url"
+                    case receivedEventsUrl = "received_events_url"
+                    case reposUrl = "repos_url"
+                    case siteAdmin = "site_admin"
+                    case starredUrl = "starred_url"
+                    case subscriptionsUrl = "subscriptions_url"
+                    case _type = "type"
+                    case url
+                    case userViewType = "user_view_type"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/discussion/user`.
+            public var user: Components.Schemas.Discussion.UserPayload?
+            /// - Remark: Generated from `#/components/schemas/discussion/labels`.
+            public var labels: [Components.Schemas.Label]?
+            /// Creates a new `Discussion`.
+            ///
+            /// - Parameters:
+            ///   - activeLockReason:
+            ///   - answerChosenAt:
+            ///   - answerChosenBy:
+            ///   - answerHtmlUrl:
+            ///   - authorAssociation: How the author is associated with the repository.
+            ///   - body:
+            ///   - category:
+            ///   - comments:
+            ///   - createdAt:
+            ///   - htmlUrl:
+            ///   - id:
+            ///   - locked:
+            ///   - nodeId:
+            ///   - number:
+            ///   - reactions:
+            ///   - repositoryUrl:
+            ///   - state: The current state of the discussion.
+            ///   - stateReason: The reason for the current state
+            ///   - timelineUrl:
+            ///   - title:
+            ///   - updatedAt:
+            ///   - user:
+            ///   - labels:
+            public init(
+                activeLockReason: Swift.String? = nil,
+                answerChosenAt: Swift.String? = nil,
+                answerChosenBy: Components.Schemas.Discussion.AnswerChosenByPayload? = nil,
+                answerHtmlUrl: Swift.String? = nil,
+                authorAssociation: Components.Schemas.Discussion.AuthorAssociationPayload? = nil,
+                body: Swift.String,
+                category: Components.Schemas.Discussion.CategoryPayload,
+                comments: Swift.Int,
+                createdAt: Foundation.Date,
+                htmlUrl: Swift.String,
+                id: Swift.Int,
+                locked: Swift.Bool,
+                nodeId: Swift.String,
+                number: Swift.Int,
+                reactions: Components.Schemas.Discussion.ReactionsPayload? = nil,
+                repositoryUrl: Swift.String,
+                state: Components.Schemas.Discussion.StatePayload,
+                stateReason: Components.Schemas.Discussion.StateReasonPayload? = nil,
+                timelineUrl: Swift.String? = nil,
+                title: Swift.String,
+                updatedAt: Foundation.Date,
+                user: Components.Schemas.Discussion.UserPayload? = nil,
+                labels: [Components.Schemas.Label]? = nil
+            ) {
+                self.activeLockReason = activeLockReason
+                self.answerChosenAt = answerChosenAt
+                self.answerChosenBy = answerChosenBy
+                self.answerHtmlUrl = answerHtmlUrl
+                self.authorAssociation = authorAssociation
+                self.body = body
+                self.category = category
+                self.comments = comments
+                self.createdAt = createdAt
+                self.htmlUrl = htmlUrl
+                self.id = id
+                self.locked = locked
+                self.nodeId = nodeId
+                self.number = number
+                self.reactions = reactions
+                self.repositoryUrl = repositoryUrl
+                self.state = state
+                self.stateReason = stateReason
+                self.timelineUrl = timelineUrl
+                self.title = title
+                self.updatedAt = updatedAt
+                self.user = user
+                self.labels = labels
+            }
+            public enum CodingKeys: String, CodingKey {
+                case activeLockReason = "active_lock_reason"
+                case answerChosenAt = "answer_chosen_at"
+                case answerChosenBy = "answer_chosen_by"
+                case answerHtmlUrl = "answer_html_url"
+                case authorAssociation = "author_association"
+                case body
+                case category
+                case comments
+                case createdAt = "created_at"
+                case htmlUrl = "html_url"
+                case id
+                case locked
+                case nodeId = "node_id"
+                case number
+                case reactions
+                case repositoryUrl = "repository_url"
+                case state
+                case stateReason = "state_reason"
+                case timelineUrl = "timeline_url"
+                case title
+                case updatedAt = "updated_at"
+                case user
+                case labels
             }
         }
         /// A collection of related issues and pull requests.
@@ -2535,8 +3266,8 @@ public enum Components {
                 case SimpleUser(Components.Schemas.SimpleUser)
                 /// - Remark: Generated from `#/components/schemas/nullable-integration/owner/case2`.
                 case Enterprise(Components.Schemas.Enterprise)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .SimpleUser(try .init(from: decoder))
                         return
@@ -2555,7 +3286,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .SimpleUser(value):
                         try value.encode(to: encoder)
@@ -2627,7 +3358,7 @@ public enum Components {
                     case contents
                     case deployments
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.issues = try container.decodeIfPresent(
                         Swift.String.self,
@@ -2657,7 +3388,7 @@ public enum Components {
                         "deployments"
                     ])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     try container.encodeIfPresent(
                         self.issues,
@@ -2872,6 +3603,140 @@ public enum Components {
                 case percentCompleted = "percent_completed"
             }
         }
+        /// Context around who pinned an issue comment and when it was pinned.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-pinned-issue-comment`.
+        public struct NullablePinnedIssueComment: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/nullable-pinned-issue-comment/pinned_at`.
+            public var pinnedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/nullable-pinned-issue-comment/pinned_by`.
+            public var pinnedBy: Components.Schemas.NullableSimpleUser?
+            /// Creates a new `NullablePinnedIssueComment`.
+            ///
+            /// - Parameters:
+            ///   - pinnedAt:
+            ///   - pinnedBy:
+            public init(
+                pinnedAt: Foundation.Date,
+                pinnedBy: Components.Schemas.NullableSimpleUser? = nil
+            ) {
+                self.pinnedAt = pinnedAt
+                self.pinnedBy = pinnedBy
+            }
+            public enum CodingKeys: String, CodingKey {
+                case pinnedAt = "pinned_at"
+                case pinnedBy = "pinned_by"
+            }
+        }
+        /// Comments provide a way for people to collaborate on an issue.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-issue-comment`.
+        public struct NullableIssueComment: Codable, Hashable, Sendable {
+            /// Unique identifier of the issue comment
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/node_id`.
+            public var nodeId: Swift.String
+            /// URL for the issue comment
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/url`.
+            public var url: Swift.String
+            /// Contents of the issue comment
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/body`.
+            public var body: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/body_text`.
+            public var bodyText: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/body_html`.
+            public var bodyHtml: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/user`.
+            public var user: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/issue_url`.
+            public var issueUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/author_association`.
+            public var authorAssociation: Components.Schemas.AuthorAssociation?
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/reactions`.
+            public var reactions: Components.Schemas.ReactionRollup?
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/pin`.
+            public var pin: Components.Schemas.NullablePinnedIssueComment?
+            /// Creates a new `NullableIssueComment`.
+            ///
+            /// - Parameters:
+            ///   - id: Unique identifier of the issue comment
+            ///   - nodeId:
+            ///   - url: URL for the issue comment
+            ///   - body: Contents of the issue comment
+            ///   - bodyText:
+            ///   - bodyHtml:
+            ///   - htmlUrl:
+            ///   - user:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - issueUrl:
+            ///   - authorAssociation:
+            ///   - performedViaGithubApp:
+            ///   - reactions:
+            ///   - pin:
+            public init(
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                url: Swift.String,
+                body: Swift.String? = nil,
+                bodyText: Swift.String? = nil,
+                bodyHtml: Swift.String? = nil,
+                htmlUrl: Swift.String,
+                user: Components.Schemas.NullableSimpleUser? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                issueUrl: Swift.String,
+                authorAssociation: Components.Schemas.AuthorAssociation? = nil,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                reactions: Components.Schemas.ReactionRollup? = nil,
+                pin: Components.Schemas.NullablePinnedIssueComment? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.body = body
+                self.bodyText = bodyText
+                self.bodyHtml = bodyHtml
+                self.htmlUrl = htmlUrl
+                self.user = user
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.issueUrl = issueUrl
+                self.authorAssociation = authorAssociation
+                self.performedViaGithubApp = performedViaGithubApp
+                self.reactions = reactions
+                self.pin = pin
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case body
+                case bodyText = "body_text"
+                case bodyHtml = "body_html"
+                case htmlUrl = "html_url"
+                case user
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case issueUrl = "issue_url"
+                case authorAssociation = "author_association"
+                case performedViaGithubApp = "performed_via_github_app"
+                case reactions
+                case pin
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary`.
         public struct IssueDependenciesSummary: Codable, Hashable, Sendable {
             /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary/blocked_by`.
@@ -2955,8 +3820,8 @@ public enum Components {
                     self.value2 = value2
                     self.value3 = value3
                 }
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self.value1 = try decoder.decodeFromSingleValueContainer()
                     } catch {
@@ -2983,7 +3848,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeFirstNonNilValueToSingleValueContainer([
                         self.value1,
                         self.value2,
@@ -3177,8 +4042,8 @@ public enum Components {
                 }
                 /// - Remark: Generated from `#/components/schemas/issue/LabelsPayload/case2`.
                 case case2(Components.Schemas.Issue.LabelsPayloadPayload.Case2Payload)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .case1(try decoder.decodeFromSingleValueContainer())
                         return
@@ -3197,7 +4062,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .case1(value):
                         try encoder.encodeToSingleValueContainer(value)
@@ -3301,6 +4166,8 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/issue/parent_issue_url`.
             public var parentIssueUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue/pinned_comment`.
+            public var pinnedComment: Components.Schemas.NullableIssueComment?
             /// - Remark: Generated from `#/components/schemas/issue/issue_dependencies_summary`.
             public var issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary?
             /// - Remark: Generated from `#/components/schemas/issue/issue_field_values`.
@@ -3345,6 +4212,7 @@ public enum Components {
             ///   - reactions:
             ///   - subIssuesSummary:
             ///   - parentIssueUrl: URL to get the parent issue of this issue, if it is a sub-issue
+            ///   - pinnedComment:
             ///   - issueDependenciesSummary:
             ///   - issueFieldValues:
             public init(
@@ -3385,6 +4253,7 @@ public enum Components {
                 reactions: Components.Schemas.ReactionRollup? = nil,
                 subIssuesSummary: Components.Schemas.SubIssuesSummary? = nil,
                 parentIssueUrl: Swift.String? = nil,
+                pinnedComment: Components.Schemas.NullableIssueComment? = nil,
                 issueDependenciesSummary: Components.Schemas.IssueDependenciesSummary? = nil,
                 issueFieldValues: [Components.Schemas.IssueFieldValue]? = nil
             ) {
@@ -3425,6 +4294,7 @@ public enum Components {
                 self.reactions = reactions
                 self.subIssuesSummary = subIssuesSummary
                 self.parentIssueUrl = parentIssueUrl
+                self.pinnedComment = pinnedComment
                 self.issueDependenciesSummary = issueDependenciesSummary
                 self.issueFieldValues = issueFieldValues
             }
@@ -3466,6 +4336,7 @@ public enum Components {
                 case reactions
                 case subIssuesSummary = "sub_issues_summary"
                 case parentIssueUrl = "parent_issue_url"
+                case pinnedComment = "pinned_comment"
                 case issueDependenciesSummary = "issue_dependencies_summary"
                 case issueFieldValues = "issue_field_values"
             }
@@ -3503,11 +4374,13 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/issue-comment/issue_url`.
             public var issueUrl: Swift.String
             /// - Remark: Generated from `#/components/schemas/issue-comment/author_association`.
-            public var authorAssociation: Components.Schemas.AuthorAssociation
+            public var authorAssociation: Components.Schemas.AuthorAssociation?
             /// - Remark: Generated from `#/components/schemas/issue-comment/performed_via_github_app`.
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/issue-comment/reactions`.
             public var reactions: Components.Schemas.ReactionRollup?
+            /// - Remark: Generated from `#/components/schemas/issue-comment/pin`.
+            public var pin: Components.Schemas.NullablePinnedIssueComment?
             /// Creates a new `IssueComment`.
             ///
             /// - Parameters:
@@ -3525,6 +4398,7 @@ public enum Components {
             ///   - authorAssociation:
             ///   - performedViaGithubApp:
             ///   - reactions:
+            ///   - pin:
             public init(
                 id: Swift.Int64,
                 nodeId: Swift.String,
@@ -3537,9 +4411,10 @@ public enum Components {
                 createdAt: Foundation.Date,
                 updatedAt: Foundation.Date,
                 issueUrl: Swift.String,
-                authorAssociation: Components.Schemas.AuthorAssociation,
+                authorAssociation: Components.Schemas.AuthorAssociation? = nil,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                reactions: Components.Schemas.ReactionRollup? = nil
+                reactions: Components.Schemas.ReactionRollup? = nil,
+                pin: Components.Schemas.NullablePinnedIssueComment? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -3555,6 +4430,7 @@ public enum Components {
                 self.authorAssociation = authorAssociation
                 self.performedViaGithubApp = performedViaGithubApp
                 self.reactions = reactions
+                self.pin = pin
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -3570,6 +4446,447 @@ public enum Components {
                 case issueUrl = "issue_url"
                 case authorAssociation = "author_association"
                 case performedViaGithubApp = "performed_via_github_app"
+                case reactions
+                case pin
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/pull-request-minimal`.
+        public struct PullRequestMinimal: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/number`.
+            public var number: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public struct HeadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                /// Creates a new `HeadPayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public var head: Components.Schemas.PullRequestMinimal.HeadPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public var base: Components.Schemas.PullRequestMinimal.BasePayload
+            /// Creates a new `PullRequestMinimal`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - number:
+            ///   - url:
+            ///   - head:
+            ///   - base:
+            public init(
+                id: Swift.Int64,
+                number: Swift.Int,
+                url: Swift.String,
+                head: Components.Schemas.PullRequestMinimal.HeadPayload,
+                base: Components.Schemas.PullRequestMinimal.BasePayload
+            ) {
+                self.id = id
+                self.number = number
+                self.url = url
+                self.head = head
+                self.base = base
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case number
+                case url
+                case head
+                case base
+            }
+        }
+        /// Data related to a release.
+        ///
+        /// - Remark: Generated from `#/components/schemas/release-asset`.
+        public struct ReleaseAsset: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/release-asset/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/browser_download_url`.
+            public var browserDownloadUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release-asset/node_id`.
+            public var nodeId: Swift.String
+            /// The file name of the asset.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release-asset/name`.
+            public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/label`.
+            public var label: Swift.String?
+            /// State of the release asset.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release-asset/state`.
+            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case uploaded = "uploaded"
+                case open = "open"
+            }
+            /// State of the release asset.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release-asset/state`.
+            public var state: Components.Schemas.ReleaseAsset.StatePayload
+            /// - Remark: Generated from `#/components/schemas/release-asset/content_type`.
+            public var contentType: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/size`.
+            public var size: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release-asset/digest`.
+            public var digest: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release-asset/download_count`.
+            public var downloadCount: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release-asset/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/release-asset/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/release-asset/uploader`.
+            public var uploader: Components.Schemas.NullableSimpleUser?
+            /// Creates a new `ReleaseAsset`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - browserDownloadUrl:
+            ///   - id:
+            ///   - nodeId:
+            ///   - name: The file name of the asset.
+            ///   - label:
+            ///   - state: State of the release asset.
+            ///   - contentType:
+            ///   - size:
+            ///   - digest:
+            ///   - downloadCount:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - uploader:
+            public init(
+                url: Swift.String,
+                browserDownloadUrl: Swift.String,
+                id: Swift.Int,
+                nodeId: Swift.String,
+                name: Swift.String,
+                label: Swift.String? = nil,
+                state: Components.Schemas.ReleaseAsset.StatePayload,
+                contentType: Swift.String,
+                size: Swift.Int,
+                digest: Swift.String? = nil,
+                downloadCount: Swift.Int,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                uploader: Components.Schemas.NullableSimpleUser? = nil
+            ) {
+                self.url = url
+                self.browserDownloadUrl = browserDownloadUrl
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.label = label
+                self.state = state
+                self.contentType = contentType
+                self.size = size
+                self.digest = digest
+                self.downloadCount = downloadCount
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.uploader = uploader
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case browserDownloadUrl = "browser_download_url"
+                case id
+                case nodeId = "node_id"
+                case name
+                case label
+                case state
+                case contentType = "content_type"
+                case size
+                case digest
+                case downloadCount = "download_count"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case uploader
+            }
+        }
+        /// A release.
+        ///
+        /// - Remark: Generated from `#/components/schemas/release`.
+        public struct Release: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/release/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/assets_url`.
+            public var assetsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/upload_url`.
+            public var uploadUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/tarball_url`.
+            public var tarballUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/zipball_url`.
+            public var zipballUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the tag.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/tag_name`.
+            public var tagName: Swift.String
+            /// Specifies the commitish value that determines where the Git tag is created from.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/target_commitish`.
+            public var targetCommitish: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/name`.
+            public var name: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/body`.
+            public var body: Swift.String?
+            /// true to create a draft (unpublished) release, false to create a published one.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/draft`.
+            public var draft: Swift.Bool
+            /// Whether to identify the release as a prerelease or a full release.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/prerelease`.
+            public var prerelease: Swift.Bool
+            /// Whether or not the release is immutable.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/immutable`.
+            public var immutable: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/release/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/release/published_at`.
+            public var publishedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/release/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/release/author`.
+            public var author: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/release/assets`.
+            public var assets: [Components.Schemas.ReleaseAsset]
+            /// - Remark: Generated from `#/components/schemas/release/body_html`.
+            public var bodyHtml: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/body_text`.
+            public var bodyText: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/mentions_count`.
+            public var mentionsCount: Swift.Int?
+            /// The URL of the release discussion.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/discussion_url`.
+            public var discussionUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/reactions`.
+            public var reactions: Components.Schemas.ReactionRollup?
+            /// Creates a new `Release`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - assetsUrl:
+            ///   - uploadUrl:
+            ///   - tarballUrl:
+            ///   - zipballUrl:
+            ///   - id:
+            ///   - nodeId:
+            ///   - tagName: The name of the tag.
+            ///   - targetCommitish: Specifies the commitish value that determines where the Git tag is created from.
+            ///   - name:
+            ///   - body:
+            ///   - draft: true to create a draft (unpublished) release, false to create a published one.
+            ///   - prerelease: Whether to identify the release as a prerelease or a full release.
+            ///   - immutable: Whether or not the release is immutable.
+            ///   - createdAt:
+            ///   - publishedAt:
+            ///   - updatedAt:
+            ///   - author:
+            ///   - assets:
+            ///   - bodyHtml:
+            ///   - bodyText:
+            ///   - mentionsCount:
+            ///   - discussionUrl: The URL of the release discussion.
+            ///   - reactions:
+            public init(
+                url: Swift.String,
+                htmlUrl: Swift.String,
+                assetsUrl: Swift.String,
+                uploadUrl: Swift.String,
+                tarballUrl: Swift.String? = nil,
+                zipballUrl: Swift.String? = nil,
+                id: Swift.Int,
+                nodeId: Swift.String,
+                tagName: Swift.String,
+                targetCommitish: Swift.String,
+                name: Swift.String? = nil,
+                body: Swift.String? = nil,
+                draft: Swift.Bool,
+                prerelease: Swift.Bool,
+                immutable: Swift.Bool? = nil,
+                createdAt: Foundation.Date,
+                publishedAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil,
+                author: Components.Schemas.SimpleUser,
+                assets: [Components.Schemas.ReleaseAsset],
+                bodyHtml: Swift.String? = nil,
+                bodyText: Swift.String? = nil,
+                mentionsCount: Swift.Int? = nil,
+                discussionUrl: Swift.String? = nil,
+                reactions: Components.Schemas.ReactionRollup? = nil
+            ) {
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.assetsUrl = assetsUrl
+                self.uploadUrl = uploadUrl
+                self.tarballUrl = tarballUrl
+                self.zipballUrl = zipballUrl
+                self.id = id
+                self.nodeId = nodeId
+                self.tagName = tagName
+                self.targetCommitish = targetCommitish
+                self.name = name
+                self.body = body
+                self.draft = draft
+                self.prerelease = prerelease
+                self.immutable = immutable
+                self.createdAt = createdAt
+                self.publishedAt = publishedAt
+                self.updatedAt = updatedAt
+                self.author = author
+                self.assets = assets
+                self.bodyHtml = bodyHtml
+                self.bodyText = bodyText
+                self.mentionsCount = mentionsCount
+                self.discussionUrl = discussionUrl
+                self.reactions = reactions
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case htmlUrl = "html_url"
+                case assetsUrl = "assets_url"
+                case uploadUrl = "upload_url"
+                case tarballUrl = "tarball_url"
+                case zipballUrl = "zipball_url"
+                case id
+                case nodeId = "node_id"
+                case tagName = "tag_name"
+                case targetCommitish = "target_commitish"
+                case name
+                case body
+                case draft
+                case prerelease
+                case immutable
+                case createdAt = "created_at"
+                case publishedAt = "published_at"
+                case updatedAt = "updated_at"
+                case author
+                case assets
+                case bodyHtml = "body_html"
+                case bodyText = "body_text"
+                case mentionsCount = "mentions_count"
+                case discussionUrl = "discussion_url"
                 case reactions
             }
         }
@@ -3617,87 +4934,178 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/event/org`.
             public var org: Components.Schemas.Actor?
             /// - Remark: Generated from `#/components/schemas/event/payload`.
-            public struct PayloadPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/event/payload/action`.
-                public var action: Swift.String?
-                /// - Remark: Generated from `#/components/schemas/event/payload/issue`.
-                public var issue: Components.Schemas.Issue?
-                /// - Remark: Generated from `#/components/schemas/event/payload/comment`.
-                public var comment: Components.Schemas.IssueComment?
-                /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload`.
-                public struct PagesPayloadPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/page_name`.
-                    public var pageName: Swift.String?
-                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/title`.
-                    public var title: Swift.String?
-                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/summary`.
-                    public var summary: Swift.String?
-                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/action`.
-                    public var action: Swift.String?
-                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/sha`.
-                    public var sha: Swift.String?
-                    /// - Remark: Generated from `#/components/schemas/event/payload/PagesPayload/html_url`.
-                    public var htmlUrl: Swift.String?
-                    /// Creates a new `PagesPayloadPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - pageName:
-                    ///   - title:
-                    ///   - summary:
-                    ///   - action:
-                    ///   - sha:
-                    ///   - htmlUrl:
-                    public init(
-                        pageName: Swift.String? = nil,
-                        title: Swift.String? = nil,
-                        summary: Swift.String? = nil,
-                        action: Swift.String? = nil,
-                        sha: Swift.String? = nil,
-                        htmlUrl: Swift.String? = nil
-                    ) {
-                        self.pageName = pageName
-                        self.title = title
-                        self.summary = summary
-                        self.action = action
-                        self.sha = sha
-                        self.htmlUrl = htmlUrl
+            @frozen public enum PayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/event/payload/case1`.
+                case CreateEvent(Components.Schemas.CreateEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case2`.
+                case DeleteEvent(Components.Schemas.DeleteEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case3`.
+                case DiscussionEvent(Components.Schemas.DiscussionEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case4`.
+                case IssuesEvent(Components.Schemas.IssuesEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case5`.
+                case IssueCommentEvent(Components.Schemas.IssueCommentEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case6`.
+                case ForkEvent(Components.Schemas.ForkEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case7`.
+                case GollumEvent(Components.Schemas.GollumEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case8`.
+                case MemberEvent(Components.Schemas.MemberEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case9`.
+                case PublicEvent(Components.Schemas.PublicEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case10`.
+                case PushEvent(Components.Schemas.PushEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case11`.
+                case PullRequestEvent(Components.Schemas.PullRequestEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case12`.
+                case PullRequestReviewCommentEvent(Components.Schemas.PullRequestReviewCommentEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case13`.
+                case PullRequestReviewEvent(Components.Schemas.PullRequestReviewEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case14`.
+                case CommitCommentEvent(Components.Schemas.CommitCommentEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case15`.
+                case ReleaseEvent(Components.Schemas.ReleaseEvent)
+                /// - Remark: Generated from `#/components/schemas/event/payload/case16`.
+                case WatchEvent(Components.Schemas.WatchEvent)
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
+                    do {
+                        self = .CreateEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
                     }
-                    public enum CodingKeys: String, CodingKey {
-                        case pageName = "page_name"
-                        case title
-                        case summary
-                        case action
-                        case sha
-                        case htmlUrl = "html_url"
+                    do {
+                        self = .DeleteEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
                     }
+                    do {
+                        self = .DiscussionEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .IssuesEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .IssueCommentEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .ForkEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .GollumEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .MemberEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .PublicEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .PushEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .PullRequestEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .PullRequestReviewCommentEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .PullRequestReviewEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .CommitCommentEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .ReleaseEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .WatchEvent(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
                 }
-                /// - Remark: Generated from `#/components/schemas/event/payload/pages`.
-                public typealias PagesPayload = [Components.Schemas.Event.PayloadPayload.PagesPayloadPayload]
-                /// - Remark: Generated from `#/components/schemas/event/payload/pages`.
-                public var pages: Components.Schemas.Event.PayloadPayload.PagesPayload?
-                /// Creates a new `PayloadPayload`.
-                ///
-                /// - Parameters:
-                ///   - action:
-                ///   - issue:
-                ///   - comment:
-                ///   - pages:
-                public init(
-                    action: Swift.String? = nil,
-                    issue: Components.Schemas.Issue? = nil,
-                    comment: Components.Schemas.IssueComment? = nil,
-                    pages: Components.Schemas.Event.PayloadPayload.PagesPayload? = nil
-                ) {
-                    self.action = action
-                    self.issue = issue
-                    self.comment = comment
-                    self.pages = pages
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case action
-                    case issue
-                    case comment
-                    case pages
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    switch self {
+                    case let .CreateEvent(value):
+                        try value.encode(to: encoder)
+                    case let .DeleteEvent(value):
+                        try value.encode(to: encoder)
+                    case let .DiscussionEvent(value):
+                        try value.encode(to: encoder)
+                    case let .IssuesEvent(value):
+                        try value.encode(to: encoder)
+                    case let .IssueCommentEvent(value):
+                        try value.encode(to: encoder)
+                    case let .ForkEvent(value):
+                        try value.encode(to: encoder)
+                    case let .GollumEvent(value):
+                        try value.encode(to: encoder)
+                    case let .MemberEvent(value):
+                        try value.encode(to: encoder)
+                    case let .PublicEvent(value):
+                        try value.encode(to: encoder)
+                    case let .PushEvent(value):
+                        try value.encode(to: encoder)
+                    case let .PullRequestEvent(value):
+                        try value.encode(to: encoder)
+                    case let .PullRequestReviewCommentEvent(value):
+                        try value.encode(to: encoder)
+                    case let .PullRequestReviewEvent(value):
+                        try value.encode(to: encoder)
+                    case let .CommitCommentEvent(value):
+                        try value.encode(to: encoder)
+                    case let .ReleaseEvent(value):
+                        try value.encode(to: encoder)
+                    case let .WatchEvent(value):
+                        try value.encode(to: encoder)
+                    }
                 }
             }
             /// - Remark: Generated from `#/components/schemas/event/payload`.
@@ -4100,6 +5508,107 @@ public enum Components {
             }
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_ai_detection`.
             public var secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public struct SecretScanningDelegatedAlertDismissalPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedAlertDismissalPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public var secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public struct SecretScanningDelegatedBypassPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedBypassPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public var secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public struct SecretScanningDelegatedBypassOptionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload`.
+                public struct ReviewersPayloadPayload: Codable, Hashable, Sendable {
+                    /// The ID of the team or role selected as a bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_id`.
+                    public var reviewerId: Swift.Int
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    @frozen public enum ReviewerTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case team = "TEAM"
+                        case role = "ROLE"
+                    }
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    public var reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    /// Creates a new `ReviewersPayloadPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
+                    ///   - reviewerType: The type of the bypass reviewer
+                    public init(
+                        reviewerId: Swift.Int,
+                        reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    ) {
+                        self.reviewerId = reviewerId
+                        self.reviewerType = reviewerType
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case reviewerId = "reviewer_id"
+                        case reviewerType = "reviewer_type"
+                    }
+                }
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public typealias ReviewersPayload = [Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload]
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public var reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload?
+                /// Creates a new `SecretScanningDelegatedBypassOptionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - reviewers: The bypass reviewers for secret scanning delegated bypass
+                public init(reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload? = nil) {
+                    self.reviewers = reviewers
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case reviewers
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public var secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload?
             /// Creates a new `SecurityAndAnalysis`.
             ///
             /// - Parameters:
@@ -4110,6 +5619,9 @@ public enum Components {
             ///   - secretScanningPushProtection:
             ///   - secretScanningNonProviderPatterns:
             ///   - secretScanningAiDetection:
+            ///   - secretScanningDelegatedAlertDismissal:
+            ///   - secretScanningDelegatedBypass:
+            ///   - secretScanningDelegatedBypassOptions:
             public init(
                 advancedSecurity: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload? = nil,
                 codeSecurity: Components.Schemas.SecurityAndAnalysis.CodeSecurityPayload? = nil,
@@ -4117,7 +5629,10 @@ public enum Components {
                 secretScanning: Components.Schemas.SecurityAndAnalysis.SecretScanningPayload? = nil,
                 secretScanningPushProtection: Components.Schemas.SecurityAndAnalysis.SecretScanningPushProtectionPayload? = nil,
                 secretScanningNonProviderPatterns: Components.Schemas.SecurityAndAnalysis.SecretScanningNonProviderPatternsPayload? = nil,
-                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil
+                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil,
+                secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload? = nil,
+                secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload? = nil
             ) {
                 self.advancedSecurity = advancedSecurity
                 self.codeSecurity = codeSecurity
@@ -4126,6 +5641,9 @@ public enum Components {
                 self.secretScanningPushProtection = secretScanningPushProtection
                 self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
                 self.secretScanningAiDetection = secretScanningAiDetection
+                self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                self.secretScanningDelegatedBypass = secretScanningDelegatedBypass
+                self.secretScanningDelegatedBypassOptions = secretScanningDelegatedBypassOptions
             }
             public enum CodingKeys: String, CodingKey {
                 case advancedSecurity = "advanced_security"
@@ -4135,6 +5653,9 @@ public enum Components {
                 case secretScanningPushProtection = "secret_scanning_push_protection"
                 case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
                 case secretScanningAiDetection = "secret_scanning_ai_detection"
+                case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                case secretScanningDelegatedBypass = "secret_scanning_delegated_bypass"
+                case secretScanningDelegatedBypassOptions = "secret_scanning_delegated_bypass_options"
             }
         }
         /// Minimal Repository
@@ -4277,6 +5798,21 @@ public enum Components {
             public var hasDownloads: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/has_discussions`.
             public var hasDiscussions: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/archived`.
             public var archived: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/disabled`.
@@ -4412,10 +5948,10 @@ public enum Components {
                 public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                     self.additionalProperties = additionalProperties
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeAdditionalProperties(additionalProperties)
                 }
             }
@@ -4493,6 +6029,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads:
             ///   - hasDiscussions:
+            ///   - hasPullRequests:
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled:
             ///   - visibility:
@@ -4582,6 +6121,9 @@ public enum Components {
                 hasPages: Swift.Bool? = nil,
                 hasDownloads: Swift.Bool? = nil,
                 hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool? = nil,
                 disabled: Swift.Bool? = nil,
                 visibility: Swift.String? = nil,
@@ -4671,6 +6213,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -4761,6 +6306,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -5042,6 +6590,1724 @@ public enum Components {
             public enum CodingKeys: String, CodingKey {
                 case starredAt = "starred_at"
                 case repo
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/create-event`.
+        public struct CreateEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/create-event/ref`.
+            public var ref: Swift.String
+            /// - Remark: Generated from `#/components/schemas/create-event/ref_type`.
+            public var refType: Swift.String
+            /// - Remark: Generated from `#/components/schemas/create-event/full_ref`.
+            public var fullRef: Swift.String
+            /// - Remark: Generated from `#/components/schemas/create-event/master_branch`.
+            public var masterBranch: Swift.String
+            /// - Remark: Generated from `#/components/schemas/create-event/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/create-event/pusher_type`.
+            public var pusherType: Swift.String
+            /// Creates a new `CreateEvent`.
+            ///
+            /// - Parameters:
+            ///   - ref:
+            ///   - refType:
+            ///   - fullRef:
+            ///   - masterBranch:
+            ///   - description:
+            ///   - pusherType:
+            public init(
+                ref: Swift.String,
+                refType: Swift.String,
+                fullRef: Swift.String,
+                masterBranch: Swift.String,
+                description: Swift.String? = nil,
+                pusherType: Swift.String
+            ) {
+                self.ref = ref
+                self.refType = refType
+                self.fullRef = fullRef
+                self.masterBranch = masterBranch
+                self.description = description
+                self.pusherType = pusherType
+            }
+            public enum CodingKeys: String, CodingKey {
+                case ref
+                case refType = "ref_type"
+                case fullRef = "full_ref"
+                case masterBranch = "master_branch"
+                case description
+                case pusherType = "pusher_type"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/delete-event`.
+        public struct DeleteEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/delete-event/ref`.
+            public var ref: Swift.String
+            /// - Remark: Generated from `#/components/schemas/delete-event/ref_type`.
+            public var refType: Swift.String
+            /// - Remark: Generated from `#/components/schemas/delete-event/full_ref`.
+            public var fullRef: Swift.String
+            /// - Remark: Generated from `#/components/schemas/delete-event/pusher_type`.
+            public var pusherType: Swift.String
+            /// Creates a new `DeleteEvent`.
+            ///
+            /// - Parameters:
+            ///   - ref:
+            ///   - refType:
+            ///   - fullRef:
+            ///   - pusherType:
+            public init(
+                ref: Swift.String,
+                refType: Swift.String,
+                fullRef: Swift.String,
+                pusherType: Swift.String
+            ) {
+                self.ref = ref
+                self.refType = refType
+                self.fullRef = fullRef
+                self.pusherType = pusherType
+            }
+            public enum CodingKeys: String, CodingKey {
+                case ref
+                case refType = "ref_type"
+                case fullRef = "full_ref"
+                case pusherType = "pusher_type"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/discussion-event`.
+        public struct DiscussionEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/discussion-event/action`.
+            public var action: Swift.String
+            /// - Remark: Generated from `#/components/schemas/discussion-event/discussion`.
+            public var discussion: Components.Schemas.Discussion
+            /// Creates a new `DiscussionEvent`.
+            ///
+            /// - Parameters:
+            ///   - action:
+            ///   - discussion:
+            public init(
+                action: Swift.String,
+                discussion: Components.Schemas.Discussion
+            ) {
+                self.action = action
+                self.discussion = discussion
+            }
+            public enum CodingKeys: String, CodingKey {
+                case action
+                case discussion
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/issues-event`.
+        public struct IssuesEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issues-event/action`.
+            public var action: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issues-event/issue`.
+            public var issue: Components.Schemas.Issue
+            /// - Remark: Generated from `#/components/schemas/issues-event/assignee`.
+            public var assignee: Components.Schemas.SimpleUser?
+            /// - Remark: Generated from `#/components/schemas/issues-event/assignees`.
+            public var assignees: [Components.Schemas.SimpleUser]?
+            /// - Remark: Generated from `#/components/schemas/issues-event/label`.
+            public var label: Components.Schemas.Label?
+            /// - Remark: Generated from `#/components/schemas/issues-event/labels`.
+            public var labels: [Components.Schemas.Label]?
+            /// Creates a new `IssuesEvent`.
+            ///
+            /// - Parameters:
+            ///   - action:
+            ///   - issue:
+            ///   - assignee:
+            ///   - assignees:
+            ///   - label:
+            ///   - labels:
+            public init(
+                action: Swift.String,
+                issue: Components.Schemas.Issue,
+                assignee: Components.Schemas.SimpleUser? = nil,
+                assignees: [Components.Schemas.SimpleUser]? = nil,
+                label: Components.Schemas.Label? = nil,
+                labels: [Components.Schemas.Label]? = nil
+            ) {
+                self.action = action
+                self.issue = issue
+                self.assignee = assignee
+                self.assignees = assignees
+                self.label = label
+                self.labels = labels
+            }
+            public enum CodingKeys: String, CodingKey {
+                case action
+                case issue
+                case assignee
+                case assignees
+                case label
+                case labels
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/issue-comment-event`.
+        public struct IssueCommentEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issue-comment-event/action`.
+            public var action: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-comment-event/issue`.
+            public var issue: Components.Schemas.Issue
+            /// - Remark: Generated from `#/components/schemas/issue-comment-event/comment`.
+            public var comment: Components.Schemas.IssueComment
+            /// Creates a new `IssueCommentEvent`.
+            ///
+            /// - Parameters:
+            ///   - action:
+            ///   - issue:
+            ///   - comment:
+            public init(
+                action: Swift.String,
+                issue: Components.Schemas.Issue,
+                comment: Components.Schemas.IssueComment
+            ) {
+                self.action = action
+                self.issue = issue
+                self.comment = comment
+            }
+            public enum CodingKeys: String, CodingKey {
+                case action
+                case issue
+                case comment
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/fork-event`.
+        public struct ForkEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/fork-event/action`.
+            public var action: Swift.String
+            /// - Remark: Generated from `#/components/schemas/fork-event/forkee`.
+            public struct ForkeePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/id`.
+                public var id: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/node_id`.
+                public var nodeId: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/name`.
+                public var name: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/full_name`.
+                public var fullName: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/private`.
+                public var _private: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/owner`.
+                public var owner: Components.Schemas.SimpleUser?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/html_url`.
+                public var htmlUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/description`.
+                public var description: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/fork`.
+                public var fork: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/url`.
+                public var url: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/forks_url`.
+                public var forksUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/keys_url`.
+                public var keysUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/collaborators_url`.
+                public var collaboratorsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/teams_url`.
+                public var teamsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/hooks_url`.
+                public var hooksUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/issue_events_url`.
+                public var issueEventsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/events_url`.
+                public var eventsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/assignees_url`.
+                public var assigneesUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/branches_url`.
+                public var branchesUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/tags_url`.
+                public var tagsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/blobs_url`.
+                public var blobsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/git_tags_url`.
+                public var gitTagsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/git_refs_url`.
+                public var gitRefsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/trees_url`.
+                public var treesUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/statuses_url`.
+                public var statusesUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/languages_url`.
+                public var languagesUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/stargazers_url`.
+                public var stargazersUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/contributors_url`.
+                public var contributorsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/subscribers_url`.
+                public var subscribersUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/subscription_url`.
+                public var subscriptionUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/commits_url`.
+                public var commitsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/git_commits_url`.
+                public var gitCommitsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/comments_url`.
+                public var commentsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/issue_comment_url`.
+                public var issueCommentUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/contents_url`.
+                public var contentsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/compare_url`.
+                public var compareUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/merges_url`.
+                public var mergesUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/archive_url`.
+                public var archiveUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/downloads_url`.
+                public var downloadsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/issues_url`.
+                public var issuesUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/pulls_url`.
+                public var pullsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/milestones_url`.
+                public var milestonesUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/notifications_url`.
+                public var notificationsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/labels_url`.
+                public var labelsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/releases_url`.
+                public var releasesUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/deployments_url`.
+                public var deploymentsUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/created_at`.
+                public var createdAt: Foundation.Date?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/updated_at`.
+                public var updatedAt: Foundation.Date?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/pushed_at`.
+                public var pushedAt: Foundation.Date?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/git_url`.
+                public var gitUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/ssh_url`.
+                public var sshUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/clone_url`.
+                public var cloneUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/svn_url`.
+                public var svnUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/homepage`.
+                public var homepage: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/size`.
+                public var size: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/stargazers_count`.
+                public var stargazersCount: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/watchers_count`.
+                public var watchersCount: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/language`.
+                public var language: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/has_issues`.
+                public var hasIssues: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/has_projects`.
+                public var hasProjects: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/has_downloads`.
+                public var hasDownloads: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/has_wiki`.
+                public var hasWiki: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/has_pages`.
+                public var hasPages: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/has_discussions`.
+                public var hasDiscussions: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/has_pull_requests`.
+                public var hasPullRequests: Swift.Bool?
+                /// The policy controlling who can create pull requests: all or collaborators_only.
+                ///
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/pull_request_creation_policy`.
+                @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case all = "all"
+                    case collaboratorsOnly = "collaborators_only"
+                }
+                /// The policy controlling who can create pull requests: all or collaborators_only.
+                ///
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/pull_request_creation_policy`.
+                public var pullRequestCreationPolicy: Components.Schemas.ForkEvent.ForkeePayload.PullRequestCreationPolicyPayload?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/has_commit_comments`.
+                public var hasCommitComments: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/forks_count`.
+                public var forksCount: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/mirror_url`.
+                public var mirrorUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/archived`.
+                public var archived: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/disabled`.
+                public var disabled: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/open_issues_count`.
+                public var openIssuesCount: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/license`.
+                public var license: Components.Schemas.NullableLicenseSimple?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/allow_forking`.
+                public var allowForking: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/is_template`.
+                public var isTemplate: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/web_commit_signoff_required`.
+                public var webCommitSignoffRequired: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/topics`.
+                public var topics: [Swift.String]?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/visibility`.
+                public var visibility: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/forks`.
+                public var forks: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/open_issues`.
+                public var openIssues: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/watchers`.
+                public var watchers: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/default_branch`.
+                public var defaultBranch: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/fork-event/forkee/public`.
+                public var _public: Swift.Bool?
+                /// Creates a new `ForkeePayload`.
+                ///
+                /// - Parameters:
+                ///   - id:
+                ///   - nodeId:
+                ///   - name:
+                ///   - fullName:
+                ///   - _private:
+                ///   - owner:
+                ///   - htmlUrl:
+                ///   - description:
+                ///   - fork:
+                ///   - url:
+                ///   - forksUrl:
+                ///   - keysUrl:
+                ///   - collaboratorsUrl:
+                ///   - teamsUrl:
+                ///   - hooksUrl:
+                ///   - issueEventsUrl:
+                ///   - eventsUrl:
+                ///   - assigneesUrl:
+                ///   - branchesUrl:
+                ///   - tagsUrl:
+                ///   - blobsUrl:
+                ///   - gitTagsUrl:
+                ///   - gitRefsUrl:
+                ///   - treesUrl:
+                ///   - statusesUrl:
+                ///   - languagesUrl:
+                ///   - stargazersUrl:
+                ///   - contributorsUrl:
+                ///   - subscribersUrl:
+                ///   - subscriptionUrl:
+                ///   - commitsUrl:
+                ///   - gitCommitsUrl:
+                ///   - commentsUrl:
+                ///   - issueCommentUrl:
+                ///   - contentsUrl:
+                ///   - compareUrl:
+                ///   - mergesUrl:
+                ///   - archiveUrl:
+                ///   - downloadsUrl:
+                ///   - issuesUrl:
+                ///   - pullsUrl:
+                ///   - milestonesUrl:
+                ///   - notificationsUrl:
+                ///   - labelsUrl:
+                ///   - releasesUrl:
+                ///   - deploymentsUrl:
+                ///   - createdAt:
+                ///   - updatedAt:
+                ///   - pushedAt:
+                ///   - gitUrl:
+                ///   - sshUrl:
+                ///   - cloneUrl:
+                ///   - svnUrl:
+                ///   - homepage:
+                ///   - size:
+                ///   - stargazersCount:
+                ///   - watchersCount:
+                ///   - language:
+                ///   - hasIssues:
+                ///   - hasProjects:
+                ///   - hasDownloads:
+                ///   - hasWiki:
+                ///   - hasPages:
+                ///   - hasDiscussions:
+                ///   - hasPullRequests:
+                ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+                ///   - hasCommitComments:
+                ///   - forksCount:
+                ///   - mirrorUrl:
+                ///   - archived:
+                ///   - disabled:
+                ///   - openIssuesCount:
+                ///   - license:
+                ///   - allowForking:
+                ///   - isTemplate:
+                ///   - webCommitSignoffRequired:
+                ///   - topics:
+                ///   - visibility:
+                ///   - forks:
+                ///   - openIssues:
+                ///   - watchers:
+                ///   - defaultBranch:
+                ///   - _public:
+                public init(
+                    id: Swift.Int? = nil,
+                    nodeId: Swift.String? = nil,
+                    name: Swift.String? = nil,
+                    fullName: Swift.String? = nil,
+                    _private: Swift.Bool? = nil,
+                    owner: Components.Schemas.SimpleUser? = nil,
+                    htmlUrl: Swift.String? = nil,
+                    description: Swift.String? = nil,
+                    fork: Swift.Bool? = nil,
+                    url: Swift.String? = nil,
+                    forksUrl: Swift.String? = nil,
+                    keysUrl: Swift.String? = nil,
+                    collaboratorsUrl: Swift.String? = nil,
+                    teamsUrl: Swift.String? = nil,
+                    hooksUrl: Swift.String? = nil,
+                    issueEventsUrl: Swift.String? = nil,
+                    eventsUrl: Swift.String? = nil,
+                    assigneesUrl: Swift.String? = nil,
+                    branchesUrl: Swift.String? = nil,
+                    tagsUrl: Swift.String? = nil,
+                    blobsUrl: Swift.String? = nil,
+                    gitTagsUrl: Swift.String? = nil,
+                    gitRefsUrl: Swift.String? = nil,
+                    treesUrl: Swift.String? = nil,
+                    statusesUrl: Swift.String? = nil,
+                    languagesUrl: Swift.String? = nil,
+                    stargazersUrl: Swift.String? = nil,
+                    contributorsUrl: Swift.String? = nil,
+                    subscribersUrl: Swift.String? = nil,
+                    subscriptionUrl: Swift.String? = nil,
+                    commitsUrl: Swift.String? = nil,
+                    gitCommitsUrl: Swift.String? = nil,
+                    commentsUrl: Swift.String? = nil,
+                    issueCommentUrl: Swift.String? = nil,
+                    contentsUrl: Swift.String? = nil,
+                    compareUrl: Swift.String? = nil,
+                    mergesUrl: Swift.String? = nil,
+                    archiveUrl: Swift.String? = nil,
+                    downloadsUrl: Swift.String? = nil,
+                    issuesUrl: Swift.String? = nil,
+                    pullsUrl: Swift.String? = nil,
+                    milestonesUrl: Swift.String? = nil,
+                    notificationsUrl: Swift.String? = nil,
+                    labelsUrl: Swift.String? = nil,
+                    releasesUrl: Swift.String? = nil,
+                    deploymentsUrl: Swift.String? = nil,
+                    createdAt: Foundation.Date? = nil,
+                    updatedAt: Foundation.Date? = nil,
+                    pushedAt: Foundation.Date? = nil,
+                    gitUrl: Swift.String? = nil,
+                    sshUrl: Swift.String? = nil,
+                    cloneUrl: Swift.String? = nil,
+                    svnUrl: Swift.String? = nil,
+                    homepage: Swift.String? = nil,
+                    size: Swift.Int? = nil,
+                    stargazersCount: Swift.Int? = nil,
+                    watchersCount: Swift.Int? = nil,
+                    language: Swift.String? = nil,
+                    hasIssues: Swift.Bool? = nil,
+                    hasProjects: Swift.Bool? = nil,
+                    hasDownloads: Swift.Bool? = nil,
+                    hasWiki: Swift.Bool? = nil,
+                    hasPages: Swift.Bool? = nil,
+                    hasDiscussions: Swift.Bool? = nil,
+                    hasPullRequests: Swift.Bool? = nil,
+                    pullRequestCreationPolicy: Components.Schemas.ForkEvent.ForkeePayload.PullRequestCreationPolicyPayload? = nil,
+                    hasCommitComments: Swift.Bool? = nil,
+                    forksCount: Swift.Int? = nil,
+                    mirrorUrl: Swift.String? = nil,
+                    archived: Swift.Bool? = nil,
+                    disabled: Swift.Bool? = nil,
+                    openIssuesCount: Swift.Int? = nil,
+                    license: Components.Schemas.NullableLicenseSimple? = nil,
+                    allowForking: Swift.Bool? = nil,
+                    isTemplate: Swift.Bool? = nil,
+                    webCommitSignoffRequired: Swift.Bool? = nil,
+                    topics: [Swift.String]? = nil,
+                    visibility: Swift.String? = nil,
+                    forks: Swift.Int? = nil,
+                    openIssues: Swift.Int? = nil,
+                    watchers: Swift.Int? = nil,
+                    defaultBranch: Swift.String? = nil,
+                    _public: Swift.Bool? = nil
+                ) {
+                    self.id = id
+                    self.nodeId = nodeId
+                    self.name = name
+                    self.fullName = fullName
+                    self._private = _private
+                    self.owner = owner
+                    self.htmlUrl = htmlUrl
+                    self.description = description
+                    self.fork = fork
+                    self.url = url
+                    self.forksUrl = forksUrl
+                    self.keysUrl = keysUrl
+                    self.collaboratorsUrl = collaboratorsUrl
+                    self.teamsUrl = teamsUrl
+                    self.hooksUrl = hooksUrl
+                    self.issueEventsUrl = issueEventsUrl
+                    self.eventsUrl = eventsUrl
+                    self.assigneesUrl = assigneesUrl
+                    self.branchesUrl = branchesUrl
+                    self.tagsUrl = tagsUrl
+                    self.blobsUrl = blobsUrl
+                    self.gitTagsUrl = gitTagsUrl
+                    self.gitRefsUrl = gitRefsUrl
+                    self.treesUrl = treesUrl
+                    self.statusesUrl = statusesUrl
+                    self.languagesUrl = languagesUrl
+                    self.stargazersUrl = stargazersUrl
+                    self.contributorsUrl = contributorsUrl
+                    self.subscribersUrl = subscribersUrl
+                    self.subscriptionUrl = subscriptionUrl
+                    self.commitsUrl = commitsUrl
+                    self.gitCommitsUrl = gitCommitsUrl
+                    self.commentsUrl = commentsUrl
+                    self.issueCommentUrl = issueCommentUrl
+                    self.contentsUrl = contentsUrl
+                    self.compareUrl = compareUrl
+                    self.mergesUrl = mergesUrl
+                    self.archiveUrl = archiveUrl
+                    self.downloadsUrl = downloadsUrl
+                    self.issuesUrl = issuesUrl
+                    self.pullsUrl = pullsUrl
+                    self.milestonesUrl = milestonesUrl
+                    self.notificationsUrl = notificationsUrl
+                    self.labelsUrl = labelsUrl
+                    self.releasesUrl = releasesUrl
+                    self.deploymentsUrl = deploymentsUrl
+                    self.createdAt = createdAt
+                    self.updatedAt = updatedAt
+                    self.pushedAt = pushedAt
+                    self.gitUrl = gitUrl
+                    self.sshUrl = sshUrl
+                    self.cloneUrl = cloneUrl
+                    self.svnUrl = svnUrl
+                    self.homepage = homepage
+                    self.size = size
+                    self.stargazersCount = stargazersCount
+                    self.watchersCount = watchersCount
+                    self.language = language
+                    self.hasIssues = hasIssues
+                    self.hasProjects = hasProjects
+                    self.hasDownloads = hasDownloads
+                    self.hasWiki = hasWiki
+                    self.hasPages = hasPages
+                    self.hasDiscussions = hasDiscussions
+                    self.hasPullRequests = hasPullRequests
+                    self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                    self.hasCommitComments = hasCommitComments
+                    self.forksCount = forksCount
+                    self.mirrorUrl = mirrorUrl
+                    self.archived = archived
+                    self.disabled = disabled
+                    self.openIssuesCount = openIssuesCount
+                    self.license = license
+                    self.allowForking = allowForking
+                    self.isTemplate = isTemplate
+                    self.webCommitSignoffRequired = webCommitSignoffRequired
+                    self.topics = topics
+                    self.visibility = visibility
+                    self.forks = forks
+                    self.openIssues = openIssues
+                    self.watchers = watchers
+                    self.defaultBranch = defaultBranch
+                    self._public = _public
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case nodeId = "node_id"
+                    case name
+                    case fullName = "full_name"
+                    case _private = "private"
+                    case owner
+                    case htmlUrl = "html_url"
+                    case description
+                    case fork
+                    case url
+                    case forksUrl = "forks_url"
+                    case keysUrl = "keys_url"
+                    case collaboratorsUrl = "collaborators_url"
+                    case teamsUrl = "teams_url"
+                    case hooksUrl = "hooks_url"
+                    case issueEventsUrl = "issue_events_url"
+                    case eventsUrl = "events_url"
+                    case assigneesUrl = "assignees_url"
+                    case branchesUrl = "branches_url"
+                    case tagsUrl = "tags_url"
+                    case blobsUrl = "blobs_url"
+                    case gitTagsUrl = "git_tags_url"
+                    case gitRefsUrl = "git_refs_url"
+                    case treesUrl = "trees_url"
+                    case statusesUrl = "statuses_url"
+                    case languagesUrl = "languages_url"
+                    case stargazersUrl = "stargazers_url"
+                    case contributorsUrl = "contributors_url"
+                    case subscribersUrl = "subscribers_url"
+                    case subscriptionUrl = "subscription_url"
+                    case commitsUrl = "commits_url"
+                    case gitCommitsUrl = "git_commits_url"
+                    case commentsUrl = "comments_url"
+                    case issueCommentUrl = "issue_comment_url"
+                    case contentsUrl = "contents_url"
+                    case compareUrl = "compare_url"
+                    case mergesUrl = "merges_url"
+                    case archiveUrl = "archive_url"
+                    case downloadsUrl = "downloads_url"
+                    case issuesUrl = "issues_url"
+                    case pullsUrl = "pulls_url"
+                    case milestonesUrl = "milestones_url"
+                    case notificationsUrl = "notifications_url"
+                    case labelsUrl = "labels_url"
+                    case releasesUrl = "releases_url"
+                    case deploymentsUrl = "deployments_url"
+                    case createdAt = "created_at"
+                    case updatedAt = "updated_at"
+                    case pushedAt = "pushed_at"
+                    case gitUrl = "git_url"
+                    case sshUrl = "ssh_url"
+                    case cloneUrl = "clone_url"
+                    case svnUrl = "svn_url"
+                    case homepage
+                    case size
+                    case stargazersCount = "stargazers_count"
+                    case watchersCount = "watchers_count"
+                    case language
+                    case hasIssues = "has_issues"
+                    case hasProjects = "has_projects"
+                    case hasDownloads = "has_downloads"
+                    case hasWiki = "has_wiki"
+                    case hasPages = "has_pages"
+                    case hasDiscussions = "has_discussions"
+                    case hasPullRequests = "has_pull_requests"
+                    case pullRequestCreationPolicy = "pull_request_creation_policy"
+                    case hasCommitComments = "has_commit_comments"
+                    case forksCount = "forks_count"
+                    case mirrorUrl = "mirror_url"
+                    case archived
+                    case disabled
+                    case openIssuesCount = "open_issues_count"
+                    case license
+                    case allowForking = "allow_forking"
+                    case isTemplate = "is_template"
+                    case webCommitSignoffRequired = "web_commit_signoff_required"
+                    case topics
+                    case visibility
+                    case forks
+                    case openIssues = "open_issues"
+                    case watchers
+                    case defaultBranch = "default_branch"
+                    case _public = "public"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/fork-event/forkee`.
+            public var forkee: Components.Schemas.ForkEvent.ForkeePayload
+            /// Creates a new `ForkEvent`.
+            ///
+            /// - Parameters:
+            ///   - action:
+            ///   - forkee:
+            public init(
+                action: Swift.String,
+                forkee: Components.Schemas.ForkEvent.ForkeePayload
+            ) {
+                self.action = action
+                self.forkee = forkee
+            }
+            public enum CodingKeys: String, CodingKey {
+                case action
+                case forkee
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/gollum-event`.
+        public struct GollumEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/gollum-event/PagesPayload`.
+            public struct PagesPayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/gollum-event/PagesPayload/page_name`.
+                public var pageName: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/gollum-event/PagesPayload/title`.
+                public var title: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/gollum-event/PagesPayload/summary`.
+                public var summary: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/gollum-event/PagesPayload/action`.
+                public var action: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/gollum-event/PagesPayload/sha`.
+                public var sha: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/gollum-event/PagesPayload/html_url`.
+                public var htmlUrl: Swift.String?
+                /// Creates a new `PagesPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - pageName:
+                ///   - title:
+                ///   - summary:
+                ///   - action:
+                ///   - sha:
+                ///   - htmlUrl:
+                public init(
+                    pageName: Swift.String? = nil,
+                    title: Swift.String? = nil,
+                    summary: Swift.String? = nil,
+                    action: Swift.String? = nil,
+                    sha: Swift.String? = nil,
+                    htmlUrl: Swift.String? = nil
+                ) {
+                    self.pageName = pageName
+                    self.title = title
+                    self.summary = summary
+                    self.action = action
+                    self.sha = sha
+                    self.htmlUrl = htmlUrl
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case pageName = "page_name"
+                    case title
+                    case summary
+                    case action
+                    case sha
+                    case htmlUrl = "html_url"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/gollum-event/pages`.
+            public typealias PagesPayload = [Components.Schemas.GollumEvent.PagesPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/gollum-event/pages`.
+            public var pages: Components.Schemas.GollumEvent.PagesPayload
+            /// Creates a new `GollumEvent`.
+            ///
+            /// - Parameters:
+            ///   - pages:
+            public init(pages: Components.Schemas.GollumEvent.PagesPayload) {
+                self.pages = pages
+            }
+            public enum CodingKeys: String, CodingKey {
+                case pages
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/member-event`.
+        public struct MemberEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/member-event/action`.
+            public var action: Swift.String
+            /// - Remark: Generated from `#/components/schemas/member-event/member`.
+            public var member: Components.Schemas.SimpleUser
+            /// Creates a new `MemberEvent`.
+            ///
+            /// - Parameters:
+            ///   - action:
+            ///   - member:
+            public init(
+                action: Swift.String,
+                member: Components.Schemas.SimpleUser
+            ) {
+                self.action = action
+                self.member = member
+            }
+            public enum CodingKeys: String, CodingKey {
+                case action
+                case member
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/public-event`.
+        public typealias PublicEvent = OpenAPIRuntime.OpenAPIObjectContainer
+        /// - Remark: Generated from `#/components/schemas/push-event`.
+        public struct PushEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/push-event/repository_id`.
+            public var repositoryId: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/push-event/push_id`.
+            public var pushId: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/push-event/ref`.
+            public var ref: Swift.String
+            /// - Remark: Generated from `#/components/schemas/push-event/head`.
+            public var head: Swift.String
+            /// - Remark: Generated from `#/components/schemas/push-event/before`.
+            public var before: Swift.String
+            /// Creates a new `PushEvent`.
+            ///
+            /// - Parameters:
+            ///   - repositoryId:
+            ///   - pushId:
+            ///   - ref:
+            ///   - head:
+            ///   - before:
+            public init(
+                repositoryId: Swift.Int,
+                pushId: Swift.Int,
+                ref: Swift.String,
+                head: Swift.String,
+                before: Swift.String
+            ) {
+                self.repositoryId = repositoryId
+                self.pushId = pushId
+                self.ref = ref
+                self.head = head
+                self.before = before
+            }
+            public enum CodingKeys: String, CodingKey {
+                case repositoryId = "repository_id"
+                case pushId = "push_id"
+                case ref
+                case head
+                case before
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/pull-request-event`.
+        public struct PullRequestEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-event/action`.
+            public var action: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-event/number`.
+            public var number: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/pull-request-event/pull_request`.
+            public var pullRequest: Components.Schemas.PullRequestMinimal
+            /// - Remark: Generated from `#/components/schemas/pull-request-event/assignee`.
+            public var assignee: Components.Schemas.SimpleUser?
+            /// - Remark: Generated from `#/components/schemas/pull-request-event/assignees`.
+            public var assignees: [Components.Schemas.SimpleUser]?
+            /// - Remark: Generated from `#/components/schemas/pull-request-event/label`.
+            public var label: Components.Schemas.Label?
+            /// - Remark: Generated from `#/components/schemas/pull-request-event/labels`.
+            public var labels: [Components.Schemas.Label]?
+            /// Creates a new `PullRequestEvent`.
+            ///
+            /// - Parameters:
+            ///   - action:
+            ///   - number:
+            ///   - pullRequest:
+            ///   - assignee:
+            ///   - assignees:
+            ///   - label:
+            ///   - labels:
+            public init(
+                action: Swift.String,
+                number: Swift.Int,
+                pullRequest: Components.Schemas.PullRequestMinimal,
+                assignee: Components.Schemas.SimpleUser? = nil,
+                assignees: [Components.Schemas.SimpleUser]? = nil,
+                label: Components.Schemas.Label? = nil,
+                labels: [Components.Schemas.Label]? = nil
+            ) {
+                self.action = action
+                self.number = number
+                self.pullRequest = pullRequest
+                self.assignee = assignee
+                self.assignees = assignees
+                self.label = label
+                self.labels = labels
+            }
+            public enum CodingKeys: String, CodingKey {
+                case action
+                case number
+                case pullRequest = "pull_request"
+                case assignee
+                case assignees
+                case label
+                case labels
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event`.
+        public struct PullRequestReviewCommentEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/action`.
+            public var action: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/pull_request`.
+            public var pullRequest: Components.Schemas.PullRequestMinimal
+            /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment`.
+            public struct CommentPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/id`.
+                public var id: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/node_id`.
+                public var nodeId: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/url`.
+                public var url: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/pull_request_review_id`.
+                public var pullRequestReviewId: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/diff_hunk`.
+                public var diffHunk: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/path`.
+                public var path: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/position`.
+                public var position: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/original_position`.
+                public var originalPosition: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/subject_type`.
+                public var subjectType: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/commit_id`.
+                public var commitId: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user`.
+                public struct UserPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/avatar_url`.
+                    public var avatarUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/deleted`.
+                    public var deleted: Swift.Bool?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/email`.
+                    public var email: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/events_url`.
+                    public var eventsUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/followers_url`.
+                    public var followersUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/following_url`.
+                    public var followingUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/gists_url`.
+                    public var gistsUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/gravatar_id`.
+                    public var gravatarId: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/html_url`.
+                    public var htmlUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/id`.
+                    public var id: Swift.Int64?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/login`.
+                    public var login: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/name`.
+                    public var name: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/node_id`.
+                    public var nodeId: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/organizations_url`.
+                    public var organizationsUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/received_events_url`.
+                    public var receivedEventsUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/repos_url`.
+                    public var reposUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/site_admin`.
+                    public var siteAdmin: Swift.Bool?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/starred_url`.
+                    public var starredUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/subscriptions_url`.
+                    public var subscriptionsUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/type`.
+                    @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case bot = "Bot"
+                        case user = "User"
+                        case organization = "Organization"
+                    }
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/type`.
+                    public var _type: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload.UserPayload._TypePayload?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/url`.
+                    public var url: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user/user_view_type`.
+                    public var userViewType: Swift.String?
+                    /// Creates a new `UserPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - avatarUrl:
+                    ///   - deleted:
+                    ///   - email:
+                    ///   - eventsUrl:
+                    ///   - followersUrl:
+                    ///   - followingUrl:
+                    ///   - gistsUrl:
+                    ///   - gravatarId:
+                    ///   - htmlUrl:
+                    ///   - id:
+                    ///   - login:
+                    ///   - name:
+                    ///   - nodeId:
+                    ///   - organizationsUrl:
+                    ///   - receivedEventsUrl:
+                    ///   - reposUrl:
+                    ///   - siteAdmin:
+                    ///   - starredUrl:
+                    ///   - subscriptionsUrl:
+                    ///   - _type:
+                    ///   - url:
+                    ///   - userViewType:
+                    public init(
+                        avatarUrl: Swift.String? = nil,
+                        deleted: Swift.Bool? = nil,
+                        email: Swift.String? = nil,
+                        eventsUrl: Swift.String? = nil,
+                        followersUrl: Swift.String? = nil,
+                        followingUrl: Swift.String? = nil,
+                        gistsUrl: Swift.String? = nil,
+                        gravatarId: Swift.String? = nil,
+                        htmlUrl: Swift.String? = nil,
+                        id: Swift.Int64? = nil,
+                        login: Swift.String? = nil,
+                        name: Swift.String? = nil,
+                        nodeId: Swift.String? = nil,
+                        organizationsUrl: Swift.String? = nil,
+                        receivedEventsUrl: Swift.String? = nil,
+                        reposUrl: Swift.String? = nil,
+                        siteAdmin: Swift.Bool? = nil,
+                        starredUrl: Swift.String? = nil,
+                        subscriptionsUrl: Swift.String? = nil,
+                        _type: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload.UserPayload._TypePayload? = nil,
+                        url: Swift.String? = nil,
+                        userViewType: Swift.String? = nil
+                    ) {
+                        self.avatarUrl = avatarUrl
+                        self.deleted = deleted
+                        self.email = email
+                        self.eventsUrl = eventsUrl
+                        self.followersUrl = followersUrl
+                        self.followingUrl = followingUrl
+                        self.gistsUrl = gistsUrl
+                        self.gravatarId = gravatarId
+                        self.htmlUrl = htmlUrl
+                        self.id = id
+                        self.login = login
+                        self.name = name
+                        self.nodeId = nodeId
+                        self.organizationsUrl = organizationsUrl
+                        self.receivedEventsUrl = receivedEventsUrl
+                        self.reposUrl = reposUrl
+                        self.siteAdmin = siteAdmin
+                        self.starredUrl = starredUrl
+                        self.subscriptionsUrl = subscriptionsUrl
+                        self._type = _type
+                        self.url = url
+                        self.userViewType = userViewType
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case avatarUrl = "avatar_url"
+                        case deleted
+                        case email
+                        case eventsUrl = "events_url"
+                        case followersUrl = "followers_url"
+                        case followingUrl = "following_url"
+                        case gistsUrl = "gists_url"
+                        case gravatarId = "gravatar_id"
+                        case htmlUrl = "html_url"
+                        case id
+                        case login
+                        case name
+                        case nodeId = "node_id"
+                        case organizationsUrl = "organizations_url"
+                        case receivedEventsUrl = "received_events_url"
+                        case reposUrl = "repos_url"
+                        case siteAdmin = "site_admin"
+                        case starredUrl = "starred_url"
+                        case subscriptionsUrl = "subscriptions_url"
+                        case _type = "type"
+                        case url
+                        case userViewType = "user_view_type"
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/user`.
+                public var user: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload.UserPayload?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/body`.
+                public var body: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/created_at`.
+                public var createdAt: Foundation.Date
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/updated_at`.
+                public var updatedAt: Foundation.Date
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/html_url`.
+                public var htmlUrl: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/pull_request_url`.
+                public var pullRequestUrl: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/_links`.
+                public struct _LinksPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/_links/html`.
+                    public struct HtmlPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/_links/html/href`.
+                        public var href: Swift.String
+                        /// Creates a new `HtmlPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - href:
+                        public init(href: Swift.String) {
+                            self.href = href
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case href
+                        }
+                    }
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/_links/html`.
+                    public var html: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload._LinksPayload.HtmlPayload
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/_links/pull_request`.
+                    public struct PullRequestPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/_links/pull_request/href`.
+                        public var href: Swift.String
+                        /// Creates a new `PullRequestPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - href:
+                        public init(href: Swift.String) {
+                            self.href = href
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case href
+                        }
+                    }
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/_links/pull_request`.
+                    public var pullRequest: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload._LinksPayload.PullRequestPayload
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/_links/self`.
+                    public struct _SelfPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/_links/self/href`.
+                        public var href: Swift.String
+                        /// Creates a new `_SelfPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - href:
+                        public init(href: Swift.String) {
+                            self.href = href
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case href
+                        }
+                    }
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/_links/self`.
+                    public var _self: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload._LinksPayload._SelfPayload
+                    /// Creates a new `_LinksPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - html:
+                    ///   - pullRequest:
+                    ///   - _self:
+                    public init(
+                        html: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload._LinksPayload.HtmlPayload,
+                        pullRequest: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload._LinksPayload.PullRequestPayload,
+                        _self: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload._LinksPayload._SelfPayload
+                    ) {
+                        self.html = html
+                        self.pullRequest = pullRequest
+                        self._self = _self
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case html
+                        case pullRequest = "pull_request"
+                        case _self = "self"
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/_links`.
+                public var _links: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload._LinksPayload
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/original_commit_id`.
+                public var originalCommitId: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions`.
+                public struct ReactionsPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions/+1`.
+                    public var _plus_1: Swift.Int?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions/-1`.
+                    public var _hyphen_1: Swift.Int?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions/confused`.
+                    public var confused: Swift.Int?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions/eyes`.
+                    public var eyes: Swift.Int?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions/heart`.
+                    public var heart: Swift.Int?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions/hooray`.
+                    public var hooray: Swift.Int?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions/laugh`.
+                    public var laugh: Swift.Int?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions/rocket`.
+                    public var rocket: Swift.Int?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions/total_count`.
+                    public var totalCount: Swift.Int?
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions/url`.
+                    public var url: Swift.String?
+                    /// Creates a new `ReactionsPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - _plus_1:
+                    ///   - _hyphen_1:
+                    ///   - confused:
+                    ///   - eyes:
+                    ///   - heart:
+                    ///   - hooray:
+                    ///   - laugh:
+                    ///   - rocket:
+                    ///   - totalCount:
+                    ///   - url:
+                    public init(
+                        _plus_1: Swift.Int? = nil,
+                        _hyphen_1: Swift.Int? = nil,
+                        confused: Swift.Int? = nil,
+                        eyes: Swift.Int? = nil,
+                        heart: Swift.Int? = nil,
+                        hooray: Swift.Int? = nil,
+                        laugh: Swift.Int? = nil,
+                        rocket: Swift.Int? = nil,
+                        totalCount: Swift.Int? = nil,
+                        url: Swift.String? = nil
+                    ) {
+                        self._plus_1 = _plus_1
+                        self._hyphen_1 = _hyphen_1
+                        self.confused = confused
+                        self.eyes = eyes
+                        self.heart = heart
+                        self.hooray = hooray
+                        self.laugh = laugh
+                        self.rocket = rocket
+                        self.totalCount = totalCount
+                        self.url = url
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case _plus_1 = "+1"
+                        case _hyphen_1 = "-1"
+                        case confused
+                        case eyes
+                        case heart
+                        case hooray
+                        case laugh
+                        case rocket
+                        case totalCount = "total_count"
+                        case url
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/reactions`.
+                public var reactions: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload.ReactionsPayload
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment/in_reply_to_id`.
+                public var inReplyToId: Swift.Int?
+                /// Creates a new `CommentPayload`.
+                ///
+                /// - Parameters:
+                ///   - id:
+                ///   - nodeId:
+                ///   - url:
+                ///   - pullRequestReviewId:
+                ///   - diffHunk:
+                ///   - path:
+                ///   - position:
+                ///   - originalPosition:
+                ///   - subjectType:
+                ///   - commitId:
+                ///   - user:
+                ///   - body:
+                ///   - createdAt:
+                ///   - updatedAt:
+                ///   - htmlUrl:
+                ///   - pullRequestUrl:
+                ///   - _links:
+                ///   - originalCommitId:
+                ///   - reactions:
+                ///   - inReplyToId:
+                public init(
+                    id: Swift.Int,
+                    nodeId: Swift.String,
+                    url: Swift.String,
+                    pullRequestReviewId: Swift.Int? = nil,
+                    diffHunk: Swift.String,
+                    path: Swift.String,
+                    position: Swift.Int? = nil,
+                    originalPosition: Swift.Int,
+                    subjectType: Swift.String? = nil,
+                    commitId: Swift.String,
+                    user: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload.UserPayload? = nil,
+                    body: Swift.String,
+                    createdAt: Foundation.Date,
+                    updatedAt: Foundation.Date,
+                    htmlUrl: Swift.String,
+                    pullRequestUrl: Swift.String,
+                    _links: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload._LinksPayload,
+                    originalCommitId: Swift.String,
+                    reactions: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload.ReactionsPayload,
+                    inReplyToId: Swift.Int? = nil
+                ) {
+                    self.id = id
+                    self.nodeId = nodeId
+                    self.url = url
+                    self.pullRequestReviewId = pullRequestReviewId
+                    self.diffHunk = diffHunk
+                    self.path = path
+                    self.position = position
+                    self.originalPosition = originalPosition
+                    self.subjectType = subjectType
+                    self.commitId = commitId
+                    self.user = user
+                    self.body = body
+                    self.createdAt = createdAt
+                    self.updatedAt = updatedAt
+                    self.htmlUrl = htmlUrl
+                    self.pullRequestUrl = pullRequestUrl
+                    self._links = _links
+                    self.originalCommitId = originalCommitId
+                    self.reactions = reactions
+                    self.inReplyToId = inReplyToId
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case nodeId = "node_id"
+                    case url
+                    case pullRequestReviewId = "pull_request_review_id"
+                    case diffHunk = "diff_hunk"
+                    case path
+                    case position
+                    case originalPosition = "original_position"
+                    case subjectType = "subject_type"
+                    case commitId = "commit_id"
+                    case user
+                    case body
+                    case createdAt = "created_at"
+                    case updatedAt = "updated_at"
+                    case htmlUrl = "html_url"
+                    case pullRequestUrl = "pull_request_url"
+                    case _links
+                    case originalCommitId = "original_commit_id"
+                    case reactions
+                    case inReplyToId = "in_reply_to_id"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-review-comment-event/comment`.
+            public var comment: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload
+            /// Creates a new `PullRequestReviewCommentEvent`.
+            ///
+            /// - Parameters:
+            ///   - action:
+            ///   - pullRequest:
+            ///   - comment:
+            public init(
+                action: Swift.String,
+                pullRequest: Components.Schemas.PullRequestMinimal,
+                comment: Components.Schemas.PullRequestReviewCommentEvent.CommentPayload
+            ) {
+                self.action = action
+                self.pullRequest = pullRequest
+                self.comment = comment
+            }
+            public enum CodingKeys: String, CodingKey {
+                case action
+                case pullRequest = "pull_request"
+                case comment
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/pull-request-review-event`.
+        public struct PullRequestReviewEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-review-event/action`.
+            public var action: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review`.
+            public struct ReviewPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/id`.
+                public var id: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/node_id`.
+                public var nodeId: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/user`.
+                public var user: Components.Schemas.NullableSimpleUser?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/body`.
+                public var body: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/commit_id`.
+                public var commitId: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/submitted_at`.
+                public var submittedAt: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/state`.
+                public var state: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/html_url`.
+                public var htmlUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/pull_request_url`.
+                public var pullRequestUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/_links`.
+                public struct _LinksPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/_links/html`.
+                    public struct HtmlPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/_links/html/href`.
+                        public var href: Swift.String
+                        /// Creates a new `HtmlPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - href:
+                        public init(href: Swift.String) {
+                            self.href = href
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case href
+                        }
+                    }
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/_links/html`.
+                    public var html: Components.Schemas.PullRequestReviewEvent.ReviewPayload._LinksPayload.HtmlPayload
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/_links/pull_request`.
+                    public struct PullRequestPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/_links/pull_request/href`.
+                        public var href: Swift.String
+                        /// Creates a new `PullRequestPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - href:
+                        public init(href: Swift.String) {
+                            self.href = href
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case href
+                        }
+                    }
+                    /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/_links/pull_request`.
+                    public var pullRequest: Components.Schemas.PullRequestReviewEvent.ReviewPayload._LinksPayload.PullRequestPayload
+                    /// Creates a new `_LinksPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - html:
+                    ///   - pullRequest:
+                    public init(
+                        html: Components.Schemas.PullRequestReviewEvent.ReviewPayload._LinksPayload.HtmlPayload,
+                        pullRequest: Components.Schemas.PullRequestReviewEvent.ReviewPayload._LinksPayload.PullRequestPayload
+                    ) {
+                        self.html = html
+                        self.pullRequest = pullRequest
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case html
+                        case pullRequest = "pull_request"
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/_links`.
+                public var _links: Components.Schemas.PullRequestReviewEvent.ReviewPayload._LinksPayload?
+                /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review/updated_at`.
+                public var updatedAt: Swift.String?
+                /// Creates a new `ReviewPayload`.
+                ///
+                /// - Parameters:
+                ///   - id:
+                ///   - nodeId:
+                ///   - user:
+                ///   - body:
+                ///   - commitId:
+                ///   - submittedAt:
+                ///   - state:
+                ///   - htmlUrl:
+                ///   - pullRequestUrl:
+                ///   - _links:
+                ///   - updatedAt:
+                public init(
+                    id: Swift.Int? = nil,
+                    nodeId: Swift.String? = nil,
+                    user: Components.Schemas.NullableSimpleUser? = nil,
+                    body: Swift.String? = nil,
+                    commitId: Swift.String? = nil,
+                    submittedAt: Swift.String? = nil,
+                    state: Swift.String? = nil,
+                    htmlUrl: Swift.String? = nil,
+                    pullRequestUrl: Swift.String? = nil,
+                    _links: Components.Schemas.PullRequestReviewEvent.ReviewPayload._LinksPayload? = nil,
+                    updatedAt: Swift.String? = nil
+                ) {
+                    self.id = id
+                    self.nodeId = nodeId
+                    self.user = user
+                    self.body = body
+                    self.commitId = commitId
+                    self.submittedAt = submittedAt
+                    self.state = state
+                    self.htmlUrl = htmlUrl
+                    self.pullRequestUrl = pullRequestUrl
+                    self._links = _links
+                    self.updatedAt = updatedAt
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case nodeId = "node_id"
+                    case user
+                    case body
+                    case commitId = "commit_id"
+                    case submittedAt = "submitted_at"
+                    case state
+                    case htmlUrl = "html_url"
+                    case pullRequestUrl = "pull_request_url"
+                    case _links
+                    case updatedAt = "updated_at"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-review-event/review`.
+            public var review: Components.Schemas.PullRequestReviewEvent.ReviewPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-review-event/pull_request`.
+            public var pullRequest: Components.Schemas.PullRequestMinimal
+            /// Creates a new `PullRequestReviewEvent`.
+            ///
+            /// - Parameters:
+            ///   - action:
+            ///   - review:
+            ///   - pullRequest:
+            public init(
+                action: Swift.String,
+                review: Components.Schemas.PullRequestReviewEvent.ReviewPayload,
+                pullRequest: Components.Schemas.PullRequestMinimal
+            ) {
+                self.action = action
+                self.review = review
+                self.pullRequest = pullRequest
+            }
+            public enum CodingKeys: String, CodingKey {
+                case action
+                case review
+                case pullRequest = "pull_request"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/commit-comment-event`.
+        public struct CommitCommentEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/commit-comment-event/action`.
+            public var action: Swift.String
+            /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment`.
+            public struct CommentPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/html_url`.
+                public var htmlUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/url`.
+                public var url: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/id`.
+                public var id: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/node_id`.
+                public var nodeId: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/body`.
+                public var body: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/path`.
+                public var path: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/position`.
+                public var position: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/line`.
+                public var line: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/commit_id`.
+                public var commitId: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/user`.
+                public var user: Components.Schemas.NullableSimpleUser?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/created_at`.
+                public var createdAt: Foundation.Date?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/updated_at`.
+                public var updatedAt: Foundation.Date?
+                /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment/reactions`.
+                public var reactions: Components.Schemas.ReactionRollup?
+                /// Creates a new `CommentPayload`.
+                ///
+                /// - Parameters:
+                ///   - htmlUrl:
+                ///   - url:
+                ///   - id:
+                ///   - nodeId:
+                ///   - body:
+                ///   - path:
+                ///   - position:
+                ///   - line:
+                ///   - commitId:
+                ///   - user:
+                ///   - createdAt:
+                ///   - updatedAt:
+                ///   - reactions:
+                public init(
+                    htmlUrl: Swift.String? = nil,
+                    url: Swift.String? = nil,
+                    id: Swift.Int? = nil,
+                    nodeId: Swift.String? = nil,
+                    body: Swift.String? = nil,
+                    path: Swift.String? = nil,
+                    position: Swift.Int? = nil,
+                    line: Swift.Int? = nil,
+                    commitId: Swift.String? = nil,
+                    user: Components.Schemas.NullableSimpleUser? = nil,
+                    createdAt: Foundation.Date? = nil,
+                    updatedAt: Foundation.Date? = nil,
+                    reactions: Components.Schemas.ReactionRollup? = nil
+                ) {
+                    self.htmlUrl = htmlUrl
+                    self.url = url
+                    self.id = id
+                    self.nodeId = nodeId
+                    self.body = body
+                    self.path = path
+                    self.position = position
+                    self.line = line
+                    self.commitId = commitId
+                    self.user = user
+                    self.createdAt = createdAt
+                    self.updatedAt = updatedAt
+                    self.reactions = reactions
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case htmlUrl = "html_url"
+                    case url
+                    case id
+                    case nodeId = "node_id"
+                    case body
+                    case path
+                    case position
+                    case line
+                    case commitId = "commit_id"
+                    case user
+                    case createdAt = "created_at"
+                    case updatedAt = "updated_at"
+                    case reactions
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/commit-comment-event/comment`.
+            public var comment: Components.Schemas.CommitCommentEvent.CommentPayload
+            /// Creates a new `CommitCommentEvent`.
+            ///
+            /// - Parameters:
+            ///   - action:
+            ///   - comment:
+            public init(
+                action: Swift.String,
+                comment: Components.Schemas.CommitCommentEvent.CommentPayload
+            ) {
+                self.action = action
+                self.comment = comment
+            }
+            public enum CodingKeys: String, CodingKey {
+                case action
+                case comment
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/release-event`.
+        public struct ReleaseEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/release-event/action`.
+            public var action: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-event/release`.
+            public struct ReleasePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/release-event/release/value1`.
+                public var value1: Components.Schemas.Release
+                /// - Remark: Generated from `#/components/schemas/release-event/release/value2`.
+                public struct Value2Payload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/release-event/release/value2/is_short_description_html_truncated`.
+                    public var isShortDescriptionHtmlTruncated: Swift.Bool?
+                    /// - Remark: Generated from `#/components/schemas/release-event/release/value2/short_description_html`.
+                    public var shortDescriptionHtml: Swift.String?
+                    /// Creates a new `Value2Payload`.
+                    ///
+                    /// - Parameters:
+                    ///   - isShortDescriptionHtmlTruncated:
+                    ///   - shortDescriptionHtml:
+                    public init(
+                        isShortDescriptionHtmlTruncated: Swift.Bool? = nil,
+                        shortDescriptionHtml: Swift.String? = nil
+                    ) {
+                        self.isShortDescriptionHtmlTruncated = isShortDescriptionHtmlTruncated
+                        self.shortDescriptionHtml = shortDescriptionHtml
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case isShortDescriptionHtmlTruncated = "is_short_description_html_truncated"
+                        case shortDescriptionHtml = "short_description_html"
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/release-event/release/value2`.
+                public var value2: Components.Schemas.ReleaseEvent.ReleasePayload.Value2Payload
+                /// Creates a new `ReleasePayload`.
+                ///
+                /// - Parameters:
+                ///   - value1:
+                ///   - value2:
+                public init(
+                    value1: Components.Schemas.Release,
+                    value2: Components.Schemas.ReleaseEvent.ReleasePayload.Value2Payload
+                ) {
+                    self.value1 = value1
+                    self.value2 = value2
+                }
+                public init(from decoder: any Swift.Decoder) throws {
+                    self.value1 = try .init(from: decoder)
+                    self.value2 = try .init(from: decoder)
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    try self.value1.encode(to: encoder)
+                    try self.value2.encode(to: encoder)
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/release-event/release`.
+            public var release: Components.Schemas.ReleaseEvent.ReleasePayload
+            /// Creates a new `ReleaseEvent`.
+            ///
+            /// - Parameters:
+            ///   - action:
+            ///   - release:
+            public init(
+                action: Swift.String,
+                release: Components.Schemas.ReleaseEvent.ReleasePayload
+            ) {
+                self.action = action
+                self.release = release
+            }
+            public enum CodingKeys: String, CodingKey {
+                case action
+                case release
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/watch-event`.
+        public struct WatchEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/watch-event/action`.
+            public var action: Swift.String
+            /// Creates a new `WatchEvent`.
+            ///
+            /// - Parameters:
+            ///   - action:
+            public init(action: Swift.String) {
+                self.action = action
+            }
+            public enum CodingKeys: String, CodingKey {
+                case action
             }
         }
     }
@@ -8493,8 +11759,8 @@ public enum Operations {
                             self.value1 = value1
                             self.value2 = value2
                         }
-                        public init(from decoder: any Decoder) throws {
-                            var errors: [any Error] = []
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
                             do {
                                 self.value1 = try decoder.decodeFromSingleValueContainer()
                             } catch {
@@ -8515,7 +11781,7 @@ public enum Operations {
                                 errors: errors
                             )
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try encoder.encodeFirstNonNilValueToSingleValueContainer([
                                 self.value1,
                                 self.value2
@@ -11466,8 +14732,8 @@ public enum Operations {
                             self.value1 = value1
                             self.value2 = value2
                         }
-                        public init(from decoder: any Decoder) throws {
-                            var errors: [any Error] = []
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
                             do {
                                 self.value1 = try decoder.decodeFromSingleValueContainer()
                             } catch {
@@ -11488,7 +14754,7 @@ public enum Operations {
                                 errors: errors
                             )
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try encoder.encodeFirstNonNilValueToSingleValueContainer([
                                 self.value1,
                                 self.value2

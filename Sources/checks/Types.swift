@@ -748,8 +748,8 @@ public enum Components {
                 case SimpleUser(Components.Schemas.SimpleUser)
                 /// - Remark: Generated from `#/components/schemas/nullable-integration/owner/case2`.
                 case Enterprise(Components.Schemas.Enterprise)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .SimpleUser(try .init(from: decoder))
                         return
@@ -768,7 +768,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .SimpleUser(value):
                         try value.encode(to: encoder)
@@ -840,7 +840,7 @@ public enum Components {
                     case contents
                     case deployments
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.issues = try container.decodeIfPresent(
                         Swift.String.self,
@@ -870,7 +870,7 @@ public enum Components {
                         "deployments"
                     ])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     try container.encodeIfPresent(
                         self.issues,
@@ -970,6 +970,163 @@ public enum Components {
                 case permissions
                 case events
                 case installationsCount = "installations_count"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/pull-request-minimal`.
+        public struct PullRequestMinimal: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/number`.
+            public var number: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public struct HeadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                /// Creates a new `HeadPayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public var head: Components.Schemas.PullRequestMinimal.HeadPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public var base: Components.Schemas.PullRequestMinimal.BasePayload
+            /// Creates a new `PullRequestMinimal`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - number:
+            ///   - url:
+            ///   - head:
+            ///   - base:
+            public init(
+                id: Swift.Int64,
+                number: Swift.Int,
+                url: Swift.String,
+                head: Components.Schemas.PullRequestMinimal.HeadPayload,
+                base: Components.Schemas.PullRequestMinimal.BasePayload
+            ) {
+                self.id = id
+                self.number = number
+                self.url = url
+                self.head = head
+                self.base = base
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case number
+                case url
+                case head
+                case base
             }
         }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
@@ -1146,6 +1303,107 @@ public enum Components {
             }
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_ai_detection`.
             public var secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public struct SecretScanningDelegatedAlertDismissalPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedAlertDismissalPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public var secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public struct SecretScanningDelegatedBypassPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedBypassPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public var secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public struct SecretScanningDelegatedBypassOptionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload`.
+                public struct ReviewersPayloadPayload: Codable, Hashable, Sendable {
+                    /// The ID of the team or role selected as a bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_id`.
+                    public var reviewerId: Swift.Int
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    @frozen public enum ReviewerTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case team = "TEAM"
+                        case role = "ROLE"
+                    }
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    public var reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    /// Creates a new `ReviewersPayloadPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
+                    ///   - reviewerType: The type of the bypass reviewer
+                    public init(
+                        reviewerId: Swift.Int,
+                        reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    ) {
+                        self.reviewerId = reviewerId
+                        self.reviewerType = reviewerType
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case reviewerId = "reviewer_id"
+                        case reviewerType = "reviewer_type"
+                    }
+                }
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public typealias ReviewersPayload = [Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload]
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public var reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload?
+                /// Creates a new `SecretScanningDelegatedBypassOptionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - reviewers: The bypass reviewers for secret scanning delegated bypass
+                public init(reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload? = nil) {
+                    self.reviewers = reviewers
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case reviewers
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public var secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload?
             /// Creates a new `SecurityAndAnalysis`.
             ///
             /// - Parameters:
@@ -1156,6 +1414,9 @@ public enum Components {
             ///   - secretScanningPushProtection:
             ///   - secretScanningNonProviderPatterns:
             ///   - secretScanningAiDetection:
+            ///   - secretScanningDelegatedAlertDismissal:
+            ///   - secretScanningDelegatedBypass:
+            ///   - secretScanningDelegatedBypassOptions:
             public init(
                 advancedSecurity: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload? = nil,
                 codeSecurity: Components.Schemas.SecurityAndAnalysis.CodeSecurityPayload? = nil,
@@ -1163,7 +1424,10 @@ public enum Components {
                 secretScanning: Components.Schemas.SecurityAndAnalysis.SecretScanningPayload? = nil,
                 secretScanningPushProtection: Components.Schemas.SecurityAndAnalysis.SecretScanningPushProtectionPayload? = nil,
                 secretScanningNonProviderPatterns: Components.Schemas.SecurityAndAnalysis.SecretScanningNonProviderPatternsPayload? = nil,
-                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil
+                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil,
+                secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload? = nil,
+                secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload? = nil
             ) {
                 self.advancedSecurity = advancedSecurity
                 self.codeSecurity = codeSecurity
@@ -1172,6 +1436,9 @@ public enum Components {
                 self.secretScanningPushProtection = secretScanningPushProtection
                 self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
                 self.secretScanningAiDetection = secretScanningAiDetection
+                self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                self.secretScanningDelegatedBypass = secretScanningDelegatedBypass
+                self.secretScanningDelegatedBypassOptions = secretScanningDelegatedBypassOptions
             }
             public enum CodingKeys: String, CodingKey {
                 case advancedSecurity = "advanced_security"
@@ -1181,6 +1448,9 @@ public enum Components {
                 case secretScanningPushProtection = "secret_scanning_push_protection"
                 case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
                 case secretScanningAiDetection = "secret_scanning_ai_detection"
+                case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                case secretScanningDelegatedBypass = "secret_scanning_delegated_bypass"
+                case secretScanningDelegatedBypassOptions = "secret_scanning_delegated_bypass_options"
             }
         }
         /// Minimal Repository
@@ -1323,6 +1593,21 @@ public enum Components {
             public var hasDownloads: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/has_discussions`.
             public var hasDiscussions: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/archived`.
             public var archived: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/disabled`.
@@ -1458,10 +1743,10 @@ public enum Components {
                 public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                     self.additionalProperties = additionalProperties
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeAdditionalProperties(additionalProperties)
                 }
             }
@@ -1539,6 +1824,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads:
             ///   - hasDiscussions:
+            ///   - hasPullRequests:
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled:
             ///   - visibility:
@@ -1628,6 +1916,9 @@ public enum Components {
                 hasPages: Swift.Bool? = nil,
                 hasDownloads: Swift.Bool? = nil,
                 hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool? = nil,
                 disabled: Swift.Bool? = nil,
                 visibility: Swift.String? = nil,
@@ -1717,6 +2008,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -1807,6 +2101,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -1836,165 +2133,8 @@ public enum Components {
         public struct EmptyObject: Codable, Hashable, Sendable {
             /// Creates a new `EmptyObject`.
             public init() {}
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
-            }
-        }
-        /// - Remark: Generated from `#/components/schemas/pull-request-minimal`.
-        public struct PullRequestMinimal: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/id`.
-            public var id: Swift.Int64
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/number`.
-            public var number: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/url`.
-            public var url: Swift.String
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
-            public struct HeadPayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/ref`.
-                public var ref: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/sha`.
-                public var sha: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
-                public struct RepoPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/id`.
-                    public var id: Swift.Int64
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/url`.
-                    public var url: Swift.String
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/name`.
-                    public var name: Swift.String
-                    /// Creates a new `RepoPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - id:
-                    ///   - url:
-                    ///   - name:
-                    public init(
-                        id: Swift.Int64,
-                        url: Swift.String,
-                        name: Swift.String
-                    ) {
-                        self.id = id
-                        self.url = url
-                        self.name = name
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case id
-                        case url
-                        case name
-                    }
-                }
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
-                public var repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
-                /// Creates a new `HeadPayload`.
-                ///
-                /// - Parameters:
-                ///   - ref:
-                ///   - sha:
-                ///   - repo:
-                public init(
-                    ref: Swift.String,
-                    sha: Swift.String,
-                    repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
-                ) {
-                    self.ref = ref
-                    self.sha = sha
-                    self.repo = repo
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case ref
-                    case sha
-                    case repo
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
-            public var head: Components.Schemas.PullRequestMinimal.HeadPayload
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
-            public struct BasePayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/ref`.
-                public var ref: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/sha`.
-                public var sha: Swift.String
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
-                public struct RepoPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/id`.
-                    public var id: Swift.Int64
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/url`.
-                    public var url: Swift.String
-                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/name`.
-                    public var name: Swift.String
-                    /// Creates a new `RepoPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - id:
-                    ///   - url:
-                    ///   - name:
-                    public init(
-                        id: Swift.Int64,
-                        url: Swift.String,
-                        name: Swift.String
-                    ) {
-                        self.id = id
-                        self.url = url
-                        self.name = name
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case id
-                        case url
-                        case name
-                    }
-                }
-                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
-                public var repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
-                /// Creates a new `BasePayload`.
-                ///
-                /// - Parameters:
-                ///   - ref:
-                ///   - sha:
-                ///   - repo:
-                public init(
-                    ref: Swift.String,
-                    sha: Swift.String,
-                    repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
-                ) {
-                    self.ref = ref
-                    self.sha = sha
-                    self.repo = repo
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case ref
-                    case sha
-                    case repo
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
-            public var base: Components.Schemas.PullRequestMinimal.BasePayload
-            /// Creates a new `PullRequestMinimal`.
-            ///
-            /// - Parameters:
-            ///   - id:
-            ///   - number:
-            ///   - url:
-            ///   - head:
-            ///   - base:
-            public init(
-                id: Swift.Int64,
-                number: Swift.Int,
-                url: Swift.String,
-                head: Components.Schemas.PullRequestMinimal.HeadPayload,
-                base: Components.Schemas.PullRequestMinimal.BasePayload
-            ) {
-                self.id = id
-                self.number = number
-                self.url = url
-                self.head = head
-                self.base = base
-            }
-            public enum CodingKeys: String, CodingKey {
-                case id
-                case number
-                case url
-                case head
-                case base
             }
         }
         /// A deployment created as the result of an Actions check run from a workflow that references an environment
@@ -2863,7 +3003,7 @@ public enum Operations {
                     public enum CodingKeys: String, CodingKey {
                         case status
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         let discriminator = try container.decode(
                             Swift.String.self,
@@ -2878,7 +3018,7 @@ public enum Operations {
                             )
                         }
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         }
                     }
@@ -3221,7 +3361,7 @@ public enum Operations {
                         public enum CodingKeys: String, CodingKey {
                             case status
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             let container = try decoder.container(keyedBy: CodingKeys.self)
                             self.status = try container.decodeIfPresent(
                                 OpenAPIRuntime.OpenAPIValueContainer.self,
@@ -3231,7 +3371,7 @@ public enum Operations {
                                 "status"
                             ])
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             var container = encoder.container(keyedBy: CodingKeys.self)
                             try container.encodeIfPresent(
                                 self.status,
@@ -3263,7 +3403,7 @@ public enum Operations {
                         public enum CodingKeys: String, CodingKey {
                             case status
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             let container = try decoder.container(keyedBy: CodingKeys.self)
                             self.status = try container.decodeIfPresent(
                                 OpenAPIRuntime.OpenAPIValueContainer.self,
@@ -3273,7 +3413,7 @@ public enum Operations {
                                 "status"
                             ])
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             var container = encoder.container(keyedBy: CodingKeys.self)
                             try container.encodeIfPresent(
                                 self.status,
@@ -3296,8 +3436,8 @@ public enum Operations {
                         self.value1 = value1
                         self.value2 = value2
                     }
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self.value1 = try .init(from: decoder)
                         } catch {
@@ -3318,7 +3458,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try self.value1?.encode(to: encoder)
                         try self.value2?.encode(to: encoder)
                     }

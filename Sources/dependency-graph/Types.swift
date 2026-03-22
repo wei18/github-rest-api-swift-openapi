@@ -599,8 +599,8 @@ public enum Components {
                     self.value2 = value2
                     self.value3 = value3
                 }
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self.value1 = try decoder.decodeFromSingleValueContainer()
                     } catch {
@@ -627,7 +627,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeFirstNonNilValueToSingleValueContainer([
                         self.value1,
                         self.value2,
@@ -644,10 +644,10 @@ public enum Components {
             public init(additionalProperties: [String: Components.Schemas.Metadata.AdditionalPropertiesPayload?] = .init()) {
                 self.additionalProperties = additionalProperties
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 try encoder.encodeAdditionalProperties(additionalProperties)
             }
         }
@@ -713,7 +713,7 @@ public enum Components {
                 case scope
                 case dependencies
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.packageUrl = try container.decodeIfPresent(
                     Swift.String.self,
@@ -766,7 +766,7 @@ public enum Components {
                 public enum CodingKeys: String, CodingKey {
                     case sourceLocation = "source_location"
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.sourceLocation = try container.decodeIfPresent(
                         Swift.String.self,
@@ -794,10 +794,10 @@ public enum Components {
                 public init(additionalProperties: [String: Components.Schemas.Dependency] = .init()) {
                     self.additionalProperties = additionalProperties
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeAdditionalProperties(additionalProperties)
                 }
             }
@@ -829,7 +829,7 @@ public enum Components {
                 case metadata
                 case resolved
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.name = try container.decode(
                     Swift.String.self,
@@ -897,7 +897,7 @@ public enum Components {
                     case correlator
                     case htmlUrl = "html_url"
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.id = try container.decode(
                         Swift.String.self,
@@ -964,7 +964,7 @@ public enum Components {
                     case version
                     case url
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.name = try container.decode(
                         Swift.String.self,
@@ -1004,10 +1004,10 @@ public enum Components {
                 public init(additionalProperties: [String: Components.Schemas.Manifest] = .init()) {
                     self.additionalProperties = additionalProperties
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeAdditionalProperties(additionalProperties)
                 }
             }
@@ -1059,7 +1059,7 @@ public enum Components {
                 case manifests
                 case scanned
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.version = try container.decode(
                     Swift.Int.self,

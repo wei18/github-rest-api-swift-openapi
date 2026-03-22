@@ -1304,8 +1304,8 @@ public enum Components {
                 case SimpleUser(Components.Schemas.SimpleUser)
                 /// - Remark: Generated from `#/components/schemas/integration/owner/case2`.
                 case Enterprise(Components.Schemas.Enterprise)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .SimpleUser(try .init(from: decoder))
                         return
@@ -1324,7 +1324,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .SimpleUser(value):
                         try value.encode(to: encoder)
@@ -1396,7 +1396,7 @@ public enum Components {
                     case contents
                     case deployments
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.issues = try container.decodeIfPresent(
                         Swift.String.self,
@@ -1426,7 +1426,7 @@ public enum Components {
                         "deployments"
                     ])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     try container.encodeIfPresent(
                         self.issues,
@@ -1548,8 +1548,8 @@ public enum Components {
             case case1(Swift.String)
             /// - Remark: Generated from `#/components/schemas/webhook-config-insecure-ssl/case2`.
             case case2(Swift.Double)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .case1(try decoder.decodeFromSingleValueContainer())
                     return
@@ -1568,7 +1568,7 @@ public enum Components {
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .case1(value):
                     try encoder.encodeToSingleValueContainer(value)
@@ -1800,8 +1800,8 @@ public enum Components {
                     case case2(Swift.Int?)
                     /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
                     case case3([Swift.String]?)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -1826,7 +1826,7 @@ public enum Components {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -1968,10 +1968,10 @@ public enum Components {
                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -1992,10 +1992,10 @@ public enum Components {
                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -2037,10 +2037,10 @@ public enum Components {
                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -2168,8 +2168,8 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self.value1 = try .init(from: decoder)
                     } catch {
@@ -2190,7 +2190,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1?.encode(to: encoder)
                     try self.value2?.encode(to: encoder)
                 }
@@ -2256,6 +2256,28 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/administration`.
             public var administration: Components.Schemas.AppPermissions.AdministrationPayload?
+            /// The level of permission to grant the access token to create and retrieve build artifact metadata records.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/artifact_metadata`.
+            @frozen public enum ArtifactMetadataPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to grant the access token to create and retrieve build artifact metadata records.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/artifact_metadata`.
+            public var artifactMetadata: Components.Schemas.AppPermissions.ArtifactMetadataPayload?
+            /// The level of permission to create and retrieve the access token for repository attestations.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/attestations`.
+            @frozen public enum AttestationsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to create and retrieve the access token for repository attestations.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/attestations`.
+            public var attestations: Components.Schemas.AppPermissions.AttestationsPayload?
             /// The level of permission to grant the access token for checks on code.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/checks`.
@@ -2311,6 +2333,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/deployments`.
             public var deployments: Components.Schemas.AppPermissions.DeploymentsPayload?
+            /// The level of permission to grant the access token for discussions and related comments and labels.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/discussions`.
+            @frozen public enum DiscussionsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to grant the access token for discussions and related comments and labels.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/discussions`.
+            public var discussions: Components.Schemas.AppPermissions.DiscussionsPayload?
             /// The level of permission to grant the access token for managing repository environments.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/environments`.
@@ -2333,6 +2366,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/issues`.
             public var issues: Components.Schemas.AppPermissions.IssuesPayload?
+            /// The level of permission to grant the access token to manage the merge queues for a repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/merge_queues`.
+            @frozen public enum MergeQueuesPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to grant the access token to manage the merge queues for a repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/merge_queues`.
+            public var mergeQueues: Components.Schemas.AppPermissions.MergeQueuesPayload?
             /// The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/metadata`.
@@ -2564,6 +2608,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_seat_management`.
             public var organizationCopilotSeatManagement: Components.Schemas.AppPermissions.OrganizationCopilotSeatManagementPayload?
+            /// The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_agent_settings`.
+            @frozen public enum OrganizationCopilotAgentSettingsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_agent_settings`.
+            public var organizationCopilotAgentSettings: Components.Schemas.AppPermissions.OrganizationCopilotAgentSettingsPayload?
             /// The level of permission to grant the access token to view and manage announcement banners for an organization.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_announcement_banners`.
@@ -2684,17 +2739,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_user_blocking`.
             public var organizationUserBlocking: Components.Schemas.AppPermissions.OrganizationUserBlockingPayload?
-            /// The level of permission to grant the access token to manage team discussions and related comments.
-            ///
-            /// - Remark: Generated from `#/components/schemas/app-permissions/team_discussions`.
-            @frozen public enum TeamDiscussionsPayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case read = "read"
-                case write = "write"
-            }
-            /// The level of permission to grant the access token to manage team discussions and related comments.
-            ///
-            /// - Remark: Generated from `#/components/schemas/app-permissions/team_discussions`.
-            public var teamDiscussions: Components.Schemas.AppPermissions.TeamDiscussionsPayload?
             /// The level of permission to grant the access token to manage the email addresses belonging to a user.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/email_addresses`.
@@ -2788,13 +2832,17 @@ public enum Components {
             /// - Parameters:
             ///   - actions: The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts.
             ///   - administration: The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation.
+            ///   - artifactMetadata: The level of permission to grant the access token to create and retrieve build artifact metadata records.
+            ///   - attestations: The level of permission to create and retrieve the access token for repository attestations.
             ///   - checks: The level of permission to grant the access token for checks on code.
             ///   - codespaces: The level of permission to grant the access token to create, edit, delete, and list Codespaces.
             ///   - contents: The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges.
             ///   - dependabotSecrets: The level of permission to grant the access token to manage Dependabot secrets.
             ///   - deployments: The level of permission to grant the access token for deployments and deployment statuses.
+            ///   - discussions: The level of permission to grant the access token for discussions and related comments and labels.
             ///   - environments: The level of permission to grant the access token for managing repository environments.
             ///   - issues: The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones.
+            ///   - mergeQueues: The level of permission to grant the access token to manage the merge queues for a repository.
             ///   - metadata: The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata.
             ///   - packages: The level of permission to grant the access token for packages published to GitHub Packages.
             ///   - pages: The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds.
@@ -2816,6 +2864,7 @@ public enum Components {
             ///   - organizationCustomOrgRoles: The level of permission to grant the access token for custom organization roles management.
             ///   - organizationCustomProperties: The level of permission to grant the access token for repository custom properties management at the organization level.
             ///   - organizationCopilotSeatManagement: The level of permission to grant the access token for managing access to GitHub Copilot for members of an organization with a Copilot Business subscription. This property is in public preview and is subject to change.
+            ///   - organizationCopilotAgentSettings: The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
             ///   - organizationAnnouncementBanners: The level of permission to grant the access token to view and manage announcement banners for an organization.
             ///   - organizationEvents: The level of permission to grant the access token to view events triggered by an activity in an organization.
             ///   - organizationHooks: The level of permission to grant the access token to manage the post-receive hooks for an organization.
@@ -2827,7 +2876,6 @@ public enum Components {
             ///   - organizationSecrets: The level of permission to grant the access token to manage organization secrets.
             ///   - organizationSelfHostedRunners: The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization.
             ///   - organizationUserBlocking: The level of permission to grant the access token to view and manage users blocked by the organization.
-            ///   - teamDiscussions: The level of permission to grant the access token to manage team discussions and related comments.
             ///   - emailAddresses: The level of permission to grant the access token to manage the email addresses belonging to a user.
             ///   - followers: The level of permission to grant the access token to manage the followers belonging to a user.
             ///   - gitSshKeys: The level of permission to grant the access token to manage git SSH keys.
@@ -2839,13 +2887,17 @@ public enum Components {
             public init(
                 actions: Components.Schemas.AppPermissions.ActionsPayload? = nil,
                 administration: Components.Schemas.AppPermissions.AdministrationPayload? = nil,
+                artifactMetadata: Components.Schemas.AppPermissions.ArtifactMetadataPayload? = nil,
+                attestations: Components.Schemas.AppPermissions.AttestationsPayload? = nil,
                 checks: Components.Schemas.AppPermissions.ChecksPayload? = nil,
                 codespaces: Components.Schemas.AppPermissions.CodespacesPayload? = nil,
                 contents: Components.Schemas.AppPermissions.ContentsPayload? = nil,
                 dependabotSecrets: Components.Schemas.AppPermissions.DependabotSecretsPayload? = nil,
                 deployments: Components.Schemas.AppPermissions.DeploymentsPayload? = nil,
+                discussions: Components.Schemas.AppPermissions.DiscussionsPayload? = nil,
                 environments: Components.Schemas.AppPermissions.EnvironmentsPayload? = nil,
                 issues: Components.Schemas.AppPermissions.IssuesPayload? = nil,
+                mergeQueues: Components.Schemas.AppPermissions.MergeQueuesPayload? = nil,
                 metadata: Components.Schemas.AppPermissions.MetadataPayload? = nil,
                 packages: Components.Schemas.AppPermissions.PackagesPayload? = nil,
                 pages: Components.Schemas.AppPermissions.PagesPayload? = nil,
@@ -2867,6 +2919,7 @@ public enum Components {
                 organizationCustomOrgRoles: Components.Schemas.AppPermissions.OrganizationCustomOrgRolesPayload? = nil,
                 organizationCustomProperties: Components.Schemas.AppPermissions.OrganizationCustomPropertiesPayload? = nil,
                 organizationCopilotSeatManagement: Components.Schemas.AppPermissions.OrganizationCopilotSeatManagementPayload? = nil,
+                organizationCopilotAgentSettings: Components.Schemas.AppPermissions.OrganizationCopilotAgentSettingsPayload? = nil,
                 organizationAnnouncementBanners: Components.Schemas.AppPermissions.OrganizationAnnouncementBannersPayload? = nil,
                 organizationEvents: Components.Schemas.AppPermissions.OrganizationEventsPayload? = nil,
                 organizationHooks: Components.Schemas.AppPermissions.OrganizationHooksPayload? = nil,
@@ -2878,7 +2931,6 @@ public enum Components {
                 organizationSecrets: Components.Schemas.AppPermissions.OrganizationSecretsPayload? = nil,
                 organizationSelfHostedRunners: Components.Schemas.AppPermissions.OrganizationSelfHostedRunnersPayload? = nil,
                 organizationUserBlocking: Components.Schemas.AppPermissions.OrganizationUserBlockingPayload? = nil,
-                teamDiscussions: Components.Schemas.AppPermissions.TeamDiscussionsPayload? = nil,
                 emailAddresses: Components.Schemas.AppPermissions.EmailAddressesPayload? = nil,
                 followers: Components.Schemas.AppPermissions.FollowersPayload? = nil,
                 gitSshKeys: Components.Schemas.AppPermissions.GitSshKeysPayload? = nil,
@@ -2890,13 +2942,17 @@ public enum Components {
             ) {
                 self.actions = actions
                 self.administration = administration
+                self.artifactMetadata = artifactMetadata
+                self.attestations = attestations
                 self.checks = checks
                 self.codespaces = codespaces
                 self.contents = contents
                 self.dependabotSecrets = dependabotSecrets
                 self.deployments = deployments
+                self.discussions = discussions
                 self.environments = environments
                 self.issues = issues
+                self.mergeQueues = mergeQueues
                 self.metadata = metadata
                 self.packages = packages
                 self.pages = pages
@@ -2918,6 +2974,7 @@ public enum Components {
                 self.organizationCustomOrgRoles = organizationCustomOrgRoles
                 self.organizationCustomProperties = organizationCustomProperties
                 self.organizationCopilotSeatManagement = organizationCopilotSeatManagement
+                self.organizationCopilotAgentSettings = organizationCopilotAgentSettings
                 self.organizationAnnouncementBanners = organizationAnnouncementBanners
                 self.organizationEvents = organizationEvents
                 self.organizationHooks = organizationHooks
@@ -2929,7 +2986,6 @@ public enum Components {
                 self.organizationSecrets = organizationSecrets
                 self.organizationSelfHostedRunners = organizationSelfHostedRunners
                 self.organizationUserBlocking = organizationUserBlocking
-                self.teamDiscussions = teamDiscussions
                 self.emailAddresses = emailAddresses
                 self.followers = followers
                 self.gitSshKeys = gitSshKeys
@@ -2942,13 +2998,17 @@ public enum Components {
             public enum CodingKeys: String, CodingKey {
                 case actions
                 case administration
+                case artifactMetadata = "artifact_metadata"
+                case attestations
                 case checks
                 case codespaces
                 case contents
                 case dependabotSecrets = "dependabot_secrets"
                 case deployments
+                case discussions
                 case environments
                 case issues
+                case mergeQueues = "merge_queues"
                 case metadata
                 case packages
                 case pages
@@ -2970,6 +3030,7 @@ public enum Components {
                 case organizationCustomOrgRoles = "organization_custom_org_roles"
                 case organizationCustomProperties = "organization_custom_properties"
                 case organizationCopilotSeatManagement = "organization_copilot_seat_management"
+                case organizationCopilotAgentSettings = "organization_copilot_agent_settings"
                 case organizationAnnouncementBanners = "organization_announcement_banners"
                 case organizationEvents = "organization_events"
                 case organizationHooks = "organization_hooks"
@@ -2981,7 +3042,6 @@ public enum Components {
                 case organizationSecrets = "organization_secrets"
                 case organizationSelfHostedRunners = "organization_self_hosted_runners"
                 case organizationUserBlocking = "organization_user_blocking"
-                case teamDiscussions = "team_discussions"
                 case emailAddresses = "email_addresses"
                 case followers
                 case gitSshKeys = "git_ssh_keys"
@@ -3163,8 +3223,8 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self.value1 = try .init(from: decoder)
                     } catch {
@@ -3185,7 +3245,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1?.encode(to: encoder)
                     try self.value2?.encode(to: encoder)
                 }
@@ -3591,6 +3651,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repository/has_discussions`.
             public var hasDiscussions: Swift.Bool?
+            /// Whether pull requests are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload?
+            /// Whether commit comments are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// Whether the repository is archived.
             ///
             /// - Remark: Generated from `#/components/schemas/repository/archived`.
@@ -3836,6 +3915,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads: Whether downloads are enabled.
             ///   - hasDiscussions: Whether discussions are enabled.
+            ///   - hasPullRequests: Whether pull requests are enabled.
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments: Whether commit comments are enabled.
             ///   - archived: Whether the repository is archived.
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -3933,6 +4015,9 @@ public enum Components {
                 hasPages: Swift.Bool,
                 hasDownloads: Swift.Bool,
                 hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -4030,6 +4115,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -4128,6 +4216,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -5331,7 +5422,7 @@ public enum Operations {
                                 case webhookSecret = "webhook_secret"
                                 case pem
                             }
-                            public init(from decoder: any Decoder) throws {
+                            public init(from decoder: any Swift.Decoder) throws {
                                 let container = try decoder.container(keyedBy: CodingKeys.self)
                                 self.clientId = try container.decode(
                                     Swift.String.self,
@@ -5356,7 +5447,7 @@ public enum Operations {
                                     "pem"
                                 ])
                             }
-                            public func encode(to encoder: any Encoder) throws {
+                            public func encode(to encoder: any Swift.Encoder) throws {
                                 var container = encoder.container(keyedBy: CodingKeys.self)
                                 try container.encode(
                                     self.clientId,
@@ -5391,11 +5482,11 @@ public enum Operations {
                             self.value1 = value1
                             self.value2 = value2
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             self.value1 = try .init(from: decoder)
                             self.value2 = try .init(from: decoder)
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try self.value1.encode(to: encoder)
                             try self.value2.encode(to: encoder)
                         }
@@ -8822,8 +8913,28 @@ public enum Operations {
                     public struct JsonPayload: Codable, Hashable, Sendable {
                         /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/total_count`.
                         public var totalCount: Swift.Int
+                        /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload`.
+                        public struct RepositoriesPayloadPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload/value1`.
+                            public var value1: Components.Schemas.Repository
+                            /// Creates a new `RepositoriesPayloadPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - value1:
+                            public init(value1: Components.Schemas.Repository) {
+                                self.value1 = value1
+                            }
+                            public init(from decoder: any Swift.Decoder) throws {
+                                self.value1 = try .init(from: decoder)
+                            }
+                            public func encode(to encoder: any Swift.Encoder) throws {
+                                try self.value1.encode(to: encoder)
+                            }
+                        }
                         /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/repositories`.
-                        public var repositories: [Components.Schemas.Repository]
+                        public typealias RepositoriesPayload = [Operations.AppsListReposAccessibleToInstallation.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload]
+                        /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/repositories`.
+                        public var repositories: Operations.AppsListReposAccessibleToInstallation.Output.Ok.Body.JsonPayload.RepositoriesPayload
                         /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/repository_selection`.
                         public var repositorySelection: Swift.String?
                         /// Creates a new `JsonPayload`.
@@ -8834,7 +8945,7 @@ public enum Operations {
                         ///   - repositorySelection:
                         public init(
                             totalCount: Swift.Int,
-                            repositories: [Components.Schemas.Repository],
+                            repositories: Operations.AppsListReposAccessibleToInstallation.Output.Ok.Body.JsonPayload.RepositoriesPayload,
                             repositorySelection: Swift.String? = nil
                         ) {
                             self.totalCount = totalCount
@@ -11048,8 +11159,28 @@ public enum Operations {
                         public var totalCount: Swift.Int
                         /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/repository_selection`.
                         public var repositorySelection: Swift.String?
+                        /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload`.
+                        public struct RepositoriesPayloadPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload/value1`.
+                            public var value1: Components.Schemas.Repository
+                            /// Creates a new `RepositoriesPayloadPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - value1:
+                            public init(value1: Components.Schemas.Repository) {
+                                self.value1 = value1
+                            }
+                            public init(from decoder: any Swift.Decoder) throws {
+                                self.value1 = try .init(from: decoder)
+                            }
+                            public func encode(to encoder: any Swift.Encoder) throws {
+                                try self.value1.encode(to: encoder)
+                            }
+                        }
                         /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/repositories`.
-                        public var repositories: [Components.Schemas.Repository]
+                        public typealias RepositoriesPayload = [Operations.AppsListInstallationReposForAuthenticatedUser.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload]
+                        /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/repositories`.
+                        public var repositories: Operations.AppsListInstallationReposForAuthenticatedUser.Output.Ok.Body.JsonPayload.RepositoriesPayload
                         /// Creates a new `JsonPayload`.
                         ///
                         /// - Parameters:
@@ -11059,7 +11190,7 @@ public enum Operations {
                         public init(
                             totalCount: Swift.Int,
                             repositorySelection: Swift.String? = nil,
-                            repositories: [Components.Schemas.Repository]
+                            repositories: Operations.AppsListInstallationReposForAuthenticatedUser.Output.Ok.Body.JsonPayload.RepositoriesPayload
                         ) {
                             self.totalCount = totalCount
                             self.repositorySelection = repositorySelection

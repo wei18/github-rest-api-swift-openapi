@@ -134,6 +134,13 @@ public struct Client: APIProtocol {
                     name: "severity",
                     value: input.query.severity
                 )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "assignees",
+                    value: input.query.assignees
+                )
                 converter.setAcceptHeader(
                     in: &request.headerFields,
                     contentTypes: input.headers.accept
@@ -340,6 +347,13 @@ public struct Client: APIProtocol {
                     explode: true,
                     name: "severity",
                     value: input.query.severity
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "assignees",
+                    value: input.query.assignees
                 )
                 converter.setAcceptHeader(
                     in: &request.headerFields,
@@ -1345,7 +1359,7 @@ public struct Client: APIProtocol {
                     switch chosenContentType {
                     case "application/json":
                         body = try await converter.getResponseBodyAsJSON(
-                            [Components.Schemas.CodeScanningAlertInstance].self,
+                            [Components.Schemas.CodeScanningAlertInstanceList].self,
                             from: responseBody,
                             transforming: { value in
                                 .json(value)
@@ -1696,7 +1710,7 @@ public struct Client: APIProtocol {
                         received: contentType,
                         options: [
                             "application/json",
-                            "application/json+sarif"
+                            "application/sarif+json"
                         ]
                     )
                     switch chosenContentType {
@@ -1708,12 +1722,12 @@ public struct Client: APIProtocol {
                                 .json(value)
                             }
                         )
-                    case "application/json+sarif":
-                        body = try converter.getResponseBodyAsBinary(
-                            OpenAPIRuntime.HTTPBody.self,
+                    case "application/sarif+json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.CodeScanningGetAnalysis.Output.Ok.Body.ApplicationSarifJsonPayload.self,
                             from: responseBody,
                             transforming: { value in
-                                .applicationJsonSarif(value)
+                                .applicationSarifJson(value)
                             }
                         )
                     default:

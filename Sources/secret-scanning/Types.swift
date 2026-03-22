@@ -66,6 +66,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// Updates the status of a secret scanning alert in an eligible repository.
     ///
+    /// You can also use this endpoint to assign or unassign an alert to a user who has write access to the repository.
+    ///
     /// The authenticated user must be an administrator for the repository or for the organization that owns the repository to use this endpoint.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
@@ -213,6 +215,8 @@ extension APIProtocol {
     /// Update a secret scanning alert
     ///
     /// Updates the status of a secret scanning alert in an eligible repository.
+    ///
+    /// You can also use this endpoint to assign or unassign an alert to a user who has write access to the repository.
     ///
     /// The authenticated user must be an administrator for the repository or for the organization that owns the repository to use this endpoint.
     ///
@@ -577,8 +581,8 @@ public enum Components {
                     case case2(Swift.Int?)
                     /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
                     case case3([Swift.String]?)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -603,7 +607,7 @@ public enum Components {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -1644,8 +1648,8 @@ public enum Components {
             case SecretScanningLocationPullRequestReview(Components.Schemas.SecretScanningLocationPullRequestReview)
             /// - Remark: Generated from `#/components/schemas/nullable-secret-scanning-first-detected-location/case13`.
             case SecretScanningLocationPullRequestReviewComment(Components.Schemas.SecretScanningLocationPullRequestReviewComment)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .SecretScanningLocationCommit(try .init(from: decoder))
                     return
@@ -1730,7 +1734,7 @@ public enum Components {
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .SecretScanningLocationCommit(value):
                     try value.encode(to: encoder)
@@ -2380,10 +2384,6 @@ public enum Components {
                 case assignedTo = "assigned_to"
             }
         }
-        /// An optional comment when closing or reopening an alert. Cannot be updated or deleted.
-        ///
-        /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-resolution-comment`.
-        public typealias SecretScanningAlertResolutionComment = Swift.String
         /// - Remark: Generated from `#/components/schemas/secret-scanning-location`.
         public struct SecretScanningLocation: Codable, Hashable, Sendable {
             /// The location type. Because secrets may be found in different types of resources (ie. code, comments, issues, pull requests, discussions), this field identifies the type of resource where the secret was found.
@@ -2436,8 +2436,8 @@ public enum Components {
                 case SecretScanningLocationPullRequestReview(Components.Schemas.SecretScanningLocationPullRequestReview)
                 /// - Remark: Generated from `#/components/schemas/secret-scanning-location/details/case13`.
                 case SecretScanningLocationPullRequestReviewComment(Components.Schemas.SecretScanningLocationPullRequestReviewComment)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .SecretScanningLocationCommit(try .init(from: decoder))
                         return
@@ -2522,7 +2522,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .SecretScanningLocationCommit(value):
                         try value.encode(to: encoder)
@@ -2711,11 +2711,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -2794,6 +2794,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-resolution`.
         public typealias SecretScanningAlertResolution = Swift.String
+        /// Filters alerts by assignee. Use `*` to get all assigned alerts, `none` to get all unassigned alerts, or a GitHub username to get alerts assigned to a specific user.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-assignee`.
+        public typealias SecretScanningAlertAssignee = Swift.String
         /// The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
         ///
         /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-sort`.
@@ -3116,6 +3120,10 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/resolution`.
                 public var resolution: Components.Parameters.SecretScanningAlertResolution?
+                /// Filters alerts by assignee. Use `*` to get all assigned alerts, `none` to get all unassigned alerts, or a GitHub username to get alerts assigned to a specific user.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/assignee`.
+                public var assignee: Components.Parameters.SecretScanningAlertAssignee?
                 /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-sort`.
                 @frozen public enum SecretScanningAlertSort: String, Codable, Hashable, Sendable, CaseIterable {
                     case created = "created"
@@ -3172,6 +3180,7 @@ public enum Operations {
                 ///   - state: Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
                 ///   - secretType: A comma-separated list of secret types to return. All default secret patterns are returned. To return generic patterns, pass the token name(s) in the parameter. See "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)" for a complete list of secret types.
                 ///   - resolution: A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
+                ///   - assignee: Filters alerts by assignee. Use `*` to get all assigned alerts, `none` to get all unassigned alerts, or a GitHub username to get alerts assigned to a specific user.
                 ///   - sort: The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
                 ///   - direction: The direction to sort the results by.
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
@@ -3186,6 +3195,7 @@ public enum Operations {
                     state: Components.Parameters.SecretScanningAlertState? = nil,
                     secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
                     resolution: Components.Parameters.SecretScanningAlertResolution? = nil,
+                    assignee: Components.Parameters.SecretScanningAlertAssignee? = nil,
                     sort: Components.Parameters.SecretScanningAlertSort? = nil,
                     direction: Components.Parameters.Direction? = nil,
                     page: Components.Parameters.Page? = nil,
@@ -3200,6 +3210,7 @@ public enum Operations {
                     self.state = state
                     self.secretType = secretType
                     self.resolution = resolution
+                    self.assignee = assignee
                     self.sort = sort
                     self.direction = direction
                     self.page = page
@@ -4022,6 +4033,10 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/resolution`.
                 public var resolution: Components.Parameters.SecretScanningAlertResolution?
+                /// Filters alerts by assignee. Use `*` to get all assigned alerts, `none` to get all unassigned alerts, or a GitHub username to get alerts assigned to a specific user.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/assignee`.
+                public var assignee: Components.Parameters.SecretScanningAlertAssignee?
                 /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-sort`.
                 @frozen public enum SecretScanningAlertSort: String, Codable, Hashable, Sendable, CaseIterable {
                     case created = "created"
@@ -4078,6 +4093,7 @@ public enum Operations {
                 ///   - state: Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
                 ///   - secretType: A comma-separated list of secret types to return. All default secret patterns are returned. To return generic patterns, pass the token name(s) in the parameter. See "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)" for a complete list of secret types.
                 ///   - resolution: A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
+                ///   - assignee: Filters alerts by assignee. Use `*` to get all assigned alerts, `none` to get all unassigned alerts, or a GitHub username to get alerts assigned to a specific user.
                 ///   - sort: The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
                 ///   - direction: The direction to sort the results by.
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
@@ -4092,6 +4108,7 @@ public enum Operations {
                     state: Components.Parameters.SecretScanningAlertState? = nil,
                     secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
                     resolution: Components.Parameters.SecretScanningAlertResolution? = nil,
+                    assignee: Components.Parameters.SecretScanningAlertAssignee? = nil,
                     sort: Components.Parameters.SecretScanningAlertSort? = nil,
                     direction: Components.Parameters.Direction? = nil,
                     page: Components.Parameters.Page? = nil,
@@ -4106,6 +4123,7 @@ public enum Operations {
                     self.state = state
                     self.secretType = secretType
                     self.resolution = resolution
+                    self.assignee = assignee
                     self.sort = sort
                     self.direction = direction
                     self.page = page
@@ -4551,6 +4569,8 @@ public enum Operations {
     ///
     /// Updates the status of a secret scanning alert in an eligible repository.
     ///
+    /// You can also use this endpoint to assign or unassign an alert to a user who has write access to the repository.
+    ///
     /// The authenticated user must be an administrator for the repository or for the organization that owns the repository to use this endpoint.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
@@ -4607,31 +4627,57 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/json/state`.
-                    public var state: Components.Schemas.SecretScanningAlertState
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/json/resolution`.
-                    public var resolution: Components.Schemas.SecretScanningAlertResolution?
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/json/resolution_comment`.
-                    public var resolutionComment: Components.Schemas.SecretScanningAlertResolutionComment?
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/json/value1`.
+                    public struct Value1Payload: Codable, Hashable, Sendable {
+                        /// Creates a new `Value1Payload`.
+                        public init() {}
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/json/value1`.
+                    public var value1: Operations.SecretScanningUpdateAlert.Input.Body.JsonPayload.Value1Payload?
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/json/value2`.
+                    public struct Value2Payload: Codable, Hashable, Sendable {
+                        /// Creates a new `Value2Payload`.
+                        public init() {}
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/json/value2`.
+                    public var value2: Operations.SecretScanningUpdateAlert.Input.Body.JsonPayload.Value2Payload?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
-                    ///   - state:
-                    ///   - resolution:
-                    ///   - resolutionComment:
+                    ///   - value1:
+                    ///   - value2:
                     public init(
-                        state: Components.Schemas.SecretScanningAlertState,
-                        resolution: Components.Schemas.SecretScanningAlertResolution? = nil,
-                        resolutionComment: Components.Schemas.SecretScanningAlertResolutionComment? = nil
+                        value1: Operations.SecretScanningUpdateAlert.Input.Body.JsonPayload.Value1Payload? = nil,
+                        value2: Operations.SecretScanningUpdateAlert.Input.Body.JsonPayload.Value2Payload? = nil
                     ) {
-                        self.state = state
-                        self.resolution = resolution
-                        self.resolutionComment = resolutionComment
+                        self.value1 = value1
+                        self.value2 = value2
                     }
-                    public enum CodingKeys: String, CodingKey {
-                        case state
-                        case resolution
-                        case resolutionComment = "resolution_comment"
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
+                        do {
+                            self.value1 = try .init(from: decoder)
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self.value2 = try .init(from: decoder)
+                        } catch {
+                            errors.append(error)
+                        }
+                        try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
+                            [
+                                self.value1,
+                                self.value2
+                            ],
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
+                    }
+                    public func encode(to encoder: any Swift.Encoder) throws {
+                        try self.value1?.encode(to: encoder)
+                        try self.value2?.encode(to: encoder)
                     }
                 }
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/content/application\/json`.
@@ -4780,13 +4826,13 @@ public enum Operations {
                 /// Creates a new `UnprocessableContent`.
                 public init() {}
             }
-            /// State does not match the resolution or resolution comment
+            /// State does not match the resolution or resolution comment, or assignee does not have write access to the repository
             ///
             /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/patch(secret-scanning/update-alert)/responses/422`.
             ///
             /// HTTP response code: `422 unprocessableContent`.
             case unprocessableContent(Operations.SecretScanningUpdateAlert.Output.UnprocessableContent)
-            /// State does not match the resolution or resolution comment
+            /// State does not match the resolution or resolution comment, or assignee does not have write access to the repository
             ///
             /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/patch(secret-scanning/update-alert)/responses/422`.
             ///

@@ -792,8 +792,8 @@ public enum Components {
                     case case2(Swift.Int?)
                     /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
                     case case3([Swift.String]?)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -818,7 +818,7 @@ public enum Components {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -1127,10 +1127,10 @@ public enum Components {
                 public init(additionalProperties: [String: Components.Schemas.BaseGist.FilesPayload.AdditionalPropertiesPayload] = .init()) {
                     self.additionalProperties = additionalProperties
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeAdditionalProperties(additionalProperties)
                 }
             }
@@ -1540,7 +1540,7 @@ public enum Components {
                 case diskUsage = "disk_usage"
                 case collaborators
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.login = try container.decode(
                     Swift.String.self,
@@ -1943,10 +1943,10 @@ public enum Components {
                     public init(additionalProperties: [String: Components.Schemas.GistSimple.ForkOfPayload.FilesPayload.AdditionalPropertiesPayload] = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -2161,10 +2161,10 @@ public enum Components {
                 public init(additionalProperties: [String: Components.Schemas.GistSimple.FilesPayload.AdditionalPropertiesPayload?] = .init()) {
                     self.additionalProperties = additionalProperties
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeAdditionalProperties(additionalProperties)
                 }
             }
@@ -2949,10 +2949,10 @@ public enum Operations {
                         public init(additionalProperties: [String: Operations.GistsCreate.Input.Body.JsonPayload.FilesPayload.AdditionalPropertiesPayload] = .init()) {
                             self.additionalProperties = additionalProperties
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }
@@ -2973,8 +2973,8 @@ public enum Operations {
                         }
                         /// - Remark: Generated from `#/paths/gists/POST/requestBody/json/public/case2`.
                         case case2(Operations.GistsCreate.Input.Body.JsonPayload.PublicPayload.Case2Payload)
-                        public init(from decoder: any Decoder) throws {
-                            var errors: [any Error] = []
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
                             do {
                                 self = .case1(try decoder.decodeFromSingleValueContainer())
                                 return
@@ -2993,7 +2993,7 @@ public enum Operations {
                                 errors: errors
                             )
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             switch self {
                             case let .case1(value):
                                 try encoder.encodeToSingleValueContainer(value)
@@ -4045,10 +4045,10 @@ public enum Operations {
                         public init(additionalProperties: [String: Operations.GistsUpdate.Input.Body.JsonPayload.FilesPayload.AdditionalPropertiesPayload?] = .init()) {
                             self.additionalProperties = additionalProperties
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }
@@ -6411,7 +6411,7 @@ public enum Operations {
                     public struct JsonPayload: Codable, Hashable, Sendable {
                         /// Creates a new `JsonPayload`.
                         public init() {}
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             try decoder.ensureNoAdditionalProperties(knownKeys: [])
                         }
                     }

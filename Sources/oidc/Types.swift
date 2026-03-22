@@ -11,6 +11,60 @@ import struct Foundation.Date
 #endif
 /// A type that performs HTTP operations defined by the OpenAPI document.
 public protocol APIProtocol: Sendable {
+    /// List OIDC custom property inclusions for an enterprise
+    ///
+    /// Lists the repository custom properties that are included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-enterprise)`.
+    func oidcListOidcCustomPropertyInclusionsForEnterprise(_ input: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Input) async throws -> Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Output
+    /// Create an OIDC custom property inclusion for an enterprise
+    ///
+    /// Adds a repository custom property to be included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-enterprise)`.
+    func oidcCreateOidcCustomPropertyInclusionForEnterprise(_ input: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input) async throws -> Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output
+    /// Delete an OIDC custom property inclusion for an enterprise
+    ///
+    /// Removes a repository custom property from being included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-enterprise)`.
+    func oidcDeleteOidcCustomPropertyInclusionForEnterprise(_ input: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Input) async throws -> Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Output
+    /// List OIDC custom property inclusions for an organization
+    ///
+    /// Lists the repository custom properties that are included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-org)`.
+    func oidcListOidcCustomPropertyInclusionsForOrg(_ input: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Input) async throws -> Operations.OidcListOidcCustomPropertyInclusionsForOrg.Output
+    /// Create an OIDC custom property inclusion for an organization
+    ///
+    /// Adds a repository custom property to be included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-org)`.
+    func oidcCreateOidcCustomPropertyInclusionForOrg(_ input: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input) async throws -> Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output
+    /// Delete an OIDC custom property inclusion for an organization
+    ///
+    /// Removes a repository custom property from being included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-org)`.
+    func oidcDeleteOidcCustomPropertyInclusionForOrg(_ input: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Input) async throws -> Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Output
     /// Get the customization template for an OIDC subject claim for an organization
     ///
     /// Gets the customization template for an OpenID Connect (OIDC) subject claim.
@@ -33,6 +87,112 @@ public protocol APIProtocol: Sendable {
 
 /// Convenience overloads for operation inputs.
 extension APIProtocol {
+    /// List OIDC custom property inclusions for an enterprise
+    ///
+    /// Lists the repository custom properties that are included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-enterprise)`.
+    public func oidcListOidcCustomPropertyInclusionsForEnterprise(
+        path: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Input.Path,
+        headers: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Input.Headers = .init()
+    ) async throws -> Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Output {
+        try await oidcListOidcCustomPropertyInclusionsForEnterprise(Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Create an OIDC custom property inclusion for an enterprise
+    ///
+    /// Adds a repository custom property to be included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-enterprise)`.
+    public func oidcCreateOidcCustomPropertyInclusionForEnterprise(
+        path: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input.Path,
+        headers: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input.Headers = .init(),
+        body: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input.Body
+    ) async throws -> Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output {
+        try await oidcCreateOidcCustomPropertyInclusionForEnterprise(Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Delete an OIDC custom property inclusion for an enterprise
+    ///
+    /// Removes a repository custom property from being included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-enterprise)`.
+    public func oidcDeleteOidcCustomPropertyInclusionForEnterprise(
+        path: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Input.Path,
+        headers: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Input.Headers = .init()
+    ) async throws -> Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Output {
+        try await oidcDeleteOidcCustomPropertyInclusionForEnterprise(Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// List OIDC custom property inclusions for an organization
+    ///
+    /// Lists the repository custom properties that are included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-org)`.
+    public func oidcListOidcCustomPropertyInclusionsForOrg(
+        path: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Input.Path,
+        headers: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Input.Headers = .init()
+    ) async throws -> Operations.OidcListOidcCustomPropertyInclusionsForOrg.Output {
+        try await oidcListOidcCustomPropertyInclusionsForOrg(Operations.OidcListOidcCustomPropertyInclusionsForOrg.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Create an OIDC custom property inclusion for an organization
+    ///
+    /// Adds a repository custom property to be included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-org)`.
+    public func oidcCreateOidcCustomPropertyInclusionForOrg(
+        path: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input.Path,
+        headers: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input.Headers = .init(),
+        body: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input.Body
+    ) async throws -> Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output {
+        try await oidcCreateOidcCustomPropertyInclusionForOrg(Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Delete an OIDC custom property inclusion for an organization
+    ///
+    /// Removes a repository custom property from being included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-org)`.
+    public func oidcDeleteOidcCustomPropertyInclusionForOrg(
+        path: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Input.Path,
+        headers: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Input.Headers = .init()
+    ) async throws -> Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Output {
+        try await oidcDeleteOidcCustomPropertyInclusionForOrg(Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Input(
+            path: path,
+            headers: headers
+        ))
+    }
     /// Get the customization template for an OIDC subject claim for an organization
     ///
     /// Gets the customization template for an OpenID Connect (OIDC) subject claim.
@@ -131,6 +291,61 @@ public enum Components {
                 case status
             }
         }
+        /// An OIDC custom property inclusion for repository properties
+        ///
+        /// - Remark: Generated from `#/components/schemas/oidc-custom-property-inclusion`.
+        public struct OidcCustomPropertyInclusion: Codable, Hashable, Sendable {
+            /// The name of the custom property that is included in the OIDC token
+            ///
+            /// - Remark: Generated from `#/components/schemas/oidc-custom-property-inclusion/custom_property_name`.
+            public var customPropertyName: Swift.String
+            /// Whether the inclusion was defined at the organization or enterprise level
+            ///
+            /// - Remark: Generated from `#/components/schemas/oidc-custom-property-inclusion/inclusion_source`.
+            @frozen public enum InclusionSourcePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case organization = "organization"
+                case enterprise = "enterprise"
+            }
+            /// Whether the inclusion was defined at the organization or enterprise level
+            ///
+            /// - Remark: Generated from `#/components/schemas/oidc-custom-property-inclusion/inclusion_source`.
+            public var inclusionSource: Components.Schemas.OidcCustomPropertyInclusion.InclusionSourcePayload
+            /// Creates a new `OidcCustomPropertyInclusion`.
+            ///
+            /// - Parameters:
+            ///   - customPropertyName: The name of the custom property that is included in the OIDC token
+            ///   - inclusionSource: Whether the inclusion was defined at the organization or enterprise level
+            public init(
+                customPropertyName: Swift.String,
+                inclusionSource: Components.Schemas.OidcCustomPropertyInclusion.InclusionSourcePayload
+            ) {
+                self.customPropertyName = customPropertyName
+                self.inclusionSource = inclusionSource
+            }
+            public enum CodingKeys: String, CodingKey {
+                case customPropertyName = "custom_property_name"
+                case inclusionSource = "inclusion_source"
+            }
+        }
+        /// Input for creating an OIDC custom property inclusion
+        ///
+        /// - Remark: Generated from `#/components/schemas/oidc-custom-property-inclusion-input`.
+        public struct OidcCustomPropertyInclusionInput: Codable, Hashable, Sendable {
+            /// The name of the custom property to include in the OIDC token
+            ///
+            /// - Remark: Generated from `#/components/schemas/oidc-custom-property-inclusion-input/custom_property_name`.
+            public var customPropertyName: Swift.String
+            /// Creates a new `OidcCustomPropertyInclusionInput`.
+            ///
+            /// - Parameters:
+            ///   - customPropertyName: The name of the custom property to include in the OIDC token
+            public init(customPropertyName: Swift.String) {
+                self.customPropertyName = customPropertyName
+            }
+            public enum CodingKeys: String, CodingKey {
+                case customPropertyName = "custom_property_name"
+            }
+        }
         /// Actions OIDC Subject customization
         ///
         /// - Remark: Generated from `#/components/schemas/oidc-custom-sub`.
@@ -156,13 +371,17 @@ public enum Components {
         public struct EmptyObject: Codable, Hashable, Sendable {
             /// Creates a new `EmptyObject`.
             public init() {}
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
             }
         }
     }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
     public enum Parameters {
+        /// The slug version of the enterprise name.
+        ///
+        /// - Remark: Generated from `#/components/parameters/enterprise`.
+        public typealias Enterprise = Swift.String
         /// The organization name. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/org`.
@@ -235,6 +454,1278 @@ public enum Components {
 
 /// API operations, with input and output types, generated from `#/paths` in the OpenAPI document.
 public enum Operations {
+    /// List OIDC custom property inclusions for an enterprise
+    ///
+    /// Lists the repository custom properties that are included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-enterprise)`.
+    public enum OidcListOidcCustomPropertyInclusionsForEnterprise {
+        public static let id: Swift.String = "oidc/list-oidc-custom-property-inclusions-for-enterprise"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/GET/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Input.Path,
+                headers: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.OidcCustomPropertyInclusion])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.OidcCustomPropertyInclusion] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// A JSON array of OIDC custom property inclusions
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-enterprise)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-enterprise)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-enterprise)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Create an OIDC custom property inclusion for an enterprise
+    ///
+    /// Adds a repository custom property to be included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-enterprise)`.
+    public enum OidcCreateOidcCustomPropertyInclusionForEnterprise {
+        public static let id: Swift.String = "oidc/create-oidc-custom-property-inclusion-for-enterprise"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/POST/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input.Headers
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/POST/requestBody/content/application\/json`.
+                case json(Components.Schemas.OidcCustomPropertyInclusionInput)
+            }
+            public var body: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input.Path,
+                headers: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input.Headers = .init(),
+                body: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/POST/responses/201/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/POST/responses/201/content/application\/json`.
+                    case json(Components.Schemas.OidcCustomPropertyInclusion)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.OidcCustomPropertyInclusion {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output.Created.Body
+                /// Creates a new `Created`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output.Created.Body) {
+                    self.body = body
+                }
+            }
+            /// OIDC custom property inclusion created
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-enterprise)/responses/201`.
+            ///
+            /// HTTP response code: `201 created`.
+            case created(Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
+            ///
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output.Created {
+                get throws {
+                    switch self {
+                    case let .created(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct BadRequest: Sendable, Hashable {
+                /// Creates a new `BadRequest`.
+                public init() {}
+            }
+            /// Invalid input
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-enterprise)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output.BadRequest)
+            /// Invalid input
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-enterprise)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            public static var badRequest: Self {
+                .badRequest(.init())
+            }
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-enterprise)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct UnprocessableContent: Sendable, Hashable {
+                /// Creates a new `UnprocessableContent`.
+                public init() {}
+            }
+            /// Property inclusion already exists
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-enterprise)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output.UnprocessableContent)
+            /// Property inclusion already exists
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-enterprise)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            public static var unprocessableContent: Self {
+                .unprocessableContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output.UnprocessableContent {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Delete an OIDC custom property inclusion for an enterprise
+    ///
+    /// Removes a repository custom property from being included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-enterprise)`.
+    public enum OidcDeleteOidcCustomPropertyInclusionForEnterprise {
+        public static let id: Swift.String = "oidc/delete-oidc-custom-property-inclusion-for-enterprise"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/DELETE/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// The name of the custom property to remove from OIDC token inclusion
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/DELETE/path/custom_property_name`.
+                public var customPropertyName: Swift.String
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                ///   - customPropertyName: The name of the custom property to remove from OIDC token inclusion
+                public init(
+                    enterprise: Components.Parameters.Enterprise,
+                    customPropertyName: Swift.String
+                ) {
+                    self.enterprise = enterprise
+                    self.customPropertyName = customPropertyName
+                }
+            }
+            public var path: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Input.Path,
+                headers: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// OIDC custom property inclusion deleted
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-enterprise)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Output.NoContent)
+            /// OIDC custom property inclusion deleted
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-enterprise)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct BadRequest: Sendable, Hashable {
+                /// Creates a new `BadRequest`.
+                public init() {}
+            }
+            /// Invalid input
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-enterprise)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Output.BadRequest)
+            /// Invalid input
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-enterprise)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            public static var badRequest: Self {
+                .badRequest(.init())
+            }
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Output.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-enterprise)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct NotFound: Sendable, Hashable {
+                /// Creates a new `NotFound`.
+                public init() {}
+            }
+            /// Property inclusion not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-enterprise)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Output.NotFound)
+            /// Property inclusion not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-enterprise)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            public static var notFound: Self {
+                .notFound(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Output.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List OIDC custom property inclusions for an organization
+    ///
+    /// Lists the repository custom properties that are included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-org)`.
+    public enum OidcListOidcCustomPropertyInclusionsForOrg {
+        public static let id: Swift.String = "oidc/list-oidc-custom-property-inclusions-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcListOidcCustomPropertyInclusionsForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcListOidcCustomPropertyInclusionsForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Input.Path,
+                headers: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.OidcCustomPropertyInclusion])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.OidcCustomPropertyInclusion] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// A JSON array of OIDC custom property inclusions
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OidcListOidcCustomPropertyInclusionsForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-org)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Create an OIDC custom property inclusion for an organization
+    ///
+    /// Adds a repository custom property to be included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-org)`.
+    public enum OidcCreateOidcCustomPropertyInclusionForOrg {
+        public static let id: Swift.String = "oidc/create-oidc-custom-property-inclusion-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/POST/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcCreateOidcCustomPropertyInclusionForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcCreateOidcCustomPropertyInclusionForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/POST/requestBody/content/application\/json`.
+                case json(Components.Schemas.OidcCustomPropertyInclusionInput)
+            }
+            public var body: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input.Path,
+                headers: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input.Headers = .init(),
+                body: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/POST/responses/201/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/POST/responses/201/content/application\/json`.
+                    case json(Components.Schemas.OidcCustomPropertyInclusion)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.OidcCustomPropertyInclusion {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output.Created.Body
+                /// Creates a new `Created`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output.Created.Body) {
+                    self.body = body
+                }
+            }
+            /// OIDC custom property inclusion created
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-org)/responses/201`.
+            ///
+            /// HTTP response code: `201 created`.
+            case created(Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
+            ///
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output.Created {
+                get throws {
+                    switch self {
+                    case let .created(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct BadRequest: Sendable, Hashable {
+                /// Creates a new `BadRequest`.
+                public init() {}
+            }
+            /// Invalid input
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-org)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output.BadRequest)
+            /// Invalid input
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-org)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            public static var badRequest: Self {
+                .badRequest(.init())
+            }
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct UnprocessableContent: Sendable, Hashable {
+                /// Creates a new `UnprocessableContent`.
+                public init() {}
+            }
+            /// Property inclusion already exists
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-org)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output.UnprocessableContent)
+            /// Property inclusion already exists
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-org)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            public static var unprocessableContent: Self {
+                .unprocessableContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output.UnprocessableContent {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Delete an OIDC custom property inclusion for an organization
+    ///
+    /// Removes a repository custom property from being included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-org)`.
+    public enum OidcDeleteOidcCustomPropertyInclusionForOrg {
+        public static let id: Swift.String = "oidc/delete-oidc-custom-property-inclusion-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/DELETE/path/org`.
+                public var org: Components.Parameters.Org
+                /// The name of the custom property to remove from OIDC token inclusion
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/DELETE/path/custom_property_name`.
+                public var customPropertyName: Swift.String
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - customPropertyName: The name of the custom property to remove from OIDC token inclusion
+                public init(
+                    org: Components.Parameters.Org,
+                    customPropertyName: Swift.String
+                ) {
+                    self.org = org
+                    self.customPropertyName = customPropertyName
+                }
+            }
+            public var path: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Input.Path,
+                headers: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// OIDC custom property inclusion deleted
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-org)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Output.NoContent)
+            /// OIDC custom property inclusion deleted
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-org)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct BadRequest: Sendable, Hashable {
+                /// Creates a new `BadRequest`.
+                public init() {}
+            }
+            /// Invalid input
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-org)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Output.BadRequest)
+            /// Invalid input
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-org)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            public static var badRequest: Self {
+                .badRequest(.init())
+            }
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Output.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct NotFound: Sendable, Hashable {
+                /// Creates a new `NotFound`.
+                public init() {}
+            }
+            /// Property inclusion not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-org)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Output.NotFound)
+            /// Property inclusion not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-org)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            public static var notFound: Self {
+                .notFound(.init())
+            }
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Output.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// Get the customization template for an OIDC subject claim for an organization
     ///
     /// Gets the customization template for an OpenID Connect (OIDC) subject claim.

@@ -1420,8 +1420,8 @@ public enum Components {
                     case case2(Swift.Int?)
                     /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
                     case case3([Swift.String]?)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -1446,7 +1446,7 @@ public enum Components {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -1804,7 +1804,7 @@ public enum Components {
                 case diskUsage = "disk_usage"
                 case collaborators
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.login = try container.decode(
                     Swift.String.self,
@@ -2016,7 +2016,7 @@ public enum Components {
         public struct EmptyObject: Codable, Hashable, Sendable {
             /// Creates a new `EmptyObject`.
             public init() {}
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
             }
         }
@@ -3031,7 +3031,7 @@ public enum Operations {
                         public enum CodingKeys: String, CodingKey {
                             case userViewType = "user_view_type"
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             let container = try decoder.container(keyedBy: CodingKeys.self)
                             let discriminator = try container.decode(
                                 Swift.String.self,
@@ -3050,7 +3050,7 @@ public enum Operations {
                                 )
                             }
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             switch self {
                             case let ._private(value):
                                 try value.encode(to: encoder)
@@ -5057,8 +5057,8 @@ public enum Operations {
                     case case2([Swift.String])
                     /// - Remark: Generated from `#/paths/user/emails/POST/requestBody/json/case3`.
                     case case3(Swift.String)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -5083,7 +5083,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -5369,8 +5369,8 @@ public enum Operations {
                     case case2([Swift.String])
                     /// - Remark: Generated from `#/paths/user/emails/DELETE/requestBody/json/case3`.
                     case case3(Swift.String)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -5395,7 +5395,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -10884,7 +10884,7 @@ public enum Operations {
                         public enum CodingKeys: String, CodingKey {
                             case userViewType = "user_view_type"
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             let container = try decoder.container(keyedBy: CodingKeys.self)
                             let discriminator = try container.decode(
                                 Swift.String.self,
@@ -10903,7 +10903,7 @@ public enum Operations {
                                 )
                             }
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             switch self {
                             case let ._private(value):
                                 try value.encode(to: encoder)
@@ -11275,7 +11275,7 @@ public enum Operations {
                         public enum CodingKeys: String, CodingKey {
                             case userViewType = "user_view_type"
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             let container = try decoder.container(keyedBy: CodingKeys.self)
                             let discriminator = try container.decode(
                                 Swift.String.self,
@@ -11294,7 +11294,7 @@ public enum Operations {
                                 )
                             }
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             switch self {
                             case let ._private(value):
                                 try value.encode(to: encoder)
@@ -11559,10 +11559,10 @@ public enum Operations {
                                         public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                             self.additionalProperties = additionalProperties
                                         }
-                                        public init(from decoder: any Decoder) throws {
+                                        public init(from decoder: any Swift.Decoder) throws {
                                             additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                                         }
-                                        public func encode(to encoder: any Encoder) throws {
+                                        public func encode(to encoder: any Swift.Encoder) throws {
                                             try encoder.encodeAdditionalProperties(additionalProperties)
                                         }
                                     }
@@ -11579,10 +11579,10 @@ public enum Operations {
                                         public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                             self.additionalProperties = additionalProperties
                                         }
-                                        public init(from decoder: any Decoder) throws {
+                                        public init(from decoder: any Swift.Decoder) throws {
                                             additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                                         }
-                                        public func encode(to encoder: any Encoder) throws {
+                                        public func encode(to encoder: any Swift.Encoder) throws {
                                             try encoder.encodeAdditionalProperties(additionalProperties)
                                         }
                                     }
@@ -11649,10 +11649,10 @@ public enum Operations {
                             public init(additionalProperties: [String: Operations.UsersListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayload?] = .init()) {
                                 self.additionalProperties = additionalProperties
                             }
-                            public init(from decoder: any Decoder) throws {
+                            public init(from decoder: any Swift.Decoder) throws {
                                 additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                             }
-                            public func encode(to encoder: any Encoder) throws {
+                            public func encode(to encoder: any Swift.Encoder) throws {
                                 try encoder.encodeAdditionalProperties(additionalProperties)
                             }
                         }
@@ -11885,8 +11885,8 @@ public enum Operations {
                     }
                     /// - Remark: Generated from `#/paths/users/{username}/attestations/delete-request/POST/requestBody/json/case2`.
                     case case2(Operations.UsersDeleteAttestationsBulk.Input.Body.JsonPayload.Case2Payload)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -11905,7 +11905,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -12544,10 +12544,10 @@ public enum Operations {
                                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                         self.additionalProperties = additionalProperties
                                     }
-                                    public init(from decoder: any Decoder) throws {
+                                    public init(from decoder: any Swift.Decoder) throws {
                                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                                     }
-                                    public func encode(to encoder: any Encoder) throws {
+                                    public func encode(to encoder: any Swift.Encoder) throws {
                                         try encoder.encodeAdditionalProperties(additionalProperties)
                                     }
                                 }
@@ -12564,10 +12564,10 @@ public enum Operations {
                                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                         self.additionalProperties = additionalProperties
                                     }
-                                    public init(from decoder: any Decoder) throws {
+                                    public init(from decoder: any Swift.Decoder) throws {
                                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                                     }
-                                    public func encode(to encoder: any Encoder) throws {
+                                    public func encode(to encoder: any Swift.Encoder) throws {
                                         try encoder.encodeAdditionalProperties(additionalProperties)
                                     }
                                 }

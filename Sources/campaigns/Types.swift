@@ -782,7 +782,7 @@ public enum Components {
                     case closedCount = "closed_count"
                     case inProgressCount = "in_progress_count"
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.openCount = try container.decode(
                         Swift.Int.self,
@@ -1310,8 +1310,8 @@ public enum Operations {
                     }
                     /// - Remark: Generated from `#/paths/orgs/{org}/campaigns/POST/requestBody/json/case2`.
                     case case2(Operations.CampaignsCreateCampaign.Input.Body.JsonPayload.Case2Payload)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -1330,7 +1330,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -1982,7 +1982,7 @@ public enum Operations {
                         case contactLink = "contact_link"
                         case state
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.name = try container.decodeIfPresent(
                             Swift.String.self,

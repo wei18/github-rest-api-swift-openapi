@@ -117,10 +117,10 @@ public enum Operations {
                         public init(additionalProperties: [String: Swift.String] = .init()) {
                             self.additionalProperties = additionalProperties
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }

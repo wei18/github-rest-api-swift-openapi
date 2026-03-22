@@ -1673,7 +1673,7 @@ public enum Components {
         public struct EmptyObject: Codable, Hashable, Sendable {
             /// Creates a new `EmptyObject`.
             public init() {}
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
             }
         }
@@ -2468,17 +2468,6 @@ public enum Components {
                 case assignees
             }
         }
-        /// Sets the state of the code scanning alert. You must provide `dismissed_reason` when you set the state to `dismissed`.
-        ///
-        /// - Remark: Generated from `#/components/schemas/code-scanning-alert-set-state`.
-        @frozen public enum CodeScanningAlertSetState: String, Codable, Hashable, Sendable, CaseIterable {
-            case open = "open"
-            case dismissed = "dismissed"
-        }
-        /// If `true`, attempt to create an alert dismissal request.
-        ///
-        /// - Remark: Generated from `#/components/schemas/code-scanning-alert-create-request`.
-        public typealias CodeScanningAlertCreateRequest = Swift.Bool
         /// The status of an autofix.
         ///
         /// - Remark: Generated from `#/components/schemas/code-scanning-autofix-status`.
@@ -2579,6 +2568,102 @@ public enum Components {
             public enum CodingKeys: String, CodingKey {
                 case targetRef = "target_ref"
                 case sha
+            }
+        }
+        /// State of a code scanning alert instance.
+        ///
+        /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-state`.
+        @frozen public enum CodeScanningAlertInstanceState: String, Codable, Hashable, Sendable, CaseIterable {
+            case open = "open"
+            case fixed = "fixed"
+        }
+        /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list`.
+        public struct CodeScanningAlertInstanceList: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/ref`.
+            public var ref: Components.Schemas.CodeScanningRef?
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/analysis_key`.
+            public var analysisKey: Components.Schemas.CodeScanningAnalysisAnalysisKey?
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/environment`.
+            public var environment: Components.Schemas.CodeScanningAlertEnvironment?
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/category`.
+            public var category: Components.Schemas.CodeScanningAnalysisCategory?
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/state`.
+            public var state: Components.Schemas.CodeScanningAlertInstanceState?
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/commit_sha`.
+            public var commitSha: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/message`.
+            public struct MessagePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/message/text`.
+                public var text: Swift.String?
+                /// Creates a new `MessagePayload`.
+                ///
+                /// - Parameters:
+                ///   - text:
+                public init(text: Swift.String? = nil) {
+                    self.text = text
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case text
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/message`.
+            public var message: Components.Schemas.CodeScanningAlertInstanceList.MessagePayload?
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/location`.
+            public var location: Components.Schemas.CodeScanningAlertLocation?
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/html_url`.
+            public var htmlUrl: Swift.String?
+            /// Classifications that have been applied to the file that triggered the alert.
+            /// For example identifying it as documentation, or a generated file.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance-list/classifications`.
+            public var classifications: [Components.Schemas.CodeScanningAlertClassification]?
+            /// Creates a new `CodeScanningAlertInstanceList`.
+            ///
+            /// - Parameters:
+            ///   - ref:
+            ///   - analysisKey:
+            ///   - environment:
+            ///   - category:
+            ///   - state:
+            ///   - commitSha:
+            ///   - message:
+            ///   - location:
+            ///   - htmlUrl:
+            ///   - classifications: Classifications that have been applied to the file that triggered the alert.
+            public init(
+                ref: Components.Schemas.CodeScanningRef? = nil,
+                analysisKey: Components.Schemas.CodeScanningAnalysisAnalysisKey? = nil,
+                environment: Components.Schemas.CodeScanningAlertEnvironment? = nil,
+                category: Components.Schemas.CodeScanningAnalysisCategory? = nil,
+                state: Components.Schemas.CodeScanningAlertInstanceState? = nil,
+                commitSha: Swift.String? = nil,
+                message: Components.Schemas.CodeScanningAlertInstanceList.MessagePayload? = nil,
+                location: Components.Schemas.CodeScanningAlertLocation? = nil,
+                htmlUrl: Swift.String? = nil,
+                classifications: [Components.Schemas.CodeScanningAlertClassification]? = nil
+            ) {
+                self.ref = ref
+                self.analysisKey = analysisKey
+                self.environment = environment
+                self.category = category
+                self.state = state
+                self.commitSha = commitSha
+                self.message = message
+                self.location = location
+                self.htmlUrl = htmlUrl
+                self.classifications = classifications
+            }
+            public enum CodingKeys: String, CodingKey {
+                case ref
+                case analysisKey = "analysis_key"
+                case environment
+                case category
+                case state
+                case commitSha = "commit_sha"
+                case message
+                case location
+                case htmlUrl = "html_url"
+                case classifications
             }
         }
         /// An identifier for the upload.
@@ -2834,6 +2919,7 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/schemas/code-scanning-variant-analysis-language`.
         @frozen public enum CodeScanningVariantAnalysisLanguage: String, Codable, Hashable, Sendable, CaseIterable {
+            case actions = "actions"
             case cpp = "cpp"
             case csharp = "csharp"
             case go = "go"
@@ -3478,7 +3564,7 @@ public enum Components {
                 case threatModel = "threat_model"
                 case languages
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.state = try container.decodeIfPresent(
                     Components.Schemas.CodeScanningDefaultSetupUpdate.StatePayload.self,
@@ -4115,6 +4201,12 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/code-scanning/alerts/GET/query/severity`.
                 public var severity: Components.Schemas.CodeScanningAlertSeverity?
+                /// Filter alerts by assignees. Provide a comma-separated list of user handles (e.g., `octocat` or `octocat,hubot`).
+                /// Use `*` to list alerts with at least one assignee or `none` to list alerts with no assignees.
+                ///
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/code-scanning/alerts/GET/query/assignees`.
+                public var assignees: Swift.String?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -4128,6 +4220,7 @@ public enum Operations {
                 ///   - state: If specified, only code scanning alerts with this state will be returned.
                 ///   - sort: The property by which to sort the results.
                 ///   - severity: If specified, only code scanning alerts with this severity will be returned.
+                ///   - assignees: Filter alerts by assignees. Provide a comma-separated list of user handles (e.g., `octocat` or `octocat,hubot`).
                 public init(
                     toolName: Components.Parameters.ToolName? = nil,
                     toolGuid: Components.Parameters.ToolGuid? = nil,
@@ -4138,7 +4231,8 @@ public enum Operations {
                     direction: Components.Parameters.Direction? = nil,
                     state: Components.Schemas.CodeScanningAlertStateQuery? = nil,
                     sort: Operations.CodeScanningListAlertsForOrg.Input.Query.SortPayload? = nil,
-                    severity: Components.Schemas.CodeScanningAlertSeverity? = nil
+                    severity: Components.Schemas.CodeScanningAlertSeverity? = nil,
+                    assignees: Swift.String? = nil
                 ) {
                     self.toolName = toolName
                     self.toolGuid = toolGuid
@@ -4150,6 +4244,7 @@ public enum Operations {
                     self.state = state
                     self.sort = sort
                     self.severity = severity
+                    self.assignees = assignees
                 }
             }
             public var query: Operations.CodeScanningListAlertsForOrg.Input.Query
@@ -4428,6 +4523,12 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/GET/query/severity`.
                 public var severity: Components.Schemas.CodeScanningAlertSeverity?
+                /// Filter alerts by assignees. Provide a comma-separated list of user handles (e.g., `octocat` or `octocat,hubot`).
+                /// Use `*` to list alerts with at least one assignee or `none` to list alerts with no assignees.
+                ///
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/GET/query/assignees`.
+                public var assignees: Swift.String?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -4443,6 +4544,7 @@ public enum Operations {
                 ///   - sort: The property by which to sort the results.
                 ///   - state: If specified, only code scanning alerts with this state will be returned.
                 ///   - severity: If specified, only code scanning alerts with this severity will be returned.
+                ///   - assignees: Filter alerts by assignees. Provide a comma-separated list of user handles (e.g., `octocat` or `octocat,hubot`).
                 public init(
                     toolName: Components.Parameters.ToolName? = nil,
                     toolGuid: Components.Parameters.ToolGuid? = nil,
@@ -4455,7 +4557,8 @@ public enum Operations {
                     after: Components.Parameters.PaginationAfter? = nil,
                     sort: Operations.CodeScanningListAlertsForRepo.Input.Query.SortPayload? = nil,
                     state: Components.Schemas.CodeScanningAlertStateQuery? = nil,
-                    severity: Components.Schemas.CodeScanningAlertSeverity? = nil
+                    severity: Components.Schemas.CodeScanningAlertSeverity? = nil,
+                    assignees: Swift.String? = nil
                 ) {
                     self.toolName = toolName
                     self.toolGuid = toolGuid
@@ -4469,6 +4572,7 @@ public enum Operations {
                     self.sort = sort
                     self.state = state
                     self.severity = severity
+                    self.assignees = assignees
                 }
             }
             public var query: Operations.CodeScanningListAlertsForRepo.Input.Query
@@ -4990,37 +5094,57 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/PATCH/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/PATCH/requestBody/json/state`.
-                    public var state: Components.Schemas.CodeScanningAlertSetState
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/PATCH/requestBody/json/dismissed_reason`.
-                    public var dismissedReason: Components.Schemas.CodeScanningAlertDismissedReason?
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/PATCH/requestBody/json/dismissed_comment`.
-                    public var dismissedComment: Components.Schemas.CodeScanningAlertDismissedComment?
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/PATCH/requestBody/json/create_request`.
-                    public var createRequest: Components.Schemas.CodeScanningAlertCreateRequest?
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/PATCH/requestBody/json/value1`.
+                    public struct Value1Payload: Codable, Hashable, Sendable {
+                        /// Creates a new `Value1Payload`.
+                        public init() {}
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/PATCH/requestBody/json/value1`.
+                    public var value1: Operations.CodeScanningUpdateAlert.Input.Body.JsonPayload.Value1Payload?
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/PATCH/requestBody/json/value2`.
+                    public struct Value2Payload: Codable, Hashable, Sendable {
+                        /// Creates a new `Value2Payload`.
+                        public init() {}
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/PATCH/requestBody/json/value2`.
+                    public var value2: Operations.CodeScanningUpdateAlert.Input.Body.JsonPayload.Value2Payload?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
-                    ///   - state:
-                    ///   - dismissedReason:
-                    ///   - dismissedComment:
-                    ///   - createRequest:
+                    ///   - value1:
+                    ///   - value2:
                     public init(
-                        state: Components.Schemas.CodeScanningAlertSetState,
-                        dismissedReason: Components.Schemas.CodeScanningAlertDismissedReason? = nil,
-                        dismissedComment: Components.Schemas.CodeScanningAlertDismissedComment? = nil,
-                        createRequest: Components.Schemas.CodeScanningAlertCreateRequest? = nil
+                        value1: Operations.CodeScanningUpdateAlert.Input.Body.JsonPayload.Value1Payload? = nil,
+                        value2: Operations.CodeScanningUpdateAlert.Input.Body.JsonPayload.Value2Payload? = nil
                     ) {
-                        self.state = state
-                        self.dismissedReason = dismissedReason
-                        self.dismissedComment = dismissedComment
-                        self.createRequest = createRequest
+                        self.value1 = value1
+                        self.value2 = value2
                     }
-                    public enum CodingKeys: String, CodingKey {
-                        case state
-                        case dismissedReason = "dismissed_reason"
-                        case dismissedComment = "dismissed_comment"
-                        case createRequest = "create_request"
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
+                        do {
+                            self.value1 = try .init(from: decoder)
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self.value2 = try .init(from: decoder)
+                        } catch {
+                            errors.append(error)
+                        }
+                        try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
+                            [
+                                self.value1,
+                                self.value2
+                            ],
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
+                    }
+                    public func encode(to encoder: any Swift.Encoder) throws {
+                        try self.value1?.encode(to: encoder)
+                        try self.value2?.encode(to: encoder)
                     }
                 }
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/PATCH/requestBody/content/application\/json`.
@@ -6199,12 +6323,12 @@ public enum Operations {
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances/GET/responses/200/content`.
                 @frozen public enum Body: Sendable, Hashable {
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances/GET/responses/200/content/application\/json`.
-                    case json([Components.Schemas.CodeScanningAlertInstance])
+                    case json([Components.Schemas.CodeScanningAlertInstanceList])
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: [Components.Schemas.CodeScanningAlertInstance] {
+                    public var json: [Components.Schemas.CodeScanningAlertInstanceList] {
                         get throws {
                             switch self {
                             case let .json(body):
@@ -6759,20 +6883,38 @@ public enum Operations {
                             }
                         }
                     }
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}/GET/responses/200/content/application\/json+sarif`.
-                    case applicationJsonSarif(OpenAPIRuntime.HTTPBody)
-                    /// The associated value of the enum case if `self` is `.applicationJsonSarif`.
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}/GET/responses/200/content/applicationSarifJson`.
+                    public struct ApplicationSarifJsonPayload: Codable, Hashable, Sendable {
+                        /// A container of undocumented properties.
+                        public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                        /// Creates a new `ApplicationSarifJsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - additionalProperties: A container of undocumented properties.
+                        public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                            self.additionalProperties = additionalProperties
+                        }
+                        public init(from decoder: any Swift.Decoder) throws {
+                            additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                        }
+                        public func encode(to encoder: any Swift.Encoder) throws {
+                            try encoder.encodeAdditionalProperties(additionalProperties)
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}/GET/responses/200/content/application\/sarif+json`.
+                    case applicationSarifJson(Operations.CodeScanningGetAnalysis.Output.Ok.Body.ApplicationSarifJsonPayload)
+                    /// The associated value of the enum case if `self` is `.applicationSarifJson`.
                     ///
-                    /// - Throws: An error if `self` is not `.applicationJsonSarif`.
-                    /// - SeeAlso: `.applicationJsonSarif`.
-                    public var applicationJsonSarif: OpenAPIRuntime.HTTPBody {
+                    /// - Throws: An error if `self` is not `.applicationSarifJson`.
+                    /// - SeeAlso: `.applicationSarifJson`.
+                    public var applicationSarifJson: Operations.CodeScanningGetAnalysis.Output.Ok.Body.ApplicationSarifJsonPayload {
                         get throws {
                             switch self {
-                            case let .applicationJsonSarif(body):
+                            case let .applicationSarifJson(body):
                                 return body
                             default:
                                 try throwUnexpectedResponseBody(
-                                    expectedContent: "application/json+sarif",
+                                    expectedContent: "application/sarif+json",
                                     body: self
                                 )
                             }
@@ -6911,14 +7053,14 @@ public enum Operations {
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
-            case applicationJsonSarif
+            case applicationSarifJson
             case other(Swift.String)
             public init?(rawValue: Swift.String) {
                 switch rawValue.lowercased() {
                 case "application/json":
                     self = .json
-                case "application/json+sarif":
-                    self = .applicationJsonSarif
+                case "application/sarif+json":
+                    self = .applicationSarifJson
                 default:
                     self = .other(rawValue)
                 }
@@ -6929,14 +7071,14 @@ public enum Operations {
                     return string
                 case .json:
                     return "application/json"
-                case .applicationJsonSarif:
-                    return "application/json+sarif"
+                case .applicationSarifJson:
+                    return "application/sarif+json"
                 }
             }
             public static var allCases: [Self] {
                 [
                     .json,
-                    .applicationJsonSarif
+                    .applicationSarifJson
                 ]
             }
         }
@@ -8016,8 +8158,8 @@ public enum Operations {
                     }
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-scanning/codeql/variant-analyses/POST/requestBody/json/case3`.
                     case case3(Operations.CodeScanningCreateVariantAnalysis.Input.Body.JsonPayload.Case3Payload)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -8042,7 +8184,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -9331,7 +9473,7 @@ public enum Operations {
                         case toolName = "tool_name"
                         case validate
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.commitSha = try container.decode(
                             Components.Schemas.CodeScanningAnalysisCommitSha.self,

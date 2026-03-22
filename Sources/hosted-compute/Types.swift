@@ -224,6 +224,14 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/network-configuration/network_settings_ids`.
             public var networkSettingsIds: [Swift.String]?
+            /// The unique identifier of each failover network settings in the configuration.
+            ///
+            /// - Remark: Generated from `#/components/schemas/network-configuration/failover_network_settings_ids`.
+            public var failoverNetworkSettingsIds: [Swift.String]?
+            /// Indicates whether the failover network resource is enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/network-configuration/failover_network_enabled`.
+            public var failoverNetworkEnabled: Swift.Bool?
             /// The time at which the network configuration was created, in ISO 8601 format.
             ///
             /// - Remark: Generated from `#/components/schemas/network-configuration/created_on`.
@@ -235,18 +243,24 @@ public enum Components {
             ///   - name: The name of the network configuration.
             ///   - computeService: The hosted compute service the network configuration supports.
             ///   - networkSettingsIds: The unique identifier of each network settings in the configuration.
+            ///   - failoverNetworkSettingsIds: The unique identifier of each failover network settings in the configuration.
+            ///   - failoverNetworkEnabled: Indicates whether the failover network resource is enabled.
             ///   - createdOn: The time at which the network configuration was created, in ISO 8601 format.
             public init(
                 id: Swift.String,
                 name: Swift.String,
                 computeService: Components.Schemas.NetworkConfiguration.ComputeServicePayload? = nil,
                 networkSettingsIds: [Swift.String]? = nil,
+                failoverNetworkSettingsIds: [Swift.String]? = nil,
+                failoverNetworkEnabled: Swift.Bool? = nil,
                 createdOn: Foundation.Date? = nil
             ) {
                 self.id = id
                 self.name = name
                 self.computeService = computeService
                 self.networkSettingsIds = networkSettingsIds
+                self.failoverNetworkSettingsIds = failoverNetworkSettingsIds
+                self.failoverNetworkEnabled = failoverNetworkEnabled
                 self.createdOn = createdOn
             }
             public enum CodingKeys: String, CodingKey {
@@ -254,6 +268,8 @@ public enum Components {
                 case name
                 case computeService = "compute_service"
                 case networkSettingsIds = "network_settings_ids"
+                case failoverNetworkSettingsIds = "failover_network_settings_ids"
+                case failoverNetworkEnabled = "failover_network_enabled"
                 case createdOn = "created_on"
             }
         }
@@ -607,7 +623,7 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/settings/network-configurations/POST/requestBody/json/compute_service`.
                     public var computeService: Operations.HostedComputeCreateNetworkConfigurationForOrg.Input.Body.JsonPayload.ComputeServicePayload?
-                    /// The identifier of the network settings to use for the network configuration. Exactly one network settings must be specified.
+                    /// A list of identifiers of the network settings resources to use for the network configuration. Exactly one resource identifier must be specified in the list.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/settings/network-configurations/POST/requestBody/json/network_settings_ids`.
                     public var networkSettingsIds: [Swift.String]
@@ -616,7 +632,7 @@ public enum Operations {
                     /// - Parameters:
                     ///   - name: Name of the network configuration. Must be between 1 and 100 characters and may only contain upper and lowercase letters a-z, numbers 0-9, '.', '-', and '_'.
                     ///   - computeService: The hosted compute service to use for the network configuration.
-                    ///   - networkSettingsIds: The identifier of the network settings to use for the network configuration. Exactly one network settings must be specified.
+                    ///   - networkSettingsIds: A list of identifiers of the network settings resources to use for the network configuration. Exactly one resource identifier must be specified in the list.
                     public init(
                         name: Swift.String,
                         computeService: Operations.HostedComputeCreateNetworkConfigurationForOrg.Input.Body.JsonPayload.ComputeServicePayload? = nil,
@@ -963,7 +979,7 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/settings/network-configurations/{network_configuration_id}/PATCH/requestBody/json/compute_service`.
                     public var computeService: Operations.HostedComputeUpdateNetworkConfigurationForOrg.Input.Body.JsonPayload.ComputeServicePayload?
-                    /// The identifier of the network settings to use for the network configuration. Exactly one network settings must be specified.
+                    /// A list of identifiers of the network settings resources to use for the network configuration. Exactly one resource identifier must be specified in the list.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/settings/network-configurations/{network_configuration_id}/PATCH/requestBody/json/network_settings_ids`.
                     public var networkSettingsIds: [Swift.String]?
@@ -972,7 +988,7 @@ public enum Operations {
                     /// - Parameters:
                     ///   - name: Name of the network configuration. Must be between 1 and 100 characters and may only contain upper and lowercase letters a-z, numbers 0-9, '.', '-', and '_'.
                     ///   - computeService: The hosted compute service to use for the network configuration.
-                    ///   - networkSettingsIds: The identifier of the network settings to use for the network configuration. Exactly one network settings must be specified.
+                    ///   - networkSettingsIds: A list of identifiers of the network settings resources to use for the network configuration. Exactly one resource identifier must be specified in the list.
                     public init(
                         name: Swift.String? = nil,
                         computeService: Operations.HostedComputeUpdateNetworkConfigurationForOrg.Input.Body.JsonPayload.ComputeServicePayload? = nil,

@@ -1637,7 +1637,7 @@ public enum Components {
                 case ecosystem
                 case name
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.ecosystem = try container.decode(
                     Swift.String.self,
@@ -1694,7 +1694,7 @@ public enum Components {
                 public enum CodingKeys: String, CodingKey {
                     case identifier
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.identifier = try container.decode(
                         Swift.String.self,
@@ -1733,7 +1733,7 @@ public enum Components {
                 case vulnerableVersionRange = "vulnerable_version_range"
                 case firstPatchedVersion = "first_patched_version"
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.package = try container.decode(
                     Components.Schemas.DependabotAlertPackage.self,
@@ -1824,7 +1824,7 @@ public enum Components {
                     case score
                     case vectorString = "vector_string"
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.score = try container.decode(
                         Swift.Double.self,
@@ -1876,7 +1876,7 @@ public enum Components {
                     case cweId = "cwe_id"
                     case name
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.cweId = try container.decode(
                         Swift.String.self,
@@ -1935,7 +1935,7 @@ public enum Components {
                     case _type = "type"
                     case value
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self._type = try container.decode(
                         Components.Schemas.DependabotAlertSecurityAdvisory.IdentifiersPayloadPayload._TypePayload.self,
@@ -1977,7 +1977,7 @@ public enum Components {
                 public enum CodingKeys: String, CodingKey {
                     case url
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.url = try container.decode(
                         Swift.String.self,
@@ -2076,7 +2076,7 @@ public enum Components {
                 case updatedAt = "updated_at"
                 case withdrawnAt = "withdrawn_at"
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.ghsaId = try container.decode(
                     Swift.String.self,
@@ -2185,6 +2185,97 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/schemas/alert-auto-dismissed-at`.
         public typealias AlertAutoDismissedAt = Foundation.Date
+        /// Information about an active dismissal request for this Dependabot alert.
+        ///
+        /// - Remark: Generated from `#/components/schemas/dependabot-alert-dismissal-request-simple`.
+        public struct DependabotAlertDismissalRequestSimple: Codable, Hashable, Sendable {
+            /// The unique identifier of the dismissal request.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert-dismissal-request-simple/id`.
+            public var id: Swift.Int?
+            /// The current status of the dismissal request.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert-dismissal-request-simple/status`.
+            @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case pending = "pending"
+                case approved = "approved"
+                case rejected = "rejected"
+                case cancelled = "cancelled"
+            }
+            /// The current status of the dismissal request.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert-dismissal-request-simple/status`.
+            public var status: Components.Schemas.DependabotAlertDismissalRequestSimple.StatusPayload?
+            /// The user who requested the dismissal.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert-dismissal-request-simple/requester`.
+            public struct RequesterPayload: Codable, Hashable, Sendable {
+                /// The unique identifier of the user.
+                ///
+                /// - Remark: Generated from `#/components/schemas/dependabot-alert-dismissal-request-simple/requester/id`.
+                public var id: Swift.Int?
+                /// The login name of the user.
+                ///
+                /// - Remark: Generated from `#/components/schemas/dependabot-alert-dismissal-request-simple/requester/login`.
+                public var login: Swift.String?
+                /// Creates a new `RequesterPayload`.
+                ///
+                /// - Parameters:
+                ///   - id: The unique identifier of the user.
+                ///   - login: The login name of the user.
+                public init(
+                    id: Swift.Int? = nil,
+                    login: Swift.String? = nil
+                ) {
+                    self.id = id
+                    self.login = login
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case login
+                }
+            }
+            /// The user who requested the dismissal.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert-dismissal-request-simple/requester`.
+            public var requester: Components.Schemas.DependabotAlertDismissalRequestSimple.RequesterPayload?
+            /// The date and time when the dismissal request was created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert-dismissal-request-simple/created_at`.
+            public var createdAt: Foundation.Date?
+            /// The API URL to get more information about this dismissal request.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert-dismissal-request-simple/url`.
+            public var url: Swift.String?
+            /// Creates a new `DependabotAlertDismissalRequestSimple`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the dismissal request.
+            ///   - status: The current status of the dismissal request.
+            ///   - requester: The user who requested the dismissal.
+            ///   - createdAt: The date and time when the dismissal request was created.
+            ///   - url: The API URL to get more information about this dismissal request.
+            public init(
+                id: Swift.Int? = nil,
+                status: Components.Schemas.DependabotAlertDismissalRequestSimple.StatusPayload? = nil,
+                requester: Components.Schemas.DependabotAlertDismissalRequestSimple.RequesterPayload? = nil,
+                createdAt: Foundation.Date? = nil,
+                url: Swift.String? = nil
+            ) {
+                self.id = id
+                self.status = status
+                self.requester = requester
+                self.createdAt = createdAt
+                self.url = url
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case status
+                case requester
+                case createdAt = "created_at"
+                case url
+            }
+        }
         /// A Dependabot alert.
         ///
         /// - Remark: Generated from `#/components/schemas/dependabot-alert-with-repository`.
@@ -2312,6 +2403,12 @@ public enum Components {
             public var fixedAt: Components.Schemas.AlertFixedAt?
             /// - Remark: Generated from `#/components/schemas/dependabot-alert-with-repository/auto_dismissed_at`.
             public var autoDismissedAt: Components.Schemas.AlertAutoDismissedAt?
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert-with-repository/dismissal_request`.
+            public var dismissalRequest: Components.Schemas.DependabotAlertDismissalRequestSimple?
+            /// The users assigned to this alert.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert-with-repository/assignees`.
+            public var assignees: [Components.Schemas.SimpleUser]?
             /// - Remark: Generated from `#/components/schemas/dependabot-alert-with-repository/repository`.
             public var repository: Components.Schemas.SimpleRepository
             /// Creates a new `DependabotAlertWithRepository`.
@@ -2332,6 +2429,8 @@ public enum Components {
             ///   - dismissedComment: An optional comment associated with the alert's dismissal.
             ///   - fixedAt:
             ///   - autoDismissedAt:
+            ///   - dismissalRequest:
+            ///   - assignees: The users assigned to this alert.
             ///   - repository:
             public init(
                 number: Components.Schemas.AlertNumber,
@@ -2349,6 +2448,8 @@ public enum Components {
                 dismissedComment: Swift.String? = nil,
                 fixedAt: Components.Schemas.AlertFixedAt? = nil,
                 autoDismissedAt: Components.Schemas.AlertAutoDismissedAt? = nil,
+                dismissalRequest: Components.Schemas.DependabotAlertDismissalRequestSimple? = nil,
+                assignees: [Components.Schemas.SimpleUser]? = nil,
                 repository: Components.Schemas.SimpleRepository
             ) {
                 self.number = number
@@ -2366,6 +2467,8 @@ public enum Components {
                 self.dismissedComment = dismissedComment
                 self.fixedAt = fixedAt
                 self.autoDismissedAt = autoDismissedAt
+                self.dismissalRequest = dismissalRequest
+                self.assignees = assignees
                 self.repository = repository
             }
             public enum CodingKeys: String, CodingKey {
@@ -2384,9 +2487,11 @@ public enum Components {
                 case dismissedComment = "dismissed_comment"
                 case fixedAt = "fixed_at"
                 case autoDismissedAt = "auto_dismissed_at"
+                case dismissalRequest = "dismissal_request"
+                case assignees
                 case repository
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.number = try container.decode(
                     Components.Schemas.AlertNumber.self,
@@ -2448,6 +2553,14 @@ public enum Components {
                     Components.Schemas.AlertAutoDismissedAt.self,
                     forKey: .autoDismissedAt
                 )
+                self.dismissalRequest = try container.decodeIfPresent(
+                    Components.Schemas.DependabotAlertDismissalRequestSimple.self,
+                    forKey: .dismissalRequest
+                )
+                self.assignees = try container.decodeIfPresent(
+                    [Components.Schemas.SimpleUser].self,
+                    forKey: .assignees
+                )
                 self.repository = try container.decode(
                     Components.Schemas.SimpleRepository.self,
                     forKey: .repository
@@ -2468,6 +2581,8 @@ public enum Components {
                     "dismissed_comment",
                     "fixed_at",
                     "auto_dismissed_at",
+                    "dismissal_request",
+                    "assignees",
                     "repository"
                 ])
             }
@@ -2646,6 +2761,107 @@ public enum Components {
             }
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_ai_detection`.
             public var secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public struct SecretScanningDelegatedAlertDismissalPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedAlertDismissalPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public var secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public struct SecretScanningDelegatedBypassPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedBypassPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public var secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public struct SecretScanningDelegatedBypassOptionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload`.
+                public struct ReviewersPayloadPayload: Codable, Hashable, Sendable {
+                    /// The ID of the team or role selected as a bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_id`.
+                    public var reviewerId: Swift.Int
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    @frozen public enum ReviewerTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case team = "TEAM"
+                        case role = "ROLE"
+                    }
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    public var reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    /// Creates a new `ReviewersPayloadPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
+                    ///   - reviewerType: The type of the bypass reviewer
+                    public init(
+                        reviewerId: Swift.Int,
+                        reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    ) {
+                        self.reviewerId = reviewerId
+                        self.reviewerType = reviewerType
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case reviewerId = "reviewer_id"
+                        case reviewerType = "reviewer_type"
+                    }
+                }
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public typealias ReviewersPayload = [Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload]
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public var reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload?
+                /// Creates a new `SecretScanningDelegatedBypassOptionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - reviewers: The bypass reviewers for secret scanning delegated bypass
+                public init(reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload? = nil) {
+                    self.reviewers = reviewers
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case reviewers
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public var secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload?
             /// Creates a new `SecurityAndAnalysis`.
             ///
             /// - Parameters:
@@ -2656,6 +2872,9 @@ public enum Components {
             ///   - secretScanningPushProtection:
             ///   - secretScanningNonProviderPatterns:
             ///   - secretScanningAiDetection:
+            ///   - secretScanningDelegatedAlertDismissal:
+            ///   - secretScanningDelegatedBypass:
+            ///   - secretScanningDelegatedBypassOptions:
             public init(
                 advancedSecurity: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload? = nil,
                 codeSecurity: Components.Schemas.SecurityAndAnalysis.CodeSecurityPayload? = nil,
@@ -2663,7 +2882,10 @@ public enum Components {
                 secretScanning: Components.Schemas.SecurityAndAnalysis.SecretScanningPayload? = nil,
                 secretScanningPushProtection: Components.Schemas.SecurityAndAnalysis.SecretScanningPushProtectionPayload? = nil,
                 secretScanningNonProviderPatterns: Components.Schemas.SecurityAndAnalysis.SecretScanningNonProviderPatternsPayload? = nil,
-                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil
+                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil,
+                secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload? = nil,
+                secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload? = nil
             ) {
                 self.advancedSecurity = advancedSecurity
                 self.codeSecurity = codeSecurity
@@ -2672,6 +2894,9 @@ public enum Components {
                 self.secretScanningPushProtection = secretScanningPushProtection
                 self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
                 self.secretScanningAiDetection = secretScanningAiDetection
+                self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                self.secretScanningDelegatedBypass = secretScanningDelegatedBypass
+                self.secretScanningDelegatedBypassOptions = secretScanningDelegatedBypassOptions
             }
             public enum CodingKeys: String, CodingKey {
                 case advancedSecurity = "advanced_security"
@@ -2681,6 +2906,9 @@ public enum Components {
                 case secretScanningPushProtection = "secret_scanning_push_protection"
                 case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
                 case secretScanningAiDetection = "secret_scanning_ai_detection"
+                case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                case secretScanningDelegatedBypass = "secret_scanning_delegated_bypass"
+                case secretScanningDelegatedBypassOptions = "secret_scanning_delegated_bypass_options"
             }
         }
         /// Minimal Repository
@@ -2823,6 +3051,21 @@ public enum Components {
             public var hasDownloads: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/has_discussions`.
             public var hasDiscussions: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/archived`.
             public var archived: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/disabled`.
@@ -2958,10 +3201,10 @@ public enum Components {
                 public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                     self.additionalProperties = additionalProperties
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeAdditionalProperties(additionalProperties)
                 }
             }
@@ -3039,6 +3282,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads:
             ///   - hasDiscussions:
+            ///   - hasPullRequests:
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled:
             ///   - visibility:
@@ -3128,6 +3374,9 @@ public enum Components {
                 hasPages: Swift.Bool? = nil,
                 hasDownloads: Swift.Bool? = nil,
                 hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool? = nil,
                 disabled: Swift.Bool? = nil,
                 visibility: Swift.String? = nil,
@@ -3217,6 +3466,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -3307,6 +3559,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -3742,7 +3997,7 @@ public enum Components {
                 case defaultLevel = "default_level"
                 case accessibleRepositories = "accessible_repositories"
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.defaultLevel = try container.decodeIfPresent(
                     Components.Schemas.DependabotRepositoryAccessDetails.DefaultLevelPayload.self,
@@ -3764,7 +4019,7 @@ public enum Components {
         public struct EmptyObject: Codable, Hashable, Sendable {
             /// Creates a new `EmptyObject`.
             public init() {}
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
             }
         }
@@ -3979,6 +4234,12 @@ public enum Components {
             public var fixedAt: Components.Schemas.AlertFixedAt?
             /// - Remark: Generated from `#/components/schemas/dependabot-alert/auto_dismissed_at`.
             public var autoDismissedAt: Components.Schemas.AlertAutoDismissedAt?
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert/dismissal_request`.
+            public var dismissalRequest: Components.Schemas.DependabotAlertDismissalRequestSimple?
+            /// The users assigned to this alert.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert/assignees`.
+            public var assignees: [Components.Schemas.SimpleUser]?
             /// Creates a new `DependabotAlert`.
             ///
             /// - Parameters:
@@ -3997,6 +4258,8 @@ public enum Components {
             ///   - dismissedComment: An optional comment associated with the alert's dismissal.
             ///   - fixedAt:
             ///   - autoDismissedAt:
+            ///   - dismissalRequest:
+            ///   - assignees: The users assigned to this alert.
             public init(
                 number: Components.Schemas.AlertNumber,
                 state: Components.Schemas.DependabotAlert.StatePayload,
@@ -4012,7 +4275,9 @@ public enum Components {
                 dismissedReason: Components.Schemas.DependabotAlert.DismissedReasonPayload? = nil,
                 dismissedComment: Swift.String? = nil,
                 fixedAt: Components.Schemas.AlertFixedAt? = nil,
-                autoDismissedAt: Components.Schemas.AlertAutoDismissedAt? = nil
+                autoDismissedAt: Components.Schemas.AlertAutoDismissedAt? = nil,
+                dismissalRequest: Components.Schemas.DependabotAlertDismissalRequestSimple? = nil,
+                assignees: [Components.Schemas.SimpleUser]? = nil
             ) {
                 self.number = number
                 self.state = state
@@ -4029,6 +4294,8 @@ public enum Components {
                 self.dismissedComment = dismissedComment
                 self.fixedAt = fixedAt
                 self.autoDismissedAt = autoDismissedAt
+                self.dismissalRequest = dismissalRequest
+                self.assignees = assignees
             }
             public enum CodingKeys: String, CodingKey {
                 case number
@@ -4046,8 +4313,10 @@ public enum Components {
                 case dismissedComment = "dismissed_comment"
                 case fixedAt = "fixed_at"
                 case autoDismissedAt = "auto_dismissed_at"
+                case dismissalRequest = "dismissal_request"
+                case assignees
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.number = try container.decode(
                     Components.Schemas.AlertNumber.self,
@@ -4109,6 +4378,14 @@ public enum Components {
                     Components.Schemas.AlertAutoDismissedAt.self,
                     forKey: .autoDismissedAt
                 )
+                self.dismissalRequest = try container.decodeIfPresent(
+                    Components.Schemas.DependabotAlertDismissalRequestSimple.self,
+                    forKey: .dismissalRequest
+                )
+                self.assignees = try container.decodeIfPresent(
+                    [Components.Schemas.SimpleUser].self,
+                    forKey: .assignees
+                )
                 try decoder.ensureNoAdditionalProperties(knownKeys: [
                     "number",
                     "state",
@@ -4124,7 +4401,9 @@ public enum Components {
                     "dismissed_reason",
                     "dismissed_comment",
                     "fixed_at",
-                    "auto_dismissed_at"
+                    "auto_dismissed_at",
+                    "dismissal_request",
+                    "assignees"
                 ])
             }
         }
@@ -4237,8 +4516,8 @@ public enum Components {
             public typealias Case2Payload = [Components.Parameters.DependabotAlertCommaSeparatedHas.Case2PayloadPayload]
             /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-has/case2`.
             case case2(Components.Parameters.DependabotAlertCommaSeparatedHas.Case2Payload)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .case1(try decoder.decodeFromSingleValueContainer())
                     return
@@ -4257,7 +4536,7 @@ public enum Components {
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .case1(value):
                     try encoder.encodeToSingleValueContainer(value)
@@ -4266,6 +4545,12 @@ public enum Components {
                 }
             }
         }
+        /// Filter alerts by assignees.
+        /// Provide a comma-separated list of user handles (e.g., `octocat` or `octocat,hubot`) to return alerts assigned to any of the specified users.
+        /// Use `*` to list alerts with at least one assignee or `none` to list alerts with no assignees.
+        ///
+        /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-assignees`.
+        public typealias DependabotAlertCommaSeparatedAssignees = Swift.String
         /// The scope of the vulnerable dependency. If specified, only alerts with this scope will be returned.
         ///
         /// - Remark: Generated from `#/components/parameters/dependabot-alert-scope`.
@@ -4326,8 +4611,8 @@ public enum Components {
             public typealias Case2Payload = [Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas.Case2PayloadPayload]
             /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has/case2`.
             case case2(Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas.Case2Payload)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .case1(try decoder.decodeFromSingleValueContainer())
                     return
@@ -4346,7 +4631,7 @@ public enum Components {
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .case1(value):
                     try encoder.encodeToSingleValueContainer(value)
@@ -4630,8 +4915,8 @@ public enum Operations {
                     public typealias Case2Payload = [Components.Parameters.DependabotAlertCommaSeparatedHas.Case2PayloadPayload]
                     /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-has/case2`.
                     case case2(Components.Parameters.DependabotAlertCommaSeparatedHas.Case2Payload)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -4650,7 +4935,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -4664,6 +4949,12 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/alerts/GET/query/has`.
                 public var has: Components.Parameters.DependabotAlertCommaSeparatedHas?
+                /// Filter alerts by assignees.
+                /// Provide a comma-separated list of user handles (e.g., `octocat` or `octocat,hubot`) to return alerts assigned to any of the specified users.
+                /// Use `*` to list alerts with at least one assignee or `none` to list alerts with no assignees.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/alerts/GET/query/assignee`.
+                public var assignee: Components.Parameters.DependabotAlertCommaSeparatedAssignees?
                 /// - Remark: Generated from `#/components/parameters/dependabot-alert-scope`.
                 @frozen public enum DependabotAlertScope: String, Codable, Hashable, Sendable, CaseIterable {
                     case development = "development"
@@ -4716,6 +5007,7 @@ public enum Operations {
                 ///   - package: A comma-separated list of package names. If specified, only alerts for these packages will be returned.
                 ///   - epssPercentage: CVE Exploit Prediction Scoring System (EPSS) percentage. Can be specified as:
                 ///   - has: Filters the list of alerts based on whether the alert has the given value. If specified, only alerts meeting this criterion will be returned.
+                ///   - assignee: Filter alerts by assignees.
                 ///   - scope: The scope of the vulnerable dependency. If specified, only alerts with this scope will be returned.
                 ///   - sort: The property by which to sort the results.
                 ///   - direction: The direction to sort the results by.
@@ -4729,6 +5021,7 @@ public enum Operations {
                     package: Components.Parameters.DependabotAlertCommaSeparatedPackages? = nil,
                     epssPercentage: Components.Parameters.DependabotAlertCommaSeparatedEpss? = nil,
                     has: Components.Parameters.DependabotAlertCommaSeparatedHas? = nil,
+                    assignee: Components.Parameters.DependabotAlertCommaSeparatedAssignees? = nil,
                     scope: Components.Parameters.DependabotAlertScope? = nil,
                     sort: Components.Parameters.DependabotAlertSort? = nil,
                     direction: Components.Parameters.Direction? = nil,
@@ -4742,6 +5035,7 @@ public enum Operations {
                     self.package = package
                     self.epssPercentage = epssPercentage
                     self.has = has
+                    self.assignee = assignee
                     self.scope = scope
                     self.sort = sort
                     self.direction = direction
@@ -5665,8 +5959,8 @@ public enum Operations {
                     public typealias Case2Payload = [Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas.Case2PayloadPayload]
                     /// - Remark: Generated from `#/components/parameters/dependabot-alert-org-scope-comma-separated-has/case2`.
                     case case2(Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas.Case2Payload)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -5685,7 +5979,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -5699,6 +5993,12 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/has`.
                 public var has: Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas?
+                /// Filter alerts by assignees.
+                /// Provide a comma-separated list of user handles (e.g., `octocat` or `octocat,hubot`) to return alerts assigned to any of the specified users.
+                /// Use `*` to list alerts with at least one assignee or `none` to list alerts with no assignees.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/assignee`.
+                public var assignee: Components.Parameters.DependabotAlertCommaSeparatedAssignees?
                 /// A comma-separated list of runtime risk strings. If specified, only alerts for repositories with deployment records matching these risks will be returned.
                 ///
                 /// Can be: `critical-resource`, `internet-exposed`, `sensitive-data`, `lateral-movement`
@@ -5759,6 +6059,7 @@ public enum Operations {
                 ///   - artifactRegistryUrl: A comma-separated list of artifact registry URLs. If specified, only alerts for repositories with storage records matching these URLs will be returned.
                 ///   - artifactRegistry: A comma-separated list of Artifact Registry name strings. If specified, only alerts for repositories with storage records matching these registries will be returned.
                 ///   - has: Filters the list of alerts based on whether the alert has the given value. If specified, only alerts meeting this criterion will be returned.
+                ///   - assignee: Filter alerts by assignees.
                 ///   - runtimeRisk: A comma-separated list of runtime risk strings. If specified, only alerts for repositories with deployment records matching these risks will be returned.
                 ///   - scope: The scope of the vulnerable dependency. If specified, only alerts with this scope will be returned.
                 ///   - sort: The property by which to sort the results.
@@ -5775,6 +6076,7 @@ public enum Operations {
                     artifactRegistryUrl: Components.Parameters.DependabotAlertCommaSeparatedArtifactRegistryUrls? = nil,
                     artifactRegistry: Components.Parameters.DependabotAlertCommaSeparatedArtifactRegistry? = nil,
                     has: Components.Parameters.DependabotAlertOrgScopeCommaSeparatedHas? = nil,
+                    assignee: Components.Parameters.DependabotAlertCommaSeparatedAssignees? = nil,
                     runtimeRisk: Components.Parameters.DependabotAlertCommaSeparatedRuntimeRisk? = nil,
                     scope: Components.Parameters.DependabotAlertScope? = nil,
                     sort: Components.Parameters.DependabotAlertSort? = nil,
@@ -5791,6 +6093,7 @@ public enum Operations {
                     self.artifactRegistryUrl = artifactRegistryUrl
                     self.artifactRegistry = artifactRegistry
                     self.has = has
+                    self.assignee = assignee
                     self.runtimeRisk = runtimeRisk
                     self.scope = scope
                     self.sort = sort
@@ -6613,8 +6916,8 @@ public enum Operations {
                             self.value1 = value1
                             self.value2 = value2
                         }
-                        public init(from decoder: any Decoder) throws {
-                            var errors: [any Error] = []
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
                             do {
                                 self.value1 = try decoder.decodeFromSingleValueContainer()
                             } catch {
@@ -6635,18 +6938,18 @@ public enum Operations {
                                 errors: errors
                             )
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try encoder.encodeFirstNonNilValueToSingleValueContainer([
                                 self.value1,
                                 self.value2
                             ])
                         }
                     }
-                    /// An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/dependabot/secrets#remove-selected-repository-from-an-organization-secret) endpoints. Use integers when possible, as strings are supported only to maintain backwards compatibility and may be removed in the future.
+                    /// An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/dependabot/secrets#remove-selected-repository-from-an-organization-secret) endpoints.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/secrets/{secret_name}/PUT/requestBody/json/selected_repository_ids`.
                     public typealias SelectedRepositoryIdsPayload = [Operations.DependabotCreateOrUpdateOrgSecret.Input.Body.JsonPayload.SelectedRepositoryIdsPayloadPayload]
-                    /// An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/dependabot/secrets#remove-selected-repository-from-an-organization-secret) endpoints. Use integers when possible, as strings are supported only to maintain backwards compatibility and may be removed in the future.
+                    /// An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/dependabot/secrets#remove-selected-repository-from-an-organization-secret) endpoints.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/secrets/{secret_name}/PUT/requestBody/json/selected_repository_ids`.
                     public var selectedRepositoryIds: Operations.DependabotCreateOrUpdateOrgSecret.Input.Body.JsonPayload.SelectedRepositoryIdsPayload?
@@ -6656,7 +6959,7 @@ public enum Operations {
                     ///   - encryptedValue: Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get an organization public key](https://docs.github.com/rest/dependabot/secrets#get-an-organization-public-key) endpoint.
                     ///   - keyId: ID of the key you used to encrypt the secret.
                     ///   - visibility: Which type of organization repositories have access to the organization secret. `selected` means only the repositories specified by `selected_repository_ids` can access the secret.
-                    ///   - selectedRepositoryIds: An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/dependabot/secrets#remove-selected-repository-from-an-organization-secret) endpoints. Use integers when possible, as strings are supported only to maintain backwards compatibility and may be removed in the future.
+                    ///   - selectedRepositoryIds: An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://docs.github.com/rest/dependabot/secrets#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://docs.github.com/rest/dependabot/secrets#remove-selected-repository-from-an-organization-secret) endpoints.
                     public init(
                         encryptedValue: Swift.String? = nil,
                         keyId: Swift.String? = nil,
@@ -7543,8 +7846,8 @@ public enum Operations {
                     public typealias Case2Payload = [Components.Parameters.DependabotAlertCommaSeparatedHas.Case2PayloadPayload]
                     /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-has/case2`.
                     case case2(Components.Parameters.DependabotAlertCommaSeparatedHas.Case2Payload)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -7563,7 +7866,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -7577,6 +7880,12 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/has`.
                 public var has: Components.Parameters.DependabotAlertCommaSeparatedHas?
+                /// Filter alerts by assignees.
+                /// Provide a comma-separated list of user handles (e.g., `octocat` or `octocat,hubot`) to return alerts assigned to any of the specified users.
+                /// Use `*` to list alerts with at least one assignee or `none` to list alerts with no assignees.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/assignee`.
+                public var assignee: Components.Parameters.DependabotAlertCommaSeparatedAssignees?
                 /// - Remark: Generated from `#/components/parameters/dependabot-alert-scope`.
                 @frozen public enum DependabotAlertScope: String, Codable, Hashable, Sendable, CaseIterable {
                     case development = "development"
@@ -7608,11 +7917,6 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/direction`.
                 public var direction: Components.Parameters.Direction?
-                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
-                ///
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/per_page`.
-                @available(*, deprecated)
-                public var perPage: Swift.Int?
                 /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/before`.
@@ -7621,6 +7925,10 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/after`.
                 public var after: Components.Parameters.PaginationAfter?
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -7631,12 +7939,13 @@ public enum Operations {
                 ///   - manifest: A comma-separated list of full manifest paths. If specified, only alerts for these manifests will be returned.
                 ///   - epssPercentage: CVE Exploit Prediction Scoring System (EPSS) percentage. Can be specified as:
                 ///   - has: Filters the list of alerts based on whether the alert has the given value. If specified, only alerts meeting this criterion will be returned.
+                ///   - assignee: Filter alerts by assignees.
                 ///   - scope: The scope of the vulnerable dependency. If specified, only alerts with this scope will be returned.
                 ///   - sort: The property by which to sort the results.
                 ///   - direction: The direction to sort the results by.
-                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
                     state: Components.Parameters.DependabotAlertCommaSeparatedStates? = nil,
                     severity: Components.Parameters.DependabotAlertCommaSeparatedSeverities? = nil,
@@ -7645,12 +7954,13 @@ public enum Operations {
                     manifest: Components.Parameters.DependabotAlertCommaSeparatedManifests? = nil,
                     epssPercentage: Components.Parameters.DependabotAlertCommaSeparatedEpss? = nil,
                     has: Components.Parameters.DependabotAlertCommaSeparatedHas? = nil,
+                    assignee: Components.Parameters.DependabotAlertCommaSeparatedAssignees? = nil,
                     scope: Components.Parameters.DependabotAlertScope? = nil,
                     sort: Components.Parameters.DependabotAlertSort? = nil,
                     direction: Components.Parameters.Direction? = nil,
-                    perPage: Swift.Int? = nil,
                     before: Components.Parameters.PaginationBefore? = nil,
-                    after: Components.Parameters.PaginationAfter? = nil
+                    after: Components.Parameters.PaginationAfter? = nil,
+                    perPage: Components.Parameters.PerPage? = nil
                 ) {
                     self.state = state
                     self.severity = severity
@@ -7659,12 +7969,13 @@ public enum Operations {
                     self.manifest = manifest
                     self.epssPercentage = epssPercentage
                     self.has = has
+                    self.assignee = assignee
                     self.scope = scope
                     self.sort = sort
                     self.direction = direction
-                    self.perPage = perPage
                     self.before = before
                     self.after = after
+                    self.perPage = perPage
                 }
             }
             public var query: Operations.DependabotListAlertsForRepo.Input.Query
@@ -8197,76 +8508,57 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/{alert_number}/PATCH/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// The state of the Dependabot alert.
-                    /// A `dismissed_reason` must be provided when setting the state to `dismissed`.
-                    ///
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/{alert_number}/PATCH/requestBody/json/state`.
-                    @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                        case dismissed = "dismissed"
-                        case open = "open"
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/{alert_number}/PATCH/requestBody/json/value1`.
+                    public struct Value1Payload: Codable, Hashable, Sendable {
+                        /// Creates a new `Value1Payload`.
+                        public init() {}
                     }
-                    /// The state of the Dependabot alert.
-                    /// A `dismissed_reason` must be provided when setting the state to `dismissed`.
-                    ///
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/{alert_number}/PATCH/requestBody/json/state`.
-                    public var state: Operations.DependabotUpdateAlert.Input.Body.JsonPayload.StatePayload
-                    /// **Required when `state` is `dismissed`.** A reason for dismissing the alert.
-                    ///
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/{alert_number}/PATCH/requestBody/json/dismissed_reason`.
-                    @frozen public enum DismissedReasonPayload: String, Codable, Hashable, Sendable, CaseIterable {
-                        case fixStarted = "fix_started"
-                        case inaccurate = "inaccurate"
-                        case noBandwidth = "no_bandwidth"
-                        case notUsed = "not_used"
-                        case tolerableRisk = "tolerable_risk"
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/{alert_number}/PATCH/requestBody/json/value1`.
+                    public var value1: Operations.DependabotUpdateAlert.Input.Body.JsonPayload.Value1Payload?
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/{alert_number}/PATCH/requestBody/json/value2`.
+                    public struct Value2Payload: Codable, Hashable, Sendable {
+                        /// Creates a new `Value2Payload`.
+                        public init() {}
                     }
-                    /// **Required when `state` is `dismissed`.** A reason for dismissing the alert.
-                    ///
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/{alert_number}/PATCH/requestBody/json/dismissed_reason`.
-                    public var dismissedReason: Operations.DependabotUpdateAlert.Input.Body.JsonPayload.DismissedReasonPayload?
-                    /// An optional comment associated with dismissing the alert.
-                    ///
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/{alert_number}/PATCH/requestBody/json/dismissed_comment`.
-                    public var dismissedComment: Swift.String?
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/{alert_number}/PATCH/requestBody/json/value2`.
+                    public var value2: Operations.DependabotUpdateAlert.Input.Body.JsonPayload.Value2Payload?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
-                    ///   - state: The state of the Dependabot alert.
-                    ///   - dismissedReason: **Required when `state` is `dismissed`.** A reason for dismissing the alert.
-                    ///   - dismissedComment: An optional comment associated with dismissing the alert.
+                    ///   - value1:
+                    ///   - value2:
                     public init(
-                        state: Operations.DependabotUpdateAlert.Input.Body.JsonPayload.StatePayload,
-                        dismissedReason: Operations.DependabotUpdateAlert.Input.Body.JsonPayload.DismissedReasonPayload? = nil,
-                        dismissedComment: Swift.String? = nil
+                        value1: Operations.DependabotUpdateAlert.Input.Body.JsonPayload.Value1Payload? = nil,
+                        value2: Operations.DependabotUpdateAlert.Input.Body.JsonPayload.Value2Payload? = nil
                     ) {
-                        self.state = state
-                        self.dismissedReason = dismissedReason
-                        self.dismissedComment = dismissedComment
+                        self.value1 = value1
+                        self.value2 = value2
                     }
-                    public enum CodingKeys: String, CodingKey {
-                        case state
-                        case dismissedReason = "dismissed_reason"
-                        case dismissedComment = "dismissed_comment"
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
+                        do {
+                            self.value1 = try .init(from: decoder)
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self.value2 = try .init(from: decoder)
+                        } catch {
+                            errors.append(error)
+                        }
+                        try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
+                            [
+                                self.value1,
+                                self.value2
+                            ],
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
                     }
-                    public init(from decoder: any Decoder) throws {
-                        let container = try decoder.container(keyedBy: CodingKeys.self)
-                        self.state = try container.decode(
-                            Operations.DependabotUpdateAlert.Input.Body.JsonPayload.StatePayload.self,
-                            forKey: .state
-                        )
-                        self.dismissedReason = try container.decodeIfPresent(
-                            Operations.DependabotUpdateAlert.Input.Body.JsonPayload.DismissedReasonPayload.self,
-                            forKey: .dismissedReason
-                        )
-                        self.dismissedComment = try container.decodeIfPresent(
-                            Swift.String.self,
-                            forKey: .dismissedComment
-                        )
-                        try decoder.ensureNoAdditionalProperties(knownKeys: [
-                            "state",
-                            "dismissed_reason",
-                            "dismissed_comment"
-                        ])
+                    public func encode(to encoder: any Swift.Encoder) throws {
+                        try self.value1?.encode(to: encoder)
+                        try self.value2?.encode(to: encoder)
                     }
                 }
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/{alert_number}/PATCH/requestBody/content/application\/json`.

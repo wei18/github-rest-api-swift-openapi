@@ -1035,6 +1035,18 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/code-security-configuration/dependabot_security_updates`.
             public var dependabotSecurityUpdates: Components.Schemas.CodeSecurityConfiguration.DependabotSecurityUpdatesPayload?
+            /// The enablement status of Dependabot delegated alert dismissal
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-security-configuration/dependabot_delegated_alert_dismissal`.
+            @frozen public enum DependabotDelegatedAlertDismissalPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case enabled = "enabled"
+                case disabled = "disabled"
+                case notSet = "not_set"
+            }
+            /// The enablement status of Dependabot delegated alert dismissal
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-security-configuration/dependabot_delegated_alert_dismissal`.
+            public var dependabotDelegatedAlertDismissal: Components.Schemas.CodeSecurityConfiguration.DependabotDelegatedAlertDismissalPayload?
             /// Feature options for code scanning
             ///
             /// - Remark: Generated from `#/components/schemas/code-security-configuration/code_scanning_options`.
@@ -1180,21 +1192,29 @@ public enum Components {
                     ///
                     /// - Remark: Generated from `#/components/schemas/code-security-configuration/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
                     public var reviewerType: Components.Schemas.CodeSecurityConfiguration.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    /// The ID of the security configuration associated with this bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/code-security-configuration/secret_scanning_delegated_bypass_options/ReviewersPayload/security_configuration_id`.
+                    public var securityConfigurationId: Swift.Int?
                     /// Creates a new `ReviewersPayloadPayload`.
                     ///
                     /// - Parameters:
                     ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
                     ///   - reviewerType: The type of the bypass reviewer
+                    ///   - securityConfigurationId: The ID of the security configuration associated with this bypass reviewer
                     public init(
                         reviewerId: Swift.Int,
-                        reviewerType: Components.Schemas.CodeSecurityConfiguration.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                        reviewerType: Components.Schemas.CodeSecurityConfiguration.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload,
+                        securityConfigurationId: Swift.Int? = nil
                     ) {
                         self.reviewerId = reviewerId
                         self.reviewerType = reviewerType
+                        self.securityConfigurationId = securityConfigurationId
                     }
                     public enum CodingKeys: String, CodingKey {
                         case reviewerId = "reviewer_id"
                         case reviewerType = "reviewer_type"
+                        case securityConfigurationId = "security_configuration_id"
                     }
                 }
                 /// The bypass reviewers for secret scanning delegated bypass
@@ -1268,6 +1288,18 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/code-security-configuration/secret_scanning_delegated_alert_dismissal`.
             public var secretScanningDelegatedAlertDismissal: Components.Schemas.CodeSecurityConfiguration.SecretScanningDelegatedAlertDismissalPayload?
+            /// The enablement status of secret scanning extended metadata
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-security-configuration/secret_scanning_extended_metadata`.
+            @frozen public enum SecretScanningExtendedMetadataPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case enabled = "enabled"
+                case disabled = "disabled"
+                case notSet = "not_set"
+            }
+            /// The enablement status of secret scanning extended metadata
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-security-configuration/secret_scanning_extended_metadata`.
+            public var secretScanningExtendedMetadata: Components.Schemas.CodeSecurityConfiguration.SecretScanningExtendedMetadataPayload?
             /// The enablement status of private vulnerability reporting
             ///
             /// - Remark: Generated from `#/components/schemas/code-security-configuration/private_vulnerability_reporting`.
@@ -1316,6 +1348,7 @@ public enum Components {
             ///   - dependencyGraphAutosubmitActionOptions: Feature options for Automatic dependency submission
             ///   - dependabotAlerts: The enablement status of Dependabot alerts
             ///   - dependabotSecurityUpdates: The enablement status of Dependabot security updates
+            ///   - dependabotDelegatedAlertDismissal: The enablement status of Dependabot delegated alert dismissal
             ///   - codeScanningOptions: Feature options for code scanning
             ///   - codeScanningDefaultSetup: The enablement status of code scanning default setup
             ///   - codeScanningDefaultSetupOptions: Feature options for code scanning default setup
@@ -1328,6 +1361,7 @@ public enum Components {
             ///   - secretScanningNonProviderPatterns: The enablement status of secret scanning non-provider patterns
             ///   - secretScanningGenericSecrets: The enablement status of Copilot secret scanning
             ///   - secretScanningDelegatedAlertDismissal: The enablement status of secret scanning delegated alert dismissal
+            ///   - secretScanningExtendedMetadata: The enablement status of secret scanning extended metadata
             ///   - privateVulnerabilityReporting: The enablement status of private vulnerability reporting
             ///   - enforcement: The enforcement status for a security configuration
             ///   - url: The URL of the configuration
@@ -1345,6 +1379,7 @@ public enum Components {
                 dependencyGraphAutosubmitActionOptions: Components.Schemas.CodeSecurityConfiguration.DependencyGraphAutosubmitActionOptionsPayload? = nil,
                 dependabotAlerts: Components.Schemas.CodeSecurityConfiguration.DependabotAlertsPayload? = nil,
                 dependabotSecurityUpdates: Components.Schemas.CodeSecurityConfiguration.DependabotSecurityUpdatesPayload? = nil,
+                dependabotDelegatedAlertDismissal: Components.Schemas.CodeSecurityConfiguration.DependabotDelegatedAlertDismissalPayload? = nil,
                 codeScanningOptions: Components.Schemas.CodeSecurityConfiguration.CodeScanningOptionsPayload? = nil,
                 codeScanningDefaultSetup: Components.Schemas.CodeSecurityConfiguration.CodeScanningDefaultSetupPayload? = nil,
                 codeScanningDefaultSetupOptions: Components.Schemas.CodeSecurityConfiguration.CodeScanningDefaultSetupOptionsPayload? = nil,
@@ -1357,6 +1392,7 @@ public enum Components {
                 secretScanningNonProviderPatterns: Components.Schemas.CodeSecurityConfiguration.SecretScanningNonProviderPatternsPayload? = nil,
                 secretScanningGenericSecrets: Components.Schemas.CodeSecurityConfiguration.SecretScanningGenericSecretsPayload? = nil,
                 secretScanningDelegatedAlertDismissal: Components.Schemas.CodeSecurityConfiguration.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                secretScanningExtendedMetadata: Components.Schemas.CodeSecurityConfiguration.SecretScanningExtendedMetadataPayload? = nil,
                 privateVulnerabilityReporting: Components.Schemas.CodeSecurityConfiguration.PrivateVulnerabilityReportingPayload? = nil,
                 enforcement: Components.Schemas.CodeSecurityConfiguration.EnforcementPayload? = nil,
                 url: Swift.String? = nil,
@@ -1374,6 +1410,7 @@ public enum Components {
                 self.dependencyGraphAutosubmitActionOptions = dependencyGraphAutosubmitActionOptions
                 self.dependabotAlerts = dependabotAlerts
                 self.dependabotSecurityUpdates = dependabotSecurityUpdates
+                self.dependabotDelegatedAlertDismissal = dependabotDelegatedAlertDismissal
                 self.codeScanningOptions = codeScanningOptions
                 self.codeScanningDefaultSetup = codeScanningDefaultSetup
                 self.codeScanningDefaultSetupOptions = codeScanningDefaultSetupOptions
@@ -1386,6 +1423,7 @@ public enum Components {
                 self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
                 self.secretScanningGenericSecrets = secretScanningGenericSecrets
                 self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                self.secretScanningExtendedMetadata = secretScanningExtendedMetadata
                 self.privateVulnerabilityReporting = privateVulnerabilityReporting
                 self.enforcement = enforcement
                 self.url = url
@@ -1404,6 +1442,7 @@ public enum Components {
                 case dependencyGraphAutosubmitActionOptions = "dependency_graph_autosubmit_action_options"
                 case dependabotAlerts = "dependabot_alerts"
                 case dependabotSecurityUpdates = "dependabot_security_updates"
+                case dependabotDelegatedAlertDismissal = "dependabot_delegated_alert_dismissal"
                 case codeScanningOptions = "code_scanning_options"
                 case codeScanningDefaultSetup = "code_scanning_default_setup"
                 case codeScanningDefaultSetupOptions = "code_scanning_default_setup_options"
@@ -1416,6 +1455,7 @@ public enum Components {
                 case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
                 case secretScanningGenericSecrets = "secret_scanning_generic_secrets"
                 case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                case secretScanningExtendedMetadata = "secret_scanning_extended_metadata"
                 case privateVulnerabilityReporting = "private_vulnerability_reporting"
                 case enforcement
                 case url
@@ -2667,6 +2707,18 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/secret_scanning_delegated_alert_dismissal`.
                     public var secretScanningDelegatedAlertDismissal: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload?
+                    /// The enablement status of secret scanning extended metadata
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/secret_scanning_extended_metadata`.
+                    @frozen public enum SecretScanningExtendedMetadataPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of secret scanning extended metadata
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/secret_scanning_extended_metadata`.
+                    public var secretScanningExtendedMetadata: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload?
                     /// The enablement status of private vulnerability reporting
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/private_vulnerability_reporting`.
@@ -2713,6 +2765,7 @@ public enum Operations {
                     ///   - secretScanningNonProviderPatterns: The enablement status of secret scanning non provider patterns
                     ///   - secretScanningGenericSecrets: The enablement status of Copilot secret scanning
                     ///   - secretScanningDelegatedAlertDismissal: The enablement status of secret scanning delegated alert dismissal
+                    ///   - secretScanningExtendedMetadata: The enablement status of secret scanning extended metadata
                     ///   - privateVulnerabilityReporting: The enablement status of private vulnerability reporting
                     ///   - enforcement: The enforcement status for a security configuration
                     public init(
@@ -2736,6 +2789,7 @@ public enum Operations {
                         secretScanningNonProviderPatterns: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningNonProviderPatternsPayload? = nil,
                         secretScanningGenericSecrets: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningGenericSecretsPayload? = nil,
                         secretScanningDelegatedAlertDismissal: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                        secretScanningExtendedMetadata: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload? = nil,
                         privateVulnerabilityReporting: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.PrivateVulnerabilityReportingPayload? = nil,
                         enforcement: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.EnforcementPayload? = nil
                     ) {
@@ -2759,6 +2813,7 @@ public enum Operations {
                         self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
                         self.secretScanningGenericSecrets = secretScanningGenericSecrets
                         self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                        self.secretScanningExtendedMetadata = secretScanningExtendedMetadata
                         self.privateVulnerabilityReporting = privateVulnerabilityReporting
                         self.enforcement = enforcement
                     }
@@ -2783,10 +2838,11 @@ public enum Operations {
                         case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
                         case secretScanningGenericSecrets = "secret_scanning_generic_secrets"
                         case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                        case secretScanningExtendedMetadata = "secret_scanning_extended_metadata"
                         case privateVulnerabilityReporting = "private_vulnerability_reporting"
                         case enforcement
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.name = try container.decode(
                             Swift.String.self,
@@ -2868,6 +2924,10 @@ public enum Operations {
                             Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload.self,
                             forKey: .secretScanningDelegatedAlertDismissal
                         )
+                        self.secretScanningExtendedMetadata = try container.decodeIfPresent(
+                            Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload.self,
+                            forKey: .secretScanningExtendedMetadata
+                        )
                         self.privateVulnerabilityReporting = try container.decodeIfPresent(
                             Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.PrivateVulnerabilityReportingPayload.self,
                             forKey: .privateVulnerabilityReporting
@@ -2897,6 +2957,7 @@ public enum Operations {
                             "secret_scanning_non_provider_patterns",
                             "secret_scanning_generic_secrets",
                             "secret_scanning_delegated_alert_dismissal",
+                            "secret_scanning_extended_metadata",
                             "private_vulnerability_reporting",
                             "enforcement"
                         ])
@@ -3617,6 +3678,8 @@ public enum Operations {
                     public var codeScanningDefaultSetup: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.CodeScanningDefaultSetupPayload?
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_scanning_default_setup_options`.
                     public var codeScanningDefaultSetupOptions: Components.Schemas.CodeScanningDefaultSetupOptions?
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_scanning_options`.
+                    public var codeScanningOptions: Components.Schemas.CodeScanningOptions?
                     /// The enablement status of code scanning delegated alert dismissal
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_scanning_delegated_alert_dismissal`.
@@ -3713,6 +3776,18 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_scanning_delegated_alert_dismissal`.
                     public var secretScanningDelegatedAlertDismissal: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload?
+                    /// The enablement status of secret scanning extended metadata
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_scanning_extended_metadata`.
+                    @frozen public enum SecretScanningExtendedMetadataPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of secret scanning extended metadata
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_scanning_extended_metadata`.
+                    public var secretScanningExtendedMetadata: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload?
                     /// The enablement status of private vulnerability reporting
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/private_vulnerability_reporting`.
@@ -3750,6 +3825,7 @@ public enum Operations {
                     ///   - dependabotSecurityUpdates: The enablement status of Dependabot security updates
                     ///   - codeScanningDefaultSetup: The enablement status of code scanning default setup
                     ///   - codeScanningDefaultSetupOptions:
+                    ///   - codeScanningOptions:
                     ///   - codeScanningDelegatedAlertDismissal: The enablement status of code scanning delegated alert dismissal
                     ///   - secretProtection: The enablement status of GitHub Secret Protection features.
                     ///   - secretScanning: The enablement status of secret scanning
@@ -3758,6 +3834,7 @@ public enum Operations {
                     ///   - secretScanningNonProviderPatterns: The enablement status of secret scanning non-provider patterns
                     ///   - secretScanningGenericSecrets: The enablement status of Copilot secret scanning
                     ///   - secretScanningDelegatedAlertDismissal: The enablement status of secret scanning delegated alert dismissal
+                    ///   - secretScanningExtendedMetadata: The enablement status of secret scanning extended metadata
                     ///   - privateVulnerabilityReporting: The enablement status of private vulnerability reporting
                     ///   - enforcement: The enforcement status for a security configuration
                     public init(
@@ -3772,6 +3849,7 @@ public enum Operations {
                         dependabotSecurityUpdates: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.DependabotSecurityUpdatesPayload? = nil,
                         codeScanningDefaultSetup: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.CodeScanningDefaultSetupPayload? = nil,
                         codeScanningDefaultSetupOptions: Components.Schemas.CodeScanningDefaultSetupOptions? = nil,
+                        codeScanningOptions: Components.Schemas.CodeScanningOptions? = nil,
                         codeScanningDelegatedAlertDismissal: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload? = nil,
                         secretProtection: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretProtectionPayload? = nil,
                         secretScanning: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningPayload? = nil,
@@ -3780,6 +3858,7 @@ public enum Operations {
                         secretScanningNonProviderPatterns: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningNonProviderPatternsPayload? = nil,
                         secretScanningGenericSecrets: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningGenericSecretsPayload? = nil,
                         secretScanningDelegatedAlertDismissal: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                        secretScanningExtendedMetadata: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload? = nil,
                         privateVulnerabilityReporting: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.PrivateVulnerabilityReportingPayload? = nil,
                         enforcement: Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.EnforcementPayload? = nil
                     ) {
@@ -3794,6 +3873,7 @@ public enum Operations {
                         self.dependabotSecurityUpdates = dependabotSecurityUpdates
                         self.codeScanningDefaultSetup = codeScanningDefaultSetup
                         self.codeScanningDefaultSetupOptions = codeScanningDefaultSetupOptions
+                        self.codeScanningOptions = codeScanningOptions
                         self.codeScanningDelegatedAlertDismissal = codeScanningDelegatedAlertDismissal
                         self.secretProtection = secretProtection
                         self.secretScanning = secretScanning
@@ -3802,6 +3882,7 @@ public enum Operations {
                         self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
                         self.secretScanningGenericSecrets = secretScanningGenericSecrets
                         self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                        self.secretScanningExtendedMetadata = secretScanningExtendedMetadata
                         self.privateVulnerabilityReporting = privateVulnerabilityReporting
                         self.enforcement = enforcement
                     }
@@ -3817,6 +3898,7 @@ public enum Operations {
                         case dependabotSecurityUpdates = "dependabot_security_updates"
                         case codeScanningDefaultSetup = "code_scanning_default_setup"
                         case codeScanningDefaultSetupOptions = "code_scanning_default_setup_options"
+                        case codeScanningOptions = "code_scanning_options"
                         case codeScanningDelegatedAlertDismissal = "code_scanning_delegated_alert_dismissal"
                         case secretProtection = "secret_protection"
                         case secretScanning = "secret_scanning"
@@ -3825,10 +3907,11 @@ public enum Operations {
                         case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
                         case secretScanningGenericSecrets = "secret_scanning_generic_secrets"
                         case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                        case secretScanningExtendedMetadata = "secret_scanning_extended_metadata"
                         case privateVulnerabilityReporting = "private_vulnerability_reporting"
                         case enforcement
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.name = try container.decodeIfPresent(
                             Swift.String.self,
@@ -3874,6 +3957,10 @@ public enum Operations {
                             Components.Schemas.CodeScanningDefaultSetupOptions.self,
                             forKey: .codeScanningDefaultSetupOptions
                         )
+                        self.codeScanningOptions = try container.decodeIfPresent(
+                            Components.Schemas.CodeScanningOptions.self,
+                            forKey: .codeScanningOptions
+                        )
                         self.codeScanningDelegatedAlertDismissal = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload.self,
                             forKey: .codeScanningDelegatedAlertDismissal
@@ -3906,6 +3993,10 @@ public enum Operations {
                             Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload.self,
                             forKey: .secretScanningDelegatedAlertDismissal
                         )
+                        self.secretScanningExtendedMetadata = try container.decodeIfPresent(
+                            Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload.self,
+                            forKey: .secretScanningExtendedMetadata
+                        )
                         self.privateVulnerabilityReporting = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateEnterpriseConfiguration.Input.Body.JsonPayload.PrivateVulnerabilityReportingPayload.self,
                             forKey: .privateVulnerabilityReporting
@@ -3926,6 +4017,7 @@ public enum Operations {
                             "dependabot_security_updates",
                             "code_scanning_default_setup",
                             "code_scanning_default_setup_options",
+                            "code_scanning_options",
                             "code_scanning_delegated_alert_dismissal",
                             "secret_protection",
                             "secret_scanning",
@@ -3934,6 +4026,7 @@ public enum Operations {
                             "secret_scanning_non_provider_patterns",
                             "secret_scanning_generic_secrets",
                             "secret_scanning_delegated_alert_dismissal",
+                            "secret_scanning_extended_metadata",
                             "private_vulnerability_reporting",
                             "enforcement"
                         ])
@@ -4443,7 +4536,7 @@ public enum Operations {
                     public enum CodingKeys: String, CodingKey {
                         case scope
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.scope = try container.decode(
                             Operations.CodeSecurityAttachEnterpriseConfiguration.Input.Body.JsonPayload.ScopePayload.self,
@@ -5478,6 +5571,18 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/dependabot_security_updates`.
                     public var dependabotSecurityUpdates: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependabotSecurityUpdatesPayload?
+                    /// The enablement status of Dependabot delegated alert dismissal. Requires Dependabot alerts to be enabled.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/dependabot_delegated_alert_dismissal`.
+                    @frozen public enum DependabotDelegatedAlertDismissalPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of Dependabot delegated alert dismissal. Requires Dependabot alerts to be enabled.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/dependabot_delegated_alert_dismissal`.
+                    public var dependabotDelegatedAlertDismissal: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependabotDelegatedAlertDismissalPayload?
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/code_scanning_options`.
                     public var codeScanningOptions: Components.Schemas.CodeScanningOptions?
                     /// The enablement status of code scanning default setup
@@ -5663,6 +5768,18 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/secret_scanning_delegated_alert_dismissal`.
                     public var secretScanningDelegatedAlertDismissal: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload?
+                    /// The enablement status of secret scanning extended metadata
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/secret_scanning_extended_metadata`.
+                    @frozen public enum SecretScanningExtendedMetadataPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of secret scanning extended metadata
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/secret_scanning_extended_metadata`.
+                    public var secretScanningExtendedMetadata: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload?
                     /// The enablement status of private vulnerability reporting
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/private_vulnerability_reporting`.
@@ -5698,6 +5815,7 @@ public enum Operations {
                     ///   - dependencyGraphAutosubmitActionOptions: Feature options for Automatic dependency submission
                     ///   - dependabotAlerts: The enablement status of Dependabot alerts
                     ///   - dependabotSecurityUpdates: The enablement status of Dependabot security updates
+                    ///   - dependabotDelegatedAlertDismissal: The enablement status of Dependabot delegated alert dismissal. Requires Dependabot alerts to be enabled.
                     ///   - codeScanningOptions:
                     ///   - codeScanningDefaultSetup: The enablement status of code scanning default setup
                     ///   - codeScanningDefaultSetupOptions:
@@ -5711,6 +5829,7 @@ public enum Operations {
                     ///   - secretScanningNonProviderPatterns: The enablement status of secret scanning non provider patterns
                     ///   - secretScanningGenericSecrets: The enablement status of Copilot secret scanning
                     ///   - secretScanningDelegatedAlertDismissal: The enablement status of secret scanning delegated alert dismissal
+                    ///   - secretScanningExtendedMetadata: The enablement status of secret scanning extended metadata
                     ///   - privateVulnerabilityReporting: The enablement status of private vulnerability reporting
                     ///   - enforcement: The enforcement status for a security configuration
                     public init(
@@ -5723,6 +5842,7 @@ public enum Operations {
                         dependencyGraphAutosubmitActionOptions: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependencyGraphAutosubmitActionOptionsPayload? = nil,
                         dependabotAlerts: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependabotAlertsPayload? = nil,
                         dependabotSecurityUpdates: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependabotSecurityUpdatesPayload? = nil,
+                        dependabotDelegatedAlertDismissal: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependabotDelegatedAlertDismissalPayload? = nil,
                         codeScanningOptions: Components.Schemas.CodeScanningOptions? = nil,
                         codeScanningDefaultSetup: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.CodeScanningDefaultSetupPayload? = nil,
                         codeScanningDefaultSetupOptions: Components.Schemas.CodeScanningDefaultSetupOptions? = nil,
@@ -5736,6 +5856,7 @@ public enum Operations {
                         secretScanningNonProviderPatterns: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningNonProviderPatternsPayload? = nil,
                         secretScanningGenericSecrets: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningGenericSecretsPayload? = nil,
                         secretScanningDelegatedAlertDismissal: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                        secretScanningExtendedMetadata: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload? = nil,
                         privateVulnerabilityReporting: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.PrivateVulnerabilityReportingPayload? = nil,
                         enforcement: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.EnforcementPayload? = nil
                     ) {
@@ -5748,6 +5869,7 @@ public enum Operations {
                         self.dependencyGraphAutosubmitActionOptions = dependencyGraphAutosubmitActionOptions
                         self.dependabotAlerts = dependabotAlerts
                         self.dependabotSecurityUpdates = dependabotSecurityUpdates
+                        self.dependabotDelegatedAlertDismissal = dependabotDelegatedAlertDismissal
                         self.codeScanningOptions = codeScanningOptions
                         self.codeScanningDefaultSetup = codeScanningDefaultSetup
                         self.codeScanningDefaultSetupOptions = codeScanningDefaultSetupOptions
@@ -5761,6 +5883,7 @@ public enum Operations {
                         self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
                         self.secretScanningGenericSecrets = secretScanningGenericSecrets
                         self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                        self.secretScanningExtendedMetadata = secretScanningExtendedMetadata
                         self.privateVulnerabilityReporting = privateVulnerabilityReporting
                         self.enforcement = enforcement
                     }
@@ -5774,6 +5897,7 @@ public enum Operations {
                         case dependencyGraphAutosubmitActionOptions = "dependency_graph_autosubmit_action_options"
                         case dependabotAlerts = "dependabot_alerts"
                         case dependabotSecurityUpdates = "dependabot_security_updates"
+                        case dependabotDelegatedAlertDismissal = "dependabot_delegated_alert_dismissal"
                         case codeScanningOptions = "code_scanning_options"
                         case codeScanningDefaultSetup = "code_scanning_default_setup"
                         case codeScanningDefaultSetupOptions = "code_scanning_default_setup_options"
@@ -5787,10 +5911,11 @@ public enum Operations {
                         case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
                         case secretScanningGenericSecrets = "secret_scanning_generic_secrets"
                         case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                        case secretScanningExtendedMetadata = "secret_scanning_extended_metadata"
                         case privateVulnerabilityReporting = "private_vulnerability_reporting"
                         case enforcement
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.name = try container.decode(
                             Swift.String.self,
@@ -5827,6 +5952,10 @@ public enum Operations {
                         self.dependabotSecurityUpdates = try container.decodeIfPresent(
                             Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependabotSecurityUpdatesPayload.self,
                             forKey: .dependabotSecurityUpdates
+                        )
+                        self.dependabotDelegatedAlertDismissal = try container.decodeIfPresent(
+                            Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependabotDelegatedAlertDismissalPayload.self,
+                            forKey: .dependabotDelegatedAlertDismissal
                         )
                         self.codeScanningOptions = try container.decodeIfPresent(
                             Components.Schemas.CodeScanningOptions.self,
@@ -5880,6 +6009,10 @@ public enum Operations {
                             Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload.self,
                             forKey: .secretScanningDelegatedAlertDismissal
                         )
+                        self.secretScanningExtendedMetadata = try container.decodeIfPresent(
+                            Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload.self,
+                            forKey: .secretScanningExtendedMetadata
+                        )
                         self.privateVulnerabilityReporting = try container.decodeIfPresent(
                             Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.PrivateVulnerabilityReportingPayload.self,
                             forKey: .privateVulnerabilityReporting
@@ -5898,6 +6031,7 @@ public enum Operations {
                             "dependency_graph_autosubmit_action_options",
                             "dependabot_alerts",
                             "dependabot_security_updates",
+                            "dependabot_delegated_alert_dismissal",
                             "code_scanning_options",
                             "code_scanning_default_setup",
                             "code_scanning_default_setup_options",
@@ -5911,6 +6045,7 @@ public enum Operations {
                             "secret_scanning_non_provider_patterns",
                             "secret_scanning_generic_secrets",
                             "secret_scanning_delegated_alert_dismissal",
+                            "secret_scanning_extended_metadata",
                             "private_vulnerability_reporting",
                             "enforcement"
                         ])
@@ -6291,7 +6426,7 @@ public enum Operations {
                     public enum CodingKeys: String, CodingKey {
                         case selectedRepositoryIds = "selected_repository_ids"
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.selectedRepositoryIds = try container.decodeIfPresent(
                             [Swift.Int].self,
@@ -6870,6 +7005,18 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/dependabot_security_updates`.
                     public var dependabotSecurityUpdates: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependabotSecurityUpdatesPayload?
+                    /// The enablement status of Dependabot delegated alert dismissal. Requires Dependabot alerts to be enabled.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/dependabot_delegated_alert_dismissal`.
+                    @frozen public enum DependabotDelegatedAlertDismissalPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of Dependabot delegated alert dismissal. Requires Dependabot alerts to be enabled.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/dependabot_delegated_alert_dismissal`.
+                    public var dependabotDelegatedAlertDismissal: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependabotDelegatedAlertDismissalPayload?
                     /// The enablement status of code scanning default setup
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_scanning_default_setup`.
@@ -6884,6 +7031,8 @@ public enum Operations {
                     public var codeScanningDefaultSetup: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeScanningDefaultSetupPayload?
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_scanning_default_setup_options`.
                     public var codeScanningDefaultSetupOptions: Components.Schemas.CodeScanningDefaultSetupOptions?
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_scanning_options`.
+                    public var codeScanningOptions: Components.Schemas.CodeScanningOptions?
                     /// The enablement status of code scanning delegated alert dismissal
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/code_scanning_delegated_alert_dismissal`.
@@ -7053,6 +7202,18 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_scanning_delegated_alert_dismissal`.
                     public var secretScanningDelegatedAlertDismissal: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload?
+                    /// The enablement status of secret scanning extended metadata
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_scanning_extended_metadata`.
+                    @frozen public enum SecretScanningExtendedMetadataPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabled = "enabled"
+                        case disabled = "disabled"
+                        case notSet = "not_set"
+                    }
+                    /// The enablement status of secret scanning extended metadata
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_scanning_extended_metadata`.
+                    public var secretScanningExtendedMetadata: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload?
                     /// The enablement status of private vulnerability reporting
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/private_vulnerability_reporting`.
@@ -7088,8 +7249,10 @@ public enum Operations {
                     ///   - dependencyGraphAutosubmitActionOptions: Feature options for Automatic dependency submission
                     ///   - dependabotAlerts: The enablement status of Dependabot alerts
                     ///   - dependabotSecurityUpdates: The enablement status of Dependabot security updates
+                    ///   - dependabotDelegatedAlertDismissal: The enablement status of Dependabot delegated alert dismissal. Requires Dependabot alerts to be enabled.
                     ///   - codeScanningDefaultSetup: The enablement status of code scanning default setup
                     ///   - codeScanningDefaultSetupOptions:
+                    ///   - codeScanningOptions:
                     ///   - codeScanningDelegatedAlertDismissal: The enablement status of code scanning delegated alert dismissal
                     ///   - secretProtection: The enablement status of GitHub Secret Protection features.
                     ///   - secretScanning: The enablement status of secret scanning
@@ -7100,6 +7263,7 @@ public enum Operations {
                     ///   - secretScanningNonProviderPatterns: The enablement status of secret scanning non-provider patterns
                     ///   - secretScanningGenericSecrets: The enablement status of Copilot secret scanning
                     ///   - secretScanningDelegatedAlertDismissal: The enablement status of secret scanning delegated alert dismissal
+                    ///   - secretScanningExtendedMetadata: The enablement status of secret scanning extended metadata
                     ///   - privateVulnerabilityReporting: The enablement status of private vulnerability reporting
                     ///   - enforcement: The enforcement status for a security configuration
                     public init(
@@ -7112,8 +7276,10 @@ public enum Operations {
                         dependencyGraphAutosubmitActionOptions: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependencyGraphAutosubmitActionOptionsPayload? = nil,
                         dependabotAlerts: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependabotAlertsPayload? = nil,
                         dependabotSecurityUpdates: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependabotSecurityUpdatesPayload? = nil,
+                        dependabotDelegatedAlertDismissal: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependabotDelegatedAlertDismissalPayload? = nil,
                         codeScanningDefaultSetup: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeScanningDefaultSetupPayload? = nil,
                         codeScanningDefaultSetupOptions: Components.Schemas.CodeScanningDefaultSetupOptions? = nil,
+                        codeScanningOptions: Components.Schemas.CodeScanningOptions? = nil,
                         codeScanningDelegatedAlertDismissal: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload? = nil,
                         secretProtection: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretProtectionPayload? = nil,
                         secretScanning: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningPayload? = nil,
@@ -7124,6 +7290,7 @@ public enum Operations {
                         secretScanningNonProviderPatterns: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningNonProviderPatternsPayload? = nil,
                         secretScanningGenericSecrets: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningGenericSecretsPayload? = nil,
                         secretScanningDelegatedAlertDismissal: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                        secretScanningExtendedMetadata: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload? = nil,
                         privateVulnerabilityReporting: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.PrivateVulnerabilityReportingPayload? = nil,
                         enforcement: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.EnforcementPayload? = nil
                     ) {
@@ -7136,8 +7303,10 @@ public enum Operations {
                         self.dependencyGraphAutosubmitActionOptions = dependencyGraphAutosubmitActionOptions
                         self.dependabotAlerts = dependabotAlerts
                         self.dependabotSecurityUpdates = dependabotSecurityUpdates
+                        self.dependabotDelegatedAlertDismissal = dependabotDelegatedAlertDismissal
                         self.codeScanningDefaultSetup = codeScanningDefaultSetup
                         self.codeScanningDefaultSetupOptions = codeScanningDefaultSetupOptions
+                        self.codeScanningOptions = codeScanningOptions
                         self.codeScanningDelegatedAlertDismissal = codeScanningDelegatedAlertDismissal
                         self.secretProtection = secretProtection
                         self.secretScanning = secretScanning
@@ -7148,6 +7317,7 @@ public enum Operations {
                         self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
                         self.secretScanningGenericSecrets = secretScanningGenericSecrets
                         self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                        self.secretScanningExtendedMetadata = secretScanningExtendedMetadata
                         self.privateVulnerabilityReporting = privateVulnerabilityReporting
                         self.enforcement = enforcement
                     }
@@ -7161,8 +7331,10 @@ public enum Operations {
                         case dependencyGraphAutosubmitActionOptions = "dependency_graph_autosubmit_action_options"
                         case dependabotAlerts = "dependabot_alerts"
                         case dependabotSecurityUpdates = "dependabot_security_updates"
+                        case dependabotDelegatedAlertDismissal = "dependabot_delegated_alert_dismissal"
                         case codeScanningDefaultSetup = "code_scanning_default_setup"
                         case codeScanningDefaultSetupOptions = "code_scanning_default_setup_options"
+                        case codeScanningOptions = "code_scanning_options"
                         case codeScanningDelegatedAlertDismissal = "code_scanning_delegated_alert_dismissal"
                         case secretProtection = "secret_protection"
                         case secretScanning = "secret_scanning"
@@ -7173,10 +7345,11 @@ public enum Operations {
                         case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
                         case secretScanningGenericSecrets = "secret_scanning_generic_secrets"
                         case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                        case secretScanningExtendedMetadata = "secret_scanning_extended_metadata"
                         case privateVulnerabilityReporting = "private_vulnerability_reporting"
                         case enforcement
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.name = try container.decodeIfPresent(
                             Swift.String.self,
@@ -7214,6 +7387,10 @@ public enum Operations {
                             Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependabotSecurityUpdatesPayload.self,
                             forKey: .dependabotSecurityUpdates
                         )
+                        self.dependabotDelegatedAlertDismissal = try container.decodeIfPresent(
+                            Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.DependabotDelegatedAlertDismissalPayload.self,
+                            forKey: .dependabotDelegatedAlertDismissal
+                        )
                         self.codeScanningDefaultSetup = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeScanningDefaultSetupPayload.self,
                             forKey: .codeScanningDefaultSetup
@@ -7221,6 +7398,10 @@ public enum Operations {
                         self.codeScanningDefaultSetupOptions = try container.decodeIfPresent(
                             Components.Schemas.CodeScanningDefaultSetupOptions.self,
                             forKey: .codeScanningDefaultSetupOptions
+                        )
+                        self.codeScanningOptions = try container.decodeIfPresent(
+                            Components.Schemas.CodeScanningOptions.self,
+                            forKey: .codeScanningOptions
                         )
                         self.codeScanningDelegatedAlertDismissal = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.CodeScanningDelegatedAlertDismissalPayload.self,
@@ -7262,6 +7443,10 @@ public enum Operations {
                             Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedAlertDismissalPayload.self,
                             forKey: .secretScanningDelegatedAlertDismissal
                         )
+                        self.secretScanningExtendedMetadata = try container.decodeIfPresent(
+                            Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningExtendedMetadataPayload.self,
+                            forKey: .secretScanningExtendedMetadata
+                        )
                         self.privateVulnerabilityReporting = try container.decodeIfPresent(
                             Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.PrivateVulnerabilityReportingPayload.self,
                             forKey: .privateVulnerabilityReporting
@@ -7280,8 +7465,10 @@ public enum Operations {
                             "dependency_graph_autosubmit_action_options",
                             "dependabot_alerts",
                             "dependabot_security_updates",
+                            "dependabot_delegated_alert_dismissal",
                             "code_scanning_default_setup",
                             "code_scanning_default_setup_options",
+                            "code_scanning_options",
                             "code_scanning_delegated_alert_dismissal",
                             "secret_protection",
                             "secret_scanning",
@@ -7292,6 +7479,7 @@ public enum Operations {
                             "secret_scanning_non_provider_patterns",
                             "secret_scanning_generic_secrets",
                             "secret_scanning_delegated_alert_dismissal",
+                            "secret_scanning_extended_metadata",
                             "private_vulnerability_reporting",
                             "enforcement"
                         ])
@@ -7749,7 +7937,7 @@ public enum Operations {
                         case scope
                         case selectedRepositoryIds = "selected_repository_ids"
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.scope = try container.decode(
                             Operations.CodeSecurityAttachConfiguration.Input.Body.JsonPayload.ScopePayload.self,

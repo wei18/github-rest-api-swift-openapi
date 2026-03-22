@@ -117,6 +117,134 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `DELETE /orgs/{org}/copilot/billing/selected_users`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot/billing/selected_users/delete(copilot/cancel-copilot-seat-assignment-for-users)`.
     func copilotCancelCopilotSeatAssignmentForUsers(_ input: Operations.CopilotCancelCopilotSeatAssignmentForUsers.Input) async throws -> Operations.CopilotCancelCopilotSeatAssignmentForUsers.Output
+    /// Get Copilot coding agent permissions for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Gets information about which repositories in an organization have been enabled
+    /// or disabled for the Copilot coding agent.
+    ///
+    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// all repositories, selected repositories, or no repositories owned by organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/coding-agent/permissions`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/get(copilot/get-copilot-coding-agent-permissions-organization)`.
+    func copilotGetCopilotCodingAgentPermissionsOrganization(_ input: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Input) async throws -> Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output
+    /// Set Copilot coding agent permissions for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Sets the policy for which repositories in an organization can use Copilot coding agent.
+    ///
+    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// all repositories, selected repositories, or no repositories owned by the organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/put(copilot/set-copilot-coding-agent-permissions-organization)`.
+    func copilotSetCopilotCodingAgentPermissionsOrganization(_ input: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input) async throws -> Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Output
+    /// List repositories enabled for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Lists the selected repositories that are enabled for Copilot coding agent in an organization.
+    ///
+    /// Organization owners can use this endpoint when the coding agent repository policy
+    /// is set to `selected` to see which repositories have been enabled.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/coding-agent/permissions/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/get(copilot/list-copilot-coding-agent-selected-repositories-for-organization)`.
+    func copilotListCopilotCodingAgentSelectedRepositoriesForOrganization(_ input: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input) async throws -> Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Output
+    /// Set selected repositories for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Replaces the list of selected repositories that are enabled for Copilot coding
+    /// agent in an organization. This method can only be called when the coding agent
+    /// repository policy is set to `selected`.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)`.
+    func copilotSetCopilotCodingAgentSelectedRepositoriesForOrganization(_ input: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input) async throws -> Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Output
+    /// Enable a repository for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Adds a repository to the list of selected repositories enabled for Copilot
+    /// coding agent in an organization. This method can only be called when the
+    /// coding agent repository policy is set to `selected`.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)`.
+    func copilotEnableCopilotCodingAgentForRepositoryInOrganization(_ input: Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Input) async throws -> Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Output
+    /// Disable a repository for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Removes a repository from the list of selected repositories enabled for Copilot
+    /// coding agent in an organization. This method can only be called when the
+    /// coding agent repository policy is set to `selected`.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/delete(copilot/disable-copilot-coding-agent-for-repository-in-organization)`.
+    func copilotDisableCopilotCodingAgentForRepositoryInOrganization(_ input: Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Input) async throws -> Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Output
+    /// Get Copilot content exclusion rules for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Gets information about an organization's Copilot content exclusion path rules.
+    /// To configure these settings, go to the organization's settings on GitHub.
+    /// For more information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)."
+    ///
+    /// Organization owners can view details about Copilot content exclusion rules for the organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `copilot` or `read:org` scopes to use this endpoint.
+    ///
+    /// > [!CAUTION]
+    /// > * At this time, the API does not support comments. This endpoint will not return any comments in the existing rules.
+    /// > * At this time, the API does not support duplicate keys. If your content exclusion configuration contains duplicate keys, the API will return only the last occurrence of that key. For example, if duplicate entries are present, only the final value will be included in the response.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/content_exclusion`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/get(copilot/copilot-content-exclusion-for-organization)`.
+    func copilotCopilotContentExclusionForOrganization(_ input: Operations.CopilotCopilotContentExclusionForOrganization.Input) async throws -> Operations.CopilotCopilotContentExclusionForOrganization.Output
+    /// Set Copilot content exclusion rules for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Sets Copilot content exclusion path rules for an organization.
+    /// To configure these settings, go to the organization's settings on GitHub.
+    /// For more information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)."
+    ///
+    /// Organization owners can set Copilot content exclusion rules for the organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `copilot` scope to use this endpoint.
+    ///
+    /// > [!CAUTION]
+    /// > * At this time, the API does not support comments. When using this endpoint, any existing comments in your rules will be deleted.
+    /// > * At this time, the API does not support duplicate keys. If you submit content exclusions through the API with duplicate keys, only the last occurrence will be saved. Earlier entries with the same key will be overwritten.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/content_exclusion`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/put(copilot/set-copilot-content-exclusion-for-organization)`.
+    func copilotSetCopilotContentExclusionForOrganization(_ input: Operations.CopilotSetCopilotContentExclusionForOrganization.Input) async throws -> Operations.CopilotSetCopilotContentExclusionForOrganization.Output
     /// Get Copilot metrics for an organization
     ///
     /// Use this endpoint to see a breakdown of aggregated metrics for various GitHub Copilot features. See the response schema tab for detailed metrics definitions.
@@ -340,6 +468,206 @@ extension APIProtocol {
             body: body
         ))
     }
+    /// Get Copilot coding agent permissions for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Gets information about which repositories in an organization have been enabled
+    /// or disabled for the Copilot coding agent.
+    ///
+    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// all repositories, selected repositories, or no repositories owned by organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/coding-agent/permissions`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/get(copilot/get-copilot-coding-agent-permissions-organization)`.
+    public func copilotGetCopilotCodingAgentPermissionsOrganization(
+        path: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Input.Path,
+        headers: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Input.Headers = .init()
+    ) async throws -> Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output {
+        try await copilotGetCopilotCodingAgentPermissionsOrganization(Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set Copilot coding agent permissions for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Sets the policy for which repositories in an organization can use Copilot coding agent.
+    ///
+    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// all repositories, selected repositories, or no repositories owned by the organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/put(copilot/set-copilot-coding-agent-permissions-organization)`.
+    public func copilotSetCopilotCodingAgentPermissionsOrganization(
+        path: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Path,
+        headers: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Headers = .init(),
+        body: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Body
+    ) async throws -> Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Output {
+        try await copilotSetCopilotCodingAgentPermissionsOrganization(Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// List repositories enabled for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Lists the selected repositories that are enabled for Copilot coding agent in an organization.
+    ///
+    /// Organization owners can use this endpoint when the coding agent repository policy
+    /// is set to `selected` to see which repositories have been enabled.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/coding-agent/permissions/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/get(copilot/list-copilot-coding-agent-selected-repositories-for-organization)`.
+    public func copilotListCopilotCodingAgentSelectedRepositoriesForOrganization(
+        path: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Path,
+        query: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Query = .init(),
+        headers: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Headers = .init()
+    ) async throws -> Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Output {
+        try await copilotListCopilotCodingAgentSelectedRepositoriesForOrganization(Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Set selected repositories for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Replaces the list of selected repositories that are enabled for Copilot coding
+    /// agent in an organization. This method can only be called when the coding agent
+    /// repository policy is set to `selected`.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)`.
+    public func copilotSetCopilotCodingAgentSelectedRepositoriesForOrganization(
+        path: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Path,
+        headers: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Headers = .init(),
+        body: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Body
+    ) async throws -> Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Output {
+        try await copilotSetCopilotCodingAgentSelectedRepositoriesForOrganization(Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Enable a repository for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Adds a repository to the list of selected repositories enabled for Copilot
+    /// coding agent in an organization. This method can only be called when the
+    /// coding agent repository policy is set to `selected`.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)`.
+    public func copilotEnableCopilotCodingAgentForRepositoryInOrganization(
+        path: Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Input.Path,
+        headers: Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Input.Headers = .init()
+    ) async throws -> Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Output {
+        try await copilotEnableCopilotCodingAgentForRepositoryInOrganization(Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Disable a repository for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Removes a repository from the list of selected repositories enabled for Copilot
+    /// coding agent in an organization. This method can only be called when the
+    /// coding agent repository policy is set to `selected`.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/delete(copilot/disable-copilot-coding-agent-for-repository-in-organization)`.
+    public func copilotDisableCopilotCodingAgentForRepositoryInOrganization(
+        path: Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Input.Path,
+        headers: Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Input.Headers = .init()
+    ) async throws -> Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Output {
+        try await copilotDisableCopilotCodingAgentForRepositoryInOrganization(Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Get Copilot content exclusion rules for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Gets information about an organization's Copilot content exclusion path rules.
+    /// To configure these settings, go to the organization's settings on GitHub.
+    /// For more information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)."
+    ///
+    /// Organization owners can view details about Copilot content exclusion rules for the organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `copilot` or `read:org` scopes to use this endpoint.
+    ///
+    /// > [!CAUTION]
+    /// > * At this time, the API does not support comments. This endpoint will not return any comments in the existing rules.
+    /// > * At this time, the API does not support duplicate keys. If your content exclusion configuration contains duplicate keys, the API will return only the last occurrence of that key. For example, if duplicate entries are present, only the final value will be included in the response.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/content_exclusion`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/get(copilot/copilot-content-exclusion-for-organization)`.
+    public func copilotCopilotContentExclusionForOrganization(
+        path: Operations.CopilotCopilotContentExclusionForOrganization.Input.Path,
+        headers: Operations.CopilotCopilotContentExclusionForOrganization.Input.Headers = .init()
+    ) async throws -> Operations.CopilotCopilotContentExclusionForOrganization.Output {
+        try await copilotCopilotContentExclusionForOrganization(Operations.CopilotCopilotContentExclusionForOrganization.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Set Copilot content exclusion rules for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Sets Copilot content exclusion path rules for an organization.
+    /// To configure these settings, go to the organization's settings on GitHub.
+    /// For more information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)."
+    ///
+    /// Organization owners can set Copilot content exclusion rules for the organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `copilot` scope to use this endpoint.
+    ///
+    /// > [!CAUTION]
+    /// > * At this time, the API does not support comments. When using this endpoint, any existing comments in your rules will be deleted.
+    /// > * At this time, the API does not support duplicate keys. If you submit content exclusions through the API with duplicate keys, only the last occurrence will be saved. Earlier entries with the same key will be overwritten.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/content_exclusion`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/put(copilot/set-copilot-content-exclusion-for-organization)`.
+    public func copilotSetCopilotContentExclusionForOrganization(
+        path: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Path,
+        headers: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Headers = .init(),
+        body: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Body
+    ) async throws -> Operations.CopilotSetCopilotContentExclusionForOrganization.Output {
+        try await copilotSetCopilotContentExclusionForOrganization(Operations.CopilotSetCopilotContentExclusionForOrganization.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
     /// Get Copilot metrics for an organization
     ///
     /// Use this endpoint to see a breakdown of aggregated metrics for various GitHub Copilot features. See the response schema tab for detailed metrics definitions.
@@ -448,6 +776,151 @@ public enum Servers {
 public enum Components {
     /// Types generated from the `#/components/schemas` section of the OpenAPI document.
     public enum Schemas {
+        /// A GitHub user.
+        ///
+        /// - Remark: Generated from `#/components/schemas/simple-user`.
+        public struct SimpleUser: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/simple-user/name`.
+            public var name: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/email`.
+            public var email: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/login`.
+            public var login: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/simple-user/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/avatar_url`.
+            public var avatarUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/gravatar_id`.
+            public var gravatarId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/followers_url`.
+            public var followersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/following_url`.
+            public var followingUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/gists_url`.
+            public var gistsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/starred_url`.
+            public var starredUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/subscriptions_url`.
+            public var subscriptionsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/organizations_url`.
+            public var organizationsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/repos_url`.
+            public var reposUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/events_url`.
+            public var eventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/received_events_url`.
+            public var receivedEventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/type`.
+            public var _type: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/site_admin`.
+            public var siteAdmin: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/simple-user/starred_at`.
+            public var starredAt: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/user_view_type`.
+            public var userViewType: Swift.String?
+            /// Creates a new `SimpleUser`.
+            ///
+            /// - Parameters:
+            ///   - name:
+            ///   - email:
+            ///   - login:
+            ///   - id:
+            ///   - nodeId:
+            ///   - avatarUrl:
+            ///   - gravatarId:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - followersUrl:
+            ///   - followingUrl:
+            ///   - gistsUrl:
+            ///   - starredUrl:
+            ///   - subscriptionsUrl:
+            ///   - organizationsUrl:
+            ///   - reposUrl:
+            ///   - eventsUrl:
+            ///   - receivedEventsUrl:
+            ///   - _type:
+            ///   - siteAdmin:
+            ///   - starredAt:
+            ///   - userViewType:
+            public init(
+                name: Swift.String? = nil,
+                email: Swift.String? = nil,
+                login: Swift.String,
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                avatarUrl: Swift.String,
+                gravatarId: Swift.String? = nil,
+                url: Swift.String,
+                htmlUrl: Swift.String,
+                followersUrl: Swift.String,
+                followingUrl: Swift.String,
+                gistsUrl: Swift.String,
+                starredUrl: Swift.String,
+                subscriptionsUrl: Swift.String,
+                organizationsUrl: Swift.String,
+                reposUrl: Swift.String,
+                eventsUrl: Swift.String,
+                receivedEventsUrl: Swift.String,
+                _type: Swift.String,
+                siteAdmin: Swift.Bool,
+                starredAt: Swift.String? = nil,
+                userViewType: Swift.String? = nil
+            ) {
+                self.name = name
+                self.email = email
+                self.login = login
+                self.id = id
+                self.nodeId = nodeId
+                self.avatarUrl = avatarUrl
+                self.gravatarId = gravatarId
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.followersUrl = followersUrl
+                self.followingUrl = followingUrl
+                self.gistsUrl = gistsUrl
+                self.starredUrl = starredUrl
+                self.subscriptionsUrl = subscriptionsUrl
+                self.organizationsUrl = organizationsUrl
+                self.reposUrl = reposUrl
+                self.eventsUrl = eventsUrl
+                self.receivedEventsUrl = receivedEventsUrl
+                self._type = _type
+                self.siteAdmin = siteAdmin
+                self.starredAt = starredAt
+                self.userViewType = userViewType
+            }
+            public enum CodingKeys: String, CodingKey {
+                case name
+                case email
+                case login
+                case id
+                case nodeId = "node_id"
+                case avatarUrl = "avatar_url"
+                case gravatarId = "gravatar_id"
+                case url
+                case htmlUrl = "html_url"
+                case followersUrl = "followers_url"
+                case followingUrl = "following_url"
+                case gistsUrl = "gists_url"
+                case starredUrl = "starred_url"
+                case subscriptionsUrl = "subscriptions_url"
+                case organizationsUrl = "organizations_url"
+                case reposUrl = "repos_url"
+                case eventsUrl = "events_url"
+                case receivedEventsUrl = "received_events_url"
+                case _type = "type"
+                case siteAdmin = "site_admin"
+                case starredAt = "starred_at"
+                case userViewType = "user_view_type"
+            }
+        }
         /// Basic Error
         ///
         /// - Remark: Generated from `#/components/schemas/basic-error`.
@@ -483,6 +956,162 @@ public enum Components {
                 case documentationUrl = "documentation_url"
                 case url
                 case status
+            }
+        }
+        /// Validation Error Simple
+        ///
+        /// - Remark: Generated from `#/components/schemas/validation-error-simple`.
+        public struct ValidationErrorSimple: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/validation-error-simple/message`.
+            public var message: Swift.String
+            /// - Remark: Generated from `#/components/schemas/validation-error-simple/documentation_url`.
+            public var documentationUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/validation-error-simple/errors`.
+            public var errors: [Swift.String]?
+            /// Creates a new `ValidationErrorSimple`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - errors:
+            public init(
+                message: Swift.String,
+                documentationUrl: Swift.String,
+                errors: [Swift.String]? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.errors = errors
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case errors
+            }
+        }
+        /// Validation Error
+        ///
+        /// - Remark: Generated from `#/components/schemas/validation-error`.
+        public struct ValidationError: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/validation-error/message`.
+            public var message: Swift.String
+            /// - Remark: Generated from `#/components/schemas/validation-error/documentation_url`.
+            public var documentationUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload`.
+            public struct ErrorsPayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/resource`.
+                public var resource: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/field`.
+                public var field: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/message`.
+                public var message: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/code`.
+                public var code: Swift.String
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/index`.
+                public var index: Swift.Int?
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value`.
+                @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case1`.
+                    case case1(Swift.String?)
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case2`.
+                    case case2(Swift.Int?)
+                    /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
+                    case case3([Swift.String]?)
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
+                        do {
+                            self = .case1(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case2(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        do {
+                            self = .case3(try decoder.decodeFromSingleValueContainer())
+                            return
+                        } catch {
+                            errors.append(error)
+                        }
+                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                            type: Self.self,
+                            codingPath: decoder.codingPath,
+                            errors: errors
+                        )
+                    }
+                    public func encode(to encoder: any Swift.Encoder) throws {
+                        switch self {
+                        case let .case1(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case2(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        case let .case3(value):
+                            try encoder.encodeToSingleValueContainer(value)
+                        }
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value`.
+                public var value: Components.Schemas.ValidationError.ErrorsPayloadPayload.ValuePayload?
+                /// Creates a new `ErrorsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - resource:
+                ///   - field:
+                ///   - message:
+                ///   - code:
+                ///   - index:
+                ///   - value:
+                public init(
+                    resource: Swift.String? = nil,
+                    field: Swift.String? = nil,
+                    message: Swift.String? = nil,
+                    code: Swift.String,
+                    index: Swift.Int? = nil,
+                    value: Components.Schemas.ValidationError.ErrorsPayloadPayload.ValuePayload? = nil
+                ) {
+                    self.resource = resource
+                    self.field = field
+                    self.message = message
+                    self.code = code
+                    self.index = index
+                    self.value = value
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case resource
+                    case field
+                    case message
+                    case code
+                    case index
+                    case value
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/validation-error/errors`.
+            public typealias ErrorsPayload = [Components.Schemas.ValidationError.ErrorsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/validation-error/errors`.
+            public var errors: Components.Schemas.ValidationError.ErrorsPayload?
+            /// Creates a new `ValidationError`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - errors:
+            public init(
+                message: Swift.String,
+                documentationUrl: Swift.String,
+                errors: Components.Schemas.ValidationError.ErrorsPayload? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.errors = errors
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case errors
             }
         }
         /// A GitHub user.
@@ -630,6 +1259,49 @@ public enum Components {
                 case userViewType = "user_view_type"
             }
         }
+        /// Code Of Conduct
+        ///
+        /// - Remark: Generated from `#/components/schemas/code-of-conduct`.
+        public struct CodeOfConduct: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/code-of-conduct/key`.
+            public var key: Swift.String
+            /// - Remark: Generated from `#/components/schemas/code-of-conduct/name`.
+            public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/code-of-conduct/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/code-of-conduct/body`.
+            public var body: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/code-of-conduct/html_url`.
+            public var htmlUrl: Swift.String?
+            /// Creates a new `CodeOfConduct`.
+            ///
+            /// - Parameters:
+            ///   - key:
+            ///   - name:
+            ///   - url:
+            ///   - body:
+            ///   - htmlUrl:
+            public init(
+                key: Swift.String,
+                name: Swift.String,
+                url: Swift.String,
+                body: Swift.String? = nil,
+                htmlUrl: Swift.String? = nil
+            ) {
+                self.key = key
+                self.name = name
+                self.url = url
+                self.body = body
+                self.htmlUrl = htmlUrl
+            }
+            public enum CodingKeys: String, CodingKey {
+                case key
+                case name
+                case url
+                case body
+                case htmlUrl = "html_url"
+            }
+        }
         /// Group of enterprise owners and/or members
         ///
         /// - Remark: Generated from `#/components/schemas/enterprise-team`.
@@ -723,6 +1395,1004 @@ public enum Components {
                 case membersUrl = "members_url"
                 case createdAt = "created_at"
                 case updatedAt = "updated_at"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
+        public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
+            /// Enable or disable GitHub Advanced Security for the repository.
+            ///
+            /// For standalone Code Scanning or Secret Protection products, this parameter cannot be used.
+            ///
+            ///
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security`.
+            public struct AdvancedSecurityPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload.StatusPayload?
+                /// Creates a new `AdvancedSecurityPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// Enable or disable GitHub Advanced Security for the repository.
+            ///
+            /// For standalone Code Scanning or Secret Protection products, this parameter cannot be used.
+            ///
+            ///
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/advanced_security`.
+            public var advancedSecurity: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/code_security`.
+            public struct CodeSecurityPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/code_security/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/code_security/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.CodeSecurityPayload.StatusPayload?
+                /// Creates a new `CodeSecurityPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.CodeSecurityPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/code_security`.
+            public var codeSecurity: Components.Schemas.SecurityAndAnalysis.CodeSecurityPayload?
+            /// Enable or disable Dependabot security updates for the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/dependabot_security_updates`.
+            public struct DependabotSecurityUpdatesPayload: Codable, Hashable, Sendable {
+                /// The enablement status of Dependabot security updates for the repository.
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/dependabot_security_updates/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// The enablement status of Dependabot security updates for the repository.
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/dependabot_security_updates/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.DependabotSecurityUpdatesPayload.StatusPayload?
+                /// Creates a new `DependabotSecurityUpdatesPayload`.
+                ///
+                /// - Parameters:
+                ///   - status: The enablement status of Dependabot security updates for the repository.
+                public init(status: Components.Schemas.SecurityAndAnalysis.DependabotSecurityUpdatesPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// Enable or disable Dependabot security updates for the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/dependabot_security_updates`.
+            public var dependabotSecurityUpdates: Components.Schemas.SecurityAndAnalysis.DependabotSecurityUpdatesPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning`.
+            public struct SecretScanningPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningPayload.StatusPayload?
+                /// Creates a new `SecretScanningPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning`.
+            public var secretScanning: Components.Schemas.SecurityAndAnalysis.SecretScanningPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_push_protection`.
+            public struct SecretScanningPushProtectionPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_push_protection/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_push_protection/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningPushProtectionPayload.StatusPayload?
+                /// Creates a new `SecretScanningPushProtectionPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningPushProtectionPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_push_protection`.
+            public var secretScanningPushProtection: Components.Schemas.SecurityAndAnalysis.SecretScanningPushProtectionPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_non_provider_patterns`.
+            public struct SecretScanningNonProviderPatternsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_non_provider_patterns/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_non_provider_patterns/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningNonProviderPatternsPayload.StatusPayload?
+                /// Creates a new `SecretScanningNonProviderPatternsPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningNonProviderPatternsPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_non_provider_patterns`.
+            public var secretScanningNonProviderPatterns: Components.Schemas.SecurityAndAnalysis.SecretScanningNonProviderPatternsPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_ai_detection`.
+            public struct SecretScanningAiDetectionPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_ai_detection/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_ai_detection/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload.StatusPayload?
+                /// Creates a new `SecretScanningAiDetectionPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_ai_detection`.
+            public var secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public struct SecretScanningDelegatedAlertDismissalPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedAlertDismissalPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public var secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public struct SecretScanningDelegatedBypassPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedBypassPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public var secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public struct SecretScanningDelegatedBypassOptionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload`.
+                public struct ReviewersPayloadPayload: Codable, Hashable, Sendable {
+                    /// The ID of the team or role selected as a bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_id`.
+                    public var reviewerId: Swift.Int
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    @frozen public enum ReviewerTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case team = "TEAM"
+                        case role = "ROLE"
+                    }
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    public var reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    /// Creates a new `ReviewersPayloadPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
+                    ///   - reviewerType: The type of the bypass reviewer
+                    public init(
+                        reviewerId: Swift.Int,
+                        reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    ) {
+                        self.reviewerId = reviewerId
+                        self.reviewerType = reviewerType
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case reviewerId = "reviewer_id"
+                        case reviewerType = "reviewer_type"
+                    }
+                }
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public typealias ReviewersPayload = [Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload]
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public var reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload?
+                /// Creates a new `SecretScanningDelegatedBypassOptionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - reviewers: The bypass reviewers for secret scanning delegated bypass
+                public init(reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload? = nil) {
+                    self.reviewers = reviewers
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case reviewers
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public var secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload?
+            /// Creates a new `SecurityAndAnalysis`.
+            ///
+            /// - Parameters:
+            ///   - advancedSecurity: Enable or disable GitHub Advanced Security for the repository.
+            ///   - codeSecurity:
+            ///   - dependabotSecurityUpdates: Enable or disable Dependabot security updates for the repository.
+            ///   - secretScanning:
+            ///   - secretScanningPushProtection:
+            ///   - secretScanningNonProviderPatterns:
+            ///   - secretScanningAiDetection:
+            ///   - secretScanningDelegatedAlertDismissal:
+            ///   - secretScanningDelegatedBypass:
+            ///   - secretScanningDelegatedBypassOptions:
+            public init(
+                advancedSecurity: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload? = nil,
+                codeSecurity: Components.Schemas.SecurityAndAnalysis.CodeSecurityPayload? = nil,
+                dependabotSecurityUpdates: Components.Schemas.SecurityAndAnalysis.DependabotSecurityUpdatesPayload? = nil,
+                secretScanning: Components.Schemas.SecurityAndAnalysis.SecretScanningPayload? = nil,
+                secretScanningPushProtection: Components.Schemas.SecurityAndAnalysis.SecretScanningPushProtectionPayload? = nil,
+                secretScanningNonProviderPatterns: Components.Schemas.SecurityAndAnalysis.SecretScanningNonProviderPatternsPayload? = nil,
+                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil,
+                secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload? = nil,
+                secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload? = nil
+            ) {
+                self.advancedSecurity = advancedSecurity
+                self.codeSecurity = codeSecurity
+                self.dependabotSecurityUpdates = dependabotSecurityUpdates
+                self.secretScanning = secretScanning
+                self.secretScanningPushProtection = secretScanningPushProtection
+                self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
+                self.secretScanningAiDetection = secretScanningAiDetection
+                self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                self.secretScanningDelegatedBypass = secretScanningDelegatedBypass
+                self.secretScanningDelegatedBypassOptions = secretScanningDelegatedBypassOptions
+            }
+            public enum CodingKeys: String, CodingKey {
+                case advancedSecurity = "advanced_security"
+                case codeSecurity = "code_security"
+                case dependabotSecurityUpdates = "dependabot_security_updates"
+                case secretScanning = "secret_scanning"
+                case secretScanningPushProtection = "secret_scanning_push_protection"
+                case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
+                case secretScanningAiDetection = "secret_scanning_ai_detection"
+                case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                case secretScanningDelegatedBypass = "secret_scanning_delegated_bypass"
+                case secretScanningDelegatedBypassOptions = "secret_scanning_delegated_bypass_options"
+            }
+        }
+        /// Minimal Repository
+        ///
+        /// - Remark: Generated from `#/components/schemas/minimal-repository`.
+        public struct MinimalRepository: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/name`.
+            public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/full_name`.
+            public var fullName: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/owner`.
+            public var owner: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/private`.
+            public var _private: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/fork`.
+            public var fork: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/archive_url`.
+            public var archiveUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/assignees_url`.
+            public var assigneesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/blobs_url`.
+            public var blobsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/branches_url`.
+            public var branchesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/collaborators_url`.
+            public var collaboratorsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/comments_url`.
+            public var commentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/commits_url`.
+            public var commitsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/compare_url`.
+            public var compareUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/contents_url`.
+            public var contentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/contributors_url`.
+            public var contributorsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/deployments_url`.
+            public var deploymentsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/downloads_url`.
+            public var downloadsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/events_url`.
+            public var eventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/forks_url`.
+            public var forksUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/git_commits_url`.
+            public var gitCommitsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/git_refs_url`.
+            public var gitRefsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/git_tags_url`.
+            public var gitTagsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/git_url`.
+            public var gitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/issue_comment_url`.
+            public var issueCommentUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/issue_events_url`.
+            public var issueEventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/issues_url`.
+            public var issuesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/keys_url`.
+            public var keysUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/labels_url`.
+            public var labelsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/languages_url`.
+            public var languagesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/merges_url`.
+            public var mergesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/milestones_url`.
+            public var milestonesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/notifications_url`.
+            public var notificationsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pulls_url`.
+            public var pullsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/releases_url`.
+            public var releasesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/ssh_url`.
+            public var sshUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/stargazers_url`.
+            public var stargazersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/statuses_url`.
+            public var statusesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/subscribers_url`.
+            public var subscribersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/subscription_url`.
+            public var subscriptionUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/tags_url`.
+            public var tagsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/teams_url`.
+            public var teamsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/trees_url`.
+            public var treesUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/clone_url`.
+            public var cloneUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/mirror_url`.
+            public var mirrorUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/hooks_url`.
+            public var hooksUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/svn_url`.
+            public var svnUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/homepage`.
+            public var homepage: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/language`.
+            public var language: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/forks_count`.
+            public var forksCount: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/stargazers_count`.
+            public var stargazersCount: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/watchers_count`.
+            public var watchersCount: Swift.Int?
+            /// The size of the repository, in kilobytes. Size is calculated hourly. When a repository is initially created, the size is 0.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/size`.
+            public var size: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/default_branch`.
+            public var defaultBranch: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/open_issues_count`.
+            public var openIssuesCount: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/is_template`.
+            public var isTemplate: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/topics`.
+            public var topics: [Swift.String]?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_issues`.
+            public var hasIssues: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_projects`.
+            public var hasProjects: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_wiki`.
+            public var hasWiki: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_pages`.
+            public var hasPages: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_downloads`.
+            public var hasDownloads: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_discussions`.
+            public var hasDiscussions: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/archived`.
+            public var archived: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/disabled`.
+            public var disabled: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/visibility`.
+            public var visibility: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pushed_at`.
+            public var pushedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/created_at`.
+            public var createdAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/permissions`.
+            public struct PermissionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/minimal-repository/permissions/admin`.
+                public var admin: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/minimal-repository/permissions/maintain`.
+                public var maintain: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/minimal-repository/permissions/push`.
+                public var push: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/minimal-repository/permissions/triage`.
+                public var triage: Swift.Bool?
+                /// - Remark: Generated from `#/components/schemas/minimal-repository/permissions/pull`.
+                public var pull: Swift.Bool?
+                /// Creates a new `PermissionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - admin:
+                ///   - maintain:
+                ///   - push:
+                ///   - triage:
+                ///   - pull:
+                public init(
+                    admin: Swift.Bool? = nil,
+                    maintain: Swift.Bool? = nil,
+                    push: Swift.Bool? = nil,
+                    triage: Swift.Bool? = nil,
+                    pull: Swift.Bool? = nil
+                ) {
+                    self.admin = admin
+                    self.maintain = maintain
+                    self.push = push
+                    self.triage = triage
+                    self.pull = pull
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case admin
+                    case maintain
+                    case push
+                    case triage
+                    case pull
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/permissions`.
+            public var permissions: Components.Schemas.MinimalRepository.PermissionsPayload?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/role_name`.
+            public var roleName: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/temp_clone_token`.
+            public var tempCloneToken: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/delete_branch_on_merge`.
+            public var deleteBranchOnMerge: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/subscribers_count`.
+            public var subscribersCount: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/network_count`.
+            public var networkCount: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/code_of_conduct`.
+            public var codeOfConduct: Components.Schemas.CodeOfConduct?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/license`.
+            public struct LicensePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/minimal-repository/license/key`.
+                public var key: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/minimal-repository/license/name`.
+                public var name: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/minimal-repository/license/spdx_id`.
+                public var spdxId: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/minimal-repository/license/url`.
+                public var url: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/minimal-repository/license/node_id`.
+                public var nodeId: Swift.String?
+                /// Creates a new `LicensePayload`.
+                ///
+                /// - Parameters:
+                ///   - key:
+                ///   - name:
+                ///   - spdxId:
+                ///   - url:
+                ///   - nodeId:
+                public init(
+                    key: Swift.String? = nil,
+                    name: Swift.String? = nil,
+                    spdxId: Swift.String? = nil,
+                    url: Swift.String? = nil,
+                    nodeId: Swift.String? = nil
+                ) {
+                    self.key = key
+                    self.name = name
+                    self.spdxId = spdxId
+                    self.url = url
+                    self.nodeId = nodeId
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case key
+                    case name
+                    case spdxId = "spdx_id"
+                    case url
+                    case nodeId = "node_id"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/license`.
+            public var license: Components.Schemas.MinimalRepository.LicensePayload?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/forks`.
+            public var forks: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/open_issues`.
+            public var openIssues: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/watchers`.
+            public var watchers: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/allow_forking`.
+            public var allowForking: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/web_commit_signoff_required`.
+            public var webCommitSignoffRequired: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/security_and_analysis`.
+            public var securityAndAnalysis: Components.Schemas.SecurityAndAnalysis?
+            /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/custom_properties`.
+            public struct CustomPropertiesPayload: Codable, Hashable, Sendable {
+                /// A container of undocumented properties.
+                public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                /// Creates a new `CustomPropertiesPayload`.
+                ///
+                /// - Parameters:
+                ///   - additionalProperties: A container of undocumented properties.
+                public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                    self.additionalProperties = additionalProperties
+                }
+                public init(from decoder: any Swift.Decoder) throws {
+                    additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    try encoder.encodeAdditionalProperties(additionalProperties)
+                }
+            }
+            /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/custom_properties`.
+            public var customProperties: Components.Schemas.MinimalRepository.CustomPropertiesPayload?
+            /// Creates a new `MinimalRepository`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - name:
+            ///   - fullName:
+            ///   - owner:
+            ///   - _private:
+            ///   - htmlUrl:
+            ///   - description:
+            ///   - fork:
+            ///   - url:
+            ///   - archiveUrl:
+            ///   - assigneesUrl:
+            ///   - blobsUrl:
+            ///   - branchesUrl:
+            ///   - collaboratorsUrl:
+            ///   - commentsUrl:
+            ///   - commitsUrl:
+            ///   - compareUrl:
+            ///   - contentsUrl:
+            ///   - contributorsUrl:
+            ///   - deploymentsUrl:
+            ///   - downloadsUrl:
+            ///   - eventsUrl:
+            ///   - forksUrl:
+            ///   - gitCommitsUrl:
+            ///   - gitRefsUrl:
+            ///   - gitTagsUrl:
+            ///   - gitUrl:
+            ///   - issueCommentUrl:
+            ///   - issueEventsUrl:
+            ///   - issuesUrl:
+            ///   - keysUrl:
+            ///   - labelsUrl:
+            ///   - languagesUrl:
+            ///   - mergesUrl:
+            ///   - milestonesUrl:
+            ///   - notificationsUrl:
+            ///   - pullsUrl:
+            ///   - releasesUrl:
+            ///   - sshUrl:
+            ///   - stargazersUrl:
+            ///   - statusesUrl:
+            ///   - subscribersUrl:
+            ///   - subscriptionUrl:
+            ///   - tagsUrl:
+            ///   - teamsUrl:
+            ///   - treesUrl:
+            ///   - cloneUrl:
+            ///   - mirrorUrl:
+            ///   - hooksUrl:
+            ///   - svnUrl:
+            ///   - homepage:
+            ///   - language:
+            ///   - forksCount:
+            ///   - stargazersCount:
+            ///   - watchersCount:
+            ///   - size: The size of the repository, in kilobytes. Size is calculated hourly. When a repository is initially created, the size is 0.
+            ///   - defaultBranch:
+            ///   - openIssuesCount:
+            ///   - isTemplate:
+            ///   - topics:
+            ///   - hasIssues:
+            ///   - hasProjects:
+            ///   - hasWiki:
+            ///   - hasPages:
+            ///   - hasDownloads:
+            ///   - hasDiscussions:
+            ///   - hasPullRequests:
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments:
+            ///   - archived:
+            ///   - disabled:
+            ///   - visibility:
+            ///   - pushedAt:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - permissions:
+            ///   - roleName:
+            ///   - tempCloneToken:
+            ///   - deleteBranchOnMerge:
+            ///   - subscribersCount:
+            ///   - networkCount:
+            ///   - codeOfConduct:
+            ///   - license:
+            ///   - forks:
+            ///   - openIssues:
+            ///   - watchers:
+            ///   - allowForking:
+            ///   - webCommitSignoffRequired:
+            ///   - securityAndAnalysis:
+            ///   - customProperties: The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values.
+            public init(
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                name: Swift.String,
+                fullName: Swift.String,
+                owner: Components.Schemas.SimpleUser,
+                _private: Swift.Bool,
+                htmlUrl: Swift.String,
+                description: Swift.String? = nil,
+                fork: Swift.Bool,
+                url: Swift.String,
+                archiveUrl: Swift.String,
+                assigneesUrl: Swift.String,
+                blobsUrl: Swift.String,
+                branchesUrl: Swift.String,
+                collaboratorsUrl: Swift.String,
+                commentsUrl: Swift.String,
+                commitsUrl: Swift.String,
+                compareUrl: Swift.String,
+                contentsUrl: Swift.String,
+                contributorsUrl: Swift.String,
+                deploymentsUrl: Swift.String,
+                downloadsUrl: Swift.String,
+                eventsUrl: Swift.String,
+                forksUrl: Swift.String,
+                gitCommitsUrl: Swift.String,
+                gitRefsUrl: Swift.String,
+                gitTagsUrl: Swift.String,
+                gitUrl: Swift.String? = nil,
+                issueCommentUrl: Swift.String,
+                issueEventsUrl: Swift.String,
+                issuesUrl: Swift.String,
+                keysUrl: Swift.String,
+                labelsUrl: Swift.String,
+                languagesUrl: Swift.String,
+                mergesUrl: Swift.String,
+                milestonesUrl: Swift.String,
+                notificationsUrl: Swift.String,
+                pullsUrl: Swift.String,
+                releasesUrl: Swift.String,
+                sshUrl: Swift.String? = nil,
+                stargazersUrl: Swift.String,
+                statusesUrl: Swift.String,
+                subscribersUrl: Swift.String,
+                subscriptionUrl: Swift.String,
+                tagsUrl: Swift.String,
+                teamsUrl: Swift.String,
+                treesUrl: Swift.String,
+                cloneUrl: Swift.String? = nil,
+                mirrorUrl: Swift.String? = nil,
+                hooksUrl: Swift.String,
+                svnUrl: Swift.String? = nil,
+                homepage: Swift.String? = nil,
+                language: Swift.String? = nil,
+                forksCount: Swift.Int? = nil,
+                stargazersCount: Swift.Int? = nil,
+                watchersCount: Swift.Int? = nil,
+                size: Swift.Int? = nil,
+                defaultBranch: Swift.String? = nil,
+                openIssuesCount: Swift.Int? = nil,
+                isTemplate: Swift.Bool? = nil,
+                topics: [Swift.String]? = nil,
+                hasIssues: Swift.Bool? = nil,
+                hasProjects: Swift.Bool? = nil,
+                hasWiki: Swift.Bool? = nil,
+                hasPages: Swift.Bool? = nil,
+                hasDownloads: Swift.Bool? = nil,
+                hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
+                archived: Swift.Bool? = nil,
+                disabled: Swift.Bool? = nil,
+                visibility: Swift.String? = nil,
+                pushedAt: Foundation.Date? = nil,
+                createdAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil,
+                permissions: Components.Schemas.MinimalRepository.PermissionsPayload? = nil,
+                roleName: Swift.String? = nil,
+                tempCloneToken: Swift.String? = nil,
+                deleteBranchOnMerge: Swift.Bool? = nil,
+                subscribersCount: Swift.Int? = nil,
+                networkCount: Swift.Int? = nil,
+                codeOfConduct: Components.Schemas.CodeOfConduct? = nil,
+                license: Components.Schemas.MinimalRepository.LicensePayload? = nil,
+                forks: Swift.Int? = nil,
+                openIssues: Swift.Int? = nil,
+                watchers: Swift.Int? = nil,
+                allowForking: Swift.Bool? = nil,
+                webCommitSignoffRequired: Swift.Bool? = nil,
+                securityAndAnalysis: Components.Schemas.SecurityAndAnalysis? = nil,
+                customProperties: Components.Schemas.MinimalRepository.CustomPropertiesPayload? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.fullName = fullName
+                self.owner = owner
+                self._private = _private
+                self.htmlUrl = htmlUrl
+                self.description = description
+                self.fork = fork
+                self.url = url
+                self.archiveUrl = archiveUrl
+                self.assigneesUrl = assigneesUrl
+                self.blobsUrl = blobsUrl
+                self.branchesUrl = branchesUrl
+                self.collaboratorsUrl = collaboratorsUrl
+                self.commentsUrl = commentsUrl
+                self.commitsUrl = commitsUrl
+                self.compareUrl = compareUrl
+                self.contentsUrl = contentsUrl
+                self.contributorsUrl = contributorsUrl
+                self.deploymentsUrl = deploymentsUrl
+                self.downloadsUrl = downloadsUrl
+                self.eventsUrl = eventsUrl
+                self.forksUrl = forksUrl
+                self.gitCommitsUrl = gitCommitsUrl
+                self.gitRefsUrl = gitRefsUrl
+                self.gitTagsUrl = gitTagsUrl
+                self.gitUrl = gitUrl
+                self.issueCommentUrl = issueCommentUrl
+                self.issueEventsUrl = issueEventsUrl
+                self.issuesUrl = issuesUrl
+                self.keysUrl = keysUrl
+                self.labelsUrl = labelsUrl
+                self.languagesUrl = languagesUrl
+                self.mergesUrl = mergesUrl
+                self.milestonesUrl = milestonesUrl
+                self.notificationsUrl = notificationsUrl
+                self.pullsUrl = pullsUrl
+                self.releasesUrl = releasesUrl
+                self.sshUrl = sshUrl
+                self.stargazersUrl = stargazersUrl
+                self.statusesUrl = statusesUrl
+                self.subscribersUrl = subscribersUrl
+                self.subscriptionUrl = subscriptionUrl
+                self.tagsUrl = tagsUrl
+                self.teamsUrl = teamsUrl
+                self.treesUrl = treesUrl
+                self.cloneUrl = cloneUrl
+                self.mirrorUrl = mirrorUrl
+                self.hooksUrl = hooksUrl
+                self.svnUrl = svnUrl
+                self.homepage = homepage
+                self.language = language
+                self.forksCount = forksCount
+                self.stargazersCount = stargazersCount
+                self.watchersCount = watchersCount
+                self.size = size
+                self.defaultBranch = defaultBranch
+                self.openIssuesCount = openIssuesCount
+                self.isTemplate = isTemplate
+                self.topics = topics
+                self.hasIssues = hasIssues
+                self.hasProjects = hasProjects
+                self.hasWiki = hasWiki
+                self.hasPages = hasPages
+                self.hasDownloads = hasDownloads
+                self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
+                self.archived = archived
+                self.disabled = disabled
+                self.visibility = visibility
+                self.pushedAt = pushedAt
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.permissions = permissions
+                self.roleName = roleName
+                self.tempCloneToken = tempCloneToken
+                self.deleteBranchOnMerge = deleteBranchOnMerge
+                self.subscribersCount = subscribersCount
+                self.networkCount = networkCount
+                self.codeOfConduct = codeOfConduct
+                self.license = license
+                self.forks = forks
+                self.openIssues = openIssues
+                self.watchers = watchers
+                self.allowForking = allowForking
+                self.webCommitSignoffRequired = webCommitSignoffRequired
+                self.securityAndAnalysis = securityAndAnalysis
+                self.customProperties = customProperties
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case name
+                case fullName = "full_name"
+                case owner
+                case _private = "private"
+                case htmlUrl = "html_url"
+                case description
+                case fork
+                case url
+                case archiveUrl = "archive_url"
+                case assigneesUrl = "assignees_url"
+                case blobsUrl = "blobs_url"
+                case branchesUrl = "branches_url"
+                case collaboratorsUrl = "collaborators_url"
+                case commentsUrl = "comments_url"
+                case commitsUrl = "commits_url"
+                case compareUrl = "compare_url"
+                case contentsUrl = "contents_url"
+                case contributorsUrl = "contributors_url"
+                case deploymentsUrl = "deployments_url"
+                case downloadsUrl = "downloads_url"
+                case eventsUrl = "events_url"
+                case forksUrl = "forks_url"
+                case gitCommitsUrl = "git_commits_url"
+                case gitRefsUrl = "git_refs_url"
+                case gitTagsUrl = "git_tags_url"
+                case gitUrl = "git_url"
+                case issueCommentUrl = "issue_comment_url"
+                case issueEventsUrl = "issue_events_url"
+                case issuesUrl = "issues_url"
+                case keysUrl = "keys_url"
+                case labelsUrl = "labels_url"
+                case languagesUrl = "languages_url"
+                case mergesUrl = "merges_url"
+                case milestonesUrl = "milestones_url"
+                case notificationsUrl = "notifications_url"
+                case pullsUrl = "pulls_url"
+                case releasesUrl = "releases_url"
+                case sshUrl = "ssh_url"
+                case stargazersUrl = "stargazers_url"
+                case statusesUrl = "statuses_url"
+                case subscribersUrl = "subscribers_url"
+                case subscriptionUrl = "subscription_url"
+                case tagsUrl = "tags_url"
+                case teamsUrl = "teams_url"
+                case treesUrl = "trees_url"
+                case cloneUrl = "clone_url"
+                case mirrorUrl = "mirror_url"
+                case hooksUrl = "hooks_url"
+                case svnUrl = "svn_url"
+                case homepage
+                case language
+                case forksCount = "forks_count"
+                case stargazersCount = "stargazers_count"
+                case watchersCount = "watchers_count"
+                case size
+                case defaultBranch = "default_branch"
+                case openIssuesCount = "open_issues_count"
+                case isTemplate = "is_template"
+                case topics
+                case hasIssues = "has_issues"
+                case hasProjects = "has_projects"
+                case hasWiki = "has_wiki"
+                case hasPages = "has_pages"
+                case hasDownloads = "has_downloads"
+                case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
+                case archived
+                case disabled
+                case visibility
+                case pushedAt = "pushed_at"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case permissions
+                case roleName = "role_name"
+                case tempCloneToken = "temp_clone_token"
+                case deleteBranchOnMerge = "delete_branch_on_merge"
+                case subscribersCount = "subscribers_count"
+                case networkCount = "network_count"
+                case codeOfConduct = "code_of_conduct"
+                case license
+                case forks
+                case openIssues = "open_issues"
+                case watchers
+                case allowForking = "allow_forking"
+                case webCommitSignoffRequired = "web_commit_signoff_required"
+                case securityAndAnalysis = "security_and_analysis"
+                case customProperties = "custom_properties"
             }
         }
         /// Groups of organization members that gives permissions on specified repositories.
@@ -1135,7 +2805,7 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/copilot-organization-details/platform_chat`.
             public var platformChat: Components.Schemas.CopilotOrganizationDetails.PlatformChatPayload?
-            /// The organization policy for allowing or disallowing Copilot in the CLI.
+            /// The organization policy for allowing or disallowing Copilot CLI.
             ///
             /// - Remark: Generated from `#/components/schemas/copilot-organization-details/cli`.
             @frozen public enum CliPayload: String, Codable, Hashable, Sendable, CaseIterable {
@@ -1143,7 +2813,7 @@ public enum Components {
                 case disabled = "disabled"
                 case unconfigured = "unconfigured"
             }
-            /// The organization policy for allowing or disallowing Copilot in the CLI.
+            /// The organization policy for allowing or disallowing Copilot CLI.
             ///
             /// - Remark: Generated from `#/components/schemas/copilot-organization-details/cli`.
             public var cli: Components.Schemas.CopilotOrganizationDetails.CliPayload?
@@ -1180,7 +2850,7 @@ public enum Components {
             ///   - publicCodeSuggestions: The organization policy for allowing or blocking suggestions matching public code (duplication detection filter).
             ///   - ideChat: The organization policy for allowing or disallowing Copilot Chat in the IDE.
             ///   - platformChat: The organization policy for allowing or disallowing Copilot features on GitHub.com.
-            ///   - cli: The organization policy for allowing or disallowing Copilot in the CLI.
+            ///   - cli: The organization policy for allowing or disallowing Copilot CLI.
             ///   - seatManagementSetting: The mode of assigning new seats.
             ///   - planType: The Copilot plan of the organization, or the parent enterprise, when applicable.
             ///   - additionalProperties: A container of undocumented properties.
@@ -1212,7 +2882,7 @@ public enum Components {
                 case seatManagementSetting = "seat_management_setting"
                 case planType = "plan_type"
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.seatBreakdown = try container.decode(
                     Components.Schemas.CopilotOrganizationSeatBreakdown.self,
@@ -1252,7 +2922,7 @@ public enum Components {
                     "plan_type"
                 ])
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 var container = encoder.container(keyedBy: CodingKeys.self)
                 try container.encode(
                     self.seatBreakdown,
@@ -1386,8 +3056,8 @@ public enum Components {
                 case Team(Components.Schemas.Team)
                 /// - Remark: Generated from `#/components/schemas/copilot-seat-details/assigning_team/case2`.
                 case EnterpriseTeam(Components.Schemas.EnterpriseTeam)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .Team(try .init(from: decoder))
                         return
@@ -1406,7 +3076,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .Team(value):
                         try value.encode(to: encoder)
@@ -1504,7 +3174,7 @@ public enum Components {
                 case updatedAt = "updated_at"
                 case planType = "plan_type"
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.assignee = try container.decodeIfPresent(
                     Components.Schemas.NullableSimpleUser.self,
@@ -1558,6 +3228,26 @@ public enum Components {
                     "updated_at",
                     "plan_type"
                 ])
+            }
+        }
+        /// List all Copilot Content Exclusion rules for an organization.
+        ///
+        /// - Remark: Generated from `#/components/schemas/copilot-organization-content-exclusion-details`.
+        public struct CopilotOrganizationContentExclusionDetails: Codable, Hashable, Sendable {
+            /// A container of undocumented properties.
+            public var additionalProperties: [String: [Swift.String]]
+            /// Creates a new `CopilotOrganizationContentExclusionDetails`.
+            ///
+            /// - Parameters:
+            ///   - additionalProperties: A container of undocumented properties.
+            public init(additionalProperties: [String: [Swift.String]] = .init()) {
+                self.additionalProperties = additionalProperties
+            }
+            public init(from decoder: any Swift.Decoder) throws {
+                additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+            }
+            public func encode(to encoder: any Swift.Encoder) throws {
+                try encoder.encodeAdditionalProperties(additionalProperties)
             }
         }
         /// Usage metrics for Copilot editor code completions in the IDE.
@@ -1766,7 +3456,7 @@ public enum Components {
                     case totalEngagedUsers = "total_engaged_users"
                     case models
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.name = try container.decodeIfPresent(
                         Swift.String.self,
@@ -1786,7 +3476,7 @@ public enum Components {
                         "models"
                     ])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     try container.encodeIfPresent(
                         self.name,
@@ -1832,7 +3522,7 @@ public enum Components {
                 case languages
                 case editors
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.totalEngagedUsers = try container.decodeIfPresent(
                     Swift.Int.self,
@@ -1852,7 +3542,7 @@ public enum Components {
                     "editors"
                 ])
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 var container = encoder.container(keyedBy: CodingKeys.self)
                 try container.encodeIfPresent(
                     self.totalEngagedUsers,
@@ -2010,7 +3700,7 @@ public enum Components {
                 case totalEngagedUsers = "total_engaged_users"
                 case editors
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.totalEngagedUsers = try container.decodeIfPresent(
                     Swift.Int.self,
@@ -2025,7 +3715,7 @@ public enum Components {
                     "editors"
                 ])
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 var container = encoder.container(keyedBy: CodingKeys.self)
                 try container.encodeIfPresent(
                     self.totalEngagedUsers,
@@ -2126,7 +3816,7 @@ public enum Components {
                 case totalEngagedUsers = "total_engaged_users"
                 case models
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.totalEngagedUsers = try container.decodeIfPresent(
                     Swift.Int.self,
@@ -2141,7 +3831,7 @@ public enum Components {
                     "models"
                 ])
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 var container = encoder.container(keyedBy: CodingKeys.self)
                 try container.encodeIfPresent(
                     self.totalEngagedUsers,
@@ -2281,7 +3971,7 @@ public enum Components {
                 case totalEngagedUsers = "total_engaged_users"
                 case repositories
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.totalEngagedUsers = try container.decodeIfPresent(
                     Swift.Int.self,
@@ -2296,7 +3986,7 @@ public enum Components {
                     "repositories"
                 ])
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 var container = encoder.container(keyedBy: CodingKeys.self)
                 try container.encodeIfPresent(
                     self.totalEngagedUsers,
@@ -2374,7 +4064,7 @@ public enum Components {
                 case copilotDotcomChat = "copilot_dotcom_chat"
                 case copilotDotcomPullRequests = "copilot_dotcom_pull_requests"
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 self.date = try container.decode(
                     Swift.String.self,
@@ -2414,7 +4104,7 @@ public enum Components {
                     "copilot_dotcom_pull_requests"
                 ])
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 var container = encoder.container(keyedBy: CodingKeys.self)
                 try container.encode(
                     self.date,
@@ -2450,6 +4140,10 @@ public enum Components {
     }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
     public enum Parameters {
+        /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+        ///
+        /// - Remark: Generated from `#/components/parameters/per-page`.
+        public typealias PerPage = Swift.Int
         /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
         ///
         /// - Remark: Generated from `#/components/parameters/page`.
@@ -2466,11 +4160,43 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/team-slug`.
         public typealias TeamSlug = Swift.String
+        /// The unique identifier of the repository.
+        ///
+        /// - Remark: Generated from `#/components/parameters/repository-id`.
+        public typealias RepositoryId = Swift.Int
     }
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}
     /// Types generated from the `#/components/responses` section of the OpenAPI document.
     public enum Responses {
+        public struct ValidationFailedSimple: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/validation_failed_simple/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/validation_failed_simple/content/application\/json`.
+                case json(Components.Schemas.ValidationErrorSimple)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.ValidationErrorSimple {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.ValidationFailedSimple.Body
+            /// Creates a new `ValidationFailedSimple`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.ValidationFailedSimple.Body) {
+                self.body = body
+            }
+        }
         public struct NotFound: Sendable, Hashable {
             /// - Remark: Generated from `#/components/responses/not_found/content`.
             @frozen public enum Body: Sendable, Hashable {
@@ -2496,6 +4222,34 @@ public enum Components {
             /// - Parameters:
             ///   - body: Received HTTP response body
             public init(body: Components.Responses.NotFound.Body) {
+                self.body = body
+            }
+        }
+        public struct ValidationFailed: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/validation_failed/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/validation_failed/content/application\/json`.
+                case json(Components.Schemas.ValidationError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.ValidationError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.ValidationFailed.Body
+            /// Creates a new `ValidationFailed`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.ValidationFailed.Body) {
                 self.body = body
             }
         }
@@ -2580,6 +4334,62 @@ public enum Components {
             /// - Parameters:
             ///   - body: Received HTTP response body
             public init(body: Components.Responses.InternalError.Body) {
+                self.body = body
+            }
+        }
+        public struct Conflict: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/conflict/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/conflict/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.Conflict.Body
+            /// Creates a new `Conflict`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.Conflict.Body) {
+                self.body = body
+            }
+        }
+        public struct TooLarge: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/too_large/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/too_large/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.TooLarge.Body
+            /// Creates a new `TooLarge`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.TooLarge.Body) {
                 self.body = body
             }
         }
@@ -4447,6 +6257,2331 @@ public enum Operations {
             }
         }
     }
+    /// Get Copilot coding agent permissions for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Gets information about which repositories in an organization have been enabled
+    /// or disabled for the Copilot coding agent.
+    ///
+    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// all repositories, selected repositories, or no repositories owned by organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/coding-agent/permissions`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/get(copilot/get-copilot-coding-agent-permissions-organization)`.
+    public enum CopilotGetCopilotCodingAgentPermissionsOrganization {
+        public static let id: Swift.String = "copilot/get-copilot-coding-agent-permissions-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Input.Path,
+                headers: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/responses/200/content/json/enabled_repositories`.
+                        @frozen public enum EnabledRepositoriesPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case all = "all"
+                            case selected = "selected"
+                            case none = "none"
+                        }
+                        /// The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/responses/200/content/json/enabled_repositories`.
+                        public var enabledRepositories: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output.Ok.Body.JsonPayload.EnabledRepositoriesPayload
+                        /// The URL for the selected repositories endpoint. Only present when `enabled_repositories` is `selected`.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/responses/200/content/json/selected_repositories_url`.
+                        public var selectedRepositoriesUrl: Swift.String?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - enabledRepositories: The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                        ///   - selectedRepositoriesUrl: The URL for the selected repositories endpoint. Only present when `enabled_repositories` is `selected`.
+                        public init(
+                            enabledRepositories: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output.Ok.Body.JsonPayload.EnabledRepositoriesPayload,
+                            selectedRepositoriesUrl: Swift.String? = nil
+                        ) {
+                            self.enabledRepositories = enabledRepositories
+                            self.selectedRepositoriesUrl = selectedRepositoriesUrl
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case enabledRepositories = "enabled_repositories"
+                            case selectedRepositoriesUrl = "selected_repositories_url"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/responses/200/content/application\/json`.
+                    case json(Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/get(copilot/get-copilot-coding-agent-permissions-organization)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/get(copilot/get-copilot-coding-agent-permissions-organization)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/get(copilot/get-copilot-coding-agent-permissions-organization)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/get(copilot/get-copilot-coding-agent-permissions-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/get(copilot/get-copilot-coding-agent-permissions-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set Copilot coding agent permissions for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Sets the policy for which repositories in an organization can use Copilot coding agent.
+    ///
+    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// all repositories, selected repositories, or no repositories owned by the organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/put(copilot/set-copilot-coding-agent-permissions-organization)`.
+    public enum CopilotSetCopilotCodingAgentPermissionsOrganization {
+        public static let id: Swift.String = "copilot/set-copilot-coding-agent-permissions-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/PUT/requestBody/json/enabled_repositories`.
+                    @frozen public enum EnabledRepositoriesPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case all = "all"
+                        case selected = "selected"
+                        case none = "none"
+                    }
+                    /// The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/PUT/requestBody/json/enabled_repositories`.
+                    public var enabledRepositories: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Body.JsonPayload.EnabledRepositoriesPayload
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - enabledRepositories: The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                    public init(enabledRepositories: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Body.JsonPayload.EnabledRepositoriesPayload) {
+                        self.enabledRepositories = enabledRepositories
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case enabledRepositories = "enabled_repositories"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/PUT/requestBody/content/application\/json`.
+                case json(Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Body.JsonPayload)
+            }
+            public var body: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Path,
+                headers: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Headers = .init(),
+                body: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// No Content
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/put(copilot/set-copilot-coding-agent-permissions-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Output.NoContent)
+            /// No Content
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/put(copilot/set-copilot-coding-agent-permissions-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/put(copilot/set-copilot-coding-agent-permissions-organization)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/put(copilot/set-copilot-coding-agent-permissions-organization)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/put(copilot/set-copilot-coding-agent-permissions-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/put(copilot/set-copilot-coding-agent-permissions-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/put(copilot/set-copilot-coding-agent-permissions-organization)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List repositories enabled for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Lists the selected repositories that are enabled for Copilot coding agent in an organization.
+    ///
+    /// Organization owners can use this endpoint when the coding agent repository policy
+    /// is set to `selected` to see which repositories have been enabled.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/coding-agent/permissions/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/get(copilot/list-copilot-coding-agent-selected-repositories-for-organization)`.
+    public enum CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization {
+        public static let id: Swift.String = "copilot/list-copilot-coding-agent-selected-repositories-for-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/GET/query/page`.
+                public var page: Components.Parameters.Page?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    page: Components.Parameters.Page? = nil
+                ) {
+                    self.perPage = perPage
+                    self.page = page
+                }
+            }
+            public var query: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Path,
+                query: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Query = .init(),
+                headers: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/GET/responses/200/content/json/total_count`.
+                        public var totalCount: Swift.Int
+                        /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/GET/responses/200/content/json/repositories`.
+                        public var repositories: [Components.Schemas.MinimalRepository]
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - totalCount:
+                        ///   - repositories:
+                        public init(
+                            totalCount: Swift.Int,
+                            repositories: [Components.Schemas.MinimalRepository]
+                        ) {
+                            self.totalCount = totalCount
+                            self.repositories = repositories
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case totalCount = "total_count"
+                            case repositories
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/GET/responses/200/content/application\/json`.
+                    case json(Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/get(copilot/list-copilot-coding-agent-selected-repositories-for-organization)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/get(copilot/list-copilot-coding-agent-selected-repositories-for-organization)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/get(copilot/list-copilot-coding-agent-selected-repositories-for-organization)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/get(copilot/list-copilot-coding-agent-selected-repositories-for-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/get(copilot/list-copilot-coding-agent-selected-repositories-for-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Conflict
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/get(copilot/list-copilot-coding-agent-selected-repositories-for-organization)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set selected repositories for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Replaces the list of selected repositories that are enabled for Copilot coding
+    /// agent in an organization. This method can only be called when the coding agent
+    /// repository policy is set to `selected`.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions/repositories`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)`.
+    public enum CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization {
+        public static let id: Swift.String = "copilot/set-copilot-coding-agent-selected-repositories-for-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// List of repository IDs to enable for Copilot coding agent.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/PUT/requestBody/json/selected_repository_ids`.
+                    public var selectedRepositoryIds: [Swift.Int]
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - selectedRepositoryIds: List of repository IDs to enable for Copilot coding agent.
+                    public init(selectedRepositoryIds: [Swift.Int]) {
+                        self.selectedRepositoryIds = selectedRepositoryIds
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case selectedRepositoryIds = "selected_repository_ids"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/PUT/requestBody/content/application\/json`.
+                case json(Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Body.JsonPayload)
+            }
+            public var body: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Path,
+                headers: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Headers = .init(),
+                body: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// No Content
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Output.NoContent)
+            /// No Content
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Conflict
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Enable a repository for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Adds a repository to the list of selected repositories enabled for Copilot
+    /// coding agent in an organization. This method can only be called when the
+    /// coding agent repository policy is set to `selected`.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)`.
+    public enum CopilotEnableCopilotCodingAgentForRepositoryInOrganization {
+        public static let id: Swift.String = "copilot/enable-copilot-coding-agent-for-repository-in-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// The unique identifier of the repository.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/PUT/path/repository_id`.
+                public var repositoryId: Components.Parameters.RepositoryId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - repositoryId: The unique identifier of the repository.
+                public init(
+                    org: Components.Parameters.Org,
+                    repositoryId: Components.Parameters.RepositoryId
+                ) {
+                    self.org = org
+                    self.repositoryId = repositoryId
+                }
+            }
+            public var path: Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Input.Path,
+                headers: Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// No Content
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Output.NoContent)
+            /// No Content
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Conflict
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Disable a repository for Copilot coding agent in an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Removes a repository from the list of selected repositories enabled for Copilot
+    /// coding agent in an organization. This method can only be called when the
+    /// coding agent repository policy is set to `selected`.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/delete(copilot/disable-copilot-coding-agent-for-repository-in-organization)`.
+    public enum CopilotDisableCopilotCodingAgentForRepositoryInOrganization {
+        public static let id: Swift.String = "copilot/disable-copilot-coding-agent-for-repository-in-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/DELETE/path/org`.
+                public var org: Components.Parameters.Org
+                /// The unique identifier of the repository.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/DELETE/path/repository_id`.
+                public var repositoryId: Components.Parameters.RepositoryId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - repositoryId: The unique identifier of the repository.
+                public init(
+                    org: Components.Parameters.Org,
+                    repositoryId: Components.Parameters.RepositoryId
+                ) {
+                    self.org = org
+                    self.repositoryId = repositoryId
+                }
+            }
+            public var path: Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Input.Path,
+                headers: Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// No Content
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/delete(copilot/disable-copilot-coding-agent-for-repository-in-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Output.NoContent)
+            /// No Content
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/delete(copilot/disable-copilot-coding-agent-for-repository-in-organization)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.CopilotDisableCopilotCodingAgentForRepositoryInOrganization.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/delete(copilot/disable-copilot-coding-agent-for-repository-in-organization)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/delete(copilot/disable-copilot-coding-agent-for-repository-in-organization)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/delete(copilot/disable-copilot-coding-agent-for-repository-in-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/delete(copilot/disable-copilot-coding-agent-for-repository-in-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Conflict
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/delete(copilot/disable-copilot-coding-agent-for-repository-in-organization)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get Copilot content exclusion rules for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Gets information about an organization's Copilot content exclusion path rules.
+    /// To configure these settings, go to the organization's settings on GitHub.
+    /// For more information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)."
+    ///
+    /// Organization owners can view details about Copilot content exclusion rules for the organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `copilot` or `read:org` scopes to use this endpoint.
+    ///
+    /// > [!CAUTION]
+    /// > * At this time, the API does not support comments. This endpoint will not return any comments in the existing rules.
+    /// > * At this time, the API does not support duplicate keys. If your content exclusion configuration contains duplicate keys, the API will return only the last occurrence of that key. For example, if duplicate entries are present, only the final value will be included in the response.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/content_exclusion`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/get(copilot/copilot-content-exclusion-for-organization)`.
+    public enum CopilotCopilotContentExclusionForOrganization {
+        public static let id: Swift.String = "copilot/copilot-content-exclusion-for-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.CopilotCopilotContentExclusionForOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotCopilotContentExclusionForOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotCopilotContentExclusionForOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotCopilotContentExclusionForOrganization.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.CopilotCopilotContentExclusionForOrganization.Input.Path,
+                headers: Operations.CopilotCopilotContentExclusionForOrganization.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.CopilotOrganizationContentExclusionDetails)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.CopilotOrganizationContentExclusionDetails {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CopilotCopilotContentExclusionForOrganization.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CopilotCopilotContentExclusionForOrganization.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// OK
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/get(copilot/copilot-content-exclusion-for-organization)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CopilotCopilotContentExclusionForOrganization.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CopilotCopilotContentExclusionForOrganization.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/get(copilot/copilot-content-exclusion-for-organization)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/get(copilot/copilot-content-exclusion-for-organization)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/get(copilot/copilot-content-exclusion-for-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/get(copilot/copilot-content-exclusion-for-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set Copilot content exclusion rules for an organization
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Sets Copilot content exclusion path rules for an organization.
+    /// To configure these settings, go to the organization's settings on GitHub.
+    /// For more information, see "[Excluding content from GitHub Copilot](https://docs.github.com/copilot/managing-copilot/configuring-and-auditing-content-exclusion/excluding-content-from-github-copilot#configuring-content-exclusions-for-your-organization)."
+    ///
+    /// Organization owners can set Copilot content exclusion rules for the organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `copilot` scope to use this endpoint.
+    ///
+    /// > [!CAUTION]
+    /// > * At this time, the API does not support comments. When using this endpoint, any existing comments in your rules will be deleted.
+    /// > * At this time, the API does not support duplicate keys. If you submit content exclusions through the API with duplicate keys, only the last occurrence will be saved. Earlier entries with the same key will be overwritten.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/copilot/content_exclusion`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/put(copilot/set-copilot-content-exclusion-for-organization)`.
+    public enum CopilotSetCopilotContentExclusionForOrganization {
+        public static let id: Swift.String = "copilot/set-copilot-content-exclusion-for-organization"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotSetCopilotContentExclusionForOrganization.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotSetCopilotContentExclusionForOrganization.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody/json/AdditionalPropertiesPayload`.
+                    public struct AdditionalPropertiesPayloadPayload: Codable, Hashable, Sendable {
+                        /// The path to the file that will be excluded.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody/json/AdditionalPropertiesPayload/value1`.
+                        public var value1: Swift.String?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody/json/AdditionalPropertiesPayload/value2`.
+                        public struct Value2Payload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody/json/AdditionalPropertiesPayload/value2/ifAnyMatch`.
+                            public var ifAnyMatch: [Swift.String]
+                            /// Creates a new `Value2Payload`.
+                            ///
+                            /// - Parameters:
+                            ///   - ifAnyMatch:
+                            public init(ifAnyMatch: [Swift.String]) {
+                                self.ifAnyMatch = ifAnyMatch
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case ifAnyMatch
+                            }
+                            public init(from decoder: any Swift.Decoder) throws {
+                                let container = try decoder.container(keyedBy: CodingKeys.self)
+                                self.ifAnyMatch = try container.decode(
+                                    [Swift.String].self,
+                                    forKey: .ifAnyMatch
+                                )
+                                try decoder.ensureNoAdditionalProperties(knownKeys: [
+                                    "ifAnyMatch"
+                                ])
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody/json/AdditionalPropertiesPayload/value2`.
+                        public var value2: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Body.JsonPayload.AdditionalPropertiesPayloadPayload.Value2Payload?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody/json/AdditionalPropertiesPayload/value3`.
+                        public struct Value3Payload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody/json/AdditionalPropertiesPayload/value3/ifNoneMatch`.
+                            public var ifNoneMatch: [Swift.String]
+                            /// Creates a new `Value3Payload`.
+                            ///
+                            /// - Parameters:
+                            ///   - ifNoneMatch:
+                            public init(ifNoneMatch: [Swift.String]) {
+                                self.ifNoneMatch = ifNoneMatch
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case ifNoneMatch
+                            }
+                            public init(from decoder: any Swift.Decoder) throws {
+                                let container = try decoder.container(keyedBy: CodingKeys.self)
+                                self.ifNoneMatch = try container.decode(
+                                    [Swift.String].self,
+                                    forKey: .ifNoneMatch
+                                )
+                                try decoder.ensureNoAdditionalProperties(knownKeys: [
+                                    "ifNoneMatch"
+                                ])
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody/json/AdditionalPropertiesPayload/value3`.
+                        public var value3: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Body.JsonPayload.AdditionalPropertiesPayloadPayload.Value3Payload?
+                        /// Creates a new `AdditionalPropertiesPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - value1: The path to the file that will be excluded.
+                        ///   - value2:
+                        ///   - value3:
+                        public init(
+                            value1: Swift.String? = nil,
+                            value2: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Body.JsonPayload.AdditionalPropertiesPayloadPayload.Value2Payload? = nil,
+                            value3: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Body.JsonPayload.AdditionalPropertiesPayloadPayload.Value3Payload? = nil
+                        ) {
+                            self.value1 = value1
+                            self.value2 = value2
+                            self.value3 = value3
+                        }
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
+                            do {
+                                self.value1 = try decoder.decodeFromSingleValueContainer()
+                            } catch {
+                                errors.append(error)
+                            }
+                            do {
+                                self.value2 = try .init(from: decoder)
+                            } catch {
+                                errors.append(error)
+                            }
+                            do {
+                                self.value3 = try .init(from: decoder)
+                            } catch {
+                                errors.append(error)
+                            }
+                            try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
+                                [
+                                    self.value1,
+                                    self.value2,
+                                    self.value3
+                                ],
+                                type: Self.self,
+                                codingPath: decoder.codingPath,
+                                errors: errors
+                            )
+                        }
+                        public func encode(to encoder: any Swift.Encoder) throws {
+                            try encoder.encodeFirstNonNilValueToSingleValueContainer([
+                                self.value1
+                            ])
+                            try self.value2?.encode(to: encoder)
+                            try self.value3?.encode(to: encoder)
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody/json/additionalProperties`.
+                    public typealias AdditionalPropertiesPayload = [Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Body.JsonPayload.AdditionalPropertiesPayloadPayload]
+                    /// A container of undocumented properties.
+                    public var additionalProperties: [String: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Body.JsonPayload.AdditionalPropertiesPayload]
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - additionalProperties: A container of undocumented properties.
+                    public init(additionalProperties: [String: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Body.JsonPayload.AdditionalPropertiesPayload] = .init()) {
+                        self.additionalProperties = additionalProperties
+                    }
+                    public init(from decoder: any Swift.Decoder) throws {
+                        additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                    }
+                    public func encode(to encoder: any Swift.Encoder) throws {
+                        try encoder.encodeAdditionalProperties(additionalProperties)
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/requestBody/content/application\/json`.
+                case json(Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Body.JsonPayload)
+            }
+            public var body: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Path,
+                headers: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Headers = .init(),
+                body: Operations.CopilotSetCopilotContentExclusionForOrganization.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/responses/200/content/json/message`.
+                        public var message: Swift.String?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - message:
+                        public init(message: Swift.String? = nil) {
+                            self.message = message
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case message
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/content_exclusion/PUT/responses/200/content/application\/json`.
+                    case json(Operations.CopilotSetCopilotContentExclusionForOrganization.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.CopilotSetCopilotContentExclusionForOrganization.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CopilotSetCopilotContentExclusionForOrganization.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CopilotSetCopilotContentExclusionForOrganization.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Success
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/put(copilot/set-copilot-content-exclusion-for-organization)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CopilotSetCopilotContentExclusionForOrganization.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CopilotSetCopilotContentExclusionForOrganization.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/put(copilot/set-copilot-content-exclusion-for-organization)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/put(copilot/set-copilot-content-exclusion-for-organization)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/put(copilot/set-copilot-content-exclusion-for-organization)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/put(copilot/set-copilot-content-exclusion-for-organization)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Payload Too Large
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/put(copilot/set-copilot-content-exclusion-for-organization)/responses/413`.
+            ///
+            /// HTTP response code: `413 contentTooLarge`.
+            case contentTooLarge(Components.Responses.TooLarge)
+            /// The associated value of the enum case if `self` is `.contentTooLarge`.
+            ///
+            /// - Throws: An error if `self` is not `.contentTooLarge`.
+            /// - SeeAlso: `.contentTooLarge`.
+            public var contentTooLarge: Components.Responses.TooLarge {
+                get throws {
+                    switch self {
+                    case let .contentTooLarge(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "contentTooLarge",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/content_exclusion/put(copilot/set-copilot-content-exclusion-for-organization)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailedSimple)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailedSimple {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// Get Copilot metrics for an organization
     ///
     /// Use this endpoint to see a breakdown of aggregated metrics for various GitHub Copilot features. See the response schema tab for detailed metrics definitions.
@@ -4670,7 +8805,7 @@ public enum Operations {
                     }
                 }
             }
-            /// Copilot Usage Merics API setting is disabled at the organization or enterprise level.
+            /// Copilot Usage Metrics API setting is disabled at the organization or enterprise level.
             ///
             /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/get(copilot/copilot-metrics-for-organization)/responses/422`.
             ///
@@ -5234,7 +9369,7 @@ public enum Operations {
                     }
                 }
             }
-            /// Copilot Usage Merics API setting is disabled at the organization or enterprise level.
+            /// Copilot Usage Metrics API setting is disabled at the organization or enterprise level.
             ///
             /// - Remark: Generated from `#/paths//orgs/{org}/team/{team_slug}/copilot/metrics/get(copilot/copilot-metrics-for-team)/responses/422`.
             ///
