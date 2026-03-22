@@ -20,10 +20,18 @@ commit:
 		&& echo "::notice::git commit $(file)" \
 		|| true;
 
-.PHONY: swift-openapi-generator
-swift-openapi-generator:
+SWIFT_BUILD_FLAGS = -c release --arch arm64 --arch x86_64
+EXECUTABLE_NAME = swift-openapi-generator
+EXECUTABLE_PATH = $(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(EXECUTABLE_NAME)
+.NOTPARALLEL: .build/bin/swift-openapi-generator
+.build/bin/swift-openapi-generator:
 	@echo "::debug::make: $@"
-	mise use spm:apple/swift-openapi-generator
+	git clone --branch 1.11.0 --single-branch \
+		https://github.com/apple/swift-openapi-generator
+	cd swift-openapi-generator; swift build $(SWIFT_BUILD_FLAGS);
+	mkdir -p $(@D);
+		cp -f $(EXECUTABLE_PATH) $@; \
+		rm -rf swift-openapi-generator;
 
 ## Generate Sources
 
@@ -48,9 +56,9 @@ endif
 $(OPENAPI_PATH): Submodule
 	@touch "$@"
 
-%/Client.swift %/Types.swift: $(OPENAPI_PATH) %/openapi-generator-config.yml
+%/Client.swift %/Types.swift: $(OPENAPI_PATH) %/openapi-generator-config.yml .build/bin/swift-openapi-generator
 	@echo "::debug::make: $@"
-	swift-openapi-generator generate \
+	.build/bin/swift-openapi-generator generate \
 		"$(OPENAPI_PATH)" \
 		--config "$(@D)/openapi-generator-config.yml" \
 		--output-directory "$(@D)";
