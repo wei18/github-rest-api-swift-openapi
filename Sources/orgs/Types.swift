@@ -21,35 +21,6 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /organizations`.
     /// - Remark: Generated from `#/paths//organizations/get(orgs/list)`.
     func orgsList(_ input: Operations.OrgsList.Input) async throws -> Operations.OrgsList.Output
-    /// Get all custom property values for an organization
-    ///
-    /// Gets all custom property values that are set for an organization.
-    ///
-    /// The organization must belong to an enterprise.
-    ///
-    /// Access requirements:
-    /// - Organization admins
-    /// - OAuth tokens and personal access tokens (classic) with the `read:org` scope
-    /// - Actors with the organization-level "read custom properties for an organization" fine-grained permission or above
-    ///
-    /// - Remark: HTTP `GET /organizations/{org}/org-properties/values`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)`.
-    func orgsCustomPropertiesForOrgsGetOrganizationValues(_ input: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input) async throws -> Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output
-    /// Create or update custom property values for an organization
-    ///
-    /// Create new or update existing custom property values for an organization.
-    /// To remove a custom property value from an organization, set the property value to `null`.
-    ///
-    /// The organization must belong to an enterprise.
-    ///
-    /// Access requirements:
-    /// - Organization admins
-    /// - OAuth tokens and personal access tokens (classic) with the `admin:org` scope
-    /// - Actors with the organization-level "edit custom properties for an organization" fine-grained permission
-    ///
-    /// - Remark: HTTP `PATCH /organizations/{org}/org-properties/values`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)`.
-    func orgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues(_ input: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input) async throws -> Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Output
     /// Get an organization
     ///
     /// Gets information about an organization.
@@ -95,6 +66,35 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `DELETE /orgs/{org}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/delete(orgs/delete)`.
     func orgsDelete(_ input: Operations.OrgsDelete.Input) async throws -> Operations.OrgsDelete.Output
+    /// Create an artifact deployment record
+    ///
+    /// Create or update deployment records for an artifact associated
+    /// with an organization.
+    /// This endpoint allows you to record information about a specific
+    /// artifact, such as its name, digest, environments, cluster, and
+    /// deployment.
+    /// The deployment name has to be uniqe within a cluster (i.e a
+    /// combination of logical, physical environment and cluster) as it
+    /// identifies unique deployment.
+    /// Multiple requests for the same combination of logical, physical
+    /// environment, cluster and deployment name will only create one
+    /// record, successive request will update the existing record.
+    /// This allows for a stable tracking of a deployment where the actual
+    /// deployed artifact can change over time.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/post(orgs/create-artifact-deployment-record)`.
+    func orgsCreateArtifactDeploymentRecord(_ input: Operations.OrgsCreateArtifactDeploymentRecord.Input) async throws -> Operations.OrgsCreateArtifactDeploymentRecord.Output
+    /// Set cluster deployment records
+    ///
+    /// Set deployment records for a given cluster.
+    /// If proposed records in the 'deployments' field have identical 'cluster', 'logical_environment',
+    /// 'physical_environment', and 'deployment_name' values as existing records, the existing records will be updated.
+    /// If no existing records match, new records will be created.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)`.
+    func orgsSetClusterDeploymentRecords(_ input: Operations.OrgsSetClusterDeploymentRecords.Input) async throws -> Operations.OrgsSetClusterDeploymentRecords.Output
     /// Create artifact metadata storage record
     ///
     /// Create metadata storage records for artifacts associated with an organization.
@@ -104,6 +104,13 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/storage-record`.
     /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/storage-record/post(orgs/create-artifact-storage-record)`.
     func orgsCreateArtifactStorageRecord(_ input: Operations.OrgsCreateArtifactStorageRecord.Input) async throws -> Operations.OrgsCreateArtifactStorageRecord.Output
+    /// List artifact deployment records
+    ///
+    /// List deployment records for an artifact metadata associated with an organization.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/get(orgs/list-artifact-deployment-records)`.
+    func orgsListArtifactDeploymentRecords(_ input: Operations.OrgsListArtifactDeploymentRecords.Input) async throws -> Operations.OrgsListArtifactDeploymentRecords.Output
     /// List artifact storage records
     ///
     /// List a collection of artifact storage records with a given subject digest that are associated with repositories owned by an organization.
@@ -448,6 +455,49 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /orgs/{org}/invitations/{invitation_id}/teams`.
     /// - Remark: Generated from `#/paths//orgs/{org}/invitations/{invitation_id}/teams/get(orgs/list-invitation-teams)`.
     func orgsListInvitationTeams(_ input: Operations.OrgsListInvitationTeams.Input) async throws -> Operations.OrgsListInvitationTeams.Output
+    /// List issue fields for an organization
+    ///
+    /// Lists all issue fields for an organization. OAuth app tokens and personal access tokens (classic) need the read:org scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/issue-fields`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/get(orgs/list-issue-fields)`.
+    func orgsListIssueFields(_ input: Operations.OrgsListIssueFields.Input) async throws -> Operations.OrgsListIssueFields.Output
+    /// Create issue field for an organization
+    ///
+    /// Creates a new issue field for an organization.
+    ///
+    /// You can find out more about issue fields in [Managing issue fields in an organization](https://docs.github.com/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization).
+    ///
+    /// To use this endpoint, the authenticated user must be an administrator for the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/issue-fields`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/post(orgs/create-issue-field)`.
+    func orgsCreateIssueField(_ input: Operations.OrgsCreateIssueField.Input) async throws -> Operations.OrgsCreateIssueField.Output
+    /// Update issue field for an organization
+    ///
+    /// Updates an issue field for an organization.
+    ///
+    /// You can find out more about issue fields in [Managing issue fields in an organization](https://docs.github.com/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization).
+    ///
+    /// To use this endpoint, the authenticated user must be an administrator for the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/issue-fields/{issue_field_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/patch(orgs/update-issue-field)`.
+    func orgsUpdateIssueField(_ input: Operations.OrgsUpdateIssueField.Input) async throws -> Operations.OrgsUpdateIssueField.Output
+    /// Delete issue field for an organization
+    ///
+    /// Deletes an issue field for an organization.
+    ///
+    /// You can find out more about issue fields in [Managing issue fields in an organization](https://docs.github.com/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization).
+    ///
+    /// To use this endpoint, the authenticated user must be an administrator for the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/issue-fields/{issue_field_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/delete(orgs/delete-issue-field)`.
+    func orgsDeleteIssueField(_ input: Operations.OrgsDeleteIssueField.Input) async throws -> Operations.OrgsDeleteIssueField.Output
     /// List issue types for an organization
     ///
     /// Lists all issue types for an organization. OAuth app tokens and personal access tokens (classic) need the read:org scope to use this endpoint.
@@ -1039,53 +1089,6 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// Get all custom property values for an organization
-    ///
-    /// Gets all custom property values that are set for an organization.
-    ///
-    /// The organization must belong to an enterprise.
-    ///
-    /// Access requirements:
-    /// - Organization admins
-    /// - OAuth tokens and personal access tokens (classic) with the `read:org` scope
-    /// - Actors with the organization-level "read custom properties for an organization" fine-grained permission or above
-    ///
-    /// - Remark: HTTP `GET /organizations/{org}/org-properties/values`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)`.
-    public func orgsCustomPropertiesForOrgsGetOrganizationValues(
-        path: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Path,
-        headers: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Headers = .init()
-    ) async throws -> Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output {
-        try await orgsCustomPropertiesForOrgsGetOrganizationValues(Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input(
-            path: path,
-            headers: headers
-        ))
-    }
-    /// Create or update custom property values for an organization
-    ///
-    /// Create new or update existing custom property values for an organization.
-    /// To remove a custom property value from an organization, set the property value to `null`.
-    ///
-    /// The organization must belong to an enterprise.
-    ///
-    /// Access requirements:
-    /// - Organization admins
-    /// - OAuth tokens and personal access tokens (classic) with the `admin:org` scope
-    /// - Actors with the organization-level "edit custom properties for an organization" fine-grained permission
-    ///
-    /// - Remark: HTTP `PATCH /organizations/{org}/org-properties/values`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)`.
-    public func orgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues(
-        path: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Path,
-        headers: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Headers = .init(),
-        body: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Body
-    ) async throws -> Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Output {
-        try await orgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues(Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input(
-            path: path,
-            headers: headers,
-            body: body
-        ))
-    }
     /// Get an organization
     ///
     /// Gets information about an organization.
@@ -1157,6 +1160,55 @@ extension APIProtocol {
             headers: headers
         ))
     }
+    /// Create an artifact deployment record
+    ///
+    /// Create or update deployment records for an artifact associated
+    /// with an organization.
+    /// This endpoint allows you to record information about a specific
+    /// artifact, such as its name, digest, environments, cluster, and
+    /// deployment.
+    /// The deployment name has to be uniqe within a cluster (i.e a
+    /// combination of logical, physical environment and cluster) as it
+    /// identifies unique deployment.
+    /// Multiple requests for the same combination of logical, physical
+    /// environment, cluster and deployment name will only create one
+    /// record, successive request will update the existing record.
+    /// This allows for a stable tracking of a deployment where the actual
+    /// deployed artifact can change over time.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/post(orgs/create-artifact-deployment-record)`.
+    public func orgsCreateArtifactDeploymentRecord(
+        path: Operations.OrgsCreateArtifactDeploymentRecord.Input.Path,
+        headers: Operations.OrgsCreateArtifactDeploymentRecord.Input.Headers = .init(),
+        body: Operations.OrgsCreateArtifactDeploymentRecord.Input.Body
+    ) async throws -> Operations.OrgsCreateArtifactDeploymentRecord.Output {
+        try await orgsCreateArtifactDeploymentRecord(Operations.OrgsCreateArtifactDeploymentRecord.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Set cluster deployment records
+    ///
+    /// Set deployment records for a given cluster.
+    /// If proposed records in the 'deployments' field have identical 'cluster', 'logical_environment',
+    /// 'physical_environment', and 'deployment_name' values as existing records, the existing records will be updated.
+    /// If no existing records match, new records will be created.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)`.
+    public func orgsSetClusterDeploymentRecords(
+        path: Operations.OrgsSetClusterDeploymentRecords.Input.Path,
+        headers: Operations.OrgsSetClusterDeploymentRecords.Input.Headers = .init(),
+        body: Operations.OrgsSetClusterDeploymentRecords.Input.Body
+    ) async throws -> Operations.OrgsSetClusterDeploymentRecords.Output {
+        try await orgsSetClusterDeploymentRecords(Operations.OrgsSetClusterDeploymentRecords.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
     /// Create artifact metadata storage record
     ///
     /// Create metadata storage records for artifacts associated with an organization.
@@ -1174,6 +1226,21 @@ extension APIProtocol {
             path: path,
             headers: headers,
             body: body
+        ))
+    }
+    /// List artifact deployment records
+    ///
+    /// List deployment records for an artifact metadata associated with an organization.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/get(orgs/list-artifact-deployment-records)`.
+    public func orgsListArtifactDeploymentRecords(
+        path: Operations.OrgsListArtifactDeploymentRecords.Input.Path,
+        headers: Operations.OrgsListArtifactDeploymentRecords.Input.Headers = .init()
+    ) async throws -> Operations.OrgsListArtifactDeploymentRecords.Output {
+        try await orgsListArtifactDeploymentRecords(Operations.OrgsListArtifactDeploymentRecords.Input(
+            path: path,
+            headers: headers
         ))
     }
     /// List artifact storage records
@@ -1857,6 +1924,85 @@ extension APIProtocol {
         try await orgsListInvitationTeams(Operations.OrgsListInvitationTeams.Input(
             path: path,
             query: query,
+            headers: headers
+        ))
+    }
+    /// List issue fields for an organization
+    ///
+    /// Lists all issue fields for an organization. OAuth app tokens and personal access tokens (classic) need the read:org scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/issue-fields`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/get(orgs/list-issue-fields)`.
+    public func orgsListIssueFields(
+        path: Operations.OrgsListIssueFields.Input.Path,
+        headers: Operations.OrgsListIssueFields.Input.Headers = .init()
+    ) async throws -> Operations.OrgsListIssueFields.Output {
+        try await orgsListIssueFields(Operations.OrgsListIssueFields.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Create issue field for an organization
+    ///
+    /// Creates a new issue field for an organization.
+    ///
+    /// You can find out more about issue fields in [Managing issue fields in an organization](https://docs.github.com/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization).
+    ///
+    /// To use this endpoint, the authenticated user must be an administrator for the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/issue-fields`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/post(orgs/create-issue-field)`.
+    public func orgsCreateIssueField(
+        path: Operations.OrgsCreateIssueField.Input.Path,
+        headers: Operations.OrgsCreateIssueField.Input.Headers = .init(),
+        body: Operations.OrgsCreateIssueField.Input.Body
+    ) async throws -> Operations.OrgsCreateIssueField.Output {
+        try await orgsCreateIssueField(Operations.OrgsCreateIssueField.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Update issue field for an organization
+    ///
+    /// Updates an issue field for an organization.
+    ///
+    /// You can find out more about issue fields in [Managing issue fields in an organization](https://docs.github.com/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization).
+    ///
+    /// To use this endpoint, the authenticated user must be an administrator for the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/issue-fields/{issue_field_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/patch(orgs/update-issue-field)`.
+    public func orgsUpdateIssueField(
+        path: Operations.OrgsUpdateIssueField.Input.Path,
+        headers: Operations.OrgsUpdateIssueField.Input.Headers = .init(),
+        body: Operations.OrgsUpdateIssueField.Input.Body
+    ) async throws -> Operations.OrgsUpdateIssueField.Output {
+        try await orgsUpdateIssueField(Operations.OrgsUpdateIssueField.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Delete issue field for an organization
+    ///
+    /// Deletes an issue field for an organization.
+    ///
+    /// You can find out more about issue fields in [Managing issue fields in an organization](https://docs.github.com/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization).
+    ///
+    /// To use this endpoint, the authenticated user must be an administrator for the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/issue-fields/{issue_field_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/delete(orgs/delete-issue-field)`.
+    public func orgsDeleteIssueField(
+        path: Operations.OrgsDeleteIssueField.Input.Path,
+        headers: Operations.OrgsDeleteIssueField.Input.Headers = .init()
+    ) async throws -> Operations.OrgsDeleteIssueField.Output {
+        try await orgsDeleteIssueField(Operations.OrgsDeleteIssueField.Input(
+            path: path,
             headers: headers
         ))
     }
@@ -3214,8 +3360,8 @@ public enum Components {
             case case1(Swift.String)
             /// - Remark: Generated from `#/components/schemas/webhook-config-insecure-ssl/case2`.
             case case2(Swift.Double)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .case1(try decoder.decodeFromSingleValueContainer())
                     return
@@ -3234,7 +3380,7 @@ public enum Components {
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .case1(value):
                     try encoder.encodeToSingleValueContainer(value)
@@ -3466,8 +3612,8 @@ public enum Components {
                     case case2(Swift.Int?)
                     /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
                     case case3([Swift.String]?)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -3492,7 +3638,7 @@ public enum Components {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -3634,10 +3780,10 @@ public enum Components {
                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -3658,10 +3804,10 @@ public enum Components {
                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -3703,10 +3849,10 @@ public enum Components {
                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -3832,6 +3978,28 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/administration`.
             public var administration: Components.Schemas.AppPermissions.AdministrationPayload?
+            /// The level of permission to grant the access token to create and retrieve build artifact metadata records.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/artifact_metadata`.
+            @frozen public enum ArtifactMetadataPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to grant the access token to create and retrieve build artifact metadata records.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/artifact_metadata`.
+            public var artifactMetadata: Components.Schemas.AppPermissions.ArtifactMetadataPayload?
+            /// The level of permission to create and retrieve the access token for repository attestations.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/attestations`.
+            @frozen public enum AttestationsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to create and retrieve the access token for repository attestations.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/attestations`.
+            public var attestations: Components.Schemas.AppPermissions.AttestationsPayload?
             /// The level of permission to grant the access token for checks on code.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/checks`.
@@ -3887,6 +4055,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/deployments`.
             public var deployments: Components.Schemas.AppPermissions.DeploymentsPayload?
+            /// The level of permission to grant the access token for discussions and related comments and labels.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/discussions`.
+            @frozen public enum DiscussionsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to grant the access token for discussions and related comments and labels.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/discussions`.
+            public var discussions: Components.Schemas.AppPermissions.DiscussionsPayload?
             /// The level of permission to grant the access token for managing repository environments.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/environments`.
@@ -3909,6 +4088,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/issues`.
             public var issues: Components.Schemas.AppPermissions.IssuesPayload?
+            /// The level of permission to grant the access token to manage the merge queues for a repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/merge_queues`.
+            @frozen public enum MergeQueuesPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to grant the access token to manage the merge queues for a repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/merge_queues`.
+            public var mergeQueues: Components.Schemas.AppPermissions.MergeQueuesPayload?
             /// The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/metadata`.
@@ -4140,6 +4330,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_seat_management`.
             public var organizationCopilotSeatManagement: Components.Schemas.AppPermissions.OrganizationCopilotSeatManagementPayload?
+            /// The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_agent_settings`.
+            @frozen public enum OrganizationCopilotAgentSettingsPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_agent_settings`.
+            public var organizationCopilotAgentSettings: Components.Schemas.AppPermissions.OrganizationCopilotAgentSettingsPayload?
             /// The level of permission to grant the access token to view and manage announcement banners for an organization.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_announcement_banners`.
@@ -4260,17 +4461,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_user_blocking`.
             public var organizationUserBlocking: Components.Schemas.AppPermissions.OrganizationUserBlockingPayload?
-            /// The level of permission to grant the access token to manage team discussions and related comments.
-            ///
-            /// - Remark: Generated from `#/components/schemas/app-permissions/team_discussions`.
-            @frozen public enum TeamDiscussionsPayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case read = "read"
-                case write = "write"
-            }
-            /// The level of permission to grant the access token to manage team discussions and related comments.
-            ///
-            /// - Remark: Generated from `#/components/schemas/app-permissions/team_discussions`.
-            public var teamDiscussions: Components.Schemas.AppPermissions.TeamDiscussionsPayload?
             /// The level of permission to grant the access token to manage the email addresses belonging to a user.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/email_addresses`.
@@ -4364,13 +4554,17 @@ public enum Components {
             /// - Parameters:
             ///   - actions: The level of permission to grant the access token for GitHub Actions workflows, workflow runs, and artifacts.
             ///   - administration: The level of permission to grant the access token for repository creation, deletion, settings, teams, and collaborators creation.
+            ///   - artifactMetadata: The level of permission to grant the access token to create and retrieve build artifact metadata records.
+            ///   - attestations: The level of permission to create and retrieve the access token for repository attestations.
             ///   - checks: The level of permission to grant the access token for checks on code.
             ///   - codespaces: The level of permission to grant the access token to create, edit, delete, and list Codespaces.
             ///   - contents: The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges.
             ///   - dependabotSecrets: The level of permission to grant the access token to manage Dependabot secrets.
             ///   - deployments: The level of permission to grant the access token for deployments and deployment statuses.
+            ///   - discussions: The level of permission to grant the access token for discussions and related comments and labels.
             ///   - environments: The level of permission to grant the access token for managing repository environments.
             ///   - issues: The level of permission to grant the access token for issues and related comments, assignees, labels, and milestones.
+            ///   - mergeQueues: The level of permission to grant the access token to manage the merge queues for a repository.
             ///   - metadata: The level of permission to grant the access token to search repositories, list collaborators, and access repository metadata.
             ///   - packages: The level of permission to grant the access token for packages published to GitHub Packages.
             ///   - pages: The level of permission to grant the access token to retrieve Pages statuses, configuration, and builds, as well as create new builds.
@@ -4392,6 +4586,7 @@ public enum Components {
             ///   - organizationCustomOrgRoles: The level of permission to grant the access token for custom organization roles management.
             ///   - organizationCustomProperties: The level of permission to grant the access token for repository custom properties management at the organization level.
             ///   - organizationCopilotSeatManagement: The level of permission to grant the access token for managing access to GitHub Copilot for members of an organization with a Copilot Business subscription. This property is in public preview and is subject to change.
+            ///   - organizationCopilotAgentSettings: The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
             ///   - organizationAnnouncementBanners: The level of permission to grant the access token to view and manage announcement banners for an organization.
             ///   - organizationEvents: The level of permission to grant the access token to view events triggered by an activity in an organization.
             ///   - organizationHooks: The level of permission to grant the access token to manage the post-receive hooks for an organization.
@@ -4403,7 +4598,6 @@ public enum Components {
             ///   - organizationSecrets: The level of permission to grant the access token to manage organization secrets.
             ///   - organizationSelfHostedRunners: The level of permission to grant the access token to view and manage GitHub Actions self-hosted runners available to an organization.
             ///   - organizationUserBlocking: The level of permission to grant the access token to view and manage users blocked by the organization.
-            ///   - teamDiscussions: The level of permission to grant the access token to manage team discussions and related comments.
             ///   - emailAddresses: The level of permission to grant the access token to manage the email addresses belonging to a user.
             ///   - followers: The level of permission to grant the access token to manage the followers belonging to a user.
             ///   - gitSshKeys: The level of permission to grant the access token to manage git SSH keys.
@@ -4415,13 +4609,17 @@ public enum Components {
             public init(
                 actions: Components.Schemas.AppPermissions.ActionsPayload? = nil,
                 administration: Components.Schemas.AppPermissions.AdministrationPayload? = nil,
+                artifactMetadata: Components.Schemas.AppPermissions.ArtifactMetadataPayload? = nil,
+                attestations: Components.Schemas.AppPermissions.AttestationsPayload? = nil,
                 checks: Components.Schemas.AppPermissions.ChecksPayload? = nil,
                 codespaces: Components.Schemas.AppPermissions.CodespacesPayload? = nil,
                 contents: Components.Schemas.AppPermissions.ContentsPayload? = nil,
                 dependabotSecrets: Components.Schemas.AppPermissions.DependabotSecretsPayload? = nil,
                 deployments: Components.Schemas.AppPermissions.DeploymentsPayload? = nil,
+                discussions: Components.Schemas.AppPermissions.DiscussionsPayload? = nil,
                 environments: Components.Schemas.AppPermissions.EnvironmentsPayload? = nil,
                 issues: Components.Schemas.AppPermissions.IssuesPayload? = nil,
+                mergeQueues: Components.Schemas.AppPermissions.MergeQueuesPayload? = nil,
                 metadata: Components.Schemas.AppPermissions.MetadataPayload? = nil,
                 packages: Components.Schemas.AppPermissions.PackagesPayload? = nil,
                 pages: Components.Schemas.AppPermissions.PagesPayload? = nil,
@@ -4443,6 +4641,7 @@ public enum Components {
                 organizationCustomOrgRoles: Components.Schemas.AppPermissions.OrganizationCustomOrgRolesPayload? = nil,
                 organizationCustomProperties: Components.Schemas.AppPermissions.OrganizationCustomPropertiesPayload? = nil,
                 organizationCopilotSeatManagement: Components.Schemas.AppPermissions.OrganizationCopilotSeatManagementPayload? = nil,
+                organizationCopilotAgentSettings: Components.Schemas.AppPermissions.OrganizationCopilotAgentSettingsPayload? = nil,
                 organizationAnnouncementBanners: Components.Schemas.AppPermissions.OrganizationAnnouncementBannersPayload? = nil,
                 organizationEvents: Components.Schemas.AppPermissions.OrganizationEventsPayload? = nil,
                 organizationHooks: Components.Schemas.AppPermissions.OrganizationHooksPayload? = nil,
@@ -4454,7 +4653,6 @@ public enum Components {
                 organizationSecrets: Components.Schemas.AppPermissions.OrganizationSecretsPayload? = nil,
                 organizationSelfHostedRunners: Components.Schemas.AppPermissions.OrganizationSelfHostedRunnersPayload? = nil,
                 organizationUserBlocking: Components.Schemas.AppPermissions.OrganizationUserBlockingPayload? = nil,
-                teamDiscussions: Components.Schemas.AppPermissions.TeamDiscussionsPayload? = nil,
                 emailAddresses: Components.Schemas.AppPermissions.EmailAddressesPayload? = nil,
                 followers: Components.Schemas.AppPermissions.FollowersPayload? = nil,
                 gitSshKeys: Components.Schemas.AppPermissions.GitSshKeysPayload? = nil,
@@ -4466,13 +4664,17 @@ public enum Components {
             ) {
                 self.actions = actions
                 self.administration = administration
+                self.artifactMetadata = artifactMetadata
+                self.attestations = attestations
                 self.checks = checks
                 self.codespaces = codespaces
                 self.contents = contents
                 self.dependabotSecrets = dependabotSecrets
                 self.deployments = deployments
+                self.discussions = discussions
                 self.environments = environments
                 self.issues = issues
+                self.mergeQueues = mergeQueues
                 self.metadata = metadata
                 self.packages = packages
                 self.pages = pages
@@ -4494,6 +4696,7 @@ public enum Components {
                 self.organizationCustomOrgRoles = organizationCustomOrgRoles
                 self.organizationCustomProperties = organizationCustomProperties
                 self.organizationCopilotSeatManagement = organizationCopilotSeatManagement
+                self.organizationCopilotAgentSettings = organizationCopilotAgentSettings
                 self.organizationAnnouncementBanners = organizationAnnouncementBanners
                 self.organizationEvents = organizationEvents
                 self.organizationHooks = organizationHooks
@@ -4505,7 +4708,6 @@ public enum Components {
                 self.organizationSecrets = organizationSecrets
                 self.organizationSelfHostedRunners = organizationSelfHostedRunners
                 self.organizationUserBlocking = organizationUserBlocking
-                self.teamDiscussions = teamDiscussions
                 self.emailAddresses = emailAddresses
                 self.followers = followers
                 self.gitSshKeys = gitSshKeys
@@ -4518,13 +4720,17 @@ public enum Components {
             public enum CodingKeys: String, CodingKey {
                 case actions
                 case administration
+                case artifactMetadata = "artifact_metadata"
+                case attestations
                 case checks
                 case codespaces
                 case contents
                 case dependabotSecrets = "dependabot_secrets"
                 case deployments
+                case discussions
                 case environments
                 case issues
+                case mergeQueues = "merge_queues"
                 case metadata
                 case packages
                 case pages
@@ -4546,6 +4752,7 @@ public enum Components {
                 case organizationCustomOrgRoles = "organization_custom_org_roles"
                 case organizationCustomProperties = "organization_custom_properties"
                 case organizationCopilotSeatManagement = "organization_copilot_seat_management"
+                case organizationCopilotAgentSettings = "organization_copilot_agent_settings"
                 case organizationAnnouncementBanners = "organization_announcement_banners"
                 case organizationEvents = "organization_events"
                 case organizationHooks = "organization_hooks"
@@ -4557,7 +4764,6 @@ public enum Components {
                 case organizationSecrets = "organization_secrets"
                 case organizationSelfHostedRunners = "organization_self_hosted_runners"
                 case organizationUserBlocking = "organization_user_blocking"
-                case teamDiscussions = "team_discussions"
                 case emailAddresses = "email_addresses"
                 case followers
                 case gitSshKeys = "git_ssh_keys"
@@ -4739,8 +4945,8 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self.value1 = try .init(from: decoder)
                     } catch {
@@ -4761,7 +4967,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1?.encode(to: encoder)
                     try self.value2?.encode(to: encoder)
                 }
@@ -5302,6 +5508,107 @@ public enum Components {
             }
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_ai_detection`.
             public var secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public struct SecretScanningDelegatedAlertDismissalPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedAlertDismissalPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public var secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public struct SecretScanningDelegatedBypassPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedBypassPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public var secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public struct SecretScanningDelegatedBypassOptionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload`.
+                public struct ReviewersPayloadPayload: Codable, Hashable, Sendable {
+                    /// The ID of the team or role selected as a bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_id`.
+                    public var reviewerId: Swift.Int
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    @frozen public enum ReviewerTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case team = "TEAM"
+                        case role = "ROLE"
+                    }
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    public var reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    /// Creates a new `ReviewersPayloadPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
+                    ///   - reviewerType: The type of the bypass reviewer
+                    public init(
+                        reviewerId: Swift.Int,
+                        reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    ) {
+                        self.reviewerId = reviewerId
+                        self.reviewerType = reviewerType
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case reviewerId = "reviewer_id"
+                        case reviewerType = "reviewer_type"
+                    }
+                }
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public typealias ReviewersPayload = [Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload]
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public var reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload?
+                /// Creates a new `SecretScanningDelegatedBypassOptionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - reviewers: The bypass reviewers for secret scanning delegated bypass
+                public init(reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload? = nil) {
+                    self.reviewers = reviewers
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case reviewers
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public var secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload?
             /// Creates a new `SecurityAndAnalysis`.
             ///
             /// - Parameters:
@@ -5312,6 +5619,9 @@ public enum Components {
             ///   - secretScanningPushProtection:
             ///   - secretScanningNonProviderPatterns:
             ///   - secretScanningAiDetection:
+            ///   - secretScanningDelegatedAlertDismissal:
+            ///   - secretScanningDelegatedBypass:
+            ///   - secretScanningDelegatedBypassOptions:
             public init(
                 advancedSecurity: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload? = nil,
                 codeSecurity: Components.Schemas.SecurityAndAnalysis.CodeSecurityPayload? = nil,
@@ -5319,7 +5629,10 @@ public enum Components {
                 secretScanning: Components.Schemas.SecurityAndAnalysis.SecretScanningPayload? = nil,
                 secretScanningPushProtection: Components.Schemas.SecurityAndAnalysis.SecretScanningPushProtectionPayload? = nil,
                 secretScanningNonProviderPatterns: Components.Schemas.SecurityAndAnalysis.SecretScanningNonProviderPatternsPayload? = nil,
-                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil
+                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil,
+                secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload? = nil,
+                secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload? = nil
             ) {
                 self.advancedSecurity = advancedSecurity
                 self.codeSecurity = codeSecurity
@@ -5328,6 +5641,9 @@ public enum Components {
                 self.secretScanningPushProtection = secretScanningPushProtection
                 self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
                 self.secretScanningAiDetection = secretScanningAiDetection
+                self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                self.secretScanningDelegatedBypass = secretScanningDelegatedBypass
+                self.secretScanningDelegatedBypassOptions = secretScanningDelegatedBypassOptions
             }
             public enum CodingKeys: String, CodingKey {
                 case advancedSecurity = "advanced_security"
@@ -5337,6 +5653,9 @@ public enum Components {
                 case secretScanningPushProtection = "secret_scanning_push_protection"
                 case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
                 case secretScanningAiDetection = "secret_scanning_ai_detection"
+                case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                case secretScanningDelegatedBypass = "secret_scanning_delegated_bypass"
+                case secretScanningDelegatedBypassOptions = "secret_scanning_delegated_bypass_options"
             }
         }
         /// Minimal Repository
@@ -5479,6 +5798,21 @@ public enum Components {
             public var hasDownloads: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/has_discussions`.
             public var hasDiscussions: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/archived`.
             public var archived: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/disabled`.
@@ -5614,10 +5948,10 @@ public enum Components {
                 public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                     self.additionalProperties = additionalProperties
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeAdditionalProperties(additionalProperties)
                 }
             }
@@ -5695,6 +6029,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads:
             ///   - hasDiscussions:
+            ///   - hasPullRequests:
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled:
             ///   - visibility:
@@ -5784,6 +6121,9 @@ public enum Components {
                 hasPages: Swift.Bool? = nil,
                 hasDownloads: Swift.Bool? = nil,
                 hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool? = nil,
                 disabled: Swift.Bool? = nil,
                 visibility: Swift.String? = nil,
@@ -5873,6 +6213,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -5963,6 +6306,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -5984,72 +6330,6 @@ public enum Components {
                 case webCommitSignoffRequired = "web_commit_signoff_required"
                 case securityAndAnalysis = "security_and_analysis"
                 case customProperties = "custom_properties"
-            }
-        }
-        /// Custom property name and associated value
-        ///
-        /// - Remark: Generated from `#/components/schemas/custom-property-value`.
-        public struct CustomPropertyValue: Codable, Hashable, Sendable {
-            /// The name of the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/property_name`.
-            public var propertyName: Swift.String
-            /// The value assigned to the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
-            @frozen public enum ValuePayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case1`.
-                case case1(Swift.String)
-                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case2`.
-                case case2([Swift.String])
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
-                    do {
-                        self = .case1(try decoder.decodeFromSingleValueContainer())
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case2(try decoder.decodeFromSingleValueContainer())
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
-                        type: Self.self,
-                        codingPath: decoder.codingPath,
-                        errors: errors
-                    )
-                }
-                public func encode(to encoder: any Encoder) throws {
-                    switch self {
-                    case let .case1(value):
-                        try encoder.encodeToSingleValueContainer(value)
-                    case let .case2(value):
-                        try encoder.encodeToSingleValueContainer(value)
-                    }
-                }
-            }
-            /// The value assigned to the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
-            public var value: Components.Schemas.CustomPropertyValue.ValuePayload?
-            /// Creates a new `CustomPropertyValue`.
-            ///
-            /// - Parameters:
-            ///   - propertyName: The name of the property
-            ///   - value: The value assigned to the property
-            public init(
-                propertyName: Swift.String,
-                value: Components.Schemas.CustomPropertyValue.ValuePayload? = nil
-            ) {
-                self.propertyName = propertyName
-                self.value = value
-            }
-            public enum CodingKeys: String, CodingKey {
-                case propertyName = "property_name"
-                case value
             }
         }
         /// Organization Full
@@ -6560,6 +6840,118 @@ public enum Components {
                 case updatedAt = "updated_at"
                 case archivedAt = "archived_at"
                 case deployKeysEnabledForRepositories = "deploy_keys_enabled_for_repositories"
+            }
+        }
+        /// Artifact Metadata Deployment Record
+        ///
+        /// - Remark: Generated from `#/components/schemas/artifact-deployment-record`.
+        public struct ArtifactDeploymentRecord: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/id`.
+            public var id: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/digest`.
+            public var digest: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/logical_environment`.
+            public var logicalEnvironment: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/physical_environment`.
+            public var physicalEnvironment: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/cluster`.
+            public var cluster: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/deployment_name`.
+            public var deploymentName: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/tags`.
+            public struct TagsPayload: Codable, Hashable, Sendable {
+                /// A container of undocumented properties.
+                public var additionalProperties: [String: Swift.String]
+                /// Creates a new `TagsPayload`.
+                ///
+                /// - Parameters:
+                ///   - additionalProperties: A container of undocumented properties.
+                public init(additionalProperties: [String: Swift.String] = .init()) {
+                    self.additionalProperties = additionalProperties
+                }
+                public init(from decoder: any Swift.Decoder) throws {
+                    additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    try encoder.encodeAdditionalProperties(additionalProperties)
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/tags`.
+            public var tags: Components.Schemas.ArtifactDeploymentRecord.TagsPayload?
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/RuntimeRisksPayload`.
+            @frozen public enum RuntimeRisksPayloadPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case criticalResource = "critical-resource"
+                case internetExposed = "internet-exposed"
+                case lateralMovement = "lateral-movement"
+                case sensitiveData = "sensitive-data"
+            }
+            /// A list of runtime risks associated with the deployment.
+            ///
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/runtime_risks`.
+            public typealias RuntimeRisksPayload = [Components.Schemas.ArtifactDeploymentRecord.RuntimeRisksPayloadPayload]
+            /// A list of runtime risks associated with the deployment.
+            ///
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/runtime_risks`.
+            public var runtimeRisks: Components.Schemas.ArtifactDeploymentRecord.RuntimeRisksPayload?
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/created_at`.
+            public var createdAt: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/updated_at`.
+            public var updatedAt: Swift.String?
+            /// The ID of the provenance attestation associated with the deployment record.
+            ///
+            /// - Remark: Generated from `#/components/schemas/artifact-deployment-record/attestation_id`.
+            public var attestationId: Swift.Int?
+            /// Creates a new `ArtifactDeploymentRecord`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - digest:
+            ///   - logicalEnvironment:
+            ///   - physicalEnvironment:
+            ///   - cluster:
+            ///   - deploymentName:
+            ///   - tags:
+            ///   - runtimeRisks: A list of runtime risks associated with the deployment.
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - attestationId: The ID of the provenance attestation associated with the deployment record.
+            public init(
+                id: Swift.Int? = nil,
+                digest: Swift.String? = nil,
+                logicalEnvironment: Swift.String? = nil,
+                physicalEnvironment: Swift.String? = nil,
+                cluster: Swift.String? = nil,
+                deploymentName: Swift.String? = nil,
+                tags: Components.Schemas.ArtifactDeploymentRecord.TagsPayload? = nil,
+                runtimeRisks: Components.Schemas.ArtifactDeploymentRecord.RuntimeRisksPayload? = nil,
+                createdAt: Swift.String? = nil,
+                updatedAt: Swift.String? = nil,
+                attestationId: Swift.Int? = nil
+            ) {
+                self.id = id
+                self.digest = digest
+                self.logicalEnvironment = logicalEnvironment
+                self.physicalEnvironment = physicalEnvironment
+                self.cluster = cluster
+                self.deploymentName = deploymentName
+                self.tags = tags
+                self.runtimeRisks = runtimeRisks
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.attestationId = attestationId
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case digest
+                case logicalEnvironment = "logical_environment"
+                case physicalEnvironment = "physical_environment"
+                case cluster
+                case deploymentName = "deployment_name"
+                case tags
+                case runtimeRisks = "runtime_risks"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case attestationId = "attestation_id"
             }
         }
         /// Groups of organization members that gives permissions on specified repositories.
@@ -7315,6 +7707,428 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/schemas/api-insights-user-stats`.
         public typealias ApiInsightsUserStats = [Components.Schemas.ApiInsightsUserStatsPayload]
+        /// A custom attribute defined at the organization level for attaching structured data to issues.
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-field`.
+        public struct IssueField: Codable, Hashable, Sendable {
+            /// The unique identifier of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/id`.
+            public var id: Swift.Int
+            /// The node identifier of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/name`.
+            public var name: Swift.String
+            /// The description of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/description`.
+            public var description: Swift.String?
+            /// The data type of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/data_type`.
+            @frozen public enum DataTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case text = "text"
+                case date = "date"
+                case singleSelect = "single_select"
+                case number = "number"
+            }
+            /// The data type of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/data_type`.
+            public var dataType: Components.Schemas.IssueField.DataTypePayload
+            /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues).
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/visibility`.
+            @frozen public enum VisibilityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case organizationMembersOnly = "organization_members_only"
+                case all = "all"
+            }
+            /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues).
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/visibility`.
+            public var visibility: Components.Schemas.IssueField.VisibilityPayload?
+            /// - Remark: Generated from `#/components/schemas/issue-field/OptionsPayload`.
+            public struct OptionsPayloadPayload: Codable, Hashable, Sendable {
+                /// The unique identifier of the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field/OptionsPayload/id`.
+                public var id: Swift.Int
+                /// The name of the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field/OptionsPayload/name`.
+                public var name: Swift.String
+                /// The description of the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field/OptionsPayload/description`.
+                public var description: Swift.String?
+                /// The color of the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field/OptionsPayload/color`.
+                @frozen public enum ColorPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case gray = "gray"
+                    case blue = "blue"
+                    case green = "green"
+                    case yellow = "yellow"
+                    case orange = "orange"
+                    case red = "red"
+                    case pink = "pink"
+                    case purple = "purple"
+                }
+                /// The color of the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field/OptionsPayload/color`.
+                public var color: Components.Schemas.IssueField.OptionsPayloadPayload.ColorPayload?
+                /// The priority of the option for ordering.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field/OptionsPayload/priority`.
+                public var priority: Swift.Int?
+                /// The time the option was created.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field/OptionsPayload/created_at`.
+                public var createdAt: Foundation.Date?
+                /// The time the option was last updated.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field/OptionsPayload/updated_at`.
+                public var updatedAt: Foundation.Date?
+                /// Creates a new `OptionsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - id: The unique identifier of the option.
+                ///   - name: The name of the option.
+                ///   - description: The description of the option.
+                ///   - color: The color of the option.
+                ///   - priority: The priority of the option for ordering.
+                ///   - createdAt: The time the option was created.
+                ///   - updatedAt: The time the option was last updated.
+                public init(
+                    id: Swift.Int,
+                    name: Swift.String,
+                    description: Swift.String? = nil,
+                    color: Components.Schemas.IssueField.OptionsPayloadPayload.ColorPayload? = nil,
+                    priority: Swift.Int? = nil,
+                    createdAt: Foundation.Date? = nil,
+                    updatedAt: Foundation.Date? = nil
+                ) {
+                    self.id = id
+                    self.name = name
+                    self.description = description
+                    self.color = color
+                    self.priority = priority
+                    self.createdAt = createdAt
+                    self.updatedAt = updatedAt
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case name
+                    case description
+                    case color
+                    case priority
+                    case createdAt = "created_at"
+                    case updatedAt = "updated_at"
+                }
+            }
+            /// Available options for single select fields.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/options`.
+            public typealias OptionsPayload = [Components.Schemas.IssueField.OptionsPayloadPayload]
+            /// Available options for single select fields.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/options`.
+            public var options: Components.Schemas.IssueField.OptionsPayload?
+            /// The time the issue field was created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/created_at`.
+            public var createdAt: Foundation.Date?
+            /// The time the issue field was last updated.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// Creates a new `IssueField`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the issue field.
+            ///   - nodeId: The node identifier of the issue field.
+            ///   - name: The name of the issue field.
+            ///   - description: The description of the issue field.
+            ///   - dataType: The data type of the issue field.
+            ///   - visibility: The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues).
+            ///   - options: Available options for single select fields.
+            ///   - createdAt: The time the issue field was created.
+            ///   - updatedAt: The time the issue field was last updated.
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                name: Swift.String,
+                description: Swift.String? = nil,
+                dataType: Components.Schemas.IssueField.DataTypePayload,
+                visibility: Components.Schemas.IssueField.VisibilityPayload? = nil,
+                options: Components.Schemas.IssueField.OptionsPayload? = nil,
+                createdAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.description = description
+                self.dataType = dataType
+                self.visibility = visibility
+                self.options = options
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case name
+                case description
+                case dataType = "data_type"
+                case visibility
+                case options
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/organization-create-issue-field`.
+        public struct OrganizationCreateIssueField: Codable, Hashable, Sendable {
+            /// Name of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/name`.
+            public var name: Swift.String
+            /// Description of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/description`.
+            public var description: Swift.String?
+            /// The data type of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/data_type`.
+            @frozen public enum DataTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case text = "text"
+                case date = "date"
+                case singleSelect = "single_select"
+                case number = "number"
+            }
+            /// The data type of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/data_type`.
+            public var dataType: Components.Schemas.OrganizationCreateIssueField.DataTypePayload
+            /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues). Only used when the visibility settings feature is enabled. Defaults to `organization_members_only`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/visibility`.
+            @frozen public enum VisibilityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case organizationMembersOnly = "organization_members_only"
+                case all = "all"
+            }
+            /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues). Only used when the visibility settings feature is enabled. Defaults to `organization_members_only`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/visibility`.
+            public var visibility: Components.Schemas.OrganizationCreateIssueField.VisibilityPayload?
+            /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/OptionsPayload`.
+            public struct OptionsPayloadPayload: Codable, Hashable, Sendable {
+                /// Name of the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/OptionsPayload/name`.
+                public var name: Swift.String
+                /// Description of the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/OptionsPayload/description`.
+                public var description: Swift.String?
+                /// Color for the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/OptionsPayload/color`.
+                @frozen public enum ColorPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case gray = "gray"
+                    case blue = "blue"
+                    case green = "green"
+                    case yellow = "yellow"
+                    case orange = "orange"
+                    case red = "red"
+                    case pink = "pink"
+                    case purple = "purple"
+                }
+                /// Color for the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/OptionsPayload/color`.
+                public var color: Components.Schemas.OrganizationCreateIssueField.OptionsPayloadPayload.ColorPayload
+                /// Priority of the option for ordering.
+                ///
+                /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/OptionsPayload/priority`.
+                public var priority: Swift.Int
+                /// Creates a new `OptionsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - name: Name of the option.
+                ///   - description: Description of the option.
+                ///   - color: Color for the option.
+                ///   - priority: Priority of the option for ordering.
+                public init(
+                    name: Swift.String,
+                    description: Swift.String? = nil,
+                    color: Components.Schemas.OrganizationCreateIssueField.OptionsPayloadPayload.ColorPayload,
+                    priority: Swift.Int
+                ) {
+                    self.name = name
+                    self.description = description
+                    self.color = color
+                    self.priority = priority
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case name
+                    case description
+                    case color
+                    case priority
+                }
+            }
+            /// Options for single select fields. Required when data_type is 'single_select'.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/options`.
+            public typealias OptionsPayload = [Components.Schemas.OrganizationCreateIssueField.OptionsPayloadPayload]
+            /// Options for single select fields. Required when data_type is 'single_select'.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/options`.
+            public var options: Components.Schemas.OrganizationCreateIssueField.OptionsPayload?
+            /// Creates a new `OrganizationCreateIssueField`.
+            ///
+            /// - Parameters:
+            ///   - name: Name of the issue field.
+            ///   - description: Description of the issue field.
+            ///   - dataType: The data type of the issue field.
+            ///   - visibility: The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues). Only used when the visibility settings feature is enabled. Defaults to `organization_members_only`.
+            ///   - options: Options for single select fields. Required when data_type is 'single_select'.
+            public init(
+                name: Swift.String,
+                description: Swift.String? = nil,
+                dataType: Components.Schemas.OrganizationCreateIssueField.DataTypePayload,
+                visibility: Components.Schemas.OrganizationCreateIssueField.VisibilityPayload? = nil,
+                options: Components.Schemas.OrganizationCreateIssueField.OptionsPayload? = nil
+            ) {
+                self.name = name
+                self.description = description
+                self.dataType = dataType
+                self.visibility = visibility
+                self.options = options
+            }
+            public enum CodingKeys: String, CodingKey {
+                case name
+                case description
+                case dataType = "data_type"
+                case visibility
+                case options
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/organization-update-issue-field`.
+        public struct OrganizationUpdateIssueField: Codable, Hashable, Sendable {
+            /// Name of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/name`.
+            public var name: Swift.String?
+            /// Description of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/description`.
+            public var description: Swift.String?
+            /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues). Only used when the visibility settings feature is enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/visibility`.
+            @frozen public enum VisibilityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case organizationMembersOnly = "organization_members_only"
+                case all = "all"
+            }
+            /// The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues). Only used when the visibility settings feature is enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/visibility`.
+            public var visibility: Components.Schemas.OrganizationUpdateIssueField.VisibilityPayload?
+            /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/OptionsPayload`.
+            public struct OptionsPayloadPayload: Codable, Hashable, Sendable {
+                /// Name of the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/OptionsPayload/name`.
+                public var name: Swift.String
+                /// Description of the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/OptionsPayload/description`.
+                public var description: Swift.String?
+                /// Color for the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/OptionsPayload/color`.
+                @frozen public enum ColorPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case gray = "gray"
+                    case blue = "blue"
+                    case green = "green"
+                    case yellow = "yellow"
+                    case orange = "orange"
+                    case red = "red"
+                    case pink = "pink"
+                    case purple = "purple"
+                }
+                /// Color for the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/OptionsPayload/color`.
+                public var color: Components.Schemas.OrganizationUpdateIssueField.OptionsPayloadPayload.ColorPayload
+                /// Priority of the option for ordering.
+                ///
+                /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/OptionsPayload/priority`.
+                public var priority: Swift.Int
+                /// Creates a new `OptionsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - name: Name of the option.
+                ///   - description: Description of the option.
+                ///   - color: Color for the option.
+                ///   - priority: Priority of the option for ordering.
+                public init(
+                    name: Swift.String,
+                    description: Swift.String? = nil,
+                    color: Components.Schemas.OrganizationUpdateIssueField.OptionsPayloadPayload.ColorPayload,
+                    priority: Swift.Int
+                ) {
+                    self.name = name
+                    self.description = description
+                    self.color = color
+                    self.priority = priority
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case name
+                    case description
+                    case color
+                    case priority
+                }
+            }
+            /// Options for single select fields. Only applicable when updating single_select fields.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/options`.
+            public typealias OptionsPayload = [Components.Schemas.OrganizationUpdateIssueField.OptionsPayloadPayload]
+            /// Options for single select fields. Only applicable when updating single_select fields.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/options`.
+            public var options: Components.Schemas.OrganizationUpdateIssueField.OptionsPayload?
+            /// Creates a new `OrganizationUpdateIssueField`.
+            ///
+            /// - Parameters:
+            ///   - name: Name of the issue field.
+            ///   - description: Description of the issue field.
+            ///   - visibility: The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues). Only used when the visibility settings feature is enabled.
+            ///   - options: Options for single select fields. Only applicable when updating single_select fields.
+            public init(
+                name: Swift.String? = nil,
+                description: Swift.String? = nil,
+                visibility: Components.Schemas.OrganizationUpdateIssueField.VisibilityPayload? = nil,
+                options: Components.Schemas.OrganizationUpdateIssueField.OptionsPayload? = nil
+            ) {
+                self.name = name
+                self.description = description
+                self.visibility = visibility
+                self.options = options
+            }
+            public enum CodingKeys: String, CodingKey {
+                case name
+                case description
+                case visibility
+                case options
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/organization-create-issue-type`.
         public struct OrganizationCreateIssueType: Codable, Hashable, Sendable {
             /// Name of the issue type.
@@ -8171,10 +8985,10 @@ public enum Components {
                     public init(additionalProperties: [String: Swift.String] = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -8191,10 +9005,10 @@ public enum Components {
                     public init(additionalProperties: [String: Swift.String] = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -8211,10 +9025,10 @@ public enum Components {
                     public init(additionalProperties: [String: Swift.String] = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -8367,10 +9181,10 @@ public enum Components {
                     public init(additionalProperties: [String: Swift.String] = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -8387,10 +9201,10 @@ public enum Components {
                     public init(additionalProperties: [String: Swift.String] = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -8407,10 +9221,10 @@ public enum Components {
                     public init(additionalProperties: [String: Swift.String] = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -8549,6 +9363,7 @@ public enum Components {
                 case singleSelect = "single_select"
                 case multiSelect = "multi_select"
                 case trueFalse = "true_false"
+                case url = "url"
             }
             /// The type of the value for the property
             ///
@@ -8566,8 +9381,8 @@ public enum Components {
                 case case1(Swift.String)
                 /// - Remark: Generated from `#/components/schemas/custom-property/default_value/case2`.
                 case case2([Swift.String])
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .case1(try decoder.decodeFromSingleValueContainer())
                         return
@@ -8586,7 +9401,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .case1(value):
                         try encoder.encodeToSingleValueContainer(value)
@@ -8619,6 +9434,10 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/custom-property/values_editable_by`.
             public var valuesEditableBy: Components.Schemas.CustomProperty.ValuesEditableByPayload?
+            /// Whether setting properties values is mandatory
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property/require_explicit_values`.
+            public var requireExplicitValues: Swift.Bool?
             /// Creates a new `CustomProperty`.
             ///
             /// - Parameters:
@@ -8631,6 +9450,7 @@ public enum Components {
             ///   - description: Short description of the property
             ///   - allowedValues: An ordered list of the allowed values of the property.
             ///   - valuesEditableBy: Who can edit the values of the property
+            ///   - requireExplicitValues: Whether setting properties values is mandatory
             public init(
                 propertyName: Swift.String,
                 url: Swift.String? = nil,
@@ -8640,7 +9460,8 @@ public enum Components {
                 defaultValue: Components.Schemas.CustomProperty.DefaultValuePayload? = nil,
                 description: Swift.String? = nil,
                 allowedValues: [Swift.String]? = nil,
-                valuesEditableBy: Components.Schemas.CustomProperty.ValuesEditableByPayload? = nil
+                valuesEditableBy: Components.Schemas.CustomProperty.ValuesEditableByPayload? = nil,
+                requireExplicitValues: Swift.Bool? = nil
             ) {
                 self.propertyName = propertyName
                 self.url = url
@@ -8651,6 +9472,7 @@ public enum Components {
                 self.description = description
                 self.allowedValues = allowedValues
                 self.valuesEditableBy = valuesEditableBy
+                self.requireExplicitValues = requireExplicitValues
             }
             public enum CodingKeys: String, CodingKey {
                 case propertyName = "property_name"
@@ -8662,6 +9484,7 @@ public enum Components {
                 case description
                 case allowedValues = "allowed_values"
                 case valuesEditableBy = "values_editable_by"
+                case requireExplicitValues = "require_explicit_values"
             }
         }
         /// Custom property set payload
@@ -8676,6 +9499,7 @@ public enum Components {
                 case singleSelect = "single_select"
                 case multiSelect = "multi_select"
                 case trueFalse = "true_false"
+                case url = "url"
             }
             /// The type of the value for the property
             ///
@@ -8693,8 +9517,8 @@ public enum Components {
                 case case1(Swift.String)
                 /// - Remark: Generated from `#/components/schemas/custom-property-set-payload/default_value/case2`.
                 case case2([Swift.String])
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .case1(try decoder.decodeFromSingleValueContainer())
                         return
@@ -8713,7 +9537,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .case1(value):
                         try encoder.encodeToSingleValueContainer(value)
@@ -8746,6 +9570,10 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/custom-property-set-payload/values_editable_by`.
             public var valuesEditableBy: Components.Schemas.CustomPropertySetPayload.ValuesEditableByPayload?
+            /// Whether setting properties values is mandatory
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-set-payload/require_explicit_values`.
+            public var requireExplicitValues: Swift.Bool?
             /// Creates a new `CustomPropertySetPayload`.
             ///
             /// - Parameters:
@@ -8755,13 +9583,15 @@ public enum Components {
             ///   - description: Short description of the property
             ///   - allowedValues: An ordered list of the allowed values of the property.
             ///   - valuesEditableBy: Who can edit the values of the property
+            ///   - requireExplicitValues: Whether setting properties values is mandatory
             public init(
                 valueType: Components.Schemas.CustomPropertySetPayload.ValueTypePayload,
                 required: Swift.Bool? = nil,
                 defaultValue: Components.Schemas.CustomPropertySetPayload.DefaultValuePayload? = nil,
                 description: Swift.String? = nil,
                 allowedValues: [Swift.String]? = nil,
-                valuesEditableBy: Components.Schemas.CustomPropertySetPayload.ValuesEditableByPayload? = nil
+                valuesEditableBy: Components.Schemas.CustomPropertySetPayload.ValuesEditableByPayload? = nil,
+                requireExplicitValues: Swift.Bool? = nil
             ) {
                 self.valueType = valueType
                 self.required = required
@@ -8769,6 +9599,7 @@ public enum Components {
                 self.description = description
                 self.allowedValues = allowedValues
                 self.valuesEditableBy = valuesEditableBy
+                self.requireExplicitValues = requireExplicitValues
             }
             public enum CodingKeys: String, CodingKey {
                 case valueType = "value_type"
@@ -8777,6 +9608,73 @@ public enum Components {
                 case description
                 case allowedValues = "allowed_values"
                 case valuesEditableBy = "values_editable_by"
+                case requireExplicitValues = "require_explicit_values"
+            }
+        }
+        /// Custom property name and associated value
+        ///
+        /// - Remark: Generated from `#/components/schemas/custom-property-value`.
+        public struct CustomPropertyValue: Codable, Hashable, Sendable {
+            /// The name of the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/property_name`.
+            public var propertyName: Swift.String
+            /// The value assigned to the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
+            @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case1`.
+                case case1(Swift.String)
+                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case2`.
+                case case2([Swift.String])
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
+                    do {
+                        self = .case1(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .case2(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    switch self {
+                    case let .case1(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    case let .case2(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    }
+                }
+            }
+            /// The value assigned to the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
+            public var value: Components.Schemas.CustomPropertyValue.ValuePayload?
+            /// Creates a new `CustomPropertyValue`.
+            ///
+            /// - Parameters:
+            ///   - propertyName: The name of the property
+            ///   - value: The value assigned to the property
+            public init(
+                propertyName: Swift.String,
+                value: Components.Schemas.CustomPropertyValue.ValuePayload? = nil
+            ) {
+                self.propertyName = propertyName
+                self.value = value
+            }
+            public enum CodingKeys: String, CodingKey {
+                case propertyName = "property_name"
+                case value
             }
         }
         /// List of custom property values for a repository
@@ -8913,11 +9811,11 @@ public enum Components {
                 self.value1 = value1
                 self.value2 = value2
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 self.value1 = try .init(from: decoder)
                 self.value2 = try .init(from: decoder)
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 try self.value1.encode(to: encoder)
                 try self.value2.encode(to: encoder)
             }
@@ -9011,6 +9909,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/repository-id`.
         public typealias RepositoryId = Swift.Int
+        /// The SHA256 digest of the artifact, in the form `sha256:HEX_DIGEST`.
+        ///
+        /// - Remark: Generated from `#/components/parameters/subject-digest`.
+        public typealias SubjectDigest = Swift.String
         /// The unique identifier of the hook. You can find this value in the `X-GitHub-Hook-ID` header of a webhook delivery.
         ///
         /// - Remark: Generated from `#/components/parameters/hook-id`.
@@ -9086,6 +9988,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/invitation-id`.
         public typealias InvitationId = Swift.Int
+        /// The unique identifier of the issue field.
+        ///
+        /// - Remark: Generated from `#/components/parameters/issue-field-id`.
+        public typealias IssueFieldId = Swift.Int
         /// The unique identifier of the issue type.
         ///
         /// - Remark: Generated from `#/components/parameters/issue-type-id`.
@@ -9611,410 +10517,6 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "notModified",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
-        }
-    }
-    /// Get all custom property values for an organization
-    ///
-    /// Gets all custom property values that are set for an organization.
-    ///
-    /// The organization must belong to an enterprise.
-    ///
-    /// Access requirements:
-    /// - Organization admins
-    /// - OAuth tokens and personal access tokens (classic) with the `read:org` scope
-    /// - Actors with the organization-level "read custom properties for an organization" fine-grained permission or above
-    ///
-    /// - Remark: HTTP `GET /organizations/{org}/org-properties/values`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)`.
-    public enum OrgsCustomPropertiesForOrgsGetOrganizationValues {
-        public static let id: Swift.String = "orgs/custom-properties-for-orgs-get-organization-values"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/GET/path`.
-            public struct Path: Sendable, Hashable {
-                /// The organization name. The name is not case sensitive.
-                ///
-                /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/GET/path/org`.
-                public var org: Components.Parameters.Org
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - org: The organization name. The name is not case sensitive.
-                public init(org: Components.Parameters.Org) {
-                    self.org = org
-                }
-            }
-            public var path: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Path
-            /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/GET/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Headers
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - headers:
-            public init(
-                path: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Path,
-                headers: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Input.Headers = .init()
-            ) {
-                self.path = path
-                self.headers = headers
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/GET/responses/200/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/GET/responses/200/content/application\/json`.
-                    case json([Components.Schemas.CustomPropertyValue])
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: [Components.Schemas.CustomPropertyValue] {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output.Ok.Body
-                /// Creates a new `Ok`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output.Ok.Body) {
-                    self.body = body
-                }
-            }
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)/responses/200`.
-            ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
-            ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.OrgsCustomPropertiesForOrgsGetOrganizationValues.Output.Ok {
-                get throws {
-                    switch self {
-                    case let .ok(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Forbidden
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)/responses/403`.
-            ///
-            /// HTTP response code: `403 forbidden`.
-            case forbidden(Components.Responses.Forbidden)
-            /// The associated value of the enum case if `self` is `.forbidden`.
-            ///
-            /// - Throws: An error if `self` is not `.forbidden`.
-            /// - SeeAlso: `.forbidden`.
-            public var forbidden: Components.Responses.Forbidden {
-                get throws {
-                    switch self {
-                    case let .forbidden(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "forbidden",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/get(orgs/custom-properties-for-orgs-get-organization-values)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
-        }
-    }
-    /// Create or update custom property values for an organization
-    ///
-    /// Create new or update existing custom property values for an organization.
-    /// To remove a custom property value from an organization, set the property value to `null`.
-    ///
-    /// The organization must belong to an enterprise.
-    ///
-    /// Access requirements:
-    /// - Organization admins
-    /// - OAuth tokens and personal access tokens (classic) with the `admin:org` scope
-    /// - Actors with the organization-level "edit custom properties for an organization" fine-grained permission
-    ///
-    /// - Remark: HTTP `PATCH /organizations/{org}/org-properties/values`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)`.
-    public enum OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues {
-        public static let id: Swift.String = "orgs/custom-properties-for-orgs-create-or-update-organization-values"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/path`.
-            public struct Path: Sendable, Hashable {
-                /// The organization name. The name is not case sensitive.
-                ///
-                /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/path/org`.
-                public var org: Components.Parameters.Org
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - org: The organization name. The name is not case sensitive.
-                public init(org: Components.Parameters.Org) {
-                    self.org = org
-                }
-            }
-            public var path: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Path
-            /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Headers
-            /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/requestBody`.
-            @frozen public enum Body: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/requestBody/json`.
-                public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// A list of custom property names and associated values to apply to the organization.
-                    ///
-                    /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/requestBody/json/properties`.
-                    public var properties: [Components.Schemas.CustomPropertyValue]
-                    /// Creates a new `JsonPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - properties: A list of custom property names and associated values to apply to the organization.
-                    public init(properties: [Components.Schemas.CustomPropertyValue]) {
-                        self.properties = properties
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case properties
-                    }
-                }
-                /// - Remark: Generated from `#/paths/organizations/{org}/org-properties/values/PATCH/requestBody/content/application\/json`.
-                case json(Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Body.JsonPayload)
-            }
-            public var body: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Body
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - headers:
-            ///   - body:
-            public init(
-                path: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Path,
-                headers: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Headers = .init(),
-                body: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Input.Body
-            ) {
-                self.path = path
-                self.headers = headers
-                self.body = body
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct NoContent: Sendable, Hashable {
-                /// Creates a new `NoContent`.
-                public init() {}
-            }
-            /// No Content when custom property values are successfully created or updated
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)/responses/204`.
-            ///
-            /// HTTP response code: `204 noContent`.
-            case noContent(Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Output.NoContent)
-            /// No Content when custom property values are successfully created or updated
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)/responses/204`.
-            ///
-            /// HTTP response code: `204 noContent`.
-            public static var noContent: Self {
-                .noContent(.init())
-            }
-            /// The associated value of the enum case if `self` is `.noContent`.
-            ///
-            /// - Throws: An error if `self` is not `.noContent`.
-            /// - SeeAlso: `.noContent`.
-            public var noContent: Operations.OrgsCustomPropertiesForOrgsCreateOrUpdateOrganizationValues.Output.NoContent {
-                get throws {
-                    switch self {
-                    case let .noContent(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "noContent",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Forbidden
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)/responses/403`.
-            ///
-            /// HTTP response code: `403 forbidden`.
-            case forbidden(Components.Responses.Forbidden)
-            /// The associated value of the enum case if `self` is `.forbidden`.
-            ///
-            /// - Throws: An error if `self` is not `.forbidden`.
-            /// - SeeAlso: `.forbidden`.
-            public var forbidden: Components.Responses.Forbidden {
-                get throws {
-                    switch self {
-                    case let .forbidden(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "forbidden",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Validation failed, or the endpoint has been spammed.
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/org-properties/values/patch(orgs/custom-properties-for-orgs-create-or-update-organization-values)/responses/422`.
-            ///
-            /// HTTP response code: `422 unprocessableContent`.
-            case unprocessableContent(Components.Responses.ValidationFailed)
-            /// The associated value of the enum case if `self` is `.unprocessableContent`.
-            ///
-            /// - Throws: An error if `self` is not `.unprocessableContent`.
-            /// - SeeAlso: `.unprocessableContent`.
-            public var unprocessableContent: Components.Responses.ValidationFailed {
-                get throws {
-                    switch self {
-                    case let .unprocessableContent(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "unprocessableContent",
                             response: self
                         )
                     }
@@ -10653,8 +11155,8 @@ public enum Operations {
                         case ValidationError(Components.Schemas.ValidationError)
                         /// - Remark: Generated from `#/paths/orgs/{org}/PATCH/responses/422/content/json/case2`.
                         case ValidationErrorSimple(Components.Schemas.ValidationErrorSimple)
-                        public init(from decoder: any Decoder) throws {
-                            var errors: [any Error] = []
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
                             do {
                                 self = .ValidationError(try .init(from: decoder))
                                 return
@@ -10673,7 +11175,7 @@ public enum Operations {
                                 errors: errors
                             )
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             switch self {
                             case let .ValidationError(value):
                                 try value.encode(to: encoder)
@@ -10940,6 +11442,675 @@ public enum Operations {
             }
         }
     }
+    /// Create an artifact deployment record
+    ///
+    /// Create or update deployment records for an artifact associated
+    /// with an organization.
+    /// This endpoint allows you to record information about a specific
+    /// artifact, such as its name, digest, environments, cluster, and
+    /// deployment.
+    /// The deployment name has to be uniqe within a cluster (i.e a
+    /// combination of logical, physical environment and cluster) as it
+    /// identifies unique deployment.
+    /// Multiple requests for the same combination of logical, physical
+    /// environment, cluster and deployment name will only create one
+    /// record, successive request will update the existing record.
+    /// This allows for a stable tracking of a deployment where the actual
+    /// deployed artifact can change over time.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/post(orgs/create-artifact-deployment-record)`.
+    public enum OrgsCreateArtifactDeploymentRecord {
+        public static let id: Swift.String = "orgs/create-artifact-deployment-record"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsCreateArtifactDeploymentRecord.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateArtifactDeploymentRecord.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateArtifactDeploymentRecord.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsCreateArtifactDeploymentRecord.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The name of the artifact.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/name`.
+                    public var name: Swift.String
+                    /// The hex encoded digest of the artifact.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/digest`.
+                    public var digest: Swift.String
+                    /// The artifact version.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/version`.
+                    public var version: Swift.String?
+                    /// The status of the artifact. Can be either deployed or decommissioned.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/status`.
+                    @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case deployed = "deployed"
+                        case decommissioned = "decommissioned"
+                    }
+                    /// The status of the artifact. Can be either deployed or decommissioned.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/status`.
+                    public var status: Operations.OrgsCreateArtifactDeploymentRecord.Input.Body.JsonPayload.StatusPayload
+                    /// The stage of the deployment.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/logical_environment`.
+                    public var logicalEnvironment: Swift.String
+                    /// The physical region of the deployment.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/physical_environment`.
+                    public var physicalEnvironment: Swift.String?
+                    /// The deployment cluster.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/cluster`.
+                    public var cluster: Swift.String?
+                    /// The unique identifier for the deployment represented by the new record. To accommodate differing
+                    /// containers and namespaces within a cluster, the following format is recommended:
+                    /// {namespaceName}-{deploymentName}-{containerName}.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/deployment_name`.
+                    public var deploymentName: Swift.String
+                    /// The tags associated with the deployment.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/tags`.
+                    public struct TagsPayload: Codable, Hashable, Sendable {
+                        /// A container of undocumented properties.
+                        public var additionalProperties: [String: Swift.String]
+                        /// Creates a new `TagsPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - additionalProperties: A container of undocumented properties.
+                        public init(additionalProperties: [String: Swift.String] = .init()) {
+                            self.additionalProperties = additionalProperties
+                        }
+                        public init(from decoder: any Swift.Decoder) throws {
+                            additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                        }
+                        public func encode(to encoder: any Swift.Encoder) throws {
+                            try encoder.encodeAdditionalProperties(additionalProperties)
+                        }
+                    }
+                    /// The tags associated with the deployment.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/tags`.
+                    public var tags: Operations.OrgsCreateArtifactDeploymentRecord.Input.Body.JsonPayload.TagsPayload?
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/RuntimeRisksPayload`.
+                    @frozen public enum RuntimeRisksPayloadPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case criticalResource = "critical-resource"
+                        case internetExposed = "internet-exposed"
+                        case lateralMovement = "lateral-movement"
+                        case sensitiveData = "sensitive-data"
+                    }
+                    /// A list of runtime risks associated with the deployment.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/runtime_risks`.
+                    public typealias RuntimeRisksPayload = [Operations.OrgsCreateArtifactDeploymentRecord.Input.Body.JsonPayload.RuntimeRisksPayloadPayload]
+                    /// A list of runtime risks associated with the deployment.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/runtime_risks`.
+                    public var runtimeRisks: Operations.OrgsCreateArtifactDeploymentRecord.Input.Body.JsonPayload.RuntimeRisksPayload?
+                    /// The name of the GitHub repository associated with the artifact. This should be used
+                    /// when there are no provenance attestations available for the artifact. The repository
+                    /// must belong to the organization specified in the path parameter.
+                    ///
+                    /// If a provenance attestation is available for the artifact, the API will use
+                    /// the repository information from the attestation instead of this parameter.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/github_repository`.
+                    public var githubRepository: Swift.String?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - name: The name of the artifact.
+                    ///   - digest: The hex encoded digest of the artifact.
+                    ///   - version: The artifact version.
+                    ///   - status: The status of the artifact. Can be either deployed or decommissioned.
+                    ///   - logicalEnvironment: The stage of the deployment.
+                    ///   - physicalEnvironment: The physical region of the deployment.
+                    ///   - cluster: The deployment cluster.
+                    ///   - deploymentName: The unique identifier for the deployment represented by the new record. To accommodate differing
+                    ///   - tags: The tags associated with the deployment.
+                    ///   - runtimeRisks: A list of runtime risks associated with the deployment.
+                    ///   - githubRepository: The name of the GitHub repository associated with the artifact. This should be used
+                    public init(
+                        name: Swift.String,
+                        digest: Swift.String,
+                        version: Swift.String? = nil,
+                        status: Operations.OrgsCreateArtifactDeploymentRecord.Input.Body.JsonPayload.StatusPayload,
+                        logicalEnvironment: Swift.String,
+                        physicalEnvironment: Swift.String? = nil,
+                        cluster: Swift.String? = nil,
+                        deploymentName: Swift.String,
+                        tags: Operations.OrgsCreateArtifactDeploymentRecord.Input.Body.JsonPayload.TagsPayload? = nil,
+                        runtimeRisks: Operations.OrgsCreateArtifactDeploymentRecord.Input.Body.JsonPayload.RuntimeRisksPayload? = nil,
+                        githubRepository: Swift.String? = nil
+                    ) {
+                        self.name = name
+                        self.digest = digest
+                        self.version = version
+                        self.status = status
+                        self.logicalEnvironment = logicalEnvironment
+                        self.physicalEnvironment = physicalEnvironment
+                        self.cluster = cluster
+                        self.deploymentName = deploymentName
+                        self.tags = tags
+                        self.runtimeRisks = runtimeRisks
+                        self.githubRepository = githubRepository
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case name
+                        case digest
+                        case version
+                        case status
+                        case logicalEnvironment = "logical_environment"
+                        case physicalEnvironment = "physical_environment"
+                        case cluster
+                        case deploymentName = "deployment_name"
+                        case tags
+                        case runtimeRisks = "runtime_risks"
+                        case githubRepository = "github_repository"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/content/application\/json`.
+                case json(Operations.OrgsCreateArtifactDeploymentRecord.Input.Body.JsonPayload)
+            }
+            public var body: Operations.OrgsCreateArtifactDeploymentRecord.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.OrgsCreateArtifactDeploymentRecord.Input.Path,
+                headers: Operations.OrgsCreateArtifactDeploymentRecord.Input.Headers = .init(),
+                body: Operations.OrgsCreateArtifactDeploymentRecord.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The number of deployment records created
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/responses/200/content/json/total_count`.
+                        public var totalCount: Swift.Int?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/responses/200/content/json/deployment_records`.
+                        public var deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - totalCount: The number of deployment records created
+                        ///   - deploymentRecords:
+                        public init(
+                            totalCount: Swift.Int? = nil,
+                            deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]? = nil
+                        ) {
+                            self.totalCount = totalCount
+                            self.deploymentRecords = deploymentRecords
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case totalCount = "total_count"
+                            case deploymentRecords = "deployment_records"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/responses/200/content/application\/json`.
+                    case json(Operations.OrgsCreateArtifactDeploymentRecord.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.OrgsCreateArtifactDeploymentRecord.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsCreateArtifactDeploymentRecord.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsCreateArtifactDeploymentRecord.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Artifact deployment record stored successfully.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/post(orgs/create-artifact-deployment-record)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsCreateArtifactDeploymentRecord.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsCreateArtifactDeploymentRecord.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set cluster deployment records
+    ///
+    /// Set deployment records for a given cluster.
+    /// If proposed records in the 'deployments' field have identical 'cluster', 'logical_environment',
+    /// 'physical_environment', and 'deployment_name' values as existing records, the existing records will be updated.
+    /// If no existing records match, new records will be created.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)`.
+    public enum OrgsSetClusterDeploymentRecords {
+        public static let id: Swift.String = "orgs/set-cluster-deployment-records"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/path/org`.
+                public var org: Components.Parameters.Org
+                /// The cluster name.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/path/cluster`.
+                public var cluster: Swift.String
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - cluster: The cluster name.
+                public init(
+                    org: Components.Parameters.Org,
+                    cluster: Swift.String
+                ) {
+                    self.org = org
+                    self.cluster = cluster
+                }
+            }
+            public var path: Operations.OrgsSetClusterDeploymentRecords.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsSetClusterDeploymentRecords.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsSetClusterDeploymentRecords.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsSetClusterDeploymentRecords.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The stage of the deployment.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/logical_environment`.
+                    public var logicalEnvironment: Swift.String
+                    /// The physical region of the deployment.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/physical_environment`.
+                    public var physicalEnvironment: Swift.String?
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload`.
+                    public struct DeploymentsPayloadPayload: Codable, Hashable, Sendable {
+                        /// The name of the artifact. Note that if multiple deployments have identical 'digest' parameter values,
+                        /// the name parameter must also be identical across all entries.
+                        ///
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/name`.
+                        public var name: Swift.String
+                        /// The hex encoded digest of the artifact. Note that if multiple deployments have identical 'digest' parameter values,
+                        /// the name and version parameters must also be identical across all entries.
+                        ///
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/digest`.
+                        public var digest: Swift.String
+                        /// The artifact version. Note that if multiple deployments have identical 'digest' parameter values,
+                        /// the version parameter must also be identical across all entries.
+                        ///
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/version`.
+                        public var version: Swift.String?
+                        /// The deployment status of the artifact.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/status`.
+                        @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case deployed = "deployed"
+                            case decommissioned = "decommissioned"
+                        }
+                        /// The deployment status of the artifact.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/status`.
+                        public var status: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayloadPayload.StatusPayload?
+                        /// The unique identifier for the deployment represented by the new record. To accommodate differing
+                        /// containers and namespaces within a record set, the following format is recommended:
+                        /// {namespaceName}-{deploymentName}-{containerName}.
+                        /// The deployment_name must be unique across all entries in the deployments array.
+                        ///
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/deployment_name`.
+                        public var deploymentName: Swift.String
+                        /// The name of the GitHub repository associated with the artifact. This should be used
+                        /// when there are no provenance attestations available for the artifact. The repository
+                        /// must belong to the organization specified in the path parameter.
+                        ///
+                        /// If a provenance attestation is available for the artifact, the API will use
+                        /// the repository information from the attestation instead of this parameter.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/github_repository`.
+                        public var githubRepository: Swift.String?
+                        /// Key-value pairs to tag the deployment record.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/tags`.
+                        public struct TagsPayload: Codable, Hashable, Sendable {
+                            /// A container of undocumented properties.
+                            public var additionalProperties: [String: Swift.String]
+                            /// Creates a new `TagsPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - additionalProperties: A container of undocumented properties.
+                            public init(additionalProperties: [String: Swift.String] = .init()) {
+                                self.additionalProperties = additionalProperties
+                            }
+                            public init(from decoder: any Swift.Decoder) throws {
+                                additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                            }
+                            public func encode(to encoder: any Swift.Encoder) throws {
+                                try encoder.encodeAdditionalProperties(additionalProperties)
+                            }
+                        }
+                        /// Key-value pairs to tag the deployment record.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/tags`.
+                        public var tags: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayloadPayload.TagsPayload?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/RuntimeRisksPayload`.
+                        @frozen public enum RuntimeRisksPayloadPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case criticalResource = "critical-resource"
+                            case internetExposed = "internet-exposed"
+                            case lateralMovement = "lateral-movement"
+                            case sensitiveData = "sensitive-data"
+                        }
+                        /// A list of runtime risks associated with the deployment.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/runtime_risks`.
+                        public typealias RuntimeRisksPayload = [Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayloadPayload.RuntimeRisksPayloadPayload]
+                        /// A list of runtime risks associated with the deployment.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/runtime_risks`.
+                        public var runtimeRisks: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayloadPayload.RuntimeRisksPayload?
+                        /// Creates a new `DeploymentsPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - name: The name of the artifact. Note that if multiple deployments have identical 'digest' parameter values,
+                        ///   - digest: The hex encoded digest of the artifact. Note that if multiple deployments have identical 'digest' parameter values,
+                        ///   - version: The artifact version. Note that if multiple deployments have identical 'digest' parameter values,
+                        ///   - status: The deployment status of the artifact.
+                        ///   - deploymentName: The unique identifier for the deployment represented by the new record. To accommodate differing
+                        ///   - githubRepository: The name of the GitHub repository associated with the artifact. This should be used
+                        ///   - tags: Key-value pairs to tag the deployment record.
+                        ///   - runtimeRisks: A list of runtime risks associated with the deployment.
+                        public init(
+                            name: Swift.String,
+                            digest: Swift.String,
+                            version: Swift.String? = nil,
+                            status: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayloadPayload.StatusPayload? = nil,
+                            deploymentName: Swift.String,
+                            githubRepository: Swift.String? = nil,
+                            tags: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayloadPayload.TagsPayload? = nil,
+                            runtimeRisks: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayloadPayload.RuntimeRisksPayload? = nil
+                        ) {
+                            self.name = name
+                            self.digest = digest
+                            self.version = version
+                            self.status = status
+                            self.deploymentName = deploymentName
+                            self.githubRepository = githubRepository
+                            self.tags = tags
+                            self.runtimeRisks = runtimeRisks
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case name
+                            case digest
+                            case version
+                            case status
+                            case deploymentName = "deployment_name"
+                            case githubRepository = "github_repository"
+                            case tags
+                            case runtimeRisks = "runtime_risks"
+                        }
+                    }
+                    /// The list of deployments to record.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/deployments`.
+                    public typealias DeploymentsPayload = [Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayloadPayload]
+                    /// The list of deployments to record.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/deployments`.
+                    public var deployments: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayload
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - logicalEnvironment: The stage of the deployment.
+                    ///   - physicalEnvironment: The physical region of the deployment.
+                    ///   - deployments: The list of deployments to record.
+                    public init(
+                        logicalEnvironment: Swift.String,
+                        physicalEnvironment: Swift.String? = nil,
+                        deployments: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayload
+                    ) {
+                        self.logicalEnvironment = logicalEnvironment
+                        self.physicalEnvironment = physicalEnvironment
+                        self.deployments = deployments
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case logicalEnvironment = "logical_environment"
+                        case physicalEnvironment = "physical_environment"
+                        case deployments
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/content/application\/json`.
+                case json(Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload)
+            }
+            public var body: Operations.OrgsSetClusterDeploymentRecords.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.OrgsSetClusterDeploymentRecords.Input.Path,
+                headers: Operations.OrgsSetClusterDeploymentRecords.Input.Headers = .init(),
+                body: Operations.OrgsSetClusterDeploymentRecords.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The number of deployment records created
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/200/content/json/total_count`.
+                        public var totalCount: Swift.Int?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/200/content/json/deployment_records`.
+                        public var deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - totalCount: The number of deployment records created
+                        ///   - deploymentRecords:
+                        public init(
+                            totalCount: Swift.Int? = nil,
+                            deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]? = nil
+                        ) {
+                            self.totalCount = totalCount
+                            self.deploymentRecords = deploymentRecords
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case totalCount = "total_count"
+                            case deploymentRecords = "deployment_records"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/200/content/application\/json`.
+                    case json(Operations.OrgsSetClusterDeploymentRecords.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.OrgsSetClusterDeploymentRecords.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsSetClusterDeploymentRecords.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsSetClusterDeploymentRecords.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Deployment records created or updated successfully.
+            ///
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsSetClusterDeploymentRecords.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsSetClusterDeploymentRecords.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// Create artifact metadata storage record
     ///
     /// Create metadata storage records for artifacts associated with an organization.
@@ -10990,6 +12161,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/digest`.
                     public var digest: Swift.String
+                    /// The artifact version.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/version`.
+                    public var version: Swift.String?
                     /// The URL where the artifact is stored.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/artifact_url`.
@@ -11018,41 +12193,58 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/status`.
                     public var status: Operations.OrgsCreateArtifactStorageRecord.Input.Body.JsonPayload.StatusPayload?
+                    /// The name of the GitHub repository associated with the artifact. This should be used
+                    /// when there are no provenance attestations available for the artifact. The repository
+                    /// must belong to the organization specified in the path parameter.
+                    ///
+                    /// If a provenance attestation is available for the artifact, the API will use
+                    /// the repository information from the attestation instead of this parameter.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/github_repository`.
+                    public var githubRepository: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - name: The name of the artifact.
                     ///   - digest: The digest of the artifact (algorithm:hex-encoded-digest).
+                    ///   - version: The artifact version.
                     ///   - artifactUrl: The URL where the artifact is stored.
                     ///   - path: The path of the artifact.
                     ///   - registryUrl: The base URL of the artifact registry.
                     ///   - repository: The repository name within the registry.
                     ///   - status: The status of the artifact (e.g., active, inactive).
+                    ///   - githubRepository: The name of the GitHub repository associated with the artifact. This should be used
                     public init(
                         name: Swift.String,
                         digest: Swift.String,
+                        version: Swift.String? = nil,
                         artifactUrl: Swift.String? = nil,
                         path: Swift.String? = nil,
                         registryUrl: Swift.String,
                         repository: Swift.String? = nil,
-                        status: Operations.OrgsCreateArtifactStorageRecord.Input.Body.JsonPayload.StatusPayload? = nil
+                        status: Operations.OrgsCreateArtifactStorageRecord.Input.Body.JsonPayload.StatusPayload? = nil,
+                        githubRepository: Swift.String? = nil
                     ) {
                         self.name = name
                         self.digest = digest
+                        self.version = version
                         self.artifactUrl = artifactUrl
                         self.path = path
                         self.registryUrl = registryUrl
                         self.repository = repository
                         self.status = status
+                        self.githubRepository = githubRepository
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
                         case digest
+                        case version
                         case artifactUrl = "artifact_url"
                         case path
                         case registryUrl = "registry_url"
                         case repository
                         case status
+                        case githubRepository = "github_repository"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/content/application\/json`.
@@ -11205,6 +12397,172 @@ public enum Operations {
             /// - Throws: An error if `self` is not `.ok`.
             /// - SeeAlso: `.ok`.
             public var ok: Operations.OrgsCreateArtifactStorageRecord.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List artifact deployment records
+    ///
+    /// List deployment records for an artifact metadata associated with an organization.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/get(orgs/list-artifact-deployment-records)`.
+    public enum OrgsListArtifactDeploymentRecords {
+        public static let id: Swift.String = "orgs/list-artifact-deployment-records"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// The SHA256 digest of the artifact, in the form `sha256:HEX_DIGEST`.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/GET/path/subject_digest`.
+                public var subjectDigest: Components.Parameters.SubjectDigest
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - subjectDigest: The SHA256 digest of the artifact, in the form `sha256:HEX_DIGEST`.
+                public init(
+                    org: Components.Parameters.Org,
+                    subjectDigest: Components.Parameters.SubjectDigest
+                ) {
+                    self.org = org
+                    self.subjectDigest = subjectDigest
+                }
+            }
+            public var path: Operations.OrgsListArtifactDeploymentRecords.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListArtifactDeploymentRecords.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListArtifactDeploymentRecords.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsListArtifactDeploymentRecords.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.OrgsListArtifactDeploymentRecords.Input.Path,
+                headers: Operations.OrgsListArtifactDeploymentRecords.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The number of deployment records for this digest and organization
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/GET/responses/200/content/json/total_count`.
+                        public var totalCount: Swift.Int?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/GET/responses/200/content/json/deployment_records`.
+                        public var deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - totalCount: The number of deployment records for this digest and organization
+                        ///   - deploymentRecords:
+                        public init(
+                            totalCount: Swift.Int? = nil,
+                            deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]? = nil
+                        ) {
+                            self.totalCount = totalCount
+                            self.deploymentRecords = deploymentRecords
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case totalCount = "total_count"
+                            case deploymentRecords = "deployment_records"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/GET/responses/200/content/application\/json`.
+                    case json(Operations.OrgsListArtifactDeploymentRecords.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.OrgsListArtifactDeploymentRecords.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsListArtifactDeploymentRecords.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsListArtifactDeploymentRecords.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Successful response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/{subject_digest}/metadata/deployment-records/get(orgs/list-artifact-deployment-records)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsListArtifactDeploymentRecords.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsListArtifactDeploymentRecords.Output.Ok {
                 get throws {
                     switch self {
                     case let .ok(response):
@@ -11637,10 +12995,10 @@ public enum Operations {
                                         public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                             self.additionalProperties = additionalProperties
                                         }
-                                        public init(from decoder: any Decoder) throws {
+                                        public init(from decoder: any Swift.Decoder) throws {
                                             additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                                         }
-                                        public func encode(to encoder: any Encoder) throws {
+                                        public func encode(to encoder: any Swift.Encoder) throws {
                                             try encoder.encodeAdditionalProperties(additionalProperties)
                                         }
                                     }
@@ -11657,10 +13015,10 @@ public enum Operations {
                                         public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                             self.additionalProperties = additionalProperties
                                         }
-                                        public init(from decoder: any Decoder) throws {
+                                        public init(from decoder: any Swift.Decoder) throws {
                                             additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                                         }
-                                        public func encode(to encoder: any Encoder) throws {
+                                        public func encode(to encoder: any Swift.Encoder) throws {
                                             try encoder.encodeAdditionalProperties(additionalProperties)
                                         }
                                     }
@@ -11727,10 +13085,10 @@ public enum Operations {
                             public init(additionalProperties: [String: Operations.OrgsListAttestationsBulk.Output.Ok.Body.JsonPayload.AttestationsSubjectDigestsPayload.AdditionalPropertiesPayload?] = .init()) {
                                 self.additionalProperties = additionalProperties
                             }
-                            public init(from decoder: any Decoder) throws {
+                            public init(from decoder: any Swift.Decoder) throws {
                                 additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                             }
-                            public func encode(to encoder: any Encoder) throws {
+                            public func encode(to encoder: any Swift.Encoder) throws {
                                 try encoder.encodeAdditionalProperties(additionalProperties)
                             }
                         }
@@ -11963,8 +13321,8 @@ public enum Operations {
                     }
                     /// - Remark: Generated from `#/paths/orgs/{org}/attestations/delete-request/POST/requestBody/json/case2`.
                     case case2(Operations.OrgsDeleteAttestationsBulk.Input.Body.JsonPayload.Case2Payload)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -11983,7 +13341,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -12823,10 +14181,10 @@ public enum Operations {
                                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                         self.additionalProperties = additionalProperties
                                     }
-                                    public init(from decoder: any Decoder) throws {
+                                    public init(from decoder: any Swift.Decoder) throws {
                                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                                     }
-                                    public func encode(to encoder: any Encoder) throws {
+                                    public func encode(to encoder: any Swift.Encoder) throws {
                                         try encoder.encodeAdditionalProperties(additionalProperties)
                                     }
                                 }
@@ -12843,10 +14201,10 @@ public enum Operations {
                                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                         self.additionalProperties = additionalProperties
                                     }
-                                    public init(from decoder: any Decoder) throws {
+                                    public init(from decoder: any Swift.Decoder) throws {
                                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                                     }
-                                    public func encode(to encoder: any Encoder) throws {
+                                    public func encode(to encoder: any Swift.Encoder) throws {
                                         try encoder.encodeAdditionalProperties(additionalProperties)
                                     }
                                 }
@@ -18751,6 +20109,726 @@ public enum Operations {
             }
         }
     }
+    /// List issue fields for an organization
+    ///
+    /// Lists all issue fields for an organization. OAuth app tokens and personal access tokens (classic) need the read:org scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/issue-fields`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/get(orgs/list-issue-fields)`.
+    public enum OrgsListIssueFields {
+        public static let id: Swift.String = "orgs/list-issue-fields"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsListIssueFields.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListIssueFields.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsListIssueFields.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsListIssueFields.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.OrgsListIssueFields.Input.Path,
+                headers: Operations.OrgsListIssueFields.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.IssueField])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.IssueField] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsListIssueFields.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsListIssueFields.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/get(orgs/list-issue-fields)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsListIssueFields.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsListIssueFields.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/get(orgs/list-issue-fields)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Create issue field for an organization
+    ///
+    /// Creates a new issue field for an organization.
+    ///
+    /// You can find out more about issue fields in [Managing issue fields in an organization](https://docs.github.com/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization).
+    ///
+    /// To use this endpoint, the authenticated user must be an administrator for the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/issue-fields`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/post(orgs/create-issue-field)`.
+    public enum OrgsCreateIssueField {
+        public static let id: Swift.String = "orgs/create-issue-field"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/POST/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.OrgsCreateIssueField.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateIssueField.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateIssueField.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsCreateIssueField.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/POST/requestBody/content/application\/json`.
+                case json(Components.Schemas.OrganizationCreateIssueField)
+            }
+            public var body: Operations.OrgsCreateIssueField.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.OrgsCreateIssueField.Input.Path,
+                headers: Operations.OrgsCreateIssueField.Input.Headers = .init(),
+                body: Operations.OrgsCreateIssueField.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/POST/responses/200/content/application\/json`.
+                    case json(Components.Schemas.IssueField)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.IssueField {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsCreateIssueField.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsCreateIssueField.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/post(orgs/create-issue-field)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsCreateIssueField.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsCreateIssueField.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/post(orgs/create-issue-field)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/post(orgs/create-issue-field)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailedSimple)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailedSimple {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Update issue field for an organization
+    ///
+    /// Updates an issue field for an organization.
+    ///
+    /// You can find out more about issue fields in [Managing issue fields in an organization](https://docs.github.com/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization).
+    ///
+    /// To use this endpoint, the authenticated user must be an administrator for the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/issue-fields/{issue_field_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/patch(orgs/update-issue-field)`.
+    public enum OrgsUpdateIssueField {
+        public static let id: Swift.String = "orgs/update-issue-field"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/PATCH/path/org`.
+                public var org: Components.Parameters.Org
+                /// The unique identifier of the issue field.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/PATCH/path/issue_field_id`.
+                public var issueFieldId: Components.Parameters.IssueFieldId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - issueFieldId: The unique identifier of the issue field.
+                public init(
+                    org: Components.Parameters.Org,
+                    issueFieldId: Components.Parameters.IssueFieldId
+                ) {
+                    self.org = org
+                    self.issueFieldId = issueFieldId
+                }
+            }
+            public var path: Operations.OrgsUpdateIssueField.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsUpdateIssueField.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsUpdateIssueField.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsUpdateIssueField.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/PATCH/requestBody/content/application\/json`.
+                case json(Components.Schemas.OrganizationUpdateIssueField)
+            }
+            public var body: Operations.OrgsUpdateIssueField.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.OrgsUpdateIssueField.Input.Path,
+                headers: Operations.OrgsUpdateIssueField.Input.Headers = .init(),
+                body: Operations.OrgsUpdateIssueField.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/PATCH/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/PATCH/responses/200/content/application\/json`.
+                    case json(Components.Schemas.IssueField)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.IssueField {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsUpdateIssueField.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsUpdateIssueField.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/patch(orgs/update-issue-field)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsUpdateIssueField.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsUpdateIssueField.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/patch(orgs/update-issue-field)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/patch(orgs/update-issue-field)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailedSimple)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailedSimple {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Delete issue field for an organization
+    ///
+    /// Deletes an issue field for an organization.
+    ///
+    /// You can find out more about issue fields in [Managing issue fields in an organization](https://docs.github.com/issues/tracking-your-work-with-issues/using-issues/managing-issue-fields-in-an-organization).
+    ///
+    /// To use this endpoint, the authenticated user must be an administrator for the organization. OAuth app tokens and
+    /// personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/issue-fields/{issue_field_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/delete(orgs/delete-issue-field)`.
+    public enum OrgsDeleteIssueField {
+        public static let id: Swift.String = "orgs/delete-issue-field"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/DELETE/path/org`.
+                public var org: Components.Parameters.Org
+                /// The unique identifier of the issue field.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/DELETE/path/issue_field_id`.
+                public var issueFieldId: Components.Parameters.IssueFieldId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - issueFieldId: The unique identifier of the issue field.
+                public init(
+                    org: Components.Parameters.Org,
+                    issueFieldId: Components.Parameters.IssueFieldId
+                ) {
+                    self.org = org
+                    self.issueFieldId = issueFieldId
+                }
+            }
+            public var path: Operations.OrgsDeleteIssueField.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/issue-fields/{issue_field_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsDeleteIssueField.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsDeleteIssueField.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsDeleteIssueField.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.OrgsDeleteIssueField.Input.Path,
+                headers: Operations.OrgsDeleteIssueField.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/delete(orgs/delete-issue-field)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Components.Responses.NoContent)
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/delete(orgs/delete-issue-field)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Components.Responses.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/delete(orgs/delete-issue-field)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/issue-fields/{issue_field_id}/delete(orgs/delete-issue-field)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailedSimple)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailedSimple {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// List issue types for an organization
     ///
     /// Lists all issue types for an organization. OAuth app tokens and personal access tokens (classic) need the read:org scope to use this endpoint.
@@ -22513,7 +24591,7 @@ public enum Operations {
                     public struct JsonPayload: Codable, Hashable, Sendable {
                         /// Creates a new `JsonPayload`.
                         public init() {}
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             try decoder.ensureNoAdditionalProperties(knownKeys: [])
                         }
                     }
