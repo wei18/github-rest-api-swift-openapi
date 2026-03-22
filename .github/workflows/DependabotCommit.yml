@@ -38,6 +38,8 @@ jobs:
 
       - uses: ./.github/composites/git-config
 
+      - run: make .build/bin/swift-openapi-generator
+
       - name: "Commit new sources"
         run: |
           make install
