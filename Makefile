@@ -20,7 +20,7 @@ commit:
 		&& echo "::notice::git commit $(file)" \
 		|| true;
 
-SWIFT_BUILD_FLAGS = -c release --arch arm64 --arch x86_64
+SWIFT_BUILD_FLAGS = -c release
 EXECUTABLE_NAME = swift-openapi-generator
 EXECUTABLE_PATH = $(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(EXECUTABLE_NAME)
 .NOTPARALLEL: .build/bin/swift-openapi-generator
