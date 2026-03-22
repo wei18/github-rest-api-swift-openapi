@@ -31,4 +31,6 @@ jobs:
         with:
           os: ${{ matrix.os }}
       
+      - run: make .build/bin/swift-openapi-generator
+      
       - run: swift test
