@@ -1,6 +1,7 @@
 [tools]
 swift = "6"
 "spm:apple/swift-openapi-generator" = "latest"
+jq = "1.8.1"
 
 [settings]
 experimental = true

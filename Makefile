@@ -5,6 +5,8 @@
 # [Special-Targets](https://www.gnu.org/software/make/manual/html_node/Special-Targets.html)
 .DEFAULT_GOAL  := install
 OPENAPI_PATH   := Submodule/github/rest-api-description/descriptions/api.github.com/api.github.com.json
+FILTERED_NAMES  = $(shell jq -r '.tags[].name' $(OPENAPI_PATH))
+SOURCE_DIRS     = $(addprefix Sources/, $(FILTERED_NAMES))
 PACKAGE_PATHS  := Package.swift
 
 ## Helper
@@ -12,82 +14,64 @@ PACKAGE_PATHS  := Package.swift
 .SILENT: commit
 .PHONY: commit
 commit:
-	@echo "::debug::[commit] start $(file)"
 	git add "$(file)"
 	git commit -m "Commit via running: make $(file)" >/dev/null \
-		&& @echo "::notice:: git commit $(file)\n" \
+		&& touch "$(file)" \
+		&& echo "::notice::git commit $(file)" \
 		|| true;
-	touch "$(file)";
-	@echo "::debug::[commit] end $(file)"
 
 .PHONY: swift-openapi-generator
 swift-openapi-generator:
-	@echo "::debug::[generator] setup swift-openapi-generator"
+	@echo "::debug::make: $@"
 	mise use spm:apple/swift-openapi-generator
 
-## Create sources
+## Generate Sources
 
+.INTERMEDIATE: %/openapi-generator-config.yml
 %/openapi-generator-config.yml:
-	@echo "::debug::[config] start $(@D)"
-	@mkdir -p "$(@D)"; \
-		tag_name=$(shell basename $(shell dirname $@)); \
-		@echo "::debug::[config] tag=$$tag_name"; \
+	@echo ;
+	@echo "::debug::make: $(@D)"
+	mkdir -p "$(@D)"
+	@echo "::debug::make: $@"
+	tag_name=$(shell basename $(shell dirname $@)); \
 		swift Scripts/GeneratorConfigBuilder.swift $$tag_name
-	@echo "::debug::[config] end $(@D)"
 
 .NOTPARALLEL: Submodule # Prevent submodule update from running in parallel with other jobs
 Submodule:
-	@echo "::debug::[submodule] start"
-ifdef GITHUB_ACTIONS
-	@echo "::debug::[submodule] CI mode skip update"
-else
-	@echo "::debug::[submodule] updating"
+ifndef GITHUB_ACTIONS
+	@echo "::debug::make: $@"
 	@git submodule update --remote
 	@$(MAKE) commit file="$@"
 endif
-	@echo "::debug::[submodule] end"
+	@echo ;
 
 $(OPENAPI_PATH): Submodule
 	@touch "$@"
 
-%/Client.swift %/Types.swift: $(OPENAPI_PATH)
-	@echo "::debug::[generate] start $(@D)"
-	@echo "Folder $(@D) running"
-	@$(MAKE) "$(@D)/openapi-generator-config.yml"
-	@echo "::debug::[generate] running openapi-generator"
+%/Client.swift %/Types.swift: $(OPENAPI_PATH) %/openapi-generator-config.yml
+	@echo "::debug::make: $@"
 	swift-openapi-generator generate \
 		"$(OPENAPI_PATH)" \
 		--config "$(@D)/openapi-generator-config.yml" \
 		--output-directory "$(@D)";
-	@echo "::debug::[generate] finished openapi-generator"
-	@touch $(@D)/*.swift
-	@rm "$(@D)/openapi-generator-config.yml";
-	@echo ;
-	@echo "::debug::[generate] end $(@D)"
 
 Sources/%: Sources/%/Client.swift Sources/%/Types.swift
-	@echo "::debug::[target] build $@"
 	@$(MAKE) commit file="$@"
 
-.DELETE_ON_ERROR: Sources
-Sources: $(OPENAPI_PATH)
-	@echo "::debug::[sources] start"
-	@names=$$(swift Scripts/PackageTargetsParser.swift $(OPENAPI_PATH)); \
-	$(MAKE) $$(printf "Sources/%s " $$names)
-	@echo "::debug::[sources] end"
-
-$(PACKAGE_PATHS): Sources
-	@echo "::debug::[package] start Package.swift"
+$(PACKAGE_PATHS): $(SOURCE_DIRS)
+	@echo "::debug::make: $@"
 	swift Scripts/PackageBuilder.swift "$@"
 	@$(MAKE) commit file="$@"
-	@echo "::debug::[package] end Package.swift"
 
 .spi.yml: $(PACKAGE_PATHS)
-	@echo "::debug::[spi] start"
+	@echo "::debug::make: $@"
 	swift Scripts/SPIManifestBuilder.swift
 	@$(MAKE) commit file="$@"
-	@echo "::debug::[spi] end"
 
-## Install
+## main
 
 install: .spi.yml
+
+update:
+	$(MAKE) -B Submodule
+	$(MAKE) install
