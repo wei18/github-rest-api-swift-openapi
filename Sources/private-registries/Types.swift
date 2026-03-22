@@ -330,8 +330,8 @@ public enum Components {
                     case case2(Swift.Int?)
                     /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
                     case case3([Swift.String]?)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -356,7 +356,7 @@ public enum Components {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -459,10 +459,18 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/registry_type`.
             public var registryType: Components.Schemas.OrgPrivateRegistryConfiguration.RegistryTypePayload
+            /// The URL of the private registry.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/url`.
+            public var url: Swift.String?
             /// The username to use when authenticating with the private registry.
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/username`.
             public var username: Swift.String?
+            /// Whether this private registry replaces the base registry (e.g., npmjs.org for npm, rubygems.org for rubygems). When `true`, Dependabot will only use this registry and will not fall back to the public registry. When `false` (default), Dependabot will use this registry for scoped packages but may fall back to the public registry for other packages.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/replaces_base`.
+            public var replacesBase: Swift.Bool?
             /// Which type of organization repositories have access to the private registry.
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/visibility`.
@@ -484,21 +492,27 @@ public enum Components {
             /// - Parameters:
             ///   - name: The name of the private registry configuration.
             ///   - registryType: The registry type.
+            ///   - url: The URL of the private registry.
             ///   - username: The username to use when authenticating with the private registry.
+            ///   - replacesBase: Whether this private registry replaces the base registry (e.g., npmjs.org for npm, rubygems.org for rubygems). When `true`, Dependabot will only use this registry and will not fall back to the public registry. When `false` (default), Dependabot will use this registry for scoped packages but may fall back to the public registry for other packages.
             ///   - visibility: Which type of organization repositories have access to the private registry.
             ///   - createdAt:
             ///   - updatedAt:
             public init(
                 name: Swift.String,
                 registryType: Components.Schemas.OrgPrivateRegistryConfiguration.RegistryTypePayload,
+                url: Swift.String? = nil,
                 username: Swift.String? = nil,
+                replacesBase: Swift.Bool? = nil,
                 visibility: Components.Schemas.OrgPrivateRegistryConfiguration.VisibilityPayload,
                 createdAt: Foundation.Date,
                 updatedAt: Foundation.Date
             ) {
                 self.name = name
                 self.registryType = registryType
+                self.url = url
                 self.username = username
+                self.replacesBase = replacesBase
                 self.visibility = visibility
                 self.createdAt = createdAt
                 self.updatedAt = updatedAt
@@ -506,7 +520,9 @@ public enum Components {
             public enum CodingKeys: String, CodingKey {
                 case name
                 case registryType = "registry_type"
+                case url
                 case username
+                case replacesBase = "replaces_base"
                 case visibility
                 case createdAt = "created_at"
                 case updatedAt = "updated_at"
@@ -544,10 +560,18 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/registry_type`.
             public var registryType: Components.Schemas.OrgPrivateRegistryConfigurationWithSelectedRepositories.RegistryTypePayload
+            /// The URL of the private registry.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/url`.
+            public var url: Swift.String?
             /// The username to use when authenticating with the private registry.
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/username`.
             public var username: Swift.String?
+            /// Whether this private registry replaces the base registry (e.g., npmjs.org for npm, rubygems.org for rubygems). When `true`, Dependabot will only use this registry and will not fall back to the public registry. When `false` (default), Dependabot will use this registry for scoped packages but may fall back to the public registry for other packages.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/replaces_base`.
+            public var replacesBase: Swift.Bool?
             /// Which type of organization repositories have access to the private registry. `selected` means only the repositories specified by `selected_repository_ids` can access the private registry.
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/visibility`.
@@ -573,7 +597,9 @@ public enum Components {
             /// - Parameters:
             ///   - name: The name of the private registry configuration.
             ///   - registryType: The registry type.
+            ///   - url: The URL of the private registry.
             ///   - username: The username to use when authenticating with the private registry.
+            ///   - replacesBase: Whether this private registry replaces the base registry (e.g., npmjs.org for npm, rubygems.org for rubygems). When `true`, Dependabot will only use this registry and will not fall back to the public registry. When `false` (default), Dependabot will use this registry for scoped packages but may fall back to the public registry for other packages.
             ///   - visibility: Which type of organization repositories have access to the private registry. `selected` means only the repositories specified by `selected_repository_ids` can access the private registry.
             ///   - selectedRepositoryIds: An array of repository IDs that can access the organization private registry when `visibility` is set to `selected`.
             ///   - createdAt:
@@ -581,7 +607,9 @@ public enum Components {
             public init(
                 name: Swift.String,
                 registryType: Components.Schemas.OrgPrivateRegistryConfigurationWithSelectedRepositories.RegistryTypePayload,
+                url: Swift.String? = nil,
                 username: Swift.String? = nil,
+                replacesBase: Swift.Bool? = nil,
                 visibility: Components.Schemas.OrgPrivateRegistryConfigurationWithSelectedRepositories.VisibilityPayload,
                 selectedRepositoryIds: [Swift.Int]? = nil,
                 createdAt: Foundation.Date,
@@ -589,7 +617,9 @@ public enum Components {
             ) {
                 self.name = name
                 self.registryType = registryType
+                self.url = url
                 self.username = username
+                self.replacesBase = replacesBase
                 self.visibility = visibility
                 self.selectedRepositoryIds = selectedRepositoryIds
                 self.createdAt = createdAt
@@ -598,7 +628,9 @@ public enum Components {
             public enum CodingKeys: String, CodingKey {
                 case name
                 case registryType = "registry_type"
+                case url
                 case username
+                case replacesBase = "replaces_base"
                 case visibility
                 case selectedRepositoryIds = "selected_repository_ids"
                 case createdAt = "created_at"
@@ -1079,6 +1111,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/username`.
                     public var username: Swift.String?
+                    /// Whether this private registry should replace the base registry (e.g., npmjs.org for npm, rubygems.org for rubygems). When set to `true`, Dependabot will only use this registry and will not fall back to the public registry. When set to `false` (default), Dependabot will use this registry for scoped packages but may fall back to the public registry for other packages.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/replaces_base`.
+                    public var replacesBase: Swift.Bool?
                     /// The value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get private registries public key for an organization](https://docs.github.com/rest/private-registries/organization-configurations#get-private-registries-public-key-for-an-organization) endpoint.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/encrypted_value`.
@@ -1109,6 +1145,7 @@ public enum Operations {
                     ///   - registryType: The registry type.
                     ///   - url: The URL of the private registry.
                     ///   - username: The username to use when authenticating with the private registry. This field should be omitted if the private registry does not require a username for authentication.
+                    ///   - replacesBase: Whether this private registry should replace the base registry (e.g., npmjs.org for npm, rubygems.org for rubygems). When set to `true`, Dependabot will only use this registry and will not fall back to the public registry. When set to `false` (default), Dependabot will use this registry for scoped packages but may fall back to the public registry for other packages.
                     ///   - encryptedValue: The value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get private registries public key for an organization](https://docs.github.com/rest/private-registries/organization-configurations#get-private-registries-public-key-for-an-organization) endpoint.
                     ///   - keyId: The ID of the key you used to encrypt the secret.
                     ///   - visibility: Which type of organization repositories have access to the private registry. `selected` means only the repositories specified by `selected_repository_ids` can access the private registry.
@@ -1117,6 +1154,7 @@ public enum Operations {
                         registryType: Operations.PrivateRegistriesCreateOrgPrivateRegistry.Input.Body.JsonPayload.RegistryTypePayload,
                         url: Swift.String,
                         username: Swift.String? = nil,
+                        replacesBase: Swift.Bool? = nil,
                         encryptedValue: Swift.String,
                         keyId: Swift.String,
                         visibility: Operations.PrivateRegistriesCreateOrgPrivateRegistry.Input.Body.JsonPayload.VisibilityPayload,
@@ -1125,6 +1163,7 @@ public enum Operations {
                         self.registryType = registryType
                         self.url = url
                         self.username = username
+                        self.replacesBase = replacesBase
                         self.encryptedValue = encryptedValue
                         self.keyId = keyId
                         self.visibility = visibility
@@ -1134,6 +1173,7 @@ public enum Operations {
                         case registryType = "registry_type"
                         case url
                         case username
+                        case replacesBase = "replaces_base"
                         case encryptedValue = "encrypted_value"
                         case keyId = "key_id"
                         case visibility
@@ -1744,6 +1784,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/username`.
                     public var username: Swift.String?
+                    /// Whether this private registry should replace the base registry (e.g., npmjs.org for npm, rubygems.org for rubygems). When set to `true`, Dependabot will only use this registry and will not fall back to the public registry. When set to `false` (default), Dependabot will use this registry for scoped packages but may fall back to the public registry for other packages.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/replaces_base`.
+                    public var replacesBase: Swift.Bool?
                     /// The value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get private registries public key for an organization](https://docs.github.com/rest/private-registries/organization-configurations#get-private-registries-public-key-for-an-organization) endpoint.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/encrypted_value`.
@@ -1774,6 +1818,7 @@ public enum Operations {
                     ///   - registryType: The registry type.
                     ///   - url: The URL of the private registry.
                     ///   - username: The username to use when authenticating with the private registry. This field should be omitted if the private registry does not require a username for authentication.
+                    ///   - replacesBase: Whether this private registry should replace the base registry (e.g., npmjs.org for npm, rubygems.org for rubygems). When set to `true`, Dependabot will only use this registry and will not fall back to the public registry. When set to `false` (default), Dependabot will use this registry for scoped packages but may fall back to the public registry for other packages.
                     ///   - encryptedValue: The value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get private registries public key for an organization](https://docs.github.com/rest/private-registries/organization-configurations#get-private-registries-public-key-for-an-organization) endpoint.
                     ///   - keyId: The ID of the key you used to encrypt the secret.
                     ///   - visibility: Which type of organization repositories have access to the private registry. `selected` means only the repositories specified by `selected_repository_ids` can access the private registry.
@@ -1782,6 +1827,7 @@ public enum Operations {
                         registryType: Operations.PrivateRegistriesUpdateOrgPrivateRegistry.Input.Body.JsonPayload.RegistryTypePayload? = nil,
                         url: Swift.String? = nil,
                         username: Swift.String? = nil,
+                        replacesBase: Swift.Bool? = nil,
                         encryptedValue: Swift.String? = nil,
                         keyId: Swift.String? = nil,
                         visibility: Operations.PrivateRegistriesUpdateOrgPrivateRegistry.Input.Body.JsonPayload.VisibilityPayload? = nil,
@@ -1790,6 +1836,7 @@ public enum Operations {
                         self.registryType = registryType
                         self.url = url
                         self.username = username
+                        self.replacesBase = replacesBase
                         self.encryptedValue = encryptedValue
                         self.keyId = keyId
                         self.visibility = visibility
@@ -1799,6 +1846,7 @@ public enum Operations {
                         case registryType = "registry_type"
                         case url
                         case username
+                        case replacesBase = "replaces_base"
                         case encryptedValue = "encrypted_value"
                         case keyId = "key_id"
                         case visibility
