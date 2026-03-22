@@ -20,18 +20,21 @@ commit:
 		&& echo "::notice::git commit $(file)" \
 		|| true;
 
-SWIFT_BUILD_FLAGS = -c release
-EXECUTABLE_NAME = swift-openapi-generator
-EXECUTABLE_PATH = $(shell swift build $(SWIFT_BUILD_FLAGS) --show-bin-path)/$(EXECUTABLE_NAME)
-.NOTPARALLEL: .build/bin/swift-openapi-generator
-.build/bin/swift-openapi-generator:
+.INTERMEDIATE: swift-openapi-generator/.build/release/swift-openapi-generator
+swift-openapi-generator/.build/release/swift-openapi-generator:
 	@echo "::debug::make: $@"
 	git clone --branch 1.11.0 --single-branch \
 		https://github.com/apple/swift-openapi-generator
-	cd swift-openapi-generator; swift build $(SWIFT_BUILD_FLAGS);
-	mkdir -p $(@D);
-		cp -f $(EXECUTABLE_PATH) $@; \
-		rm -rf swift-openapi-generator;
+	cd swift-openapi-generator; \
+		swift build -c release --product swift-openapi-generator
+
+.NOTPARALLEL: .build/bin/swift-openapi-generator
+.build/bin/swift-openapi-generator: swift-openapi-generator/.build/release/swift-openapi-generator
+	@echo "::debug::make: $@"
+	mkdir -p $(@D)
+	cp -f $^ $@
+	touch $@
+	rm -rf swift-openapi-generator
 
 ## Generate Sources
 
