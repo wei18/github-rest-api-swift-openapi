@@ -2,8 +2,8 @@ name: Release
 
 on:
   schedule:
-    - cron: '0 0 1 * *'  # 每月的第一天 00:00 UTC
-  workflow_dispatch:  # 允許手動觸發工作流
+    - cron: '0 0 1 * *'  # Run at 00:00 UTC on the 1st of every month.
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}
