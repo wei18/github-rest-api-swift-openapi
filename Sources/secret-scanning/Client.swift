@@ -89,6 +89,13 @@ public struct Client: APIProtocol {
                     in: &request,
                     style: .form,
                     explode: true,
+                    name: "assignee",
+                    value: input.query.assignee
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
                     name: "sort",
                     value: input.query.sort
                 )
@@ -605,6 +612,13 @@ public struct Client: APIProtocol {
                     in: &request,
                     style: .form,
                     explode: true,
+                    name: "assignee",
+                    value: input.query.assignee
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
                     name: "sort",
                     value: input.query.sort
                 )
@@ -843,6 +857,8 @@ public struct Client: APIProtocol {
     /// Update a secret scanning alert
     ///
     /// Updates the status of a secret scanning alert in an eligible repository.
+    ///
+    /// You can also use this endpoint to assign or unassign an alert to a user who has write access to the repository.
     ///
     /// The authenticated user must be an administrator for the repository or for the organization that owns the repository to use this endpoint.
     ///
