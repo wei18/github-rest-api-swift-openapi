@@ -1923,43 +1923,6 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/tags`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/get(repos/list-tags)`.
     func reposListTags(_ input: Operations.ReposListTags.Input) async throws -> Operations.ReposListTags.Output
-    /// Closing down - List tag protection states for a repository
-    ///
-    /// > [!WARNING]
-    /// > **Closing down notice:** This operation is closing down and will be removed after August 30, 2024. Use the "[Repository Rulesets](https://docs.github.com/rest/repos/rules#get-all-repository-rulesets)" endpoint instead.
-    ///
-    /// This returns the tag protection states of a repository.
-    ///
-    /// This information is only available to repository administrators.
-    ///
-    /// - Remark: HTTP `GET /repos/{owner}/{repo}/tags/protection`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/get(repos/list-tag-protection)`.
-    @available(*, deprecated)
-    func reposListTagProtection(_ input: Operations.ReposListTagProtection.Input) async throws -> Operations.ReposListTagProtection.Output
-    /// Closing down - Create a tag protection state for a repository
-    ///
-    /// > [!WARNING]
-    /// > **Closing down notice:** This operation is closing down and will be removed after August 30, 2024. Use the "[Repository Rulesets](https://docs.github.com/rest/repos/rules#create-a-repository-ruleset)" endpoint instead.
-    ///
-    /// This creates a tag protection state for a repository.
-    /// This endpoint is only available to repository administrators.
-    ///
-    /// - Remark: HTTP `POST /repos/{owner}/{repo}/tags/protection`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/post(repos/create-tag-protection)`.
-    @available(*, deprecated)
-    func reposCreateTagProtection(_ input: Operations.ReposCreateTagProtection.Input) async throws -> Operations.ReposCreateTagProtection.Output
-    /// Closing down - Delete a tag protection state for a repository
-    ///
-    /// > [!WARNING]
-    /// > **Closing down notice:** This operation is closing down and will be removed after August 30, 2024. Use the "[Repository Rulesets](https://docs.github.com/rest/repos/rules#delete-a-repository-ruleset)" endpoint instead.
-    ///
-    /// This deletes a tag protection state for a repository.
-    /// This endpoint is only available to repository administrators.
-    ///
-    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/tags/protection/{tag_protection_id}`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/{tag_protection_id}/delete(repos/delete-tag-protection)`.
-    @available(*, deprecated)
-    func reposDeleteTagProtection(_ input: Operations.ReposDeleteTagProtection.Input) async throws -> Operations.ReposDeleteTagProtection.Output
     /// Download a repository archive (tar)
     ///
     /// Gets a redirect URL to download a tar archive for a repository. If you omit `:ref`, the repository’s default branch (usually
@@ -3753,12 +3716,14 @@ extension APIProtocol {
     public func reposGetContent(
         path: Operations.ReposGetContent.Input.Path,
         query: Operations.ReposGetContent.Input.Query = .init(),
-        headers: Operations.ReposGetContent.Input.Headers = .init()
+        headers: Operations.ReposGetContent.Input.Headers = .init(),
+        body: Operations.ReposGetContent.Input.Body? = nil
     ) async throws -> Operations.ReposGetContent.Output {
         try await reposGetContent(Operations.ReposGetContent.Input(
             path: path,
             query: query,
-            headers: headers
+            headers: headers,
+            body: body
         ))
     }
     /// Create or update file contents
@@ -5605,69 +5570,6 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// Closing down - List tag protection states for a repository
-    ///
-    /// > [!WARNING]
-    /// > **Closing down notice:** This operation is closing down and will be removed after August 30, 2024. Use the "[Repository Rulesets](https://docs.github.com/rest/repos/rules#get-all-repository-rulesets)" endpoint instead.
-    ///
-    /// This returns the tag protection states of a repository.
-    ///
-    /// This information is only available to repository administrators.
-    ///
-    /// - Remark: HTTP `GET /repos/{owner}/{repo}/tags/protection`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/get(repos/list-tag-protection)`.
-    @available(*, deprecated)
-    public func reposListTagProtection(
-        path: Operations.ReposListTagProtection.Input.Path,
-        headers: Operations.ReposListTagProtection.Input.Headers = .init()
-    ) async throws -> Operations.ReposListTagProtection.Output {
-        try await reposListTagProtection(Operations.ReposListTagProtection.Input(
-            path: path,
-            headers: headers
-        ))
-    }
-    /// Closing down - Create a tag protection state for a repository
-    ///
-    /// > [!WARNING]
-    /// > **Closing down notice:** This operation is closing down and will be removed after August 30, 2024. Use the "[Repository Rulesets](https://docs.github.com/rest/repos/rules#create-a-repository-ruleset)" endpoint instead.
-    ///
-    /// This creates a tag protection state for a repository.
-    /// This endpoint is only available to repository administrators.
-    ///
-    /// - Remark: HTTP `POST /repos/{owner}/{repo}/tags/protection`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/post(repos/create-tag-protection)`.
-    @available(*, deprecated)
-    public func reposCreateTagProtection(
-        path: Operations.ReposCreateTagProtection.Input.Path,
-        headers: Operations.ReposCreateTagProtection.Input.Headers = .init(),
-        body: Operations.ReposCreateTagProtection.Input.Body
-    ) async throws -> Operations.ReposCreateTagProtection.Output {
-        try await reposCreateTagProtection(Operations.ReposCreateTagProtection.Input(
-            path: path,
-            headers: headers,
-            body: body
-        ))
-    }
-    /// Closing down - Delete a tag protection state for a repository
-    ///
-    /// > [!WARNING]
-    /// > **Closing down notice:** This operation is closing down and will be removed after August 30, 2024. Use the "[Repository Rulesets](https://docs.github.com/rest/repos/rules#delete-a-repository-ruleset)" endpoint instead.
-    ///
-    /// This deletes a tag protection state for a repository.
-    /// This endpoint is only available to repository administrators.
-    ///
-    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/tags/protection/{tag_protection_id}`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/{tag_protection_id}/delete(repos/delete-tag-protection)`.
-    @available(*, deprecated)
-    public func reposDeleteTagProtection(
-        path: Operations.ReposDeleteTagProtection.Input.Path,
-        headers: Operations.ReposDeleteTagProtection.Input.Headers = .init()
-    ) async throws -> Operations.ReposDeleteTagProtection.Output {
-        try await reposDeleteTagProtection(Operations.ReposDeleteTagProtection.Input(
-            path: path,
-            headers: headers
-        ))
-    }
     /// Download a repository archive (tar)
     ///
     /// Gets a redirect URL to download a tar archive for a repository. If you omit `:ref`, the repository’s default branch (usually
@@ -6338,8 +6240,8 @@ public enum Components {
                 case SimpleUser(Components.Schemas.SimpleUser)
                 /// - Remark: Generated from `#/components/schemas/integration/owner/case2`.
                 case Enterprise(Components.Schemas.Enterprise)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .SimpleUser(try .init(from: decoder))
                         return
@@ -6358,7 +6260,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .SimpleUser(value):
                         try value.encode(to: encoder)
@@ -6430,7 +6332,7 @@ public enum Components {
                     case contents
                     case deployments
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.issues = try container.decodeIfPresent(
                         Swift.String.self,
@@ -6460,7 +6362,7 @@ public enum Components {
                         "deployments"
                     ])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     try container.encodeIfPresent(
                         self.issues,
@@ -6582,8 +6484,8 @@ public enum Components {
             case case1(Swift.String)
             /// - Remark: Generated from `#/components/schemas/webhook-config-insecure-ssl/case2`.
             case case2(Swift.Double)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .case1(try decoder.decodeFromSingleValueContainer())
                     return
@@ -6602,7 +6504,7 @@ public enum Components {
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .case1(value):
                     try encoder.encodeToSingleValueContainer(value)
@@ -6834,8 +6736,8 @@ public enum Components {
                     case case2(Swift.Int?)
                     /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
                     case case3([Swift.String]?)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -6860,7 +6762,7 @@ public enum Components {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -7002,10 +6904,10 @@ public enum Components {
                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -7026,10 +6928,10 @@ public enum Components {
                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -7071,10 +6973,10 @@ public enum Components {
                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -7576,6 +7478,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repository/has_discussions`.
             public var hasDiscussions: Swift.Bool?
+            /// Whether pull requests are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload?
+            /// Whether commit comments are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// Whether the repository is archived.
             ///
             /// - Remark: Generated from `#/components/schemas/repository/archived`.
@@ -7821,6 +7742,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads: Whether downloads are enabled.
             ///   - hasDiscussions: Whether discussions are enabled.
+            ///   - hasPullRequests: Whether pull requests are enabled.
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments: Whether commit comments are enabled.
             ///   - archived: Whether the repository is archived.
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -7918,6 +7842,9 @@ public enum Components {
                 hasPages: Swift.Bool,
                 hasDownloads: Swift.Bool,
                 hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -8015,6 +7942,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -8113,6 +8043,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -8328,8 +8261,8 @@ public enum Components {
                 case SimpleUser(Components.Schemas.SimpleUser)
                 /// - Remark: Generated from `#/components/schemas/nullable-integration/owner/case2`.
                 case Enterprise(Components.Schemas.Enterprise)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .SimpleUser(try .init(from: decoder))
                         return
@@ -8348,7 +8281,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .SimpleUser(value):
                         try value.encode(to: encoder)
@@ -8420,7 +8353,7 @@ public enum Components {
                     case contents
                     case deployments
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.issues = try container.decodeIfPresent(
                         Swift.String.self,
@@ -8450,7 +8383,7 @@ public enum Components {
                         "deployments"
                     ])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     var container = encoder.container(keyedBy: CodingKeys.self)
                     try container.encodeIfPresent(
                         self.issues,
@@ -8636,6 +8569,289 @@ public enum Components {
                 case rocket
             }
         }
+        /// Data related to a release.
+        ///
+        /// - Remark: Generated from `#/components/schemas/release-asset`.
+        public struct ReleaseAsset: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/release-asset/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/browser_download_url`.
+            public var browserDownloadUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release-asset/node_id`.
+            public var nodeId: Swift.String
+            /// The file name of the asset.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release-asset/name`.
+            public var name: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/label`.
+            public var label: Swift.String?
+            /// State of the release asset.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release-asset/state`.
+            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case uploaded = "uploaded"
+                case open = "open"
+            }
+            /// State of the release asset.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release-asset/state`.
+            public var state: Components.Schemas.ReleaseAsset.StatePayload
+            /// - Remark: Generated from `#/components/schemas/release-asset/content_type`.
+            public var contentType: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release-asset/size`.
+            public var size: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release-asset/digest`.
+            public var digest: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release-asset/download_count`.
+            public var downloadCount: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release-asset/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/release-asset/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/release-asset/uploader`.
+            public var uploader: Components.Schemas.NullableSimpleUser?
+            /// Creates a new `ReleaseAsset`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - browserDownloadUrl:
+            ///   - id:
+            ///   - nodeId:
+            ///   - name: The file name of the asset.
+            ///   - label:
+            ///   - state: State of the release asset.
+            ///   - contentType:
+            ///   - size:
+            ///   - digest:
+            ///   - downloadCount:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - uploader:
+            public init(
+                url: Swift.String,
+                browserDownloadUrl: Swift.String,
+                id: Swift.Int,
+                nodeId: Swift.String,
+                name: Swift.String,
+                label: Swift.String? = nil,
+                state: Components.Schemas.ReleaseAsset.StatePayload,
+                contentType: Swift.String,
+                size: Swift.Int,
+                digest: Swift.String? = nil,
+                downloadCount: Swift.Int,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date,
+                uploader: Components.Schemas.NullableSimpleUser? = nil
+            ) {
+                self.url = url
+                self.browserDownloadUrl = browserDownloadUrl
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.label = label
+                self.state = state
+                self.contentType = contentType
+                self.size = size
+                self.digest = digest
+                self.downloadCount = downloadCount
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.uploader = uploader
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case browserDownloadUrl = "browser_download_url"
+                case id
+                case nodeId = "node_id"
+                case name
+                case label
+                case state
+                case contentType = "content_type"
+                case size
+                case digest
+                case downloadCount = "download_count"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case uploader
+            }
+        }
+        /// A release.
+        ///
+        /// - Remark: Generated from `#/components/schemas/release`.
+        public struct Release: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/release/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/assets_url`.
+            public var assetsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/upload_url`.
+            public var uploadUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/tarball_url`.
+            public var tarballUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/zipball_url`.
+            public var zipballUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/release/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the tag.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/tag_name`.
+            public var tagName: Swift.String
+            /// Specifies the commitish value that determines where the Git tag is created from.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/target_commitish`.
+            public var targetCommitish: Swift.String
+            /// - Remark: Generated from `#/components/schemas/release/name`.
+            public var name: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/body`.
+            public var body: Swift.String?
+            /// true to create a draft (unpublished) release, false to create a published one.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/draft`.
+            public var draft: Swift.Bool
+            /// Whether to identify the release as a prerelease or a full release.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/prerelease`.
+            public var prerelease: Swift.Bool
+            /// Whether or not the release is immutable.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/immutable`.
+            public var immutable: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/release/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/release/published_at`.
+            public var publishedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/release/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/release/author`.
+            public var author: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/release/assets`.
+            public var assets: [Components.Schemas.ReleaseAsset]
+            /// - Remark: Generated from `#/components/schemas/release/body_html`.
+            public var bodyHtml: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/body_text`.
+            public var bodyText: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/mentions_count`.
+            public var mentionsCount: Swift.Int?
+            /// The URL of the release discussion.
+            ///
+            /// - Remark: Generated from `#/components/schemas/release/discussion_url`.
+            public var discussionUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/release/reactions`.
+            public var reactions: Components.Schemas.ReactionRollup?
+            /// Creates a new `Release`.
+            ///
+            /// - Parameters:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - assetsUrl:
+            ///   - uploadUrl:
+            ///   - tarballUrl:
+            ///   - zipballUrl:
+            ///   - id:
+            ///   - nodeId:
+            ///   - tagName: The name of the tag.
+            ///   - targetCommitish: Specifies the commitish value that determines where the Git tag is created from.
+            ///   - name:
+            ///   - body:
+            ///   - draft: true to create a draft (unpublished) release, false to create a published one.
+            ///   - prerelease: Whether to identify the release as a prerelease or a full release.
+            ///   - immutable: Whether or not the release is immutable.
+            ///   - createdAt:
+            ///   - publishedAt:
+            ///   - updatedAt:
+            ///   - author:
+            ///   - assets:
+            ///   - bodyHtml:
+            ///   - bodyText:
+            ///   - mentionsCount:
+            ///   - discussionUrl: The URL of the release discussion.
+            ///   - reactions:
+            public init(
+                url: Swift.String,
+                htmlUrl: Swift.String,
+                assetsUrl: Swift.String,
+                uploadUrl: Swift.String,
+                tarballUrl: Swift.String? = nil,
+                zipballUrl: Swift.String? = nil,
+                id: Swift.Int,
+                nodeId: Swift.String,
+                tagName: Swift.String,
+                targetCommitish: Swift.String,
+                name: Swift.String? = nil,
+                body: Swift.String? = nil,
+                draft: Swift.Bool,
+                prerelease: Swift.Bool,
+                immutable: Swift.Bool? = nil,
+                createdAt: Foundation.Date,
+                publishedAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil,
+                author: Components.Schemas.SimpleUser,
+                assets: [Components.Schemas.ReleaseAsset],
+                bodyHtml: Swift.String? = nil,
+                bodyText: Swift.String? = nil,
+                mentionsCount: Swift.Int? = nil,
+                discussionUrl: Swift.String? = nil,
+                reactions: Components.Schemas.ReactionRollup? = nil
+            ) {
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.assetsUrl = assetsUrl
+                self.uploadUrl = uploadUrl
+                self.tarballUrl = tarballUrl
+                self.zipballUrl = zipballUrl
+                self.id = id
+                self.nodeId = nodeId
+                self.tagName = tagName
+                self.targetCommitish = targetCommitish
+                self.name = name
+                self.body = body
+                self.draft = draft
+                self.prerelease = prerelease
+                self.immutable = immutable
+                self.createdAt = createdAt
+                self.publishedAt = publishedAt
+                self.updatedAt = updatedAt
+                self.author = author
+                self.assets = assets
+                self.bodyHtml = bodyHtml
+                self.bodyText = bodyText
+                self.mentionsCount = mentionsCount
+                self.discussionUrl = discussionUrl
+                self.reactions = reactions
+            }
+            public enum CodingKeys: String, CodingKey {
+                case url
+                case htmlUrl = "html_url"
+                case assetsUrl = "assets_url"
+                case uploadUrl = "upload_url"
+                case tarballUrl = "tarball_url"
+                case zipballUrl = "zipball_url"
+                case id
+                case nodeId = "node_id"
+                case tagName = "tag_name"
+                case targetCommitish = "target_commitish"
+                case name
+                case body
+                case draft
+                case prerelease
+                case immutable
+                case createdAt = "created_at"
+                case publishedAt = "published_at"
+                case updatedAt = "updated_at"
+                case author
+                case assets
+                case bodyHtml = "body_html"
+                case bodyText = "body_text"
+                case mentionsCount = "mentions_count"
+                case discussionUrl = "discussion_url"
+                case reactions
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
         public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
             /// Enable or disable GitHub Advanced Security for the repository.
@@ -8810,6 +9026,107 @@ public enum Components {
             }
             /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_ai_detection`.
             public var secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public struct SecretScanningDelegatedAlertDismissalPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedAlertDismissalPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_alert_dismissal`.
+            public var secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public struct SecretScanningDelegatedBypassPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass/status`.
+                public var status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload?
+                /// Creates a new `SecretScanningDelegatedBypassPayload`.
+                ///
+                /// - Parameters:
+                ///   - status:
+                public init(status: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload.StatusPayload? = nil) {
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass`.
+            public var secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload?
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public struct SecretScanningDelegatedBypassOptionsPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload`.
+                public struct ReviewersPayloadPayload: Codable, Hashable, Sendable {
+                    /// The ID of the team or role selected as a bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_id`.
+                    public var reviewerId: Swift.Int
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    @frozen public enum ReviewerTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case team = "TEAM"
+                        case role = "ROLE"
+                    }
+                    /// The type of the bypass reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                    public var reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    /// Creates a new `ReviewersPayloadPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
+                    ///   - reviewerType: The type of the bypass reviewer
+                    public init(
+                        reviewerId: Swift.Int,
+                        reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    ) {
+                        self.reviewerId = reviewerId
+                        self.reviewerType = reviewerType
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case reviewerId = "reviewer_id"
+                        case reviewerType = "reviewer_type"
+                    }
+                }
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public typealias ReviewersPayload = [Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload]
+                /// The bypass reviewers for secret scanning delegated bypass
+                ///
+                /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                public var reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload?
+                /// Creates a new `SecretScanningDelegatedBypassOptionsPayload`.
+                ///
+                /// - Parameters:
+                ///   - reviewers: The bypass reviewers for secret scanning delegated bypass
+                public init(reviewers: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload? = nil) {
+                    self.reviewers = reviewers
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case reviewers
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options`.
+            public var secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload?
             /// Creates a new `SecurityAndAnalysis`.
             ///
             /// - Parameters:
@@ -8820,6 +9137,9 @@ public enum Components {
             ///   - secretScanningPushProtection:
             ///   - secretScanningNonProviderPatterns:
             ///   - secretScanningAiDetection:
+            ///   - secretScanningDelegatedAlertDismissal:
+            ///   - secretScanningDelegatedBypass:
+            ///   - secretScanningDelegatedBypassOptions:
             public init(
                 advancedSecurity: Components.Schemas.SecurityAndAnalysis.AdvancedSecurityPayload? = nil,
                 codeSecurity: Components.Schemas.SecurityAndAnalysis.CodeSecurityPayload? = nil,
@@ -8827,7 +9147,10 @@ public enum Components {
                 secretScanning: Components.Schemas.SecurityAndAnalysis.SecretScanningPayload? = nil,
                 secretScanningPushProtection: Components.Schemas.SecurityAndAnalysis.SecretScanningPushProtectionPayload? = nil,
                 secretScanningNonProviderPatterns: Components.Schemas.SecurityAndAnalysis.SecretScanningNonProviderPatternsPayload? = nil,
-                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil
+                secretScanningAiDetection: Components.Schemas.SecurityAndAnalysis.SecretScanningAiDetectionPayload? = nil,
+                secretScanningDelegatedAlertDismissal: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                secretScanningDelegatedBypass: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassPayload? = nil,
+                secretScanningDelegatedBypassOptions: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload? = nil
             ) {
                 self.advancedSecurity = advancedSecurity
                 self.codeSecurity = codeSecurity
@@ -8836,6 +9159,9 @@ public enum Components {
                 self.secretScanningPushProtection = secretScanningPushProtection
                 self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
                 self.secretScanningAiDetection = secretScanningAiDetection
+                self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                self.secretScanningDelegatedBypass = secretScanningDelegatedBypass
+                self.secretScanningDelegatedBypassOptions = secretScanningDelegatedBypassOptions
             }
             public enum CodingKeys: String, CodingKey {
                 case advancedSecurity = "advanced_security"
@@ -8845,6 +9171,9 @@ public enum Components {
                 case secretScanningPushProtection = "secret_scanning_push_protection"
                 case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
                 case secretScanningAiDetection = "secret_scanning_ai_detection"
+                case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                case secretScanningDelegatedBypass = "secret_scanning_delegated_bypass"
+                case secretScanningDelegatedBypassOptions = "secret_scanning_delegated_bypass_options"
             }
         }
         /// Minimal Repository
@@ -8987,6 +9316,21 @@ public enum Components {
             public var hasDownloads: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/has_discussions`.
             public var hasDiscussions: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload?
+            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/archived`.
             public var archived: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/disabled`.
@@ -9122,10 +9466,10 @@ public enum Components {
                 public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                     self.additionalProperties = additionalProperties
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeAdditionalProperties(additionalProperties)
                 }
             }
@@ -9203,6 +9547,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads:
             ///   - hasDiscussions:
+            ///   - hasPullRequests:
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled:
             ///   - visibility:
@@ -9292,6 +9639,9 @@ public enum Components {
                 hasPages: Swift.Bool? = nil,
                 hasDownloads: Swift.Bool? = nil,
                 hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool? = nil,
                 disabled: Swift.Bool? = nil,
                 visibility: Swift.String? = nil,
@@ -9381,6 +9731,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -9471,6 +9824,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -9494,79 +9850,13 @@ public enum Components {
                 case customProperties = "custom_properties"
             }
         }
-        /// Custom property name and associated value
-        ///
-        /// - Remark: Generated from `#/components/schemas/custom-property-value`.
-        public struct CustomPropertyValue: Codable, Hashable, Sendable {
-            /// The name of the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/property_name`.
-            public var propertyName: Swift.String
-            /// The value assigned to the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
-            @frozen public enum ValuePayload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case1`.
-                case case1(Swift.String)
-                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case2`.
-                case case2([Swift.String])
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
-                    do {
-                        self = .case1(try decoder.decodeFromSingleValueContainer())
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    do {
-                        self = .case2(try decoder.decodeFromSingleValueContainer())
-                        return
-                    } catch {
-                        errors.append(error)
-                    }
-                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
-                        type: Self.self,
-                        codingPath: decoder.codingPath,
-                        errors: errors
-                    )
-                }
-                public func encode(to encoder: any Encoder) throws {
-                    switch self {
-                    case let .case1(value):
-                        try encoder.encodeToSingleValueContainer(value)
-                    case let .case2(value):
-                        try encoder.encodeToSingleValueContainer(value)
-                    }
-                }
-            }
-            /// The value assigned to the property
-            ///
-            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
-            public var value: Components.Schemas.CustomPropertyValue.ValuePayload?
-            /// Creates a new `CustomPropertyValue`.
-            ///
-            /// - Parameters:
-            ///   - propertyName: The name of the property
-            ///   - value: The value assigned to the property
-            public init(
-                propertyName: Swift.String,
-                value: Components.Schemas.CustomPropertyValue.ValuePayload? = nil
-            ) {
-                self.propertyName = propertyName
-                self.value = value
-            }
-            public enum CodingKeys: String, CodingKey {
-                case propertyName = "property_name"
-                case value
-            }
-        }
         /// An object without any properties.
         ///
         /// - Remark: Generated from `#/components/schemas/empty-object`.
         public struct EmptyObject: Codable, Hashable, Sendable {
             /// Creates a new `EmptyObject`.
             public init() {}
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
             }
         }
@@ -10372,6 +10662,72 @@ public enum Components {
                 case draft
             }
         }
+        /// Custom property name and associated value
+        ///
+        /// - Remark: Generated from `#/components/schemas/custom-property-value`.
+        public struct CustomPropertyValue: Codable, Hashable, Sendable {
+            /// The name of the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/property_name`.
+            public var propertyName: Swift.String
+            /// The value assigned to the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
+            @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case1`.
+                case case1(Swift.String)
+                /// - Remark: Generated from `#/components/schemas/custom-property-value/value/case2`.
+                case case2([Swift.String])
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
+                    do {
+                        self = .case1(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .case2(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    switch self {
+                    case let .case1(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    case let .case2(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    }
+                }
+            }
+            /// The value assigned to the property
+            ///
+            /// - Remark: Generated from `#/components/schemas/custom-property-value/value`.
+            public var value: Components.Schemas.CustomPropertyValue.ValuePayload?
+            /// Creates a new `CustomPropertyValue`.
+            ///
+            /// - Parameters:
+            ///   - propertyName: The name of the property
+            ///   - value: The value assigned to the property
+            public init(
+                propertyName: Swift.String,
+                value: Components.Schemas.CustomPropertyValue.ValuePayload? = nil
+            ) {
+                self.propertyName = propertyName
+                self.value = value
+            }
+            public enum CodingKeys: String, CodingKey {
+                case propertyName = "property_name"
+                case value
+            }
+        }
         /// A repository on GitHub.
         ///
         /// - Remark: Generated from `#/components/schemas/nullable-repository`.
@@ -10580,6 +10936,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/nullable-repository/has_discussions`.
             public var hasDiscussions: Swift.Bool?
+            /// Whether pull requests are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.NullableRepository.PullRequestCreationPolicyPayload?
+            /// Whether commit comments are enabled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// Whether the repository is archived.
             ///
             /// - Remark: Generated from `#/components/schemas/nullable-repository/archived`.
@@ -10825,6 +11200,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads: Whether downloads are enabled.
             ///   - hasDiscussions: Whether discussions are enabled.
+            ///   - hasPullRequests: Whether pull requests are enabled.
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments: Whether commit comments are enabled.
             ///   - archived: Whether the repository is archived.
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -10922,6 +11300,9 @@ public enum Components {
                 hasPages: Swift.Bool,
                 hasDownloads: Swift.Bool,
                 hasDiscussions: Swift.Bool? = nil,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.NullableRepository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -11019,6 +11400,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -11117,6 +11501,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -11322,6 +11709,21 @@ public enum Components {
             public var hasDownloads: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/full-repository/has_discussions`.
             public var hasDiscussions: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/full-repository/has_pull_requests`.
+            public var hasPullRequests: Swift.Bool?
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/full-repository/pull_request_creation_policy`.
+            @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case all = "all"
+                case collaboratorsOnly = "collaborators_only"
+            }
+            /// The policy controlling who can create pull requests: all or collaborators_only.
+            ///
+            /// - Remark: Generated from `#/components/schemas/full-repository/pull_request_creation_policy`.
+            public var pullRequestCreationPolicy: Components.Schemas.FullRepository.PullRequestCreationPolicyPayload?
+            /// - Remark: Generated from `#/components/schemas/full-repository/has_commit_comments`.
+            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/full-repository/archived`.
             public var archived: Swift.Bool
             /// Returns whether or not this repository disabled.
@@ -11518,10 +11920,10 @@ public enum Components {
                 public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                     self.additionalProperties = additionalProperties
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try encoder.encodeAdditionalProperties(additionalProperties)
                 }
             }
@@ -11599,6 +12001,9 @@ public enum Components {
             ///   - hasPages:
             ///   - hasDownloads:
             ///   - hasDiscussions:
+            ///   - hasPullRequests:
+            ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
+            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -11703,6 +12108,9 @@ public enum Components {
                 hasPages: Swift.Bool,
                 hasDownloads: Swift.Bool? = nil,
                 hasDiscussions: Swift.Bool,
+                hasPullRequests: Swift.Bool? = nil,
+                pullRequestCreationPolicy: Components.Schemas.FullRepository.PullRequestCreationPolicyPayload? = nil,
+                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -11807,6 +12215,9 @@ public enum Components {
                 self.hasPages = hasPages
                 self.hasDownloads = hasDownloads
                 self.hasDiscussions = hasDiscussions
+                self.hasPullRequests = hasPullRequests
+                self.pullRequestCreationPolicy = pullRequestCreationPolicy
+                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -11912,6 +12323,9 @@ public enum Components {
                 case hasPages = "has_pages"
                 case hasDownloads = "has_downloads"
                 case hasDiscussions = "has_discussions"
+                case hasPullRequests = "has_pull_requests"
+                case pullRequestCreationPolicy = "pull_request_creation_policy"
+                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -11962,7 +12376,7 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/schemas/repository-ruleset-bypass-actor`.
         public struct RepositoryRulesetBypassActor: Codable, Hashable, Sendable {
-            /// The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, and `Team` actor types. If `actor_type` is `OrganizationAdmin`, this should be `1`. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
+            /// The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, and `Team` actor types. If `actor_type` is `OrganizationAdmin`, `actor_id` is ignored. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
             ///
             /// - Remark: Generated from `#/components/schemas/repository-ruleset-bypass-actor/actor_id`.
             public var actorId: Swift.Int?
@@ -11995,7 +12409,7 @@ public enum Components {
             /// Creates a new `RepositoryRulesetBypassActor`.
             ///
             /// - Parameters:
-            ///   - actorId: The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, and `Team` actor types. If `actor_type` is `OrganizationAdmin`, this should be `1`. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
+            ///   - actorId: The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, and `Team` actor types. If `actor_type` is `OrganizationAdmin`, `actor_id` is ignored. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
             ///   - actorType: The type of actor that can bypass a ruleset.
             ///   - bypassMode: When the specified actor can bypass the ruleset. `pull_request` means that an actor can only bypass rules on pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only applicable to branch rulesets. When `bypass_mode` is `exempt`, rules will not be run for that actor and a bypass audit entry will not be created.
             public init(
@@ -12258,11 +12672,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -12291,11 +12705,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -12324,11 +12738,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -12337,8 +12751,8 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/org-ruleset-conditions/case3`.
             case case3(Components.Schemas.OrgRulesetConditions.Case3Payload)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .case1(try .init(from: decoder))
                     return
@@ -12363,7 +12777,7 @@ public enum Components {
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .case1(value):
                     try value.encode(to: encoder)
@@ -12661,6 +13075,76 @@ public enum Components {
                 case _type = "type"
             }
         }
+        /// A required reviewing team
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-rule-params-reviewer`.
+        public struct RepositoryRuleParamsReviewer: Codable, Hashable, Sendable {
+            /// ID of the reviewer which must review changes to matching files.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-rule-params-reviewer/id`.
+            public var id: Swift.Int
+            /// The type of the reviewer
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-rule-params-reviewer/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case team = "Team"
+            }
+            /// The type of the reviewer
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-rule-params-reviewer/type`.
+            public var _type: Components.Schemas.RepositoryRuleParamsReviewer._TypePayload
+            /// Creates a new `RepositoryRuleParamsReviewer`.
+            ///
+            /// - Parameters:
+            ///   - id: ID of the reviewer which must review changes to matching files.
+            ///   - _type: The type of the reviewer
+            public init(
+                id: Swift.Int,
+                _type: Components.Schemas.RepositoryRuleParamsReviewer._TypePayload
+            ) {
+                self.id = id
+                self._type = _type
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case _type = "type"
+            }
+        }
+        /// A reviewing team, and file patterns describing which files they must approve changes to.
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-rule-params-required-reviewer-configuration`.
+        public struct RepositoryRuleParamsRequiredReviewerConfiguration: Codable, Hashable, Sendable {
+            /// Array of file patterns. Pull requests which change matching files must be approved by the specified team. File patterns use fnmatch syntax.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-rule-params-required-reviewer-configuration/file_patterns`.
+            public var filePatterns: [Swift.String]
+            /// Minimum number of approvals required from the specified team. If set to zero, the team will be added to the pull request but approval is optional.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-rule-params-required-reviewer-configuration/minimum_approvals`.
+            public var minimumApprovals: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/repository-rule-params-required-reviewer-configuration/reviewer`.
+            public var reviewer: Components.Schemas.RepositoryRuleParamsReviewer
+            /// Creates a new `RepositoryRuleParamsRequiredReviewerConfiguration`.
+            ///
+            /// - Parameters:
+            ///   - filePatterns: Array of file patterns. Pull requests which change matching files must be approved by the specified team. File patterns use fnmatch syntax.
+            ///   - minimumApprovals: Minimum number of approvals required from the specified team. If set to zero, the team will be added to the pull request but approval is optional.
+            ///   - reviewer:
+            public init(
+                filePatterns: [Swift.String],
+                minimumApprovals: Swift.Int,
+                reviewer: Components.Schemas.RepositoryRuleParamsReviewer
+            ) {
+                self.filePatterns = filePatterns
+                self.minimumApprovals = minimumApprovals
+                self.reviewer = reviewer
+            }
+            public enum CodingKeys: String, CodingKey {
+                case filePatterns = "file_patterns"
+                case minimumApprovals = "minimum_approvals"
+                case reviewer
+            }
+        }
         /// Require all commits be made to a non-target branch and submitted via a pull request before they can be merged.
         ///
         /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request`.
@@ -12687,10 +13171,6 @@ public enum Components {
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request/parameters/allowed_merge_methods`.
                 public var allowedMergeMethods: Components.Schemas.RepositoryRulePullRequest.ParametersPayload.AllowedMergeMethodsPayload?
-                /// Request Copilot code review for new pull requests automatically if the author has access to Copilot code review.
-                ///
-                /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request/parameters/automatic_copilot_code_review_enabled`.
-                public var automaticCopilotCodeReviewEnabled: Swift.Bool?
                 /// New, reviewable commits pushed will dismiss previous pull request review approvals.
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request/parameters/dismiss_stale_reviews_on_push`.
@@ -12711,41 +13191,48 @@ public enum Components {
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request/parameters/required_review_thread_resolution`.
                 public var requiredReviewThreadResolution: Swift.Bool
+                /// > [!NOTE]
+                /// > `required_reviewers` is in beta and subject to change.
+                ///
+                /// A collection of reviewers and associated file patterns. Each reviewer has a list of file patterns which determine the files that reviewer is required to review.
+                ///
+                /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request/parameters/required_reviewers`.
+                public var requiredReviewers: [Components.Schemas.RepositoryRuleParamsRequiredReviewerConfiguration]?
                 /// Creates a new `ParametersPayload`.
                 ///
                 /// - Parameters:
                 ///   - allowedMergeMethods: Array of allowed merge methods. Allowed values include `merge`, `squash`, and `rebase`. At least one option must be enabled.
-                ///   - automaticCopilotCodeReviewEnabled: Request Copilot code review for new pull requests automatically if the author has access to Copilot code review.
                 ///   - dismissStaleReviewsOnPush: New, reviewable commits pushed will dismiss previous pull request review approvals.
                 ///   - requireCodeOwnerReview: Require an approving review in pull requests that modify files that have a designated code owner.
                 ///   - requireLastPushApproval: Whether the most recent reviewable push must be approved by someone other than the person who pushed it.
                 ///   - requiredApprovingReviewCount: The number of approving reviews that are required before a pull request can be merged.
                 ///   - requiredReviewThreadResolution: All conversations on code must be resolved before a pull request can be merged.
+                ///   - requiredReviewers: > [!NOTE]
                 public init(
                     allowedMergeMethods: Components.Schemas.RepositoryRulePullRequest.ParametersPayload.AllowedMergeMethodsPayload? = nil,
-                    automaticCopilotCodeReviewEnabled: Swift.Bool? = nil,
                     dismissStaleReviewsOnPush: Swift.Bool,
                     requireCodeOwnerReview: Swift.Bool,
                     requireLastPushApproval: Swift.Bool,
                     requiredApprovingReviewCount: Swift.Int,
-                    requiredReviewThreadResolution: Swift.Bool
+                    requiredReviewThreadResolution: Swift.Bool,
+                    requiredReviewers: [Components.Schemas.RepositoryRuleParamsRequiredReviewerConfiguration]? = nil
                 ) {
                     self.allowedMergeMethods = allowedMergeMethods
-                    self.automaticCopilotCodeReviewEnabled = automaticCopilotCodeReviewEnabled
                     self.dismissStaleReviewsOnPush = dismissStaleReviewsOnPush
                     self.requireCodeOwnerReview = requireCodeOwnerReview
                     self.requireLastPushApproval = requireLastPushApproval
                     self.requiredApprovingReviewCount = requiredApprovingReviewCount
                     self.requiredReviewThreadResolution = requiredReviewThreadResolution
+                    self.requiredReviewers = requiredReviewers
                 }
                 public enum CodingKeys: String, CodingKey {
                     case allowedMergeMethods = "allowed_merge_methods"
-                    case automaticCopilotCodeReviewEnabled = "automatic_copilot_code_review_enabled"
                     case dismissStaleReviewsOnPush = "dismiss_stale_reviews_on_push"
                     case requireCodeOwnerReview = "require_code_owner_review"
                     case requireLastPushApproval = "require_last_push_approval"
                     case requiredApprovingReviewCount = "required_approving_review_count"
                     case requiredReviewThreadResolution = "required_review_thread_resolution"
+                    case requiredReviewers = "required_reviewers"
                 }
             }
             /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request/parameters`.
@@ -12893,7 +13380,7 @@ public enum Components {
             public var _type: Components.Schemas.RepositoryRuleCommitMessagePattern._TypePayload
             /// - Remark: Generated from `#/components/schemas/repository-rule-commit-message-pattern/parameters`.
             public struct ParametersPayload: Codable, Hashable, Sendable {
-                /// How this rule will appear to users.
+                /// How this rule appears when configuring it.
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-commit-message-pattern/parameters/name`.
                 public var name: Swift.String?
@@ -12921,7 +13408,7 @@ public enum Components {
                 /// Creates a new `ParametersPayload`.
                 ///
                 /// - Parameters:
-                ///   - name: How this rule will appear to users.
+                ///   - name: How this rule appears when configuring it.
                 ///   - negate: If true, the rule will fail if the pattern matches.
                 ///   - _operator: The operator to use for matching.
                 ///   - pattern: The pattern to match with.
@@ -12974,7 +13461,7 @@ public enum Components {
             public var _type: Components.Schemas.RepositoryRuleCommitAuthorEmailPattern._TypePayload
             /// - Remark: Generated from `#/components/schemas/repository-rule-commit-author-email-pattern/parameters`.
             public struct ParametersPayload: Codable, Hashable, Sendable {
-                /// How this rule will appear to users.
+                /// How this rule appears when configuring it.
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-commit-author-email-pattern/parameters/name`.
                 public var name: Swift.String?
@@ -13002,7 +13489,7 @@ public enum Components {
                 /// Creates a new `ParametersPayload`.
                 ///
                 /// - Parameters:
-                ///   - name: How this rule will appear to users.
+                ///   - name: How this rule appears when configuring it.
                 ///   - negate: If true, the rule will fail if the pattern matches.
                 ///   - _operator: The operator to use for matching.
                 ///   - pattern: The pattern to match with.
@@ -13055,7 +13542,7 @@ public enum Components {
             public var _type: Components.Schemas.RepositoryRuleCommitterEmailPattern._TypePayload
             /// - Remark: Generated from `#/components/schemas/repository-rule-committer-email-pattern/parameters`.
             public struct ParametersPayload: Codable, Hashable, Sendable {
-                /// How this rule will appear to users.
+                /// How this rule appears when configuring it.
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-committer-email-pattern/parameters/name`.
                 public var name: Swift.String?
@@ -13083,7 +13570,7 @@ public enum Components {
                 /// Creates a new `ParametersPayload`.
                 ///
                 /// - Parameters:
-                ///   - name: How this rule will appear to users.
+                ///   - name: How this rule appears when configuring it.
                 ///   - negate: If true, the rule will fail if the pattern matches.
                 ///   - _operator: The operator to use for matching.
                 ///   - pattern: The pattern to match with.
@@ -13136,7 +13623,7 @@ public enum Components {
             public var _type: Components.Schemas.RepositoryRuleBranchNamePattern._TypePayload
             /// - Remark: Generated from `#/components/schemas/repository-rule-branch-name-pattern/parameters`.
             public struct ParametersPayload: Codable, Hashable, Sendable {
-                /// How this rule will appear to users.
+                /// How this rule appears when configuring it.
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-branch-name-pattern/parameters/name`.
                 public var name: Swift.String?
@@ -13164,7 +13651,7 @@ public enum Components {
                 /// Creates a new `ParametersPayload`.
                 ///
                 /// - Parameters:
-                ///   - name: How this rule will appear to users.
+                ///   - name: How this rule appears when configuring it.
                 ///   - negate: If true, the rule will fail if the pattern matches.
                 ///   - _operator: The operator to use for matching.
                 ///   - pattern: The pattern to match with.
@@ -13217,7 +13704,7 @@ public enum Components {
             public var _type: Components.Schemas.RepositoryRuleTagNamePattern._TypePayload
             /// - Remark: Generated from `#/components/schemas/repository-rule-tag-name-pattern/parameters`.
             public struct ParametersPayload: Codable, Hashable, Sendable {
-                /// How this rule will appear to users.
+                /// How this rule appears when configuring it.
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-tag-name-pattern/parameters/name`.
                 public var name: Swift.String?
@@ -13245,7 +13732,7 @@ public enum Components {
                 /// Creates a new `ParametersPayload`.
                 ///
                 /// - Parameters:
-                ///   - name: How this rule will appear to users.
+                ///   - name: How this rule appears when configuring it.
                 ///   - negate: If true, the rule will fail if the pattern matches.
                 ///   - _operator: The operator to use for matching.
                 ///   - pattern: The pattern to match with.
@@ -13673,7 +14160,7 @@ public enum Components {
                 case parameters
             }
         }
-        /// Request Copilot code review for new pull requests automatically if the author has access to Copilot code review.
+        /// Request Copilot code review for new pull requests automatically if the author has access to Copilot code review and their premium requests quota has not reached the limit.
         ///
         /// - Remark: Generated from `#/components/schemas/repository-rule-copilot-code-review`.
         public struct RepositoryRuleCopilotCodeReview: Codable, Hashable, Sendable {
@@ -13777,8 +14264,8 @@ public enum Components {
             case RepositoryRuleCodeScanning(Components.Schemas.RepositoryRuleCodeScanning)
             /// - Remark: Generated from `#/components/schemas/repository-rule/case22`.
             case RepositoryRuleCopilotCodeReview(Components.Schemas.RepositoryRuleCopilotCodeReview)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .RepositoryRuleCreation(try .init(from: decoder))
                     return
@@ -13917,7 +14404,7 @@ public enum Components {
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .RepositoryRuleCreation(value):
                     try value.encode(to: encoder)
@@ -14107,8 +14594,8 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self.value1 = try .init(from: decoder)
                     } catch {
@@ -14129,7 +14616,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1?.encode(to: encoder)
                     try self.value2?.encode(to: encoder)
                 }
@@ -14251,8 +14738,10 @@ public enum Components {
             case RepositoryRuleWorkflows(Components.Schemas.RepositoryRuleWorkflows)
             /// - Remark: Generated from `#/components/schemas/org-rules/case20`.
             case RepositoryRuleCodeScanning(Components.Schemas.RepositoryRuleCodeScanning)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            /// - Remark: Generated from `#/components/schemas/org-rules/case21`.
+            case RepositoryRuleCopilotCodeReview(Components.Schemas.RepositoryRuleCopilotCodeReview)
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .RepositoryRuleCreation(try .init(from: decoder))
                     return
@@ -14373,13 +14862,19 @@ public enum Components {
                 } catch {
                     errors.append(error)
                 }
+                do {
+                    self = .RepositoryRuleCopilotCodeReview(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
                 throw Swift.DecodingError.failedToDecodeOneOfSchema(
                     type: Self.self,
                     codingPath: decoder.codingPath,
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .RepositoryRuleCreation(value):
                     try value.encode(to: encoder)
@@ -14420,6 +14915,8 @@ public enum Components {
                 case let .RepositoryRuleWorkflows(value):
                     try value.encode(to: encoder)
                 case let .RepositoryRuleCodeScanning(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleCopilotCodeReview(value):
                     try value.encode(to: encoder)
                 }
             }
@@ -14862,11 +15359,11 @@ public enum Components {
                 self.value1 = value1
                 self.value2 = value2
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 self.value1 = try .init(from: decoder)
                 self.value2 = try .init(from: decoder)
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 try self.value1.encode(to: encoder)
                 try self.value2.encode(to: encoder)
             }
@@ -14913,10 +15410,10 @@ public enum Components {
                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                         self.additionalProperties = additionalProperties
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try encoder.encodeAdditionalProperties(additionalProperties)
                     }
                 }
@@ -14924,8 +15421,8 @@ public enum Components {
                 case case1(Components.Schemas.Deployment.PayloadPayload.Case1Payload)
                 /// - Remark: Generated from `#/components/schemas/deployment/payload/case2`.
                 case case2(Swift.String)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .case1(try .init(from: decoder))
                         return
@@ -14944,7 +15441,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .case1(value):
                         try value.encode(to: encoder)
@@ -16255,7 +16752,7 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/nullable-git-user/email`.
             public var email: Swift.String?
             /// - Remark: Generated from `#/components/schemas/nullable-git-user/date`.
-            public var date: Swift.String?
+            public var date: Foundation.Date?
             /// Creates a new `NullableGitUser`.
             ///
             /// - Parameters:
@@ -16265,7 +16762,7 @@ public enum Components {
             public init(
                 name: Swift.String? = nil,
                 email: Swift.String? = nil,
-                date: Swift.String? = nil
+                date: Foundation.Date? = nil
             ) {
                 self.name = name
                 self.email = email
@@ -16505,8 +17002,8 @@ public enum Components {
                 case SimpleUser(Components.Schemas.SimpleUser)
                 /// - Remark: Generated from `#/components/schemas/commit/author/case2`.
                 case EmptyObject(Components.Schemas.EmptyObject)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .SimpleUser(try .init(from: decoder))
                         return
@@ -16525,7 +17022,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .SimpleUser(value):
                         try value.encode(to: encoder)
@@ -16542,8 +17039,8 @@ public enum Components {
                 case SimpleUser(Components.Schemas.SimpleUser)
                 /// - Remark: Generated from `#/components/schemas/commit/committer/case2`.
                 case EmptyObject(Components.Schemas.EmptyObject)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .SimpleUser(try .init(from: decoder))
                         return
@@ -16562,7 +17059,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .SimpleUser(value):
                         try value.encode(to: encoder)
@@ -17032,7 +17529,7 @@ public enum Components {
                     case url
                     case enabled
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.url = try container.decode(
                         Swift.String.self,
@@ -17064,7 +17561,7 @@ public enum Components {
                 public enum CodingKeys: String, CodingKey {
                     case enabled
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.enabled = try container.decode(
                         Swift.Bool.self,
@@ -17091,7 +17588,7 @@ public enum Components {
                 public enum CodingKeys: String, CodingKey {
                     case enabled
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.enabled = try container.decode(
                         Swift.Bool.self,
@@ -17118,7 +17615,7 @@ public enum Components {
                 public enum CodingKeys: String, CodingKey {
                     case enabled
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.enabled = try container.decode(
                         Swift.Bool.self,
@@ -17147,7 +17644,7 @@ public enum Components {
                 public enum CodingKeys: String, CodingKey {
                     case enabled
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.enabled = try container.decodeIfPresent(
                         Swift.Bool.self,
@@ -17174,7 +17671,7 @@ public enum Components {
                 public enum CodingKeys: String, CodingKey {
                     case enabled
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.enabled = try container.decode(
                         Swift.Bool.self,
@@ -17203,7 +17700,7 @@ public enum Components {
                 public enum CodingKeys: String, CodingKey {
                     case enabled
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.enabled = try container.decodeIfPresent(
                         Swift.Bool.self,
@@ -17234,7 +17731,7 @@ public enum Components {
                 public enum CodingKeys: String, CodingKey {
                     case enabled
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     let container = try decoder.container(keyedBy: CodingKeys.self)
                     self.enabled = try container.decodeIfPresent(
                         Swift.Bool.self,
@@ -20066,8 +20563,8 @@ public enum Components {
                                 self.value1 = value1
                                 self.value2 = value2
                             }
-                            public init(from decoder: any Decoder) throws {
-                                var errors: [any Error] = []
+                            public init(from decoder: any Swift.Decoder) throws {
+                                var errors: [any Swift.Error] = []
                                 do {
                                     self.value1 = try .init(from: decoder)
                                 } catch {
@@ -20088,7 +20585,7 @@ public enum Components {
                                     errors: errors
                                 )
                             }
-                            public func encode(to encoder: any Encoder) throws {
+                            public func encode(to encoder: any Swift.Encoder) throws {
                                 try self.value1?.encode(to: encoder)
                                 try self.value2?.encode(to: encoder)
                             }
@@ -20197,8 +20694,8 @@ public enum Components {
                     self.value2 = value2
                     self.value3 = value3
                 }
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self.value1 = try .init(from: decoder)
                     } catch {
@@ -20225,7 +20722,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1?.encode(to: encoder)
                     try self.value2?.encode(to: encoder)
                     try self.value3?.encode(to: encoder)
@@ -20728,10 +21225,10 @@ public enum Components {
             public init(additionalProperties: [String: Swift.Int] = .init()) {
                 self.additionalProperties = additionalProperties
             }
-            public init(from decoder: any Decoder) throws {
+            public init(from decoder: any Swift.Decoder) throws {
                 additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 try encoder.encodeAdditionalProperties(additionalProperties)
             }
         }
@@ -21088,8 +21585,8 @@ public enum Components {
                 case case1(Swift.Int)
                 /// - Remark: Generated from `#/components/schemas/page-deployment/id/case2`.
                 case case2(Swift.String)
-                public init(from decoder: any Decoder) throws {
-                    var errors: [any Error] = []
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
                     do {
                         self = .case1(try decoder.decodeFromSingleValueContainer())
                         return
@@ -21108,7 +21605,7 @@ public enum Components {
                         errors: errors
                     )
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     switch self {
                     case let .case1(value):
                         try encoder.encodeToSingleValueContainer(value)
@@ -21574,289 +22071,6 @@ public enum Components {
                 case altDomain = "alt_domain"
             }
         }
-        /// Data related to a release.
-        ///
-        /// - Remark: Generated from `#/components/schemas/release-asset`.
-        public struct ReleaseAsset: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/release-asset/url`.
-            public var url: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release-asset/browser_download_url`.
-            public var browserDownloadUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release-asset/id`.
-            public var id: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/release-asset/node_id`.
-            public var nodeId: Swift.String
-            /// The file name of the asset.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release-asset/name`.
-            public var name: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release-asset/label`.
-            public var label: Swift.String?
-            /// State of the release asset.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release-asset/state`.
-            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case uploaded = "uploaded"
-                case open = "open"
-            }
-            /// State of the release asset.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release-asset/state`.
-            public var state: Components.Schemas.ReleaseAsset.StatePayload
-            /// - Remark: Generated from `#/components/schemas/release-asset/content_type`.
-            public var contentType: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release-asset/size`.
-            public var size: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/release-asset/digest`.
-            public var digest: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release-asset/download_count`.
-            public var downloadCount: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/release-asset/created_at`.
-            public var createdAt: Foundation.Date
-            /// - Remark: Generated from `#/components/schemas/release-asset/updated_at`.
-            public var updatedAt: Foundation.Date
-            /// - Remark: Generated from `#/components/schemas/release-asset/uploader`.
-            public var uploader: Components.Schemas.NullableSimpleUser?
-            /// Creates a new `ReleaseAsset`.
-            ///
-            /// - Parameters:
-            ///   - url:
-            ///   - browserDownloadUrl:
-            ///   - id:
-            ///   - nodeId:
-            ///   - name: The file name of the asset.
-            ///   - label:
-            ///   - state: State of the release asset.
-            ///   - contentType:
-            ///   - size:
-            ///   - digest:
-            ///   - downloadCount:
-            ///   - createdAt:
-            ///   - updatedAt:
-            ///   - uploader:
-            public init(
-                url: Swift.String,
-                browserDownloadUrl: Swift.String,
-                id: Swift.Int,
-                nodeId: Swift.String,
-                name: Swift.String,
-                label: Swift.String? = nil,
-                state: Components.Schemas.ReleaseAsset.StatePayload,
-                contentType: Swift.String,
-                size: Swift.Int,
-                digest: Swift.String? = nil,
-                downloadCount: Swift.Int,
-                createdAt: Foundation.Date,
-                updatedAt: Foundation.Date,
-                uploader: Components.Schemas.NullableSimpleUser? = nil
-            ) {
-                self.url = url
-                self.browserDownloadUrl = browserDownloadUrl
-                self.id = id
-                self.nodeId = nodeId
-                self.name = name
-                self.label = label
-                self.state = state
-                self.contentType = contentType
-                self.size = size
-                self.digest = digest
-                self.downloadCount = downloadCount
-                self.createdAt = createdAt
-                self.updatedAt = updatedAt
-                self.uploader = uploader
-            }
-            public enum CodingKeys: String, CodingKey {
-                case url
-                case browserDownloadUrl = "browser_download_url"
-                case id
-                case nodeId = "node_id"
-                case name
-                case label
-                case state
-                case contentType = "content_type"
-                case size
-                case digest
-                case downloadCount = "download_count"
-                case createdAt = "created_at"
-                case updatedAt = "updated_at"
-                case uploader
-            }
-        }
-        /// A release.
-        ///
-        /// - Remark: Generated from `#/components/schemas/release`.
-        public struct Release: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/release/url`.
-            public var url: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release/html_url`.
-            public var htmlUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release/assets_url`.
-            public var assetsUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release/upload_url`.
-            public var uploadUrl: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release/tarball_url`.
-            public var tarballUrl: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/zipball_url`.
-            public var zipballUrl: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/id`.
-            public var id: Swift.Int
-            /// - Remark: Generated from `#/components/schemas/release/node_id`.
-            public var nodeId: Swift.String
-            /// The name of the tag.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/tag_name`.
-            public var tagName: Swift.String
-            /// Specifies the commitish value that determines where the Git tag is created from.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/target_commitish`.
-            public var targetCommitish: Swift.String
-            /// - Remark: Generated from `#/components/schemas/release/name`.
-            public var name: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/body`.
-            public var body: Swift.String?
-            /// true to create a draft (unpublished) release, false to create a published one.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/draft`.
-            public var draft: Swift.Bool
-            /// Whether to identify the release as a prerelease or a full release.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/prerelease`.
-            public var prerelease: Swift.Bool
-            /// Whether or not the release is immutable.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/immutable`.
-            public var immutable: Swift.Bool?
-            /// - Remark: Generated from `#/components/schemas/release/created_at`.
-            public var createdAt: Foundation.Date
-            /// - Remark: Generated from `#/components/schemas/release/published_at`.
-            public var publishedAt: Foundation.Date?
-            /// - Remark: Generated from `#/components/schemas/release/updated_at`.
-            public var updatedAt: Foundation.Date?
-            /// - Remark: Generated from `#/components/schemas/release/author`.
-            public var author: Components.Schemas.SimpleUser
-            /// - Remark: Generated from `#/components/schemas/release/assets`.
-            public var assets: [Components.Schemas.ReleaseAsset]
-            /// - Remark: Generated from `#/components/schemas/release/body_html`.
-            public var bodyHtml: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/body_text`.
-            public var bodyText: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/mentions_count`.
-            public var mentionsCount: Swift.Int?
-            /// The URL of the release discussion.
-            ///
-            /// - Remark: Generated from `#/components/schemas/release/discussion_url`.
-            public var discussionUrl: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/release/reactions`.
-            public var reactions: Components.Schemas.ReactionRollup?
-            /// Creates a new `Release`.
-            ///
-            /// - Parameters:
-            ///   - url:
-            ///   - htmlUrl:
-            ///   - assetsUrl:
-            ///   - uploadUrl:
-            ///   - tarballUrl:
-            ///   - zipballUrl:
-            ///   - id:
-            ///   - nodeId:
-            ///   - tagName: The name of the tag.
-            ///   - targetCommitish: Specifies the commitish value that determines where the Git tag is created from.
-            ///   - name:
-            ///   - body:
-            ///   - draft: true to create a draft (unpublished) release, false to create a published one.
-            ///   - prerelease: Whether to identify the release as a prerelease or a full release.
-            ///   - immutable: Whether or not the release is immutable.
-            ///   - createdAt:
-            ///   - publishedAt:
-            ///   - updatedAt:
-            ///   - author:
-            ///   - assets:
-            ///   - bodyHtml:
-            ///   - bodyText:
-            ///   - mentionsCount:
-            ///   - discussionUrl: The URL of the release discussion.
-            ///   - reactions:
-            public init(
-                url: Swift.String,
-                htmlUrl: Swift.String,
-                assetsUrl: Swift.String,
-                uploadUrl: Swift.String,
-                tarballUrl: Swift.String? = nil,
-                zipballUrl: Swift.String? = nil,
-                id: Swift.Int,
-                nodeId: Swift.String,
-                tagName: Swift.String,
-                targetCommitish: Swift.String,
-                name: Swift.String? = nil,
-                body: Swift.String? = nil,
-                draft: Swift.Bool,
-                prerelease: Swift.Bool,
-                immutable: Swift.Bool? = nil,
-                createdAt: Foundation.Date,
-                publishedAt: Foundation.Date? = nil,
-                updatedAt: Foundation.Date? = nil,
-                author: Components.Schemas.SimpleUser,
-                assets: [Components.Schemas.ReleaseAsset],
-                bodyHtml: Swift.String? = nil,
-                bodyText: Swift.String? = nil,
-                mentionsCount: Swift.Int? = nil,
-                discussionUrl: Swift.String? = nil,
-                reactions: Components.Schemas.ReactionRollup? = nil
-            ) {
-                self.url = url
-                self.htmlUrl = htmlUrl
-                self.assetsUrl = assetsUrl
-                self.uploadUrl = uploadUrl
-                self.tarballUrl = tarballUrl
-                self.zipballUrl = zipballUrl
-                self.id = id
-                self.nodeId = nodeId
-                self.tagName = tagName
-                self.targetCommitish = targetCommitish
-                self.name = name
-                self.body = body
-                self.draft = draft
-                self.prerelease = prerelease
-                self.immutable = immutable
-                self.createdAt = createdAt
-                self.publishedAt = publishedAt
-                self.updatedAt = updatedAt
-                self.author = author
-                self.assets = assets
-                self.bodyHtml = bodyHtml
-                self.bodyText = bodyText
-                self.mentionsCount = mentionsCount
-                self.discussionUrl = discussionUrl
-                self.reactions = reactions
-            }
-            public enum CodingKeys: String, CodingKey {
-                case url
-                case htmlUrl = "html_url"
-                case assetsUrl = "assets_url"
-                case uploadUrl = "upload_url"
-                case tarballUrl = "tarball_url"
-                case zipballUrl = "zipball_url"
-                case id
-                case nodeId = "node_id"
-                case tagName = "tag_name"
-                case targetCommitish = "target_commitish"
-                case name
-                case body
-                case draft
-                case prerelease
-                case immutable
-                case createdAt = "created_at"
-                case publishedAt = "published_at"
-                case updatedAt = "updated_at"
-                case author
-                case assets
-                case bodyHtml = "body_html"
-                case bodyText = "body_text"
-                case mentionsCount = "mentions_count"
-                case discussionUrl = "discussion_url"
-                case reactions
-            }
-        }
         /// Generated name and body describing a release
         ///
         /// - Remark: Generated from `#/components/schemas/release-notes-content`.
@@ -21952,11 +22166,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -21981,11 +22195,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22010,11 +22224,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22039,11 +22253,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22068,11 +22282,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22097,11 +22311,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22126,11 +22340,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22155,11 +22369,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22184,11 +22398,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22213,11 +22427,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22242,11 +22456,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22271,11 +22485,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22300,11 +22514,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22329,11 +22543,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22358,11 +22572,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22387,11 +22601,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22416,11 +22630,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22445,11 +22659,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22474,11 +22688,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22503,11 +22717,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22532,11 +22746,11 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
@@ -22561,19 +22775,19 @@ public enum Components {
                     self.value1 = value1
                     self.value2 = value2
                 }
-                public init(from decoder: any Decoder) throws {
+                public init(from decoder: any Swift.Decoder) throws {
                     self.value1 = try .init(from: decoder)
                     self.value2 = try .init(from: decoder)
                 }
-                public func encode(to encoder: any Encoder) throws {
+                public func encode(to encoder: any Swift.Encoder) throws {
                     try self.value1.encode(to: encoder)
                     try self.value2.encode(to: encoder)
                 }
             }
             /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22`.
             case case22(Components.Schemas.RepositoryRuleDetailed.Case22Payload)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .case1(try .init(from: decoder))
                     return
@@ -22712,7 +22926,7 @@ public enum Components {
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .case1(value):
                     try value.encode(to: encoder)
@@ -22951,49 +23165,6 @@ public enum Components {
                 case zipballUrl = "zipball_url"
                 case tarballUrl = "tarball_url"
                 case nodeId = "node_id"
-            }
-        }
-        /// Tag protection
-        ///
-        /// - Remark: Generated from `#/components/schemas/tag-protection`.
-        public struct TagProtection: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/tag-protection/id`.
-            public var id: Swift.Int?
-            /// - Remark: Generated from `#/components/schemas/tag-protection/created_at`.
-            public var createdAt: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/tag-protection/updated_at`.
-            public var updatedAt: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/tag-protection/enabled`.
-            public var enabled: Swift.Bool?
-            /// - Remark: Generated from `#/components/schemas/tag-protection/pattern`.
-            public var pattern: Swift.String
-            /// Creates a new `TagProtection`.
-            ///
-            /// - Parameters:
-            ///   - id:
-            ///   - createdAt:
-            ///   - updatedAt:
-            ///   - enabled:
-            ///   - pattern:
-            public init(
-                id: Swift.Int? = nil,
-                createdAt: Swift.String? = nil,
-                updatedAt: Swift.String? = nil,
-                enabled: Swift.Bool? = nil,
-                pattern: Swift.String
-            ) {
-                self.id = id
-                self.createdAt = createdAt
-                self.updatedAt = updatedAt
-                self.enabled = enabled
-                self.pattern = pattern
-            }
-            public enum CodingKeys: String, CodingKey {
-                case id
-                case createdAt = "created_at"
-                case updatedAt = "updated_at"
-                case enabled
-                case pattern
             }
         }
         /// A topic aggregates entities that are related to a subject.
@@ -23322,8 +23493,8 @@ public enum Components {
             case case1(Swift.Int)
             /// - Remark: Generated from `#/components/parameters/pages-deployment-id/case2`.
             case case2(Swift.String)
-            public init(from decoder: any Decoder) throws {
-                var errors: [any Error] = []
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
                 do {
                     self = .case1(try decoder.decodeFromSingleValueContainer())
                     return
@@ -23342,7 +23513,7 @@ public enum Components {
                     errors: errors
                 )
             }
-            public func encode(to encoder: any Encoder) throws {
+            public func encode(to encoder: any Swift.Encoder) throws {
                 switch self {
                 case let .case1(value):
                     try encoder.encodeToSingleValueContainer(value)
@@ -23359,10 +23530,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/release-id`.
         public typealias ReleaseId = Swift.Int
-        /// The unique identifier of the tag protection.
-        ///
-        /// - Remark: Generated from `#/components/parameters/tag-protection-id`.
-        public typealias TagProtectionId = Swift.Int
         /// The time frame to display results for.
         ///
         /// - Remark: Generated from `#/components/parameters/per`.
@@ -24246,10 +24413,10 @@ public enum Operations {
                         public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                             self.additionalProperties = additionalProperties
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }
@@ -24941,6 +25108,29 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/rulesets/post(repos/create-org-ruleset)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
                             response: self
                         )
                     }
@@ -25844,6 +26034,29 @@ public enum Operations {
                     }
                 }
             }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/rulesets/{ruleset_id}/put(repos/update-org-ruleset)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Internal Error
             ///
             /// - Remark: Generated from `#/paths//orgs/{org}/rulesets/{ruleset_id}/put(repos/update-org-ruleset)/responses/500`.
@@ -26517,6 +26730,119 @@ public enum Operations {
                         ///
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_non_provider_patterns`.
                         public var secretScanningNonProviderPatterns: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningNonProviderPatternsPayload?
+                        /// Use the `status` property to enable or disable secret scanning delegated alert dismissal for this repository.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_alert_dismissal`.
+                        public struct SecretScanningDelegatedAlertDismissalPayload: Codable, Hashable, Sendable {
+                            /// Can be `enabled` or `disabled`.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_alert_dismissal/status`.
+                            public var status: Swift.String?
+                            /// Creates a new `SecretScanningDelegatedAlertDismissalPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - status: Can be `enabled` or `disabled`.
+                            public init(status: Swift.String? = nil) {
+                                self.status = status
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case status
+                            }
+                        }
+                        /// Use the `status` property to enable or disable secret scanning delegated alert dismissal for this repository.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_alert_dismissal`.
+                        public var secretScanningDelegatedAlertDismissal: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedAlertDismissalPayload?
+                        /// Use the `status` property to enable or disable secret scanning delegated bypass for this repository.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass`.
+                        public struct SecretScanningDelegatedBypassPayload: Codable, Hashable, Sendable {
+                            /// Can be `enabled` or `disabled`.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass/status`.
+                            public var status: Swift.String?
+                            /// Creates a new `SecretScanningDelegatedBypassPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - status: Can be `enabled` or `disabled`.
+                            public init(status: Swift.String? = nil) {
+                                self.status = status
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case status
+                            }
+                        }
+                        /// Use the `status` property to enable or disable secret scanning delegated bypass for this repository.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass`.
+                        public var secretScanningDelegatedBypass: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassPayload?
+                        /// Feature options for secret scanning delegated bypass.
+                        /// This object is only honored when `security_and_analysis.secret_scanning_delegated_bypass.status` is set to `enabled`.
+                        /// You can send this object in the same request as `secret_scanning_delegated_bypass`, or update just the options in a separate request.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass_options`.
+                        public struct SecretScanningDelegatedBypassOptionsPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass_options/ReviewersPayload`.
+                            public struct ReviewersPayloadPayload: Codable, Hashable, Sendable {
+                                /// The ID of the team or role selected as a bypass reviewer
+                                ///
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_id`.
+                                public var reviewerId: Swift.Int
+                                /// The type of the bypass reviewer
+                                ///
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                                @frozen public enum ReviewerTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                    case team = "TEAM"
+                                    case role = "ROLE"
+                                }
+                                /// The type of the bypass reviewer
+                                ///
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
+                                public var reviewerType: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                                /// Creates a new `ReviewersPayloadPayload`.
+                                ///
+                                /// - Parameters:
+                                ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
+                                ///   - reviewerType: The type of the bypass reviewer
+                                public init(
+                                    reviewerId: Swift.Int,
+                                    reviewerType: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                                ) {
+                                    self.reviewerId = reviewerId
+                                    self.reviewerType = reviewerType
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case reviewerId = "reviewer_id"
+                                    case reviewerType = "reviewer_type"
+                                }
+                            }
+                            /// The bypass reviewers for secret scanning delegated bypass.
+                            /// If you omit this field, the existing set of reviewers is unchanged.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                            public typealias ReviewersPayload = [Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload]
+                            /// The bypass reviewers for secret scanning delegated bypass.
+                            /// If you omit this field, the existing set of reviewers is unchanged.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass_options/reviewers`.
+                            public var reviewers: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload?
+                            /// Creates a new `SecretScanningDelegatedBypassOptionsPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - reviewers: The bypass reviewers for secret scanning delegated bypass.
+                            public init(reviewers: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayload? = nil) {
+                                self.reviewers = reviewers
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case reviewers
+                            }
+                        }
+                        /// Feature options for secret scanning delegated bypass.
+                        /// This object is only honored when `security_and_analysis.secret_scanning_delegated_bypass.status` is set to `enabled`.
+                        /// You can send this object in the same request as `secret_scanning_delegated_bypass`, or update just the options in a separate request.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass_options`.
+                        public var secretScanningDelegatedBypassOptions: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload?
                         /// Creates a new `SecurityAndAnalysisPayload`.
                         ///
                         /// - Parameters:
@@ -26526,13 +26852,19 @@ public enum Operations {
                         ///   - secretScanningPushProtection: Use the `status` property to enable or disable secret scanning push protection for this repository. For more information, see "[Protecting pushes with secret scanning](/code-security/secret-scanning/protecting-pushes-with-secret-scanning)."
                         ///   - secretScanningAiDetection: Use the `status` property to enable or disable secret scanning AI detection for this repository. For more information, see "[Responsible detection of generic secrets with AI](https://docs.github.com/code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/generic-secret-detection/responsible-ai-generic-secrets)."
                         ///   - secretScanningNonProviderPatterns: Use the `status` property to enable or disable secret scanning non-provider patterns for this repository. For more information, see "[Supported secret scanning patterns](/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)."
+                        ///   - secretScanningDelegatedAlertDismissal: Use the `status` property to enable or disable secret scanning delegated alert dismissal for this repository.
+                        ///   - secretScanningDelegatedBypass: Use the `status` property to enable or disable secret scanning delegated bypass for this repository.
+                        ///   - secretScanningDelegatedBypassOptions: Feature options for secret scanning delegated bypass.
                         public init(
                             advancedSecurity: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.AdvancedSecurityPayload? = nil,
                             codeSecurity: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.CodeSecurityPayload? = nil,
                             secretScanning: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningPayload? = nil,
                             secretScanningPushProtection: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningPushProtectionPayload? = nil,
                             secretScanningAiDetection: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningAiDetectionPayload? = nil,
-                            secretScanningNonProviderPatterns: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningNonProviderPatternsPayload? = nil
+                            secretScanningNonProviderPatterns: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningNonProviderPatternsPayload? = nil,
+                            secretScanningDelegatedAlertDismissal: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedAlertDismissalPayload? = nil,
+                            secretScanningDelegatedBypass: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassPayload? = nil,
+                            secretScanningDelegatedBypassOptions: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload? = nil
                         ) {
                             self.advancedSecurity = advancedSecurity
                             self.codeSecurity = codeSecurity
@@ -26540,6 +26872,9 @@ public enum Operations {
                             self.secretScanningPushProtection = secretScanningPushProtection
                             self.secretScanningAiDetection = secretScanningAiDetection
                             self.secretScanningNonProviderPatterns = secretScanningNonProviderPatterns
+                            self.secretScanningDelegatedAlertDismissal = secretScanningDelegatedAlertDismissal
+                            self.secretScanningDelegatedBypass = secretScanningDelegatedBypass
+                            self.secretScanningDelegatedBypassOptions = secretScanningDelegatedBypassOptions
                         }
                         public enum CodingKeys: String, CodingKey {
                             case advancedSecurity = "advanced_security"
@@ -26548,6 +26883,9 @@ public enum Operations {
                             case secretScanningPushProtection = "secret_scanning_push_protection"
                             case secretScanningAiDetection = "secret_scanning_ai_detection"
                             case secretScanningNonProviderPatterns = "secret_scanning_non_provider_patterns"
+                            case secretScanningDelegatedAlertDismissal = "secret_scanning_delegated_alert_dismissal"
+                            case secretScanningDelegatedBypass = "secret_scanning_delegated_bypass"
+                            case secretScanningDelegatedBypassOptions = "secret_scanning_delegated_bypass_options"
                         }
                     }
                     /// Specify which security and analysis features to enable or disable for the repository.
@@ -27635,10 +27973,10 @@ public enum Operations {
                             public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                 self.additionalProperties = additionalProperties
                             }
-                            public init(from decoder: any Decoder) throws {
+                            public init(from decoder: any Swift.Decoder) throws {
                                 additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                             }
-                            public func encode(to encoder: any Encoder) throws {
+                            public func encode(to encoder: any Swift.Encoder) throws {
                                 try encoder.encodeAdditionalProperties(additionalProperties)
                             }
                         }
@@ -27655,10 +27993,10 @@ public enum Operations {
                             public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                 self.additionalProperties = additionalProperties
                             }
-                            public init(from decoder: any Decoder) throws {
+                            public init(from decoder: any Swift.Decoder) throws {
                                 additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                             }
-                            public func encode(to encoder: any Encoder) throws {
+                            public func encode(to encoder: any Swift.Encoder) throws {
                                 try encoder.encodeAdditionalProperties(additionalProperties)
                             }
                         }
@@ -28005,10 +28343,10 @@ public enum Operations {
                                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                         self.additionalProperties = additionalProperties
                                     }
-                                    public init(from decoder: any Decoder) throws {
+                                    public init(from decoder: any Swift.Decoder) throws {
                                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                                     }
-                                    public func encode(to encoder: any Encoder) throws {
+                                    public func encode(to encoder: any Swift.Encoder) throws {
                                         try encoder.encodeAdditionalProperties(additionalProperties)
                                     }
                                 }
@@ -28025,10 +28363,10 @@ public enum Operations {
                                     public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                         self.additionalProperties = additionalProperties
                                     }
-                                    public init(from decoder: any Decoder) throws {
+                                    public init(from decoder: any Swift.Decoder) throws {
                                         additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                                     }
-                                    public func encode(to encoder: any Encoder) throws {
+                                    public func encode(to encoder: any Swift.Encoder) throws {
                                         try encoder.encodeAdditionalProperties(additionalProperties)
                                     }
                                 }
@@ -32903,8 +33241,8 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts/POST/requestBody/json/case2`.
                     case case2([Swift.String])
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -32923,7 +33261,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -33183,8 +33521,8 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts/PUT/requestBody/json/case2`.
                     case case2([Swift.String])
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -33203,7 +33541,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -33440,8 +33778,8 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts/DELETE/requestBody/json/case2`.
                     case case2([Swift.String])
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -33460,7 +33798,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -34910,8 +35248,8 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams/POST/requestBody/json/case2`.
                     case case2([Swift.String])
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -34930,7 +35268,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -35146,8 +35484,8 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams/PUT/requestBody/json/case2`.
                     case case2([Swift.String])
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -35166,7 +35504,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -35382,8 +35720,8 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams/DELETE/requestBody/json/case2`.
                     case case2([Swift.String])
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try .init(from: decoder))
                             return
@@ -35402,7 +35740,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try value.encode(to: encoder)
@@ -41101,20 +41439,29 @@ public enum Operations {
                 }
             }
             public var headers: Operations.ReposGetContent.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/contents/{path}/GET/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/contents/{path}/GET/requestBody/content/application\/json`.
+                case json(OpenAPIRuntime.OpenAPIValueContainer)
+            }
+            public var body: Operations.ReposGetContent.Input.Body?
             /// Creates a new `Input`.
             ///
             /// - Parameters:
             ///   - path:
             ///   - query:
             ///   - headers:
+            ///   - body:
             public init(
                 path: Operations.ReposGetContent.Input.Path,
                 query: Operations.ReposGetContent.Input.Query = .init(),
-                headers: Operations.ReposGetContent.Input.Headers = .init()
+                headers: Operations.ReposGetContent.Input.Headers = .init(),
+                body: Operations.ReposGetContent.Input.Body? = nil
             ) {
                 self.path = path
                 self.query = query
                 self.headers = headers
+                self.body = body
             }
         }
         @frozen public enum Output: Sendable, Hashable {
@@ -41680,8 +42027,8 @@ public enum Operations {
                         case BasicError(Components.Schemas.BasicError)
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/contents/{path}/PUT/responses/409/content/json/case2`.
                         case RepositoryRuleViolationError(Components.Schemas.RepositoryRuleViolationError)
-                        public init(from decoder: any Decoder) throws {
-                            var errors: [any Error] = []
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
                             do {
                                 self = .BasicError(try .init(from: decoder))
                                 return
@@ -41700,7 +42047,7 @@ public enum Operations {
                                 errors: errors
                             )
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             switch self {
                             case let .BasicError(value):
                                 try value.encode(to: encoder)
@@ -42772,10 +43119,10 @@ public enum Operations {
                             public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                                 self.additionalProperties = additionalProperties
                             }
-                            public init(from decoder: any Decoder) throws {
+                            public init(from decoder: any Swift.Decoder) throws {
                                 additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                             }
-                            public func encode(to encoder: any Encoder) throws {
+                            public func encode(to encoder: any Swift.Encoder) throws {
                                 try encoder.encodeAdditionalProperties(additionalProperties)
                             }
                         }
@@ -42785,8 +43132,8 @@ public enum Operations {
                         ///
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/deployments/POST/requestBody/json/payload/case2`.
                         case case2(Swift.String)
-                        public init(from decoder: any Decoder) throws {
-                            var errors: [any Error] = []
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
                             do {
                                 self = .case1(try .init(from: decoder))
                                 return
@@ -42805,7 +43152,7 @@ public enum Operations {
                                 errors: errors
                             )
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             switch self {
                             case let .case1(value):
                                 try value.encode(to: encoder)
@@ -44210,10 +44557,10 @@ public enum Operations {
                         public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
                             self.additionalProperties = additionalProperties
                         }
-                        public init(from decoder: any Decoder) throws {
+                        public init(from decoder: any Swift.Decoder) throws {
                             additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }
@@ -44848,7 +45195,7 @@ public enum Operations {
                         case reviewers
                         case deploymentBranchPolicy = "deployment_branch_policy"
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.waitTimer = try container.decodeIfPresent(
                             Components.Schemas.WaitTimer.self,
@@ -47656,7 +48003,7 @@ public enum Operations {
                         case events
                         case active
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.name = try container.decodeIfPresent(
                             Swift.String.self,
@@ -48693,7 +49040,7 @@ public enum Operations {
                         case secret
                         case insecureSsl = "insecure_ssl"
                     }
-                    public init(from decoder: any Decoder) throws {
+                    public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
                         self.url = try container.decodeIfPresent(
                             Components.Schemas.WebhookConfigUrl.self,
@@ -52308,8 +52655,8 @@ public enum Operations {
                         self.value1 = value1
                         self.value2 = value2
                     }
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self.value1 = try .init(from: decoder)
                         } catch {
@@ -52330,7 +52677,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try self.value1?.encode(to: encoder)
                         try self.value2?.encode(to: encoder)
                     }
@@ -52593,8 +52940,8 @@ public enum Operations {
                         self.value4 = value4
                         self.value5 = value5
                     }
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self.value1 = try .init(from: decoder)
                         } catch {
@@ -52633,7 +52980,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         try self.value1?.encode(to: encoder)
                         try self.value2?.encode(to: encoder)
                         try self.value3?.encode(to: encoder)
@@ -53931,8 +54278,8 @@ public enum Operations {
                     case case1(Swift.Int)
                     /// - Remark: Generated from `#/components/parameters/pages-deployment-id/case2`.
                     case case2(Swift.String)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -53951,7 +54298,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -54139,8 +54486,8 @@ public enum Operations {
                     case case1(Swift.Int)
                     /// - Remark: Generated from `#/components/parameters/pages-deployment-id/case2`.
                     case case2(Swift.String)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -54159,7 +54506,7 @@ public enum Operations {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -59121,6 +59468,29 @@ public enum Operations {
                     }
                 }
             }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/rulesets/post(repos/create-repo-ruleset)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Internal Error
             ///
             /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/rulesets/post(repos/create-repo-ruleset)/responses/500`.
@@ -60054,6 +60424,29 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/rulesets/{ruleset_id}/put(repos/update-repo-ruleset)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
                             response: self
                         )
                     }
@@ -62072,597 +62465,6 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
-        }
-    }
-    /// Closing down - List tag protection states for a repository
-    ///
-    /// > [!WARNING]
-    /// > **Closing down notice:** This operation is closing down and will be removed after August 30, 2024. Use the "[Repository Rulesets](https://docs.github.com/rest/repos/rules#get-all-repository-rulesets)" endpoint instead.
-    ///
-    /// This returns the tag protection states of a repository.
-    ///
-    /// This information is only available to repository administrators.
-    ///
-    /// - Remark: HTTP `GET /repos/{owner}/{repo}/tags/protection`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/get(repos/list-tag-protection)`.
-    public enum ReposListTagProtection {
-        public static let id: Swift.String = "repos/list-tag-protection"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/GET/path`.
-            public struct Path: Sendable, Hashable {
-                /// The account owner of the repository. The name is not case sensitive.
-                ///
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/GET/path/owner`.
-                public var owner: Components.Parameters.Owner
-                /// The name of the repository without the `.git` extension. The name is not case sensitive.
-                ///
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/GET/path/repo`.
-                public var repo: Components.Parameters.Repo
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - owner: The account owner of the repository. The name is not case sensitive.
-                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
-                public init(
-                    owner: Components.Parameters.Owner,
-                    repo: Components.Parameters.Repo
-                ) {
-                    self.owner = owner
-                    self.repo = repo
-                }
-            }
-            public var path: Operations.ReposListTagProtection.Input.Path
-            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/GET/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposListTagProtection.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposListTagProtection.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.ReposListTagProtection.Input.Headers
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - headers:
-            public init(
-                path: Operations.ReposListTagProtection.Input.Path,
-                headers: Operations.ReposListTagProtection.Input.Headers = .init()
-            ) {
-                self.path = path
-                self.headers = headers
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/GET/responses/200/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/GET/responses/200/content/application\/json`.
-                    case json([Components.Schemas.TagProtection])
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: [Components.Schemas.TagProtection] {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.ReposListTagProtection.Output.Ok.Body
-                /// Creates a new `Ok`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.ReposListTagProtection.Output.Ok.Body) {
-                    self.body = body
-                }
-            }
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/get(repos/list-tag-protection)/responses/200`.
-            ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.ReposListTagProtection.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
-            ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.ReposListTagProtection.Output.Ok {
-                get throws {
-                    switch self {
-                    case let .ok(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Forbidden
-            ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/get(repos/list-tag-protection)/responses/403`.
-            ///
-            /// HTTP response code: `403 forbidden`.
-            case forbidden(Components.Responses.Forbidden)
-            /// The associated value of the enum case if `self` is `.forbidden`.
-            ///
-            /// - Throws: An error if `self` is not `.forbidden`.
-            /// - SeeAlso: `.forbidden`.
-            public var forbidden: Components.Responses.Forbidden {
-                get throws {
-                    switch self {
-                    case let .forbidden(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "forbidden",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/get(repos/list-tag-protection)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
-        }
-    }
-    /// Closing down - Create a tag protection state for a repository
-    ///
-    /// > [!WARNING]
-    /// > **Closing down notice:** This operation is closing down and will be removed after August 30, 2024. Use the "[Repository Rulesets](https://docs.github.com/rest/repos/rules#create-a-repository-ruleset)" endpoint instead.
-    ///
-    /// This creates a tag protection state for a repository.
-    /// This endpoint is only available to repository administrators.
-    ///
-    /// - Remark: HTTP `POST /repos/{owner}/{repo}/tags/protection`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/post(repos/create-tag-protection)`.
-    public enum ReposCreateTagProtection {
-        public static let id: Swift.String = "repos/create-tag-protection"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/POST/path`.
-            public struct Path: Sendable, Hashable {
-                /// The account owner of the repository. The name is not case sensitive.
-                ///
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/POST/path/owner`.
-                public var owner: Components.Parameters.Owner
-                /// The name of the repository without the `.git` extension. The name is not case sensitive.
-                ///
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/POST/path/repo`.
-                public var repo: Components.Parameters.Repo
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - owner: The account owner of the repository. The name is not case sensitive.
-                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
-                public init(
-                    owner: Components.Parameters.Owner,
-                    repo: Components.Parameters.Repo
-                ) {
-                    self.owner = owner
-                    self.repo = repo
-                }
-            }
-            public var path: Operations.ReposCreateTagProtection.Input.Path
-            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/POST/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposCreateTagProtection.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposCreateTagProtection.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.ReposCreateTagProtection.Input.Headers
-            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/POST/requestBody`.
-            @frozen public enum Body: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/POST/requestBody/json`.
-                public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// An optional glob pattern to match against when enforcing tag protection.
-                    ///
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/POST/requestBody/json/pattern`.
-                    public var pattern: Swift.String
-                    /// Creates a new `JsonPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - pattern: An optional glob pattern to match against when enforcing tag protection.
-                    public init(pattern: Swift.String) {
-                        self.pattern = pattern
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case pattern
-                    }
-                }
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/POST/requestBody/content/application\/json`.
-                case json(Operations.ReposCreateTagProtection.Input.Body.JsonPayload)
-            }
-            public var body: Operations.ReposCreateTagProtection.Input.Body
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - headers:
-            ///   - body:
-            public init(
-                path: Operations.ReposCreateTagProtection.Input.Path,
-                headers: Operations.ReposCreateTagProtection.Input.Headers = .init(),
-                body: Operations.ReposCreateTagProtection.Input.Body
-            ) {
-                self.path = path
-                self.headers = headers
-                self.body = body
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct Created: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/POST/responses/201/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/POST/responses/201/content/application\/json`.
-                    case json(Components.Schemas.TagProtection)
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: Components.Schemas.TagProtection {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.ReposCreateTagProtection.Output.Created.Body
-                /// Creates a new `Created`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.ReposCreateTagProtection.Output.Created.Body) {
-                    self.body = body
-                }
-            }
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/post(repos/create-tag-protection)/responses/201`.
-            ///
-            /// HTTP response code: `201 created`.
-            case created(Operations.ReposCreateTagProtection.Output.Created)
-            /// The associated value of the enum case if `self` is `.created`.
-            ///
-            /// - Throws: An error if `self` is not `.created`.
-            /// - SeeAlso: `.created`.
-            public var created: Operations.ReposCreateTagProtection.Output.Created {
-                get throws {
-                    switch self {
-                    case let .created(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "created",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Forbidden
-            ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/post(repos/create-tag-protection)/responses/403`.
-            ///
-            /// HTTP response code: `403 forbidden`.
-            case forbidden(Components.Responses.Forbidden)
-            /// The associated value of the enum case if `self` is `.forbidden`.
-            ///
-            /// - Throws: An error if `self` is not `.forbidden`.
-            /// - SeeAlso: `.forbidden`.
-            public var forbidden: Components.Responses.Forbidden {
-                get throws {
-                    switch self {
-                    case let .forbidden(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "forbidden",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/post(repos/create-tag-protection)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
-        }
-    }
-    /// Closing down - Delete a tag protection state for a repository
-    ///
-    /// > [!WARNING]
-    /// > **Closing down notice:** This operation is closing down and will be removed after August 30, 2024. Use the "[Repository Rulesets](https://docs.github.com/rest/repos/rules#delete-a-repository-ruleset)" endpoint instead.
-    ///
-    /// This deletes a tag protection state for a repository.
-    /// This endpoint is only available to repository administrators.
-    ///
-    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/tags/protection/{tag_protection_id}`.
-    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/{tag_protection_id}/delete(repos/delete-tag-protection)`.
-    public enum ReposDeleteTagProtection {
-        public static let id: Swift.String = "repos/delete-tag-protection"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/{tag_protection_id}/DELETE/path`.
-            public struct Path: Sendable, Hashable {
-                /// The account owner of the repository. The name is not case sensitive.
-                ///
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/{tag_protection_id}/DELETE/path/owner`.
-                public var owner: Components.Parameters.Owner
-                /// The name of the repository without the `.git` extension. The name is not case sensitive.
-                ///
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/{tag_protection_id}/DELETE/path/repo`.
-                public var repo: Components.Parameters.Repo
-                /// The unique identifier of the tag protection.
-                ///
-                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/{tag_protection_id}/DELETE/path/tag_protection_id`.
-                public var tagProtectionId: Components.Parameters.TagProtectionId
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - owner: The account owner of the repository. The name is not case sensitive.
-                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
-                ///   - tagProtectionId: The unique identifier of the tag protection.
-                public init(
-                    owner: Components.Parameters.Owner,
-                    repo: Components.Parameters.Repo,
-                    tagProtectionId: Components.Parameters.TagProtectionId
-                ) {
-                    self.owner = owner
-                    self.repo = repo
-                    self.tagProtectionId = tagProtectionId
-                }
-            }
-            public var path: Operations.ReposDeleteTagProtection.Input.Path
-            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/tags/protection/{tag_protection_id}/DELETE/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposDeleteTagProtection.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposDeleteTagProtection.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.ReposDeleteTagProtection.Input.Headers
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - headers:
-            public init(
-                path: Operations.ReposDeleteTagProtection.Input.Path,
-                headers: Operations.ReposDeleteTagProtection.Input.Headers = .init()
-            ) {
-                self.path = path
-                self.headers = headers
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct NoContent: Sendable, Hashable {
-                /// Creates a new `NoContent`.
-                public init() {}
-            }
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/{tag_protection_id}/delete(repos/delete-tag-protection)/responses/204`.
-            ///
-            /// HTTP response code: `204 noContent`.
-            case noContent(Operations.ReposDeleteTagProtection.Output.NoContent)
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/{tag_protection_id}/delete(repos/delete-tag-protection)/responses/204`.
-            ///
-            /// HTTP response code: `204 noContent`.
-            public static var noContent: Self {
-                .noContent(.init())
-            }
-            /// The associated value of the enum case if `self` is `.noContent`.
-            ///
-            /// - Throws: An error if `self` is not `.noContent`.
-            /// - SeeAlso: `.noContent`.
-            public var noContent: Operations.ReposDeleteTagProtection.Output.NoContent {
-                get throws {
-                    switch self {
-                    case let .noContent(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "noContent",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Forbidden
-            ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/{tag_protection_id}/delete(repos/delete-tag-protection)/responses/403`.
-            ///
-            /// HTTP response code: `403 forbidden`.
-            case forbidden(Components.Responses.Forbidden)
-            /// The associated value of the enum case if `self` is `.forbidden`.
-            ///
-            /// - Throws: An error if `self` is not `.forbidden`.
-            /// - SeeAlso: `.forbidden`.
-            public var forbidden: Components.Responses.Forbidden {
-                get throws {
-                    switch self {
-                    case let .forbidden(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "forbidden",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/tags/protection/{tag_protection_id}/delete(repos/delete-tag-protection)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
                             response: self
                         )
                     }
