@@ -246,8 +246,8 @@ public enum Components {
                     case case2(Swift.Int?)
                     /// - Remark: Generated from `#/components/schemas/validation-error/ErrorsPayload/value/case3`.
                     case case3([Swift.String]?)
-                    public init(from decoder: any Decoder) throws {
-                        var errors: [any Error] = []
+                    public init(from decoder: any Swift.Decoder) throws {
+                        var errors: [any Swift.Error] = []
                         do {
                             self = .case1(try decoder.decodeFromSingleValueContainer())
                             return
@@ -272,7 +272,7 @@ public enum Components {
                             errors: errors
                         )
                     }
-                    public func encode(to encoder: any Encoder) throws {
+                    public func encode(to encoder: any Swift.Encoder) throws {
                         switch self {
                         case let .case1(value):
                             try encoder.encodeToSingleValueContainer(value)
@@ -533,7 +533,7 @@ public enum Operations {
                         public struct Value2Payload: Codable, Hashable, Sendable {
                             /// Creates a new `Value2Payload`.
                             public init() {}
-                            public init(from decoder: any Decoder) throws {
+                            public init(from decoder: any Swift.Decoder) throws {
                                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
                             }
                         }
@@ -551,8 +551,8 @@ public enum Operations {
                             self.value1 = value1
                             self.value2 = value2
                         }
-                        public init(from decoder: any Decoder) throws {
-                            var errors: [any Error] = []
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
                             do {
                                 self.value1 = try .init(from: decoder)
                             } catch {
@@ -573,7 +573,7 @@ public enum Operations {
                                 errors: errors
                             )
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try self.value1?.encode(to: encoder)
                             try self.value2?.encode(to: encoder)
                         }
@@ -965,7 +965,7 @@ public enum Operations {
                         public struct Value2Payload: Codable, Hashable, Sendable {
                             /// Creates a new `Value2Payload`.
                             public init() {}
-                            public init(from decoder: any Decoder) throws {
+                            public init(from decoder: any Swift.Decoder) throws {
                                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
                             }
                         }
@@ -983,8 +983,8 @@ public enum Operations {
                             self.value1 = value1
                             self.value2 = value2
                         }
-                        public init(from decoder: any Decoder) throws {
-                            var errors: [any Error] = []
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
                             do {
                                 self.value1 = try .init(from: decoder)
                             } catch {
@@ -1005,7 +1005,7 @@ public enum Operations {
                                 errors: errors
                             )
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try self.value1?.encode(to: encoder)
                             try self.value2?.encode(to: encoder)
                         }
@@ -1433,7 +1433,7 @@ public enum Operations {
                         public struct Value2Payload: Codable, Hashable, Sendable {
                             /// Creates a new `Value2Payload`.
                             public init() {}
-                            public init(from decoder: any Decoder) throws {
+                            public init(from decoder: any Swift.Decoder) throws {
                                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
                             }
                         }
@@ -1451,8 +1451,8 @@ public enum Operations {
                             self.value1 = value1
                             self.value2 = value2
                         }
-                        public init(from decoder: any Decoder) throws {
-                            var errors: [any Error] = []
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
                             do {
                                 self.value1 = try .init(from: decoder)
                             } catch {
@@ -1473,7 +1473,7 @@ public enum Operations {
                                 errors: errors
                             )
                         }
-                        public func encode(to encoder: any Encoder) throws {
+                        public func encode(to encoder: any Swift.Encoder) throws {
                             try self.value1?.encode(to: encoder)
                             try self.value2?.encode(to: encoder)
                         }
