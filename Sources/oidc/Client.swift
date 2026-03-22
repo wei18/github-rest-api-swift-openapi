@@ -38,6 +38,574 @@ public struct Client: APIProtocol {
     private var converter: Converter {
         client.converter
     }
+    /// List OIDC custom property inclusions for an enterprise
+    ///
+    /// Lists the repository custom properties that are included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-enterprise)`.
+    public func oidcListOidcCustomPropertyInclusionsForEnterprise(_ input: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Input) async throws -> Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/enterprises/{}/actions/oidc/customization/properties/repo",
+                    parameters: [
+                        input.path.enterprise
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OidcListOidcCustomPropertyInclusionsForEnterprise.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            [Components.Schemas.OidcCustomPropertyInclusion].self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Create an OIDC custom property inclusion for an enterprise
+    ///
+    /// Adds a repository custom property to be included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-enterprise)`.
+    public func oidcCreateOidcCustomPropertyInclusionForEnterprise(_ input: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Input) async throws -> Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/enterprises/{}/actions/oidc/customization/properties/repo",
+                    parameters: [
+                        input.path.enterprise
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .post
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 201:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OidcCreateOidcCustomPropertyInclusionForEnterprise.Output.Created.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.OidcCustomPropertyInclusion.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .created(.init(body: body))
+                case 400:
+                    return .badRequest(.init())
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                case 422:
+                    return .unprocessableContent(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Delete an OIDC custom property inclusion for an enterprise
+    ///
+    /// Removes a repository custom property from being included in the OIDC token for repository actions in an enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:enterprise` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-enterprise)`.
+    public func oidcDeleteOidcCustomPropertyInclusionForEnterprise(_ input: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Input) async throws -> Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OidcDeleteOidcCustomPropertyInclusionForEnterprise.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/enterprises/{}/actions/oidc/customization/properties/repo/{}",
+                    parameters: [
+                        input.path.enterprise,
+                        input.path.customPropertyName
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .delete
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                case 400:
+                    return .badRequest(.init())
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                case 404:
+                    return .notFound(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// List OIDC custom property inclusions for an organization
+    ///
+    /// Lists the repository custom properties that are included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/get(oidc/list-oidc-custom-property-inclusions-for-org)`.
+    public func oidcListOidcCustomPropertyInclusionsForOrg(_ input: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Input) async throws -> Operations.OidcListOidcCustomPropertyInclusionsForOrg.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OidcListOidcCustomPropertyInclusionsForOrg.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/actions/oidc/customization/properties/repo",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OidcListOidcCustomPropertyInclusionsForOrg.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            [Components.Schemas.OidcCustomPropertyInclusion].self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Create an OIDC custom property inclusion for an organization
+    ///
+    /// Adds a repository custom property to be included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/actions/oidc/customization/properties/repo`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/post(oidc/create-oidc-custom-property-inclusion-for-org)`.
+    public func oidcCreateOidcCustomPropertyInclusionForOrg(_ input: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Input) async throws -> Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/actions/oidc/customization/properties/repo",
+                    parameters: [
+                        input.path.org
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .post
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 201:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OidcCreateOidcCustomPropertyInclusionForOrg.Output.Created.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.OidcCustomPropertyInclusion.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .created(.init(body: body))
+                case 400:
+                    return .badRequest(.init())
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                case 422:
+                    return .unprocessableContent(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Delete an OIDC custom property inclusion for an organization
+    ///
+    /// Removes a repository custom property from being included in the OIDC token for repository actions in an organization.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/actions/oidc/customization/properties/repo/{custom_property_name}/delete(oidc/delete-oidc-custom-property-inclusion-for-org)`.
+    public func oidcDeleteOidcCustomPropertyInclusionForOrg(_ input: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Input) async throws -> Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OidcDeleteOidcCustomPropertyInclusionForOrg.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/actions/oidc/customization/properties/repo/{}",
+                    parameters: [
+                        input.path.org,
+                        input.path.customPropertyName
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .delete
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                case 400:
+                    return .badRequest(.init())
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                case 404:
+                    return .notFound(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// Get the customization template for an OIDC subject claim for an organization
     ///
     /// Gets the customization template for an OpenID Connect (OIDC) subject claim.
