@@ -1796,6 +1796,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/dependabot-alert-security-advisory/severity`.
             public var severity: Components.Schemas.DependabotAlertSecurityAdvisory.SeverityPayload
+            /// The classification of the advisory.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert-security-advisory/classification`.
+            @frozen public enum ClassificationPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case general = "general"
+                case malware = "malware"
+            }
+            /// The classification of the advisory.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-alert-security-advisory/classification`.
+            public var classification: Components.Schemas.DependabotAlertSecurityAdvisory.ClassificationPayload?
             /// Details for the advisory pertaining to the Common Vulnerability Scoring System.
             ///
             /// - Remark: Generated from `#/components/schemas/dependabot-alert-security-advisory/cvss`.
@@ -2017,6 +2028,7 @@ public enum Components {
             ///   - description: A long-form Markdown-supported description of the advisory.
             ///   - vulnerabilities: Vulnerable version range information for the advisory.
             ///   - severity: The severity of the advisory.
+            ///   - classification: The classification of the advisory.
             ///   - cvss: Details for the advisory pertaining to the Common Vulnerability Scoring System.
             ///   - cvssSeverities:
             ///   - epss:
@@ -2033,6 +2045,7 @@ public enum Components {
                 description: Swift.String,
                 vulnerabilities: [Components.Schemas.DependabotAlertSecurityVulnerability],
                 severity: Components.Schemas.DependabotAlertSecurityAdvisory.SeverityPayload,
+                classification: Components.Schemas.DependabotAlertSecurityAdvisory.ClassificationPayload? = nil,
                 cvss: Components.Schemas.DependabotAlertSecurityAdvisory.CvssPayload,
                 cvssSeverities: Components.Schemas.CvssSeverities? = nil,
                 epss: Components.Schemas.SecurityAdvisoryEpss? = nil,
@@ -2049,6 +2062,7 @@ public enum Components {
                 self.description = description
                 self.vulnerabilities = vulnerabilities
                 self.severity = severity
+                self.classification = classification
                 self.cvss = cvss
                 self.cvssSeverities = cvssSeverities
                 self.epss = epss
@@ -2066,6 +2080,7 @@ public enum Components {
                 case description
                 case vulnerabilities
                 case severity
+                case classification
                 case cvss
                 case cvssSeverities = "cvss_severities"
                 case epss
@@ -2101,6 +2116,10 @@ public enum Components {
                 self.severity = try container.decode(
                     Components.Schemas.DependabotAlertSecurityAdvisory.SeverityPayload.self,
                     forKey: .severity
+                )
+                self.classification = try container.decodeIfPresent(
+                    Components.Schemas.DependabotAlertSecurityAdvisory.ClassificationPayload.self,
+                    forKey: .classification
                 )
                 self.cvss = try container.decode(
                     Components.Schemas.DependabotAlertSecurityAdvisory.CvssPayload.self,
@@ -2145,6 +2164,7 @@ public enum Components {
                     "description",
                     "vulnerabilities",
                     "severity",
+                    "classification",
                     "cvss",
                     "cvss_severities",
                     "epss",
@@ -2327,6 +2347,7 @@ public enum Components {
                     case unknown = "unknown"
                     case direct = "direct"
                     case transitive = "transitive"
+                    case inconclusive = "inconclusive"
                 }
                 /// The vulnerable dependency's relationship to your project.
                 ///
@@ -3064,8 +3085,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload?
-            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/archived`.
             public var archived: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/disabled`.
@@ -3284,7 +3303,6 @@ public enum Components {
             ///   - hasDiscussions:
             ///   - hasPullRequests:
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled:
             ///   - visibility:
@@ -3376,7 +3394,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool? = nil,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool? = nil,
                 disabled: Swift.Bool? = nil,
                 visibility: Swift.String? = nil,
@@ -3468,7 +3485,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -3561,7 +3577,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -4158,6 +4173,7 @@ public enum Components {
                     case unknown = "unknown"
                     case direct = "direct"
                     case transitive = "transitive"
+                    case inconclusive = "inconclusive"
                 }
                 /// The vulnerable dependency's relationship to your project.
                 ///
@@ -4470,6 +4486,12 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/enterprise`.
         public typealias Enterprise = Swift.String
+        /// A comma-separated list of vulnerability classifications. If specified, only alerts for vulnerabilities with these classifications will be returned.
+        ///
+        /// Can be: `malware`, `general`
+        ///
+        /// - Remark: Generated from `#/components/parameters/dependabot-alert-comma-separated-classifications`.
+        public typealias DependabotAlertCommaSeparatedClassifications = Swift.String
         /// A comma-separated list of states. If specified, only alerts with these states will be returned.
         ///
         /// Can be: `auto_dismissed`, `dismissed`, `fixed`, `open`
@@ -4872,6 +4894,12 @@ public enum Operations {
             public var path: Operations.DependabotListAlertsForEnterprise.Input.Path
             /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/alerts/GET/query`.
             public struct Query: Sendable, Hashable {
+                /// A comma-separated list of vulnerability classifications. If specified, only alerts for vulnerabilities with these classifications will be returned.
+                ///
+                /// Can be: `malware`, `general`
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/alerts/GET/query/classification`.
+                public var classification: Components.Parameters.DependabotAlertCommaSeparatedClassifications?
                 /// A comma-separated list of states. If specified, only alerts with these states will be returned.
                 ///
                 /// Can be: `auto_dismissed`, `dismissed`, `fixed`, `open`
@@ -5001,6 +5029,7 @@ public enum Operations {
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
+                ///   - classification: A comma-separated list of vulnerability classifications. If specified, only alerts for vulnerabilities with these classifications will be returned.
                 ///   - state: A comma-separated list of states. If specified, only alerts with these states will be returned.
                 ///   - severity: A comma-separated list of severities. If specified, only alerts with these severities will be returned.
                 ///   - ecosystem: A comma-separated list of ecosystems. If specified, only alerts for these ecosystems will be returned.
@@ -5015,6 +5044,7 @@ public enum Operations {
                 ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
+                    classification: Components.Parameters.DependabotAlertCommaSeparatedClassifications? = nil,
                     state: Components.Parameters.DependabotAlertCommaSeparatedStates? = nil,
                     severity: Components.Parameters.DependabotAlertCommaSeparatedSeverities? = nil,
                     ecosystem: Components.Parameters.DependabotAlertCommaSeparatedEcosystems? = nil,
@@ -5029,6 +5059,7 @@ public enum Operations {
                     after: Components.Parameters.PaginationAfter? = nil,
                     perPage: Components.Parameters.PerPage? = nil
                 ) {
+                    self.classification = classification
                     self.state = state
                     self.severity = severity
                     self.ecosystem = ecosystem
@@ -5905,6 +5936,12 @@ public enum Operations {
             public var path: Operations.DependabotListAlertsForOrg.Input.Path
             /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query`.
             public struct Query: Sendable, Hashable {
+                /// A comma-separated list of vulnerability classifications. If specified, only alerts for vulnerabilities with these classifications will be returned.
+                ///
+                /// Can be: `malware`, `general`
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/alerts/GET/query/classification`.
+                public var classification: Components.Parameters.DependabotAlertCommaSeparatedClassifications?
                 /// A comma-separated list of states. If specified, only alerts with these states will be returned.
                 ///
                 /// Can be: `auto_dismissed`, `dismissed`, `fixed`, `open`
@@ -6051,6 +6088,7 @@ public enum Operations {
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
+                ///   - classification: A comma-separated list of vulnerability classifications. If specified, only alerts for vulnerabilities with these classifications will be returned.
                 ///   - state: A comma-separated list of states. If specified, only alerts with these states will be returned.
                 ///   - severity: A comma-separated list of severities. If specified, only alerts with these severities will be returned.
                 ///   - ecosystem: A comma-separated list of ecosystems. If specified, only alerts for these ecosystems will be returned.
@@ -6068,6 +6106,7 @@ public enum Operations {
                 ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
+                    classification: Components.Parameters.DependabotAlertCommaSeparatedClassifications? = nil,
                     state: Components.Parameters.DependabotAlertCommaSeparatedStates? = nil,
                     severity: Components.Parameters.DependabotAlertCommaSeparatedSeverities? = nil,
                     ecosystem: Components.Parameters.DependabotAlertCommaSeparatedEcosystems? = nil,
@@ -6085,6 +6124,7 @@ public enum Operations {
                     after: Components.Parameters.PaginationAfter? = nil,
                     perPage: Components.Parameters.PerPage? = nil
                 ) {
+                    self.classification = classification
                     self.state = state
                     self.severity = severity
                     self.ecosystem = ecosystem
@@ -7799,6 +7839,12 @@ public enum Operations {
             public var path: Operations.DependabotListAlertsForRepo.Input.Path
             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query`.
             public struct Query: Sendable, Hashable {
+                /// A comma-separated list of vulnerability classifications. If specified, only alerts for vulnerabilities with these classifications will be returned.
+                ///
+                /// Can be: `malware`, `general`
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependabot/alerts/GET/query/classification`.
+                public var classification: Components.Parameters.DependabotAlertCommaSeparatedClassifications?
                 /// A comma-separated list of states. If specified, only alerts with these states will be returned.
                 ///
                 /// Can be: `auto_dismissed`, `dismissed`, `fixed`, `open`
@@ -7932,6 +7978,7 @@ public enum Operations {
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
+                ///   - classification: A comma-separated list of vulnerability classifications. If specified, only alerts for vulnerabilities with these classifications will be returned.
                 ///   - state: A comma-separated list of states. If specified, only alerts with these states will be returned.
                 ///   - severity: A comma-separated list of severities. If specified, only alerts with these severities will be returned.
                 ///   - ecosystem: A comma-separated list of ecosystems. If specified, only alerts for these ecosystems will be returned.
@@ -7947,6 +7994,7 @@ public enum Operations {
                 ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
+                    classification: Components.Parameters.DependabotAlertCommaSeparatedClassifications? = nil,
                     state: Components.Parameters.DependabotAlertCommaSeparatedStates? = nil,
                     severity: Components.Parameters.DependabotAlertCommaSeparatedSeverities? = nil,
                     ecosystem: Components.Parameters.DependabotAlertCommaSeparatedEcosystems? = nil,
@@ -7962,6 +8010,7 @@ public enum Operations {
                     after: Components.Parameters.PaginationAfter? = nil,
                     perPage: Components.Parameters.PerPage? = nil
                 ) {
+                    self.classification = classification
                     self.state = state
                     self.severity = severity
                     self.ecosystem = ecosystem
