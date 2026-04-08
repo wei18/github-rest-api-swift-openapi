@@ -5115,8 +5115,14 @@ extension APIProtocol {
     ///
     /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/releases/assets/{asset_id}`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/releases/assets/{asset_id}/delete(repos/delete-release-asset)`.
-    public func reposDeleteReleaseAsset(path: Operations.ReposDeleteReleaseAsset.Input.Path) async throws -> Operations.ReposDeleteReleaseAsset.Output {
-        try await reposDeleteReleaseAsset(Operations.ReposDeleteReleaseAsset.Input(path: path))
+    public func reposDeleteReleaseAsset(
+        path: Operations.ReposDeleteReleaseAsset.Input.Path,
+        headers: Operations.ReposDeleteReleaseAsset.Input.Headers = .init()
+    ) async throws -> Operations.ReposDeleteReleaseAsset.Output {
+        try await reposDeleteReleaseAsset(Operations.ReposDeleteReleaseAsset.Input(
+            path: path,
+            headers: headers
+        ))
     }
     /// Generate release notes content for a release
     ///
@@ -5208,8 +5214,14 @@ extension APIProtocol {
     ///
     /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/releases/{release_id}`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/releases/{release_id}/delete(repos/delete-release)`.
-    public func reposDeleteRelease(path: Operations.ReposDeleteRelease.Input.Path) async throws -> Operations.ReposDeleteRelease.Output {
-        try await reposDeleteRelease(Operations.ReposDeleteRelease.Input(path: path))
+    public func reposDeleteRelease(
+        path: Operations.ReposDeleteRelease.Input.Path,
+        headers: Operations.ReposDeleteRelease.Input.Headers = .init()
+    ) async throws -> Operations.ReposDeleteRelease.Output {
+        try await reposDeleteRelease(Operations.ReposDeleteRelease.Input(
+            path: path,
+            headers: headers
+        ))
     }
     /// List release assets
     ///
@@ -7493,10 +7505,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload?
-            /// Whether commit comments are enabled.
-            ///
-            /// - Remark: Generated from `#/components/schemas/repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// Whether the repository is archived.
             ///
             /// - Remark: Generated from `#/components/schemas/repository/archived`.
@@ -7744,7 +7752,6 @@ public enum Components {
             ///   - hasDiscussions: Whether discussions are enabled.
             ///   - hasPullRequests: Whether pull requests are enabled.
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments: Whether commit comments are enabled.
             ///   - archived: Whether the repository is archived.
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -7844,7 +7851,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool? = nil,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -7944,7 +7950,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -8045,7 +8050,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -9329,8 +9333,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload?
-            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/archived`.
             public var archived: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/disabled`.
@@ -9549,7 +9551,6 @@ public enum Components {
             ///   - hasDiscussions:
             ///   - hasPullRequests:
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled:
             ///   - visibility:
@@ -9641,7 +9642,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool? = nil,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool? = nil,
                 disabled: Swift.Bool? = nil,
                 visibility: Swift.String? = nil,
@@ -9733,7 +9733,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -9826,7 +9825,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -10951,10 +10949,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/nullable-repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.NullableRepository.PullRequestCreationPolicyPayload?
-            /// Whether commit comments are enabled.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// Whether the repository is archived.
             ///
             /// - Remark: Generated from `#/components/schemas/nullable-repository/archived`.
@@ -11202,7 +11196,6 @@ public enum Components {
             ///   - hasDiscussions: Whether discussions are enabled.
             ///   - hasPullRequests: Whether pull requests are enabled.
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments: Whether commit comments are enabled.
             ///   - archived: Whether the repository is archived.
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -11302,7 +11295,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool? = nil,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.NullableRepository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -11402,7 +11394,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -11503,7 +11494,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -11722,8 +11712,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/full-repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.FullRepository.PullRequestCreationPolicyPayload?
-            /// - Remark: Generated from `#/components/schemas/full-repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/full-repository/archived`.
             public var archived: Swift.Bool
             /// Returns whether or not this repository disabled.
@@ -12003,7 +11991,6 @@ public enum Components {
             ///   - hasDiscussions:
             ///   - hasPullRequests:
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -12110,7 +12097,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.FullRepository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -12217,7 +12203,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -12325,7 +12310,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -23369,6 +23353,13 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/cursor`.
         public typealias Cursor = Swift.String
+        /// Returns webhook deliveries filtered by delivery outcome classification based on `status_code` range. A `status` of `success` returns deliveries with a `status_code` in the 200-399 range (inclusive). A `status` of `failure` returns deliveries with a `status_code` in the 400-599 range (inclusive).
+        ///
+        /// - Remark: Generated from `#/components/parameters/webhook-delivery-status`.
+        @frozen public enum WebhookDeliveryStatus: String, Codable, Hashable, Sendable, CaseIterable {
+            case success = "success"
+            case failure = "failure"
+        }
         /// - Remark: Generated from `#/components/parameters/delivery-id`.
         public typealias DeliveryId = Swift.Int
         /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
@@ -49219,17 +49210,29 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hooks/{hook_id}/deliveries/GET/query/cursor`.
                 public var cursor: Components.Parameters.Cursor?
+                /// - Remark: Generated from `#/components/parameters/webhook-delivery-status`.
+                @frozen public enum WebhookDeliveryStatus: String, Codable, Hashable, Sendable, CaseIterable {
+                    case success = "success"
+                    case failure = "failure"
+                }
+                /// Returns webhook deliveries filtered by delivery outcome classification based on `status_code` range. A `status` of `success` returns deliveries with a `status_code` in the 200-399 range (inclusive). A `status` of `failure` returns deliveries with a `status_code` in the 400-599 range (inclusive).
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hooks/{hook_id}/deliveries/GET/query/status`.
+                public var status: Components.Parameters.WebhookDeliveryStatus?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - cursor: Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
+                ///   - status: Returns webhook deliveries filtered by delivery outcome classification based on `status_code` range. A `status` of `success` returns deliveries with a `status_code` in the 200-399 range (inclusive). A `status` of `failure` returns deliveries with a `status_code` in the 400-599 range (inclusive).
                 public init(
                     perPage: Components.Parameters.PerPage? = nil,
-                    cursor: Components.Parameters.Cursor? = nil
+                    cursor: Components.Parameters.Cursor? = nil,
+                    status: Components.Parameters.WebhookDeliveryStatus? = nil
                 ) {
                     self.perPage = perPage
                     self.cursor = cursor
+                    self.status = status
                 }
             }
             public var query: Operations.ReposListWebhookDeliveries.Input.Query
@@ -57280,12 +57283,29 @@ public enum Operations {
                 }
             }
             public var path: Operations.ReposDeleteReleaseAsset.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/releases/assets/{asset_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposDeleteReleaseAsset.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposDeleteReleaseAsset.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ReposDeleteReleaseAsset.Input.Headers
             /// Creates a new `Input`.
             ///
             /// - Parameters:
             ///   - path:
-            public init(path: Operations.ReposDeleteReleaseAsset.Input.Path) {
+            ///   - headers:
+            public init(
+                path: Operations.ReposDeleteReleaseAsset.Input.Path,
+                headers: Operations.ReposDeleteReleaseAsset.Input.Headers = .init()
+            ) {
                 self.path = path
+                self.headers = headers
             }
         }
         @frozen public enum Output: Sendable, Hashable {
@@ -57324,10 +57344,58 @@ public enum Operations {
                     }
                 }
             }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/releases/assets/{asset_id}/delete(repos/delete-release-asset)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
             case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
         }
     }
     /// Generate release notes content for a release
@@ -57653,6 +57721,29 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/releases/latest/get(repos/get-latest-release)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
                             response: self
                         )
                     }
@@ -58377,12 +58468,29 @@ public enum Operations {
                 }
             }
             public var path: Operations.ReposDeleteRelease.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/releases/{release_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposDeleteRelease.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposDeleteRelease.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ReposDeleteRelease.Input.Headers
             /// Creates a new `Input`.
             ///
             /// - Parameters:
             ///   - path:
-            public init(path: Operations.ReposDeleteRelease.Input.Path) {
+            ///   - headers:
+            public init(
+                path: Operations.ReposDeleteRelease.Input.Path,
+                headers: Operations.ReposDeleteRelease.Input.Headers = .init()
+            ) {
                 self.path = path
+                self.headers = headers
             }
         }
         @frozen public enum Output: Sendable, Hashable {
@@ -58421,10 +58529,58 @@ public enum Operations {
                     }
                 }
             }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/releases/{release_id}/delete(repos/delete-release)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
             case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
         }
     }
     /// List release assets
