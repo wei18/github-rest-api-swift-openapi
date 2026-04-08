@@ -26,6 +26,7 @@ public protocol APIProtocol: Sendable {
     ///
     ///
     /// Creates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, or `oidc_jfrog`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -56,6 +57,7 @@ public protocol APIProtocol: Sendable {
     ///
     ///
     /// Updates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, or `oidc_jfrog`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -101,6 +103,7 @@ extension APIProtocol {
     ///
     ///
     /// Creates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, or `oidc_jfrog`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -157,6 +160,7 @@ extension APIProtocol {
     ///
     ///
     /// Updates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, or `oidc_jfrog`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -459,6 +463,20 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/registry_type`.
             public var registryType: Components.Schemas.OrgPrivateRegistryConfiguration.RegistryTypePayload
+            /// The authentication type for the private registry.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/auth_type`.
+            @frozen public enum AuthTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case token = "token"
+                case usernamePassword = "username_password"
+                case oidcAzure = "oidc_azure"
+                case oidcAws = "oidc_aws"
+                case oidcJfrog = "oidc_jfrog"
+            }
+            /// The authentication type for the private registry.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/auth_type`.
+            public var authType: Components.Schemas.OrgPrivateRegistryConfiguration.AuthTypePayload?
             /// The URL of the private registry.
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/url`.
@@ -483,6 +501,46 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/visibility`.
             public var visibility: Components.Schemas.OrgPrivateRegistryConfiguration.VisibilityPayload
+            /// The tenant ID of the Azure AD application.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/tenant_id`.
+            public var tenantId: Swift.String?
+            /// The client ID of the Azure AD application.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/client_id`.
+            public var clientId: Swift.String?
+            /// The AWS region.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/aws_region`.
+            public var awsRegion: Swift.String?
+            /// The AWS account ID.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/account_id`.
+            public var accountId: Swift.String?
+            /// The AWS IAM role name.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/role_name`.
+            public var roleName: Swift.String?
+            /// The CodeArtifact domain.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/domain`.
+            public var domain: Swift.String?
+            /// The CodeArtifact domain owner.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/domain_owner`.
+            public var domainOwner: Swift.String?
+            /// The JFrog OIDC provider name.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/jfrog_oidc_provider_name`.
+            public var jfrogOidcProviderName: Swift.String?
+            /// The OIDC audience.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/audience`.
+            public var audience: Swift.String?
+            /// The JFrog identity mapping name.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/identity_mapping_name`.
+            public var identityMappingName: Swift.String?
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/created_at`.
             public var createdAt: Foundation.Date
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/updated_at`.
@@ -492,38 +550,82 @@ public enum Components {
             /// - Parameters:
             ///   - name: The name of the private registry configuration.
             ///   - registryType: The registry type.
+            ///   - authType: The authentication type for the private registry.
             ///   - url: The URL of the private registry.
             ///   - username: The username to use when authenticating with the private registry.
             ///   - replacesBase: Whether this private registry replaces the base registry (e.g., npmjs.org for npm, rubygems.org for rubygems). When `true`, Dependabot will only use this registry and will not fall back to the public registry. When `false` (default), Dependabot will use this registry for scoped packages but may fall back to the public registry for other packages.
             ///   - visibility: Which type of organization repositories have access to the private registry.
+            ///   - tenantId: The tenant ID of the Azure AD application.
+            ///   - clientId: The client ID of the Azure AD application.
+            ///   - awsRegion: The AWS region.
+            ///   - accountId: The AWS account ID.
+            ///   - roleName: The AWS IAM role name.
+            ///   - domain: The CodeArtifact domain.
+            ///   - domainOwner: The CodeArtifact domain owner.
+            ///   - jfrogOidcProviderName: The JFrog OIDC provider name.
+            ///   - audience: The OIDC audience.
+            ///   - identityMappingName: The JFrog identity mapping name.
             ///   - createdAt:
             ///   - updatedAt:
             public init(
                 name: Swift.String,
                 registryType: Components.Schemas.OrgPrivateRegistryConfiguration.RegistryTypePayload,
+                authType: Components.Schemas.OrgPrivateRegistryConfiguration.AuthTypePayload? = nil,
                 url: Swift.String? = nil,
                 username: Swift.String? = nil,
                 replacesBase: Swift.Bool? = nil,
                 visibility: Components.Schemas.OrgPrivateRegistryConfiguration.VisibilityPayload,
+                tenantId: Swift.String? = nil,
+                clientId: Swift.String? = nil,
+                awsRegion: Swift.String? = nil,
+                accountId: Swift.String? = nil,
+                roleName: Swift.String? = nil,
+                domain: Swift.String? = nil,
+                domainOwner: Swift.String? = nil,
+                jfrogOidcProviderName: Swift.String? = nil,
+                audience: Swift.String? = nil,
+                identityMappingName: Swift.String? = nil,
                 createdAt: Foundation.Date,
                 updatedAt: Foundation.Date
             ) {
                 self.name = name
                 self.registryType = registryType
+                self.authType = authType
                 self.url = url
                 self.username = username
                 self.replacesBase = replacesBase
                 self.visibility = visibility
+                self.tenantId = tenantId
+                self.clientId = clientId
+                self.awsRegion = awsRegion
+                self.accountId = accountId
+                self.roleName = roleName
+                self.domain = domain
+                self.domainOwner = domainOwner
+                self.jfrogOidcProviderName = jfrogOidcProviderName
+                self.audience = audience
+                self.identityMappingName = identityMappingName
                 self.createdAt = createdAt
                 self.updatedAt = updatedAt
             }
             public enum CodingKeys: String, CodingKey {
                 case name
                 case registryType = "registry_type"
+                case authType = "auth_type"
                 case url
                 case username
                 case replacesBase = "replaces_base"
                 case visibility
+                case tenantId = "tenant_id"
+                case clientId = "client_id"
+                case awsRegion = "aws_region"
+                case accountId = "account_id"
+                case roleName = "role_name"
+                case domain
+                case domainOwner = "domain_owner"
+                case jfrogOidcProviderName = "jfrog_oidc_provider_name"
+                case audience
+                case identityMappingName = "identity_mapping_name"
                 case createdAt = "created_at"
                 case updatedAt = "updated_at"
             }
@@ -560,6 +662,20 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/registry_type`.
             public var registryType: Components.Schemas.OrgPrivateRegistryConfigurationWithSelectedRepositories.RegistryTypePayload
+            /// The authentication type for the private registry.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/auth_type`.
+            @frozen public enum AuthTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case token = "token"
+                case usernamePassword = "username_password"
+                case oidcAzure = "oidc_azure"
+                case oidcAws = "oidc_aws"
+                case oidcJfrog = "oidc_jfrog"
+            }
+            /// The authentication type for the private registry.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/auth_type`.
+            public var authType: Components.Schemas.OrgPrivateRegistryConfigurationWithSelectedRepositories.AuthTypePayload?
             /// The URL of the private registry.
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/url`.
@@ -588,6 +704,46 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/selected_repository_ids`.
             public var selectedRepositoryIds: [Swift.Int]?
+            /// The tenant ID of the Azure AD application.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/tenant_id`.
+            public var tenantId: Swift.String?
+            /// The client ID of the Azure AD application.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/client_id`.
+            public var clientId: Swift.String?
+            /// The AWS region.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/aws_region`.
+            public var awsRegion: Swift.String?
+            /// The AWS account ID.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/account_id`.
+            public var accountId: Swift.String?
+            /// The AWS IAM role name.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/role_name`.
+            public var roleName: Swift.String?
+            /// The CodeArtifact domain.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/domain`.
+            public var domain: Swift.String?
+            /// The CodeArtifact domain owner.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/domain_owner`.
+            public var domainOwner: Swift.String?
+            /// The JFrog OIDC provider name.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/jfrog_oidc_provider_name`.
+            public var jfrogOidcProviderName: Swift.String?
+            /// The OIDC audience.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/audience`.
+            public var audience: Swift.String?
+            /// The JFrog identity mapping name.
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/identity_mapping_name`.
+            public var identityMappingName: Swift.String?
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/created_at`.
             public var createdAt: Foundation.Date
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/updated_at`.
@@ -597,42 +753,86 @@ public enum Components {
             /// - Parameters:
             ///   - name: The name of the private registry configuration.
             ///   - registryType: The registry type.
+            ///   - authType: The authentication type for the private registry.
             ///   - url: The URL of the private registry.
             ///   - username: The username to use when authenticating with the private registry.
             ///   - replacesBase: Whether this private registry replaces the base registry (e.g., npmjs.org for npm, rubygems.org for rubygems). When `true`, Dependabot will only use this registry and will not fall back to the public registry. When `false` (default), Dependabot will use this registry for scoped packages but may fall back to the public registry for other packages.
             ///   - visibility: Which type of organization repositories have access to the private registry. `selected` means only the repositories specified by `selected_repository_ids` can access the private registry.
             ///   - selectedRepositoryIds: An array of repository IDs that can access the organization private registry when `visibility` is set to `selected`.
+            ///   - tenantId: The tenant ID of the Azure AD application.
+            ///   - clientId: The client ID of the Azure AD application.
+            ///   - awsRegion: The AWS region.
+            ///   - accountId: The AWS account ID.
+            ///   - roleName: The AWS IAM role name.
+            ///   - domain: The CodeArtifact domain.
+            ///   - domainOwner: The CodeArtifact domain owner.
+            ///   - jfrogOidcProviderName: The JFrog OIDC provider name.
+            ///   - audience: The OIDC audience.
+            ///   - identityMappingName: The JFrog identity mapping name.
             ///   - createdAt:
             ///   - updatedAt:
             public init(
                 name: Swift.String,
                 registryType: Components.Schemas.OrgPrivateRegistryConfigurationWithSelectedRepositories.RegistryTypePayload,
+                authType: Components.Schemas.OrgPrivateRegistryConfigurationWithSelectedRepositories.AuthTypePayload? = nil,
                 url: Swift.String? = nil,
                 username: Swift.String? = nil,
                 replacesBase: Swift.Bool? = nil,
                 visibility: Components.Schemas.OrgPrivateRegistryConfigurationWithSelectedRepositories.VisibilityPayload,
                 selectedRepositoryIds: [Swift.Int]? = nil,
+                tenantId: Swift.String? = nil,
+                clientId: Swift.String? = nil,
+                awsRegion: Swift.String? = nil,
+                accountId: Swift.String? = nil,
+                roleName: Swift.String? = nil,
+                domain: Swift.String? = nil,
+                domainOwner: Swift.String? = nil,
+                jfrogOidcProviderName: Swift.String? = nil,
+                audience: Swift.String? = nil,
+                identityMappingName: Swift.String? = nil,
                 createdAt: Foundation.Date,
                 updatedAt: Foundation.Date
             ) {
                 self.name = name
                 self.registryType = registryType
+                self.authType = authType
                 self.url = url
                 self.username = username
                 self.replacesBase = replacesBase
                 self.visibility = visibility
                 self.selectedRepositoryIds = selectedRepositoryIds
+                self.tenantId = tenantId
+                self.clientId = clientId
+                self.awsRegion = awsRegion
+                self.accountId = accountId
+                self.roleName = roleName
+                self.domain = domain
+                self.domainOwner = domainOwner
+                self.jfrogOidcProviderName = jfrogOidcProviderName
+                self.audience = audience
+                self.identityMappingName = identityMappingName
                 self.createdAt = createdAt
                 self.updatedAt = updatedAt
             }
             public enum CodingKeys: String, CodingKey {
                 case name
                 case registryType = "registry_type"
+                case authType = "auth_type"
                 case url
                 case username
                 case replacesBase = "replaces_base"
                 case visibility
                 case selectedRepositoryIds = "selected_repository_ids"
+                case tenantId = "tenant_id"
+                case clientId = "client_id"
+                case awsRegion = "aws_region"
+                case accountId = "account_id"
+                case roleName = "role_name"
+                case domain
+                case domainOwner = "domain_owner"
+                case jfrogOidcProviderName = "jfrog_oidc_provider_name"
+                case audience
+                case identityMappingName = "identity_mapping_name"
                 case createdAt = "created_at"
                 case updatedAt = "updated_at"
             }
@@ -1040,6 +1240,7 @@ public enum Operations {
     ///
     ///
     /// Creates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, or `oidc_jfrog`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -1115,14 +1316,14 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/replaces_base`.
                     public var replacesBase: Swift.Bool?
-                    /// The value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get private registries public key for an organization](https://docs.github.com/rest/private-registries/organization-configurations#get-private-registries-public-key-for-an-organization) endpoint.
+                    /// The value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get private registries public key for an organization](https://docs.github.com/rest/private-registries/organization-configurations#get-private-registries-public-key-for-an-organization) endpoint. Required when `auth_type` is `token` or `username_password`. Should be omitted for OIDC auth types.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/encrypted_value`.
-                    public var encryptedValue: Swift.String
-                    /// The ID of the key you used to encrypt the secret.
+                    public var encryptedValue: Swift.String?
+                    /// The ID of the key you used to encrypt the secret. Required when `auth_type` is `token` or `username_password`. Should be omitted for OIDC auth types.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/key_id`.
-                    public var keyId: Swift.String
+                    public var keyId: Swift.String?
                     /// Which type of organization repositories have access to the private registry. `selected` means only the repositories specified by `selected_repository_ids` can access the private registry.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/visibility`.
@@ -1139,6 +1340,60 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/selected_repository_ids`.
                     public var selectedRepositoryIds: [Swift.Int]?
+                    /// The authentication type for the private registry. Defaults to `token` if not specified. Use `oidc_azure`, `oidc_aws`, or `oidc_jfrog` for OIDC authentication.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/auth_type`.
+                    @frozen public enum AuthTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case token = "token"
+                        case usernamePassword = "username_password"
+                        case oidcAzure = "oidc_azure"
+                        case oidcAws = "oidc_aws"
+                        case oidcJfrog = "oidc_jfrog"
+                    }
+                    /// The authentication type for the private registry. Defaults to `token` if not specified. Use `oidc_azure`, `oidc_aws`, or `oidc_jfrog` for OIDC authentication.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/auth_type`.
+                    public var authType: Operations.PrivateRegistriesCreateOrgPrivateRegistry.Input.Body.JsonPayload.AuthTypePayload?
+                    /// The tenant ID of the Azure AD application. Required when `auth_type` is `oidc_azure`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/tenant_id`.
+                    public var tenantId: Swift.String?
+                    /// The client ID of the Azure AD application. Required when `auth_type` is `oidc_azure`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/client_id`.
+                    public var clientId: Swift.String?
+                    /// The AWS region. Required when `auth_type` is `oidc_aws`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/aws_region`.
+                    public var awsRegion: Swift.String?
+                    /// The AWS account ID. Required when `auth_type` is `oidc_aws`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/account_id`.
+                    public var accountId: Swift.String?
+                    /// The AWS IAM role name. Required when `auth_type` is `oidc_aws`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/role_name`.
+                    public var roleName: Swift.String?
+                    /// The CodeArtifact domain. Required when `auth_type` is `oidc_aws`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/domain`.
+                    public var domain: Swift.String?
+                    /// The CodeArtifact domain owner (AWS account ID). Required when `auth_type` is `oidc_aws`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/domain_owner`.
+                    public var domainOwner: Swift.String?
+                    /// The JFrog OIDC provider name. Required when `auth_type` is `oidc_jfrog`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/jfrog_oidc_provider_name`.
+                    public var jfrogOidcProviderName: Swift.String?
+                    /// The OIDC audience. Optional for `oidc_aws` and `oidc_jfrog` auth types.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/audience`.
+                    public var audience: Swift.String?
+                    /// The JFrog identity mapping name. Optional for `oidc_jfrog` auth type.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/identity_mapping_name`.
+                    public var identityMappingName: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -1146,19 +1401,41 @@ public enum Operations {
                     ///   - url: The URL of the private registry.
                     ///   - username: The username to use when authenticating with the private registry. This field should be omitted if the private registry does not require a username for authentication.
                     ///   - replacesBase: Whether this private registry should replace the base registry (e.g., npmjs.org for npm, rubygems.org for rubygems). When set to `true`, Dependabot will only use this registry and will not fall back to the public registry. When set to `false` (default), Dependabot will use this registry for scoped packages but may fall back to the public registry for other packages.
-                    ///   - encryptedValue: The value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get private registries public key for an organization](https://docs.github.com/rest/private-registries/organization-configurations#get-private-registries-public-key-for-an-organization) endpoint.
-                    ///   - keyId: The ID of the key you used to encrypt the secret.
+                    ///   - encryptedValue: The value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get private registries public key for an organization](https://docs.github.com/rest/private-registries/organization-configurations#get-private-registries-public-key-for-an-organization) endpoint. Required when `auth_type` is `token` or `username_password`. Should be omitted for OIDC auth types.
+                    ///   - keyId: The ID of the key you used to encrypt the secret. Required when `auth_type` is `token` or `username_password`. Should be omitted for OIDC auth types.
                     ///   - visibility: Which type of organization repositories have access to the private registry. `selected` means only the repositories specified by `selected_repository_ids` can access the private registry.
                     ///   - selectedRepositoryIds: An array of repository IDs that can access the organization private registry. You can only provide a list of repository IDs when `visibility` is set to `selected`. You can manage the list of selected repositories using the [Update a private registry for an organization](https://docs.github.com/rest/private-registries/organization-configurations#update-a-private-registry-for-an-organization) endpoint. This field should be omitted if `visibility` is set to `all` or `private`.
+                    ///   - authType: The authentication type for the private registry. Defaults to `token` if not specified. Use `oidc_azure`, `oidc_aws`, or `oidc_jfrog` for OIDC authentication.
+                    ///   - tenantId: The tenant ID of the Azure AD application. Required when `auth_type` is `oidc_azure`.
+                    ///   - clientId: The client ID of the Azure AD application. Required when `auth_type` is `oidc_azure`.
+                    ///   - awsRegion: The AWS region. Required when `auth_type` is `oidc_aws`.
+                    ///   - accountId: The AWS account ID. Required when `auth_type` is `oidc_aws`.
+                    ///   - roleName: The AWS IAM role name. Required when `auth_type` is `oidc_aws`.
+                    ///   - domain: The CodeArtifact domain. Required when `auth_type` is `oidc_aws`.
+                    ///   - domainOwner: The CodeArtifact domain owner (AWS account ID). Required when `auth_type` is `oidc_aws`.
+                    ///   - jfrogOidcProviderName: The JFrog OIDC provider name. Required when `auth_type` is `oidc_jfrog`.
+                    ///   - audience: The OIDC audience. Optional for `oidc_aws` and `oidc_jfrog` auth types.
+                    ///   - identityMappingName: The JFrog identity mapping name. Optional for `oidc_jfrog` auth type.
                     public init(
                         registryType: Operations.PrivateRegistriesCreateOrgPrivateRegistry.Input.Body.JsonPayload.RegistryTypePayload,
                         url: Swift.String,
                         username: Swift.String? = nil,
                         replacesBase: Swift.Bool? = nil,
-                        encryptedValue: Swift.String,
-                        keyId: Swift.String,
+                        encryptedValue: Swift.String? = nil,
+                        keyId: Swift.String? = nil,
                         visibility: Operations.PrivateRegistriesCreateOrgPrivateRegistry.Input.Body.JsonPayload.VisibilityPayload,
-                        selectedRepositoryIds: [Swift.Int]? = nil
+                        selectedRepositoryIds: [Swift.Int]? = nil,
+                        authType: Operations.PrivateRegistriesCreateOrgPrivateRegistry.Input.Body.JsonPayload.AuthTypePayload? = nil,
+                        tenantId: Swift.String? = nil,
+                        clientId: Swift.String? = nil,
+                        awsRegion: Swift.String? = nil,
+                        accountId: Swift.String? = nil,
+                        roleName: Swift.String? = nil,
+                        domain: Swift.String? = nil,
+                        domainOwner: Swift.String? = nil,
+                        jfrogOidcProviderName: Swift.String? = nil,
+                        audience: Swift.String? = nil,
+                        identityMappingName: Swift.String? = nil
                     ) {
                         self.registryType = registryType
                         self.url = url
@@ -1168,6 +1445,17 @@ public enum Operations {
                         self.keyId = keyId
                         self.visibility = visibility
                         self.selectedRepositoryIds = selectedRepositoryIds
+                        self.authType = authType
+                        self.tenantId = tenantId
+                        self.clientId = clientId
+                        self.awsRegion = awsRegion
+                        self.accountId = accountId
+                        self.roleName = roleName
+                        self.domain = domain
+                        self.domainOwner = domainOwner
+                        self.jfrogOidcProviderName = jfrogOidcProviderName
+                        self.audience = audience
+                        self.identityMappingName = identityMappingName
                     }
                     public enum CodingKeys: String, CodingKey {
                         case registryType = "registry_type"
@@ -1178,6 +1466,17 @@ public enum Operations {
                         case keyId = "key_id"
                         case visibility
                         case selectedRepositoryIds = "selected_repository_ids"
+                        case authType = "auth_type"
+                        case tenantId = "tenant_id"
+                        case clientId = "client_id"
+                        case awsRegion = "aws_region"
+                        case accountId = "account_id"
+                        case roleName = "role_name"
+                        case domain
+                        case domainOwner = "domain_owner"
+                        case jfrogOidcProviderName = "jfrog_oidc_provider_name"
+                        case audience
+                        case identityMappingName = "identity_mapping_name"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/content/application\/json`.
@@ -1704,6 +2003,7 @@ public enum Operations {
     ///
     ///
     /// Updates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, or `oidc_jfrog`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -1812,6 +2112,60 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/selected_repository_ids`.
                     public var selectedRepositoryIds: [Swift.Int]?
+                    /// The authentication type for the private registry. This field cannot be changed after creation. If provided, it must match the existing `auth_type` of the configuration. To change the authentication type, delete and recreate the configuration.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/auth_type`.
+                    @frozen public enum AuthTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case token = "token"
+                        case usernamePassword = "username_password"
+                        case oidcAzure = "oidc_azure"
+                        case oidcAws = "oidc_aws"
+                        case oidcJfrog = "oidc_jfrog"
+                    }
+                    /// The authentication type for the private registry. This field cannot be changed after creation. If provided, it must match the existing `auth_type` of the configuration. To change the authentication type, delete and recreate the configuration.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/auth_type`.
+                    public var authType: Operations.PrivateRegistriesUpdateOrgPrivateRegistry.Input.Body.JsonPayload.AuthTypePayload?
+                    /// The tenant ID of the Azure AD application. Required when `auth_type` is `oidc_azure`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/tenant_id`.
+                    public var tenantId: Swift.String?
+                    /// The client ID of the Azure AD application. Required when `auth_type` is `oidc_azure`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/client_id`.
+                    public var clientId: Swift.String?
+                    /// The AWS region. Required when `auth_type` is `oidc_aws`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/aws_region`.
+                    public var awsRegion: Swift.String?
+                    /// The AWS account ID. Required when `auth_type` is `oidc_aws`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/account_id`.
+                    public var accountId: Swift.String?
+                    /// The AWS IAM role name. Required when `auth_type` is `oidc_aws`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/role_name`.
+                    public var roleName: Swift.String?
+                    /// The CodeArtifact domain. Required when `auth_type` is `oidc_aws`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/domain`.
+                    public var domain: Swift.String?
+                    /// The CodeArtifact domain owner (AWS account ID). Required when `auth_type` is `oidc_aws`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/domain_owner`.
+                    public var domainOwner: Swift.String?
+                    /// The JFrog OIDC provider name. Required when `auth_type` is `oidc_jfrog`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/jfrog_oidc_provider_name`.
+                    public var jfrogOidcProviderName: Swift.String?
+                    /// The OIDC audience. Optional for `oidc_aws` and `oidc_jfrog` auth types.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/audience`.
+                    public var audience: Swift.String?
+                    /// The JFrog identity mapping name. Optional for `oidc_jfrog` auth type.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/identity_mapping_name`.
+                    public var identityMappingName: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -1823,6 +2177,17 @@ public enum Operations {
                     ///   - keyId: The ID of the key you used to encrypt the secret.
                     ///   - visibility: Which type of organization repositories have access to the private registry. `selected` means only the repositories specified by `selected_repository_ids` can access the private registry.
                     ///   - selectedRepositoryIds: An array of repository IDs that can access the organization private registry. You can only provide a list of repository IDs when `visibility` is set to `selected`. This field should be omitted if `visibility` is set to `all` or `private`.
+                    ///   - authType: The authentication type for the private registry. This field cannot be changed after creation. If provided, it must match the existing `auth_type` of the configuration. To change the authentication type, delete and recreate the configuration.
+                    ///   - tenantId: The tenant ID of the Azure AD application. Required when `auth_type` is `oidc_azure`.
+                    ///   - clientId: The client ID of the Azure AD application. Required when `auth_type` is `oidc_azure`.
+                    ///   - awsRegion: The AWS region. Required when `auth_type` is `oidc_aws`.
+                    ///   - accountId: The AWS account ID. Required when `auth_type` is `oidc_aws`.
+                    ///   - roleName: The AWS IAM role name. Required when `auth_type` is `oidc_aws`.
+                    ///   - domain: The CodeArtifact domain. Required when `auth_type` is `oidc_aws`.
+                    ///   - domainOwner: The CodeArtifact domain owner (AWS account ID). Required when `auth_type` is `oidc_aws`.
+                    ///   - jfrogOidcProviderName: The JFrog OIDC provider name. Required when `auth_type` is `oidc_jfrog`.
+                    ///   - audience: The OIDC audience. Optional for `oidc_aws` and `oidc_jfrog` auth types.
+                    ///   - identityMappingName: The JFrog identity mapping name. Optional for `oidc_jfrog` auth type.
                     public init(
                         registryType: Operations.PrivateRegistriesUpdateOrgPrivateRegistry.Input.Body.JsonPayload.RegistryTypePayload? = nil,
                         url: Swift.String? = nil,
@@ -1831,7 +2196,18 @@ public enum Operations {
                         encryptedValue: Swift.String? = nil,
                         keyId: Swift.String? = nil,
                         visibility: Operations.PrivateRegistriesUpdateOrgPrivateRegistry.Input.Body.JsonPayload.VisibilityPayload? = nil,
-                        selectedRepositoryIds: [Swift.Int]? = nil
+                        selectedRepositoryIds: [Swift.Int]? = nil,
+                        authType: Operations.PrivateRegistriesUpdateOrgPrivateRegistry.Input.Body.JsonPayload.AuthTypePayload? = nil,
+                        tenantId: Swift.String? = nil,
+                        clientId: Swift.String? = nil,
+                        awsRegion: Swift.String? = nil,
+                        accountId: Swift.String? = nil,
+                        roleName: Swift.String? = nil,
+                        domain: Swift.String? = nil,
+                        domainOwner: Swift.String? = nil,
+                        jfrogOidcProviderName: Swift.String? = nil,
+                        audience: Swift.String? = nil,
+                        identityMappingName: Swift.String? = nil
                     ) {
                         self.registryType = registryType
                         self.url = url
@@ -1841,6 +2217,17 @@ public enum Operations {
                         self.keyId = keyId
                         self.visibility = visibility
                         self.selectedRepositoryIds = selectedRepositoryIds
+                        self.authType = authType
+                        self.tenantId = tenantId
+                        self.clientId = clientId
+                        self.awsRegion = awsRegion
+                        self.accountId = accountId
+                        self.roleName = roleName
+                        self.domain = domain
+                        self.domainOwner = domainOwner
+                        self.jfrogOidcProviderName = jfrogOidcProviderName
+                        self.audience = audience
+                        self.identityMappingName = identityMappingName
                     }
                     public enum CodingKeys: String, CodingKey {
                         case registryType = "registry_type"
@@ -1851,6 +2238,17 @@ public enum Operations {
                         case keyId = "key_id"
                         case visibility
                         case selectedRepositoryIds = "selected_repository_ids"
+                        case authType = "auth_type"
+                        case tenantId = "tenant_id"
+                        case clientId = "client_id"
+                        case awsRegion = "aws_region"
+                        case accountId = "account_id"
+                        case roleName = "role_name"
+                        case domain
+                        case domainOwner = "domain_owner"
+                        case jfrogOidcProviderName = "jfrog_oidc_provider_name"
+                        case audience
+                        case identityMappingName = "identity_mapping_name"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/content/application\/json`.

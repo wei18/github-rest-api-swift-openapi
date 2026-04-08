@@ -32,6 +32,9 @@ public protocol APIProtocol: Sendable {
     /// *   You must always include at least one search term when searching source code. For example, searching for [`language:go`](https://github.com/search?utf8=%E2%9C%93&q=language%3Ago&type=Code) is not valid, while [`amazing
     /// language:go`](https://github.com/search?utf8=%E2%9C%93&q=amazing+language%3Ago&type=Code) is.
     ///
+    /// > [!NOTE]
+    /// > `repository.description`, `repository.owner.type`, and `repository.owner.node_id` are closing down on this endpoint and will return `null` in a future API version. Use the [Get a repository](https://docs.github.com/rest/repos/repos#get-a-repository) endpoint (`GET /repos/{owner}/{repo}`) to retrieve full repository metadata.
+    ///
     /// This endpoint requires you to authenticate and limits you to 10 requests per minute.
     ///
     /// - Remark: HTTP `GET /search/code`.
@@ -156,6 +159,9 @@ extension APIProtocol {
     /// *   Only files smaller than 384 KB are searchable.
     /// *   You must always include at least one search term when searching source code. For example, searching for [`language:go`](https://github.com/search?utf8=%E2%9C%93&q=language%3Ago&type=Code) is not valid, while [`amazing
     /// language:go`](https://github.com/search?utf8=%E2%9C%93&q=amazing+language%3Ago&type=Code) is.
+    ///
+    /// > [!NOTE]
+    /// > `repository.description`, `repository.owner.type`, and `repository.owner.node_id` are closing down on this endpoint and will return `null` in a future API version. Use the [Get a repository](https://docs.github.com/rest/repos/repos#get-a-repository) endpoint (`GET /repos/{owner}/{repo}`) to retrieve full repository metadata.
     ///
     /// This endpoint requires you to authenticate and limits you to 10 requests per minute.
     ///
@@ -1145,10 +1151,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload?
-            /// Whether commit comments are enabled.
-            ///
-            /// - Remark: Generated from `#/components/schemas/repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// Whether the repository is archived.
             ///
             /// - Remark: Generated from `#/components/schemas/repository/archived`.
@@ -1396,7 +1398,6 @@ public enum Components {
             ///   - hasDiscussions: Whether discussions are enabled.
             ///   - hasPullRequests: Whether pull requests are enabled.
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments: Whether commit comments are enabled.
             ///   - archived: Whether the repository is archived.
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -1496,7 +1497,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool? = nil,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -1596,7 +1596,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -1697,7 +1696,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -3144,8 +3142,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload?
-            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/archived`.
             public var archived: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/disabled`.
@@ -3364,7 +3360,6 @@ public enum Components {
             ///   - hasDiscussions:
             ///   - hasPullRequests:
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled:
             ///   - visibility:
@@ -3456,7 +3451,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool? = nil,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool? = nil,
                 disabled: Swift.Bool? = nil,
                 visibility: Swift.String? = nil,
@@ -3548,7 +3542,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -3641,7 +3634,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -4698,8 +4690,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repo-search-result-item/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.RepoSearchResultItem.PullRequestCreationPolicyPayload?
-            /// - Remark: Generated from `#/components/schemas/repo-search-result-item/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/repo-search-result-item/archived`.
             public var archived: Swift.Bool
             /// Returns whether or not this repository disabled.
@@ -4854,7 +4844,6 @@ public enum Components {
             ///   - hasDiscussions:
             ///   - hasPullRequests:
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -4947,7 +4936,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool? = nil,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.RepoSearchResultItem.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -5040,7 +5028,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -5134,7 +5121,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -5611,6 +5597,19 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/issues-advanced-search`.
         public typealias IssuesAdvancedSearch = Swift.String
+        /// The type of search to perform on issues. When not specified, the default is lexical search.
+        ///
+        /// - `semantic` — performs a pure semantic (vector) search using embedding-based understanding.
+        /// - `hybrid` — combines semantic search with lexical search for best results.
+        ///
+        /// Semantic and hybrid search require authentication and are rate limited to 10 requests per minute.
+        /// Only applies to issue searches (`/search/issues`).
+        ///
+        /// - Remark: Generated from `#/components/parameters/search-type`.
+        @frozen public enum SearchType: String, Codable, Hashable, Sendable, CaseIterable {
+            case semantic = "semantic"
+            case hybrid = "hybrid"
+        }
     }
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}
@@ -5675,6 +5674,34 @@ public enum Components {
         public struct NotModified: Sendable, Hashable {
             /// Creates a new `NotModified`.
             public init() {}
+        }
+        public struct RequiresAuthentication: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/requires_authentication/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/requires_authentication/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.RequiresAuthentication.Body
+            /// Creates a new `RequiresAuthentication`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.RequiresAuthentication.Body) {
+                self.body = body
+            }
         }
         public struct Forbidden: Sendable, Hashable {
             /// - Remark: Generated from `#/components/responses/forbidden/content`.
@@ -5788,6 +5815,9 @@ public enum Operations {
     /// *   Only files smaller than 384 KB are searchable.
     /// *   You must always include at least one search term when searching source code. For example, searching for [`language:go`](https://github.com/search?utf8=%E2%9C%93&q=language%3Ago&type=Code) is not valid, while [`amazing
     /// language:go`](https://github.com/search?utf8=%E2%9C%93&q=amazing+language%3Ago&type=Code) is.
+    ///
+    /// > [!NOTE]
+    /// > `repository.description`, `repository.owner.type`, and `repository.owner.node_id` are closing down on this endpoint and will return `null` in a future API version. Use the [Get a repository](https://docs.github.com/rest/repos/repos#get-a-repository) endpoint (`GET /repos/{owner}/{repo}`) to retrieve full repository metadata.
     ///
     /// This endpoint requires you to authenticate and limits you to 10 requests per minute.
     ///
@@ -6395,6 +6425,21 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/search/issues/GET/query/advanced_search`.
                 public var advancedSearch: Components.Parameters.IssuesAdvancedSearch?
+                /// - Remark: Generated from `#/components/parameters/search-type`.
+                @frozen public enum SearchType: String, Codable, Hashable, Sendable, CaseIterable {
+                    case semantic = "semantic"
+                    case hybrid = "hybrid"
+                }
+                /// The type of search to perform on issues. When not specified, the default is lexical search.
+                ///
+                /// - `semantic` — performs a pure semantic (vector) search using embedding-based understanding.
+                /// - `hybrid` — combines semantic search with lexical search for best results.
+                ///
+                /// Semantic and hybrid search require authentication and are rate limited to 10 requests per minute.
+                /// Only applies to issue searches (`/search/issues`).
+                ///
+                /// - Remark: Generated from `#/paths/search/issues/GET/query/search_type`.
+                public var searchType: Components.Parameters.SearchType?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -6404,13 +6449,15 @@ public enum Operations {
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - advancedSearch: Set to `true` to use advanced search.
+                ///   - searchType: The type of search to perform on issues. When not specified, the default is lexical search.
                 public init(
                     q: Swift.String,
                     sort: Operations.SearchIssuesAndPullRequests.Input.Query.SortPayload? = nil,
                     order: Components.Parameters.Order? = nil,
                     perPage: Components.Parameters.PerPage? = nil,
                     page: Components.Parameters.Page? = nil,
-                    advancedSearch: Components.Parameters.IssuesAdvancedSearch? = nil
+                    advancedSearch: Components.Parameters.IssuesAdvancedSearch? = nil,
+                    searchType: Components.Parameters.SearchType? = nil
                 ) {
                     self.q = q
                     self.sort = sort
@@ -6418,6 +6465,7 @@ public enum Operations {
                     self.perPage = perPage
                     self.page = page
                     self.advancedSearch = advancedSearch
+                    self.searchType = searchType
                 }
             }
             public var query: Operations.SearchIssuesAndPullRequests.Input.Query
@@ -6458,25 +6506,63 @@ public enum Operations {
                         public var incompleteResults: Swift.Bool
                         /// - Remark: Generated from `#/paths/search/issues/GET/responses/200/content/json/items`.
                         public var items: [Components.Schemas.IssueSearchResultItem]
+                        /// The type of search that was performed. Possible values are `lexical`, `semantic`, or `hybrid`.
+                        ///
+                        /// - Remark: Generated from `#/paths/search/issues/GET/responses/200/content/json/search_type`.
+                        @frozen public enum SearchTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case lexical = "lexical"
+                            case semantic = "semantic"
+                            case hybrid = "hybrid"
+                        }
+                        /// The type of search that was performed. Possible values are `lexical`, `semantic`, or `hybrid`.
+                        ///
+                        /// - Remark: Generated from `#/paths/search/issues/GET/responses/200/content/json/search_type`.
+                        public var searchType: Operations.SearchIssuesAndPullRequests.Output.Ok.Body.JsonPayload.SearchTypePayload
+                        /// - Remark: Generated from `#/paths/search/issues/GET/responses/200/content/json/LexicalFallbackReasonPayload`.
+                        @frozen public enum LexicalFallbackReasonPayloadPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case noTextTerms = "no_text_terms"
+                            case quotedText = "quoted_text"
+                            case nonIssueTarget = "non_issue_target"
+                            case orBooleanNotSupported = "or_boolean_not_supported"
+                            case noAccessibleRepos = "no_accessible_repos"
+                            case serverError = "server_error"
+                            case onlyNonSemanticFieldsRequested = "only_non_semantic_fields_requested"
+                        }
+                        /// When a semantic or hybrid search falls back to lexical search, this field contains the reasons for the fallback. Only present when a fallback occurred.
+                        ///
+                        /// - Remark: Generated from `#/paths/search/issues/GET/responses/200/content/json/lexical_fallback_reason`.
+                        public typealias LexicalFallbackReasonPayload = [Operations.SearchIssuesAndPullRequests.Output.Ok.Body.JsonPayload.LexicalFallbackReasonPayloadPayload]
+                        /// When a semantic or hybrid search falls back to lexical search, this field contains the reasons for the fallback. Only present when a fallback occurred.
+                        ///
+                        /// - Remark: Generated from `#/paths/search/issues/GET/responses/200/content/json/lexical_fallback_reason`.
+                        public var lexicalFallbackReason: Operations.SearchIssuesAndPullRequests.Output.Ok.Body.JsonPayload.LexicalFallbackReasonPayload?
                         /// Creates a new `JsonPayload`.
                         ///
                         /// - Parameters:
                         ///   - totalCount:
                         ///   - incompleteResults:
                         ///   - items:
+                        ///   - searchType: The type of search that was performed. Possible values are `lexical`, `semantic`, or `hybrid`.
+                        ///   - lexicalFallbackReason: When a semantic or hybrid search falls back to lexical search, this field contains the reasons for the fallback. Only present when a fallback occurred.
                         public init(
                             totalCount: Swift.Int,
                             incompleteResults: Swift.Bool,
-                            items: [Components.Schemas.IssueSearchResultItem]
+                            items: [Components.Schemas.IssueSearchResultItem],
+                            searchType: Operations.SearchIssuesAndPullRequests.Output.Ok.Body.JsonPayload.SearchTypePayload,
+                            lexicalFallbackReason: Operations.SearchIssuesAndPullRequests.Output.Ok.Body.JsonPayload.LexicalFallbackReasonPayload? = nil
                         ) {
                             self.totalCount = totalCount
                             self.incompleteResults = incompleteResults
                             self.items = items
+                            self.searchType = searchType
+                            self.lexicalFallbackReason = lexicalFallbackReason
                         }
                         public enum CodingKeys: String, CodingKey {
                             case totalCount = "total_count"
                             case incompleteResults = "incomplete_results"
                             case items
+                            case searchType = "search_type"
+                            case lexicalFallbackReason = "lexical_fallback_reason"
                         }
                     }
                     /// - Remark: Generated from `#/paths/search/issues/GET/responses/200/content/application\/json`.
@@ -6622,6 +6708,29 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//search/issues/get(search/issues-and-pull-requests)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }

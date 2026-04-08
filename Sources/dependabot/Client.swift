@@ -70,6 +70,13 @@ public struct Client: APIProtocol {
                     in: &request,
                     style: .form,
                     explode: true,
+                    name: "classification",
+                    value: input.query.classification
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
                     name: "state",
                     value: input.query.state
                 )
@@ -630,6 +637,13 @@ public struct Client: APIProtocol {
                     method: .get
                 )
                 suppressMutabilityWarning(&request)
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "classification",
+                    value: input.query.classification
+                )
                 try converter.setQueryItemAsURI(
                     in: &request,
                     style: .form,
@@ -1483,6 +1497,13 @@ public struct Client: APIProtocol {
                     method: .get
                 )
                 suppressMutabilityWarning(&request)
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "classification",
+                    value: input.query.classification
+                )
                 try converter.setQueryItemAsURI(
                     in: &request,
                     style: .form,

@@ -1900,8 +1900,27 @@ public enum Operations {
             public var headers: Operations.OidcUpdateOidcCustomSubTemplateForOrg.Input.Headers
             /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/sub/PUT/requestBody`.
             @frozen public enum Body: Sendable, Hashable {
+                /// Actions OIDC Subject customization
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/sub/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// Array of unique strings. Each claim key can only contain alphanumeric characters and underscores.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/sub/PUT/requestBody/json/include_claim_keys`.
+                    public var includeClaimKeys: [Swift.String]?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - includeClaimKeys: Array of unique strings. Each claim key can only contain alphanumeric characters and underscores.
+                    public init(includeClaimKeys: [Swift.String]? = nil) {
+                        self.includeClaimKeys = includeClaimKeys
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case includeClaimKeys = "include_claim_keys"
+                    }
+                }
                 /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/sub/PUT/requestBody/content/application\/json`.
-                case json(Components.Schemas.OidcCustomSub)
+                case json(Operations.OidcUpdateOidcCustomSubTemplateForOrg.Input.Body.JsonPayload)
             }
             public var body: Operations.OidcUpdateOidcCustomSubTemplateForOrg.Input.Body
             /// Creates a new `Input`.

@@ -1796,10 +1796,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload?
-            /// Whether commit comments are enabled.
-            ///
-            /// - Remark: Generated from `#/components/schemas/repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// Whether the repository is archived.
             ///
             /// - Remark: Generated from `#/components/schemas/repository/archived`.
@@ -2047,7 +2043,6 @@ public enum Components {
             ///   - hasDiscussions: Whether discussions are enabled.
             ///   - hasPullRequests: Whether pull requests are enabled.
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments: Whether commit comments are enabled.
             ///   - archived: Whether the repository is archived.
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -2147,7 +2142,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool? = nil,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -2247,7 +2241,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -2348,7 +2341,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -3610,10 +3602,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/nullable-repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.NullableRepository.PullRequestCreationPolicyPayload?
-            /// Whether commit comments are enabled.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// Whether the repository is archived.
             ///
             /// - Remark: Generated from `#/components/schemas/nullable-repository/archived`.
@@ -3861,7 +3849,6 @@ public enum Components {
             ///   - hasDiscussions: Whether discussions are enabled.
             ///   - hasPullRequests: Whether pull requests are enabled.
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments: Whether commit comments are enabled.
             ///   - archived: Whether the repository is archived.
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -3961,7 +3948,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool? = nil,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.NullableRepository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -4061,7 +4047,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -4162,7 +4147,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -4381,8 +4365,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/full-repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.FullRepository.PullRequestCreationPolicyPayload?
-            /// - Remark: Generated from `#/components/schemas/full-repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/full-repository/archived`.
             public var archived: Swift.Bool
             /// Returns whether or not this repository disabled.
@@ -4662,7 +4644,6 @@ public enum Components {
             ///   - hasDiscussions:
             ///   - hasPullRequests:
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -4769,7 +4750,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.FullRepository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -4876,7 +4856,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -4984,7 +4963,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility

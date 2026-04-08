@@ -1278,6 +1278,10 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-location-commit/commit_url`.
             public var commitUrl: Swift.String
+            /// The GitHub URL to get the associated commit resource.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-location-commit/html_url`.
+            public var htmlUrl: Swift.String?
             /// Creates a new `SecretScanningLocationCommit`.
             ///
             /// - Parameters:
@@ -1290,6 +1294,7 @@ public enum Components {
             ///   - blobUrl: The API URL to get the associated blob resource
             ///   - commitSha: SHA-1 hash ID of the associated commit
             ///   - commitUrl: The API URL to get the associated commit resource
+            ///   - htmlUrl: The GitHub URL to get the associated commit resource.
             public init(
                 path: Swift.String,
                 startLine: Swift.Double,
@@ -1299,7 +1304,8 @@ public enum Components {
                 blobSha: Swift.String,
                 blobUrl: Swift.String,
                 commitSha: Swift.String,
-                commitUrl: Swift.String
+                commitUrl: Swift.String,
+                htmlUrl: Swift.String? = nil
             ) {
                 self.path = path
                 self.startLine = startLine
@@ -1310,6 +1316,7 @@ public enum Components {
                 self.blobUrl = blobUrl
                 self.commitSha = commitSha
                 self.commitUrl = commitUrl
+                self.htmlUrl = htmlUrl
             }
             public enum CodingKeys: String, CodingKey {
                 case path
@@ -1321,6 +1328,7 @@ public enum Components {
                 case blobUrl = "blob_url"
                 case commitSha = "commit_sha"
                 case commitUrl = "commit_url"
+                case htmlUrl = "html_url"
             }
         }
         /// Represents a 'wiki_commit' secret scanning location type. This location type shows that a secret was detected inside a commit to a repository wiki.
@@ -1416,15 +1424,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-location-issue-title/issue_title_url`.
             public var issueTitleUrl: Swift.String
+            /// The GitHub URL for the issue where the secret was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-location-issue-title/html_url`.
+            public var htmlUrl: Swift.String?
             /// Creates a new `SecretScanningLocationIssueTitle`.
             ///
             /// - Parameters:
             ///   - issueTitleUrl: The API URL to get the issue where the secret was detected.
-            public init(issueTitleUrl: Swift.String) {
+            ///   - htmlUrl: The GitHub URL for the issue where the secret was detected.
+            public init(
+                issueTitleUrl: Swift.String,
+                htmlUrl: Swift.String? = nil
+            ) {
                 self.issueTitleUrl = issueTitleUrl
+                self.htmlUrl = htmlUrl
             }
             public enum CodingKeys: String, CodingKey {
                 case issueTitleUrl = "issue_title_url"
+                case htmlUrl = "html_url"
             }
         }
         /// Represents an 'issue_body' secret scanning location type. This location type shows that a secret was detected in the body of an issue.
@@ -1435,15 +1453,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-location-issue-body/issue_body_url`.
             public var issueBodyUrl: Swift.String
+            /// The GitHub URL for the issue where the secret was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-location-issue-body/html_url`.
+            public var htmlUrl: Swift.String?
             /// Creates a new `SecretScanningLocationIssueBody`.
             ///
             /// - Parameters:
             ///   - issueBodyUrl: The API URL to get the issue where the secret was detected.
-            public init(issueBodyUrl: Swift.String) {
+            ///   - htmlUrl: The GitHub URL for the issue where the secret was detected.
+            public init(
+                issueBodyUrl: Swift.String,
+                htmlUrl: Swift.String? = nil
+            ) {
                 self.issueBodyUrl = issueBodyUrl
+                self.htmlUrl = htmlUrl
             }
             public enum CodingKeys: String, CodingKey {
                 case issueBodyUrl = "issue_body_url"
+                case htmlUrl = "html_url"
             }
         }
         /// Represents an 'issue_comment' secret scanning location type. This location type shows that a secret was detected in a comment on an issue.
@@ -1454,15 +1482,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-location-issue-comment/issue_comment_url`.
             public var issueCommentUrl: Swift.String
+            /// The GitHub URL for the issue comment where the secret was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-location-issue-comment/html_url`.
+            public var htmlUrl: Swift.String?
             /// Creates a new `SecretScanningLocationIssueComment`.
             ///
             /// - Parameters:
             ///   - issueCommentUrl: The API URL to get the issue comment where the secret was detected.
-            public init(issueCommentUrl: Swift.String) {
+            ///   - htmlUrl: The GitHub URL for the issue comment where the secret was detected.
+            public init(
+                issueCommentUrl: Swift.String,
+                htmlUrl: Swift.String? = nil
+            ) {
                 self.issueCommentUrl = issueCommentUrl
+                self.htmlUrl = htmlUrl
             }
             public enum CodingKeys: String, CodingKey {
                 case issueCommentUrl = "issue_comment_url"
+                case htmlUrl = "html_url"
             }
         }
         /// Represents a 'discussion_title' secret scanning location type. This location type shows that a secret was detected in the title of a discussion.
@@ -1530,15 +1568,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-location-pull-request-title/pull_request_title_url`.
             public var pullRequestTitleUrl: Swift.String
+            /// The GitHub URL for the pull request where the secret was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-location-pull-request-title/html_url`.
+            public var htmlUrl: Swift.String?
             /// Creates a new `SecretScanningLocationPullRequestTitle`.
             ///
             /// - Parameters:
             ///   - pullRequestTitleUrl: The API URL to get the pull request where the secret was detected.
-            public init(pullRequestTitleUrl: Swift.String) {
+            ///   - htmlUrl: The GitHub URL for the pull request where the secret was detected.
+            public init(
+                pullRequestTitleUrl: Swift.String,
+                htmlUrl: Swift.String? = nil
+            ) {
                 self.pullRequestTitleUrl = pullRequestTitleUrl
+                self.htmlUrl = htmlUrl
             }
             public enum CodingKeys: String, CodingKey {
                 case pullRequestTitleUrl = "pull_request_title_url"
+                case htmlUrl = "html_url"
             }
         }
         /// Represents a 'pull_request_body' secret scanning location type. This location type shows that a secret was detected in the body of a pull request.
@@ -1549,15 +1597,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-location-pull-request-body/pull_request_body_url`.
             public var pullRequestBodyUrl: Swift.String
+            /// The GitHub URL for the pull request where the secret was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-location-pull-request-body/html_url`.
+            public var htmlUrl: Swift.String?
             /// Creates a new `SecretScanningLocationPullRequestBody`.
             ///
             /// - Parameters:
             ///   - pullRequestBodyUrl: The API URL to get the pull request where the secret was detected.
-            public init(pullRequestBodyUrl: Swift.String) {
+            ///   - htmlUrl: The GitHub URL for the pull request where the secret was detected.
+            public init(
+                pullRequestBodyUrl: Swift.String,
+                htmlUrl: Swift.String? = nil
+            ) {
                 self.pullRequestBodyUrl = pullRequestBodyUrl
+                self.htmlUrl = htmlUrl
             }
             public enum CodingKeys: String, CodingKey {
                 case pullRequestBodyUrl = "pull_request_body_url"
+                case htmlUrl = "html_url"
             }
         }
         /// Represents a 'pull_request_comment' secret scanning location type. This location type shows that a secret was detected in a comment on a pull request.
@@ -1568,15 +1626,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-location-pull-request-comment/pull_request_comment_url`.
             public var pullRequestCommentUrl: Swift.String
+            /// The GitHub URL for the pull request comment where the secret was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-location-pull-request-comment/html_url`.
+            public var htmlUrl: Swift.String?
             /// Creates a new `SecretScanningLocationPullRequestComment`.
             ///
             /// - Parameters:
             ///   - pullRequestCommentUrl: The API URL to get the pull request comment where the secret was detected.
-            public init(pullRequestCommentUrl: Swift.String) {
+            ///   - htmlUrl: The GitHub URL for the pull request comment where the secret was detected.
+            public init(
+                pullRequestCommentUrl: Swift.String,
+                htmlUrl: Swift.String? = nil
+            ) {
                 self.pullRequestCommentUrl = pullRequestCommentUrl
+                self.htmlUrl = htmlUrl
             }
             public enum CodingKeys: String, CodingKey {
                 case pullRequestCommentUrl = "pull_request_comment_url"
+                case htmlUrl = "html_url"
             }
         }
         /// Represents a 'pull_request_review' secret scanning location type. This location type shows that a secret was detected in a review on a pull request.
@@ -1587,15 +1655,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-location-pull-request-review/pull_request_review_url`.
             public var pullRequestReviewUrl: Swift.String
+            /// The GitHub URL for the pull request review where the secret was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-location-pull-request-review/html_url`.
+            public var htmlUrl: Swift.String?
             /// Creates a new `SecretScanningLocationPullRequestReview`.
             ///
             /// - Parameters:
             ///   - pullRequestReviewUrl: The API URL to get the pull request review where the secret was detected.
-            public init(pullRequestReviewUrl: Swift.String) {
+            ///   - htmlUrl: The GitHub URL for the pull request review where the secret was detected.
+            public init(
+                pullRequestReviewUrl: Swift.String,
+                htmlUrl: Swift.String? = nil
+            ) {
                 self.pullRequestReviewUrl = pullRequestReviewUrl
+                self.htmlUrl = htmlUrl
             }
             public enum CodingKeys: String, CodingKey {
                 case pullRequestReviewUrl = "pull_request_review_url"
+                case htmlUrl = "html_url"
             }
         }
         /// Represents a 'pull_request_review_comment' secret scanning location type. This location type shows that a secret was detected in a review comment on a pull request.
@@ -1606,15 +1684,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-location-pull-request-review-comment/pull_request_review_comment_url`.
             public var pullRequestReviewCommentUrl: Swift.String
+            /// The GitHub URL for the pull request review comment where the secret was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-location-pull-request-review-comment/html_url`.
+            public var htmlUrl: Swift.String?
             /// Creates a new `SecretScanningLocationPullRequestReviewComment`.
             ///
             /// - Parameters:
             ///   - pullRequestReviewCommentUrl: The API URL to get the pull request review comment where the secret was detected.
-            public init(pullRequestReviewCommentUrl: Swift.String) {
+            ///   - htmlUrl: The GitHub URL for the pull request review comment where the secret was detected.
+            public init(
+                pullRequestReviewCommentUrl: Swift.String,
+                htmlUrl: Swift.String? = nil
+            ) {
                 self.pullRequestReviewCommentUrl = pullRequestReviewCommentUrl
+                self.htmlUrl = htmlUrl
             }
             public enum CodingKeys: String, CodingKey {
                 case pullRequestReviewCommentUrl = "pull_request_review_comment_url"
+                case htmlUrl = "html_url"
             }
         }
         /// Details on the location where the token was initially detected. This can be a commit, wiki commit, issue, discussion, pull request.
@@ -1866,6 +1954,16 @@ public enum Components {
             public var hasMoreLocations: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/assigned_to`.
             public var assignedTo: Components.Schemas.NullableSimpleUser?
+            /// An optional comment from the closure request author.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/closure_request_comment`.
+            public var closureRequestComment: Swift.String?
+            /// An optional comment from the closure request reviewer.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/closure_request_reviewer_comment`.
+            public var closureRequestReviewerComment: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/closure_request_reviewer`.
+            public var closureRequestReviewer: Components.Schemas.NullableSimpleUser?
             /// Creates a new `OrganizationSecretScanningAlert`.
             ///
             /// - Parameters:
@@ -1898,6 +1996,9 @@ public enum Components {
             ///   - firstLocationDetected:
             ///   - hasMoreLocations: A boolean value representing whether or not the token in the alert was detected in more than one location.
             ///   - assignedTo:
+            ///   - closureRequestComment: An optional comment from the closure request author.
+            ///   - closureRequestReviewerComment: An optional comment from the closure request reviewer.
+            ///   - closureRequestReviewer:
             public init(
                 number: Components.Schemas.AlertNumber? = nil,
                 createdAt: Components.Schemas.AlertCreatedAt? = nil,
@@ -1927,7 +2028,10 @@ public enum Components {
                 isBase64Encoded: Swift.Bool? = nil,
                 firstLocationDetected: Components.Schemas.NullableSecretScanningFirstDetectedLocation? = nil,
                 hasMoreLocations: Swift.Bool? = nil,
-                assignedTo: Components.Schemas.NullableSimpleUser? = nil
+                assignedTo: Components.Schemas.NullableSimpleUser? = nil,
+                closureRequestComment: Swift.String? = nil,
+                closureRequestReviewerComment: Swift.String? = nil,
+                closureRequestReviewer: Components.Schemas.NullableSimpleUser? = nil
             ) {
                 self.number = number
                 self.createdAt = createdAt
@@ -1958,6 +2062,9 @@ public enum Components {
                 self.firstLocationDetected = firstLocationDetected
                 self.hasMoreLocations = hasMoreLocations
                 self.assignedTo = assignedTo
+                self.closureRequestComment = closureRequestComment
+                self.closureRequestReviewerComment = closureRequestReviewerComment
+                self.closureRequestReviewer = closureRequestReviewer
             }
             public enum CodingKeys: String, CodingKey {
                 case number
@@ -1989,6 +2096,9 @@ public enum Components {
                 case firstLocationDetected = "first_location_detected"
                 case hasMoreLocations = "has_more_locations"
                 case assignedTo = "assigned_to"
+                case closureRequestComment = "closure_request_comment"
+                case closureRequestReviewerComment = "closure_request_reviewer_comment"
+                case closureRequestReviewer = "closure_request_reviewer"
             }
         }
         /// The version of the entity. This is used to confirm you're updating the current version of the entity and mitigate unintentionally overriding someone else's update.
@@ -2263,6 +2373,16 @@ public enum Components {
             public var hasMoreLocations: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/assigned_to`.
             public var assignedTo: Components.Schemas.NullableSimpleUser?
+            /// An optional comment from the closure request author.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/closure_request_comment`.
+            public var closureRequestComment: Swift.String?
+            /// An optional comment from the closure request reviewer.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/closure_request_reviewer_comment`.
+            public var closureRequestReviewerComment: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/closure_request_reviewer`.
+            public var closureRequestReviewer: Components.Schemas.NullableSimpleUser?
             /// Creates a new `SecretScanningAlert`.
             ///
             /// - Parameters:
@@ -2294,6 +2414,9 @@ public enum Components {
             ///   - firstLocationDetected:
             ///   - hasMoreLocations: A boolean value representing whether or not the token in the alert was detected in more than one location.
             ///   - assignedTo:
+            ///   - closureRequestComment: An optional comment from the closure request author.
+            ///   - closureRequestReviewerComment: An optional comment from the closure request reviewer.
+            ///   - closureRequestReviewer:
             public init(
                 number: Components.Schemas.AlertNumber? = nil,
                 createdAt: Components.Schemas.AlertCreatedAt? = nil,
@@ -2322,7 +2445,10 @@ public enum Components {
                 isBase64Encoded: Swift.Bool? = nil,
                 firstLocationDetected: Components.Schemas.NullableSecretScanningFirstDetectedLocation? = nil,
                 hasMoreLocations: Swift.Bool? = nil,
-                assignedTo: Components.Schemas.NullableSimpleUser? = nil
+                assignedTo: Components.Schemas.NullableSimpleUser? = nil,
+                closureRequestComment: Swift.String? = nil,
+                closureRequestReviewerComment: Swift.String? = nil,
+                closureRequestReviewer: Components.Schemas.NullableSimpleUser? = nil
             ) {
                 self.number = number
                 self.createdAt = createdAt
@@ -2352,6 +2478,9 @@ public enum Components {
                 self.firstLocationDetected = firstLocationDetected
                 self.hasMoreLocations = hasMoreLocations
                 self.assignedTo = assignedTo
+                self.closureRequestComment = closureRequestComment
+                self.closureRequestReviewerComment = closureRequestReviewerComment
+                self.closureRequestReviewer = closureRequestReviewer
             }
             public enum CodingKeys: String, CodingKey {
                 case number
@@ -2382,6 +2511,9 @@ public enum Components {
                 case firstLocationDetected = "first_location_detected"
                 case hasMoreLocations = "has_more_locations"
                 case assignedTo = "assigned_to"
+                case closureRequestComment = "closure_request_comment"
+                case closureRequestReviewerComment = "closure_request_reviewer_comment"
+                case closureRequestReviewer = "closure_request_reviewer"
             }
         }
         /// - Remark: Generated from `#/components/schemas/secret-scanning-location`.
@@ -4641,17 +4773,27 @@ public enum Operations {
                     }
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/json/value2`.
                     public var value2: Operations.SecretScanningUpdateAlert.Input.Body.JsonPayload.Value2Payload?
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/json/value3`.
+                    public struct Value3Payload: Codable, Hashable, Sendable {
+                        /// Creates a new `Value3Payload`.
+                        public init() {}
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/json/value3`.
+                    public var value3: Operations.SecretScanningUpdateAlert.Input.Body.JsonPayload.Value3Payload?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - value1:
                     ///   - value2:
+                    ///   - value3:
                     public init(
                         value1: Operations.SecretScanningUpdateAlert.Input.Body.JsonPayload.Value1Payload? = nil,
-                        value2: Operations.SecretScanningUpdateAlert.Input.Body.JsonPayload.Value2Payload? = nil
+                        value2: Operations.SecretScanningUpdateAlert.Input.Body.JsonPayload.Value2Payload? = nil,
+                        value3: Operations.SecretScanningUpdateAlert.Input.Body.JsonPayload.Value3Payload? = nil
                     ) {
                         self.value1 = value1
                         self.value2 = value2
+                        self.value3 = value3
                     }
                     public init(from decoder: any Swift.Decoder) throws {
                         var errors: [any Swift.Error] = []
@@ -4665,10 +4807,16 @@ public enum Operations {
                         } catch {
                             errors.append(error)
                         }
+                        do {
+                            self.value3 = try .init(from: decoder)
+                        } catch {
+                            errors.append(error)
+                        }
                         try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
                             [
                                 self.value1,
-                                self.value2
+                                self.value2,
+                                self.value3
                             ],
                             type: Self.self,
                             codingPath: decoder.codingPath,
@@ -4678,6 +4826,7 @@ public enum Operations {
                     public func encode(to encoder: any Swift.Encoder) throws {
                         try self.value1?.encode(to: encoder)
                         try self.value2?.encode(to: encoder)
+                        try self.value3?.encode(to: encoder)
                     }
                 }
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/requestBody/content/application\/json`.

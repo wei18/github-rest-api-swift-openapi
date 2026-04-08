@@ -383,6 +383,13 @@ public struct Client: APIProtocol {
                     name: "cursor",
                     value: input.query.cursor
                 )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "status",
+                    value: input.query.status
+                )
                 converter.setAcceptHeader(
                     in: &request.headerFields,
                     contentTypes: input.headers.accept
@@ -3363,7 +3370,7 @@ public struct Client: APIProtocol {
     }
     /// Add a repository to an app installation
     ///
-    /// Add a single repository to an installation. The authenticated user must have admin access to the repository.    
+    /// Add a single repository to an installation. The authenticated user must have admin access to the repository.
     ///
     /// This endpoint only works for PATs (classic) with the `repo` scope.
     ///
@@ -3456,7 +3463,7 @@ public struct Client: APIProtocol {
     }
     /// Remove a repository from an app installation
     ///
-    /// Remove a single repository from an installation. The authenticated user must have admin access to the repository. The installation must have the `repository_selection` of `selected`. 
+    /// Remove a single repository from an installation. The authenticated user must have admin access to the repository. The installation must have the `repository_selection` of `selected`.
     ///
     /// This endpoint only works for PATs (classic) with the `repo` scope.
     ///

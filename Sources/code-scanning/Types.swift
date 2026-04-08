@@ -1951,15 +1951,25 @@ public enum Components {
             public struct MessagePayload: Codable, Hashable, Sendable {
                 /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance/message/text`.
                 public var text: Swift.String?
+                /// The message text as GitHub-flavored Markdown, with placeholder links for related locations replaced by links to the relevant code. Only populated when related locations are available for the alert instance.
+                ///
+                /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance/message/markdown`.
+                public var markdown: Swift.String?
                 /// Creates a new `MessagePayload`.
                 ///
                 /// - Parameters:
                 ///   - text:
-                public init(text: Swift.String? = nil) {
+                ///   - markdown: The message text as GitHub-flavored Markdown, with placeholder links for related locations replaced by links to the relevant code. Only populated when related locations are available for the alert instance.
+                public init(
+                    text: Swift.String? = nil,
+                    markdown: Swift.String? = nil
+                ) {
                     self.text = text
+                    self.markdown = markdown
                 }
                 public enum CodingKeys: String, CodingKey {
                     case text
+                    case markdown
                 }
             }
             /// - Remark: Generated from `#/components/schemas/code-scanning-alert-instance/message`.

@@ -606,7 +606,7 @@ public protocol APIProtocol: Sendable {
     /// To use this endpoint, the authenticated user must be one of:
     ///
     /// - An administrator for the organization.
-    /// - A user, or a user on a team, with the fine-grained permissions of `read_organization_custom_org_role` in the organization.
+    /// - An organization member (or a member of a team) assigned a custom organization role that includes the **View organization roles** (`read_organization_custom_org_role`) permission. For more information, see "[Permissions for organization access](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles#permissions-for-organization-access)."
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -686,7 +686,7 @@ public protocol APIProtocol: Sendable {
     /// To use this endpoint, the authenticated user must be one of:
     ///
     /// - An administrator for the organization.
-    /// - A user, or a user on a team, with the fine-grained permissions of `read_organization_custom_org_role` in the organization.
+    /// - An organization member (or a member of a team) assigned a custom organization role that includes the **View organization roles** (`read_organization_custom_org_role`) permission. For more information, see "[Permissions for organization access](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles#permissions-for-organization-access)."
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -2196,7 +2196,7 @@ extension APIProtocol {
     /// To use this endpoint, the authenticated user must be one of:
     ///
     /// - An administrator for the organization.
-    /// - A user, or a user on a team, with the fine-grained permissions of `read_organization_custom_org_role` in the organization.
+    /// - An organization member (or a member of a team) assigned a custom organization role that includes the **View organization roles** (`read_organization_custom_org_role`) permission. For more information, see "[Permissions for organization access](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles#permissions-for-organization-access)."
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -2296,7 +2296,7 @@ extension APIProtocol {
     /// To use this endpoint, the authenticated user must be one of:
     ///
     /// - An administrator for the organization.
-    /// - A user, or a user on a team, with the fine-grained permissions of `read_organization_custom_org_role` in the organization.
+    /// - An organization member (or a member of a team) assigned a custom organization role that includes the **View organization roles** (`read_organization_custom_org_role`) permission. For more information, see "[Permissions for organization access](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles#permissions-for-organization-access)."
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -5811,8 +5811,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/minimal-repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload?
-            /// - Remark: Generated from `#/components/schemas/minimal-repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/archived`.
             public var archived: Swift.Bool?
             /// - Remark: Generated from `#/components/schemas/minimal-repository/disabled`.
@@ -6031,7 +6029,6 @@ public enum Components {
             ///   - hasDiscussions:
             ///   - hasPullRequests:
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments:
             ///   - archived:
             ///   - disabled:
             ///   - visibility:
@@ -6123,7 +6120,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool? = nil,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.MinimalRepository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool? = nil,
                 disabled: Swift.Bool? = nil,
                 visibility: Swift.String? = nil,
@@ -6215,7 +6211,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -6308,7 +6303,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -9883,6 +9877,13 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/cursor`.
         public typealias Cursor = Swift.String
+        /// Returns webhook deliveries filtered by delivery outcome classification based on `status_code` range. A `status` of `success` returns deliveries with a `status_code` in the 200-399 range (inclusive). A `status` of `failure` returns deliveries with a `status_code` in the 400-599 range (inclusive).
+        ///
+        /// - Remark: Generated from `#/components/parameters/webhook-delivery-status`.
+        @frozen public enum WebhookDeliveryStatus: String, Codable, Hashable, Sendable, CaseIterable {
+            case success = "success"
+            case failure = "failure"
+        }
         /// - Remark: Generated from `#/components/parameters/delivery-id`.
         public typealias DeliveryId = Swift.Int
         /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
@@ -11584,6 +11585,11 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/github_repository`.
                     public var githubRepository: Swift.String?
+                    /// If true, the endpoint will return the created or updated record in the response body.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/json/return_records`.
+                    public var returnRecords: Swift.Bool?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -11598,6 +11604,7 @@ public enum Operations {
                     ///   - tags: The tags associated with the deployment.
                     ///   - runtimeRisks: A list of runtime risks associated with the deployment.
                     ///   - githubRepository: The name of the GitHub repository associated with the artifact. This should be used
+                    ///   - returnRecords: If true, the endpoint will return the created or updated record in the response body.
                     public init(
                         name: Swift.String,
                         digest: Swift.String,
@@ -11609,7 +11616,8 @@ public enum Operations {
                         deploymentName: Swift.String,
                         tags: Operations.OrgsCreateArtifactDeploymentRecord.Input.Body.JsonPayload.TagsPayload? = nil,
                         runtimeRisks: Operations.OrgsCreateArtifactDeploymentRecord.Input.Body.JsonPayload.RuntimeRisksPayload? = nil,
-                        githubRepository: Swift.String? = nil
+                        githubRepository: Swift.String? = nil,
+                        returnRecords: Swift.Bool? = nil
                     ) {
                         self.name = name
                         self.digest = digest
@@ -11622,6 +11630,7 @@ public enum Operations {
                         self.tags = tags
                         self.runtimeRisks = runtimeRisks
                         self.githubRepository = githubRepository
+                        self.returnRecords = returnRecords
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
@@ -11635,6 +11644,7 @@ public enum Operations {
                         case tags
                         case runtimeRisks = "runtime_risks"
                         case githubRepository = "github_repository"
+                        case returnRecords = "return_records"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/requestBody/content/application\/json`.
@@ -11666,7 +11676,7 @@ public enum Operations {
                         /// The number of deployment records created
                         ///
                         /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/responses/200/content/json/total_count`.
-                        public var totalCount: Swift.Int?
+                        public var totalCount: Swift.Int
                         /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/POST/responses/200/content/json/deployment_records`.
                         public var deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]?
                         /// Creates a new `JsonPayload`.
@@ -11675,7 +11685,7 @@ public enum Operations {
                         ///   - totalCount: The number of deployment records created
                         ///   - deploymentRecords:
                         public init(
-                            totalCount: Swift.Int? = nil,
+                            totalCount: Swift.Int,
                             deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]? = nil
                         ) {
                             self.totalCount = totalCount
@@ -11729,6 +11739,52 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/post(orgs/create-artifact-deployment-record)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/post(orgs/create-artifact-deployment-record)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
                             response: self
                         )
                     }
@@ -11961,25 +12017,34 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/deployments`.
                     public var deployments: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayload
+                    /// If true, the endpoint will return the set records in the response body
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/return_records`.
+                    public var returnRecords: Swift.Bool?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - logicalEnvironment: The stage of the deployment.
                     ///   - physicalEnvironment: The physical region of the deployment.
                     ///   - deployments: The list of deployments to record.
+                    ///   - returnRecords: If true, the endpoint will return the set records in the response body
                     public init(
                         logicalEnvironment: Swift.String,
                         physicalEnvironment: Swift.String? = nil,
-                        deployments: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayload
+                        deployments: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayload,
+                        returnRecords: Swift.Bool? = nil
                     ) {
                         self.logicalEnvironment = logicalEnvironment
                         self.physicalEnvironment = physicalEnvironment
                         self.deployments = deployments
+                        self.returnRecords = returnRecords
                     }
                     public enum CodingKeys: String, CodingKey {
                         case logicalEnvironment = "logical_environment"
                         case physicalEnvironment = "physical_environment"
                         case deployments
+                        case returnRecords = "return_records"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/content/application\/json`.
@@ -12011,7 +12076,7 @@ public enum Operations {
                         /// The number of deployment records created
                         ///
                         /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/200/content/json/total_count`.
-                        public var totalCount: Swift.Int?
+                        public var totalCount: Swift.Int
                         /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/200/content/json/deployment_records`.
                         public var deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]?
                         /// Creates a new `JsonPayload`.
@@ -12020,7 +12085,7 @@ public enum Operations {
                         ///   - totalCount: The number of deployment records created
                         ///   - deploymentRecords:
                         public init(
-                            totalCount: Swift.Int? = nil,
+                            totalCount: Swift.Int,
                             deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]? = nil
                         ) {
                             self.totalCount = totalCount
@@ -12075,6 +12140,80 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Forbidden: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/403/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/403/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsSetClusterDeploymentRecords.Output.Forbidden.Body
+                /// Creates a new `Forbidden`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsSetClusterDeploymentRecords.Output.Forbidden.Body) {
+                    self.body = body
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Operations.OrgsSetClusterDeploymentRecords.Output.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Operations.OrgsSetClusterDeploymentRecords.Output.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
                             response: self
                         )
                     }
@@ -12202,6 +12341,11 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/github_repository`.
                     public var githubRepository: Swift.String?
+                    /// If true, the endpoint will return the created record in the response body.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/json/return_records`.
+                    public var returnRecords: Swift.Bool?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -12214,6 +12358,7 @@ public enum Operations {
                     ///   - repository: The repository name within the registry.
                     ///   - status: The status of the artifact (e.g., active, inactive).
                     ///   - githubRepository: The name of the GitHub repository associated with the artifact. This should be used
+                    ///   - returnRecords: If true, the endpoint will return the created record in the response body.
                     public init(
                         name: Swift.String,
                         digest: Swift.String,
@@ -12223,7 +12368,8 @@ public enum Operations {
                         registryUrl: Swift.String,
                         repository: Swift.String? = nil,
                         status: Operations.OrgsCreateArtifactStorageRecord.Input.Body.JsonPayload.StatusPayload? = nil,
-                        githubRepository: Swift.String? = nil
+                        githubRepository: Swift.String? = nil,
+                        returnRecords: Swift.Bool? = nil
                     ) {
                         self.name = name
                         self.digest = digest
@@ -12234,6 +12380,7 @@ public enum Operations {
                         self.repository = repository
                         self.status = status
                         self.githubRepository = githubRepository
+                        self.returnRecords = returnRecords
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
@@ -12245,6 +12392,7 @@ public enum Operations {
                         case repository
                         case status
                         case githubRepository = "github_repository"
+                        case returnRecords = "return_records"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/requestBody/content/application\/json`.
@@ -12274,7 +12422,7 @@ public enum Operations {
                     /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json`.
                     public struct JsonPayload: Codable, Hashable, Sendable {
                         /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/total_count`.
-                        public var totalCount: Swift.Int?
+                        public var totalCount: Swift.Int
                         /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload`.
                         public struct StorageRecordsPayloadPayload: Codable, Hashable, Sendable {
                             /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/storage-record/POST/responses/200/content/json/StorageRecordsPayload/id`.
@@ -12350,7 +12498,7 @@ public enum Operations {
                         ///   - totalCount:
                         ///   - storageRecords:
                         public init(
-                            totalCount: Swift.Int? = nil,
+                            totalCount: Swift.Int,
                             storageRecords: Operations.OrgsCreateArtifactStorageRecord.Output.Ok.Body.JsonPayload.StorageRecordsPayload? = nil
                         ) {
                             self.totalCount = totalCount
@@ -12404,6 +12552,52 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/storage-record/post(orgs/create-artifact-storage-record)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/storage-record/post(orgs/create-artifact-storage-record)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
                             response: self
                         )
                     }
@@ -16627,17 +16821,29 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/hooks/{hook_id}/deliveries/GET/query/cursor`.
                 public var cursor: Components.Parameters.Cursor?
+                /// - Remark: Generated from `#/components/parameters/webhook-delivery-status`.
+                @frozen public enum WebhookDeliveryStatus: String, Codable, Hashable, Sendable, CaseIterable {
+                    case success = "success"
+                    case failure = "failure"
+                }
+                /// Returns webhook deliveries filtered by delivery outcome classification based on `status_code` range. A `status` of `success` returns deliveries with a `status_code` in the 200-399 range (inclusive). A `status` of `failure` returns deliveries with a `status_code` in the 400-599 range (inclusive).
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/hooks/{hook_id}/deliveries/GET/query/status`.
+                public var status: Components.Parameters.WebhookDeliveryStatus?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - cursor: Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
+                ///   - status: Returns webhook deliveries filtered by delivery outcome classification based on `status_code` range. A `status` of `success` returns deliveries with a `status_code` in the 200-399 range (inclusive). A `status` of `failure` returns deliveries with a `status_code` in the 400-599 range (inclusive).
                 public init(
                     perPage: Components.Parameters.PerPage? = nil,
-                    cursor: Components.Parameters.Cursor? = nil
+                    cursor: Components.Parameters.Cursor? = nil,
+                    status: Components.Parameters.WebhookDeliveryStatus? = nil
                 ) {
                     self.perPage = perPage
                     self.cursor = cursor
+                    self.status = status
                 }
             }
             public var query: Operations.OrgsListWebhookDeliveries.Input.Query
@@ -22697,7 +22903,7 @@ public enum Operations {
     /// To use this endpoint, the authenticated user must be one of:
     ///
     /// - An administrator for the organization.
-    /// - A user, or a user on a team, with the fine-grained permissions of `read_organization_custom_org_role` in the organization.
+    /// - An organization member (or a member of a team) assigned a custom organization role that includes the **View organization roles** (`read_organization_custom_org_role`) permission. For more information, see "[Permissions for organization access](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles#permissions-for-organization-access)."
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -23599,7 +23805,7 @@ public enum Operations {
     /// To use this endpoint, the authenticated user must be one of:
     ///
     /// - An administrator for the organization.
-    /// - A user, or a user on a team, with the fine-grained permissions of `read_organization_custom_org_role` in the organization.
+    /// - An organization member (or a member of a team) assigned a custom organization role that includes the **View organization roles** (`read_organization_custom_org_role`) permission. For more information, see "[Permissions for organization access](https://docs.github.com/organizations/managing-peoples-access-to-your-organization-with-roles/permissions-of-custom-organization-roles#permissions-for-organization-access)."
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
