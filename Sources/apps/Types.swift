@@ -297,7 +297,7 @@ public protocol APIProtocol: Sendable {
     func appsListInstallationReposForAuthenticatedUser(_ input: Operations.AppsListInstallationReposForAuthenticatedUser.Input) async throws -> Operations.AppsListInstallationReposForAuthenticatedUser.Output
     /// Add a repository to an app installation
     ///
-    /// Add a single repository to an installation. The authenticated user must have admin access to the repository.    
+    /// Add a single repository to an installation. The authenticated user must have admin access to the repository.
     ///
     /// This endpoint only works for PATs (classic) with the `repo` scope.
     ///
@@ -306,7 +306,7 @@ public protocol APIProtocol: Sendable {
     func appsAddRepoToInstallationForAuthenticatedUser(_ input: Operations.AppsAddRepoToInstallationForAuthenticatedUser.Input) async throws -> Operations.AppsAddRepoToInstallationForAuthenticatedUser.Output
     /// Remove a repository from an app installation
     ///
-    /// Remove a single repository from an installation. The authenticated user must have admin access to the repository. The installation must have the `repository_selection` of `selected`. 
+    /// Remove a single repository from an installation. The authenticated user must have admin access to the repository. The installation must have the `repository_selection` of `selected`.
     ///
     /// This endpoint only works for PATs (classic) with the `repo` scope.
     ///
@@ -882,7 +882,7 @@ extension APIProtocol {
     }
     /// Add a repository to an app installation
     ///
-    /// Add a single repository to an installation. The authenticated user must have admin access to the repository.    
+    /// Add a single repository to an installation. The authenticated user must have admin access to the repository.
     ///
     /// This endpoint only works for PATs (classic) with the `repo` scope.
     ///
@@ -899,7 +899,7 @@ extension APIProtocol {
     }
     /// Remove a repository from an app installation
     ///
-    /// Remove a single repository from an installation. The authenticated user must have admin access to the repository. The installation must have the `repository_selection` of `selected`. 
+    /// Remove a single repository from an installation. The authenticated user must have admin access to the repository. The installation must have the `repository_selection` of `selected`.
     ///
     /// This endpoint only works for PATs (classic) with the `repo` scope.
     ///
@@ -3666,10 +3666,6 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/repository/pull_request_creation_policy`.
             public var pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload?
-            /// Whether commit comments are enabled.
-            ///
-            /// - Remark: Generated from `#/components/schemas/repository/has_commit_comments`.
-            public var hasCommitComments: Swift.Bool?
             /// Whether the repository is archived.
             ///
             /// - Remark: Generated from `#/components/schemas/repository/archived`.
@@ -3917,7 +3913,6 @@ public enum Components {
             ///   - hasDiscussions: Whether discussions are enabled.
             ///   - hasPullRequests: Whether pull requests are enabled.
             ///   - pullRequestCreationPolicy: The policy controlling who can create pull requests: all or collaborators_only.
-            ///   - hasCommitComments: Whether commit comments are enabled.
             ///   - archived: Whether the repository is archived.
             ///   - disabled: Returns whether or not this repository disabled.
             ///   - visibility: The repository visibility: public, private, or internal.
@@ -4017,7 +4012,6 @@ public enum Components {
                 hasDiscussions: Swift.Bool? = nil,
                 hasPullRequests: Swift.Bool? = nil,
                 pullRequestCreationPolicy: Components.Schemas.Repository.PullRequestCreationPolicyPayload? = nil,
-                hasCommitComments: Swift.Bool? = nil,
                 archived: Swift.Bool,
                 disabled: Swift.Bool,
                 visibility: Swift.String? = nil,
@@ -4117,7 +4111,6 @@ public enum Components {
                 self.hasDiscussions = hasDiscussions
                 self.hasPullRequests = hasPullRequests
                 self.pullRequestCreationPolicy = pullRequestCreationPolicy
-                self.hasCommitComments = hasCommitComments
                 self.archived = archived
                 self.disabled = disabled
                 self.visibility = visibility
@@ -4218,7 +4211,6 @@ public enum Components {
                 case hasDiscussions = "has_discussions"
                 case hasPullRequests = "has_pull_requests"
                 case pullRequestCreationPolicy = "pull_request_creation_policy"
-                case hasCommitComments = "has_commit_comments"
                 case archived
                 case disabled
                 case visibility
@@ -4892,6 +4884,13 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/cursor`.
         public typealias Cursor = Swift.String
+        /// Returns webhook deliveries filtered by delivery outcome classification based on `status_code` range. A `status` of `success` returns deliveries with a `status_code` in the 200-399 range (inclusive). A `status` of `failure` returns deliveries with a `status_code` in the 400-599 range (inclusive).
+        ///
+        /// - Remark: Generated from `#/components/parameters/webhook-delivery-status`.
+        @frozen public enum WebhookDeliveryStatus: String, Codable, Hashable, Sendable, CaseIterable {
+            case success = "success"
+            case failure = "failure"
+        }
         /// - Remark: Generated from `#/components/parameters/delivery-id`.
         public typealias DeliveryId = Swift.Int
         /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
@@ -5911,17 +5910,29 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/app/hook/deliveries/GET/query/cursor`.
                 public var cursor: Components.Parameters.Cursor?
+                /// - Remark: Generated from `#/components/parameters/webhook-delivery-status`.
+                @frozen public enum WebhookDeliveryStatus: String, Codable, Hashable, Sendable, CaseIterable {
+                    case success = "success"
+                    case failure = "failure"
+                }
+                /// Returns webhook deliveries filtered by delivery outcome classification based on `status_code` range. A `status` of `success` returns deliveries with a `status_code` in the 200-399 range (inclusive). A `status` of `failure` returns deliveries with a `status_code` in the 400-599 range (inclusive).
+                ///
+                /// - Remark: Generated from `#/paths/app/hook/deliveries/GET/query/status`.
+                public var status: Components.Parameters.WebhookDeliveryStatus?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - cursor: Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors.
+                ///   - status: Returns webhook deliveries filtered by delivery outcome classification based on `status_code` range. A `status` of `success` returns deliveries with a `status_code` in the 200-399 range (inclusive). A `status` of `failure` returns deliveries with a `status_code` in the 400-599 range (inclusive).
                 public init(
                     perPage: Components.Parameters.PerPage? = nil,
-                    cursor: Components.Parameters.Cursor? = nil
+                    cursor: Components.Parameters.Cursor? = nil,
+                    status: Components.Parameters.WebhookDeliveryStatus? = nil
                 ) {
                     self.perPage = perPage
                     self.cursor = cursor
+                    self.status = status
                 }
             }
             public var query: Operations.AppsListWebhookDeliveries.Input.Query
@@ -11365,7 +11376,7 @@ public enum Operations {
     }
     /// Add a repository to an app installation
     ///
-    /// Add a single repository to an installation. The authenticated user must have admin access to the repository.    
+    /// Add a single repository to an installation. The authenticated user must have admin access to the repository.
     ///
     /// This endpoint only works for PATs (classic) with the `repo` scope.
     ///
@@ -11569,7 +11580,7 @@ public enum Operations {
     }
     /// Remove a repository from an app installation
     ///
-    /// Remove a single repository from an installation. The authenticated user must have admin access to the repository. The installation must have the `repository_selection` of `selected`. 
+    /// Remove a single repository from an installation. The authenticated user must have admin access to the repository. The installation must have the `repository_selection` of `selected`.
     ///
     /// This endpoint only works for PATs (classic) with the `repo` scope.
     ///
