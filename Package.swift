@@ -13,6 +13,7 @@ let package = Package(
     products: [
         .library(name: "GitHubRestAPIActions", targets: ["GitHubRestAPIActions"]),
         .library(name: "GitHubRestAPIActivity", targets: ["GitHubRestAPIActivity"]),
+        .library(name: "GitHubRestAPIAgent_Tasks", targets: ["GitHubRestAPIAgent_Tasks"]),
         .library(name: "GitHubRestAPIApps", targets: ["GitHubRestAPIApps"]),
         .library(name: "GitHubRestAPIBilling", targets: ["GitHubRestAPIBilling"]),
         .library(name: "GitHubRestAPICampaigns", targets: ["GitHubRestAPICampaigns"]),
@@ -78,6 +79,14 @@ let package = Package(
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
             ],
             path: "Sources/activity"
+        ),
+        .target(
+            name: "GitHubRestAPIAgent_Tasks",
+            dependencies: [
+                .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
+                .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
+            ],
+            path: "Sources/agent-tasks"
         ),
         .target(
             name: "GitHubRestAPIApps",
