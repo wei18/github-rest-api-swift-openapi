@@ -4,6 +4,7 @@ builder:
   - documentation_targets:
     - GitHubRestAPIActions
     - GitHubRestAPIActivity
+    - GitHubRestAPIAgent_Tasks
     - GitHubRestAPIApps
     - GitHubRestAPIBilling
     - GitHubRestAPICampaigns
