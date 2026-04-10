@@ -5563,21 +5563,36 @@ public enum Components {
                     ///
                     /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
                     public var reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    /// The bypass mode for the reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                    @frozen public enum ModePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case always = "ALWAYS"
+                        case exempt = "EXEMPT"
+                    }
+                    /// The bypass mode for the reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                    public var mode: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload?
                     /// Creates a new `ReviewersPayloadPayload`.
                     ///
                     /// - Parameters:
                     ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
                     ///   - reviewerType: The type of the bypass reviewer
+                    ///   - mode: The bypass mode for the reviewer
                     public init(
                         reviewerId: Swift.Int,
-                        reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                        reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload,
+                        mode: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload? = nil
                     ) {
                         self.reviewerId = reviewerId
                         self.reviewerType = reviewerType
+                        self.mode = mode
                     }
                     public enum CodingKeys: String, CodingKey {
                         case reviewerId = "reviewer_id"
                         case reviewerType = "reviewer_type"
+                        case mode
                     }
                 }
                 /// The bypass reviewers for secret scanning delegated bypass
