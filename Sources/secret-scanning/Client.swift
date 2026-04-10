@@ -82,6 +82,27 @@ public struct Client: APIProtocol {
                     in: &request,
                     style: .form,
                     explode: true,
+                    name: "exclude_secret_types",
+                    value: input.query.excludeSecretTypes
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "exclude_providers",
+                    value: input.query.excludeProviders
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "providers",
+                    value: input.query.providers
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
                     name: "resolution",
                     value: input.query.resolution
                 )
@@ -600,6 +621,27 @@ public struct Client: APIProtocol {
                     explode: true,
                     name: "secret_type",
                     value: input.query.secretType
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "exclude_secret_types",
+                    value: input.query.excludeSecretTypes
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "exclude_providers",
+                    value: input.query.excludeProviders
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "providers",
+                    value: input.query.providers
                 )
                 try converter.setQueryItemAsURI(
                     in: &request,

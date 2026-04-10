@@ -1888,6 +1888,14 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/secret_type_display_name`.
             public var secretTypeDisplayName: Swift.String?
+            /// The provider of the secret that was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/provider`.
+            public var provider: Swift.String?
+            /// The slug identifier for the provider of the secret that was detected. Use this value for filtering by provider with the `providers` or `exclude_providers` parameters.
+            ///
+            /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/provider_slug`.
+            public var providerSlug: Swift.String?
             /// The secret that was detected.
             ///
             /// - Remark: Generated from `#/components/schemas/organization-secret-scanning-alert/secret`.
@@ -1979,6 +1987,8 @@ public enum Components {
             ///   - resolvedBy:
             ///   - secretType: The type of secret that secret scanning detected.
             ///   - secretTypeDisplayName: User-friendly name for the detected secret, matching the `secret_type`.
+            ///   - provider: The provider of the secret that was detected.
+            ///   - providerSlug: The slug identifier for the provider of the secret that was detected. Use this value for filtering by provider with the `providers` or `exclude_providers` parameters.
             ///   - secret: The secret that was detected.
             ///   - repository:
             ///   - pushProtectionBypassed: Whether push protection was bypassed for the detected secret.
@@ -2012,6 +2022,8 @@ public enum Components {
                 resolvedBy: Components.Schemas.NullableSimpleUser? = nil,
                 secretType: Swift.String? = nil,
                 secretTypeDisplayName: Swift.String? = nil,
+                provider: Swift.String? = nil,
+                providerSlug: Swift.String? = nil,
                 secret: Swift.String? = nil,
                 repository: Components.Schemas.SimpleRepository? = nil,
                 pushProtectionBypassed: Swift.Bool? = nil,
@@ -2045,6 +2057,8 @@ public enum Components {
                 self.resolvedBy = resolvedBy
                 self.secretType = secretType
                 self.secretTypeDisplayName = secretTypeDisplayName
+                self.provider = provider
+                self.providerSlug = providerSlug
                 self.secret = secret
                 self.repository = repository
                 self.pushProtectionBypassed = pushProtectionBypassed
@@ -2079,6 +2093,8 @@ public enum Components {
                 case resolvedBy = "resolved_by"
                 case secretType = "secret_type"
                 case secretTypeDisplayName = "secret_type_display_name"
+                case provider
+                case providerSlug = "provider_slug"
                 case secret
                 case repository
                 case pushProtectionBypassed = "push_protection_bypassed"
@@ -2313,6 +2329,14 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/secret_type_display_name`.
             public var secretTypeDisplayName: Swift.String?
+            /// The provider of the secret that was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/provider`.
+            public var provider: Swift.String?
+            /// The slug identifier for the provider of the secret that was detected. Use this value for filtering by provider with the `providers` or `exclude_providers` parameters.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/provider_slug`.
+            public var providerSlug: Swift.String?
             /// The secret that was detected.
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-alert/secret`.
@@ -2399,6 +2423,8 @@ public enum Components {
             ///   - resolutionComment: An optional comment to resolve an alert.
             ///   - secretType: The type of secret that secret scanning detected.
             ///   - secretTypeDisplayName: User-friendly name for the detected secret, matching the `secret_type`.
+            ///   - provider: The provider of the secret that was detected.
+            ///   - providerSlug: The slug identifier for the provider of the secret that was detected. Use this value for filtering by provider with the `providers` or `exclude_providers` parameters.
             ///   - secret: The secret that was detected.
             ///   - pushProtectionBypassed: Whether push protection was bypassed for the detected secret.
             ///   - pushProtectionBypassedBy:
@@ -2431,6 +2457,8 @@ public enum Components {
                 resolutionComment: Swift.String? = nil,
                 secretType: Swift.String? = nil,
                 secretTypeDisplayName: Swift.String? = nil,
+                provider: Swift.String? = nil,
+                providerSlug: Swift.String? = nil,
                 secret: Swift.String? = nil,
                 pushProtectionBypassed: Swift.Bool? = nil,
                 pushProtectionBypassedBy: Components.Schemas.NullableSimpleUser? = nil,
@@ -2463,6 +2491,8 @@ public enum Components {
                 self.resolutionComment = resolutionComment
                 self.secretType = secretType
                 self.secretTypeDisplayName = secretTypeDisplayName
+                self.provider = provider
+                self.providerSlug = providerSlug
                 self.secret = secret
                 self.pushProtectionBypassed = pushProtectionBypassed
                 self.pushProtectionBypassedBy = pushProtectionBypassedBy
@@ -2496,6 +2526,8 @@ public enum Components {
                 case resolutionComment = "resolution_comment"
                 case secretType = "secret_type"
                 case secretTypeDisplayName = "secret_type_display_name"
+                case provider
+                case providerSlug = "provider_slug"
                 case secret
                 case pushProtectionBypassed = "push_protection_bypassed"
                 case pushProtectionBypassedBy = "push_protection_bypassed_by"
@@ -2922,6 +2954,24 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-secret-type`.
         public typealias SecretScanningAlertSecretType = Swift.String
+        /// A comma-separated list of secret types to exclude from the results. All default secret patterns are returned except those matching the specified types. Cannot be combined with the `secret_type` parameter. See "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)" for a complete list of secret types.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-exclude-secret-types`.
+        public typealias SecretScanningAlertExcludeSecretTypes = Swift.String
+        /// A comma-separated list of provider slugs to exclude from the results.
+        /// Provider slugs use lowercase with underscores (e.g., `github_secret_scanning`, `clojars`).
+        /// You can find the provider slug in the `provider_slug` field of each alert.
+        /// Cannot be combined with the `providers` parameter.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-exclude-providers`.
+        public typealias SecretScanningAlertExcludeProviders = Swift.String
+        /// A comma-separated list of provider slugs to filter by.
+        /// Provider slugs use lowercase with underscores (e.g., `github_secret_scanning`, `clojars`).
+        /// You can find the provider slug in the `provider_slug` field of each alert.
+        /// Cannot be combined with the `exclude_providers` parameter.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-providers`.
+        public typealias SecretScanningAlertProviders = Swift.String
         /// A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
         ///
         /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-resolution`.
@@ -3248,6 +3298,24 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/secret_type`.
                 public var secretType: Components.Parameters.SecretScanningAlertSecretType?
+                /// A comma-separated list of secret types to exclude from the results. All default secret patterns are returned except those matching the specified types. Cannot be combined with the `secret_type` parameter. See "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)" for a complete list of secret types.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/exclude_secret_types`.
+                public var excludeSecretTypes: Components.Parameters.SecretScanningAlertExcludeSecretTypes?
+                /// A comma-separated list of provider slugs to exclude from the results.
+                /// Provider slugs use lowercase with underscores (e.g., `github_secret_scanning`, `clojars`).
+                /// You can find the provider slug in the `provider_slug` field of each alert.
+                /// Cannot be combined with the `providers` parameter.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/exclude_providers`.
+                public var excludeProviders: Components.Parameters.SecretScanningAlertExcludeProviders?
+                /// A comma-separated list of provider slugs to filter by.
+                /// Provider slugs use lowercase with underscores (e.g., `github_secret_scanning`, `clojars`).
+                /// You can find the provider slug in the `provider_slug` field of each alert.
+                /// Cannot be combined with the `exclude_providers` parameter.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/providers`.
+                public var providers: Components.Parameters.SecretScanningAlertProviders?
                 /// A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/resolution`.
@@ -3311,6 +3379,9 @@ public enum Operations {
                 /// - Parameters:
                 ///   - state: Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
                 ///   - secretType: A comma-separated list of secret types to return. All default secret patterns are returned. To return generic patterns, pass the token name(s) in the parameter. See "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)" for a complete list of secret types.
+                ///   - excludeSecretTypes: A comma-separated list of secret types to exclude from the results. All default secret patterns are returned except those matching the specified types. Cannot be combined with the `secret_type` parameter. See "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)" for a complete list of secret types.
+                ///   - excludeProviders: A comma-separated list of provider slugs to exclude from the results.
+                ///   - providers: A comma-separated list of provider slugs to filter by.
                 ///   - resolution: A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
                 ///   - assignee: Filters alerts by assignee. Use `*` to get all assigned alerts, `none` to get all unassigned alerts, or a GitHub username to get alerts assigned to a specific user.
                 ///   - sort: The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
@@ -3326,6 +3397,9 @@ public enum Operations {
                 public init(
                     state: Components.Parameters.SecretScanningAlertState? = nil,
                     secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
+                    excludeSecretTypes: Components.Parameters.SecretScanningAlertExcludeSecretTypes? = nil,
+                    excludeProviders: Components.Parameters.SecretScanningAlertExcludeProviders? = nil,
+                    providers: Components.Parameters.SecretScanningAlertProviders? = nil,
                     resolution: Components.Parameters.SecretScanningAlertResolution? = nil,
                     assignee: Components.Parameters.SecretScanningAlertAssignee? = nil,
                     sort: Components.Parameters.SecretScanningAlertSort? = nil,
@@ -3341,6 +3415,9 @@ public enum Operations {
                 ) {
                     self.state = state
                     self.secretType = secretType
+                    self.excludeSecretTypes = excludeSecretTypes
+                    self.excludeProviders = excludeProviders
+                    self.providers = providers
                     self.resolution = resolution
                     self.assignee = assignee
                     self.sort = sort
@@ -4161,6 +4238,24 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/secret_type`.
                 public var secretType: Components.Parameters.SecretScanningAlertSecretType?
+                /// A comma-separated list of secret types to exclude from the results. All default secret patterns are returned except those matching the specified types. Cannot be combined with the `secret_type` parameter. See "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)" for a complete list of secret types.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/exclude_secret_types`.
+                public var excludeSecretTypes: Components.Parameters.SecretScanningAlertExcludeSecretTypes?
+                /// A comma-separated list of provider slugs to exclude from the results.
+                /// Provider slugs use lowercase with underscores (e.g., `github_secret_scanning`, `clojars`).
+                /// You can find the provider slug in the `provider_slug` field of each alert.
+                /// Cannot be combined with the `providers` parameter.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/exclude_providers`.
+                public var excludeProviders: Components.Parameters.SecretScanningAlertExcludeProviders?
+                /// A comma-separated list of provider slugs to filter by.
+                /// Provider slugs use lowercase with underscores (e.g., `github_secret_scanning`, `clojars`).
+                /// You can find the provider slug in the `provider_slug` field of each alert.
+                /// Cannot be combined with the `exclude_providers` parameter.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/providers`.
+                public var providers: Components.Parameters.SecretScanningAlertProviders?
                 /// A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/resolution`.
@@ -4224,6 +4319,9 @@ public enum Operations {
                 /// - Parameters:
                 ///   - state: Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
                 ///   - secretType: A comma-separated list of secret types to return. All default secret patterns are returned. To return generic patterns, pass the token name(s) in the parameter. See "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)" for a complete list of secret types.
+                ///   - excludeSecretTypes: A comma-separated list of secret types to exclude from the results. All default secret patterns are returned except those matching the specified types. Cannot be combined with the `secret_type` parameter. See "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)" for a complete list of secret types.
+                ///   - excludeProviders: A comma-separated list of provider slugs to exclude from the results.
+                ///   - providers: A comma-separated list of provider slugs to filter by.
                 ///   - resolution: A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
                 ///   - assignee: Filters alerts by assignee. Use `*` to get all assigned alerts, `none` to get all unassigned alerts, or a GitHub username to get alerts assigned to a specific user.
                 ///   - sort: The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
@@ -4239,6 +4337,9 @@ public enum Operations {
                 public init(
                     state: Components.Parameters.SecretScanningAlertState? = nil,
                     secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
+                    excludeSecretTypes: Components.Parameters.SecretScanningAlertExcludeSecretTypes? = nil,
+                    excludeProviders: Components.Parameters.SecretScanningAlertExcludeProviders? = nil,
+                    providers: Components.Parameters.SecretScanningAlertProviders? = nil,
                     resolution: Components.Parameters.SecretScanningAlertResolution? = nil,
                     assignee: Components.Parameters.SecretScanningAlertAssignee? = nil,
                     sort: Components.Parameters.SecretScanningAlertSort? = nil,
@@ -4254,6 +4355,9 @@ public enum Operations {
                 ) {
                     self.state = state
                     self.secretType = secretType
+                    self.excludeSecretTypes = excludeSecretTypes
+                    self.excludeProviders = excludeProviders
+                    self.providers = providers
                     self.resolution = resolution
                     self.assignee = assignee
                     self.sort = sort
