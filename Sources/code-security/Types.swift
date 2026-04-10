@@ -1192,6 +1192,17 @@ public enum Components {
                     ///
                     /// - Remark: Generated from `#/components/schemas/code-security-configuration/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
                     public var reviewerType: Components.Schemas.CodeSecurityConfiguration.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    /// The bypass mode for the reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/code-security-configuration/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                    @frozen public enum ModePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case always = "ALWAYS"
+                        case exempt = "EXEMPT"
+                    }
+                    /// The bypass mode for the reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/code-security-configuration/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                    public var mode: Components.Schemas.CodeSecurityConfiguration.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload?
                     /// The ID of the security configuration associated with this bypass reviewer
                     ///
                     /// - Remark: Generated from `#/components/schemas/code-security-configuration/secret_scanning_delegated_bypass_options/ReviewersPayload/security_configuration_id`.
@@ -1201,19 +1212,23 @@ public enum Components {
                     /// - Parameters:
                     ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
                     ///   - reviewerType: The type of the bypass reviewer
+                    ///   - mode: The bypass mode for the reviewer
                     ///   - securityConfigurationId: The ID of the security configuration associated with this bypass reviewer
                     public init(
                         reviewerId: Swift.Int,
                         reviewerType: Components.Schemas.CodeSecurityConfiguration.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload,
+                        mode: Components.Schemas.CodeSecurityConfiguration.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload? = nil,
                         securityConfigurationId: Swift.Int? = nil
                     ) {
                         self.reviewerId = reviewerId
                         self.reviewerType = reviewerType
+                        self.mode = mode
                         self.securityConfigurationId = securityConfigurationId
                     }
                     public enum CodingKeys: String, CodingKey {
                         case reviewerId = "reviewer_id"
                         case reviewerType = "reviewer_type"
+                        case mode
                         case securityConfigurationId = "security_configuration_id"
                     }
                 }
@@ -5680,21 +5695,36 @@ public enum Operations {
                             ///
                             /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
                             public var reviewerType: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                            /// The bypass mode for the reviewer
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                            @frozen public enum ModePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                case always = "ALWAYS"
+                                case exempt = "EXEMPT"
+                            }
+                            /// The bypass mode for the reviewer
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                            public var mode: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload?
                             /// Creates a new `ReviewersPayloadPayload`.
                             ///
                             /// - Parameters:
                             ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
                             ///   - reviewerType: The type of the bypass reviewer
+                            ///   - mode: The bypass mode for the reviewer
                             public init(
                                 reviewerId: Swift.Int,
-                                reviewerType: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                                reviewerType: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload,
+                                mode: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload? = nil
                             ) {
                                 self.reviewerId = reviewerId
                                 self.reviewerType = reviewerType
+                                self.mode = mode
                             }
                             public enum CodingKeys: String, CodingKey {
                                 case reviewerId = "reviewer_id"
                                 case reviewerType = "reviewer_type"
+                                case mode
                             }
                         }
                         /// The bypass reviewers for secret scanning delegated bypass
@@ -7114,21 +7144,36 @@ public enum Operations {
                             ///
                             /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
                             public var reviewerType: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                            /// The bypass mode for the reviewer
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                            @frozen public enum ModePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                case always = "ALWAYS"
+                                case exempt = "EXEMPT"
+                            }
+                            /// The bypass mode for the reviewer
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/{configuration_id}/PATCH/requestBody/json/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                            public var mode: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload?
                             /// Creates a new `ReviewersPayloadPayload`.
                             ///
                             /// - Parameters:
                             ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
                             ///   - reviewerType: The type of the bypass reviewer
+                            ///   - mode: The bypass mode for the reviewer
                             public init(
                                 reviewerId: Swift.Int,
-                                reviewerType: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                                reviewerType: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload,
+                                mode: Operations.CodeSecurityUpdateConfiguration.Input.Body.JsonPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload? = nil
                             ) {
                                 self.reviewerId = reviewerId
                                 self.reviewerType = reviewerType
+                                self.mode = mode
                             }
                             public enum CodingKeys: String, CodingKey {
                                 case reviewerId = "reviewer_id"
                                 case reviewerType = "reviewer_type"
+                                case mode
                             }
                         }
                         /// The bypass reviewers for secret scanning delegated bypass

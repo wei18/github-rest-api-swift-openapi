@@ -7634,7 +7634,10 @@ public struct Client: APIProtocol {
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
-                            "application/json"
+                            "application/json",
+                            "application/vnd.github.diff",
+                            "application/vnd.github.patch",
+                            "application/vnd.github.sha"
                         ]
                     )
                     switch chosenContentType {
@@ -7644,6 +7647,30 @@ public struct Client: APIProtocol {
                             from: responseBody,
                             transforming: { value in
                                 .json(value)
+                            }
+                        )
+                    case "application/vnd.github.diff":
+                        body = try converter.getResponseBodyAsBinary(
+                            OpenAPIRuntime.HTTPBody.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .applicationVnd_github_diff(value)
+                            }
+                        )
+                    case "application/vnd.github.patch":
+                        body = try converter.getResponseBodyAsBinary(
+                            OpenAPIRuntime.HTTPBody.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .applicationVnd_github_patch(value)
+                            }
+                        )
+                    case "application/vnd.github.sha":
+                        body = try converter.getResponseBodyAsBinary(
+                            OpenAPIRuntime.HTTPBody.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .applicationVnd_github_sha(value)
                             }
                         )
                     default:
@@ -8170,7 +8197,9 @@ public struct Client: APIProtocol {
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
-                            "application/json"
+                            "application/json",
+                            "application/vnd.github.diff",
+                            "application/vnd.github.patch"
                         ]
                     )
                     switch chosenContentType {
@@ -8180,6 +8209,22 @@ public struct Client: APIProtocol {
                             from: responseBody,
                             transforming: { value in
                                 .json(value)
+                            }
+                        )
+                    case "application/vnd.github.diff":
+                        body = try converter.getResponseBodyAsBinary(
+                            OpenAPIRuntime.HTTPBody.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .applicationVnd_github_diff(value)
+                            }
+                        )
+                    case "application/vnd.github.patch":
+                        body = try converter.getResponseBodyAsBinary(
+                            OpenAPIRuntime.HTTPBody.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .applicationVnd_github_patch(value)
                             }
                         )
                     default:

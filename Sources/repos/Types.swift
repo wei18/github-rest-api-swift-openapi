@@ -9093,21 +9093,36 @@ public enum Components {
                     ///
                     /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
                     public var reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                    /// The bypass mode for the reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                    @frozen public enum ModePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case always = "ALWAYS"
+                        case exempt = "EXEMPT"
+                    }
+                    /// The bypass mode for the reviewer
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/security-and-analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                    public var mode: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload?
                     /// Creates a new `ReviewersPayloadPayload`.
                     ///
                     /// - Parameters:
                     ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
                     ///   - reviewerType: The type of the bypass reviewer
+                    ///   - mode: The bypass mode for the reviewer
                     public init(
                         reviewerId: Swift.Int,
-                        reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                        reviewerType: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload,
+                        mode: Components.Schemas.SecurityAndAnalysis.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload? = nil
                     ) {
                         self.reviewerId = reviewerId
                         self.reviewerType = reviewerType
+                        self.mode = mode
                     }
                     public enum CodingKeys: String, CodingKey {
                         case reviewerId = "reviewer_id"
                         case reviewerType = "reviewer_type"
+                        case mode
                     }
                 }
                 /// The bypass reviewers for secret scanning delegated bypass
@@ -26790,21 +26805,36 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/reviewer_type`.
                                 public var reviewerType: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                                /// The bypass mode for the reviewer
+                                ///
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                                @frozen public enum ModePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                    case always = "ALWAYS"
+                                    case exempt = "EXEMPT"
+                                }
+                                /// The bypass mode for the reviewer
+                                ///
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/security_and_analysis/secret_scanning_delegated_bypass_options/ReviewersPayload/mode`.
+                                public var mode: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload?
                                 /// Creates a new `ReviewersPayloadPayload`.
                                 ///
                                 /// - Parameters:
                                 ///   - reviewerId: The ID of the team or role selected as a bypass reviewer
                                 ///   - reviewerType: The type of the bypass reviewer
+                                ///   - mode: The bypass mode for the reviewer
                                 public init(
                                     reviewerId: Swift.Int,
-                                    reviewerType: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload
+                                    reviewerType: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ReviewerTypePayload,
+                                    mode: Operations.ReposUpdate.Input.Body.JsonPayload.SecurityAndAnalysisPayload.SecretScanningDelegatedBypassOptionsPayload.ReviewersPayloadPayload.ModePayload? = nil
                                 ) {
                                     self.reviewerId = reviewerId
                                     self.reviewerType = reviewerType
+                                    self.mode = mode
                                 }
                                 public enum CodingKeys: String, CodingKey {
                                     case reviewerId = "reviewer_id"
                                     case reviewerType = "reviewer_type"
+                                    case mode
                                 }
                             }
                             /// The bypass reviewers for secret scanning delegated bypass.
@@ -40287,6 +40317,68 @@ public enum Operations {
                             switch self {
                             case let .json(body):
                                 return body
+                            default:
+                                try throwUnexpectedResponseBody(
+                                    expectedContent: "application/json",
+                                    body: self
+                                )
+                            }
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/commits/{ref}/GET/responses/200/content/application\/vnd.github.diff`.
+                    case applicationVnd_github_diff(OpenAPIRuntime.HTTPBody)
+                    /// The associated value of the enum case if `self` is `.applicationVnd_github_diff`.
+                    ///
+                    /// - Throws: An error if `self` is not `.applicationVnd_github_diff`.
+                    /// - SeeAlso: `.applicationVnd_github_diff`.
+                    public var applicationVnd_github_diff: OpenAPIRuntime.HTTPBody {
+                        get throws {
+                            switch self {
+                            case let .applicationVnd_github_diff(body):
+                                return body
+                            default:
+                                try throwUnexpectedResponseBody(
+                                    expectedContent: "application/vnd.github.diff",
+                                    body: self
+                                )
+                            }
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/commits/{ref}/GET/responses/200/content/application\/vnd.github.patch`.
+                    case applicationVnd_github_patch(OpenAPIRuntime.HTTPBody)
+                    /// The associated value of the enum case if `self` is `.applicationVnd_github_patch`.
+                    ///
+                    /// - Throws: An error if `self` is not `.applicationVnd_github_patch`.
+                    /// - SeeAlso: `.applicationVnd_github_patch`.
+                    public var applicationVnd_github_patch: OpenAPIRuntime.HTTPBody {
+                        get throws {
+                            switch self {
+                            case let .applicationVnd_github_patch(body):
+                                return body
+                            default:
+                                try throwUnexpectedResponseBody(
+                                    expectedContent: "application/vnd.github.patch",
+                                    body: self
+                                )
+                            }
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/commits/{ref}/GET/responses/200/content/application\/vnd.github.sha`.
+                    case applicationVnd_github_sha(OpenAPIRuntime.HTTPBody)
+                    /// The associated value of the enum case if `self` is `.applicationVnd_github_sha`.
+                    ///
+                    /// - Throws: An error if `self` is not `.applicationVnd_github_sha`.
+                    /// - SeeAlso: `.applicationVnd_github_sha`.
+                    public var applicationVnd_github_sha: OpenAPIRuntime.HTTPBody {
+                        get throws {
+                            switch self {
+                            case let .applicationVnd_github_sha(body):
+                                return body
+                            default:
+                                try throwUnexpectedResponseBody(
+                                    expectedContent: "application/vnd.github.sha",
+                                    body: self
+                                )
                             }
                         }
                     }
@@ -40446,11 +40538,20 @@ public enum Operations {
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
+            case applicationVnd_github_diff
+            case applicationVnd_github_patch
+            case applicationVnd_github_sha
             case other(Swift.String)
             public init?(rawValue: Swift.String) {
                 switch rawValue.lowercased() {
                 case "application/json":
                     self = .json
+                case "application/vnd.github.diff":
+                    self = .applicationVnd_github_diff
+                case "application/vnd.github.patch":
+                    self = .applicationVnd_github_patch
+                case "application/vnd.github.sha":
+                    self = .applicationVnd_github_sha
                 default:
                     self = .other(rawValue)
                 }
@@ -40461,11 +40562,20 @@ public enum Operations {
                     return string
                 case .json:
                     return "application/json"
+                case .applicationVnd_github_diff:
+                    return "application/vnd.github.diff"
+                case .applicationVnd_github_patch:
+                    return "application/vnd.github.patch"
+                case .applicationVnd_github_sha:
+                    return "application/vnd.github.sha"
                 }
             }
             public static var allCases: [Self] {
                 [
-                    .json
+                    .json,
+                    .applicationVnd_github_diff,
+                    .applicationVnd_github_patch,
+                    .applicationVnd_github_sha
                 ]
             }
         }
@@ -41202,6 +41312,49 @@ public enum Operations {
                             switch self {
                             case let .json(body):
                                 return body
+                            default:
+                                try throwUnexpectedResponseBody(
+                                    expectedContent: "application/json",
+                                    body: self
+                                )
+                            }
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/compare/{basehead}/GET/responses/200/content/application\/vnd.github.diff`.
+                    case applicationVnd_github_diff(OpenAPIRuntime.HTTPBody)
+                    /// The associated value of the enum case if `self` is `.applicationVnd_github_diff`.
+                    ///
+                    /// - Throws: An error if `self` is not `.applicationVnd_github_diff`.
+                    /// - SeeAlso: `.applicationVnd_github_diff`.
+                    public var applicationVnd_github_diff: OpenAPIRuntime.HTTPBody {
+                        get throws {
+                            switch self {
+                            case let .applicationVnd_github_diff(body):
+                                return body
+                            default:
+                                try throwUnexpectedResponseBody(
+                                    expectedContent: "application/vnd.github.diff",
+                                    body: self
+                                )
+                            }
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/compare/{basehead}/GET/responses/200/content/application\/vnd.github.patch`.
+                    case applicationVnd_github_patch(OpenAPIRuntime.HTTPBody)
+                    /// The associated value of the enum case if `self` is `.applicationVnd_github_patch`.
+                    ///
+                    /// - Throws: An error if `self` is not `.applicationVnd_github_patch`.
+                    /// - SeeAlso: `.applicationVnd_github_patch`.
+                    public var applicationVnd_github_patch: OpenAPIRuntime.HTTPBody {
+                        get throws {
+                            switch self {
+                            case let .applicationVnd_github_patch(body):
+                                return body
+                            default:
+                                try throwUnexpectedResponseBody(
+                                    expectedContent: "application/vnd.github.patch",
+                                    body: self
+                                )
                             }
                         }
                     }
@@ -41315,11 +41468,17 @@ public enum Operations {
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
+            case applicationVnd_github_diff
+            case applicationVnd_github_patch
             case other(Swift.String)
             public init?(rawValue: Swift.String) {
                 switch rawValue.lowercased() {
                 case "application/json":
                     self = .json
+                case "application/vnd.github.diff":
+                    self = .applicationVnd_github_diff
+                case "application/vnd.github.patch":
+                    self = .applicationVnd_github_patch
                 default:
                     self = .other(rawValue)
                 }
@@ -41330,11 +41489,17 @@ public enum Operations {
                     return string
                 case .json:
                     return "application/json"
+                case .applicationVnd_github_diff:
+                    return "application/vnd.github.diff"
+                case .applicationVnd_github_patch:
+                    return "application/vnd.github.patch"
                 }
             }
             public static var allCases: [Self] {
                 [
-                    .json
+                    .json,
+                    .applicationVnd_github_diff,
+                    .applicationVnd_github_patch
                 ]
             }
         }

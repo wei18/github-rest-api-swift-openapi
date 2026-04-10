@@ -27,7 +27,7 @@ public protocol APIProtocol: Sendable {
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Creates a new task for a repository
+    /// Creates a new task for a repository.
     ///
     ///
     /// - Remark: HTTP `POST /agents/repos/{owner}/{repo}/tasks`.
@@ -96,7 +96,7 @@ extension APIProtocol {
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Creates a new task for a repository
+    /// Creates a new task for a repository.
     ///
     ///
     /// - Remark: HTTP `POST /agents/repos/{owner}/{repo}/tasks`.
@@ -562,14 +562,16 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/provider`.
                                 public var provider: Operations.AgentTasksListTasksForRepo.Output.Ok.Body.JsonPayload.TasksPayloadPayload.ArtifactsPayloadPayload.ProviderPayload
-                                /// Discriminator for data shape
+                                /// Type of artifact. Available Values: `pull`, `branch`.
+                                ///
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/type`.
                                 @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                                    case githubResource = "github_resource"
+                                    case pull = "pull"
                                     case branch = "branch"
                                 }
-                                /// Discriminator for data shape
+                                /// Type of artifact. Available Values: `pull`, `branch`.
+                                ///
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/type`.
                                 public var _type: Operations.AgentTasksListTasksForRepo.Output.Ok.Body.JsonPayload.TasksPayloadPayload.ArtifactsPayloadPayload._TypePayload
@@ -584,11 +586,7 @@ public enum Operations {
                                         /// GitHub resource ID
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/data/case1/id`.
-                                        public var id: Swift.Int64?
-                                        /// Resource type (e.g., pull_request, issue)
-                                        ///
-                                        /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/data/case1/type`.
-                                        public var _type: Swift.String?
+                                        public var id: Swift.Int64
                                         /// GraphQL global ID
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/data/case1/global_id`.
@@ -597,20 +595,16 @@ public enum Operations {
                                         ///
                                         /// - Parameters:
                                         ///   - id: GitHub resource ID
-                                        ///   - _type: Resource type (e.g., pull_request, issue)
                                         ///   - globalId: GraphQL global ID
                                         public init(
-                                            id: Swift.Int64? = nil,
-                                            _type: Swift.String? = nil,
+                                            id: Swift.Int64,
                                             globalId: Swift.String? = nil
                                         ) {
                                             self.id = id
-                                            self._type = _type
                                             self.globalId = globalId
                                         }
                                         public enum CodingKeys: String, CodingKey {
                                             case id
-                                            case _type = "type"
                                             case globalId = "global_id"
                                         }
                                     }
@@ -625,19 +619,19 @@ public enum Operations {
                                         /// Head branch name
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/data/case2/head_ref`.
-                                        public var headRef: Swift.String?
+                                        public var headRef: Swift.String
                                         /// Base branch name
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/data/case2/base_ref`.
-                                        public var baseRef: Swift.String?
+                                        public var baseRef: Swift.String
                                         /// Creates a new `Case2Payload`.
                                         ///
                                         /// - Parameters:
                                         ///   - headRef: Head branch name
                                         ///   - baseRef: Base branch name
                                         public init(
-                                            headRef: Swift.String? = nil,
-                                            baseRef: Swift.String? = nil
+                                            headRef: Swift.String,
+                                            baseRef: Swift.String
                                         ) {
                                             self.headRef = headRef
                                             self.baseRef = baseRef
@@ -688,7 +682,7 @@ public enum Operations {
                                 ///
                                 /// - Parameters:
                                 ///   - provider: Provider namespace
-                                ///   - _type: Discriminator for data shape
+                                ///   - _type: Type of artifact. Available Values: `pull`, `branch`.
                                 ///   - data: Resource data (shape depends on type)
                                 public init(
                                     provider: Operations.AgentTasksListTasksForRepo.Output.Ok.Body.JsonPayload.TasksPayloadPayload.ArtifactsPayloadPayload.ProviderPayload,
@@ -1595,7 +1589,7 @@ public enum Operations {
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Creates a new task for a repository
+    /// Creates a new task for a repository.
     ///
     ///
     /// - Remark: HTTP `POST /agents/repos/{owner}/{repo}/tasks`.
@@ -1643,27 +1637,15 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// Agent ID (optional, defaults to coding agent)
+                    /// The user's prompt for the agent
                     ///
-                    /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/agent_id`.
-                    public var agentId: Swift.Int64?
-                    /// Additional prompting for the agent
-                    ///
-                    /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/problem_statement`.
-                    public var problemStatement: Swift.String?
-                    /// User's written prompt
-                    ///
-                    /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/event_content`.
-                    public var eventContent: Swift.String
+                    /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/prompt`.
+                    public var prompt: Swift.String
                     /// The model to use for this task. The allowed models may change over time and depend on the user's GitHub Copilot plan and organization policies. Currently supported values: `claude-sonnet-4.6`, `claude-opus-4.6`, `gpt-5.2-codex`, `gpt-5.3-codex`, `gpt-5.4`, `claude-sonnet-4.5`, `claude-opus-4.5`
                     ///
                     /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/model`.
                     public var model: Swift.String?
-                    /// Custom agent identifier
-                    ///
-                    /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/custom_agent`.
-                    public var customAgent: Swift.String?
-                    /// Whether to create a PR
+                    /// Whether to create a PR.
                     ///
                     /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/create_pull_request`.
                     public var createPullRequest: Swift.Bool?
@@ -1674,36 +1656,24 @@ public enum Operations {
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
-                    ///   - agentId: Agent ID (optional, defaults to coding agent)
-                    ///   - problemStatement: Additional prompting for the agent
-                    ///   - eventContent: User's written prompt
+                    ///   - prompt: The user's prompt for the agent
                     ///   - model: The model to use for this task. The allowed models may change over time and depend on the user's GitHub Copilot plan and organization policies. Currently supported values: `claude-sonnet-4.6`, `claude-opus-4.6`, `gpt-5.2-codex`, `gpt-5.3-codex`, `gpt-5.4`, `claude-sonnet-4.5`, `claude-opus-4.5`
-                    ///   - customAgent: Custom agent identifier
-                    ///   - createPullRequest: Whether to create a PR
+                    ///   - createPullRequest: Whether to create a PR.
                     ///   - baseRef: Base ref for new branch/PR
                     public init(
-                        agentId: Swift.Int64? = nil,
-                        problemStatement: Swift.String? = nil,
-                        eventContent: Swift.String,
+                        prompt: Swift.String,
                         model: Swift.String? = nil,
-                        customAgent: Swift.String? = nil,
                         createPullRequest: Swift.Bool? = nil,
                         baseRef: Swift.String? = nil
                     ) {
-                        self.agentId = agentId
-                        self.problemStatement = problemStatement
-                        self.eventContent = eventContent
+                        self.prompt = prompt
                         self.model = model
-                        self.customAgent = customAgent
                         self.createPullRequest = createPullRequest
                         self.baseRef = baseRef
                     }
                     public enum CodingKeys: String, CodingKey {
-                        case agentId = "agent_id"
-                        case problemStatement = "problem_statement"
-                        case eventContent = "event_content"
+                        case prompt
                         case model
-                        case customAgent = "custom_agent"
                         case createPullRequest = "create_pull_request"
                         case baseRef = "base_ref"
                     }
@@ -1922,14 +1892,16 @@ public enum Operations {
                             ///
                             /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/ArtifactsPayload/provider`.
                             public var provider: Operations.AgentTasksCreateTask.Output.Created.Body.JsonPayload.ArtifactsPayloadPayload.ProviderPayload
-                            /// Discriminator for data shape
+                            /// Type of artifact. Available Values: `pull`, `branch`.
+                            ///
                             ///
                             /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/ArtifactsPayload/type`.
                             @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                                case githubResource = "github_resource"
+                                case pull = "pull"
                                 case branch = "branch"
                             }
-                            /// Discriminator for data shape
+                            /// Type of artifact. Available Values: `pull`, `branch`.
+                            ///
                             ///
                             /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/ArtifactsPayload/type`.
                             public var _type: Operations.AgentTasksCreateTask.Output.Created.Body.JsonPayload.ArtifactsPayloadPayload._TypePayload
@@ -1944,11 +1916,7 @@ public enum Operations {
                                     /// GitHub resource ID
                                     ///
                                     /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/ArtifactsPayload/data/case1/id`.
-                                    public var id: Swift.Int64?
-                                    /// Resource type (e.g., pull_request, issue)
-                                    ///
-                                    /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/ArtifactsPayload/data/case1/type`.
-                                    public var _type: Swift.String?
+                                    public var id: Swift.Int64
                                     /// GraphQL global ID
                                     ///
                                     /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/ArtifactsPayload/data/case1/global_id`.
@@ -1957,20 +1925,16 @@ public enum Operations {
                                     ///
                                     /// - Parameters:
                                     ///   - id: GitHub resource ID
-                                    ///   - _type: Resource type (e.g., pull_request, issue)
                                     ///   - globalId: GraphQL global ID
                                     public init(
-                                        id: Swift.Int64? = nil,
-                                        _type: Swift.String? = nil,
+                                        id: Swift.Int64,
                                         globalId: Swift.String? = nil
                                     ) {
                                         self.id = id
-                                        self._type = _type
                                         self.globalId = globalId
                                     }
                                     public enum CodingKeys: String, CodingKey {
                                         case id
-                                        case _type = "type"
                                         case globalId = "global_id"
                                     }
                                 }
@@ -1985,19 +1949,19 @@ public enum Operations {
                                     /// Head branch name
                                     ///
                                     /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/ArtifactsPayload/data/case2/head_ref`.
-                                    public var headRef: Swift.String?
+                                    public var headRef: Swift.String
                                     /// Base branch name
                                     ///
                                     /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/ArtifactsPayload/data/case2/base_ref`.
-                                    public var baseRef: Swift.String?
+                                    public var baseRef: Swift.String
                                     /// Creates a new `Case2Payload`.
                                     ///
                                     /// - Parameters:
                                     ///   - headRef: Head branch name
                                     ///   - baseRef: Base branch name
                                     public init(
-                                        headRef: Swift.String? = nil,
-                                        baseRef: Swift.String? = nil
+                                        headRef: Swift.String,
+                                        baseRef: Swift.String
                                     ) {
                                         self.headRef = headRef
                                         self.baseRef = baseRef
@@ -2048,7 +2012,7 @@ public enum Operations {
                             ///
                             /// - Parameters:
                             ///   - provider: Provider namespace
-                            ///   - _type: Discriminator for data shape
+                            ///   - _type: Type of artifact. Available Values: `pull`, `branch`.
                             ///   - data: Resource data (shape depends on type)
                             public init(
                                 provider: Operations.AgentTasksCreateTask.Output.Created.Body.JsonPayload.ArtifactsPayloadPayload.ProviderPayload,
@@ -3038,14 +3002,16 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/provider`.
                                 public var provider: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value1Payload.ArtifactsPayloadPayload.ProviderPayload
-                                /// Discriminator for data shape
+                                /// Type of artifact. Available Values: `pull`, `branch`.
+                                ///
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/type`.
                                 @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                                    case githubResource = "github_resource"
+                                    case pull = "pull"
                                     case branch = "branch"
                                 }
-                                /// Discriminator for data shape
+                                /// Type of artifact. Available Values: `pull`, `branch`.
+                                ///
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/type`.
                                 public var _type: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value1Payload.ArtifactsPayloadPayload._TypePayload
@@ -3060,11 +3026,7 @@ public enum Operations {
                                         /// GitHub resource ID
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/data/case1/id`.
-                                        public var id: Swift.Int64?
-                                        /// Resource type (e.g., pull_request, issue)
-                                        ///
-                                        /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/data/case1/type`.
-                                        public var _type: Swift.String?
+                                        public var id: Swift.Int64
                                         /// GraphQL global ID
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/data/case1/global_id`.
@@ -3073,20 +3035,16 @@ public enum Operations {
                                         ///
                                         /// - Parameters:
                                         ///   - id: GitHub resource ID
-                                        ///   - _type: Resource type (e.g., pull_request, issue)
                                         ///   - globalId: GraphQL global ID
                                         public init(
-                                            id: Swift.Int64? = nil,
-                                            _type: Swift.String? = nil,
+                                            id: Swift.Int64,
                                             globalId: Swift.String? = nil
                                         ) {
                                             self.id = id
-                                            self._type = _type
                                             self.globalId = globalId
                                         }
                                         public enum CodingKeys: String, CodingKey {
                                             case id
-                                            case _type = "type"
                                             case globalId = "global_id"
                                         }
                                     }
@@ -3101,19 +3059,19 @@ public enum Operations {
                                         /// Head branch name
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/data/case2/head_ref`.
-                                        public var headRef: Swift.String?
+                                        public var headRef: Swift.String
                                         /// Base branch name
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/data/case2/base_ref`.
-                                        public var baseRef: Swift.String?
+                                        public var baseRef: Swift.String
                                         /// Creates a new `Case2Payload`.
                                         ///
                                         /// - Parameters:
                                         ///   - headRef: Head branch name
                                         ///   - baseRef: Base branch name
                                         public init(
-                                            headRef: Swift.String? = nil,
-                                            baseRef: Swift.String? = nil
+                                            headRef: Swift.String,
+                                            baseRef: Swift.String
                                         ) {
                                             self.headRef = headRef
                                             self.baseRef = baseRef
@@ -3164,7 +3122,7 @@ public enum Operations {
                                 ///
                                 /// - Parameters:
                                 ///   - provider: Provider namespace
-                                ///   - _type: Discriminator for data shape
+                                ///   - _type: Type of artifact. Available Values: `pull`, `branch`.
                                 ///   - data: Resource data (shape depends on type)
                                 public init(
                                     provider: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value1Payload.ArtifactsPayloadPayload.ProviderPayload,
@@ -3355,14 +3313,6 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/repository`.
                                 public var repository: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.RepositoryPayload?
-                                /// Agent ID
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/agent_id`.
-                                public var agentId: Swift.Int64?
-                                /// Agent internal task ID
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/agent_task_id`.
-                                public var agentTaskId: Swift.String?
                                 /// Task ID this session belongs to
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/task_id`.
@@ -3396,42 +3346,10 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/completed_at`.
                                 public var completedAt: Foundation.Date?
-                                /// Type of event that triggered this session
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/event_type`.
-                                public var eventType: Swift.String?
-                                /// URL of the triggering event
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/event_url`.
-                                public var eventUrl: Swift.String?
                                 /// Content of the triggering event
                                 ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/event_content`.
-                                public var eventContent: Swift.String?
-                                /// Identifiers for tracking
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/event_identifiers`.
-                                public var eventIdentifiers: [Swift.String]?
-                                /// Type of resource associated with this session
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/resource_type`.
-                                public var resourceType: Swift.String?
-                                /// Resource ID
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/resource_id`.
-                                public var resourceId: Swift.Int64?
-                                /// Resource number (e.g., PR number)
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/resource_number`.
-                                public var resourceNumber: Swift.Int32?
-                                /// GraphQL global ID of the resource
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/resource_global_id`.
-                                public var resourceGlobalId: Swift.String?
-                                /// State of the associated resource
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/resource_state`.
-                                public var resourceState: Swift.String?
+                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/prompt`.
+                                public var prompt: Swift.String?
                                 /// Head branch name
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/head_ref`.
@@ -3440,18 +3358,10 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/base_ref`.
                                 public var baseRef: Swift.String?
-                                /// GitHub Actions workflow run ID
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/workflow_run_id`.
-                                public var workflowRunId: Swift.Int64?
                                 /// Model used for this session
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/model`.
                                 public var model: Swift.String?
-                                /// Premium request count
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/premium_requests`.
-                                public var premiumRequests: Swift.Double?
                                 /// Error details for a failed session
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/error`.
@@ -3483,27 +3393,15 @@ public enum Operations {
                                 ///   - user: The user who created this session
                                 ///   - owner: The owner of the repository
                                 ///   - repository: The repository this session belongs to
-                                ///   - agentId: Agent ID
-                                ///   - agentTaskId: Agent internal task ID
                                 ///   - taskId: Task ID this session belongs to
                                 ///   - state: Current state of a session
                                 ///   - createdAt: Creation timestamp
                                 ///   - updatedAt: Last update timestamp
                                 ///   - completedAt: Completion timestamp
-                                ///   - eventType: Type of event that triggered this session
-                                ///   - eventUrl: URL of the triggering event
-                                ///   - eventContent: Content of the triggering event
-                                ///   - eventIdentifiers: Identifiers for tracking
-                                ///   - resourceType: Type of resource associated with this session
-                                ///   - resourceId: Resource ID
-                                ///   - resourceNumber: Resource number (e.g., PR number)
-                                ///   - resourceGlobalId: GraphQL global ID of the resource
-                                ///   - resourceState: State of the associated resource
+                                ///   - prompt: Content of the triggering event
                                 ///   - headRef: Head branch name
                                 ///   - baseRef: Base branch name
-                                ///   - workflowRunId: GitHub Actions workflow run ID
                                 ///   - model: Model used for this session
-                                ///   - premiumRequests: Premium request count
                                 ///   - error: Error details for a failed session
                                 public init(
                                     id: Swift.String,
@@ -3511,27 +3409,15 @@ public enum Operations {
                                     user: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.UserPayload? = nil,
                                     owner: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.OwnerPayload? = nil,
                                     repository: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.RepositoryPayload? = nil,
-                                    agentId: Swift.Int64? = nil,
-                                    agentTaskId: Swift.String? = nil,
                                     taskId: Swift.String? = nil,
                                     state: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.StatePayload,
                                     createdAt: Foundation.Date,
                                     updatedAt: Foundation.Date? = nil,
                                     completedAt: Foundation.Date? = nil,
-                                    eventType: Swift.String? = nil,
-                                    eventUrl: Swift.String? = nil,
-                                    eventContent: Swift.String? = nil,
-                                    eventIdentifiers: [Swift.String]? = nil,
-                                    resourceType: Swift.String? = nil,
-                                    resourceId: Swift.Int64? = nil,
-                                    resourceNumber: Swift.Int32? = nil,
-                                    resourceGlobalId: Swift.String? = nil,
-                                    resourceState: Swift.String? = nil,
+                                    prompt: Swift.String? = nil,
                                     headRef: Swift.String? = nil,
                                     baseRef: Swift.String? = nil,
-                                    workflowRunId: Swift.Int64? = nil,
                                     model: Swift.String? = nil,
-                                    premiumRequests: Swift.Double? = nil,
                                     error: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload._ErrorPayload? = nil
                                 ) {
                                     self.id = id
@@ -3539,27 +3425,15 @@ public enum Operations {
                                     self.user = user
                                     self.owner = owner
                                     self.repository = repository
-                                    self.agentId = agentId
-                                    self.agentTaskId = agentTaskId
                                     self.taskId = taskId
                                     self.state = state
                                     self.createdAt = createdAt
                                     self.updatedAt = updatedAt
                                     self.completedAt = completedAt
-                                    self.eventType = eventType
-                                    self.eventUrl = eventUrl
-                                    self.eventContent = eventContent
-                                    self.eventIdentifiers = eventIdentifiers
-                                    self.resourceType = resourceType
-                                    self.resourceId = resourceId
-                                    self.resourceNumber = resourceNumber
-                                    self.resourceGlobalId = resourceGlobalId
-                                    self.resourceState = resourceState
+                                    self.prompt = prompt
                                     self.headRef = headRef
                                     self.baseRef = baseRef
-                                    self.workflowRunId = workflowRunId
                                     self.model = model
-                                    self.premiumRequests = premiumRequests
                                     self.error = error
                                 }
                                 public enum CodingKeys: String, CodingKey {
@@ -3568,27 +3442,15 @@ public enum Operations {
                                     case user
                                     case owner
                                     case repository
-                                    case agentId = "agent_id"
-                                    case agentTaskId = "agent_task_id"
                                     case taskId = "task_id"
                                     case state
                                     case createdAt = "created_at"
                                     case updatedAt = "updated_at"
                                     case completedAt = "completed_at"
-                                    case eventType = "event_type"
-                                    case eventUrl = "event_url"
-                                    case eventContent = "event_content"
-                                    case eventIdentifiers = "event_identifiers"
-                                    case resourceType = "resource_type"
-                                    case resourceId = "resource_id"
-                                    case resourceNumber = "resource_number"
-                                    case resourceGlobalId = "resource_global_id"
-                                    case resourceState = "resource_state"
+                                    case prompt
                                     case headRef = "head_ref"
                                     case baseRef = "base_ref"
-                                    case workflowRunId = "workflow_run_id"
                                     case model
-                                    case premiumRequests = "premium_requests"
                                     case error
                                 }
                             }
@@ -4709,14 +4571,16 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/provider`.
                                 public var provider: Operations.AgentTasksListTasks.Output.Ok.Body.JsonPayload.TasksPayloadPayload.ArtifactsPayloadPayload.ProviderPayload
-                                /// Discriminator for data shape
+                                /// Type of artifact. Available Values: `pull`, `branch`.
+                                ///
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/type`.
                                 @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                                    case githubResource = "github_resource"
+                                    case pull = "pull"
                                     case branch = "branch"
                                 }
-                                /// Discriminator for data shape
+                                /// Type of artifact. Available Values: `pull`, `branch`.
+                                ///
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/type`.
                                 public var _type: Operations.AgentTasksListTasks.Output.Ok.Body.JsonPayload.TasksPayloadPayload.ArtifactsPayloadPayload._TypePayload
@@ -4731,11 +4595,7 @@ public enum Operations {
                                         /// GitHub resource ID
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/data/case1/id`.
-                                        public var id: Swift.Int64?
-                                        /// Resource type (e.g., pull_request, issue)
-                                        ///
-                                        /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/data/case1/type`.
-                                        public var _type: Swift.String?
+                                        public var id: Swift.Int64
                                         /// GraphQL global ID
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/data/case1/global_id`.
@@ -4744,20 +4604,16 @@ public enum Operations {
                                         ///
                                         /// - Parameters:
                                         ///   - id: GitHub resource ID
-                                        ///   - _type: Resource type (e.g., pull_request, issue)
                                         ///   - globalId: GraphQL global ID
                                         public init(
-                                            id: Swift.Int64? = nil,
-                                            _type: Swift.String? = nil,
+                                            id: Swift.Int64,
                                             globalId: Swift.String? = nil
                                         ) {
                                             self.id = id
-                                            self._type = _type
                                             self.globalId = globalId
                                         }
                                         public enum CodingKeys: String, CodingKey {
                                             case id
-                                            case _type = "type"
                                             case globalId = "global_id"
                                         }
                                     }
@@ -4772,19 +4628,19 @@ public enum Operations {
                                         /// Head branch name
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/data/case2/head_ref`.
-                                        public var headRef: Swift.String?
+                                        public var headRef: Swift.String
                                         /// Base branch name
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/ArtifactsPayload/data/case2/base_ref`.
-                                        public var baseRef: Swift.String?
+                                        public var baseRef: Swift.String
                                         /// Creates a new `Case2Payload`.
                                         ///
                                         /// - Parameters:
                                         ///   - headRef: Head branch name
                                         ///   - baseRef: Base branch name
                                         public init(
-                                            headRef: Swift.String? = nil,
-                                            baseRef: Swift.String? = nil
+                                            headRef: Swift.String,
+                                            baseRef: Swift.String
                                         ) {
                                             self.headRef = headRef
                                             self.baseRef = baseRef
@@ -4835,7 +4691,7 @@ public enum Operations {
                                 ///
                                 /// - Parameters:
                                 ///   - provider: Provider namespace
-                                ///   - _type: Discriminator for data shape
+                                ///   - _type: Type of artifact. Available Values: `pull`, `branch`.
                                 ///   - data: Resource data (shape depends on type)
                                 public init(
                                     provider: Operations.AgentTasksListTasks.Output.Ok.Body.JsonPayload.TasksPayloadPayload.ArtifactsPayloadPayload.ProviderPayload,
@@ -5851,14 +5707,16 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/provider`.
                                 public var provider: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value1Payload.ArtifactsPayloadPayload.ProviderPayload
-                                /// Discriminator for data shape
+                                /// Type of artifact. Available Values: `pull`, `branch`.
+                                ///
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/type`.
                                 @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                                    case githubResource = "github_resource"
+                                    case pull = "pull"
                                     case branch = "branch"
                                 }
-                                /// Discriminator for data shape
+                                /// Type of artifact. Available Values: `pull`, `branch`.
+                                ///
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/type`.
                                 public var _type: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value1Payload.ArtifactsPayloadPayload._TypePayload
@@ -5873,11 +5731,7 @@ public enum Operations {
                                         /// GitHub resource ID
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/data/case1/id`.
-                                        public var id: Swift.Int64?
-                                        /// Resource type (e.g., pull_request, issue)
-                                        ///
-                                        /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/data/case1/type`.
-                                        public var _type: Swift.String?
+                                        public var id: Swift.Int64
                                         /// GraphQL global ID
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/data/case1/global_id`.
@@ -5886,20 +5740,16 @@ public enum Operations {
                                         ///
                                         /// - Parameters:
                                         ///   - id: GitHub resource ID
-                                        ///   - _type: Resource type (e.g., pull_request, issue)
                                         ///   - globalId: GraphQL global ID
                                         public init(
-                                            id: Swift.Int64? = nil,
-                                            _type: Swift.String? = nil,
+                                            id: Swift.Int64,
                                             globalId: Swift.String? = nil
                                         ) {
                                             self.id = id
-                                            self._type = _type
                                             self.globalId = globalId
                                         }
                                         public enum CodingKeys: String, CodingKey {
                                             case id
-                                            case _type = "type"
                                             case globalId = "global_id"
                                         }
                                     }
@@ -5914,19 +5764,19 @@ public enum Operations {
                                         /// Head branch name
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/data/case2/head_ref`.
-                                        public var headRef: Swift.String?
+                                        public var headRef: Swift.String
                                         /// Base branch name
                                         ///
                                         /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/ArtifactsPayload/data/case2/base_ref`.
-                                        public var baseRef: Swift.String?
+                                        public var baseRef: Swift.String
                                         /// Creates a new `Case2Payload`.
                                         ///
                                         /// - Parameters:
                                         ///   - headRef: Head branch name
                                         ///   - baseRef: Base branch name
                                         public init(
-                                            headRef: Swift.String? = nil,
-                                            baseRef: Swift.String? = nil
+                                            headRef: Swift.String,
+                                            baseRef: Swift.String
                                         ) {
                                             self.headRef = headRef
                                             self.baseRef = baseRef
@@ -5977,7 +5827,7 @@ public enum Operations {
                                 ///
                                 /// - Parameters:
                                 ///   - provider: Provider namespace
-                                ///   - _type: Discriminator for data shape
+                                ///   - _type: Type of artifact. Available Values: `pull`, `branch`.
                                 ///   - data: Resource data (shape depends on type)
                                 public init(
                                     provider: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value1Payload.ArtifactsPayloadPayload.ProviderPayload,
@@ -6168,14 +6018,6 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/repository`.
                                 public var repository: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.RepositoryPayload?
-                                /// Agent ID
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/agent_id`.
-                                public var agentId: Swift.Int64?
-                                /// Agent internal task ID
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/agent_task_id`.
-                                public var agentTaskId: Swift.String?
                                 /// Task ID this session belongs to
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/task_id`.
@@ -6209,42 +6051,10 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/completed_at`.
                                 public var completedAt: Foundation.Date?
-                                /// Type of event that triggered this session
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/event_type`.
-                                public var eventType: Swift.String?
-                                /// URL of the triggering event
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/event_url`.
-                                public var eventUrl: Swift.String?
                                 /// Content of the triggering event
                                 ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/event_content`.
-                                public var eventContent: Swift.String?
-                                /// Identifiers for tracking
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/event_identifiers`.
-                                public var eventIdentifiers: [Swift.String]?
-                                /// Type of resource associated with this session
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/resource_type`.
-                                public var resourceType: Swift.String?
-                                /// Resource ID
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/resource_id`.
-                                public var resourceId: Swift.Int64?
-                                /// Resource number (e.g., PR number)
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/resource_number`.
-                                public var resourceNumber: Swift.Int32?
-                                /// GraphQL global ID of the resource
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/resource_global_id`.
-                                public var resourceGlobalId: Swift.String?
-                                /// State of the associated resource
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/resource_state`.
-                                public var resourceState: Swift.String?
+                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/prompt`.
+                                public var prompt: Swift.String?
                                 /// Head branch name
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/head_ref`.
@@ -6253,18 +6063,10 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/base_ref`.
                                 public var baseRef: Swift.String?
-                                /// GitHub Actions workflow run ID
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/workflow_run_id`.
-                                public var workflowRunId: Swift.Int64?
                                 /// Model used for this session
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/model`.
                                 public var model: Swift.String?
-                                /// Premium request count
-                                ///
-                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/premium_requests`.
-                                public var premiumRequests: Swift.Double?
                                 /// Error details for a failed session
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/error`.
@@ -6296,27 +6098,15 @@ public enum Operations {
                                 ///   - user: The user who created this session
                                 ///   - owner: The owner of the repository
                                 ///   - repository: The repository this session belongs to
-                                ///   - agentId: Agent ID
-                                ///   - agentTaskId: Agent internal task ID
                                 ///   - taskId: Task ID this session belongs to
                                 ///   - state: Current state of a session
                                 ///   - createdAt: Creation timestamp
                                 ///   - updatedAt: Last update timestamp
                                 ///   - completedAt: Completion timestamp
-                                ///   - eventType: Type of event that triggered this session
-                                ///   - eventUrl: URL of the triggering event
-                                ///   - eventContent: Content of the triggering event
-                                ///   - eventIdentifiers: Identifiers for tracking
-                                ///   - resourceType: Type of resource associated with this session
-                                ///   - resourceId: Resource ID
-                                ///   - resourceNumber: Resource number (e.g., PR number)
-                                ///   - resourceGlobalId: GraphQL global ID of the resource
-                                ///   - resourceState: State of the associated resource
+                                ///   - prompt: Content of the triggering event
                                 ///   - headRef: Head branch name
                                 ///   - baseRef: Base branch name
-                                ///   - workflowRunId: GitHub Actions workflow run ID
                                 ///   - model: Model used for this session
-                                ///   - premiumRequests: Premium request count
                                 ///   - error: Error details for a failed session
                                 public init(
                                     id: Swift.String,
@@ -6324,27 +6114,15 @@ public enum Operations {
                                     user: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.UserPayload? = nil,
                                     owner: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.OwnerPayload? = nil,
                                     repository: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.RepositoryPayload? = nil,
-                                    agentId: Swift.Int64? = nil,
-                                    agentTaskId: Swift.String? = nil,
                                     taskId: Swift.String? = nil,
                                     state: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.StatePayload,
                                     createdAt: Foundation.Date,
                                     updatedAt: Foundation.Date? = nil,
                                     completedAt: Foundation.Date? = nil,
-                                    eventType: Swift.String? = nil,
-                                    eventUrl: Swift.String? = nil,
-                                    eventContent: Swift.String? = nil,
-                                    eventIdentifiers: [Swift.String]? = nil,
-                                    resourceType: Swift.String? = nil,
-                                    resourceId: Swift.Int64? = nil,
-                                    resourceNumber: Swift.Int32? = nil,
-                                    resourceGlobalId: Swift.String? = nil,
-                                    resourceState: Swift.String? = nil,
+                                    prompt: Swift.String? = nil,
                                     headRef: Swift.String? = nil,
                                     baseRef: Swift.String? = nil,
-                                    workflowRunId: Swift.Int64? = nil,
                                     model: Swift.String? = nil,
-                                    premiumRequests: Swift.Double? = nil,
                                     error: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload._ErrorPayload? = nil
                                 ) {
                                     self.id = id
@@ -6352,27 +6130,15 @@ public enum Operations {
                                     self.user = user
                                     self.owner = owner
                                     self.repository = repository
-                                    self.agentId = agentId
-                                    self.agentTaskId = agentTaskId
                                     self.taskId = taskId
                                     self.state = state
                                     self.createdAt = createdAt
                                     self.updatedAt = updatedAt
                                     self.completedAt = completedAt
-                                    self.eventType = eventType
-                                    self.eventUrl = eventUrl
-                                    self.eventContent = eventContent
-                                    self.eventIdentifiers = eventIdentifiers
-                                    self.resourceType = resourceType
-                                    self.resourceId = resourceId
-                                    self.resourceNumber = resourceNumber
-                                    self.resourceGlobalId = resourceGlobalId
-                                    self.resourceState = resourceState
+                                    self.prompt = prompt
                                     self.headRef = headRef
                                     self.baseRef = baseRef
-                                    self.workflowRunId = workflowRunId
                                     self.model = model
-                                    self.premiumRequests = premiumRequests
                                     self.error = error
                                 }
                                 public enum CodingKeys: String, CodingKey {
@@ -6381,27 +6147,15 @@ public enum Operations {
                                     case user
                                     case owner
                                     case repository
-                                    case agentId = "agent_id"
-                                    case agentTaskId = "agent_task_id"
                                     case taskId = "task_id"
                                     case state
                                     case createdAt = "created_at"
                                     case updatedAt = "updated_at"
                                     case completedAt = "completed_at"
-                                    case eventType = "event_type"
-                                    case eventUrl = "event_url"
-                                    case eventContent = "event_content"
-                                    case eventIdentifiers = "event_identifiers"
-                                    case resourceType = "resource_type"
-                                    case resourceId = "resource_id"
-                                    case resourceNumber = "resource_number"
-                                    case resourceGlobalId = "resource_global_id"
-                                    case resourceState = "resource_state"
+                                    case prompt
                                     case headRef = "head_ref"
                                     case baseRef = "base_ref"
-                                    case workflowRunId = "workflow_run_id"
                                     case model
-                                    case premiumRequests = "premium_requests"
                                     case error
                                 }
                             }
