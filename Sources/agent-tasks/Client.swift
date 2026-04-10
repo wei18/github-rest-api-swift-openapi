@@ -286,7 +286,7 @@ public struct Client: APIProtocol {
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Creates a new task for a repository
+    /// Creates a new task for a repository.
     ///
     ///
     /// - Remark: HTTP `POST /agents/repos/{owner}/{repo}/tasks`.
