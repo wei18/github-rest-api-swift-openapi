@@ -8051,6 +8051,10 @@ public enum Components {
             public var visibility: Components.Schemas.OrganizationUpdateIssueField.VisibilityPayload?
             /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/OptionsPayload`.
             public struct OptionsPayloadPayload: Codable, Hashable, Sendable {
+                /// The id of an existing option to retain or update. Omit this when creating a new option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/OptionsPayload/id`.
+                public var id: Swift.Int?
                 /// Name of the option.
                 ///
                 /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/OptionsPayload/name`.
@@ -8083,33 +8087,37 @@ public enum Components {
                 /// Creates a new `OptionsPayloadPayload`.
                 ///
                 /// - Parameters:
+                ///   - id: The id of an existing option to retain or update. Omit this when creating a new option.
                 ///   - name: Name of the option.
                 ///   - description: Description of the option.
                 ///   - color: Color for the option.
                 ///   - priority: Priority of the option for ordering.
                 public init(
+                    id: Swift.Int? = nil,
                     name: Swift.String,
                     description: Swift.String? = nil,
                     color: Components.Schemas.OrganizationUpdateIssueField.OptionsPayloadPayload.ColorPayload,
                     priority: Swift.Int
                 ) {
+                    self.id = id
                     self.name = name
                     self.description = description
                     self.color = color
                     self.priority = priority
                 }
                 public enum CodingKeys: String, CodingKey {
+                    case id
                     case name
                     case description
                     case color
                     case priority
                 }
             }
-            /// Options for single select fields. Only applicable when updating single_select fields.
+            /// Options for single select fields. Only applicable when updating single_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
             ///
             /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/options`.
             public typealias OptionsPayload = [Components.Schemas.OrganizationUpdateIssueField.OptionsPayloadPayload]
-            /// Options for single select fields. Only applicable when updating single_select fields.
+            /// Options for single select fields. Only applicable when updating single_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
             ///
             /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/options`.
             public var options: Components.Schemas.OrganizationUpdateIssueField.OptionsPayload?
@@ -8119,7 +8127,7 @@ public enum Components {
             ///   - name: Name of the issue field.
             ///   - description: Description of the issue field.
             ///   - visibility: The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues). Only used when the visibility settings feature is enabled.
-            ///   - options: Options for single select fields. Only applicable when updating single_select fields.
+            ///   - options: Options for single select fields. Only applicable when updating single_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
             public init(
                 name: Swift.String? = nil,
                 description: Swift.String? = nil,
@@ -12211,17 +12219,45 @@ public enum Operations {
                     }
                 }
             }
+            public struct NotFound: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/404/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/404/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsSetClusterDeploymentRecords.Output.NotFound.Body
+                /// Creates a new `NotFound`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsSetClusterDeploymentRecords.Output.NotFound.Body) {
+                    self.body = body
+                }
+            }
             /// Resource not found
             ///
             /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
+            case notFound(Operations.OrgsSetClusterDeploymentRecords.Output.NotFound)
             /// The associated value of the enum case if `self` is `.notFound`.
             ///
             /// - Throws: An error if `self` is not `.notFound`.
             /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
+            public var notFound: Operations.OrgsSetClusterDeploymentRecords.Output.NotFound {
                 get throws {
                     switch self {
                     case let .notFound(response):
