@@ -280,6 +280,215 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// Fetch a software bill of materials (SBOM) for a repository.
+    ///
+    /// Fetches a previously generated software bill of materials (SBOM) for a repository.
+    /// When the SBOM is ready, the response is a 302 redirect to a temporary download URL for the SBOM in SPDX JSON format.
+    /// The generated SBOM report may be retained for up to one week from the original request.
+    /// The temporary download URL returned by this endpoint expires separately, and its expiry is set when the fetch request is made.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/get(dependency-graph/fetch-sbom-report)`.
+    public func dependencyGraphFetchSbomReport(_ input: Operations.DependencyGraphFetchSbomReport.Input) async throws -> Operations.DependencyGraphFetchSbomReport.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.DependencyGraphFetchSbomReport.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/repos/{}/{}/dependency-graph/sbom/fetch-report/{}",
+                    parameters: [
+                        input.path.owner,
+                        input.path.repo,
+                        input.path.sbomUuid
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 302:
+                    let headers: Operations.DependencyGraphFetchSbomReport.Output.Found.Headers = .init(location: try converter.getOptionalHeaderFieldAsURI(
+                        in: response.headerFields,
+                        name: "Location",
+                        as: Components.Headers.Location.self
+                    ))
+                    return .found(.init(headers: headers))
+                case 202:
+                    return .accepted(.init())
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Request generation of a software bill of materials (SBOM) for a repository.
+    ///
+    /// Triggers a job to generate a software bill of materials (SBOM) for a repository in SPDX JSON format.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/dependency-graph/sbom/generate-report`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/generate-report/get(dependency-graph/generate-sbom-report)`.
+    public func dependencyGraphGenerateSbomReport(_ input: Operations.DependencyGraphGenerateSbomReport.Input) async throws -> Operations.DependencyGraphGenerateSbomReport.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.DependencyGraphGenerateSbomReport.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/repos/{}/{}/dependency-graph/sbom/generate-report",
+                    parameters: [
+                        input.path.owner,
+                        input.path.repo
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 201:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.DependencyGraphGenerateSbomReport.Output.Created.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.DependencyGraphGenerateSbomReport.Output.Created.Body.JsonPayload.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .created(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// Create a snapshot of dependencies for a repository
     ///
     /// Create a new snapshot of a repository's dependencies.

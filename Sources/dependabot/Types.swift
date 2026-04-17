@@ -24,6 +24,17 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /enterprises/{enterprise}/dependabot/alerts`.
     /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/alerts/get(dependabot/list-alerts-for-enterprise)`.
     func dependabotListAlertsForEnterprise(_ input: Operations.DependabotListAlertsForEnterprise.Input) async throws -> Operations.DependabotListAlertsForEnterprise.Output
+    /// List Dependabot alerts for an organization
+    ///
+    /// Lists Dependabot alerts for an organization.
+    ///
+    /// The authenticated user must be an owner or security manager for the organization to use this endpoint.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/dependabot/alerts`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/alerts/get(dependabot/list-alerts-for-org)`.
+    func dependabotListAlertsForOrg(_ input: Operations.DependabotListAlertsForOrg.Input) async throws -> Operations.DependabotListAlertsForOrg.Output
     /// Lists the repositories Dependabot can access in an organization
     ///
     /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
@@ -31,8 +42,8 @@ public protocol APIProtocol: Sendable {
     /// >    This operation supports both server-to-server and user-to-server access.
     /// Unauthorized users will not see the existence of this endpoint.
     ///
-    /// - Remark: HTTP `GET /organizations/{org}/dependabot/repository-access`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)`.
+    /// - Remark: HTTP `GET /orgs/{org}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)`.
     func dependabotRepositoryAccessForOrg(_ input: Operations.DependabotRepositoryAccessForOrg.Input) async throws -> Operations.DependabotRepositoryAccessForOrg.Output
     /// Updates Dependabot's repository access list for an organization
     ///
@@ -50,8 +61,8 @@ public protocol APIProtocol: Sendable {
     /// }
     /// ```
     ///
-    /// - Remark: HTTP `PATCH /organizations/{org}/dependabot/repository-access`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)`.
+    /// - Remark: HTTP `PATCH /orgs/{org}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)`.
     func dependabotUpdateRepositoryAccessForOrg(_ input: Operations.DependabotUpdateRepositoryAccessForOrg.Input) async throws -> Operations.DependabotUpdateRepositoryAccessForOrg.Output
     /// Set the default repository access level for Dependabot
     ///
@@ -63,20 +74,9 @@ public protocol APIProtocol: Sendable {
     ///
     /// This operation supports both server-to-server and user-to-server access.
     ///
-    /// - Remark: HTTP `PUT /organizations/{org}/dependabot/repository-access/default-level`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)`.
+    /// - Remark: HTTP `PUT /orgs/{org}/dependabot/repository-access/default-level`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)`.
     func dependabotSetRepositoryAccessDefaultLevel(_ input: Operations.DependabotSetRepositoryAccessDefaultLevel.Input) async throws -> Operations.DependabotSetRepositoryAccessDefaultLevel.Output
-    /// List Dependabot alerts for an organization
-    ///
-    /// Lists Dependabot alerts for an organization.
-    ///
-    /// The authenticated user must be an owner or security manager for the organization to use this endpoint.
-    ///
-    /// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
-    ///
-    /// - Remark: HTTP `GET /orgs/{org}/dependabot/alerts`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/alerts/get(dependabot/list-alerts-for-org)`.
-    func dependabotListAlertsForOrg(_ input: Operations.DependabotListAlertsForOrg.Input) async throws -> Operations.DependabotListAlertsForOrg.Output
     /// List organization secrets
     ///
     /// Lists all secrets available in an organization without revealing their
@@ -267,6 +267,27 @@ extension APIProtocol {
             headers: headers
         ))
     }
+    /// List Dependabot alerts for an organization
+    ///
+    /// Lists Dependabot alerts for an organization.
+    ///
+    /// The authenticated user must be an owner or security manager for the organization to use this endpoint.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/dependabot/alerts`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/alerts/get(dependabot/list-alerts-for-org)`.
+    public func dependabotListAlertsForOrg(
+        path: Operations.DependabotListAlertsForOrg.Input.Path,
+        query: Operations.DependabotListAlertsForOrg.Input.Query = .init(),
+        headers: Operations.DependabotListAlertsForOrg.Input.Headers = .init()
+    ) async throws -> Operations.DependabotListAlertsForOrg.Output {
+        try await dependabotListAlertsForOrg(Operations.DependabotListAlertsForOrg.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
     /// Lists the repositories Dependabot can access in an organization
     ///
     /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
@@ -274,8 +295,8 @@ extension APIProtocol {
     /// >    This operation supports both server-to-server and user-to-server access.
     /// Unauthorized users will not see the existence of this endpoint.
     ///
-    /// - Remark: HTTP `GET /organizations/{org}/dependabot/repository-access`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)`.
+    /// - Remark: HTTP `GET /orgs/{org}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)`.
     public func dependabotRepositoryAccessForOrg(
         path: Operations.DependabotRepositoryAccessForOrg.Input.Path,
         query: Operations.DependabotRepositoryAccessForOrg.Input.Query = .init(),
@@ -303,8 +324,8 @@ extension APIProtocol {
     /// }
     /// ```
     ///
-    /// - Remark: HTTP `PATCH /organizations/{org}/dependabot/repository-access`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)`.
+    /// - Remark: HTTP `PATCH /orgs/{org}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)`.
     public func dependabotUpdateRepositoryAccessForOrg(
         path: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Path,
         headers: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Headers = .init(),
@@ -326,8 +347,8 @@ extension APIProtocol {
     ///
     /// This operation supports both server-to-server and user-to-server access.
     ///
-    /// - Remark: HTTP `PUT /organizations/{org}/dependabot/repository-access/default-level`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)`.
+    /// - Remark: HTTP `PUT /orgs/{org}/dependabot/repository-access/default-level`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)`.
     public func dependabotSetRepositoryAccessDefaultLevel(
         path: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Path,
         headers: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Headers = .init(),
@@ -337,27 +358,6 @@ extension APIProtocol {
             path: path,
             headers: headers,
             body: body
-        ))
-    }
-    /// List Dependabot alerts for an organization
-    ///
-    /// Lists Dependabot alerts for an organization.
-    ///
-    /// The authenticated user must be an owner or security manager for the organization to use this endpoint.
-    ///
-    /// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
-    ///
-    /// - Remark: HTTP `GET /orgs/{org}/dependabot/alerts`.
-    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/alerts/get(dependabot/list-alerts-for-org)`.
-    public func dependabotListAlertsForOrg(
-        path: Operations.DependabotListAlertsForOrg.Input.Path,
-        query: Operations.DependabotListAlertsForOrg.Input.Query = .init(),
-        headers: Operations.DependabotListAlertsForOrg.Input.Headers = .init()
-    ) async throws -> Operations.DependabotListAlertsForOrg.Output {
-        try await dependabotListAlertsForOrg(Operations.DependabotListAlertsForOrg.Input(
-            path: path,
-            query: query,
-            headers: headers
         ))
     }
     /// List organization secrets
@@ -3615,6 +3615,16 @@ public enum Components {
                 case customProperties = "custom_properties"
             }
         }
+        /// An object without any properties.
+        ///
+        /// - Remark: Generated from `#/components/schemas/empty-object`.
+        public struct EmptyObject: Codable, Hashable, Sendable {
+            /// Creates a new `EmptyObject`.
+            public init() {}
+            public init(from decoder: any Swift.Decoder) throws {
+                try decoder.ensureNoAdditionalProperties(knownKeys: [])
+            }
+        }
         /// A GitHub repository.
         ///
         /// - Remark: Generated from `#/components/schemas/nullable-simple-repository`.
@@ -4041,16 +4051,6 @@ public enum Components {
                     "default_level",
                     "accessible_repositories"
                 ])
-            }
-        }
-        /// An object without any properties.
-        ///
-        /// - Remark: Generated from `#/components/schemas/empty-object`.
-        public struct EmptyObject: Codable, Hashable, Sendable {
-            /// Creates a new `EmptyObject`.
-            public init() {}
-            public init(from decoder: any Swift.Decoder) throws {
-                try decoder.ensureNoAdditionalProperties(knownKeys: [])
             }
         }
         /// Secrets for GitHub Dependabot for an organization.
@@ -5302,625 +5302,6 @@ public enum Operations {
             }
         }
     }
-    /// Lists the repositories Dependabot can access in an organization
-    ///
-    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
-    /// > [!NOTE]
-    /// >    This operation supports both server-to-server and user-to-server access.
-    /// Unauthorized users will not see the existence of this endpoint.
-    ///
-    /// - Remark: HTTP `GET /organizations/{org}/dependabot/repository-access`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)`.
-    public enum DependabotRepositoryAccessForOrg {
-        public static let id: Swift.String = "dependabot/repository-access-for-org"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/GET/path`.
-            public struct Path: Sendable, Hashable {
-                /// The organization name. The name is not case sensitive.
-                ///
-                /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/GET/path/org`.
-                public var org: Components.Parameters.Org
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - org: The organization name. The name is not case sensitive.
-                public init(org: Components.Parameters.Org) {
-                    self.org = org
-                }
-            }
-            public var path: Operations.DependabotRepositoryAccessForOrg.Input.Path
-            /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/GET/query`.
-            public struct Query: Sendable, Hashable {
-                /// The page number of results to fetch.
-                ///
-                /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/GET/query/page`.
-                public var page: Swift.Int?
-                /// Number of results per page.
-                ///
-                /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/GET/query/per_page`.
-                public var perPage: Swift.Int?
-                /// Creates a new `Query`.
-                ///
-                /// - Parameters:
-                ///   - page: The page number of results to fetch.
-                ///   - perPage: Number of results per page.
-                public init(
-                    page: Swift.Int? = nil,
-                    perPage: Swift.Int? = nil
-                ) {
-                    self.page = page
-                    self.perPage = perPage
-                }
-            }
-            public var query: Operations.DependabotRepositoryAccessForOrg.Input.Query
-            /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/GET/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotRepositoryAccessForOrg.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotRepositoryAccessForOrg.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.DependabotRepositoryAccessForOrg.Input.Headers
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - query:
-            ///   - headers:
-            public init(
-                path: Operations.DependabotRepositoryAccessForOrg.Input.Path,
-                query: Operations.DependabotRepositoryAccessForOrg.Input.Query = .init(),
-                headers: Operations.DependabotRepositoryAccessForOrg.Input.Headers = .init()
-            ) {
-                self.path = path
-                self.query = query
-                self.headers = headers
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/GET/responses/200/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/GET/responses/200/content/application\/json`.
-                    case json(Components.Schemas.DependabotRepositoryAccessDetails)
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: Components.Schemas.DependabotRepositoryAccessDetails {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.DependabotRepositoryAccessForOrg.Output.Ok.Body
-                /// Creates a new `Ok`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.DependabotRepositoryAccessForOrg.Output.Ok.Body) {
-                    self.body = body
-                }
-            }
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)/responses/200`.
-            ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.DependabotRepositoryAccessForOrg.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
-            ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.DependabotRepositoryAccessForOrg.Output.Ok {
-                get throws {
-                    switch self {
-                    case let .ok(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Forbidden
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)/responses/403`.
-            ///
-            /// HTTP response code: `403 forbidden`.
-            case forbidden(Components.Responses.Forbidden)
-            /// The associated value of the enum case if `self` is `.forbidden`.
-            ///
-            /// - Throws: An error if `self` is not `.forbidden`.
-            /// - SeeAlso: `.forbidden`.
-            public var forbidden: Components.Responses.Forbidden {
-                get throws {
-                    switch self {
-                    case let .forbidden(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "forbidden",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
-        }
-    }
-    /// Updates Dependabot's repository access list for an organization
-    ///
-    /// Updates repositories according to the list of repositories that organization admins have given Dependabot access to when they've updated dependencies.
-    ///
-    /// > [!NOTE]
-    /// >    This operation supports both server-to-server and user-to-server access.
-    /// Unauthorized users will not see the existence of this endpoint.
-    ///
-    /// **Example request body:**
-    /// ```json
-    /// {
-    ///   "repository_ids_to_add": [123, 456],
-    ///   "repository_ids_to_remove": [789]
-    /// }
-    /// ```
-    ///
-    /// - Remark: HTTP `PATCH /organizations/{org}/dependabot/repository-access`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)`.
-    public enum DependabotUpdateRepositoryAccessForOrg {
-        public static let id: Swift.String = "dependabot/update-repository-access-for-org"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/PATCH/path`.
-            public struct Path: Sendable, Hashable {
-                /// The organization name. The name is not case sensitive.
-                ///
-                /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/PATCH/path/org`.
-                public var org: Components.Parameters.Org
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - org: The organization name. The name is not case sensitive.
-                public init(org: Components.Parameters.Org) {
-                    self.org = org
-                }
-            }
-            public var path: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Path
-            /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/PATCH/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotUpdateRepositoryAccessForOrg.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotUpdateRepositoryAccessForOrg.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Headers
-            /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/PATCH/requestBody`.
-            @frozen public enum Body: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/PATCH/requestBody/json`.
-                public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// List of repository IDs to add.
-                    ///
-                    /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/PATCH/requestBody/json/repository_ids_to_add`.
-                    public var repositoryIdsToAdd: [Swift.Int]?
-                    /// List of repository IDs to remove.
-                    ///
-                    /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/PATCH/requestBody/json/repository_ids_to_remove`.
-                    public var repositoryIdsToRemove: [Swift.Int]?
-                    /// Creates a new `JsonPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - repositoryIdsToAdd: List of repository IDs to add.
-                    ///   - repositoryIdsToRemove: List of repository IDs to remove.
-                    public init(
-                        repositoryIdsToAdd: [Swift.Int]? = nil,
-                        repositoryIdsToRemove: [Swift.Int]? = nil
-                    ) {
-                        self.repositoryIdsToAdd = repositoryIdsToAdd
-                        self.repositoryIdsToRemove = repositoryIdsToRemove
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case repositoryIdsToAdd = "repository_ids_to_add"
-                        case repositoryIdsToRemove = "repository_ids_to_remove"
-                    }
-                }
-                /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/PATCH/requestBody/content/application\/json`.
-                case json(Operations.DependabotUpdateRepositoryAccessForOrg.Input.Body.JsonPayload)
-            }
-            public var body: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Body
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - headers:
-            ///   - body:
-            public init(
-                path: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Path,
-                headers: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Headers = .init(),
-                body: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Body
-            ) {
-                self.path = path
-                self.headers = headers
-                self.body = body
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct NoContent: Sendable, Hashable {
-                /// Creates a new `NoContent`.
-                public init() {}
-            }
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)/responses/204`.
-            ///
-            /// HTTP response code: `204 noContent`.
-            case noContent(Operations.DependabotUpdateRepositoryAccessForOrg.Output.NoContent)
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)/responses/204`.
-            ///
-            /// HTTP response code: `204 noContent`.
-            public static var noContent: Self {
-                .noContent(.init())
-            }
-            /// The associated value of the enum case if `self` is `.noContent`.
-            ///
-            /// - Throws: An error if `self` is not `.noContent`.
-            /// - SeeAlso: `.noContent`.
-            public var noContent: Operations.DependabotUpdateRepositoryAccessForOrg.Output.NoContent {
-                get throws {
-                    switch self {
-                    case let .noContent(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "noContent",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Forbidden
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)/responses/403`.
-            ///
-            /// HTTP response code: `403 forbidden`.
-            case forbidden(Components.Responses.Forbidden)
-            /// The associated value of the enum case if `self` is `.forbidden`.
-            ///
-            /// - Throws: An error if `self` is not `.forbidden`.
-            /// - SeeAlso: `.forbidden`.
-            public var forbidden: Components.Responses.Forbidden {
-                get throws {
-                    switch self {
-                    case let .forbidden(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "forbidden",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
-        }
-    }
-    /// Set the default repository access level for Dependabot
-    ///
-    /// Sets the default level of repository access Dependabot will have while performing an update.  Available values are:
-    /// - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories.
-    /// - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories.
-    ///
-    /// Unauthorized users will not see the existence of this endpoint.
-    ///
-    /// This operation supports both server-to-server and user-to-server access.
-    ///
-    /// - Remark: HTTP `PUT /organizations/{org}/dependabot/repository-access/default-level`.
-    /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)`.
-    public enum DependabotSetRepositoryAccessDefaultLevel {
-        public static let id: Swift.String = "dependabot/set-repository-access-default-level"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/default-level/PUT/path`.
-            public struct Path: Sendable, Hashable {
-                /// The organization name. The name is not case sensitive.
-                ///
-                /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/default-level/PUT/path/org`.
-                public var org: Components.Parameters.Org
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - org: The organization name. The name is not case sensitive.
-                public init(org: Components.Parameters.Org) {
-                    self.org = org
-                }
-            }
-            public var path: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Path
-            /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/default-level/PUT/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotSetRepositoryAccessDefaultLevel.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotSetRepositoryAccessDefaultLevel.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Headers
-            /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/default-level/PUT/requestBody`.
-            @frozen public enum Body: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/default-level/PUT/requestBody/json`.
-                public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// The default repository access level for Dependabot updates.
-                    ///
-                    /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/default-level/PUT/requestBody/json/default_level`.
-                    @frozen public enum DefaultLevelPayload: String, Codable, Hashable, Sendable, CaseIterable {
-                        case _public = "public"
-                        case _internal = "internal"
-                    }
-                    /// The default repository access level for Dependabot updates.
-                    ///
-                    /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/default-level/PUT/requestBody/json/default_level`.
-                    public var defaultLevel: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Body.JsonPayload.DefaultLevelPayload
-                    /// Creates a new `JsonPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - defaultLevel: The default repository access level for Dependabot updates.
-                    public init(defaultLevel: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Body.JsonPayload.DefaultLevelPayload) {
-                        self.defaultLevel = defaultLevel
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case defaultLevel = "default_level"
-                    }
-                }
-                /// - Remark: Generated from `#/paths/organizations/{org}/dependabot/repository-access/default-level/PUT/requestBody/content/application\/json`.
-                case json(Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Body.JsonPayload)
-            }
-            public var body: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Body
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - headers:
-            ///   - body:
-            public init(
-                path: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Path,
-                headers: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Headers = .init(),
-                body: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Body
-            ) {
-                self.path = path
-                self.headers = headers
-                self.body = body
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct NoContent: Sendable, Hashable {
-                /// Creates a new `NoContent`.
-                public init() {}
-            }
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)/responses/204`.
-            ///
-            /// HTTP response code: `204 noContent`.
-            case noContent(Operations.DependabotSetRepositoryAccessDefaultLevel.Output.NoContent)
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)/responses/204`.
-            ///
-            /// HTTP response code: `204 noContent`.
-            public static var noContent: Self {
-                .noContent(.init())
-            }
-            /// The associated value of the enum case if `self` is `.noContent`.
-            ///
-            /// - Throws: An error if `self` is not `.noContent`.
-            /// - SeeAlso: `.noContent`.
-            public var noContent: Operations.DependabotSetRepositoryAccessDefaultLevel.Output.NoContent {
-                get throws {
-                    switch self {
-                    case let .noContent(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "noContent",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Forbidden
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)/responses/403`.
-            ///
-            /// HTTP response code: `403 forbidden`.
-            case forbidden(Components.Responses.Forbidden)
-            /// The associated value of the enum case if `self` is `.forbidden`.
-            ///
-            /// - Throws: An error if `self` is not `.forbidden`.
-            /// - SeeAlso: `.forbidden`.
-            public var forbidden: Components.Responses.Forbidden {
-                get throws {
-                    switch self {
-                    case let .forbidden(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "forbidden",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//organizations/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
-        }
-    }
     /// List Dependabot alerts for an organization
     ///
     /// Lists Dependabot alerts for an organization.
@@ -6395,6 +5776,625 @@ public enum Operations {
                 [
                     .json,
                     .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Lists the repositories Dependabot can access in an organization
+    ///
+    /// Lists repositories that organization admins have allowed Dependabot to access when updating dependencies.
+    /// > [!NOTE]
+    /// >    This operation supports both server-to-server and user-to-server access.
+    /// Unauthorized users will not see the existence of this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)`.
+    public enum DependabotRepositoryAccessForOrg {
+        public static let id: Swift.String = "dependabot/repository-access-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.DependabotRepositoryAccessForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The page number of results to fetch.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/GET/query/page`.
+                public var page: Swift.Int?
+                /// Number of results per page.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/GET/query/per_page`.
+                public var perPage: Swift.Int?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - page: The page number of results to fetch.
+                ///   - perPage: Number of results per page.
+                public init(
+                    page: Swift.Int? = nil,
+                    perPage: Swift.Int? = nil
+                ) {
+                    self.page = page
+                    self.perPage = perPage
+                }
+            }
+            public var query: Operations.DependabotRepositoryAccessForOrg.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotRepositoryAccessForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotRepositoryAccessForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.DependabotRepositoryAccessForOrg.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.DependabotRepositoryAccessForOrg.Input.Path,
+                query: Operations.DependabotRepositoryAccessForOrg.Input.Query = .init(),
+                headers: Operations.DependabotRepositoryAccessForOrg.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.DependabotRepositoryAccessDetails)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.DependabotRepositoryAccessDetails {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.DependabotRepositoryAccessForOrg.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.DependabotRepositoryAccessForOrg.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.DependabotRepositoryAccessForOrg.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.DependabotRepositoryAccessForOrg.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/get(dependabot/repository-access-for-org)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Updates Dependabot's repository access list for an organization
+    ///
+    /// Updates repositories according to the list of repositories that organization admins have given Dependabot access to when they've updated dependencies.
+    ///
+    /// > [!NOTE]
+    /// >    This operation supports both server-to-server and user-to-server access.
+    /// Unauthorized users will not see the existence of this endpoint.
+    ///
+    /// **Example request body:**
+    /// ```json
+    /// {
+    ///   "repository_ids_to_add": [123, 456],
+    ///   "repository_ids_to_remove": [789]
+    /// }
+    /// ```
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)`.
+    public enum DependabotUpdateRepositoryAccessForOrg {
+        public static let id: Swift.String = "dependabot/update-repository-access-for-org"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/PATCH/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotUpdateRepositoryAccessForOrg.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotUpdateRepositoryAccessForOrg.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/PATCH/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// List of repository IDs to add.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/PATCH/requestBody/json/repository_ids_to_add`.
+                    public var repositoryIdsToAdd: [Swift.Int]?
+                    /// List of repository IDs to remove.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/PATCH/requestBody/json/repository_ids_to_remove`.
+                    public var repositoryIdsToRemove: [Swift.Int]?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - repositoryIdsToAdd: List of repository IDs to add.
+                    ///   - repositoryIdsToRemove: List of repository IDs to remove.
+                    public init(
+                        repositoryIdsToAdd: [Swift.Int]? = nil,
+                        repositoryIdsToRemove: [Swift.Int]? = nil
+                    ) {
+                        self.repositoryIdsToAdd = repositoryIdsToAdd
+                        self.repositoryIdsToRemove = repositoryIdsToRemove
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case repositoryIdsToAdd = "repository_ids_to_add"
+                        case repositoryIdsToRemove = "repository_ids_to_remove"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/PATCH/requestBody/content/application\/json`.
+                case json(Operations.DependabotUpdateRepositoryAccessForOrg.Input.Body.JsonPayload)
+            }
+            public var body: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Path,
+                headers: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Headers = .init(),
+                body: Operations.DependabotUpdateRepositoryAccessForOrg.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.DependabotUpdateRepositoryAccessForOrg.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.DependabotUpdateRepositoryAccessForOrg.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/patch(dependabot/update-repository-access-for-org)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set the default repository access level for Dependabot
+    ///
+    /// Sets the default level of repository access Dependabot will have while performing an update.  Available values are:
+    /// - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories.
+    /// - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories.
+    ///
+    /// Unauthorized users will not see the existence of this endpoint.
+    ///
+    /// This operation supports both server-to-server and user-to-server access.
+    ///
+    /// - Remark: HTTP `PUT /orgs/{org}/dependabot/repository-access/default-level`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)`.
+    public enum DependabotSetRepositoryAccessDefaultLevel {
+        public static let id: Swift.String = "dependabot/set-repository-access-default-level"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/default-level/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/default-level/PUT/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/default-level/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotSetRepositoryAccessDefaultLevel.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotSetRepositoryAccessDefaultLevel.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/default-level/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/default-level/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The default repository access level for Dependabot updates.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/default-level/PUT/requestBody/json/default_level`.
+                    @frozen public enum DefaultLevelPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case _public = "public"
+                        case _internal = "internal"
+                    }
+                    /// The default repository access level for Dependabot updates.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/default-level/PUT/requestBody/json/default_level`.
+                    public var defaultLevel: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Body.JsonPayload.DefaultLevelPayload
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - defaultLevel: The default repository access level for Dependabot updates.
+                    public init(defaultLevel: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Body.JsonPayload.DefaultLevelPayload) {
+                        self.defaultLevel = defaultLevel
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case defaultLevel = "default_level"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/dependabot/repository-access/default-level/PUT/requestBody/content/application\/json`.
+                case json(Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Body.JsonPayload)
+            }
+            public var body: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Path,
+                headers: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Headers = .init(),
+                body: Operations.DependabotSetRepositoryAccessDefaultLevel.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.DependabotSetRepositoryAccessDefaultLevel.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.DependabotSetRepositoryAccessDefaultLevel.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
                 ]
             }
         }

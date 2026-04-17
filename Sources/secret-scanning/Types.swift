@@ -99,10 +99,10 @@ public protocol APIProtocol: Sendable {
     func secretScanningCreatePushProtectionBypass(_ input: Operations.SecretScanningCreatePushProtectionBypass.Input) async throws -> Operations.SecretScanningCreatePushProtectionBypass.Output
     /// Get secret scanning scan history for a repository
     ///
-    /// Lists the latest default incremental and backfill scans by type for a repository. Scans from Copilot Secret Scanning are not included.
+    /// Lists the latest default incremental and backfill scans by type for a repository.
     ///
     /// > [!NOTE]
-    /// > This endpoint requires [GitHub Advanced Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security)."
+    /// > This endpoint requires [GitHub Advanced Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security).
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
     ///
@@ -279,10 +279,10 @@ extension APIProtocol {
     }
     /// Get secret scanning scan history for a repository
     ///
-    /// Lists the latest default incremental and backfill scans by type for a repository. Scans from Copilot Secret Scanning are not included.
+    /// Lists the latest default incremental and backfill scans by type for a repository.
     ///
     /// > [!NOTE]
-    /// > This endpoint requires [GitHub Advanced Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security)."
+    /// > This endpoint requires [GitHub Advanced Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security).
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
     ///
@@ -2888,6 +2888,8 @@ public enum Components {
             public typealias CustomPatternBackfillScansPayload = [Components.Schemas.SecretScanningScanHistory.CustomPatternBackfillScansPayloadPayload]
             /// - Remark: Generated from `#/components/schemas/secret-scanning-scan-history/custom_pattern_backfill_scans`.
             public var customPatternBackfillScans: Components.Schemas.SecretScanningScanHistory.CustomPatternBackfillScansPayload?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-scan-history/generic_secrets_backfill_scans`.
+            public var genericSecretsBackfillScans: [Components.Schemas.SecretScanningScan]?
             /// Creates a new `SecretScanningScanHistory`.
             ///
             /// - Parameters:
@@ -2895,22 +2897,26 @@ public enum Components {
             ///   - patternUpdateScans:
             ///   - backfillScans:
             ///   - customPatternBackfillScans:
+            ///   - genericSecretsBackfillScans:
             public init(
                 incrementalScans: [Components.Schemas.SecretScanningScan]? = nil,
                 patternUpdateScans: [Components.Schemas.SecretScanningScan]? = nil,
                 backfillScans: [Components.Schemas.SecretScanningScan]? = nil,
-                customPatternBackfillScans: Components.Schemas.SecretScanningScanHistory.CustomPatternBackfillScansPayload? = nil
+                customPatternBackfillScans: Components.Schemas.SecretScanningScanHistory.CustomPatternBackfillScansPayload? = nil,
+                genericSecretsBackfillScans: [Components.Schemas.SecretScanningScan]? = nil
             ) {
                 self.incrementalScans = incrementalScans
                 self.patternUpdateScans = patternUpdateScans
                 self.backfillScans = backfillScans
                 self.customPatternBackfillScans = customPatternBackfillScans
+                self.genericSecretsBackfillScans = genericSecretsBackfillScans
             }
             public enum CodingKeys: String, CodingKey {
                 case incrementalScans = "incremental_scans"
                 case patternUpdateScans = "pattern_update_scans"
                 case backfillScans = "backfill_scans"
                 case customPatternBackfillScans = "custom_pattern_backfill_scans"
+                case genericSecretsBackfillScans = "generic_secrets_backfill_scans"
             }
         }
     }
@@ -5727,10 +5733,10 @@ public enum Operations {
     }
     /// Get secret scanning scan history for a repository
     ///
-    /// Lists the latest default incremental and backfill scans by type for a repository. Scans from Copilot Secret Scanning are not included.
+    /// Lists the latest default incremental and backfill scans by type for a repository.
     ///
     /// > [!NOTE]
-    /// > This endpoint requires [GitHub Advanced Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security)."
+    /// > This endpoint requires [GitHub Advanced Security](https://docs.github.com/get-started/learning-about-github/about-github-advanced-security).
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
     ///

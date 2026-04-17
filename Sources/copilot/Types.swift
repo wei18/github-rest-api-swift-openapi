@@ -63,6 +63,53 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /enterprises/{enterprise}/copilot/metrics/reports/users-28-day/latest`.
     /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/users-28-day/latest/get(copilot/copilot-users-usage-metrics)`.
     func copilotCopilotUsersUsageMetrics(_ input: Operations.CopilotCopilotUsersUsageMetrics.Input) async throws -> Operations.CopilotCopilotUsersUsageMetrics.Output
+    /// Set the coding agent policy for an enterprise
+    ///
+    /// Sets the policy for Copilot coding agent usage across an enterprise.
+    ///
+    /// Enterprise owners can configure whether Copilot coding agent is enabled for all
+    /// organizations, disabled for all organizations, configured by individual organization
+    /// admins, or enabled for selected organizations only.
+    ///
+    /// Only enterprise owners can set the coding agent policy for their enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/copilot/policies/coding_agent`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/put(copilot/set-enterprise-coding-agent-policy)`.
+    func copilotSetEnterpriseCodingAgentPolicy(_ input: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input) async throws -> Operations.CopilotSetEnterpriseCodingAgentPolicy.Output
+    /// Add organizations to the enterprise coding agent policy
+    ///
+    /// Enables Copilot coding agent for the specified organizations within the enterprise.
+    ///
+    /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
+    /// using this endpoint. Organizations can be specified by login or matched via custom properties.
+    ///
+    /// Only organizations that have Copilot enabled and belong to the enterprise will be affected.
+    ///
+    /// Only enterprise owners can add organizations to the coding agent policy.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/copilot/policies/coding_agent/organizations`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/post(copilot/add-organizations-to-enterprise-coding-agent-policy)`.
+    func copilotAddOrganizationsToEnterpriseCodingAgentPolicy(_ input: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input) async throws -> Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Output
+    /// Remove organizations from the enterprise coding agent policy
+    ///
+    /// Disables Copilot coding agent for the specified organizations within the enterprise.
+    ///
+    /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
+    /// using this endpoint. Organizations can be specified by login or matched via custom properties.
+    ///
+    /// Only organizations that have Copilot enabled and belong to the enterprise will be affected.
+    ///
+    /// Only enterprise owners can remove organizations from the coding agent policy.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/copilot/policies/coding_agent/organizations`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/delete(copilot/remove-organizations-from-enterprise-coding-agent-policy)`.
+    func copilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy(_ input: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input) async throws -> Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Output
     /// Get Copilot seat information and settings for an organization
     ///
     /// > [!NOTE]
@@ -502,6 +549,83 @@ extension APIProtocol {
         try await copilotCopilotUsersUsageMetrics(Operations.CopilotCopilotUsersUsageMetrics.Input(
             path: path,
             headers: headers
+        ))
+    }
+    /// Set the coding agent policy for an enterprise
+    ///
+    /// Sets the policy for Copilot coding agent usage across an enterprise.
+    ///
+    /// Enterprise owners can configure whether Copilot coding agent is enabled for all
+    /// organizations, disabled for all organizations, configured by individual organization
+    /// admins, or enabled for selected organizations only.
+    ///
+    /// Only enterprise owners can set the coding agent policy for their enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/copilot/policies/coding_agent`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/put(copilot/set-enterprise-coding-agent-policy)`.
+    public func copilotSetEnterpriseCodingAgentPolicy(
+        path: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Path,
+        headers: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Headers = .init(),
+        body: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Body
+    ) async throws -> Operations.CopilotSetEnterpriseCodingAgentPolicy.Output {
+        try await copilotSetEnterpriseCodingAgentPolicy(Operations.CopilotSetEnterpriseCodingAgentPolicy.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Add organizations to the enterprise coding agent policy
+    ///
+    /// Enables Copilot coding agent for the specified organizations within the enterprise.
+    ///
+    /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
+    /// using this endpoint. Organizations can be specified by login or matched via custom properties.
+    ///
+    /// Only organizations that have Copilot enabled and belong to the enterprise will be affected.
+    ///
+    /// Only enterprise owners can add organizations to the coding agent policy.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/copilot/policies/coding_agent/organizations`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/post(copilot/add-organizations-to-enterprise-coding-agent-policy)`.
+    public func copilotAddOrganizationsToEnterpriseCodingAgentPolicy(
+        path: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Path,
+        headers: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Headers = .init(),
+        body: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Body
+    ) async throws -> Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Output {
+        try await copilotAddOrganizationsToEnterpriseCodingAgentPolicy(Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Remove organizations from the enterprise coding agent policy
+    ///
+    /// Disables Copilot coding agent for the specified organizations within the enterprise.
+    ///
+    /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
+    /// using this endpoint. Organizations can be specified by login or matched via custom properties.
+    ///
+    /// Only organizations that have Copilot enabled and belong to the enterprise will be affected.
+    ///
+    /// Only enterprise owners can remove organizations from the coding agent policy.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/copilot/policies/coding_agent/organizations`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/delete(copilot/remove-organizations-from-enterprise-coding-agent-policy)`.
+    public func copilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy(
+        path: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Path,
+        headers: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Headers = .init(),
+        body: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Body
+    ) async throws -> Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Output {
+        try await copilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy(Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input(
+            path: path,
+            headers: headers,
+            body: body
         ))
     }
     /// Get Copilot seat information and settings for an organization
@@ -1283,6 +1407,55 @@ public enum Components {
                 case message
                 case documentationUrl = "documentation_url"
                 case errors
+            }
+        }
+        /// Scim Error
+        ///
+        /// - Remark: Generated from `#/components/schemas/scim-error`.
+        public struct ScimError: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/scim-error/message`.
+            public var message: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/documentation_url`.
+            public var documentationUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/detail`.
+            public var detail: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/status`.
+            public var status: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/scim-error/scimType`.
+            public var scimType: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/schemas`.
+            public var schemas: [Swift.String]?
+            /// Creates a new `ScimError`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - detail:
+            ///   - status:
+            ///   - scimType:
+            ///   - schemas:
+            public init(
+                message: Swift.String? = nil,
+                documentationUrl: Swift.String? = nil,
+                detail: Swift.String? = nil,
+                status: Swift.Int? = nil,
+                scimType: Swift.String? = nil,
+                schemas: [Swift.String]? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.detail = detail
+                self.status = status
+                self.scimType = scimType
+                self.schemas = schemas
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case detail
+                case status
+                case scimType
+                case schemas
             }
         }
         /// Validation Error
@@ -4604,6 +4777,58 @@ public enum Components {
                 self.body = body
             }
         }
+        public struct BadRequest: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/bad_request/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/bad_request/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        default:
+                            try throwUnexpectedResponseBody(
+                                expectedContent: "application/json",
+                                body: self
+                            )
+                        }
+                    }
+                }
+                /// - Remark: Generated from `#/components/responses/bad_request/content/application\/scim+json`.
+                case applicationScimJson(Components.Schemas.ScimError)
+                /// The associated value of the enum case if `self` is `.applicationScimJson`.
+                ///
+                /// - Throws: An error if `self` is not `.applicationScimJson`.
+                /// - SeeAlso: `.applicationScimJson`.
+                public var applicationScimJson: Components.Schemas.ScimError {
+                    get throws {
+                        switch self {
+                        case let .applicationScimJson(body):
+                            return body
+                        default:
+                            try throwUnexpectedResponseBody(
+                                expectedContent: "application/scim+json",
+                                body: self
+                            )
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.BadRequest.Body
+            /// Creates a new `BadRequest`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.BadRequest.Body) {
+                self.body = body
+            }
+        }
         public struct ValidationFailed: Sendable, Hashable {
             /// - Remark: Generated from `#/components/responses/validation_failed/content`.
             @frozen public enum Body: Sendable, Hashable {
@@ -5674,6 +5899,624 @@ public enum Operations {
             public static var allCases: [Self] {
                 [
                     .json
+                ]
+            }
+        }
+    }
+    /// Set the coding agent policy for an enterprise
+    ///
+    /// Sets the policy for Copilot coding agent usage across an enterprise.
+    ///
+    /// Enterprise owners can configure whether Copilot coding agent is enabled for all
+    /// organizations, disabled for all organizations, configured by individual organization
+    /// admins, or enabled for selected organizations only.
+    ///
+    /// Only enterprise owners can set the coding agent policy for their enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/copilot/policies/coding_agent`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/put(copilot/set-enterprise-coding-agent-policy)`.
+    public enum CopilotSetEnterpriseCodingAgentPolicy {
+        public static let id: Swift.String = "copilot/set-enterprise-coding-agent-policy"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/PUT/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotSetEnterpriseCodingAgentPolicy.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotSetEnterpriseCodingAgentPolicy.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Headers
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The policy state for Copilot coding agent in the enterprise. Can be one of `enabled_for_all_orgs`, `disabled_for_all_orgs`, `enabled_for_selected_orgs`, or `configured_by_org_admins`.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/PUT/requestBody/json/policy_state`.
+                    @frozen public enum PolicyStatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case enabledForAllOrgs = "enabled_for_all_orgs"
+                        case disabledForAllOrgs = "disabled_for_all_orgs"
+                        case enabledForSelectedOrgs = "enabled_for_selected_orgs"
+                        case configuredByOrgAdmins = "configured_by_org_admins"
+                    }
+                    /// The policy state for Copilot coding agent in the enterprise. Can be one of `enabled_for_all_orgs`, `disabled_for_all_orgs`, `enabled_for_selected_orgs`, or `configured_by_org_admins`.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/PUT/requestBody/json/policy_state`.
+                    public var policyState: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Body.JsonPayload.PolicyStatePayload
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - policyState: The policy state for Copilot coding agent in the enterprise. Can be one of `enabled_for_all_orgs`, `disabled_for_all_orgs`, `enabled_for_selected_orgs`, or `configured_by_org_admins`.
+                    public init(policyState: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Body.JsonPayload.PolicyStatePayload) {
+                        self.policyState = policyState
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case policyState = "policy_state"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/PUT/requestBody/content/application\/json`.
+                case json(Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Body.JsonPayload)
+            }
+            public var body: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Path,
+                headers: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Headers = .init(),
+                body: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/put(copilot/set-enterprise-coding-agent-policy)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Components.Responses.NoContent)
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/put(copilot/set-enterprise-coding-agent-policy)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Components.Responses.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/put(copilot/set-enterprise-coding-agent-policy)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Add organizations to the enterprise coding agent policy
+    ///
+    /// Enables Copilot coding agent for the specified organizations within the enterprise.
+    ///
+    /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
+    /// using this endpoint. Organizations can be specified by login or matched via custom properties.
+    ///
+    /// Only organizations that have Copilot enabled and belong to the enterprise will be affected.
+    ///
+    /// Only enterprise owners can add organizations to the coding agent policy.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/copilot/policies/coding_agent/organizations`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/post(copilot/add-organizations-to-enterprise-coding-agent-policy)`.
+    public enum CopilotAddOrganizationsToEnterpriseCodingAgentPolicy {
+        public static let id: Swift.String = "copilot/add-organizations-to-enterprise-coding-agent-policy"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Headers
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// List of organization logins within the enterprise to enable Copilot coding agent for.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/requestBody/json/organizations`.
+                    public var organizations: [Swift.String]?
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/requestBody/json/CustomPropertiesPayload`.
+                    public struct CustomPropertiesPayloadPayload: Codable, Hashable, Sendable {
+                        /// The name of the custom property to filter by.
+                        ///
+                        /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/requestBody/json/CustomPropertiesPayload/property_name`.
+                        public var propertyName: Swift.String
+                        /// The values of the custom property to match.
+                        ///
+                        /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/requestBody/json/CustomPropertiesPayload/values`.
+                        public var values: [Swift.String]
+                        /// Creates a new `CustomPropertiesPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - propertyName: The name of the custom property to filter by.
+                        ///   - values: The values of the custom property to match.
+                        public init(
+                            propertyName: Swift.String,
+                            values: [Swift.String]
+                        ) {
+                            self.propertyName = propertyName
+                            self.values = values
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case propertyName = "property_name"
+                            case values
+                        }
+                    }
+                    /// List of custom property filters to match organizations. Organizations matching any of the specified property name/value pairs will be included. This is a one-time operation, setting the property on an organization in the future will not automatically update its coding agent policy.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/requestBody/json/custom_properties`.
+                    public typealias CustomPropertiesPayload = [Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Body.JsonPayload.CustomPropertiesPayloadPayload]
+                    /// List of custom property filters to match organizations. Organizations matching any of the specified property name/value pairs will be included. This is a one-time operation, setting the property on an organization in the future will not automatically update its coding agent policy.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/requestBody/json/custom_properties`.
+                    public var customProperties: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Body.JsonPayload.CustomPropertiesPayload?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - organizations: List of organization logins within the enterprise to enable Copilot coding agent for.
+                    ///   - customProperties: List of custom property filters to match organizations. Organizations matching any of the specified property name/value pairs will be included. This is a one-time operation, setting the property on an organization in the future will not automatically update its coding agent policy.
+                    public init(
+                        organizations: [Swift.String]? = nil,
+                        customProperties: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Body.JsonPayload.CustomPropertiesPayload? = nil
+                    ) {
+                        self.organizations = organizations
+                        self.customProperties = customProperties
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case organizations
+                        case customProperties = "custom_properties"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/requestBody/content/application\/json`.
+                case json(Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Body.JsonPayload)
+            }
+            public var body: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Path,
+                headers: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Headers = .init(),
+                body: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/post(copilot/add-organizations-to-enterprise-coding-agent-policy)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Components.Responses.NoContent)
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/post(copilot/add-organizations-to-enterprise-coding-agent-policy)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Components.Responses.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/post(copilot/add-organizations-to-enterprise-coding-agent-policy)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Remove organizations from the enterprise coding agent policy
+    ///
+    /// Disables Copilot coding agent for the specified organizations within the enterprise.
+    ///
+    /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
+    /// using this endpoint. Organizations can be specified by login or matched via custom properties.
+    ///
+    /// Only organizations that have Copilot enabled and belong to the enterprise will be affected.
+    ///
+    /// Only enterprise owners can remove organizations from the coding agent policy.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/copilot/policies/coding_agent/organizations`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/delete(copilot/remove-organizations-from-enterprise-coding-agent-policy)`.
+    public enum CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy {
+        public static let id: Swift.String = "copilot/remove-organizations-from-enterprise-coding-agent-policy"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Headers
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// List of organization logins within the enterprise to disable Copilot coding agent for.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/requestBody/json/organizations`.
+                    public var organizations: [Swift.String]?
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/requestBody/json/CustomPropertiesPayload`.
+                    public struct CustomPropertiesPayloadPayload: Codable, Hashable, Sendable {
+                        /// The name of the custom property to filter by.
+                        ///
+                        /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/requestBody/json/CustomPropertiesPayload/property_name`.
+                        public var propertyName: Swift.String
+                        /// The values of the custom property to match.
+                        ///
+                        /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/requestBody/json/CustomPropertiesPayload/values`.
+                        public var values: [Swift.String]
+                        /// Creates a new `CustomPropertiesPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - propertyName: The name of the custom property to filter by.
+                        ///   - values: The values of the custom property to match.
+                        public init(
+                            propertyName: Swift.String,
+                            values: [Swift.String]
+                        ) {
+                            self.propertyName = propertyName
+                            self.values = values
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case propertyName = "property_name"
+                            case values
+                        }
+                    }
+                    /// List of custom property filters to match organizations. Organizations matching any of the specified property name/value pairs will be included. This is a one-time operation, setting the property on an organization in the future will not automatically update its coding agent policy.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/requestBody/json/custom_properties`.
+                    public typealias CustomPropertiesPayload = [Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Body.JsonPayload.CustomPropertiesPayloadPayload]
+                    /// List of custom property filters to match organizations. Organizations matching any of the specified property name/value pairs will be included. This is a one-time operation, setting the property on an organization in the future will not automatically update its coding agent policy.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/requestBody/json/custom_properties`.
+                    public var customProperties: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Body.JsonPayload.CustomPropertiesPayload?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - organizations: List of organization logins within the enterprise to disable Copilot coding agent for.
+                    ///   - customProperties: List of custom property filters to match organizations. Organizations matching any of the specified property name/value pairs will be included. This is a one-time operation, setting the property on an organization in the future will not automatically update its coding agent policy.
+                    public init(
+                        organizations: [Swift.String]? = nil,
+                        customProperties: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Body.JsonPayload.CustomPropertiesPayload? = nil
+                    ) {
+                        self.organizations = organizations
+                        self.customProperties = customProperties
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case organizations
+                        case customProperties = "custom_properties"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/requestBody/content/application\/json`.
+                case json(Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Body.JsonPayload)
+            }
+            public var body: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Path,
+                headers: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Headers = .init(),
+                body: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/delete(copilot/remove-organizations-from-enterprise-coding-agent-policy)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Components.Responses.NoContent)
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/delete(copilot/remove-organizations-from-enterprise-coding-agent-policy)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Components.Responses.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/delete(copilot/remove-organizations-from-enterprise-coding-agent-policy)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
                 ]
             }
         }
