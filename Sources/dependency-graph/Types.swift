@@ -25,6 +25,23 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/dependency-graph/sbom`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/get(dependency-graph/export-sbom)`.
     func dependencyGraphExportSbom(_ input: Operations.DependencyGraphExportSbom.Input) async throws -> Operations.DependencyGraphExportSbom.Output
+    /// Fetch a software bill of materials (SBOM) for a repository.
+    ///
+    /// Fetches a previously generated software bill of materials (SBOM) for a repository.
+    /// When the SBOM is ready, the response is a 302 redirect to a temporary download URL for the SBOM in SPDX JSON format.
+    /// The generated SBOM report may be retained for up to one week from the original request.
+    /// The temporary download URL returned by this endpoint expires separately, and its expiry is set when the fetch request is made.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/get(dependency-graph/fetch-sbom-report)`.
+    func dependencyGraphFetchSbomReport(_ input: Operations.DependencyGraphFetchSbomReport.Input) async throws -> Operations.DependencyGraphFetchSbomReport.Output
+    /// Request generation of a software bill of materials (SBOM) for a repository.
+    ///
+    /// Triggers a job to generate a software bill of materials (SBOM) for a repository in SPDX JSON format.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/dependency-graph/sbom/generate-report`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/generate-report/get(dependency-graph/generate-sbom-report)`.
+    func dependencyGraphGenerateSbomReport(_ input: Operations.DependencyGraphGenerateSbomReport.Input) async throws -> Operations.DependencyGraphGenerateSbomReport.Output
     /// Create a snapshot of dependencies for a repository
     ///
     /// Create a new snapshot of a repository's dependencies.
@@ -68,6 +85,39 @@ extension APIProtocol {
         headers: Operations.DependencyGraphExportSbom.Input.Headers = .init()
     ) async throws -> Operations.DependencyGraphExportSbom.Output {
         try await dependencyGraphExportSbom(Operations.DependencyGraphExportSbom.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Fetch a software bill of materials (SBOM) for a repository.
+    ///
+    /// Fetches a previously generated software bill of materials (SBOM) for a repository.
+    /// When the SBOM is ready, the response is a 302 redirect to a temporary download URL for the SBOM in SPDX JSON format.
+    /// The generated SBOM report may be retained for up to one week from the original request.
+    /// The temporary download URL returned by this endpoint expires separately, and its expiry is set when the fetch request is made.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/get(dependency-graph/fetch-sbom-report)`.
+    public func dependencyGraphFetchSbomReport(
+        path: Operations.DependencyGraphFetchSbomReport.Input.Path,
+        headers: Operations.DependencyGraphFetchSbomReport.Input.Headers = .init()
+    ) async throws -> Operations.DependencyGraphFetchSbomReport.Output {
+        try await dependencyGraphFetchSbomReport(Operations.DependencyGraphFetchSbomReport.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Request generation of a software bill of materials (SBOM) for a repository.
+    ///
+    /// Triggers a job to generate a software bill of materials (SBOM) for a repository in SPDX JSON format.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/dependency-graph/sbom/generate-report`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/generate-report/get(dependency-graph/generate-sbom-report)`.
+    public func dependencyGraphGenerateSbomReport(
+        path: Operations.DependencyGraphGenerateSbomReport.Input.Path,
+        headers: Operations.DependencyGraphGenerateSbomReport.Input.Headers = .init()
+    ) async throws -> Operations.DependencyGraphGenerateSbomReport.Output {
+        try await dependencyGraphGenerateSbomReport(Operations.DependencyGraphGenerateSbomReport.Input(
             path: path,
             headers: headers
         ))
@@ -1214,6 +1264,8 @@ public enum Components {
     public enum Headers {
         /// - Remark: Generated from `#/components/headers/link`.
         public typealias Link = Swift.String
+        /// - Remark: Generated from `#/components/headers/location`.
+        public typealias Location = Swift.String
     }
 }
 
@@ -1605,6 +1657,437 @@ public enum Operations {
             /// Forbidden
             ///
             /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/get(dependency-graph/export-sbom)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Fetch a software bill of materials (SBOM) for a repository.
+    ///
+    /// Fetches a previously generated software bill of materials (SBOM) for a repository.
+    /// When the SBOM is ready, the response is a 302 redirect to a temporary download URL for the SBOM in SPDX JSON format.
+    /// The generated SBOM report may be retained for up to one week from the original request.
+    /// The temporary download URL returned by this endpoint expires separately, and its expiry is set when the fetch request is made.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/get(dependency-graph/fetch-sbom-report)`.
+    public enum DependencyGraphFetchSbomReport {
+        public static let id: Swift.String = "dependency-graph/fetch-sbom-report"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The unique identifier of the SBOM export.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/GET/path/sbom_uuid`.
+                public var sbomUuid: Swift.String
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - sbomUuid: The unique identifier of the SBOM export.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    sbomUuid: Swift.String
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.sbomUuid = sbomUuid
+                }
+            }
+            public var path: Operations.DependencyGraphFetchSbomReport.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependencyGraphFetchSbomReport.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependencyGraphFetchSbomReport.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.DependencyGraphFetchSbomReport.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.DependencyGraphFetchSbomReport.Input.Path,
+                headers: Operations.DependencyGraphFetchSbomReport.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Found: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/GET/responses/302/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/GET/responses/302/headers/Location`.
+                    public var location: Components.Headers.Location?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - location:
+                    public init(location: Components.Headers.Location? = nil) {
+                        self.location = location
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.DependencyGraphFetchSbomReport.Output.Found.Headers
+                /// Creates a new `Found`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                public init(headers: Operations.DependencyGraphFetchSbomReport.Output.Found.Headers = .init()) {
+                    self.headers = headers
+                }
+            }
+            /// Redirects to a temporary download URL for the completed SBOM.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/get(dependency-graph/fetch-sbom-report)/responses/302`.
+            ///
+            /// HTTP response code: `302 found`.
+            case found(Operations.DependencyGraphFetchSbomReport.Output.Found)
+            /// The associated value of the enum case if `self` is `.found`.
+            ///
+            /// - Throws: An error if `self` is not `.found`.
+            /// - SeeAlso: `.found`.
+            public var found: Operations.DependencyGraphFetchSbomReport.Output.Found {
+                get throws {
+                    switch self {
+                    case let .found(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "found",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Accepted: Sendable, Hashable {
+                /// Creates a new `Accepted`.
+                public init() {}
+            }
+            /// SBOM is still being processed, no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/get(dependency-graph/fetch-sbom-report)/responses/202`.
+            ///
+            /// HTTP response code: `202 accepted`.
+            case accepted(Operations.DependencyGraphFetchSbomReport.Output.Accepted)
+            /// SBOM is still being processed, no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/get(dependency-graph/fetch-sbom-report)/responses/202`.
+            ///
+            /// HTTP response code: `202 accepted`.
+            public static var accepted: Self {
+                .accepted(.init())
+            }
+            /// The associated value of the enum case if `self` is `.accepted`.
+            ///
+            /// - Throws: An error if `self` is not `.accepted`.
+            /// - SeeAlso: `.accepted`.
+            public var accepted: Operations.DependencyGraphFetchSbomReport.Output.Accepted {
+                get throws {
+                    switch self {
+                    case let .accepted(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "accepted",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/get(dependency-graph/fetch-sbom-report)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/fetch-report/{sbom_uuid}/get(dependency-graph/fetch-sbom-report)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Request generation of a software bill of materials (SBOM) for a repository.
+    ///
+    /// Triggers a job to generate a software bill of materials (SBOM) for a repository in SPDX JSON format.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/dependency-graph/sbom/generate-report`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/generate-report/get(dependency-graph/generate-sbom-report)`.
+    public enum DependencyGraphGenerateSbomReport {
+        public static let id: Swift.String = "dependency-graph/generate-sbom-report"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/generate-report/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/generate-report/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/generate-report/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.DependencyGraphGenerateSbomReport.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/generate-report/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependencyGraphGenerateSbomReport.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependencyGraphGenerateSbomReport.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.DependencyGraphGenerateSbomReport.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.DependencyGraphGenerateSbomReport.Input.Path,
+                headers: Operations.DependencyGraphGenerateSbomReport.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/generate-report/GET/responses/201/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/generate-report/GET/responses/201/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// URL to poll for the SBOM export result.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/generate-report/GET/responses/201/content/json/sbom_url`.
+                        public var sbomUrl: Swift.String?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - sbomUrl: URL to poll for the SBOM export result.
+                        public init(sbomUrl: Swift.String? = nil) {
+                            self.sbomUrl = sbomUrl
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case sbomUrl = "sbom_url"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/dependency-graph/sbom/generate-report/GET/responses/201/content/application\/json`.
+                    case json(Operations.DependencyGraphGenerateSbomReport.Output.Created.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.DependencyGraphGenerateSbomReport.Output.Created.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.DependencyGraphGenerateSbomReport.Output.Created.Body
+                /// Creates a new `Created`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.DependencyGraphGenerateSbomReport.Output.Created.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/generate-report/get(dependency-graph/generate-sbom-report)/responses/201`.
+            ///
+            /// HTTP response code: `201 created`.
+            case created(Operations.DependencyGraphGenerateSbomReport.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
+            ///
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.DependencyGraphGenerateSbomReport.Output.Created {
+                get throws {
+                    switch self {
+                    case let .created(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/generate-report/get(dependency-graph/generate-sbom-report)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/sbom/generate-report/get(dependency-graph/generate-sbom-report)/responses/403`.
             ///
             /// HTTP response code: `403 forbidden`.
             case forbidden(Components.Responses.Forbidden)
