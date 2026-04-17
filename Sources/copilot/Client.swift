@@ -596,6 +596,284 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// Set the coding agent policy for an enterprise
+    ///
+    /// Sets the policy for Copilot coding agent usage across an enterprise.
+    ///
+    /// Enterprise owners can configure whether Copilot coding agent is enabled for all
+    /// organizations, disabled for all organizations, configured by individual organization
+    /// admins, or enabled for selected organizations only.
+    ///
+    /// Only enterprise owners can set the coding agent policy for their enterprise.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/copilot/policies/coding_agent`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/put(copilot/set-enterprise-coding-agent-policy)`.
+    public func copilotSetEnterpriseCodingAgentPolicy(_ input: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input) async throws -> Operations.CopilotSetEnterpriseCodingAgentPolicy.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.CopilotSetEnterpriseCodingAgentPolicy.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/enterprises/{}/copilot/policies/coding_agent",
+                    parameters: [
+                        input.path.enterprise
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .put
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                case 400:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.BadRequest.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json",
+                            "application/scim+json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    case "application/scim+json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ScimError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .applicationScimJson(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .badRequest(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Add organizations to the enterprise coding agent policy
+    ///
+    /// Enables Copilot coding agent for the specified organizations within the enterprise.
+    ///
+    /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
+    /// using this endpoint. Organizations can be specified by login or matched via custom properties.
+    ///
+    /// Only organizations that have Copilot enabled and belong to the enterprise will be affected.
+    ///
+    /// Only enterprise owners can add organizations to the coding agent policy.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /enterprises/{enterprise}/copilot/policies/coding_agent/organizations`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/post(copilot/add-organizations-to-enterprise-coding-agent-policy)`.
+    public func copilotAddOrganizationsToEnterpriseCodingAgentPolicy(_ input: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input) async throws -> Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/enterprises/{}/copilot/policies/coding_agent/organizations",
+                    parameters: [
+                        input.path.enterprise
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .post
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                case 400:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.BadRequest.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json",
+                            "application/scim+json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    case "application/scim+json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ScimError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .applicationScimJson(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .badRequest(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Remove organizations from the enterprise coding agent policy
+    ///
+    /// Disables Copilot coding agent for the specified organizations within the enterprise.
+    ///
+    /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
+    /// using this endpoint. Organizations can be specified by login or matched via custom properties.
+    ///
+    /// Only organizations that have Copilot enabled and belong to the enterprise will be affected.
+    ///
+    /// Only enterprise owners can remove organizations from the coding agent policy.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `admin:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /enterprises/{enterprise}/copilot/policies/coding_agent/organizations`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/policies/coding_agent/organizations/delete(copilot/remove-organizations-from-enterprise-coding-agent-policy)`.
+    public func copilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy(_ input: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Input) async throws -> Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.CopilotRemoveOrganizationsFromEnterpriseCodingAgentPolicy.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/enterprises/{}/copilot/policies/coding_agent/organizations",
+                    parameters: [
+                        input.path.enterprise
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .delete
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 204:
+                    return .noContent(.init())
+                case 400:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.BadRequest.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json",
+                            "application/scim+json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    case "application/scim+json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ScimError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .applicationScimJson(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .badRequest(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// Get Copilot seat information and settings for an organization
     ///
     /// > [!NOTE]
