@@ -6445,12 +6445,12 @@ public enum Operations {
                     /// An array of repository IDs to detach from configurations. Up to 250 IDs can be provided.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/detach/DELETE/requestBody/json/selected_repository_ids`.
-                    public var selectedRepositoryIds: [Swift.Int]?
+                    public var selectedRepositoryIds: [Swift.Int]
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - selectedRepositoryIds: An array of repository IDs to detach from configurations. Up to 250 IDs can be provided.
-                    public init(selectedRepositoryIds: [Swift.Int]? = nil) {
+                    public init(selectedRepositoryIds: [Swift.Int]) {
                         self.selectedRepositoryIds = selectedRepositoryIds
                     }
                     public enum CodingKeys: String, CodingKey {
@@ -6458,7 +6458,7 @@ public enum Operations {
                     }
                     public init(from decoder: any Swift.Decoder) throws {
                         let container = try decoder.container(keyedBy: CodingKeys.self)
-                        self.selectedRepositoryIds = try container.decodeIfPresent(
+                        self.selectedRepositoryIds = try container.decode(
                             [Swift.Int].self,
                             forKey: .selectedRepositoryIds
                         )

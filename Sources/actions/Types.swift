@@ -10598,21 +10598,37 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/oidc-custom-sub-repo/include_claim_keys`.
             public var includeClaimKeys: [Swift.String]?
+            /// Whether the repository has opted in to the immutable OIDC subject claim format. When `true`, OIDC tokens will use a stable, repository-ID-based `sub` claim. If not set at the repository level, falls back to the organization-level setting.
+            ///
+            /// - Remark: Generated from `#/components/schemas/oidc-custom-sub-repo/use_immutable_subject`.
+            public var useImmutableSubject: Swift.Bool?
+            /// The current `sub` claim prefix for this repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/oidc-custom-sub-repo/sub_claim_prefix`.
+            public var subClaimPrefix: Swift.String?
             /// Creates a new `OidcCustomSubRepo`.
             ///
             /// - Parameters:
             ///   - useDefault: Whether to use the default template or not. If `true`, the `include_claim_keys` field is ignored.
             ///   - includeClaimKeys: Array of unique strings. Each claim key can only contain alphanumeric characters and underscores.
+            ///   - useImmutableSubject: Whether the repository has opted in to the immutable OIDC subject claim format. When `true`, OIDC tokens will use a stable, repository-ID-based `sub` claim. If not set at the repository level, falls back to the organization-level setting.
+            ///   - subClaimPrefix: The current `sub` claim prefix for this repository.
             public init(
                 useDefault: Swift.Bool,
-                includeClaimKeys: [Swift.String]? = nil
+                includeClaimKeys: [Swift.String]? = nil,
+                useImmutableSubject: Swift.Bool? = nil,
+                subClaimPrefix: Swift.String? = nil
             ) {
                 self.useDefault = useDefault
                 self.includeClaimKeys = includeClaimKeys
+                self.useImmutableSubject = useImmutableSubject
+                self.subClaimPrefix = subClaimPrefix
             }
             public enum CodingKeys: String, CodingKey {
                 case useDefault = "use_default"
                 case includeClaimKeys = "include_claim_keys"
+                case useImmutableSubject = "use_immutable_subject"
+                case subClaimPrefix = "sub_claim_prefix"
             }
         }
         /// Set secrets for GitHub Actions.
@@ -16917,6 +16933,18 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/size`.
                     public var size: Swift.String?
+                    /// The source type of the runner image to use. Must match the source of the image specified by `image_id`. Can be one of `github`, `partner`, or `custom`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/image_source`.
+                    @frozen public enum ImageSourcePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case github = "github"
+                        case partner = "partner"
+                        case custom = "custom"
+                    }
+                    /// The source type of the runner image to use. Must match the source of the image specified by `image_id`. Can be one of `github`, `partner`, or `custom`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/image_source`.
+                    public var imageSource: Operations.ActionsUpdateHostedRunnerForOrg.Input.Body.JsonPayload.ImageSourcePayload?
                     /// The unique identifier of the runner image. To list available images, use `GET /actions/hosted-runners/images/github-owned`, `GET /actions/hosted-runners/images/partner`, or `GET /actions/hosted-runners/images/custom`.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/image_id`.
@@ -16925,6 +16953,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/image_version`.
                     public var imageVersion: Swift.String?
+                    /// Whether to enable image generation for this runner pool. When enabled, the runner pool is used to build and publish custom runner images.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/json/image_gen`.
+                    public var imageGen: Swift.Bool?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -16933,24 +16965,30 @@ public enum Operations {
                     ///   - maximumRunners: The maximum amount of runners to scale up to. Runners will not auto-scale above this number. Use this setting to limit your cost.
                     ///   - enableStaticIp: Whether this runner should be updated with a static public IP. Note limit on account. To list limits on account, use `GET actions/hosted-runners/limits`
                     ///   - size: The machine size of the runner. To list available sizes, use `GET actions/hosted-runners/machine-sizes`
+                    ///   - imageSource: The source type of the runner image to use. Must match the source of the image specified by `image_id`. Can be one of `github`, `partner`, or `custom`.
                     ///   - imageId: The unique identifier of the runner image. To list available images, use `GET /actions/hosted-runners/images/github-owned`, `GET /actions/hosted-runners/images/partner`, or `GET /actions/hosted-runners/images/custom`.
                     ///   - imageVersion: The version of the runner image to deploy. This is relevant only for runners using custom images.
+                    ///   - imageGen: Whether to enable image generation for this runner pool. When enabled, the runner pool is used to build and publish custom runner images.
                     public init(
                         name: Swift.String? = nil,
                         runnerGroupId: Swift.Int? = nil,
                         maximumRunners: Swift.Int? = nil,
                         enableStaticIp: Swift.Bool? = nil,
                         size: Swift.String? = nil,
+                        imageSource: Operations.ActionsUpdateHostedRunnerForOrg.Input.Body.JsonPayload.ImageSourcePayload? = nil,
                         imageId: Swift.String? = nil,
-                        imageVersion: Swift.String? = nil
+                        imageVersion: Swift.String? = nil,
+                        imageGen: Swift.Bool? = nil
                     ) {
                         self.name = name
                         self.runnerGroupId = runnerGroupId
                         self.maximumRunners = maximumRunners
                         self.enableStaticIp = enableStaticIp
                         self.size = size
+                        self.imageSource = imageSource
                         self.imageId = imageId
                         self.imageVersion = imageVersion
+                        self.imageGen = imageGen
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
@@ -16958,8 +16996,10 @@ public enum Operations {
                         case maximumRunners = "maximum_runners"
                         case enableStaticIp = "enable_static_ip"
                         case size
+                        case imageSource = "image_source"
                         case imageId = "image_id"
                         case imageVersion = "image_version"
+                        case imageGen = "image_gen"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/actions/hosted-runners/{hosted_runner_id}/PATCH/requestBody/content/application\/json`.
@@ -30462,21 +30502,29 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/oidc/customization/sub/PUT/requestBody/json/include_claim_keys`.
                     public var includeClaimKeys: [Swift.String]?
+                    /// Whether to opt in to the immutable OIDC subject claim format for this repository. When `true`, OIDC tokens will use a stable, repository-ID-based `sub` claim.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/oidc/customization/sub/PUT/requestBody/json/use_immutable_subject`.
+                    public var useImmutableSubject: Swift.Bool?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - useDefault: Whether to use the default template or not. If `true`, the `include_claim_keys` field is ignored.
                     ///   - includeClaimKeys: Array of unique strings. Each claim key can only contain alphanumeric characters and underscores.
+                    ///   - useImmutableSubject: Whether to opt in to the immutable OIDC subject claim format for this repository. When `true`, OIDC tokens will use a stable, repository-ID-based `sub` claim.
                     public init(
                         useDefault: Swift.Bool,
-                        includeClaimKeys: [Swift.String]? = nil
+                        includeClaimKeys: [Swift.String]? = nil,
+                        useImmutableSubject: Swift.Bool? = nil
                     ) {
                         self.useDefault = useDefault
                         self.includeClaimKeys = includeClaimKeys
+                        self.useImmutableSubject = useImmutableSubject
                     }
                     public enum CodingKeys: String, CodingKey {
                         case useDefault = "use_default"
                         case includeClaimKeys = "include_claim_keys"
+                        case useImmutableSubject = "use_immutable_subject"
                     }
                 }
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/oidc/customization/sub/PUT/requestBody/content/application\/json`.
