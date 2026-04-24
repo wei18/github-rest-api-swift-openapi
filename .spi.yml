@@ -10,6 +10,7 @@ builder:
     - GitHubRestAPICampaigns
     - GitHubRestAPIChecks
     - GitHubRestAPIClassroom
+    - GitHubRestAPICode_Quality
     - GitHubRestAPICode_Scanning
     - GitHubRestAPICode_Security
     - GitHubRestAPICodes_Of_Conduct
