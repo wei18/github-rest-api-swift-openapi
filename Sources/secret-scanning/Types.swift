@@ -5085,13 +5085,13 @@ public enum Operations {
                 /// Creates a new `UnprocessableContent`.
                 public init() {}
             }
-            /// State does not match the resolution or resolution comment, or assignee does not have write access to the repository
+            /// State does not match the resolution or resolution comment, assignee does not have write access to the repository, or the requested validity change could not be applied to this alert
             ///
             /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/patch(secret-scanning/update-alert)/responses/422`.
             ///
             /// HTTP response code: `422 unprocessableContent`.
             case unprocessableContent(Operations.SecretScanningUpdateAlert.Output.UnprocessableContent)
-            /// State does not match the resolution or resolution comment, or assignee does not have write access to the repository
+            /// State does not match the resolution or resolution comment, assignee does not have write access to the repository, or the requested validity change could not be applied to this alert
             ///
             /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/patch(secret-scanning/update-alert)/responses/422`.
             ///
