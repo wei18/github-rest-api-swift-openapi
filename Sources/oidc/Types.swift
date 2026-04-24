@@ -354,15 +354,25 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/oidc-custom-sub/include_claim_keys`.
             public var includeClaimKeys: [Swift.String]
+            /// Whether to opt in to the immutable OIDC subject claim format for the organization. When `true`, new OIDC tokens will use a stable, repository-ID-based `sub` claim instead of the name-based format.
+            ///
+            /// - Remark: Generated from `#/components/schemas/oidc-custom-sub/use_immutable_subject`.
+            public var useImmutableSubject: Swift.Bool?
             /// Creates a new `OidcCustomSub`.
             ///
             /// - Parameters:
             ///   - includeClaimKeys: Array of unique strings. Each claim key can only contain alphanumeric characters and underscores.
-            public init(includeClaimKeys: [Swift.String]) {
+            ///   - useImmutableSubject: Whether to opt in to the immutable OIDC subject claim format for the organization. When `true`, new OIDC tokens will use a stable, repository-ID-based `sub` claim instead of the name-based format.
+            public init(
+                includeClaimKeys: [Swift.String],
+                useImmutableSubject: Swift.Bool? = nil
+            ) {
                 self.includeClaimKeys = includeClaimKeys
+                self.useImmutableSubject = useImmutableSubject
             }
             public enum CodingKeys: String, CodingKey {
                 case includeClaimKeys = "include_claim_keys"
+                case useImmutableSubject = "use_immutable_subject"
             }
         }
         /// An object without any properties.
@@ -1908,15 +1918,25 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/sub/PUT/requestBody/json/include_claim_keys`.
                     public var includeClaimKeys: [Swift.String]?
+                    /// Whether to opt in to the immutable OIDC subject claim format for the organization. When `true`, new OIDC tokens will use a stable, repository-ID-based `sub` claim instead of the name-based format.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/sub/PUT/requestBody/json/use_immutable_subject`.
+                    public var useImmutableSubject: Swift.Bool?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - includeClaimKeys: Array of unique strings. Each claim key can only contain alphanumeric characters and underscores.
-                    public init(includeClaimKeys: [Swift.String]? = nil) {
+                    ///   - useImmutableSubject: Whether to opt in to the immutable OIDC subject claim format for the organization. When `true`, new OIDC tokens will use a stable, repository-ID-based `sub` claim instead of the name-based format.
+                    public init(
+                        includeClaimKeys: [Swift.String]? = nil,
+                        useImmutableSubject: Swift.Bool? = nil
+                    ) {
                         self.includeClaimKeys = includeClaimKeys
+                        self.useImmutableSubject = useImmutableSubject
                     }
                     public enum CodingKeys: String, CodingKey {
                         case includeClaimKeys = "include_claim_keys"
+                        case useImmutableSubject = "use_immutable_subject"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/actions/oidc/customization/sub/PUT/requestBody/content/application\/json`.
