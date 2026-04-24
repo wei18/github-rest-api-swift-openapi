@@ -358,6 +358,59 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/get(issues/list-issue-field-values-for-issue)`.
     func issuesListIssueFieldValuesForIssue(_ input: Operations.IssuesListIssueFieldValuesForIssue.Input) async throws -> Operations.IssuesListIssueFieldValuesForIssue.Output
+    /// Add issue field values to an issue
+    ///
+    /// Add custom field values to an issue. You can set values for organization-level issue fields that have been defined for the repository's organization.
+    /// Adding an empty array will clear all existing field values for the issue.
+    ///
+    /// This endpoint supports the following field data types:
+    /// - **`text`**: String values for text fields
+    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
+    /// - **`number`**: Numeric values for number fields
+    /// - **`date`**: ISO 8601 date strings for date fields
+    ///
+    /// Only users with push access to the repository can add issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
+    ///
+    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
+    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)`.
+    func issuesAddIssueFieldValues(_ input: Operations.IssuesAddIssueFieldValues.Input) async throws -> Operations.IssuesAddIssueFieldValues.Output
+    /// Set issue field values for an issue
+    ///
+    /// Set custom field values for an issue, replacing any existing values. You can set values for organization-level issue fields that have been defined for the repository's organization.
+    ///
+    /// This endpoint supports the following field data types:
+    /// - **`text`**: String values for text fields
+    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
+    /// - **`number`**: Numeric values for number fields
+    /// - **`date`**: ISO 8601 date strings for date fields
+    ///
+    /// This operation will replace all existing field values with the provided ones. If you want to add field values without replacing existing ones, use the `POST` endpoint instead.
+    ///
+    /// Only users with push access to the repository can set issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
+    ///
+    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
+    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)`.
+    func issuesSetIssueFieldValues(_ input: Operations.IssuesSetIssueFieldValues.Input) async throws -> Operations.IssuesSetIssueFieldValues.Output
+    /// Delete an issue field value from an issue
+    ///
+    /// Remove a specific custom field value from an issue.
+    ///
+    /// Only users with push access to the repository can delete issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
+    ///
+    /// If the specified field does not have a value set on the issue, this operation will return a `404` error.
+    ///
+    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
+    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)`.
+    func issuesDeleteIssueFieldValue(_ input: Operations.IssuesDeleteIssueFieldValue.Input) async throws -> Operations.IssuesDeleteIssueFieldValue.Output
     /// List labels for an issue
     ///
     /// Lists all labels for an issue.
@@ -561,59 +614,6 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/milestones/{milestone_number}/labels`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/milestones/{milestone_number}/labels/get(issues/list-labels-for-milestone)`.
     func issuesListLabelsForMilestone(_ input: Operations.IssuesListLabelsForMilestone.Input) async throws -> Operations.IssuesListLabelsForMilestone.Output
-    /// Add issue field values to an issue
-    ///
-    /// Add custom field values to an issue. You can set values for organization-level issue fields that have been defined for the repository's organization.
-    /// Adding an empty array will clear all existing field values for the issue.
-    ///
-    /// This endpoint supports the following field data types:
-    /// - **`text`**: String values for text fields
-    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
-    /// - **`number`**: Numeric values for number fields
-    /// - **`date`**: ISO 8601 date strings for date fields
-    ///
-    /// Only users with push access to the repository can add issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
-    ///
-    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
-    ///
-    /// - Remark: HTTP `POST /repositories/{repository_id}/issues/{issue_number}/issue-field-values`.
-    /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)`.
-    func issuesAddIssueFieldValues(_ input: Operations.IssuesAddIssueFieldValues.Input) async throws -> Operations.IssuesAddIssueFieldValues.Output
-    /// Set issue field values for an issue
-    ///
-    /// Set custom field values for an issue, replacing any existing values. You can set values for organization-level issue fields that have been defined for the repository's organization.
-    ///
-    /// This endpoint supports the following field data types:
-    /// - **`text`**: String values for text fields
-    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
-    /// - **`number`**: Numeric values for number fields
-    /// - **`date`**: ISO 8601 date strings for date fields
-    ///
-    /// This operation will replace all existing field values with the provided ones. If you want to add field values without replacing existing ones, use the `POST` endpoint instead.
-    ///
-    /// Only users with push access to the repository can set issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
-    ///
-    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
-    ///
-    /// - Remark: HTTP `PUT /repositories/{repository_id}/issues/{issue_number}/issue-field-values`.
-    /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)`.
-    func issuesSetIssueFieldValues(_ input: Operations.IssuesSetIssueFieldValues.Input) async throws -> Operations.IssuesSetIssueFieldValues.Output
-    /// Delete an issue field value from an issue
-    ///
-    /// Remove a specific custom field value from an issue.
-    ///
-    /// Only users with push access to the repository can delete issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
-    ///
-    /// If the specified field does not have a value set on the issue, this operation will return a `404` error.
-    ///
-    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
-    ///
-    /// - Remark: HTTP `DELETE /repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}`.
-    /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)`.
-    func issuesDeleteIssueFieldValue(_ input: Operations.IssuesDeleteIssueFieldValue.Input) async throws -> Operations.IssuesDeleteIssueFieldValue.Output
     /// List user account issues assigned to the authenticated user
     ///
     /// List issues across owned and member repositories assigned to the authenticated user.
@@ -1226,6 +1226,87 @@ extension APIProtocol {
             headers: headers
         ))
     }
+    /// Add issue field values to an issue
+    ///
+    /// Add custom field values to an issue. You can set values for organization-level issue fields that have been defined for the repository's organization.
+    /// Adding an empty array will clear all existing field values for the issue.
+    ///
+    /// This endpoint supports the following field data types:
+    /// - **`text`**: String values for text fields
+    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
+    /// - **`number`**: Numeric values for number fields
+    /// - **`date`**: ISO 8601 date strings for date fields
+    ///
+    /// Only users with push access to the repository can add issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
+    ///
+    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
+    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)`.
+    public func issuesAddIssueFieldValues(
+        path: Operations.IssuesAddIssueFieldValues.Input.Path,
+        headers: Operations.IssuesAddIssueFieldValues.Input.Headers = .init(),
+        body: Operations.IssuesAddIssueFieldValues.Input.Body
+    ) async throws -> Operations.IssuesAddIssueFieldValues.Output {
+        try await issuesAddIssueFieldValues(Operations.IssuesAddIssueFieldValues.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Set issue field values for an issue
+    ///
+    /// Set custom field values for an issue, replacing any existing values. You can set values for organization-level issue fields that have been defined for the repository's organization.
+    ///
+    /// This endpoint supports the following field data types:
+    /// - **`text`**: String values for text fields
+    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
+    /// - **`number`**: Numeric values for number fields
+    /// - **`date`**: ISO 8601 date strings for date fields
+    ///
+    /// This operation will replace all existing field values with the provided ones. If you want to add field values without replacing existing ones, use the `POST` endpoint instead.
+    ///
+    /// Only users with push access to the repository can set issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
+    ///
+    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
+    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)`.
+    public func issuesSetIssueFieldValues(
+        path: Operations.IssuesSetIssueFieldValues.Input.Path,
+        headers: Operations.IssuesSetIssueFieldValues.Input.Headers = .init(),
+        body: Operations.IssuesSetIssueFieldValues.Input.Body
+    ) async throws -> Operations.IssuesSetIssueFieldValues.Output {
+        try await issuesSetIssueFieldValues(Operations.IssuesSetIssueFieldValues.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Delete an issue field value from an issue
+    ///
+    /// Remove a specific custom field value from an issue.
+    ///
+    /// Only users with push access to the repository can delete issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
+    ///
+    /// If the specified field does not have a value set on the issue, this operation will return a `404` error.
+    ///
+    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
+    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)`.
+    public func issuesDeleteIssueFieldValue(
+        path: Operations.IssuesDeleteIssueFieldValue.Input.Path,
+        headers: Operations.IssuesDeleteIssueFieldValue.Input.Headers = .init()
+    ) async throws -> Operations.IssuesDeleteIssueFieldValue.Output {
+        try await issuesDeleteIssueFieldValue(Operations.IssuesDeleteIssueFieldValue.Input(
+            path: path,
+            headers: headers
+        ))
+    }
     /// List labels for an issue
     ///
     /// Lists all labels for an issue.
@@ -1644,87 +1725,6 @@ extension APIProtocol {
         try await issuesListLabelsForMilestone(Operations.IssuesListLabelsForMilestone.Input(
             path: path,
             query: query,
-            headers: headers
-        ))
-    }
-    /// Add issue field values to an issue
-    ///
-    /// Add custom field values to an issue. You can set values for organization-level issue fields that have been defined for the repository's organization.
-    /// Adding an empty array will clear all existing field values for the issue.
-    ///
-    /// This endpoint supports the following field data types:
-    /// - **`text`**: String values for text fields
-    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
-    /// - **`number`**: Numeric values for number fields
-    /// - **`date`**: ISO 8601 date strings for date fields
-    ///
-    /// Only users with push access to the repository can add issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
-    ///
-    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
-    ///
-    /// - Remark: HTTP `POST /repositories/{repository_id}/issues/{issue_number}/issue-field-values`.
-    /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)`.
-    public func issuesAddIssueFieldValues(
-        path: Operations.IssuesAddIssueFieldValues.Input.Path,
-        headers: Operations.IssuesAddIssueFieldValues.Input.Headers = .init(),
-        body: Operations.IssuesAddIssueFieldValues.Input.Body
-    ) async throws -> Operations.IssuesAddIssueFieldValues.Output {
-        try await issuesAddIssueFieldValues(Operations.IssuesAddIssueFieldValues.Input(
-            path: path,
-            headers: headers,
-            body: body
-        ))
-    }
-    /// Set issue field values for an issue
-    ///
-    /// Set custom field values for an issue, replacing any existing values. You can set values for organization-level issue fields that have been defined for the repository's organization.
-    ///
-    /// This endpoint supports the following field data types:
-    /// - **`text`**: String values for text fields
-    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
-    /// - **`number`**: Numeric values for number fields
-    /// - **`date`**: ISO 8601 date strings for date fields
-    ///
-    /// This operation will replace all existing field values with the provided ones. If you want to add field values without replacing existing ones, use the `POST` endpoint instead.
-    ///
-    /// Only users with push access to the repository can set issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
-    ///
-    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
-    ///
-    /// - Remark: HTTP `PUT /repositories/{repository_id}/issues/{issue_number}/issue-field-values`.
-    /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)`.
-    public func issuesSetIssueFieldValues(
-        path: Operations.IssuesSetIssueFieldValues.Input.Path,
-        headers: Operations.IssuesSetIssueFieldValues.Input.Headers = .init(),
-        body: Operations.IssuesSetIssueFieldValues.Input.Body
-    ) async throws -> Operations.IssuesSetIssueFieldValues.Output {
-        try await issuesSetIssueFieldValues(Operations.IssuesSetIssueFieldValues.Input(
-            path: path,
-            headers: headers,
-            body: body
-        ))
-    }
-    /// Delete an issue field value from an issue
-    ///
-    /// Remove a specific custom field value from an issue.
-    ///
-    /// Only users with push access to the repository can delete issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
-    ///
-    /// If the specified field does not have a value set on the issue, this operation will return a `404` error.
-    ///
-    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
-    ///
-    /// - Remark: HTTP `DELETE /repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}`.
-    /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)`.
-    public func issuesDeleteIssueFieldValue(
-        path: Operations.IssuesDeleteIssueFieldValue.Input.Path,
-        headers: Operations.IssuesDeleteIssueFieldValue.Input.Headers = .init()
-    ) async throws -> Operations.IssuesDeleteIssueFieldValue.Output {
-        try await issuesDeleteIssueFieldValue(Operations.IssuesDeleteIssueFieldValue.Input(
-            path: path,
             headers: headers
         ))
     }
@@ -9414,10 +9414,6 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/repo`.
         public typealias Repo = Swift.String
-        /// The unique identifier of the repository.
-        ///
-        /// - Remark: Generated from `#/components/parameters/repository-id`.
-        public typealias RepositoryId = Swift.Int
         /// The unique identifier of the issue field.
         ///
         /// - Remark: Generated from `#/components/parameters/issue-field-id`.
@@ -16990,6 +16986,1049 @@ public enum Operations {
             }
         }
     }
+    /// Add issue field values to an issue
+    ///
+    /// Add custom field values to an issue. You can set values for organization-level issue fields that have been defined for the repository's organization.
+    /// Adding an empty array will clear all existing field values for the issue.
+    ///
+    /// This endpoint supports the following field data types:
+    /// - **`text`**: String values for text fields
+    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
+    /// - **`number`**: Numeric values for number fields
+    /// - **`date`**: ISO 8601 date strings for date fields
+    ///
+    /// Only users with push access to the repository can add issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
+    ///
+    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
+    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)`.
+    public enum IssuesAddIssueFieldValues {
+        public static let id: Swift.String = "issues/add-issue-field-values"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the issue.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/path/issue_number`.
+                public var issueNumber: Components.Parameters.IssueNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - issueNumber: The number that identifies the issue.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    issueNumber: Components.Parameters.IssueNumber
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.issueNumber = issueNumber
+                }
+            }
+            public var path: Operations.IssuesAddIssueFieldValues.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesAddIssueFieldValues.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesAddIssueFieldValues.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.IssuesAddIssueFieldValues.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload`.
+                    public struct IssueFieldValuesPayloadPayload: Codable, Hashable, Sendable {
+                        /// The ID of the issue field to set
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload/field_id`.
+                        public var fieldId: Swift.Int
+                        /// The value to set for the field. The type depends on the field's data type:
+                        /// - For text fields: provide a string value
+                        /// - For single_select fields: provide the option name as a string (must match an existing option)
+                        /// - For number fields: provide a numeric value
+                        /// - For date fields: provide an ISO 8601 date string
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload/value`.
+                        @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                            /// The value to set for text, single_select, or date fields
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload/value/case1`.
+                            case case1(Swift.String)
+                            /// The value to set for number fields
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload/value/case2`.
+                            case case2(Swift.Double)
+                            public init(from decoder: any Swift.Decoder) throws {
+                                var errors: [any Swift.Error] = []
+                                do {
+                                    self = .case1(try decoder.decodeFromSingleValueContainer())
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                do {
+                                    self = .case2(try decoder.decodeFromSingleValueContainer())
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                    type: Self.self,
+                                    codingPath: decoder.codingPath,
+                                    errors: errors
+                                )
+                            }
+                            public func encode(to encoder: any Swift.Encoder) throws {
+                                switch self {
+                                case let .case1(value):
+                                    try encoder.encodeToSingleValueContainer(value)
+                                case let .case2(value):
+                                    try encoder.encodeToSingleValueContainer(value)
+                                }
+                            }
+                        }
+                        /// The value to set for the field. The type depends on the field's data type:
+                        /// - For text fields: provide a string value
+                        /// - For single_select fields: provide the option name as a string (must match an existing option)
+                        /// - For number fields: provide a numeric value
+                        /// - For date fields: provide an ISO 8601 date string
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload/value`.
+                        public var value: Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
+                        /// Creates a new `IssueFieldValuesPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - fieldId: The ID of the issue field to set
+                        ///   - value: The value to set for the field. The type depends on the field's data type:
+                        public init(
+                            fieldId: Swift.Int,
+                            value: Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
+                        ) {
+                            self.fieldId = fieldId
+                            self.value = value
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case fieldId = "field_id"
+                            case value
+                        }
+                        public init(from decoder: any Swift.Decoder) throws {
+                            let container = try decoder.container(keyedBy: CodingKeys.self)
+                            self.fieldId = try container.decode(
+                                Swift.Int.self,
+                                forKey: .fieldId
+                            )
+                            self.value = try container.decode(
+                                Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload.self,
+                                forKey: .value
+                            )
+                            try decoder.ensureNoAdditionalProperties(knownKeys: [
+                                "field_id",
+                                "value"
+                            ])
+                        }
+                    }
+                    /// An array of issue field values to add to this issue. Each field value must include the field ID and the value to set.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/requestBody/json/issue_field_values`.
+                    public typealias IssueFieldValuesPayload = [Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload]
+                    /// An array of issue field values to add to this issue. Each field value must include the field ID and the value to set.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/requestBody/json/issue_field_values`.
+                    public var issueFieldValues: Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayload?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - issueFieldValues: An array of issue field values to add to this issue. Each field value must include the field ID and the value to set.
+                    public init(issueFieldValues: Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayload? = nil) {
+                        self.issueFieldValues = issueFieldValues
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case issueFieldValues = "issue_field_values"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/requestBody/content/application\/json`.
+                case json(Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload)
+            }
+            public var body: Operations.IssuesAddIssueFieldValues.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.IssuesAddIssueFieldValues.Input.Path,
+                headers: Operations.IssuesAddIssueFieldValues.Input.Headers = .init(),
+                body: Operations.IssuesAddIssueFieldValues.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/POST/responses/200/content/application\/json`.
+                    case json([Components.Schemas.IssueFieldValue])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.IssueFieldValue] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.IssuesAddIssueFieldValues.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.IssuesAddIssueFieldValues.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.IssuesAddIssueFieldValues.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.IssuesAddIssueFieldValues.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Service unavailable
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/503`.
+            ///
+            /// HTTP response code: `503 serviceUnavailable`.
+            case serviceUnavailable(Components.Responses.ServiceUnavailable)
+            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
+            ///
+            /// - Throws: An error if `self` is not `.serviceUnavailable`.
+            /// - SeeAlso: `.serviceUnavailable`.
+            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
+                get throws {
+                    switch self {
+                    case let .serviceUnavailable(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "serviceUnavailable",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Set issue field values for an issue
+    ///
+    /// Set custom field values for an issue, replacing any existing values. You can set values for organization-level issue fields that have been defined for the repository's organization.
+    ///
+    /// This endpoint supports the following field data types:
+    /// - **`text`**: String values for text fields
+    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
+    /// - **`number`**: Numeric values for number fields
+    /// - **`date`**: ISO 8601 date strings for date fields
+    ///
+    /// This operation will replace all existing field values with the provided ones. If you want to add field values without replacing existing ones, use the `POST` endpoint instead.
+    ///
+    /// Only users with push access to the repository can set issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
+    ///
+    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
+    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)`.
+    public enum IssuesSetIssueFieldValues {
+        public static let id: Swift.String = "issues/set-issue-field-values"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the issue.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/path/issue_number`.
+                public var issueNumber: Components.Parameters.IssueNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - issueNumber: The number that identifies the issue.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    issueNumber: Components.Parameters.IssueNumber
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.issueNumber = issueNumber
+                }
+            }
+            public var path: Operations.IssuesSetIssueFieldValues.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesSetIssueFieldValues.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesSetIssueFieldValues.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.IssuesSetIssueFieldValues.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload`.
+                    public struct IssueFieldValuesPayloadPayload: Codable, Hashable, Sendable {
+                        /// The ID of the issue field to set
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload/field_id`.
+                        public var fieldId: Swift.Int
+                        /// The value to set for the field. The type depends on the field's data type:
+                        /// - For text fields: provide a string value
+                        /// - For single_select fields: provide the option name as a string (must match an existing option)
+                        /// - For number fields: provide a numeric value
+                        /// - For date fields: provide an ISO 8601 date string
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload/value`.
+                        @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                            /// The value to set for text, single_select, or date fields
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload/value/case1`.
+                            case case1(Swift.String)
+                            /// The value to set for number fields
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload/value/case2`.
+                            case case2(Swift.Double)
+                            public init(from decoder: any Swift.Decoder) throws {
+                                var errors: [any Swift.Error] = []
+                                do {
+                                    self = .case1(try decoder.decodeFromSingleValueContainer())
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                do {
+                                    self = .case2(try decoder.decodeFromSingleValueContainer())
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                    type: Self.self,
+                                    codingPath: decoder.codingPath,
+                                    errors: errors
+                                )
+                            }
+                            public func encode(to encoder: any Swift.Encoder) throws {
+                                switch self {
+                                case let .case1(value):
+                                    try encoder.encodeToSingleValueContainer(value)
+                                case let .case2(value):
+                                    try encoder.encodeToSingleValueContainer(value)
+                                }
+                            }
+                        }
+                        /// The value to set for the field. The type depends on the field's data type:
+                        /// - For text fields: provide a string value
+                        /// - For single_select fields: provide the option name as a string (must match an existing option)
+                        /// - For number fields: provide a numeric value
+                        /// - For date fields: provide an ISO 8601 date string
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload/value`.
+                        public var value: Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
+                        /// Creates a new `IssueFieldValuesPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - fieldId: The ID of the issue field to set
+                        ///   - value: The value to set for the field. The type depends on the field's data type:
+                        public init(
+                            fieldId: Swift.Int,
+                            value: Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
+                        ) {
+                            self.fieldId = fieldId
+                            self.value = value
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case fieldId = "field_id"
+                            case value
+                        }
+                        public init(from decoder: any Swift.Decoder) throws {
+                            let container = try decoder.container(keyedBy: CodingKeys.self)
+                            self.fieldId = try container.decode(
+                                Swift.Int.self,
+                                forKey: .fieldId
+                            )
+                            self.value = try container.decode(
+                                Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload.self,
+                                forKey: .value
+                            )
+                            try decoder.ensureNoAdditionalProperties(knownKeys: [
+                                "field_id",
+                                "value"
+                            ])
+                        }
+                    }
+                    /// An array of issue field values to set for this issue. Each field value must include the field ID and the value to set. All existing field values will be replaced.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/issue_field_values`.
+                    public typealias IssueFieldValuesPayload = [Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload]
+                    /// An array of issue field values to set for this issue. Each field value must include the field ID and the value to set. All existing field values will be replaced.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/issue_field_values`.
+                    public var issueFieldValues: Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayload?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - issueFieldValues: An array of issue field values to set for this issue. Each field value must include the field ID and the value to set. All existing field values will be replaced.
+                    public init(issueFieldValues: Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayload? = nil) {
+                        self.issueFieldValues = issueFieldValues
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case issueFieldValues = "issue_field_values"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/requestBody/content/application\/json`.
+                case json(Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload)
+            }
+            public var body: Operations.IssuesSetIssueFieldValues.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.IssuesSetIssueFieldValues.Input.Path,
+                headers: Operations.IssuesSetIssueFieldValues.Input.Headers = .init(),
+                body: Operations.IssuesSetIssueFieldValues.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/PUT/responses/200/content/application\/json`.
+                    case json([Components.Schemas.IssueFieldValue])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.IssueFieldValue] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.IssuesSetIssueFieldValues.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.IssuesSetIssueFieldValues.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.IssuesSetIssueFieldValues.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.IssuesSetIssueFieldValues.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Service unavailable
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/503`.
+            ///
+            /// HTTP response code: `503 serviceUnavailable`.
+            case serviceUnavailable(Components.Responses.ServiceUnavailable)
+            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
+            ///
+            /// - Throws: An error if `self` is not `.serviceUnavailable`.
+            /// - SeeAlso: `.serviceUnavailable`.
+            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
+                get throws {
+                    switch self {
+                    case let .serviceUnavailable(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "serviceUnavailable",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Delete an issue field value from an issue
+    ///
+    /// Remove a specific custom field value from an issue.
+    ///
+    /// Only users with push access to the repository can delete issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
+    ///
+    /// If the specified field does not have a value set on the issue, this operation will return a `404` error.
+    ///
+    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
+    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)`.
+    public enum IssuesDeleteIssueFieldValue {
+        public static let id: Swift.String = "issues/delete-issue-field-value"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/DELETE/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/DELETE/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the issue.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/DELETE/path/issue_number`.
+                public var issueNumber: Components.Parameters.IssueNumber
+                /// The unique identifier of the issue field.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/DELETE/path/issue_field_id`.
+                public var issueFieldId: Components.Parameters.IssueFieldId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - issueNumber: The number that identifies the issue.
+                ///   - issueFieldId: The unique identifier of the issue field.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    issueNumber: Components.Parameters.IssueNumber,
+                    issueFieldId: Components.Parameters.IssueFieldId
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.issueNumber = issueNumber
+                    self.issueFieldId = issueFieldId
+                }
+            }
+            public var path: Operations.IssuesDeleteIssueFieldValue.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesDeleteIssueFieldValue.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesDeleteIssueFieldValue.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.IssuesDeleteIssueFieldValue.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.IssuesDeleteIssueFieldValue.Input.Path,
+                headers: Operations.IssuesDeleteIssueFieldValue.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Issue field value deleted successfully
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.IssuesDeleteIssueFieldValue.Output.NoContent)
+            /// Issue field value deleted successfully
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.IssuesDeleteIssueFieldValue.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Service unavailable
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/503`.
+            ///
+            /// HTTP response code: `503 serviceUnavailable`.
+            case serviceUnavailable(Components.Responses.ServiceUnavailable)
+            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
+            ///
+            /// - Throws: An error if `self` is not `.serviceUnavailable`.
+            /// - SeeAlso: `.serviceUnavailable`.
+            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
+                get throws {
+                    switch self {
+                    case let .serviceUnavailable(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "serviceUnavailable",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// List labels for an issue
     ///
     /// Lists all labels for an issue.
@@ -22495,1028 +23534,6 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
-        }
-    }
-    /// Add issue field values to an issue
-    ///
-    /// Add custom field values to an issue. You can set values for organization-level issue fields that have been defined for the repository's organization.
-    /// Adding an empty array will clear all existing field values for the issue.
-    ///
-    /// This endpoint supports the following field data types:
-    /// - **`text`**: String values for text fields
-    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
-    /// - **`number`**: Numeric values for number fields
-    /// - **`date`**: ISO 8601 date strings for date fields
-    ///
-    /// Only users with push access to the repository can add issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
-    ///
-    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
-    ///
-    /// - Remark: HTTP `POST /repositories/{repository_id}/issues/{issue_number}/issue-field-values`.
-    /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)`.
-    public enum IssuesAddIssueFieldValues {
-        public static let id: Swift.String = "issues/add-issue-field-values"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/path`.
-            public struct Path: Sendable, Hashable {
-                /// The unique identifier of the repository.
-                ///
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/path/repository_id`.
-                public var repositoryId: Components.Parameters.RepositoryId
-                /// The number that identifies the issue.
-                ///
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/path/issue_number`.
-                public var issueNumber: Components.Parameters.IssueNumber
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - repositoryId: The unique identifier of the repository.
-                ///   - issueNumber: The number that identifies the issue.
-                public init(
-                    repositoryId: Components.Parameters.RepositoryId,
-                    issueNumber: Components.Parameters.IssueNumber
-                ) {
-                    self.repositoryId = repositoryId
-                    self.issueNumber = issueNumber
-                }
-            }
-            public var path: Operations.IssuesAddIssueFieldValues.Input.Path
-            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesAddIssueFieldValues.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesAddIssueFieldValues.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.IssuesAddIssueFieldValues.Input.Headers
-            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/requestBody`.
-            @frozen public enum Body: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/requestBody/json`.
-                public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload`.
-                    public struct IssueFieldValuesPayloadPayload: Codable, Hashable, Sendable {
-                        /// The ID of the issue field to set
-                        ///
-                        /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload/field_id`.
-                        public var fieldId: Swift.Int
-                        /// The value to set for the field. The type depends on the field's data type:
-                        /// - For text fields: provide a string value
-                        /// - For single_select fields: provide the option name as a string (must match an existing option)
-                        /// - For number fields: provide a numeric value
-                        /// - For date fields: provide an ISO 8601 date string
-                        ///
-                        /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload/value`.
-                        @frozen public enum ValuePayload: Codable, Hashable, Sendable {
-                            /// The value to set for text, single_select, or date fields
-                            ///
-                            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload/value/case1`.
-                            case case1(Swift.String)
-                            /// The value to set for number fields
-                            ///
-                            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload/value/case2`.
-                            case case2(Swift.Double)
-                            public init(from decoder: any Swift.Decoder) throws {
-                                var errors: [any Swift.Error] = []
-                                do {
-                                    self = .case1(try decoder.decodeFromSingleValueContainer())
-                                    return
-                                } catch {
-                                    errors.append(error)
-                                }
-                                do {
-                                    self = .case2(try decoder.decodeFromSingleValueContainer())
-                                    return
-                                } catch {
-                                    errors.append(error)
-                                }
-                                throw Swift.DecodingError.failedToDecodeOneOfSchema(
-                                    type: Self.self,
-                                    codingPath: decoder.codingPath,
-                                    errors: errors
-                                )
-                            }
-                            public func encode(to encoder: any Swift.Encoder) throws {
-                                switch self {
-                                case let .case1(value):
-                                    try encoder.encodeToSingleValueContainer(value)
-                                case let .case2(value):
-                                    try encoder.encodeToSingleValueContainer(value)
-                                }
-                            }
-                        }
-                        /// The value to set for the field. The type depends on the field's data type:
-                        /// - For text fields: provide a string value
-                        /// - For single_select fields: provide the option name as a string (must match an existing option)
-                        /// - For number fields: provide a numeric value
-                        /// - For date fields: provide an ISO 8601 date string
-                        ///
-                        /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/requestBody/json/IssueFieldValuesPayload/value`.
-                        public var value: Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
-                        /// Creates a new `IssueFieldValuesPayloadPayload`.
-                        ///
-                        /// - Parameters:
-                        ///   - fieldId: The ID of the issue field to set
-                        ///   - value: The value to set for the field. The type depends on the field's data type:
-                        public init(
-                            fieldId: Swift.Int,
-                            value: Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
-                        ) {
-                            self.fieldId = fieldId
-                            self.value = value
-                        }
-                        public enum CodingKeys: String, CodingKey {
-                            case fieldId = "field_id"
-                            case value
-                        }
-                        public init(from decoder: any Swift.Decoder) throws {
-                            let container = try decoder.container(keyedBy: CodingKeys.self)
-                            self.fieldId = try container.decode(
-                                Swift.Int.self,
-                                forKey: .fieldId
-                            )
-                            self.value = try container.decode(
-                                Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload.self,
-                                forKey: .value
-                            )
-                            try decoder.ensureNoAdditionalProperties(knownKeys: [
-                                "field_id",
-                                "value"
-                            ])
-                        }
-                    }
-                    /// An array of issue field values to add to this issue. Each field value must include the field ID and the value to set.
-                    ///
-                    /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/requestBody/json/issue_field_values`.
-                    public typealias IssueFieldValuesPayload = [Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload]
-                    /// An array of issue field values to add to this issue. Each field value must include the field ID and the value to set.
-                    ///
-                    /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/requestBody/json/issue_field_values`.
-                    public var issueFieldValues: Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayload?
-                    /// Creates a new `JsonPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - issueFieldValues: An array of issue field values to add to this issue. Each field value must include the field ID and the value to set.
-                    public init(issueFieldValues: Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayload? = nil) {
-                        self.issueFieldValues = issueFieldValues
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case issueFieldValues = "issue_field_values"
-                    }
-                }
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/requestBody/content/application\/json`.
-                case json(Operations.IssuesAddIssueFieldValues.Input.Body.JsonPayload)
-            }
-            public var body: Operations.IssuesAddIssueFieldValues.Input.Body
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - headers:
-            ///   - body:
-            public init(
-                path: Operations.IssuesAddIssueFieldValues.Input.Path,
-                headers: Operations.IssuesAddIssueFieldValues.Input.Headers = .init(),
-                body: Operations.IssuesAddIssueFieldValues.Input.Body
-            ) {
-                self.path = path
-                self.headers = headers
-                self.body = body
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/responses/200/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/POST/responses/200/content/application\/json`.
-                    case json([Components.Schemas.IssueFieldValue])
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: [Components.Schemas.IssueFieldValue] {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.IssuesAddIssueFieldValues.Output.Ok.Body
-                /// Creates a new `Ok`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.IssuesAddIssueFieldValues.Output.Ok.Body) {
-                    self.body = body
-                }
-            }
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/200`.
-            ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.IssuesAddIssueFieldValues.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
-            ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.IssuesAddIssueFieldValues.Output.Ok {
-                get throws {
-                    switch self {
-                    case let .ok(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Bad Request
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/400`.
-            ///
-            /// HTTP response code: `400 badRequest`.
-            case badRequest(Components.Responses.BadRequest)
-            /// The associated value of the enum case if `self` is `.badRequest`.
-            ///
-            /// - Throws: An error if `self` is not `.badRequest`.
-            /// - SeeAlso: `.badRequest`.
-            public var badRequest: Components.Responses.BadRequest {
-                get throws {
-                    switch self {
-                    case let .badRequest(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "badRequest",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Forbidden
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/403`.
-            ///
-            /// HTTP response code: `403 forbidden`.
-            case forbidden(Components.Responses.Forbidden)
-            /// The associated value of the enum case if `self` is `.forbidden`.
-            ///
-            /// - Throws: An error if `self` is not `.forbidden`.
-            /// - SeeAlso: `.forbidden`.
-            public var forbidden: Components.Responses.Forbidden {
-                get throws {
-                    switch self {
-                    case let .forbidden(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "forbidden",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Validation failed, or the endpoint has been spammed.
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/422`.
-            ///
-            /// HTTP response code: `422 unprocessableContent`.
-            case unprocessableContent(Components.Responses.ValidationFailed)
-            /// The associated value of the enum case if `self` is `.unprocessableContent`.
-            ///
-            /// - Throws: An error if `self` is not `.unprocessableContent`.
-            /// - SeeAlso: `.unprocessableContent`.
-            public var unprocessableContent: Components.Responses.ValidationFailed {
-                get throws {
-                    switch self {
-                    case let .unprocessableContent(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "unprocessableContent",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Service unavailable
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/post(issues/add-issue-field-values)/responses/503`.
-            ///
-            /// HTTP response code: `503 serviceUnavailable`.
-            case serviceUnavailable(Components.Responses.ServiceUnavailable)
-            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
-            ///
-            /// - Throws: An error if `self` is not `.serviceUnavailable`.
-            /// - SeeAlso: `.serviceUnavailable`.
-            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
-                get throws {
-                    switch self {
-                    case let .serviceUnavailable(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "serviceUnavailable",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case applicationScimJson
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                case "application/scim+json":
-                    self = .applicationScimJson
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                case .applicationScimJson:
-                    return "application/scim+json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json,
-                    .applicationScimJson
-                ]
-            }
-        }
-    }
-    /// Set issue field values for an issue
-    ///
-    /// Set custom field values for an issue, replacing any existing values. You can set values for organization-level issue fields that have been defined for the repository's organization.
-    ///
-    /// This endpoint supports the following field data types:
-    /// - **`text`**: String values for text fields
-    /// - **`single_select`**: Option names for single-select fields (must match an existing option name)
-    /// - **`number`**: Numeric values for number fields
-    /// - **`date`**: ISO 8601 date strings for date fields
-    ///
-    /// This operation will replace all existing field values with the provided ones. If you want to add field values without replacing existing ones, use the `POST` endpoint instead.
-    ///
-    /// Only users with push access to the repository can set issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
-    ///
-    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
-    ///
-    /// - Remark: HTTP `PUT /repositories/{repository_id}/issues/{issue_number}/issue-field-values`.
-    /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)`.
-    public enum IssuesSetIssueFieldValues {
-        public static let id: Swift.String = "issues/set-issue-field-values"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/path`.
-            public struct Path: Sendable, Hashable {
-                /// The unique identifier of the repository.
-                ///
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/path/repository_id`.
-                public var repositoryId: Components.Parameters.RepositoryId
-                /// The number that identifies the issue.
-                ///
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/path/issue_number`.
-                public var issueNumber: Components.Parameters.IssueNumber
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - repositoryId: The unique identifier of the repository.
-                ///   - issueNumber: The number that identifies the issue.
-                public init(
-                    repositoryId: Components.Parameters.RepositoryId,
-                    issueNumber: Components.Parameters.IssueNumber
-                ) {
-                    self.repositoryId = repositoryId
-                    self.issueNumber = issueNumber
-                }
-            }
-            public var path: Operations.IssuesSetIssueFieldValues.Input.Path
-            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesSetIssueFieldValues.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesSetIssueFieldValues.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.IssuesSetIssueFieldValues.Input.Headers
-            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/requestBody`.
-            @frozen public enum Body: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/requestBody/json`.
-                public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload`.
-                    public struct IssueFieldValuesPayloadPayload: Codable, Hashable, Sendable {
-                        /// The ID of the issue field to set
-                        ///
-                        /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload/field_id`.
-                        public var fieldId: Swift.Int
-                        /// The value to set for the field. The type depends on the field's data type:
-                        /// - For text fields: provide a string value
-                        /// - For single_select fields: provide the option name as a string (must match an existing option)
-                        /// - For number fields: provide a numeric value
-                        /// - For date fields: provide an ISO 8601 date string
-                        ///
-                        /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload/value`.
-                        @frozen public enum ValuePayload: Codable, Hashable, Sendable {
-                            /// The value to set for text, single_select, or date fields
-                            ///
-                            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload/value/case1`.
-                            case case1(Swift.String)
-                            /// The value to set for number fields
-                            ///
-                            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload/value/case2`.
-                            case case2(Swift.Double)
-                            public init(from decoder: any Swift.Decoder) throws {
-                                var errors: [any Swift.Error] = []
-                                do {
-                                    self = .case1(try decoder.decodeFromSingleValueContainer())
-                                    return
-                                } catch {
-                                    errors.append(error)
-                                }
-                                do {
-                                    self = .case2(try decoder.decodeFromSingleValueContainer())
-                                    return
-                                } catch {
-                                    errors.append(error)
-                                }
-                                throw Swift.DecodingError.failedToDecodeOneOfSchema(
-                                    type: Self.self,
-                                    codingPath: decoder.codingPath,
-                                    errors: errors
-                                )
-                            }
-                            public func encode(to encoder: any Swift.Encoder) throws {
-                                switch self {
-                                case let .case1(value):
-                                    try encoder.encodeToSingleValueContainer(value)
-                                case let .case2(value):
-                                    try encoder.encodeToSingleValueContainer(value)
-                                }
-                            }
-                        }
-                        /// The value to set for the field. The type depends on the field's data type:
-                        /// - For text fields: provide a string value
-                        /// - For single_select fields: provide the option name as a string (must match an existing option)
-                        /// - For number fields: provide a numeric value
-                        /// - For date fields: provide an ISO 8601 date string
-                        ///
-                        /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/IssueFieldValuesPayload/value`.
-                        public var value: Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
-                        /// Creates a new `IssueFieldValuesPayloadPayload`.
-                        ///
-                        /// - Parameters:
-                        ///   - fieldId: The ID of the issue field to set
-                        ///   - value: The value to set for the field. The type depends on the field's data type:
-                        public init(
-                            fieldId: Swift.Int,
-                            value: Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
-                        ) {
-                            self.fieldId = fieldId
-                            self.value = value
-                        }
-                        public enum CodingKeys: String, CodingKey {
-                            case fieldId = "field_id"
-                            case value
-                        }
-                        public init(from decoder: any Swift.Decoder) throws {
-                            let container = try decoder.container(keyedBy: CodingKeys.self)
-                            self.fieldId = try container.decode(
-                                Swift.Int.self,
-                                forKey: .fieldId
-                            )
-                            self.value = try container.decode(
-                                Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload.self,
-                                forKey: .value
-                            )
-                            try decoder.ensureNoAdditionalProperties(knownKeys: [
-                                "field_id",
-                                "value"
-                            ])
-                        }
-                    }
-                    /// An array of issue field values to set for this issue. Each field value must include the field ID and the value to set. All existing field values will be replaced.
-                    ///
-                    /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/issue_field_values`.
-                    public typealias IssueFieldValuesPayload = [Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload]
-                    /// An array of issue field values to set for this issue. Each field value must include the field ID and the value to set. All existing field values will be replaced.
-                    ///
-                    /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/requestBody/json/issue_field_values`.
-                    public var issueFieldValues: Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayload?
-                    /// Creates a new `JsonPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - issueFieldValues: An array of issue field values to set for this issue. Each field value must include the field ID and the value to set. All existing field values will be replaced.
-                    public init(issueFieldValues: Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload.IssueFieldValuesPayload? = nil) {
-                        self.issueFieldValues = issueFieldValues
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case issueFieldValues = "issue_field_values"
-                    }
-                }
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/requestBody/content/application\/json`.
-                case json(Operations.IssuesSetIssueFieldValues.Input.Body.JsonPayload)
-            }
-            public var body: Operations.IssuesSetIssueFieldValues.Input.Body
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - headers:
-            ///   - body:
-            public init(
-                path: Operations.IssuesSetIssueFieldValues.Input.Path,
-                headers: Operations.IssuesSetIssueFieldValues.Input.Headers = .init(),
-                body: Operations.IssuesSetIssueFieldValues.Input.Body
-            ) {
-                self.path = path
-                self.headers = headers
-                self.body = body
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/responses/200/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/PUT/responses/200/content/application\/json`.
-                    case json([Components.Schemas.IssueFieldValue])
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: [Components.Schemas.IssueFieldValue] {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.IssuesSetIssueFieldValues.Output.Ok.Body
-                /// Creates a new `Ok`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.IssuesSetIssueFieldValues.Output.Ok.Body) {
-                    self.body = body
-                }
-            }
-            /// Response
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/200`.
-            ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.IssuesSetIssueFieldValues.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
-            ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.IssuesSetIssueFieldValues.Output.Ok {
-                get throws {
-                    switch self {
-                    case let .ok(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Bad Request
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/400`.
-            ///
-            /// HTTP response code: `400 badRequest`.
-            case badRequest(Components.Responses.BadRequest)
-            /// The associated value of the enum case if `self` is `.badRequest`.
-            ///
-            /// - Throws: An error if `self` is not `.badRequest`.
-            /// - SeeAlso: `.badRequest`.
-            public var badRequest: Components.Responses.BadRequest {
-                get throws {
-                    switch self {
-                    case let .badRequest(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "badRequest",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Forbidden
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/403`.
-            ///
-            /// HTTP response code: `403 forbidden`.
-            case forbidden(Components.Responses.Forbidden)
-            /// The associated value of the enum case if `self` is `.forbidden`.
-            ///
-            /// - Throws: An error if `self` is not `.forbidden`.
-            /// - SeeAlso: `.forbidden`.
-            public var forbidden: Components.Responses.Forbidden {
-                get throws {
-                    switch self {
-                    case let .forbidden(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "forbidden",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Validation failed, or the endpoint has been spammed.
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/422`.
-            ///
-            /// HTTP response code: `422 unprocessableContent`.
-            case unprocessableContent(Components.Responses.ValidationFailed)
-            /// The associated value of the enum case if `self` is `.unprocessableContent`.
-            ///
-            /// - Throws: An error if `self` is not `.unprocessableContent`.
-            /// - SeeAlso: `.unprocessableContent`.
-            public var unprocessableContent: Components.Responses.ValidationFailed {
-                get throws {
-                    switch self {
-                    case let .unprocessableContent(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "unprocessableContent",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Service unavailable
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/put(issues/set-issue-field-values)/responses/503`.
-            ///
-            /// HTTP response code: `503 serviceUnavailable`.
-            case serviceUnavailable(Components.Responses.ServiceUnavailable)
-            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
-            ///
-            /// - Throws: An error if `self` is not `.serviceUnavailable`.
-            /// - SeeAlso: `.serviceUnavailable`.
-            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
-                get throws {
-                    switch self {
-                    case let .serviceUnavailable(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "serviceUnavailable",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case applicationScimJson
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                case "application/scim+json":
-                    self = .applicationScimJson
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                case .applicationScimJson:
-                    return "application/scim+json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json,
-                    .applicationScimJson
-                ]
-            }
-        }
-    }
-    /// Delete an issue field value from an issue
-    ///
-    /// Remove a specific custom field value from an issue.
-    ///
-    /// Only users with push access to the repository can delete issue field values. If you don't have the proper permissions, you'll receive a `403 Forbidden` response.
-    ///
-    /// If the specified field does not have a value set on the issue, this operation will return a `404` error.
-    ///
-    /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
-    /// and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
-    ///
-    /// - Remark: HTTP `DELETE /repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}`.
-    /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)`.
-    public enum IssuesDeleteIssueFieldValue {
-        public static let id: Swift.String = "issues/delete-issue-field-value"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/DELETE/path`.
-            public struct Path: Sendable, Hashable {
-                /// The unique identifier of the repository.
-                ///
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/DELETE/path/repository_id`.
-                public var repositoryId: Components.Parameters.RepositoryId
-                /// The number that identifies the issue.
-                ///
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/DELETE/path/issue_number`.
-                public var issueNumber: Components.Parameters.IssueNumber
-                /// The unique identifier of the issue field.
-                ///
-                /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/DELETE/path/issue_field_id`.
-                public var issueFieldId: Components.Parameters.IssueFieldId
-                /// Creates a new `Path`.
-                ///
-                /// - Parameters:
-                ///   - repositoryId: The unique identifier of the repository.
-                ///   - issueNumber: The number that identifies the issue.
-                ///   - issueFieldId: The unique identifier of the issue field.
-                public init(
-                    repositoryId: Components.Parameters.RepositoryId,
-                    issueNumber: Components.Parameters.IssueNumber,
-                    issueFieldId: Components.Parameters.IssueFieldId
-                ) {
-                    self.repositoryId = repositoryId
-                    self.issueNumber = issueNumber
-                    self.issueFieldId = issueFieldId
-                }
-            }
-            public var path: Operations.IssuesDeleteIssueFieldValue.Input.Path
-            /// - Remark: Generated from `#/paths/repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/DELETE/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesDeleteIssueFieldValue.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesDeleteIssueFieldValue.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.IssuesDeleteIssueFieldValue.Input.Headers
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - path:
-            ///   - headers:
-            public init(
-                path: Operations.IssuesDeleteIssueFieldValue.Input.Path,
-                headers: Operations.IssuesDeleteIssueFieldValue.Input.Headers = .init()
-            ) {
-                self.path = path
-                self.headers = headers
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct NoContent: Sendable, Hashable {
-                /// Creates a new `NoContent`.
-                public init() {}
-            }
-            /// Issue field value deleted successfully
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/204`.
-            ///
-            /// HTTP response code: `204 noContent`.
-            case noContent(Operations.IssuesDeleteIssueFieldValue.Output.NoContent)
-            /// Issue field value deleted successfully
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/204`.
-            ///
-            /// HTTP response code: `204 noContent`.
-            public static var noContent: Self {
-                .noContent(.init())
-            }
-            /// The associated value of the enum case if `self` is `.noContent`.
-            ///
-            /// - Throws: An error if `self` is not `.noContent`.
-            /// - SeeAlso: `.noContent`.
-            public var noContent: Operations.IssuesDeleteIssueFieldValue.Output.NoContent {
-                get throws {
-                    switch self {
-                    case let .noContent(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "noContent",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Forbidden
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/403`.
-            ///
-            /// HTTP response code: `403 forbidden`.
-            case forbidden(Components.Responses.Forbidden)
-            /// The associated value of the enum case if `self` is `.forbidden`.
-            ///
-            /// - Throws: An error if `self` is not `.forbidden`.
-            /// - SeeAlso: `.forbidden`.
-            public var forbidden: Components.Responses.Forbidden {
-                get throws {
-                    switch self {
-                    case let .forbidden(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "forbidden",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Resource not found
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/404`.
-            ///
-            /// HTTP response code: `404 notFound`.
-            case notFound(Components.Responses.NotFound)
-            /// The associated value of the enum case if `self` is `.notFound`.
-            ///
-            /// - Throws: An error if `self` is not `.notFound`.
-            /// - SeeAlso: `.notFound`.
-            public var notFound: Components.Responses.NotFound {
-                get throws {
-                    switch self {
-                    case let .notFound(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "notFound",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Validation failed, or the endpoint has been spammed.
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/422`.
-            ///
-            /// HTTP response code: `422 unprocessableContent`.
-            case unprocessableContent(Components.Responses.ValidationFailed)
-            /// The associated value of the enum case if `self` is `.unprocessableContent`.
-            ///
-            /// - Throws: An error if `self` is not `.unprocessableContent`.
-            /// - SeeAlso: `.unprocessableContent`.
-            public var unprocessableContent: Components.Responses.ValidationFailed {
-                get throws {
-                    switch self {
-                    case let .unprocessableContent(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "unprocessableContent",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Service unavailable
-            ///
-            /// - Remark: Generated from `#/paths//repositories/{repository_id}/issues/{issue_number}/issue-field-values/{issue_field_id}/delete(issues/delete-issue-field-value)/responses/503`.
-            ///
-            /// HTTP response code: `503 serviceUnavailable`.
-            case serviceUnavailable(Components.Responses.ServiceUnavailable)
-            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
-            ///
-            /// - Throws: An error if `self` is not `.serviceUnavailable`.
-            /// - SeeAlso: `.serviceUnavailable`.
-            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
-                get throws {
-                    switch self {
-                    case let .serviceUnavailable(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "serviceUnavailable",
                             response: self
                         )
                     }
