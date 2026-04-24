@@ -144,6 +144,24 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/pulls/{pull_number}`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/patch(pulls/update)`.
     func pullsUpdate(_ input: Operations.PullsUpdate.Input) async throws -> Operations.PullsUpdate.Output
+    /// Archive a pull request
+    ///
+    /// Archives a pull request. Closes, locks, and marks the pull request as archived.
+    /// Only repository admins can archive pull requests.
+    /// Archived pull requests are hidden from non-admin users.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/pulls/{pull_number}/archive`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/put(pulls/archive)`.
+    func pullsArchive(_ input: Operations.PullsArchive.Input) async throws -> Operations.PullsArchive.Output
+    /// Unarchive a pull request
+    ///
+    /// Unarchives a pull request. Removes the archived flag from the pull request.
+    /// Does not automatically reopen or unlock the pull request.
+    /// Only repository admins can unarchive pull requests.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/pulls/{pull_number}/archive`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/delete(pulls/unarchive)`.
+    func pullsUnarchive(_ input: Operations.PullsUnarchive.Input) async throws -> Operations.PullsUnarchive.Output
     /// List review comments on a pull request
     ///
     /// Lists all review comments for a specified pull request. By default, review comments
@@ -608,6 +626,40 @@ extension APIProtocol {
             path: path,
             headers: headers,
             body: body
+        ))
+    }
+    /// Archive a pull request
+    ///
+    /// Archives a pull request. Closes, locks, and marks the pull request as archived.
+    /// Only repository admins can archive pull requests.
+    /// Archived pull requests are hidden from non-admin users.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/pulls/{pull_number}/archive`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/put(pulls/archive)`.
+    public func pullsArchive(
+        path: Operations.PullsArchive.Input.Path,
+        headers: Operations.PullsArchive.Input.Headers = .init()
+    ) async throws -> Operations.PullsArchive.Output {
+        try await pullsArchive(Operations.PullsArchive.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Unarchive a pull request
+    ///
+    /// Unarchives a pull request. Removes the archived flag from the pull request.
+    /// Does not automatically reopen or unlock the pull request.
+    /// Only repository admins can unarchive pull requests.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/pulls/{pull_number}/archive`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/delete(pulls/unarchive)`.
+    public func pullsUnarchive(
+        path: Operations.PullsUnarchive.Input.Path,
+        headers: Operations.PullsUnarchive.Input.Headers = .init()
+    ) async throws -> Operations.PullsUnarchive.Output {
+        try await pullsUnarchive(Operations.PullsUnarchive.Input(
+            path: path,
+            headers: headers
         ))
     }
     /// List review comments on a pull request
@@ -7451,6 +7503,412 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Archive a pull request
+    ///
+    /// Archives a pull request. Closes, locks, and marks the pull request as archived.
+    /// Only repository admins can archive pull requests.
+    /// Archived pull requests are hidden from non-admin users.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/pulls/{pull_number}/archive`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/put(pulls/archive)`.
+    public enum PullsArchive {
+        public static let id: Swift.String = "pulls/archive"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/archive/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/archive/PUT/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/archive/PUT/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the pull request.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/archive/PUT/path/pull_number`.
+                public var pullNumber: Components.Parameters.PullNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - pullNumber: The number that identifies the pull request.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    pullNumber: Components.Parameters.PullNumber
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.pullNumber = pullNumber
+                }
+            }
+            public var path: Operations.PullsArchive.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/archive/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullsArchive.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullsArchive.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.PullsArchive.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.PullsArchive.Input.Path,
+                headers: Operations.PullsArchive.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/put(pulls/archive)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.PullsArchive.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/put(pulls/archive)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.PullsArchive.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/put(pulls/archive)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/put(pulls/archive)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/put(pulls/archive)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Unarchive a pull request
+    ///
+    /// Unarchives a pull request. Removes the archived flag from the pull request.
+    /// Does not automatically reopen or unlock the pull request.
+    /// Only repository admins can unarchive pull requests.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/pulls/{pull_number}/archive`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/delete(pulls/unarchive)`.
+    public enum PullsUnarchive {
+        public static let id: Swift.String = "pulls/unarchive"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/archive/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/archive/DELETE/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/archive/DELETE/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the pull request.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/archive/DELETE/path/pull_number`.
+                public var pullNumber: Components.Parameters.PullNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - pullNumber: The number that identifies the pull request.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    pullNumber: Components.Parameters.PullNumber
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.pullNumber = pullNumber
+                }
+            }
+            public var path: Operations.PullsUnarchive.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/archive/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullsUnarchive.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullsUnarchive.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.PullsUnarchive.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.PullsUnarchive.Input.Path,
+                headers: Operations.PullsUnarchive.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/delete(pulls/unarchive)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.PullsUnarchive.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/delete(pulls/unarchive)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.PullsUnarchive.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/delete(pulls/unarchive)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/delete(pulls/unarchive)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/archive/delete(pulls/unarchive)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
                             response: self
                         )
                     }
