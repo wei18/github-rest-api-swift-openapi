@@ -24,6 +24,43 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /enterprises/{enterprise}/dependabot/alerts`.
     /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/alerts/get(dependabot/list-alerts-for-enterprise)`.
     func dependabotListAlertsForEnterprise(_ input: Operations.DependabotListAlertsForEnterprise.Input) async throws -> Operations.DependabotListAlertsForEnterprise.Output
+    /// Lists the repositories Dependabot can access in an enterprise
+    ///
+    /// Lists repositories that enterprise admins have allowed Dependabot to access when updating dependencies across organizations in the enterprise.
+    ///
+    /// The authenticated user must be an enterprise owner to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/get(dependabot/repository-access-for-enterprise)`.
+    func dependabotRepositoryAccessForEnterprise(_ input: Operations.DependabotRepositoryAccessForEnterprise.Input) async throws -> Operations.DependabotRepositoryAccessForEnterprise.Output
+    /// Updates Dependabot's repository access list for an enterprise
+    ///
+    /// Updates repositories according to the list of repositories that enterprise admins have given Dependabot access to when they've updated dependencies across organizations in the enterprise.
+    ///
+    /// The authenticated user must be an enterprise owner to use this endpoint.
+    ///
+    /// **Example request body:**
+    /// ```json
+    /// {
+    ///   "repository_ids_to_add": [123, 456],
+    ///   "repository_ids_to_remove": [789]
+    /// }
+    /// ```
+    ///
+    /// - Remark: HTTP `PATCH /enterprises/{enterprise}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/patch(dependabot/update-repository-access-for-enterprise)`.
+    func dependabotUpdateRepositoryAccessForEnterprise(_ input: Operations.DependabotUpdateRepositoryAccessForEnterprise.Input) async throws -> Operations.DependabotUpdateRepositoryAccessForEnterprise.Output
+    /// Set the default repository access level for Dependabot in an enterprise
+    ///
+    /// Sets the default level of repository access Dependabot will have while performing an update across organizations in the enterprise. Available values are:
+    /// - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories.
+    /// - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories.
+    ///
+    /// The authenticated user must be an enterprise owner to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/dependabot/repository-access/default-level`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level-for-enterprise)`.
+    func dependabotSetRepositoryAccessDefaultLevelForEnterprise(_ input: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input) async throws -> Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Output
     /// List Dependabot alerts for an organization
     ///
     /// Lists Dependabot alerts for an organization.
@@ -265,6 +302,73 @@ extension APIProtocol {
             path: path,
             query: query,
             headers: headers
+        ))
+    }
+    /// Lists the repositories Dependabot can access in an enterprise
+    ///
+    /// Lists repositories that enterprise admins have allowed Dependabot to access when updating dependencies across organizations in the enterprise.
+    ///
+    /// The authenticated user must be an enterprise owner to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/get(dependabot/repository-access-for-enterprise)`.
+    public func dependabotRepositoryAccessForEnterprise(
+        path: Operations.DependabotRepositoryAccessForEnterprise.Input.Path,
+        query: Operations.DependabotRepositoryAccessForEnterprise.Input.Query = .init(),
+        headers: Operations.DependabotRepositoryAccessForEnterprise.Input.Headers = .init()
+    ) async throws -> Operations.DependabotRepositoryAccessForEnterprise.Output {
+        try await dependabotRepositoryAccessForEnterprise(Operations.DependabotRepositoryAccessForEnterprise.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Updates Dependabot's repository access list for an enterprise
+    ///
+    /// Updates repositories according to the list of repositories that enterprise admins have given Dependabot access to when they've updated dependencies across organizations in the enterprise.
+    ///
+    /// The authenticated user must be an enterprise owner to use this endpoint.
+    ///
+    /// **Example request body:**
+    /// ```json
+    /// {
+    ///   "repository_ids_to_add": [123, 456],
+    ///   "repository_ids_to_remove": [789]
+    /// }
+    /// ```
+    ///
+    /// - Remark: HTTP `PATCH /enterprises/{enterprise}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/patch(dependabot/update-repository-access-for-enterprise)`.
+    public func dependabotUpdateRepositoryAccessForEnterprise(
+        path: Operations.DependabotUpdateRepositoryAccessForEnterprise.Input.Path,
+        headers: Operations.DependabotUpdateRepositoryAccessForEnterprise.Input.Headers = .init(),
+        body: Operations.DependabotUpdateRepositoryAccessForEnterprise.Input.Body
+    ) async throws -> Operations.DependabotUpdateRepositoryAccessForEnterprise.Output {
+        try await dependabotUpdateRepositoryAccessForEnterprise(Operations.DependabotUpdateRepositoryAccessForEnterprise.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Set the default repository access level for Dependabot in an enterprise
+    ///
+    /// Sets the default level of repository access Dependabot will have while performing an update across organizations in the enterprise. Available values are:
+    /// - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories.
+    /// - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories.
+    ///
+    /// The authenticated user must be an enterprise owner to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/dependabot/repository-access/default-level`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level-for-enterprise)`.
+    public func dependabotSetRepositoryAccessDefaultLevelForEnterprise(
+        path: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Path,
+        headers: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Headers = .init(),
+        body: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Body
+    ) async throws -> Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Output {
+        try await dependabotSetRepositoryAccessDefaultLevelForEnterprise(Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input(
+            path: path,
+            headers: headers,
+            body: body
         ))
     }
     /// List Dependabot alerts for an organization
@@ -2608,6 +2712,434 @@ public enum Components {
                 ])
             }
         }
+        /// A GitHub repository.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-simple-repository`.
+        public struct NullableSimpleRepository: Codable, Hashable, Sendable {
+            /// A unique identifier of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/id`.
+            public var id: Swift.Int64
+            /// The GraphQL identifier of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/name`.
+            public var name: Swift.String
+            /// The full, globally unique, name of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/full_name`.
+            public var fullName: Swift.String
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/owner`.
+            public var owner: Components.Schemas.SimpleUser
+            /// Whether the repository is private.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/private`.
+            public var _private: Swift.Bool
+            /// The URL to view the repository on GitHub.com.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/html_url`.
+            public var htmlUrl: Swift.String
+            /// The repository description.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/description`.
+            public var description: Swift.String?
+            /// Whether the repository is a fork.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/fork`.
+            public var fork: Swift.Bool
+            /// The URL to get more information about the repository from the GitHub API.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/url`.
+            public var url: Swift.String
+            /// A template for the API URL to download the repository as an archive.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/archive_url`.
+            public var archiveUrl: Swift.String
+            /// A template for the API URL to list the available assignees for issues in the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/assignees_url`.
+            public var assigneesUrl: Swift.String
+            /// A template for the API URL to create or retrieve a raw Git blob in the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/blobs_url`.
+            public var blobsUrl: Swift.String
+            /// A template for the API URL to get information about branches in the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/branches_url`.
+            public var branchesUrl: Swift.String
+            /// A template for the API URL to get information about collaborators of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/collaborators_url`.
+            public var collaboratorsUrl: Swift.String
+            /// A template for the API URL to get information about comments on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/comments_url`.
+            public var commentsUrl: Swift.String
+            /// A template for the API URL to get information about commits on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/commits_url`.
+            public var commitsUrl: Swift.String
+            /// A template for the API URL to compare two commits or refs.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/compare_url`.
+            public var compareUrl: Swift.String
+            /// A template for the API URL to get the contents of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/contents_url`.
+            public var contentsUrl: Swift.String
+            /// A template for the API URL to list the contributors to the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/contributors_url`.
+            public var contributorsUrl: Swift.String
+            /// The API URL to list the deployments of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/deployments_url`.
+            public var deploymentsUrl: Swift.String
+            /// The API URL to list the downloads on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/downloads_url`.
+            public var downloadsUrl: Swift.String
+            /// The API URL to list the events of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/events_url`.
+            public var eventsUrl: Swift.String
+            /// The API URL to list the forks of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/forks_url`.
+            public var forksUrl: Swift.String
+            /// A template for the API URL to get information about Git commits of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/git_commits_url`.
+            public var gitCommitsUrl: Swift.String
+            /// A template for the API URL to get information about Git refs of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/git_refs_url`.
+            public var gitRefsUrl: Swift.String
+            /// A template for the API URL to get information about Git tags of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/git_tags_url`.
+            public var gitTagsUrl: Swift.String
+            /// A template for the API URL to get information about issue comments on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/issue_comment_url`.
+            public var issueCommentUrl: Swift.String
+            /// A template for the API URL to get information about issue events on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/issue_events_url`.
+            public var issueEventsUrl: Swift.String
+            /// A template for the API URL to get information about issues on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/issues_url`.
+            public var issuesUrl: Swift.String
+            /// A template for the API URL to get information about deploy keys on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/keys_url`.
+            public var keysUrl: Swift.String
+            /// A template for the API URL to get information about labels of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/labels_url`.
+            public var labelsUrl: Swift.String
+            /// The API URL to get information about the languages of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/languages_url`.
+            public var languagesUrl: Swift.String
+            /// The API URL to merge branches in the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/merges_url`.
+            public var mergesUrl: Swift.String
+            /// A template for the API URL to get information about milestones of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/milestones_url`.
+            public var milestonesUrl: Swift.String
+            /// A template for the API URL to get information about notifications on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/notifications_url`.
+            public var notificationsUrl: Swift.String
+            /// A template for the API URL to get information about pull requests on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/pulls_url`.
+            public var pullsUrl: Swift.String
+            /// A template for the API URL to get information about releases on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/releases_url`.
+            public var releasesUrl: Swift.String
+            /// The API URL to list the stargazers on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/stargazers_url`.
+            public var stargazersUrl: Swift.String
+            /// A template for the API URL to get information about statuses of a commit.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/statuses_url`.
+            public var statusesUrl: Swift.String
+            /// The API URL to list the subscribers on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/subscribers_url`.
+            public var subscribersUrl: Swift.String
+            /// The API URL to subscribe to notifications for this repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/subscription_url`.
+            public var subscriptionUrl: Swift.String
+            /// The API URL to get information about tags on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/tags_url`.
+            public var tagsUrl: Swift.String
+            /// The API URL to list the teams on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/teams_url`.
+            public var teamsUrl: Swift.String
+            /// A template for the API URL to create or retrieve a raw Git tree of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/trees_url`.
+            public var treesUrl: Swift.String
+            /// The API URL to list the hooks on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/hooks_url`.
+            public var hooksUrl: Swift.String
+            /// Creates a new `NullableSimpleRepository`.
+            ///
+            /// - Parameters:
+            ///   - id: A unique identifier of the repository.
+            ///   - nodeId: The GraphQL identifier of the repository.
+            ///   - name: The name of the repository.
+            ///   - fullName: The full, globally unique, name of the repository.
+            ///   - owner:
+            ///   - _private: Whether the repository is private.
+            ///   - htmlUrl: The URL to view the repository on GitHub.com.
+            ///   - description: The repository description.
+            ///   - fork: Whether the repository is a fork.
+            ///   - url: The URL to get more information about the repository from the GitHub API.
+            ///   - archiveUrl: A template for the API URL to download the repository as an archive.
+            ///   - assigneesUrl: A template for the API URL to list the available assignees for issues in the repository.
+            ///   - blobsUrl: A template for the API URL to create or retrieve a raw Git blob in the repository.
+            ///   - branchesUrl: A template for the API URL to get information about branches in the repository.
+            ///   - collaboratorsUrl: A template for the API URL to get information about collaborators of the repository.
+            ///   - commentsUrl: A template for the API URL to get information about comments on the repository.
+            ///   - commitsUrl: A template for the API URL to get information about commits on the repository.
+            ///   - compareUrl: A template for the API URL to compare two commits or refs.
+            ///   - contentsUrl: A template for the API URL to get the contents of the repository.
+            ///   - contributorsUrl: A template for the API URL to list the contributors to the repository.
+            ///   - deploymentsUrl: The API URL to list the deployments of the repository.
+            ///   - downloadsUrl: The API URL to list the downloads on the repository.
+            ///   - eventsUrl: The API URL to list the events of the repository.
+            ///   - forksUrl: The API URL to list the forks of the repository.
+            ///   - gitCommitsUrl: A template for the API URL to get information about Git commits of the repository.
+            ///   - gitRefsUrl: A template for the API URL to get information about Git refs of the repository.
+            ///   - gitTagsUrl: A template for the API URL to get information about Git tags of the repository.
+            ///   - issueCommentUrl: A template for the API URL to get information about issue comments on the repository.
+            ///   - issueEventsUrl: A template for the API URL to get information about issue events on the repository.
+            ///   - issuesUrl: A template for the API URL to get information about issues on the repository.
+            ///   - keysUrl: A template for the API URL to get information about deploy keys on the repository.
+            ///   - labelsUrl: A template for the API URL to get information about labels of the repository.
+            ///   - languagesUrl: The API URL to get information about the languages of the repository.
+            ///   - mergesUrl: The API URL to merge branches in the repository.
+            ///   - milestonesUrl: A template for the API URL to get information about milestones of the repository.
+            ///   - notificationsUrl: A template for the API URL to get information about notifications on the repository.
+            ///   - pullsUrl: A template for the API URL to get information about pull requests on the repository.
+            ///   - releasesUrl: A template for the API URL to get information about releases on the repository.
+            ///   - stargazersUrl: The API URL to list the stargazers on the repository.
+            ///   - statusesUrl: A template for the API URL to get information about statuses of a commit.
+            ///   - subscribersUrl: The API URL to list the subscribers on the repository.
+            ///   - subscriptionUrl: The API URL to subscribe to notifications for this repository.
+            ///   - tagsUrl: The API URL to get information about tags on the repository.
+            ///   - teamsUrl: The API URL to list the teams on the repository.
+            ///   - treesUrl: A template for the API URL to create or retrieve a raw Git tree of the repository.
+            ///   - hooksUrl: The API URL to list the hooks on the repository.
+            public init(
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                name: Swift.String,
+                fullName: Swift.String,
+                owner: Components.Schemas.SimpleUser,
+                _private: Swift.Bool,
+                htmlUrl: Swift.String,
+                description: Swift.String? = nil,
+                fork: Swift.Bool,
+                url: Swift.String,
+                archiveUrl: Swift.String,
+                assigneesUrl: Swift.String,
+                blobsUrl: Swift.String,
+                branchesUrl: Swift.String,
+                collaboratorsUrl: Swift.String,
+                commentsUrl: Swift.String,
+                commitsUrl: Swift.String,
+                compareUrl: Swift.String,
+                contentsUrl: Swift.String,
+                contributorsUrl: Swift.String,
+                deploymentsUrl: Swift.String,
+                downloadsUrl: Swift.String,
+                eventsUrl: Swift.String,
+                forksUrl: Swift.String,
+                gitCommitsUrl: Swift.String,
+                gitRefsUrl: Swift.String,
+                gitTagsUrl: Swift.String,
+                issueCommentUrl: Swift.String,
+                issueEventsUrl: Swift.String,
+                issuesUrl: Swift.String,
+                keysUrl: Swift.String,
+                labelsUrl: Swift.String,
+                languagesUrl: Swift.String,
+                mergesUrl: Swift.String,
+                milestonesUrl: Swift.String,
+                notificationsUrl: Swift.String,
+                pullsUrl: Swift.String,
+                releasesUrl: Swift.String,
+                stargazersUrl: Swift.String,
+                statusesUrl: Swift.String,
+                subscribersUrl: Swift.String,
+                subscriptionUrl: Swift.String,
+                tagsUrl: Swift.String,
+                teamsUrl: Swift.String,
+                treesUrl: Swift.String,
+                hooksUrl: Swift.String
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.fullName = fullName
+                self.owner = owner
+                self._private = _private
+                self.htmlUrl = htmlUrl
+                self.description = description
+                self.fork = fork
+                self.url = url
+                self.archiveUrl = archiveUrl
+                self.assigneesUrl = assigneesUrl
+                self.blobsUrl = blobsUrl
+                self.branchesUrl = branchesUrl
+                self.collaboratorsUrl = collaboratorsUrl
+                self.commentsUrl = commentsUrl
+                self.commitsUrl = commitsUrl
+                self.compareUrl = compareUrl
+                self.contentsUrl = contentsUrl
+                self.contributorsUrl = contributorsUrl
+                self.deploymentsUrl = deploymentsUrl
+                self.downloadsUrl = downloadsUrl
+                self.eventsUrl = eventsUrl
+                self.forksUrl = forksUrl
+                self.gitCommitsUrl = gitCommitsUrl
+                self.gitRefsUrl = gitRefsUrl
+                self.gitTagsUrl = gitTagsUrl
+                self.issueCommentUrl = issueCommentUrl
+                self.issueEventsUrl = issueEventsUrl
+                self.issuesUrl = issuesUrl
+                self.keysUrl = keysUrl
+                self.labelsUrl = labelsUrl
+                self.languagesUrl = languagesUrl
+                self.mergesUrl = mergesUrl
+                self.milestonesUrl = milestonesUrl
+                self.notificationsUrl = notificationsUrl
+                self.pullsUrl = pullsUrl
+                self.releasesUrl = releasesUrl
+                self.stargazersUrl = stargazersUrl
+                self.statusesUrl = statusesUrl
+                self.subscribersUrl = subscribersUrl
+                self.subscriptionUrl = subscriptionUrl
+                self.tagsUrl = tagsUrl
+                self.teamsUrl = teamsUrl
+                self.treesUrl = treesUrl
+                self.hooksUrl = hooksUrl
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case name
+                case fullName = "full_name"
+                case owner
+                case _private = "private"
+                case htmlUrl = "html_url"
+                case description
+                case fork
+                case url
+                case archiveUrl = "archive_url"
+                case assigneesUrl = "assignees_url"
+                case blobsUrl = "blobs_url"
+                case branchesUrl = "branches_url"
+                case collaboratorsUrl = "collaborators_url"
+                case commentsUrl = "comments_url"
+                case commitsUrl = "commits_url"
+                case compareUrl = "compare_url"
+                case contentsUrl = "contents_url"
+                case contributorsUrl = "contributors_url"
+                case deploymentsUrl = "deployments_url"
+                case downloadsUrl = "downloads_url"
+                case eventsUrl = "events_url"
+                case forksUrl = "forks_url"
+                case gitCommitsUrl = "git_commits_url"
+                case gitRefsUrl = "git_refs_url"
+                case gitTagsUrl = "git_tags_url"
+                case issueCommentUrl = "issue_comment_url"
+                case issueEventsUrl = "issue_events_url"
+                case issuesUrl = "issues_url"
+                case keysUrl = "keys_url"
+                case labelsUrl = "labels_url"
+                case languagesUrl = "languages_url"
+                case mergesUrl = "merges_url"
+                case milestonesUrl = "milestones_url"
+                case notificationsUrl = "notifications_url"
+                case pullsUrl = "pulls_url"
+                case releasesUrl = "releases_url"
+                case stargazersUrl = "stargazers_url"
+                case statusesUrl = "statuses_url"
+                case subscribersUrl = "subscribers_url"
+                case subscriptionUrl = "subscription_url"
+                case tagsUrl = "tags_url"
+                case teamsUrl = "teams_url"
+                case treesUrl = "trees_url"
+                case hooksUrl = "hooks_url"
+            }
+        }
+        /// Information about repositories that Dependabot is able to access in an organization
+        ///
+        /// - Remark: Generated from `#/components/schemas/dependabot-repository-access-details`.
+        public struct DependabotRepositoryAccessDetails: Codable, Hashable, Sendable {
+            /// The default repository access level for Dependabot updates.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-repository-access-details/default_level`.
+            @frozen public enum DefaultLevelPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case _public = "public"
+                case _internal = "internal"
+            }
+            /// The default repository access level for Dependabot updates.
+            ///
+            /// - Remark: Generated from `#/components/schemas/dependabot-repository-access-details/default_level`.
+            public var defaultLevel: Components.Schemas.DependabotRepositoryAccessDetails.DefaultLevelPayload?
+            /// - Remark: Generated from `#/components/schemas/dependabot-repository-access-details/accessible_repositories`.
+            public var accessibleRepositories: [Components.Schemas.NullableSimpleRepository]?
+            /// Creates a new `DependabotRepositoryAccessDetails`.
+            ///
+            /// - Parameters:
+            ///   - defaultLevel: The default repository access level for Dependabot updates.
+            ///   - accessibleRepositories:
+            public init(
+                defaultLevel: Components.Schemas.DependabotRepositoryAccessDetails.DefaultLevelPayload? = nil,
+                accessibleRepositories: [Components.Schemas.NullableSimpleRepository]? = nil
+            ) {
+                self.defaultLevel = defaultLevel
+                self.accessibleRepositories = accessibleRepositories
+            }
+            public enum CodingKeys: String, CodingKey {
+                case defaultLevel = "default_level"
+                case accessibleRepositories = "accessible_repositories"
+            }
+            public init(from decoder: any Swift.Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.defaultLevel = try container.decodeIfPresent(
+                    Components.Schemas.DependabotRepositoryAccessDetails.DefaultLevelPayload.self,
+                    forKey: .defaultLevel
+                )
+                self.accessibleRepositories = try container.decodeIfPresent(
+                    [Components.Schemas.NullableSimpleRepository].self,
+                    forKey: .accessibleRepositories
+                )
+                try decoder.ensureNoAdditionalProperties(knownKeys: [
+                    "default_level",
+                    "accessible_repositories"
+                ])
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.
         public struct SecurityAndAnalysis: Codable, Hashable, Sendable {
             /// Enable or disable GitHub Advanced Security for the repository.
@@ -3623,434 +4155,6 @@ public enum Components {
             public init() {}
             public init(from decoder: any Swift.Decoder) throws {
                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
-            }
-        }
-        /// A GitHub repository.
-        ///
-        /// - Remark: Generated from `#/components/schemas/nullable-simple-repository`.
-        public struct NullableSimpleRepository: Codable, Hashable, Sendable {
-            /// A unique identifier of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/id`.
-            public var id: Swift.Int64
-            /// The GraphQL identifier of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/node_id`.
-            public var nodeId: Swift.String
-            /// The name of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/name`.
-            public var name: Swift.String
-            /// The full, globally unique, name of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/full_name`.
-            public var fullName: Swift.String
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/owner`.
-            public var owner: Components.Schemas.SimpleUser
-            /// Whether the repository is private.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/private`.
-            public var _private: Swift.Bool
-            /// The URL to view the repository on GitHub.com.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/html_url`.
-            public var htmlUrl: Swift.String
-            /// The repository description.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/description`.
-            public var description: Swift.String?
-            /// Whether the repository is a fork.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/fork`.
-            public var fork: Swift.Bool
-            /// The URL to get more information about the repository from the GitHub API.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/url`.
-            public var url: Swift.String
-            /// A template for the API URL to download the repository as an archive.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/archive_url`.
-            public var archiveUrl: Swift.String
-            /// A template for the API URL to list the available assignees for issues in the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/assignees_url`.
-            public var assigneesUrl: Swift.String
-            /// A template for the API URL to create or retrieve a raw Git blob in the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/blobs_url`.
-            public var blobsUrl: Swift.String
-            /// A template for the API URL to get information about branches in the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/branches_url`.
-            public var branchesUrl: Swift.String
-            /// A template for the API URL to get information about collaborators of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/collaborators_url`.
-            public var collaboratorsUrl: Swift.String
-            /// A template for the API URL to get information about comments on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/comments_url`.
-            public var commentsUrl: Swift.String
-            /// A template for the API URL to get information about commits on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/commits_url`.
-            public var commitsUrl: Swift.String
-            /// A template for the API URL to compare two commits or refs.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/compare_url`.
-            public var compareUrl: Swift.String
-            /// A template for the API URL to get the contents of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/contents_url`.
-            public var contentsUrl: Swift.String
-            /// A template for the API URL to list the contributors to the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/contributors_url`.
-            public var contributorsUrl: Swift.String
-            /// The API URL to list the deployments of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/deployments_url`.
-            public var deploymentsUrl: Swift.String
-            /// The API URL to list the downloads on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/downloads_url`.
-            public var downloadsUrl: Swift.String
-            /// The API URL to list the events of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/events_url`.
-            public var eventsUrl: Swift.String
-            /// The API URL to list the forks of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/forks_url`.
-            public var forksUrl: Swift.String
-            /// A template for the API URL to get information about Git commits of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/git_commits_url`.
-            public var gitCommitsUrl: Swift.String
-            /// A template for the API URL to get information about Git refs of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/git_refs_url`.
-            public var gitRefsUrl: Swift.String
-            /// A template for the API URL to get information about Git tags of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/git_tags_url`.
-            public var gitTagsUrl: Swift.String
-            /// A template for the API URL to get information about issue comments on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/issue_comment_url`.
-            public var issueCommentUrl: Swift.String
-            /// A template for the API URL to get information about issue events on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/issue_events_url`.
-            public var issueEventsUrl: Swift.String
-            /// A template for the API URL to get information about issues on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/issues_url`.
-            public var issuesUrl: Swift.String
-            /// A template for the API URL to get information about deploy keys on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/keys_url`.
-            public var keysUrl: Swift.String
-            /// A template for the API URL to get information about labels of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/labels_url`.
-            public var labelsUrl: Swift.String
-            /// The API URL to get information about the languages of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/languages_url`.
-            public var languagesUrl: Swift.String
-            /// The API URL to merge branches in the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/merges_url`.
-            public var mergesUrl: Swift.String
-            /// A template for the API URL to get information about milestones of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/milestones_url`.
-            public var milestonesUrl: Swift.String
-            /// A template for the API URL to get information about notifications on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/notifications_url`.
-            public var notificationsUrl: Swift.String
-            /// A template for the API URL to get information about pull requests on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/pulls_url`.
-            public var pullsUrl: Swift.String
-            /// A template for the API URL to get information about releases on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/releases_url`.
-            public var releasesUrl: Swift.String
-            /// The API URL to list the stargazers on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/stargazers_url`.
-            public var stargazersUrl: Swift.String
-            /// A template for the API URL to get information about statuses of a commit.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/statuses_url`.
-            public var statusesUrl: Swift.String
-            /// The API URL to list the subscribers on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/subscribers_url`.
-            public var subscribersUrl: Swift.String
-            /// The API URL to subscribe to notifications for this repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/subscription_url`.
-            public var subscriptionUrl: Swift.String
-            /// The API URL to get information about tags on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/tags_url`.
-            public var tagsUrl: Swift.String
-            /// The API URL to list the teams on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/teams_url`.
-            public var teamsUrl: Swift.String
-            /// A template for the API URL to create or retrieve a raw Git tree of the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/trees_url`.
-            public var treesUrl: Swift.String
-            /// The API URL to list the hooks on the repository.
-            ///
-            /// - Remark: Generated from `#/components/schemas/nullable-simple-repository/hooks_url`.
-            public var hooksUrl: Swift.String
-            /// Creates a new `NullableSimpleRepository`.
-            ///
-            /// - Parameters:
-            ///   - id: A unique identifier of the repository.
-            ///   - nodeId: The GraphQL identifier of the repository.
-            ///   - name: The name of the repository.
-            ///   - fullName: The full, globally unique, name of the repository.
-            ///   - owner:
-            ///   - _private: Whether the repository is private.
-            ///   - htmlUrl: The URL to view the repository on GitHub.com.
-            ///   - description: The repository description.
-            ///   - fork: Whether the repository is a fork.
-            ///   - url: The URL to get more information about the repository from the GitHub API.
-            ///   - archiveUrl: A template for the API URL to download the repository as an archive.
-            ///   - assigneesUrl: A template for the API URL to list the available assignees for issues in the repository.
-            ///   - blobsUrl: A template for the API URL to create or retrieve a raw Git blob in the repository.
-            ///   - branchesUrl: A template for the API URL to get information about branches in the repository.
-            ///   - collaboratorsUrl: A template for the API URL to get information about collaborators of the repository.
-            ///   - commentsUrl: A template for the API URL to get information about comments on the repository.
-            ///   - commitsUrl: A template for the API URL to get information about commits on the repository.
-            ///   - compareUrl: A template for the API URL to compare two commits or refs.
-            ///   - contentsUrl: A template for the API URL to get the contents of the repository.
-            ///   - contributorsUrl: A template for the API URL to list the contributors to the repository.
-            ///   - deploymentsUrl: The API URL to list the deployments of the repository.
-            ///   - downloadsUrl: The API URL to list the downloads on the repository.
-            ///   - eventsUrl: The API URL to list the events of the repository.
-            ///   - forksUrl: The API URL to list the forks of the repository.
-            ///   - gitCommitsUrl: A template for the API URL to get information about Git commits of the repository.
-            ///   - gitRefsUrl: A template for the API URL to get information about Git refs of the repository.
-            ///   - gitTagsUrl: A template for the API URL to get information about Git tags of the repository.
-            ///   - issueCommentUrl: A template for the API URL to get information about issue comments on the repository.
-            ///   - issueEventsUrl: A template for the API URL to get information about issue events on the repository.
-            ///   - issuesUrl: A template for the API URL to get information about issues on the repository.
-            ///   - keysUrl: A template for the API URL to get information about deploy keys on the repository.
-            ///   - labelsUrl: A template for the API URL to get information about labels of the repository.
-            ///   - languagesUrl: The API URL to get information about the languages of the repository.
-            ///   - mergesUrl: The API URL to merge branches in the repository.
-            ///   - milestonesUrl: A template for the API URL to get information about milestones of the repository.
-            ///   - notificationsUrl: A template for the API URL to get information about notifications on the repository.
-            ///   - pullsUrl: A template for the API URL to get information about pull requests on the repository.
-            ///   - releasesUrl: A template for the API URL to get information about releases on the repository.
-            ///   - stargazersUrl: The API URL to list the stargazers on the repository.
-            ///   - statusesUrl: A template for the API URL to get information about statuses of a commit.
-            ///   - subscribersUrl: The API URL to list the subscribers on the repository.
-            ///   - subscriptionUrl: The API URL to subscribe to notifications for this repository.
-            ///   - tagsUrl: The API URL to get information about tags on the repository.
-            ///   - teamsUrl: The API URL to list the teams on the repository.
-            ///   - treesUrl: A template for the API URL to create or retrieve a raw Git tree of the repository.
-            ///   - hooksUrl: The API URL to list the hooks on the repository.
-            public init(
-                id: Swift.Int64,
-                nodeId: Swift.String,
-                name: Swift.String,
-                fullName: Swift.String,
-                owner: Components.Schemas.SimpleUser,
-                _private: Swift.Bool,
-                htmlUrl: Swift.String,
-                description: Swift.String? = nil,
-                fork: Swift.Bool,
-                url: Swift.String,
-                archiveUrl: Swift.String,
-                assigneesUrl: Swift.String,
-                blobsUrl: Swift.String,
-                branchesUrl: Swift.String,
-                collaboratorsUrl: Swift.String,
-                commentsUrl: Swift.String,
-                commitsUrl: Swift.String,
-                compareUrl: Swift.String,
-                contentsUrl: Swift.String,
-                contributorsUrl: Swift.String,
-                deploymentsUrl: Swift.String,
-                downloadsUrl: Swift.String,
-                eventsUrl: Swift.String,
-                forksUrl: Swift.String,
-                gitCommitsUrl: Swift.String,
-                gitRefsUrl: Swift.String,
-                gitTagsUrl: Swift.String,
-                issueCommentUrl: Swift.String,
-                issueEventsUrl: Swift.String,
-                issuesUrl: Swift.String,
-                keysUrl: Swift.String,
-                labelsUrl: Swift.String,
-                languagesUrl: Swift.String,
-                mergesUrl: Swift.String,
-                milestonesUrl: Swift.String,
-                notificationsUrl: Swift.String,
-                pullsUrl: Swift.String,
-                releasesUrl: Swift.String,
-                stargazersUrl: Swift.String,
-                statusesUrl: Swift.String,
-                subscribersUrl: Swift.String,
-                subscriptionUrl: Swift.String,
-                tagsUrl: Swift.String,
-                teamsUrl: Swift.String,
-                treesUrl: Swift.String,
-                hooksUrl: Swift.String
-            ) {
-                self.id = id
-                self.nodeId = nodeId
-                self.name = name
-                self.fullName = fullName
-                self.owner = owner
-                self._private = _private
-                self.htmlUrl = htmlUrl
-                self.description = description
-                self.fork = fork
-                self.url = url
-                self.archiveUrl = archiveUrl
-                self.assigneesUrl = assigneesUrl
-                self.blobsUrl = blobsUrl
-                self.branchesUrl = branchesUrl
-                self.collaboratorsUrl = collaboratorsUrl
-                self.commentsUrl = commentsUrl
-                self.commitsUrl = commitsUrl
-                self.compareUrl = compareUrl
-                self.contentsUrl = contentsUrl
-                self.contributorsUrl = contributorsUrl
-                self.deploymentsUrl = deploymentsUrl
-                self.downloadsUrl = downloadsUrl
-                self.eventsUrl = eventsUrl
-                self.forksUrl = forksUrl
-                self.gitCommitsUrl = gitCommitsUrl
-                self.gitRefsUrl = gitRefsUrl
-                self.gitTagsUrl = gitTagsUrl
-                self.issueCommentUrl = issueCommentUrl
-                self.issueEventsUrl = issueEventsUrl
-                self.issuesUrl = issuesUrl
-                self.keysUrl = keysUrl
-                self.labelsUrl = labelsUrl
-                self.languagesUrl = languagesUrl
-                self.mergesUrl = mergesUrl
-                self.milestonesUrl = milestonesUrl
-                self.notificationsUrl = notificationsUrl
-                self.pullsUrl = pullsUrl
-                self.releasesUrl = releasesUrl
-                self.stargazersUrl = stargazersUrl
-                self.statusesUrl = statusesUrl
-                self.subscribersUrl = subscribersUrl
-                self.subscriptionUrl = subscriptionUrl
-                self.tagsUrl = tagsUrl
-                self.teamsUrl = teamsUrl
-                self.treesUrl = treesUrl
-                self.hooksUrl = hooksUrl
-            }
-            public enum CodingKeys: String, CodingKey {
-                case id
-                case nodeId = "node_id"
-                case name
-                case fullName = "full_name"
-                case owner
-                case _private = "private"
-                case htmlUrl = "html_url"
-                case description
-                case fork
-                case url
-                case archiveUrl = "archive_url"
-                case assigneesUrl = "assignees_url"
-                case blobsUrl = "blobs_url"
-                case branchesUrl = "branches_url"
-                case collaboratorsUrl = "collaborators_url"
-                case commentsUrl = "comments_url"
-                case commitsUrl = "commits_url"
-                case compareUrl = "compare_url"
-                case contentsUrl = "contents_url"
-                case contributorsUrl = "contributors_url"
-                case deploymentsUrl = "deployments_url"
-                case downloadsUrl = "downloads_url"
-                case eventsUrl = "events_url"
-                case forksUrl = "forks_url"
-                case gitCommitsUrl = "git_commits_url"
-                case gitRefsUrl = "git_refs_url"
-                case gitTagsUrl = "git_tags_url"
-                case issueCommentUrl = "issue_comment_url"
-                case issueEventsUrl = "issue_events_url"
-                case issuesUrl = "issues_url"
-                case keysUrl = "keys_url"
-                case labelsUrl = "labels_url"
-                case languagesUrl = "languages_url"
-                case mergesUrl = "merges_url"
-                case milestonesUrl = "milestones_url"
-                case notificationsUrl = "notifications_url"
-                case pullsUrl = "pulls_url"
-                case releasesUrl = "releases_url"
-                case stargazersUrl = "stargazers_url"
-                case statusesUrl = "statuses_url"
-                case subscribersUrl = "subscribers_url"
-                case subscriptionUrl = "subscription_url"
-                case tagsUrl = "tags_url"
-                case teamsUrl = "teams_url"
-                case treesUrl = "trees_url"
-                case hooksUrl = "hooks_url"
-            }
-        }
-        /// Information about repositories that Dependabot is able to access in an organization
-        ///
-        /// - Remark: Generated from `#/components/schemas/dependabot-repository-access-details`.
-        public struct DependabotRepositoryAccessDetails: Codable, Hashable, Sendable {
-            /// The default repository access level for Dependabot updates.
-            ///
-            /// - Remark: Generated from `#/components/schemas/dependabot-repository-access-details/default_level`.
-            @frozen public enum DefaultLevelPayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case _public = "public"
-                case _internal = "internal"
-            }
-            /// The default repository access level for Dependabot updates.
-            ///
-            /// - Remark: Generated from `#/components/schemas/dependabot-repository-access-details/default_level`.
-            public var defaultLevel: Components.Schemas.DependabotRepositoryAccessDetails.DefaultLevelPayload?
-            /// - Remark: Generated from `#/components/schemas/dependabot-repository-access-details/accessible_repositories`.
-            public var accessibleRepositories: [Components.Schemas.NullableSimpleRepository]?
-            /// Creates a new `DependabotRepositoryAccessDetails`.
-            ///
-            /// - Parameters:
-            ///   - defaultLevel: The default repository access level for Dependabot updates.
-            ///   - accessibleRepositories:
-            public init(
-                defaultLevel: Components.Schemas.DependabotRepositoryAccessDetails.DefaultLevelPayload? = nil,
-                accessibleRepositories: [Components.Schemas.NullableSimpleRepository]? = nil
-            ) {
-                self.defaultLevel = defaultLevel
-                self.accessibleRepositories = accessibleRepositories
-            }
-            public enum CodingKeys: String, CodingKey {
-                case defaultLevel = "default_level"
-                case accessibleRepositories = "accessible_repositories"
-            }
-            public init(from decoder: any Swift.Decoder) throws {
-                let container = try decoder.container(keyedBy: CodingKeys.self)
-                self.defaultLevel = try container.decodeIfPresent(
-                    Components.Schemas.DependabotRepositoryAccessDetails.DefaultLevelPayload.self,
-                    forKey: .defaultLevel
-                )
-                self.accessibleRepositories = try container.decodeIfPresent(
-                    [Components.Schemas.NullableSimpleRepository].self,
-                    forKey: .accessibleRepositories
-                )
-                try decoder.ensureNoAdditionalProperties(knownKeys: [
-                    "default_level",
-                    "accessible_repositories"
-                ])
             }
         }
         /// Secrets for GitHub Dependabot for an organization.
@@ -5266,6 +5370,620 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Lists the repositories Dependabot can access in an enterprise
+    ///
+    /// Lists repositories that enterprise admins have allowed Dependabot to access when updating dependencies across organizations in the enterprise.
+    ///
+    /// The authenticated user must be an enterprise owner to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/get(dependabot/repository-access-for-enterprise)`.
+    public enum DependabotRepositoryAccessForEnterprise {
+        public static let id: Swift.String = "dependabot/repository-access-for-enterprise"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/GET/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.DependabotRepositoryAccessForEnterprise.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The page number of results to fetch.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/GET/query/page`.
+                public var page: Swift.Int?
+                /// Number of results per page.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/GET/query/per_page`.
+                public var perPage: Swift.Int?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - page: The page number of results to fetch.
+                ///   - perPage: Number of results per page.
+                public init(
+                    page: Swift.Int? = nil,
+                    perPage: Swift.Int? = nil
+                ) {
+                    self.page = page
+                    self.perPage = perPage
+                }
+            }
+            public var query: Operations.DependabotRepositoryAccessForEnterprise.Input.Query
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotRepositoryAccessForEnterprise.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotRepositoryAccessForEnterprise.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.DependabotRepositoryAccessForEnterprise.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.DependabotRepositoryAccessForEnterprise.Input.Path,
+                query: Operations.DependabotRepositoryAccessForEnterprise.Input.Query = .init(),
+                headers: Operations.DependabotRepositoryAccessForEnterprise.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.DependabotRepositoryAccessDetails)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.DependabotRepositoryAccessDetails {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.DependabotRepositoryAccessForEnterprise.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.DependabotRepositoryAccessForEnterprise.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/get(dependabot/repository-access-for-enterprise)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.DependabotRepositoryAccessForEnterprise.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.DependabotRepositoryAccessForEnterprise.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/get(dependabot/repository-access-for-enterprise)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/get(dependabot/repository-access-for-enterprise)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Updates Dependabot's repository access list for an enterprise
+    ///
+    /// Updates repositories according to the list of repositories that enterprise admins have given Dependabot access to when they've updated dependencies across organizations in the enterprise.
+    ///
+    /// The authenticated user must be an enterprise owner to use this endpoint.
+    ///
+    /// **Example request body:**
+    /// ```json
+    /// {
+    ///   "repository_ids_to_add": [123, 456],
+    ///   "repository_ids_to_remove": [789]
+    /// }
+    /// ```
+    ///
+    /// - Remark: HTTP `PATCH /enterprises/{enterprise}/dependabot/repository-access`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/patch(dependabot/update-repository-access-for-enterprise)`.
+    public enum DependabotUpdateRepositoryAccessForEnterprise {
+        public static let id: Swift.String = "dependabot/update-repository-access-for-enterprise"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/PATCH/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.DependabotUpdateRepositoryAccessForEnterprise.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotUpdateRepositoryAccessForEnterprise.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotUpdateRepositoryAccessForEnterprise.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.DependabotUpdateRepositoryAccessForEnterprise.Input.Headers
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/PATCH/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// List of repository IDs to add.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/PATCH/requestBody/json/repository_ids_to_add`.
+                    public var repositoryIdsToAdd: [Swift.Int]?
+                    /// List of repository IDs to remove.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/PATCH/requestBody/json/repository_ids_to_remove`.
+                    public var repositoryIdsToRemove: [Swift.Int]?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - repositoryIdsToAdd: List of repository IDs to add.
+                    ///   - repositoryIdsToRemove: List of repository IDs to remove.
+                    public init(
+                        repositoryIdsToAdd: [Swift.Int]? = nil,
+                        repositoryIdsToRemove: [Swift.Int]? = nil
+                    ) {
+                        self.repositoryIdsToAdd = repositoryIdsToAdd
+                        self.repositoryIdsToRemove = repositoryIdsToRemove
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case repositoryIdsToAdd = "repository_ids_to_add"
+                        case repositoryIdsToRemove = "repository_ids_to_remove"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/PATCH/requestBody/content/application\/json`.
+                case json(Operations.DependabotUpdateRepositoryAccessForEnterprise.Input.Body.JsonPayload)
+            }
+            public var body: Operations.DependabotUpdateRepositoryAccessForEnterprise.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.DependabotUpdateRepositoryAccessForEnterprise.Input.Path,
+                headers: Operations.DependabotUpdateRepositoryAccessForEnterprise.Input.Headers = .init(),
+                body: Operations.DependabotUpdateRepositoryAccessForEnterprise.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/patch(dependabot/update-repository-access-for-enterprise)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.DependabotUpdateRepositoryAccessForEnterprise.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/patch(dependabot/update-repository-access-for-enterprise)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.DependabotUpdateRepositoryAccessForEnterprise.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/patch(dependabot/update-repository-access-for-enterprise)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/patch(dependabot/update-repository-access-for-enterprise)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Set the default repository access level for Dependabot in an enterprise
+    ///
+    /// Sets the default level of repository access Dependabot will have while performing an update across organizations in the enterprise. Available values are:
+    /// - 'public' - Dependabot will only have access to public repositories, unless access is explicitly granted to non-public repositories.
+    /// - 'internal' - Dependabot will only have access to public and internal repositories, unless access is explicitly granted to private repositories.
+    ///
+    /// The authenticated user must be an enterprise owner to use this endpoint.
+    ///
+    /// - Remark: HTTP `PUT /enterprises/{enterprise}/dependabot/repository-access/default-level`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level-for-enterprise)`.
+    public enum DependabotSetRepositoryAccessDefaultLevelForEnterprise {
+        public static let id: Swift.String = "dependabot/set-repository-access-default-level-for-enterprise"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/default-level/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/default-level/PUT/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/default-level/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Headers
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/default-level/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/default-level/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The default repository access level for Dependabot updates.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/default-level/PUT/requestBody/json/default_level`.
+                    @frozen public enum DefaultLevelPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case _public = "public"
+                        case _internal = "internal"
+                    }
+                    /// The default repository access level for Dependabot updates.
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/default-level/PUT/requestBody/json/default_level`.
+                    public var defaultLevel: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Body.JsonPayload.DefaultLevelPayload
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - defaultLevel: The default repository access level for Dependabot updates.
+                    public init(defaultLevel: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Body.JsonPayload.DefaultLevelPayload) {
+                        self.defaultLevel = defaultLevel
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case defaultLevel = "default_level"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/dependabot/repository-access/default-level/PUT/requestBody/content/application\/json`.
+                case json(Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Body.JsonPayload)
+            }
+            public var body: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Path,
+                headers: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Headers = .init(),
+                body: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level-for-enterprise)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level-for-enterprise)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.DependabotSetRepositoryAccessDefaultLevelForEnterprise.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level-for-enterprise)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/dependabot/repository-access/default-level/put(dependabot/set-repository-access-default-level-for-enterprise)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
                             response: self
                         )
                     }
