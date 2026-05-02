@@ -16,6 +16,7 @@ builder:
     - GitHubRestAPICodes_Of_Conduct
     - GitHubRestAPICodespaces
     - GitHubRestAPICopilot
+    - GitHubRestAPICopilot_Spaces
     - GitHubRestAPICredentials
     - GitHubRestAPIDependabot
     - GitHubRestAPIDependency_Graph
