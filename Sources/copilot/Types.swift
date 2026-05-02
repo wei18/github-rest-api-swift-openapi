@@ -65,9 +65,9 @@ public protocol APIProtocol: Sendable {
     func copilotCopilotUsersUsageMetrics(_ input: Operations.CopilotCopilotUsersUsageMetrics.Input) async throws -> Operations.CopilotCopilotUsersUsageMetrics.Output
     /// Set the coding agent policy for an enterprise
     ///
-    /// Sets the policy for Copilot coding agent usage across an enterprise.
+    /// Sets the policy for Copilot cloud agent usage across an enterprise.
     ///
-    /// Enterprise owners can configure whether Copilot coding agent is enabled for all
+    /// Enterprise owners can configure whether Copilot cloud agent is enabled for all
     /// organizations, disabled for all organizations, configured by individual organization
     /// admins, or enabled for selected organizations only.
     ///
@@ -80,7 +80,7 @@ public protocol APIProtocol: Sendable {
     func copilotSetEnterpriseCodingAgentPolicy(_ input: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input) async throws -> Operations.CopilotSetEnterpriseCodingAgentPolicy.Output
     /// Add organizations to the enterprise coding agent policy
     ///
-    /// Enables Copilot coding agent for the specified organizations within the enterprise.
+    /// Enables Copilot cloud agent for the specified organizations within the enterprise.
     ///
     /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
     /// using this endpoint. Organizations can be specified by login or matched via custom properties.
@@ -96,7 +96,7 @@ public protocol APIProtocol: Sendable {
     func copilotAddOrganizationsToEnterpriseCodingAgentPolicy(_ input: Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Input) async throws -> Operations.CopilotAddOrganizationsToEnterpriseCodingAgentPolicy.Output
     /// Remove organizations from the enterprise coding agent policy
     ///
-    /// Disables Copilot coding agent for the specified organizations within the enterprise.
+    /// Disables Copilot cloud agent for the specified organizations within the enterprise.
     ///
     /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
     /// using this endpoint. Organizations can be specified by login or matched via custom properties.
@@ -216,15 +216,15 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `DELETE /orgs/{org}/copilot/billing/selected_users`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot/billing/selected_users/delete(copilot/cancel-copilot-seat-assignment-for-users)`.
     func copilotCancelCopilotSeatAssignmentForUsers(_ input: Operations.CopilotCancelCopilotSeatAssignmentForUsers.Input) async throws -> Operations.CopilotCancelCopilotSeatAssignmentForUsers.Output
-    /// Get Copilot coding agent permissions for an organization
+    /// Get Copilot cloud agent permissions for an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
     /// Gets information about which repositories in an organization have been enabled
-    /// or disabled for the Copilot coding agent.
+    /// or disabled for the Copilot cloud agent.
     ///
-    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// Organization owners can configure whether Copilot cloud agent is enabled for
     /// all repositories, selected repositories, or no repositories owned by organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
@@ -232,14 +232,14 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /orgs/{org}/copilot/coding-agent/permissions`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/get(copilot/get-copilot-coding-agent-permissions-organization)`.
     func copilotGetCopilotCodingAgentPermissionsOrganization(_ input: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Input) async throws -> Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output
-    /// Set Copilot coding agent permissions for an organization
+    /// Set Copilot cloud agent permissions for an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Sets the policy for which repositories in an organization can use Copilot coding agent.
+    /// Sets the policy for which repositories in an organization can use Copilot cloud agent.
     ///
-    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// Organization owners can configure whether Copilot cloud agent is enabled for
     /// all repositories, selected repositories, or no repositories owned by the organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
@@ -247,12 +247,12 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/put(copilot/set-copilot-coding-agent-permissions-organization)`.
     func copilotSetCopilotCodingAgentPermissionsOrganization(_ input: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input) async throws -> Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Output
-    /// List repositories enabled for Copilot coding agent in an organization
+    /// List repositories enabled for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Lists the selected repositories that are enabled for Copilot coding agent in an organization.
+    /// Lists the selected repositories that are enabled for Copilot cloud agent in an organization.
     ///
     /// Organization owners can use this endpoint when the coding agent repository policy
     /// is set to `selected` to see which repositories have been enabled.
@@ -262,13 +262,13 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /orgs/{org}/copilot/coding-agent/permissions/repositories`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/get(copilot/list-copilot-coding-agent-selected-repositories-for-organization)`.
     func copilotListCopilotCodingAgentSelectedRepositoriesForOrganization(_ input: Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Input) async throws -> Operations.CopilotListCopilotCodingAgentSelectedRepositoriesForOrganization.Output
-    /// Set selected repositories for Copilot coding agent in an organization
+    /// Set selected repositories for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Replaces the list of selected repositories that are enabled for Copilot coding
-    /// agent in an organization. This method can only be called when the coding agent
+    /// Replaces the list of selected repositories that are enabled for Copilot cloud
+    /// agent in an organization. This method can only be called when the cloud agent
     /// repository policy is set to `selected`.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
@@ -276,28 +276,28 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions/repositories`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/put(copilot/set-copilot-coding-agent-selected-repositories-for-organization)`.
     func copilotSetCopilotCodingAgentSelectedRepositoriesForOrganization(_ input: Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Input) async throws -> Operations.CopilotSetCopilotCodingAgentSelectedRepositoriesForOrganization.Output
-    /// Enable a repository for Copilot coding agent in an organization
+    /// Enable a repository for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
     /// Adds a repository to the list of selected repositories enabled for Copilot
-    /// coding agent in an organization. This method can only be called when the
-    /// coding agent repository policy is set to `selected`.
+    /// cloud agent in an organization. This method can only be called when the
+    /// cloud agent repository policy is set to `selected`.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot/coding-agent/permissions/repositories/{repository_id}/put(copilot/enable-copilot-coding-agent-for-repository-in-organization)`.
     func copilotEnableCopilotCodingAgentForRepositoryInOrganization(_ input: Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Input) async throws -> Operations.CopilotEnableCopilotCodingAgentForRepositoryInOrganization.Output
-    /// Disable a repository for Copilot coding agent in an organization
+    /// Disable a repository for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
     /// Removes a repository from the list of selected repositories enabled for Copilot
-    /// coding agent in an organization. This method can only be called when the
-    /// coding agent repository policy is set to `selected`.
+    /// cloud agent in an organization. This method can only be called when the
+    /// cloud agent repository policy is set to `selected`.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scopes to use this endpoint.
     ///
@@ -553,9 +553,9 @@ extension APIProtocol {
     }
     /// Set the coding agent policy for an enterprise
     ///
-    /// Sets the policy for Copilot coding agent usage across an enterprise.
+    /// Sets the policy for Copilot cloud agent usage across an enterprise.
     ///
-    /// Enterprise owners can configure whether Copilot coding agent is enabled for all
+    /// Enterprise owners can configure whether Copilot cloud agent is enabled for all
     /// organizations, disabled for all organizations, configured by individual organization
     /// admins, or enabled for selected organizations only.
     ///
@@ -578,7 +578,7 @@ extension APIProtocol {
     }
     /// Add organizations to the enterprise coding agent policy
     ///
-    /// Enables Copilot coding agent for the specified organizations within the enterprise.
+    /// Enables Copilot cloud agent for the specified organizations within the enterprise.
     ///
     /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
     /// using this endpoint. Organizations can be specified by login or matched via custom properties.
@@ -604,7 +604,7 @@ extension APIProtocol {
     }
     /// Remove organizations from the enterprise coding agent policy
     ///
-    /// Disables Copilot coding agent for the specified organizations within the enterprise.
+    /// Disables Copilot cloud agent for the specified organizations within the enterprise.
     ///
     /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
     /// using this endpoint. Organizations can be specified by login or matched via custom properties.
@@ -792,15 +792,15 @@ extension APIProtocol {
             body: body
         ))
     }
-    /// Get Copilot coding agent permissions for an organization
+    /// Get Copilot cloud agent permissions for an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
     /// Gets information about which repositories in an organization have been enabled
-    /// or disabled for the Copilot coding agent.
+    /// or disabled for the Copilot cloud agent.
     ///
-    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// Organization owners can configure whether Copilot cloud agent is enabled for
     /// all repositories, selected repositories, or no repositories owned by organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
@@ -816,14 +816,14 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// Set Copilot coding agent permissions for an organization
+    /// Set Copilot cloud agent permissions for an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Sets the policy for which repositories in an organization can use Copilot coding agent.
+    /// Sets the policy for which repositories in an organization can use Copilot cloud agent.
     ///
-    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// Organization owners can configure whether Copilot cloud agent is enabled for
     /// all repositories, selected repositories, or no repositories owned by the organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
@@ -841,12 +841,12 @@ extension APIProtocol {
             body: body
         ))
     }
-    /// List repositories enabled for Copilot coding agent in an organization
+    /// List repositories enabled for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Lists the selected repositories that are enabled for Copilot coding agent in an organization.
+    /// Lists the selected repositories that are enabled for Copilot cloud agent in an organization.
     ///
     /// Organization owners can use this endpoint when the coding agent repository policy
     /// is set to `selected` to see which repositories have been enabled.
@@ -866,13 +866,13 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// Set selected repositories for Copilot coding agent in an organization
+    /// Set selected repositories for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Replaces the list of selected repositories that are enabled for Copilot coding
-    /// agent in an organization. This method can only be called when the coding agent
+    /// Replaces the list of selected repositories that are enabled for Copilot cloud
+    /// agent in an organization. This method can only be called when the cloud agent
     /// repository policy is set to `selected`.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
@@ -890,14 +890,14 @@ extension APIProtocol {
             body: body
         ))
     }
-    /// Enable a repository for Copilot coding agent in an organization
+    /// Enable a repository for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
     /// Adds a repository to the list of selected repositories enabled for Copilot
-    /// coding agent in an organization. This method can only be called when the
-    /// coding agent repository policy is set to `selected`.
+    /// cloud agent in an organization. This method can only be called when the
+    /// cloud agent repository policy is set to `selected`.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -912,14 +912,14 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// Disable a repository for Copilot coding agent in an organization
+    /// Disable a repository for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
     /// Removes a repository from the list of selected repositories enabled for Copilot
-    /// coding agent in an organization. This method can only be called when the
-    /// coding agent repository policy is set to `selected`.
+    /// cloud agent in an organization. This method can only be called when the
+    /// cloud agent repository policy is set to `selected`.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scopes to use this endpoint.
     ///
@@ -5905,9 +5905,9 @@ public enum Operations {
     }
     /// Set the coding agent policy for an enterprise
     ///
-    /// Sets the policy for Copilot coding agent usage across an enterprise.
+    /// Sets the policy for Copilot cloud agent usage across an enterprise.
     ///
-    /// Enterprise owners can configure whether Copilot coding agent is enabled for all
+    /// Enterprise owners can configure whether Copilot cloud agent is enabled for all
     /// organizations, disabled for all organizations, configured by individual organization
     /// admins, or enabled for selected organizations only.
     ///
@@ -5951,7 +5951,7 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/PUT/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// The policy state for Copilot coding agent in the enterprise. Can be one of `enabled_for_all_orgs`, `disabled_for_all_orgs`, `enabled_for_selected_orgs`, or `configured_by_org_admins`.
+                    /// The policy state for Copilot cloud agent in the enterprise. Can be one of `enabled_for_all_orgs`, `disabled_for_all_orgs`, `enabled_for_selected_orgs`, or `configured_by_org_admins`.
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/PUT/requestBody/json/policy_state`.
                     @frozen public enum PolicyStatePayload: String, Codable, Hashable, Sendable, CaseIterable {
@@ -5960,14 +5960,14 @@ public enum Operations {
                         case enabledForSelectedOrgs = "enabled_for_selected_orgs"
                         case configuredByOrgAdmins = "configured_by_org_admins"
                     }
-                    /// The policy state for Copilot coding agent in the enterprise. Can be one of `enabled_for_all_orgs`, `disabled_for_all_orgs`, `enabled_for_selected_orgs`, or `configured_by_org_admins`.
+                    /// The policy state for Copilot cloud agent in the enterprise. Can be one of `enabled_for_all_orgs`, `disabled_for_all_orgs`, `enabled_for_selected_orgs`, or `configured_by_org_admins`.
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/PUT/requestBody/json/policy_state`.
                     public var policyState: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Body.JsonPayload.PolicyStatePayload
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
-                    ///   - policyState: The policy state for Copilot coding agent in the enterprise. Can be one of `enabled_for_all_orgs`, `disabled_for_all_orgs`, `enabled_for_selected_orgs`, or `configured_by_org_admins`.
+                    ///   - policyState: The policy state for Copilot cloud agent in the enterprise. Can be one of `enabled_for_all_orgs`, `disabled_for_all_orgs`, `enabled_for_selected_orgs`, or `configured_by_org_admins`.
                     public init(policyState: Operations.CopilotSetEnterpriseCodingAgentPolicy.Input.Body.JsonPayload.PolicyStatePayload) {
                         self.policyState = policyState
                     }
@@ -6089,7 +6089,7 @@ public enum Operations {
     }
     /// Add organizations to the enterprise coding agent policy
     ///
-    /// Enables Copilot coding agent for the specified organizations within the enterprise.
+    /// Enables Copilot cloud agent for the specified organizations within the enterprise.
     ///
     /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
     /// using this endpoint. Organizations can be specified by login or matched via custom properties.
@@ -6136,7 +6136,7 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// List of organization logins within the enterprise to enable Copilot coding agent for.
+                    /// List of organization logins within the enterprise to enable Copilot cloud agent for.
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/POST/requestBody/json/organizations`.
                     public var organizations: [Swift.String]?
@@ -6178,7 +6178,7 @@ public enum Operations {
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
-                    ///   - organizations: List of organization logins within the enterprise to enable Copilot coding agent for.
+                    ///   - organizations: List of organization logins within the enterprise to enable Copilot cloud agent for.
                     ///   - customProperties: List of custom property filters to match organizations. Organizations matching any of the specified property name/value pairs will be included. This is a one-time operation, setting the property on an organization in the future will not automatically update its coding agent policy.
                     public init(
                         organizations: [Swift.String]? = nil,
@@ -6306,7 +6306,7 @@ public enum Operations {
     }
     /// Remove organizations from the enterprise coding agent policy
     ///
-    /// Disables Copilot coding agent for the specified organizations within the enterprise.
+    /// Disables Copilot cloud agent for the specified organizations within the enterprise.
     ///
     /// The enterprise's coding agent policy must be set to `enabled_for_selected_orgs` before
     /// using this endpoint. Organizations can be specified by login or matched via custom properties.
@@ -6353,7 +6353,7 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// List of organization logins within the enterprise to disable Copilot coding agent for.
+                    /// List of organization logins within the enterprise to disable Copilot cloud agent for.
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/policies/coding_agent/organizations/DELETE/requestBody/json/organizations`.
                     public var organizations: [Swift.String]?
@@ -6395,7 +6395,7 @@ public enum Operations {
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
-                    ///   - organizations: List of organization logins within the enterprise to disable Copilot coding agent for.
+                    ///   - organizations: List of organization logins within the enterprise to disable Copilot cloud agent for.
                     ///   - customProperties: List of custom property filters to match organizations. Organizations matching any of the specified property name/value pairs will be included. This is a one-time operation, setting the property on an organization in the future will not automatically update its coding agent policy.
                     public init(
                         organizations: [Swift.String]? = nil,
@@ -8347,15 +8347,15 @@ public enum Operations {
             }
         }
     }
-    /// Get Copilot coding agent permissions for an organization
+    /// Get Copilot cloud agent permissions for an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
     /// Gets information about which repositories in an organization have been enabled
-    /// or disabled for the Copilot coding agent.
+    /// or disabled for the Copilot cloud agent.
     ///
-    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// Organization owners can configure whether Copilot cloud agent is enabled for
     /// all repositories, selected repositories, or no repositories owned by organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
@@ -8411,7 +8411,7 @@ public enum Operations {
                 @frozen public enum Body: Sendable, Hashable {
                     /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/responses/200/content/json`.
                     public struct JsonPayload: Codable, Hashable, Sendable {
-                        /// The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                        /// The policy for which repositories can use Copilot cloud agent. Can be one of `all`, `selected`, or `none`.
                         ///
                         /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/responses/200/content/json/enabled_repositories`.
                         @frozen public enum EnabledRepositoriesPayload: String, Codable, Hashable, Sendable, CaseIterable {
@@ -8419,7 +8419,7 @@ public enum Operations {
                             case selected = "selected"
                             case none = "none"
                         }
-                        /// The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                        /// The policy for which repositories can use Copilot cloud agent. Can be one of `all`, `selected`, or `none`.
                         ///
                         /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/GET/responses/200/content/json/enabled_repositories`.
                         public var enabledRepositories: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output.Ok.Body.JsonPayload.EnabledRepositoriesPayload
@@ -8430,7 +8430,7 @@ public enum Operations {
                         /// Creates a new `JsonPayload`.
                         ///
                         /// - Parameters:
-                        ///   - enabledRepositories: The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                        ///   - enabledRepositories: The policy for which repositories can use Copilot cloud agent. Can be one of `all`, `selected`, or `none`.
                         ///   - selectedRepositoriesUrl: The URL for the selected repositories endpoint. Only present when `enabled_repositories` is `selected`.
                         public init(
                             enabledRepositories: Operations.CopilotGetCopilotCodingAgentPermissionsOrganization.Output.Ok.Body.JsonPayload.EnabledRepositoriesPayload,
@@ -8615,14 +8615,14 @@ public enum Operations {
             }
         }
     }
-    /// Set Copilot coding agent permissions for an organization
+    /// Set Copilot cloud agent permissions for an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Sets the policy for which repositories in an organization can use Copilot coding agent.
+    /// Sets the policy for which repositories in an organization can use Copilot cloud agent.
     ///
-    /// Organization owners can configure whether Copilot coding agent is enabled for
+    /// Organization owners can configure whether Copilot cloud agent is enabled for
     /// all repositories, selected repositories, or no repositories owned by the organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
@@ -8663,7 +8663,7 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/PUT/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                    /// The policy for which repositories can use Copilot cloud agent. Can be one of `all`, `selected`, or `none`.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/PUT/requestBody/json/enabled_repositories`.
                     @frozen public enum EnabledRepositoriesPayload: String, Codable, Hashable, Sendable, CaseIterable {
@@ -8671,14 +8671,14 @@ public enum Operations {
                         case selected = "selected"
                         case none = "none"
                     }
-                    /// The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                    /// The policy for which repositories can use Copilot cloud agent. Can be one of `all`, `selected`, or `none`.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/PUT/requestBody/json/enabled_repositories`.
                     public var enabledRepositories: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Body.JsonPayload.EnabledRepositoriesPayload
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
-                    ///   - enabledRepositories: The policy for which repositories can use Copilot coding agent. Can be one of `all`, `selected`, or `none`.
+                    ///   - enabledRepositories: The policy for which repositories can use Copilot cloud agent. Can be one of `all`, `selected`, or `none`.
                     public init(enabledRepositories: Operations.CopilotSetCopilotCodingAgentPermissionsOrganization.Input.Body.JsonPayload.EnabledRepositoriesPayload) {
                         self.enabledRepositories = enabledRepositories
                     }
@@ -8888,12 +8888,12 @@ public enum Operations {
             }
         }
     }
-    /// List repositories enabled for Copilot coding agent in an organization
+    /// List repositories enabled for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Lists the selected repositories that are enabled for Copilot coding agent in an organization.
+    /// Lists the selected repositories that are enabled for Copilot cloud agent in an organization.
     ///
     /// Organization owners can use this endpoint when the coding agent repository policy
     /// is set to `selected` to see which repositories have been enabled.
@@ -9193,13 +9193,13 @@ public enum Operations {
             }
         }
     }
-    /// Set selected repositories for Copilot coding agent in an organization
+    /// Set selected repositories for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
-    /// Replaces the list of selected repositories that are enabled for Copilot coding
-    /// agent in an organization. This method can only be called when the coding agent
+    /// Replaces the list of selected repositories that are enabled for Copilot cloud
+    /// agent in an organization. This method can only be called when the cloud agent
     /// repository policy is set to `selected`.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
@@ -9240,14 +9240,14 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/PUT/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// List of repository IDs to enable for Copilot coding agent.
+                    /// List of repository IDs to enable for Copilot cloud agent.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/copilot/coding-agent/permissions/repositories/PUT/requestBody/json/selected_repository_ids`.
                     public var selectedRepositoryIds: [Swift.Int]
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
-                    ///   - selectedRepositoryIds: List of repository IDs to enable for Copilot coding agent.
+                    ///   - selectedRepositoryIds: List of repository IDs to enable for Copilot cloud agent.
                     public init(selectedRepositoryIds: [Swift.Int]) {
                         self.selectedRepositoryIds = selectedRepositoryIds
                     }
@@ -9480,14 +9480,14 @@ public enum Operations {
             }
         }
     }
-    /// Enable a repository for Copilot coding agent in an organization
+    /// Enable a repository for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
     /// Adds a repository to the list of selected repositories enabled for Copilot
-    /// coding agent in an organization. This method can only be called when the
-    /// coding agent repository policy is set to `selected`.
+    /// cloud agent in an organization. This method can only be called when the
+    /// cloud agent repository policy is set to `selected`.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -9750,14 +9750,14 @@ public enum Operations {
             }
         }
     }
-    /// Disable a repository for Copilot coding agent in an organization
+    /// Disable a repository for Copilot cloud agent in an organization
     ///
     /// > [!NOTE]
     /// > This endpoint is in public preview and is subject to change.
     ///
     /// Removes a repository from the list of selected repositories enabled for Copilot
-    /// coding agent in an organization. This method can only be called when the
-    /// coding agent repository policy is set to `selected`.
+    /// cloud agent in an organization. This method can only be called when the
+    /// cloud agent repository policy is set to `selected`.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scopes to use this endpoint.
     ///
