@@ -2608,14 +2608,14 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_seat_management`.
             public var organizationCopilotSeatManagement: Components.Schemas.AppPermissions.OrganizationCopilotSeatManagementPayload?
-            /// The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
+            /// The level of permission to grant the access token to view and manage Copilot cloud agent settings for an organization.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_agent_settings`.
             @frozen public enum OrganizationCopilotAgentSettingsPayload: String, Codable, Hashable, Sendable, CaseIterable {
                 case read = "read"
                 case write = "write"
             }
-            /// The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
+            /// The level of permission to grant the access token to view and manage Copilot cloud agent settings for an organization.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_agent_settings`.
             public var organizationCopilotAgentSettings: Components.Schemas.AppPermissions.OrganizationCopilotAgentSettingsPayload?
@@ -2864,7 +2864,7 @@ public enum Components {
             ///   - organizationCustomOrgRoles: The level of permission to grant the access token for custom organization roles management.
             ///   - organizationCustomProperties: The level of permission to grant the access token for repository custom properties management at the organization level.
             ///   - organizationCopilotSeatManagement: The level of permission to grant the access token for managing access to GitHub Copilot for members of an organization with a Copilot Business subscription. This property is in public preview and is subject to change.
-            ///   - organizationCopilotAgentSettings: The level of permission to grant the access token to view and manage Copilot coding agent settings for an organization.
+            ///   - organizationCopilotAgentSettings: The level of permission to grant the access token to view and manage Copilot cloud agent settings for an organization.
             ///   - organizationAnnouncementBanners: The level of permission to grant the access token to view and manage announcement banners for an organization.
             ///   - organizationEvents: The level of permission to grant the access token to view events triggered by an activity in an organization.
             ///   - organizationHooks: The level of permission to grant the access token to manage the post-receive hooks for an organization.
