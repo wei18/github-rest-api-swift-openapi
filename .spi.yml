@@ -4,50 +4,50 @@ builder:
   - documentation_targets:
     - GitHubRestAPIActions
     - GitHubRestAPIActivity
-    - GitHubRestAPIAgent_Tasks
+    - GitHubRestAPIAgentTasks
     - GitHubRestAPIApps
     - GitHubRestAPIBilling
     - GitHubRestAPICampaigns
     - GitHubRestAPIChecks
     - GitHubRestAPIClassroom
-    - GitHubRestAPICode_Quality
-    - GitHubRestAPICode_Scanning
-    - GitHubRestAPICode_Security
-    - GitHubRestAPICodes_Of_Conduct
+    - GitHubRestAPICodeQuality
+    - GitHubRestAPICodeScanning
+    - GitHubRestAPICodeSecurity
+    - GitHubRestAPICodesOfConduct
     - GitHubRestAPICodespaces
     - GitHubRestAPICopilot
-    - GitHubRestAPICopilot_Spaces
+    - GitHubRestAPICopilotSpaces
     - GitHubRestAPICredentials
     - GitHubRestAPIDependabot
-    - GitHubRestAPIDependency_Graph
+    - GitHubRestAPIDependencyGraph
     - GitHubRestAPIDesktop
     - GitHubRestAPIEmojis
-    - GitHubRestAPIEnterprise_Team_Memberships
-    - GitHubRestAPIEnterprise_Team_Organizations
-    - GitHubRestAPIEnterprise_Teams
+    - GitHubRestAPIEnterpriseTeamMemberships
+    - GitHubRestAPIEnterpriseTeamOrganizations
+    - GitHubRestAPIEnterpriseTeams
     - GitHubRestAPIGists
     - GitHubRestAPIGit
     - GitHubRestAPIGitignore
-    - GitHubRestAPIHosted_Compute
+    - GitHubRestAPIHostedCompute
     - GitHubRestAPIInteractions
     - GitHubRestAPIIssues
     - GitHubRestAPILicenses
     - GitHubRestAPIMarkdown
-    - GitHubRestAPIMerge_Queue
+    - GitHubRestAPIMergeQueue
     - GitHubRestAPIMeta
     - GitHubRestAPIMigrations
     - GitHubRestAPIOidc
     - GitHubRestAPIOrgs
     - GitHubRestAPIPackages
-    - GitHubRestAPIPrivate_Registries
+    - GitHubRestAPIPrivateRegistries
     - GitHubRestAPIProjects
-    - GitHubRestAPIProjects_Classic
+    - GitHubRestAPIProjectsClassic
     - GitHubRestAPIPulls
-    - GitHubRestAPIRate_Limit
+    - GitHubRestAPIRateLimit
     - GitHubRestAPIReactions
     - GitHubRestAPIRepos
     - GitHubRestAPISearch
-    - GitHubRestAPISecret_Scanning
-    - GitHubRestAPISecurity_Advisories
+    - GitHubRestAPISecretScanning
+    - GitHubRestAPISecurityAdvisories
     - GitHubRestAPITeams
     - GitHubRestAPIUsers

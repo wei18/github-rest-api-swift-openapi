@@ -61,7 +61,7 @@ if let argPath = CommandLine.arguments[1]
     let names = try PackageTargetsParser().parse(from: path)
     print(names.joined(separator: "\n"))
 } else {
-    throw ErrorMessage(message: "PackageTargetsParser.parse(from:) failure")
+    throw ErrorMessage(message: "Path argument not found.")
 }
 
 

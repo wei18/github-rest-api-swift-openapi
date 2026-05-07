@@ -13,51 +13,51 @@ let package = Package(
     products: [
         .library(name: "GitHubRestAPIActions", targets: ["GitHubRestAPIActions"]),
         .library(name: "GitHubRestAPIActivity", targets: ["GitHubRestAPIActivity"]),
-        .library(name: "GitHubRestAPIAgent_Tasks", targets: ["GitHubRestAPIAgent_Tasks"]),
+        .library(name: "GitHubRestAPIAgentTasks", targets: ["GitHubRestAPIAgentTasks"]),
         .library(name: "GitHubRestAPIApps", targets: ["GitHubRestAPIApps"]),
         .library(name: "GitHubRestAPIBilling", targets: ["GitHubRestAPIBilling"]),
         .library(name: "GitHubRestAPICampaigns", targets: ["GitHubRestAPICampaigns"]),
         .library(name: "GitHubRestAPIChecks", targets: ["GitHubRestAPIChecks"]),
         .library(name: "GitHubRestAPIClassroom", targets: ["GitHubRestAPIClassroom"]),
-        .library(name: "GitHubRestAPICode_Quality", targets: ["GitHubRestAPICode_Quality"]),
-        .library(name: "GitHubRestAPICode_Scanning", targets: ["GitHubRestAPICode_Scanning"]),
-        .library(name: "GitHubRestAPICode_Security", targets: ["GitHubRestAPICode_Security"]),
-        .library(name: "GitHubRestAPICodes_Of_Conduct", targets: ["GitHubRestAPICodes_Of_Conduct"]),
+        .library(name: "GitHubRestAPICodeQuality", targets: ["GitHubRestAPICodeQuality"]),
+        .library(name: "GitHubRestAPICodeScanning", targets: ["GitHubRestAPICodeScanning"]),
+        .library(name: "GitHubRestAPICodeSecurity", targets: ["GitHubRestAPICodeSecurity"]),
+        .library(name: "GitHubRestAPICodesOfConduct", targets: ["GitHubRestAPICodesOfConduct"]),
         .library(name: "GitHubRestAPICodespaces", targets: ["GitHubRestAPICodespaces"]),
         .library(name: "GitHubRestAPICopilot", targets: ["GitHubRestAPICopilot"]),
-        .library(name: "GitHubRestAPICopilot_Spaces", targets: ["GitHubRestAPICopilot_Spaces"]),
+        .library(name: "GitHubRestAPICopilotSpaces", targets: ["GitHubRestAPICopilotSpaces"]),
         .library(name: "GitHubRestAPICredentials", targets: ["GitHubRestAPICredentials"]),
         .library(name: "GitHubRestAPIDependabot", targets: ["GitHubRestAPIDependabot"]),
-        .library(name: "GitHubRestAPIDependency_Graph", targets: ["GitHubRestAPIDependency_Graph"]),
+        .library(name: "GitHubRestAPIDependencyGraph", targets: ["GitHubRestAPIDependencyGraph"]),
         .library(name: "GitHubRestAPIDesktop", targets: ["GitHubRestAPIDesktop"]),
         .library(name: "GitHubRestAPIEmojis", targets: ["GitHubRestAPIEmojis"]),
-        .library(name: "GitHubRestAPIEnterprise_Team_Memberships", targets: ["GitHubRestAPIEnterprise_Team_Memberships"]),
-        .library(name: "GitHubRestAPIEnterprise_Team_Organizations", targets: ["GitHubRestAPIEnterprise_Team_Organizations"]),
-        .library(name: "GitHubRestAPIEnterprise_Teams", targets: ["GitHubRestAPIEnterprise_Teams"]),
+        .library(name: "GitHubRestAPIEnterpriseTeamMemberships", targets: ["GitHubRestAPIEnterpriseTeamMemberships"]),
+        .library(name: "GitHubRestAPIEnterpriseTeamOrganizations", targets: ["GitHubRestAPIEnterpriseTeamOrganizations"]),
+        .library(name: "GitHubRestAPIEnterpriseTeams", targets: ["GitHubRestAPIEnterpriseTeams"]),
         .library(name: "GitHubRestAPIGists", targets: ["GitHubRestAPIGists"]),
         .library(name: "GitHubRestAPIGit", targets: ["GitHubRestAPIGit"]),
         .library(name: "GitHubRestAPIGitignore", targets: ["GitHubRestAPIGitignore"]),
-        .library(name: "GitHubRestAPIHosted_Compute", targets: ["GitHubRestAPIHosted_Compute"]),
+        .library(name: "GitHubRestAPIHostedCompute", targets: ["GitHubRestAPIHostedCompute"]),
         .library(name: "GitHubRestAPIInteractions", targets: ["GitHubRestAPIInteractions"]),
         .library(name: "GitHubRestAPIIssues", targets: ["GitHubRestAPIIssues"]),
         .library(name: "GitHubRestAPILicenses", targets: ["GitHubRestAPILicenses"]),
         .library(name: "GitHubRestAPIMarkdown", targets: ["GitHubRestAPIMarkdown"]),
-        .library(name: "GitHubRestAPIMerge_Queue", targets: ["GitHubRestAPIMerge_Queue"]),
+        .library(name: "GitHubRestAPIMergeQueue", targets: ["GitHubRestAPIMergeQueue"]),
         .library(name: "GitHubRestAPIMeta", targets: ["GitHubRestAPIMeta"]),
         .library(name: "GitHubRestAPIMigrations", targets: ["GitHubRestAPIMigrations"]),
         .library(name: "GitHubRestAPIOidc", targets: ["GitHubRestAPIOidc"]),
         .library(name: "GitHubRestAPIOrgs", targets: ["GitHubRestAPIOrgs"]),
         .library(name: "GitHubRestAPIPackages", targets: ["GitHubRestAPIPackages"]),
-        .library(name: "GitHubRestAPIPrivate_Registries", targets: ["GitHubRestAPIPrivate_Registries"]),
+        .library(name: "GitHubRestAPIPrivateRegistries", targets: ["GitHubRestAPIPrivateRegistries"]),
         .library(name: "GitHubRestAPIProjects", targets: ["GitHubRestAPIProjects"]),
-        .library(name: "GitHubRestAPIProjects_Classic", targets: ["GitHubRestAPIProjects_Classic"]),
+        .library(name: "GitHubRestAPIProjectsClassic", targets: ["GitHubRestAPIProjectsClassic"]),
         .library(name: "GitHubRestAPIPulls", targets: ["GitHubRestAPIPulls"]),
-        .library(name: "GitHubRestAPIRate_Limit", targets: ["GitHubRestAPIRate_Limit"]),
+        .library(name: "GitHubRestAPIRateLimit", targets: ["GitHubRestAPIRateLimit"]),
         .library(name: "GitHubRestAPIReactions", targets: ["GitHubRestAPIReactions"]),
         .library(name: "GitHubRestAPIRepos", targets: ["GitHubRestAPIRepos"]),
         .library(name: "GitHubRestAPISearch", targets: ["GitHubRestAPISearch"]),
-        .library(name: "GitHubRestAPISecret_Scanning", targets: ["GitHubRestAPISecret_Scanning"]),
-        .library(name: "GitHubRestAPISecurity_Advisories", targets: ["GitHubRestAPISecurity_Advisories"]),
+        .library(name: "GitHubRestAPISecretScanning", targets: ["GitHubRestAPISecretScanning"]),
+        .library(name: "GitHubRestAPISecurityAdvisories", targets: ["GitHubRestAPISecurityAdvisories"]),
         .library(name: "GitHubRestAPITeams", targets: ["GitHubRestAPITeams"]),
         .library(name: "GitHubRestAPIUsers", targets: ["GitHubRestAPIUsers"]),
     ],
@@ -83,7 +83,7 @@ let package = Package(
             path: "Sources/activity"
         ),
         .target(
-            name: "GitHubRestAPIAgent_Tasks",
+            name: "GitHubRestAPIAgentTasks",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -131,7 +131,7 @@ let package = Package(
             path: "Sources/classroom"
         ),
         .target(
-            name: "GitHubRestAPICode_Quality",
+            name: "GitHubRestAPICodeQuality",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -139,7 +139,7 @@ let package = Package(
             path: "Sources/code-quality"
         ),
         .target(
-            name: "GitHubRestAPICode_Scanning",
+            name: "GitHubRestAPICodeScanning",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -147,7 +147,7 @@ let package = Package(
             path: "Sources/code-scanning"
         ),
         .target(
-            name: "GitHubRestAPICode_Security",
+            name: "GitHubRestAPICodeSecurity",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -155,7 +155,7 @@ let package = Package(
             path: "Sources/code-security"
         ),
         .target(
-            name: "GitHubRestAPICodes_Of_Conduct",
+            name: "GitHubRestAPICodesOfConduct",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -179,7 +179,7 @@ let package = Package(
             path: "Sources/copilot"
         ),
         .target(
-            name: "GitHubRestAPICopilot_Spaces",
+            name: "GitHubRestAPICopilotSpaces",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -203,7 +203,7 @@ let package = Package(
             path: "Sources/dependabot"
         ),
         .target(
-            name: "GitHubRestAPIDependency_Graph",
+            name: "GitHubRestAPIDependencyGraph",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -227,7 +227,7 @@ let package = Package(
             path: "Sources/emojis"
         ),
         .target(
-            name: "GitHubRestAPIEnterprise_Team_Memberships",
+            name: "GitHubRestAPIEnterpriseTeamMemberships",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -235,7 +235,7 @@ let package = Package(
             path: "Sources/enterprise-team-memberships"
         ),
         .target(
-            name: "GitHubRestAPIEnterprise_Team_Organizations",
+            name: "GitHubRestAPIEnterpriseTeamOrganizations",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -243,7 +243,7 @@ let package = Package(
             path: "Sources/enterprise-team-organizations"
         ),
         .target(
-            name: "GitHubRestAPIEnterprise_Teams",
+            name: "GitHubRestAPIEnterpriseTeams",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -275,7 +275,7 @@ let package = Package(
             path: "Sources/gitignore"
         ),
         .target(
-            name: "GitHubRestAPIHosted_Compute",
+            name: "GitHubRestAPIHostedCompute",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -315,7 +315,7 @@ let package = Package(
             path: "Sources/markdown"
         ),
         .target(
-            name: "GitHubRestAPIMerge_Queue",
+            name: "GitHubRestAPIMergeQueue",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -363,7 +363,7 @@ let package = Package(
             path: "Sources/packages"
         ),
         .target(
-            name: "GitHubRestAPIPrivate_Registries",
+            name: "GitHubRestAPIPrivateRegistries",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -379,7 +379,7 @@ let package = Package(
             path: "Sources/projects"
         ),
         .target(
-            name: "GitHubRestAPIProjects_Classic",
+            name: "GitHubRestAPIProjectsClassic",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -395,7 +395,7 @@ let package = Package(
             path: "Sources/pulls"
         ),
         .target(
-            name: "GitHubRestAPIRate_Limit",
+            name: "GitHubRestAPIRateLimit",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -427,7 +427,7 @@ let package = Package(
             path: "Sources/search"
         ),
         .target(
-            name: "GitHubRestAPISecret_Scanning",
+            name: "GitHubRestAPISecretScanning",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
@@ -435,7 +435,7 @@ let package = Package(
             path: "Sources/secret-scanning"
         ),
         .target(
-            name: "GitHubRestAPISecurity_Advisories",
+            name: "GitHubRestAPISecurityAdvisories",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),

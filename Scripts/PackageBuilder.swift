@@ -68,7 +68,7 @@ struct SourcesBuilder {
 
         sources = sourceURLs.map(\.lastPathComponent).sorted().map {
             let folderName = $0
-            let targetName = folderName.replacingOccurrences(of: "-", with: "_").capitalized
+            let targetName = folderName.split(separator: "-").map { $0.prefix(1).uppercased() + $0.dropFirst() }.joined()
             return Source(folderName: folderName, targetName: "GitHubRestAPI\(targetName)")
         }
     }
@@ -76,39 +76,22 @@ struct SourcesBuilder {
 
 struct PackageBuilder {
 
-    enum SwiftVersion: String, CaseIterable {
+    enum SwiftVersion: String {
         case v5_9 = "5.9"
-        case v5_8 = "5.8"
-        case v5_7 = "5.7.1"
 
         init?(rawValue: String) {
             switch rawValue {
             case SwiftVersion.v5_9.fileName: self = .v5_9
-            case SwiftVersion.v5_8.fileName: self = .v5_8
-            case SwiftVersion.v5_7.fileName: self = .v5_7
             default: return nil
             }
         }
 
-        var fileName: String {
-            switch self {
-            case .v5_9: return "Package.swift"
-            case .v5_8: return "Package@swift-5.8.swift"
-            case .v5_7: return "Package@swift-5.7.swift"
-            }
-        }
+        var fileName: String { "Package.swift" }
 
         var platformsString: String {
-            switch self {
-            case .v5_9:
             #"""
                     .macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6), .visionOS(.v1),
             """#
-            case .v5_8, .v5_7:
-            #"""
-                    .macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6),
-            """#
-            }
         }
     }
 
@@ -186,7 +169,7 @@ if let argVersion = CommandLine.arguments[1]
     let version = String(argVersion)
     try PackageBuilder(version: version).write()
 } else {
-    throw ErrorMessage(message: "No tag not found.")
+    throw ErrorMessage(message: "Tag not found.")
 }
 
 

@@ -68,7 +68,7 @@ struct SourcesBuilder {
 
         sources = sourceURLs.map(\.lastPathComponent).sorted().map {
             let folderName = $0
-            let targetName = folderName.replacingOccurrences(of: "-", with: "_").capitalized
+            let targetName = folderName.split(separator: "-").map { $0.prefix(1).uppercased() + $0.dropFirst() }.joined()
             return Source(folderName: folderName, targetName: "GitHubRestAPI\(targetName)")
         }
     }

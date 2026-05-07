@@ -63,5 +63,5 @@ if let argTag = CommandLine.arguments[1]
     let tag = String(argTag)
     try GeneratorConfigBuilder(tag: tag).write()
 } else {
-    throw ErrorMessage(message: "No tag not found.")
+    throw ErrorMessage(message: "Tag not found.")
 }
