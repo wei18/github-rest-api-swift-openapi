@@ -183,6 +183,13 @@ public struct Client: APIProtocol {
                     name: "hide_secret",
                     value: input.query.hideSecret
                 )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "is_bypassed",
+                    value: input.query.isBypassed
+                )
                 converter.setAcceptHeader(
                     in: &request.headerFields,
                     contentTypes: input.headers.accept
@@ -727,6 +734,13 @@ public struct Client: APIProtocol {
                     name: "hide_secret",
                     value: input.query.hideSecret
                 )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "is_bypassed",
+                    value: input.query.isBypassed
+                )
                 converter.setAcceptHeader(
                     in: &request.headerFields,
                     contentTypes: input.headers.accept
@@ -967,6 +981,8 @@ public struct Client: APIProtocol {
                     return .ok(.init(body: body))
                 case 400:
                     return .badRequest(.init())
+                case 403:
+                    return .forbidden(.init())
                 case 404:
                     return .notFound(.init())
                 case 422:

@@ -11350,6 +11350,93 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/POST/requestBody/json/assignees`.
                     public var assignees: [Swift.String]?
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/POST/requestBody/json/IssueFieldValuesPayload`.
+                    public struct IssueFieldValuesPayloadPayload: Codable, Hashable, Sendable {
+                        /// The ID of the issue field to set
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/POST/requestBody/json/IssueFieldValuesPayload/field_id`.
+                        public var fieldId: Swift.Int
+                        /// The value to set for the field
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/POST/requestBody/json/IssueFieldValuesPayload/value`.
+                        @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/POST/requestBody/json/IssueFieldValuesPayload/value/case1`.
+                            case case1(Swift.String)
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/POST/requestBody/json/IssueFieldValuesPayload/value/case2`.
+                            case case2(Swift.Double)
+                            public init(from decoder: any Swift.Decoder) throws {
+                                var errors: [any Swift.Error] = []
+                                do {
+                                    self = .case1(try decoder.decodeFromSingleValueContainer())
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                do {
+                                    self = .case2(try decoder.decodeFromSingleValueContainer())
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                    type: Self.self,
+                                    codingPath: decoder.codingPath,
+                                    errors: errors
+                                )
+                            }
+                            public func encode(to encoder: any Swift.Encoder) throws {
+                                switch self {
+                                case let .case1(value):
+                                    try encoder.encodeToSingleValueContainer(value)
+                                case let .case2(value):
+                                    try encoder.encodeToSingleValueContainer(value)
+                                }
+                            }
+                        }
+                        /// The value to set for the field
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/POST/requestBody/json/IssueFieldValuesPayload/value`.
+                        public var value: Operations.IssuesCreate.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
+                        /// Creates a new `IssueFieldValuesPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - fieldId: The ID of the issue field to set
+                        ///   - value: The value to set for the field
+                        public init(
+                            fieldId: Swift.Int,
+                            value: Operations.IssuesCreate.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
+                        ) {
+                            self.fieldId = fieldId
+                            self.value = value
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case fieldId = "field_id"
+                            case value
+                        }
+                        public init(from decoder: any Swift.Decoder) throws {
+                            let container = try decoder.container(keyedBy: CodingKeys.self)
+                            self.fieldId = try container.decode(
+                                Swift.Int.self,
+                                forKey: .fieldId
+                            )
+                            self.value = try container.decode(
+                                Operations.IssuesCreate.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload.self,
+                                forKey: .value
+                            )
+                            try decoder.ensureNoAdditionalProperties(knownKeys: [
+                                "field_id",
+                                "value"
+                            ])
+                        }
+                    }
+                    /// An array of issue field values to set on this issue. Each field value must include the field ID and the value to set. Issue fields are only available for organization-owned repositories with the feature enabled. Field values are silently dropped otherwise.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/POST/requestBody/json/issue_field_values`.
+                    public typealias IssueFieldValuesPayload = [Operations.IssuesCreate.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload]
+                    /// An array of issue field values to set on this issue. Each field value must include the field ID and the value to set. Issue fields are only available for organization-owned repositories with the feature enabled. Field values are silently dropped otherwise.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/POST/requestBody/json/issue_field_values`.
+                    public var issueFieldValues: Operations.IssuesCreate.Input.Body.JsonPayload.IssueFieldValuesPayload?
                     /// The name of the issue type to associate with this issue. _NOTE: Only users with push access can set the type for new issues. The type is silently dropped otherwise._
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/POST/requestBody/json/type`.
@@ -11363,6 +11450,7 @@ public enum Operations {
                     ///   - milestone:
                     ///   - labels: Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
                     ///   - assignees: Logins for Users to assign to this issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._
+                    ///   - issueFieldValues: An array of issue field values to set on this issue. Each field value must include the field ID and the value to set. Issue fields are only available for organization-owned repositories with the feature enabled. Field values are silently dropped otherwise.
                     ///   - _type: The name of the issue type to associate with this issue. _NOTE: Only users with push access can set the type for new issues. The type is silently dropped otherwise._
                     public init(
                         title: Operations.IssuesCreate.Input.Body.JsonPayload.TitlePayload,
@@ -11371,6 +11459,7 @@ public enum Operations {
                         milestone: Operations.IssuesCreate.Input.Body.JsonPayload.MilestonePayload? = nil,
                         labels: Operations.IssuesCreate.Input.Body.JsonPayload.LabelsPayload? = nil,
                         assignees: [Swift.String]? = nil,
+                        issueFieldValues: Operations.IssuesCreate.Input.Body.JsonPayload.IssueFieldValuesPayload? = nil,
                         _type: Swift.String? = nil
                     ) {
                         self.title = title
@@ -11379,6 +11468,7 @@ public enum Operations {
                         self.milestone = milestone
                         self.labels = labels
                         self.assignees = assignees
+                        self.issueFieldValues = issueFieldValues
                         self._type = _type
                     }
                     public enum CodingKeys: String, CodingKey {
@@ -11388,6 +11478,7 @@ public enum Operations {
                         case milestone
                         case labels
                         case assignees
+                        case issueFieldValues = "issue_field_values"
                         case _type = "type"
                     }
                 }

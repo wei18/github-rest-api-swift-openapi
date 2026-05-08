@@ -599,6 +599,10 @@ public struct Client: APIProtocol {
     /// If proposed records in the 'deployments' field have identical 'cluster', 'logical_environment',
     /// 'physical_environment', and 'deployment_name' values as existing records, the existing records will be updated.
     /// If no existing records match, new records will be created.
+    /// Note: Artifacts are uniquely identified by the combination of their repository and digest fields. If two entries in the deployments
+    /// array resolve to the same repository and have identical digest fields but differing name and version fields, the endpoint will use
+    /// the artifact name and version from the record processed first, since a single artifact (identified by repository and digest) can
+    /// only have one name and version.
     ///
     /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)`.

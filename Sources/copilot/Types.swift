@@ -1871,6 +1871,17 @@ public enum Components {
             public var createdAt: Foundation.Date
             /// - Remark: Generated from `#/components/schemas/enterprise-team/updated_at`.
             public var updatedAt: Foundation.Date
+            /// Whether team members will receive notifications when the team is mentioned.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/notification_setting`.
+            @frozen public enum NotificationSettingPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case notificationsEnabled = "notifications_enabled"
+                case notificationsDisabled = "notifications_disabled"
+            }
+            /// Whether team members will receive notifications when the team is mentioned.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/notification_setting`.
+            public var notificationSetting: Components.Schemas.EnterpriseTeam.NotificationSettingPayload?
             /// Creates a new `EnterpriseTeam`.
             ///
             /// - Parameters:
@@ -1887,6 +1898,7 @@ public enum Components {
             ///   - membersUrl:
             ///   - createdAt:
             ///   - updatedAt:
+            ///   - notificationSetting: Whether team members will receive notifications when the team is mentioned.
             public init(
                 id: Swift.Int64,
                 name: Swift.String,
@@ -1900,7 +1912,8 @@ public enum Components {
                 htmlUrl: Swift.String,
                 membersUrl: Swift.String,
                 createdAt: Foundation.Date,
-                updatedAt: Foundation.Date
+                updatedAt: Foundation.Date,
+                notificationSetting: Components.Schemas.EnterpriseTeam.NotificationSettingPayload? = nil
             ) {
                 self.id = id
                 self.name = name
@@ -1915,6 +1928,7 @@ public enum Components {
                 self.membersUrl = membersUrl
                 self.createdAt = createdAt
                 self.updatedAt = updatedAt
+                self.notificationSetting = notificationSetting
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -1930,6 +1944,7 @@ public enum Components {
                 case membersUrl = "members_url"
                 case createdAt = "created_at"
                 case updatedAt = "updated_at"
+                case notificationSetting = "notification_setting"
             }
         }
         /// - Remark: Generated from `#/components/schemas/security-and-analysis`.

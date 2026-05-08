@@ -1049,6 +1049,35 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/actions/caches/{cache_id}`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/caches/{cache_id}/delete(actions/delete-actions-cache-by-id)`.
     func actionsDeleteActionsCacheById(_ input: Operations.ActionsDeleteActionsCacheById.Input) async throws -> Operations.ActionsDeleteActionsCacheById.Output
+    /// List concurrency groups for a repository
+    ///
+    /// Lists the active concurrency groups for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/concurrency_groups`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/get(actions/list-concurrency-groups-for-repository)`.
+    func actionsListConcurrencyGroupsForRepository(_ input: Operations.ActionsListConcurrencyGroupsForRepository.Input) async throws -> Operations.ActionsListConcurrencyGroupsForRepository.Output
+    /// Get a concurrency group for a repository
+    ///
+    /// Gets a specific concurrency group for a repository, including all instances in the group's queue.
+    /// Returns 404 if the group is inactive or does not exist.
+    ///
+    /// Optionally, pass `ahead_of_run` or `ahead_of_job` to filter the results to only the items
+    /// ahead of the specified workflow run or job in the queue, plus the specified item itself
+    /// (returned as the last element). This is useful for determining what is blocking a particular
+    /// run or job. Returns 422 if the specified run or job is not in this concurrency group.
+    ///
+    /// When using `ahead_of_run`, this matches workflow-level concurrency and any reusable-workflow
+    /// leases held on behalf of that run. Job-level leases within the run are not considered to
+    /// block the run as a whole. Use `ahead_of_job` to match job-level concurrency and reusable-workflow
+    /// leases on the job's ancestor paths.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/get(actions/get-concurrency-group-for-repository)`.
+    func actionsGetConcurrencyGroupForRepository(_ input: Operations.ActionsGetConcurrencyGroupForRepository.Input) async throws -> Operations.ActionsGetConcurrencyGroupForRepository.Output
     /// Get a job for a workflow run
     ///
     /// Gets a specific job in a workflow run.
@@ -1514,6 +1543,31 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `POST /repos/{owner}/{repo}/actions/runs/{run_id}/cancel`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/runs/{run_id}/cancel/post(actions/cancel-workflow-run)`.
     func actionsCancelWorkflowRun(_ input: Operations.ActionsCancelWorkflowRun.Input) async throws -> Operations.ActionsCancelWorkflowRun.Output
+    /// List concurrency groups for a workflow run
+    ///
+    /// Lists all concurrency groups associated with a workflow run or its jobs.
+    ///
+    /// The set of groups is derived from the run's configuration, so a group is
+    /// included even when the run no longer has any items currently holding or
+    /// waiting in it. In that case the `group_members` array will be empty.
+    /// `total_count` reflects the number of groups the run participates in by
+    /// configuration, not the number with active items.
+    ///
+    /// This differs from `GET /repos/{owner}/{repo}/actions/concurrency_groups/{group_name}`,
+    /// which returns 404 when a group has no active items. That endpoint reports
+    /// the live state of a group repo-wide, while this endpoint reports the
+    /// groups associated with a specific run by configuration.
+    ///
+    /// Results are sorted by group name and support cursor-based pagination via
+    /// `before` and `after`. The `after` cursor paginates forward only and does
+    /// not emit a `rel="prev"` Link; use `before` to page backward from a
+    /// forward page's `next` cursor.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/get(actions/list-concurrency-groups-for-workflow-run)`.
+    func actionsListConcurrencyGroupsForWorkflowRun(_ input: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input) async throws -> Operations.ActionsListConcurrencyGroupsForWorkflowRun.Output
     /// Review custom deployment protection rules for a workflow run
     ///
     /// Approve or reject custom deployment protection rules provided by a GitHub App for a workflow run. For more information, see "[Using environments for deployment](https://docs.github.com/actions/deployment/targeting-different-environments/using-environments-for-deployment)."
@@ -3774,6 +3828,55 @@ extension APIProtocol {
     public func actionsDeleteActionsCacheById(path: Operations.ActionsDeleteActionsCacheById.Input.Path) async throws -> Operations.ActionsDeleteActionsCacheById.Output {
         try await actionsDeleteActionsCacheById(Operations.ActionsDeleteActionsCacheById.Input(path: path))
     }
+    /// List concurrency groups for a repository
+    ///
+    /// Lists the active concurrency groups for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/concurrency_groups`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/get(actions/list-concurrency-groups-for-repository)`.
+    public func actionsListConcurrencyGroupsForRepository(
+        path: Operations.ActionsListConcurrencyGroupsForRepository.Input.Path,
+        query: Operations.ActionsListConcurrencyGroupsForRepository.Input.Query = .init(),
+        headers: Operations.ActionsListConcurrencyGroupsForRepository.Input.Headers = .init()
+    ) async throws -> Operations.ActionsListConcurrencyGroupsForRepository.Output {
+        try await actionsListConcurrencyGroupsForRepository(Operations.ActionsListConcurrencyGroupsForRepository.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Get a concurrency group for a repository
+    ///
+    /// Gets a specific concurrency group for a repository, including all instances in the group's queue.
+    /// Returns 404 if the group is inactive or does not exist.
+    ///
+    /// Optionally, pass `ahead_of_run` or `ahead_of_job` to filter the results to only the items
+    /// ahead of the specified workflow run or job in the queue, plus the specified item itself
+    /// (returned as the last element). This is useful for determining what is blocking a particular
+    /// run or job. Returns 422 if the specified run or job is not in this concurrency group.
+    ///
+    /// When using `ahead_of_run`, this matches workflow-level concurrency and any reusable-workflow
+    /// leases held on behalf of that run. Job-level leases within the run are not considered to
+    /// block the run as a whole. Use `ahead_of_job` to match job-level concurrency and reusable-workflow
+    /// leases on the job's ancestor paths.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/get(actions/get-concurrency-group-for-repository)`.
+    public func actionsGetConcurrencyGroupForRepository(
+        path: Operations.ActionsGetConcurrencyGroupForRepository.Input.Path,
+        query: Operations.ActionsGetConcurrencyGroupForRepository.Input.Query = .init(),
+        headers: Operations.ActionsGetConcurrencyGroupForRepository.Input.Headers = .init()
+    ) async throws -> Operations.ActionsGetConcurrencyGroupForRepository.Output {
+        try await actionsGetConcurrencyGroupForRepository(Operations.ActionsGetConcurrencyGroupForRepository.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
     /// Get a job for a workflow run
     ///
     /// Gets a specific job in a workflow run.
@@ -4594,6 +4697,41 @@ extension APIProtocol {
     ) async throws -> Operations.ActionsCancelWorkflowRun.Output {
         try await actionsCancelWorkflowRun(Operations.ActionsCancelWorkflowRun.Input(
             path: path,
+            headers: headers
+        ))
+    }
+    /// List concurrency groups for a workflow run
+    ///
+    /// Lists all concurrency groups associated with a workflow run or its jobs.
+    ///
+    /// The set of groups is derived from the run's configuration, so a group is
+    /// included even when the run no longer has any items currently holding or
+    /// waiting in it. In that case the `group_members` array will be empty.
+    /// `total_count` reflects the number of groups the run participates in by
+    /// configuration, not the number with active items.
+    ///
+    /// This differs from `GET /repos/{owner}/{repo}/actions/concurrency_groups/{group_name}`,
+    /// which returns 404 when a group has no active items. That endpoint reports
+    /// the live state of a group repo-wide, while this endpoint reports the
+    /// groups associated with a specific run by configuration.
+    ///
+    /// Results are sorted by group name and support cursor-based pagination via
+    /// `before` and `after`. The `after` cursor paginates forward only and does
+    /// not emit a `rel="prev"` Link; use `before` to page backward from a
+    /// forward page's `next` cursor.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/get(actions/list-concurrency-groups-for-workflow-run)`.
+    public func actionsListConcurrencyGroupsForWorkflowRun(
+        path: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input.Path,
+        query: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input.Query = .init(),
+        headers: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input.Headers = .init()
+    ) async throws -> Operations.ActionsListConcurrencyGroupsForWorkflowRun.Output {
+        try await actionsListConcurrencyGroupsForWorkflowRun(Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input(
+            path: path,
+            query: query,
             headers: headers
         ))
     }
@@ -10307,6 +10445,196 @@ public enum Components {
                 case actionsCaches = "actions_caches"
             }
         }
+        /// A list of active concurrency groups for a repository.
+        ///
+        /// - Remark: Generated from `#/components/schemas/concurrency-group-list`.
+        public struct ConcurrencyGroupList: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/concurrency-group-list/total_count`.
+            public var totalCount: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/concurrency-group-list/ConcurrencyGroupsPayload`.
+            public struct ConcurrencyGroupsPayloadPayload: Codable, Hashable, Sendable {
+                /// The name of the concurrency group.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group-list/ConcurrencyGroupsPayload/group_name`.
+                public var groupName: Swift.String
+                /// API URL for this concurrency group.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group-list/ConcurrencyGroupsPayload/group_url`.
+                public var groupUrl: Swift.String
+                /// - Remark: Generated from `#/components/schemas/concurrency-group-list/ConcurrencyGroupsPayload/last_acquired_at`.
+                public var lastAcquiredAt: Foundation.Date?
+                /// Creates a new `ConcurrencyGroupsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - groupName: The name of the concurrency group.
+                ///   - groupUrl: API URL for this concurrency group.
+                ///   - lastAcquiredAt:
+                public init(
+                    groupName: Swift.String,
+                    groupUrl: Swift.String,
+                    lastAcquiredAt: Foundation.Date? = nil
+                ) {
+                    self.groupName = groupName
+                    self.groupUrl = groupUrl
+                    self.lastAcquiredAt = lastAcquiredAt
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case groupName = "group_name"
+                    case groupUrl = "group_url"
+                    case lastAcquiredAt = "last_acquired_at"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/concurrency-group-list/concurrency_groups`.
+            public typealias ConcurrencyGroupsPayload = [Components.Schemas.ConcurrencyGroupList.ConcurrencyGroupsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/concurrency-group-list/concurrency_groups`.
+            public var concurrencyGroups: Components.Schemas.ConcurrencyGroupList.ConcurrencyGroupsPayload
+            /// Creates a new `ConcurrencyGroupList`.
+            ///
+            /// - Parameters:
+            ///   - totalCount:
+            ///   - concurrencyGroups:
+            public init(
+                totalCount: Swift.Int,
+                concurrencyGroups: Components.Schemas.ConcurrencyGroupList.ConcurrencyGroupsPayload
+            ) {
+                self.totalCount = totalCount
+                self.concurrencyGroups = concurrencyGroups
+            }
+            public enum CodingKeys: String, CodingKey {
+                case totalCount = "total_count"
+                case concurrencyGroups = "concurrency_groups"
+            }
+        }
+        /// A concurrency group with the workflow runs and jobs that are either currently holding
+        /// or waiting for the concurrency group lease.
+        ///
+        /// - Remark: Generated from `#/components/schemas/concurrency-group`.
+        public struct ConcurrencyGroup: Codable, Hashable, Sendable {
+            /// The name of the concurrency group.
+            ///
+            /// - Remark: Generated from `#/components/schemas/concurrency-group/group_name`.
+            public var groupName: Swift.String
+            /// API URL for this concurrency group.
+            ///
+            /// - Remark: Generated from `#/components/schemas/concurrency-group/group_url`.
+            public var groupUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/concurrency-group/total_count`.
+            public var totalCount: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/concurrency-group/GroupMembersPayload`.
+            public struct GroupMembersPayloadPayload: Codable, Hashable, Sendable {
+                /// The ID of the workflow run.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group/GroupMembersPayload/run_id`.
+                public var runId: Swift.Int
+                /// The name of the workflow run.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group/GroupMembersPayload/run_name`.
+                public var runName: Swift.String
+                /// API URL for the workflow run.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group/GroupMembersPayload/run_url`.
+                public var runUrl: Swift.String?
+                /// Web URL for the workflow run.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group/GroupMembersPayload/run_html_url`.
+                public var runHtmlUrl: Swift.String?
+                /// The ID of the job, when the item represents a job-level or reusable-workflow-level lease.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group/GroupMembersPayload/job_id`.
+                public var jobId: Swift.Int?
+                /// The display name of the job, when the item represents a job-level or reusable-workflow-level lease.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group/GroupMembersPayload/job_name`.
+                public var jobName: Swift.String?
+                /// API URL for the job.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group/GroupMembersPayload/job_url`.
+                public var jobUrl: Swift.String?
+                /// Web URL for the job.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group/GroupMembersPayload/job_html_url`.
+                public var jobHtmlUrl: Swift.String?
+                /// - Remark: Generated from `#/components/schemas/concurrency-group/GroupMembersPayload/status`.
+                @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case inProgress = "in_progress"
+                    case pending = "pending"
+                }
+                /// - Remark: Generated from `#/components/schemas/concurrency-group/GroupMembersPayload/status`.
+                public var status: Components.Schemas.ConcurrencyGroup.GroupMembersPayloadPayload.StatusPayload
+                /// Creates a new `GroupMembersPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - runId: The ID of the workflow run.
+                ///   - runName: The name of the workflow run.
+                ///   - runUrl: API URL for the workflow run.
+                ///   - runHtmlUrl: Web URL for the workflow run.
+                ///   - jobId: The ID of the job, when the item represents a job-level or reusable-workflow-level lease.
+                ///   - jobName: The display name of the job, when the item represents a job-level or reusable-workflow-level lease.
+                ///   - jobUrl: API URL for the job.
+                ///   - jobHtmlUrl: Web URL for the job.
+                ///   - status:
+                public init(
+                    runId: Swift.Int,
+                    runName: Swift.String,
+                    runUrl: Swift.String? = nil,
+                    runHtmlUrl: Swift.String? = nil,
+                    jobId: Swift.Int? = nil,
+                    jobName: Swift.String? = nil,
+                    jobUrl: Swift.String? = nil,
+                    jobHtmlUrl: Swift.String? = nil,
+                    status: Components.Schemas.ConcurrencyGroup.GroupMembersPayloadPayload.StatusPayload
+                ) {
+                    self.runId = runId
+                    self.runName = runName
+                    self.runUrl = runUrl
+                    self.runHtmlUrl = runHtmlUrl
+                    self.jobId = jobId
+                    self.jobName = jobName
+                    self.jobUrl = jobUrl
+                    self.jobHtmlUrl = jobHtmlUrl
+                    self.status = status
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case runId = "run_id"
+                    case runName = "run_name"
+                    case runUrl = "run_url"
+                    case runHtmlUrl = "run_html_url"
+                    case jobId = "job_id"
+                    case jobName = "job_name"
+                    case jobUrl = "job_url"
+                    case jobHtmlUrl = "job_html_url"
+                    case status
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/concurrency-group/group_members`.
+            public typealias GroupMembersPayload = [Components.Schemas.ConcurrencyGroup.GroupMembersPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/concurrency-group/group_members`.
+            public var groupMembers: Components.Schemas.ConcurrencyGroup.GroupMembersPayload
+            /// Creates a new `ConcurrencyGroup`.
+            ///
+            /// - Parameters:
+            ///   - groupName: The name of the concurrency group.
+            ///   - groupUrl: API URL for this concurrency group.
+            ///   - totalCount:
+            ///   - groupMembers:
+            public init(
+                groupName: Swift.String,
+                groupUrl: Swift.String,
+                totalCount: Swift.Int,
+                groupMembers: Components.Schemas.ConcurrencyGroup.GroupMembersPayload
+            ) {
+                self.groupName = groupName
+                self.groupUrl = groupUrl
+                self.totalCount = totalCount
+                self.groupMembers = groupMembers
+            }
+            public enum CodingKeys: String, CodingKey {
+                case groupName = "group_name"
+                case groupUrl = "group_url"
+                case totalCount = "total_count"
+                case groupMembers = "group_members"
+            }
+        }
         /// Information of a job execution in a workflow run
         ///
         /// - Remark: Generated from `#/components/schemas/job`.
@@ -11314,6 +11642,188 @@ public enum Components {
                 case comment
             }
         }
+        /// A list of concurrency groups associated with a workflow run.
+        ///
+        /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list`.
+        public struct ConcurrencyGroupRunList: Codable, Hashable, Sendable {
+            /// The total number of concurrency groups this workflow run participates in,
+            /// derived from the run's configuration. This count is not filtered by
+            /// whether the run currently holds or is waiting in each group, so it can
+            /// include groups whose `group_members` array is empty (for example, when
+            /// the run has already released its lease in that group).
+            ///
+            /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/total_count`.
+            public var totalCount: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload`.
+            public struct ConcurrencyGroupsPayloadPayload: Codable, Hashable, Sendable {
+                /// The name of the concurrency group.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/group_name`.
+                public var groupName: Swift.String
+                /// API URL for this concurrency group. May return 404 if the group
+                /// has no active items at the time it is requested, since the
+                /// get-by-name endpoint reports the live repo-wide state of a group
+                /// while this endpoint lists groups associated with a run by
+                /// configuration.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/group_url`.
+                public var groupUrl: Swift.String
+                /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload`.
+                public struct GroupMembersPayloadPayload: Codable, Hashable, Sendable {
+                    /// The ID of the workflow run.
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/run_id`.
+                    public var runId: Swift.Int
+                    /// The name of the workflow run.
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/run_name`.
+                    public var runName: Swift.String
+                    /// API URL for the workflow run.
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/run_url`.
+                    public var runUrl: Swift.String?
+                    /// Web URL for the workflow run.
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/run_html_url`.
+                    public var runHtmlUrl: Swift.String?
+                    /// Queue position. 0 means the item holds the concurrency lease (in_progress), 1 or higher means queued (pending).
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/position`.
+                    public var position: Swift.Int
+                    /// API URL to get items ahead of this item in the concurrency group.
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/position_url`.
+                    public var positionUrl: Swift.String
+                    /// The ID of the job, when the item represents a job-level or reusable-workflow-level lease.
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/job_id`.
+                    public var jobId: Swift.Int?
+                    /// The display name of the job, when the item represents a job-level or reusable-workflow-level lease.
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/job_name`.
+                    public var jobName: Swift.String?
+                    /// API URL for the job.
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/job_url`.
+                    public var jobUrl: Swift.String?
+                    /// Web URL for the job.
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/job_html_url`.
+                    public var jobHtmlUrl: Swift.String?
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/status`.
+                    @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case inProgress = "in_progress"
+                        case pending = "pending"
+                    }
+                    /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/GroupMembersPayload/status`.
+                    public var status: Components.Schemas.ConcurrencyGroupRunList.ConcurrencyGroupsPayloadPayload.GroupMembersPayloadPayload.StatusPayload
+                    /// Creates a new `GroupMembersPayloadPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - runId: The ID of the workflow run.
+                    ///   - runName: The name of the workflow run.
+                    ///   - runUrl: API URL for the workflow run.
+                    ///   - runHtmlUrl: Web URL for the workflow run.
+                    ///   - position: Queue position. 0 means the item holds the concurrency lease (in_progress), 1 or higher means queued (pending).
+                    ///   - positionUrl: API URL to get items ahead of this item in the concurrency group.
+                    ///   - jobId: The ID of the job, when the item represents a job-level or reusable-workflow-level lease.
+                    ///   - jobName: The display name of the job, when the item represents a job-level or reusable-workflow-level lease.
+                    ///   - jobUrl: API URL for the job.
+                    ///   - jobHtmlUrl: Web URL for the job.
+                    ///   - status:
+                    public init(
+                        runId: Swift.Int,
+                        runName: Swift.String,
+                        runUrl: Swift.String? = nil,
+                        runHtmlUrl: Swift.String? = nil,
+                        position: Swift.Int,
+                        positionUrl: Swift.String,
+                        jobId: Swift.Int? = nil,
+                        jobName: Swift.String? = nil,
+                        jobUrl: Swift.String? = nil,
+                        jobHtmlUrl: Swift.String? = nil,
+                        status: Components.Schemas.ConcurrencyGroupRunList.ConcurrencyGroupsPayloadPayload.GroupMembersPayloadPayload.StatusPayload
+                    ) {
+                        self.runId = runId
+                        self.runName = runName
+                        self.runUrl = runUrl
+                        self.runHtmlUrl = runHtmlUrl
+                        self.position = position
+                        self.positionUrl = positionUrl
+                        self.jobId = jobId
+                        self.jobName = jobName
+                        self.jobUrl = jobUrl
+                        self.jobHtmlUrl = jobHtmlUrl
+                        self.status = status
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case runId = "run_id"
+                        case runName = "run_name"
+                        case runUrl = "run_url"
+                        case runHtmlUrl = "run_html_url"
+                        case position
+                        case positionUrl = "position_url"
+                        case jobId = "job_id"
+                        case jobName = "job_name"
+                        case jobUrl = "job_url"
+                        case jobHtmlUrl = "job_html_url"
+                        case status
+                    }
+                }
+                /// Items belonging to this workflow run that are either currently holding or
+                /// waiting for the concurrency group lease. May be empty if the run no
+                /// longer has any active or queued items in this group.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/group_members`.
+                public typealias GroupMembersPayload = [Components.Schemas.ConcurrencyGroupRunList.ConcurrencyGroupsPayloadPayload.GroupMembersPayloadPayload]
+                /// Items belonging to this workflow run that are either currently holding or
+                /// waiting for the concurrency group lease. May be empty if the run no
+                /// longer has any active or queued items in this group.
+                ///
+                /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/ConcurrencyGroupsPayload/group_members`.
+                public var groupMembers: Components.Schemas.ConcurrencyGroupRunList.ConcurrencyGroupsPayloadPayload.GroupMembersPayload
+                /// Creates a new `ConcurrencyGroupsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - groupName: The name of the concurrency group.
+                ///   - groupUrl: API URL for this concurrency group. May return 404 if the group
+                ///   - groupMembers: Items belonging to this workflow run that are either currently holding or
+                public init(
+                    groupName: Swift.String,
+                    groupUrl: Swift.String,
+                    groupMembers: Components.Schemas.ConcurrencyGroupRunList.ConcurrencyGroupsPayloadPayload.GroupMembersPayload
+                ) {
+                    self.groupName = groupName
+                    self.groupUrl = groupUrl
+                    self.groupMembers = groupMembers
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case groupName = "group_name"
+                    case groupUrl = "group_url"
+                    case groupMembers = "group_members"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/concurrency_groups`.
+            public typealias ConcurrencyGroupsPayload = [Components.Schemas.ConcurrencyGroupRunList.ConcurrencyGroupsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/concurrency-group-run-list/concurrency_groups`.
+            public var concurrencyGroups: Components.Schemas.ConcurrencyGroupRunList.ConcurrencyGroupsPayload
+            /// Creates a new `ConcurrencyGroupRunList`.
+            ///
+            /// - Parameters:
+            ///   - totalCount: The total number of concurrency groups this workflow run participates in,
+            ///   - concurrencyGroups:
+            public init(
+                totalCount: Swift.Int,
+                concurrencyGroups: Components.Schemas.ConcurrencyGroupRunList.ConcurrencyGroupsPayload
+            ) {
+                self.totalCount = totalCount
+                self.concurrencyGroups = concurrencyGroups
+            }
+            public enum CodingKeys: String, CodingKey {
+                case totalCount = "total_count"
+                case concurrencyGroups = "concurrency_groups"
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/review-custom-gates-comment-required`.
         public struct ReviewCustomGatesCommentRequired: Codable, Hashable, Sendable {
             /// The name of the environment to approve or reject.
@@ -12178,6 +12688,14 @@ public enum Components {
     }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
     public enum Parameters {
+        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+        ///
+        /// - Remark: Generated from `#/components/parameters/pagination-before`.
+        public typealias PaginationBefore = Swift.String
+        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+        ///
+        /// - Remark: Generated from `#/components/parameters/pagination-after`.
+        public typealias PaginationAfter = Swift.String
         /// The direction to sort the results by.
         ///
         /// - Remark: Generated from `#/components/parameters/direction`.
@@ -12285,6 +12803,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/cache-id`.
         public typealias CacheId = Swift.Int
+        /// The name of the concurrency group.
+        ///
+        /// - Remark: Generated from `#/components/parameters/concurrency-group-name`.
+        public typealias ConcurrencyGroupName = Swift.String
         /// The unique identifier of the job.
         ///
         /// - Remark: Generated from `#/components/parameters/job-id`.
@@ -29789,6 +30311,456 @@ public enum Operations {
             case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
         }
     }
+    /// List concurrency groups for a repository
+    ///
+    /// Lists the active concurrency groups for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/concurrency_groups`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/get(actions/list-concurrency-groups-for-repository)`.
+    public enum ActionsListConcurrencyGroupsForRepository {
+        public static let id: Swift.String = "actions/list-concurrency-groups-for-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ActionsListConcurrencyGroupsForRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/GET/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil
+                ) {
+                    self.perPage = perPage
+                    self.after = after
+                }
+            }
+            public var query: Operations.ActionsListConcurrencyGroupsForRepository.Input.Query
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsListConcurrencyGroupsForRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsListConcurrencyGroupsForRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsListConcurrencyGroupsForRepository.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsListConcurrencyGroupsForRepository.Input.Path,
+                query: Operations.ActionsListConcurrencyGroupsForRepository.Input.Query = .init(),
+                headers: Operations.ActionsListConcurrencyGroupsForRepository.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ActionsListConcurrencyGroupsForRepository.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ConcurrencyGroupList)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ConcurrencyGroupList {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsListConcurrencyGroupsForRepository.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ActionsListConcurrencyGroupsForRepository.Output.Ok.Headers = .init(),
+                    body: Operations.ActionsListConcurrencyGroupsForRepository.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/get(actions/list-concurrency-groups-for-repository)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsListConcurrencyGroupsForRepository.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsListConcurrencyGroupsForRepository.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/get(actions/list-concurrency-groups-for-repository)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get a concurrency group for a repository
+    ///
+    /// Gets a specific concurrency group for a repository, including all instances in the group's queue.
+    /// Returns 404 if the group is inactive or does not exist.
+    ///
+    /// Optionally, pass `ahead_of_run` or `ahead_of_job` to filter the results to only the items
+    /// ahead of the specified workflow run or job in the queue, plus the specified item itself
+    /// (returned as the last element). This is useful for determining what is blocking a particular
+    /// run or job. Returns 422 if the specified run or job is not in this concurrency group.
+    ///
+    /// When using `ahead_of_run`, this matches workflow-level concurrency and any reusable-workflow
+    /// leases held on behalf of that run. Job-level leases within the run are not considered to
+    /// block the run as a whole. Use `ahead_of_job` to match job-level concurrency and reusable-workflow
+    /// leases on the job's ancestor paths.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/get(actions/get-concurrency-group-for-repository)`.
+    public enum ActionsGetConcurrencyGroupForRepository {
+        public static let id: Swift.String = "actions/get-concurrency-group-for-repository"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The name of the concurrency group.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/GET/path/concurrency_group_name`.
+                public var concurrencyGroupName: Components.Parameters.ConcurrencyGroupName
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - concurrencyGroupName: The name of the concurrency group.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    concurrencyGroupName: Components.Parameters.ConcurrencyGroupName
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.concurrencyGroupName = concurrencyGroupName
+                }
+            }
+            public var path: Operations.ActionsGetConcurrencyGroupForRepository.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// Filter to items ahead of this workflow run ID in the queue, plus the run itself.
+                /// Matches workflow-level concurrency and reusable-workflow leases held on behalf of
+                /// the run. Mutually exclusive with `ahead_of_job`.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/GET/query/ahead_of_run`.
+                public var aheadOfRun: Swift.Int?
+                /// Filter to items ahead of this job ID in the queue, plus the job itself.
+                /// Matches job-level concurrency and reusable-workflow leases on the job's
+                /// ancestor paths. Mutually exclusive with `ahead_of_run`.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/GET/query/ahead_of_job`.
+                public var aheadOfJob: Swift.Int?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - aheadOfRun: Filter to items ahead of this workflow run ID in the queue, plus the run itself.
+                ///   - aheadOfJob: Filter to items ahead of this job ID in the queue, plus the job itself.
+                public init(
+                    aheadOfRun: Swift.Int? = nil,
+                    aheadOfJob: Swift.Int? = nil
+                ) {
+                    self.aheadOfRun = aheadOfRun
+                    self.aheadOfJob = aheadOfJob
+                }
+            }
+            public var query: Operations.ActionsGetConcurrencyGroupForRepository.Input.Query
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetConcurrencyGroupForRepository.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsGetConcurrencyGroupForRepository.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsGetConcurrencyGroupForRepository.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsGetConcurrencyGroupForRepository.Input.Path,
+                query: Operations.ActionsGetConcurrencyGroupForRepository.Input.Query = .init(),
+                headers: Operations.ActionsGetConcurrencyGroupForRepository.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ConcurrencyGroup)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ConcurrencyGroup {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsGetConcurrencyGroupForRepository.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ActionsGetConcurrencyGroupForRepository.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/get(actions/get-concurrency-group-for-repository)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsGetConcurrencyGroupForRepository.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsGetConcurrencyGroupForRepository.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/get(actions/get-concurrency-group-for-repository)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/get(actions/get-concurrency-group-for-repository)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// Get a job for a workflow run
     ///
     /// Gets a specific job in a workflow run.
@@ -30109,15 +31081,25 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/jobs/{job_id}/rerun/POST/requestBody/json/enable_debug_logging`.
                     public var enableDebugLogging: Swift.Bool?
+                    /// Whether to enable the debugger for the re-run of this job.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/jobs/{job_id}/rerun/POST/requestBody/json/enable_debugger`.
+                    public var enableDebugger: Swift.Bool?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - enableDebugLogging: Whether to enable debug logging for the re-run.
-                    public init(enableDebugLogging: Swift.Bool? = nil) {
+                    ///   - enableDebugger: Whether to enable the debugger for the re-run of this job.
+                    public init(
+                        enableDebugLogging: Swift.Bool? = nil,
+                        enableDebugger: Swift.Bool? = nil
+                    ) {
                         self.enableDebugLogging = enableDebugLogging
+                        self.enableDebugger = enableDebugger
                     }
                     public enum CodingKeys: String, CodingKey {
                         case enableDebugLogging = "enable_debug_logging"
+                        case enableDebugger = "enable_debugger"
                     }
                 }
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/jobs/{job_id}/rerun/POST/requestBody/content/application\/json`.
@@ -37133,6 +38115,271 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List concurrency groups for a workflow run
+    ///
+    /// Lists all concurrency groups associated with a workflow run or its jobs.
+    ///
+    /// The set of groups is derived from the run's configuration, so a group is
+    /// included even when the run no longer has any items currently holding or
+    /// waiting in it. In that case the `group_members` array will be empty.
+    /// `total_count` reflects the number of groups the run participates in by
+    /// configuration, not the number with active items.
+    ///
+    /// This differs from `GET /repos/{owner}/{repo}/actions/concurrency_groups/{group_name}`,
+    /// which returns 404 when a group has no active items. That endpoint reports
+    /// the live state of a group repo-wide, while this endpoint reports the
+    /// groups associated with a specific run by configuration.
+    ///
+    /// Results are sorted by group name and support cursor-based pagination via
+    /// `before` and `after`. The `after` cursor paginates forward only and does
+    /// not emit a `rel="prev"` Link; use `before` to page backward from a
+    /// forward page's `next` cursor.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/get(actions/list-concurrency-groups-for-workflow-run)`.
+    public enum ActionsListConcurrencyGroupsForWorkflowRun {
+        public static let id: Swift.String = "actions/list-concurrency-groups-for-workflow-run"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The unique identifier of the workflow run.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/path/run_id`.
+                public var runId: Components.Parameters.RunId
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - runId: The unique identifier of the workflow run.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    runId: Components.Parameters.RunId
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.runId = runId
+                }
+            }
+            public var path: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/query/before`.
+                public var before: Components.Parameters.PaginationBefore?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    before: Components.Parameters.PaginationBefore? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil
+                ) {
+                    self.perPage = perPage
+                    self.before = before
+                    self.after = after
+                }
+            }
+            public var query: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input.Query
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsListConcurrencyGroupsForWorkflowRun.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ActionsListConcurrencyGroupsForWorkflowRun.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input.Path,
+                query: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input.Query = .init(),
+                headers: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.ConcurrencyGroupRunList)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ConcurrencyGroupRunList {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Output.Ok.Headers = .init(),
+                    body: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/get(actions/list-concurrency-groups-for-workflow-run)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ActionsListConcurrencyGroupsForWorkflowRun.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/get(actions/list-concurrency-groups-for-workflow-run)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/get(actions/list-concurrency-groups-for-workflow-run)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
                             response: self
                         )
                     }
