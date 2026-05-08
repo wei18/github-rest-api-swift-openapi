@@ -8524,6 +8524,254 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// List concurrency groups for a repository
+    ///
+    /// Lists the active concurrency groups for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/concurrency_groups`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/get(actions/list-concurrency-groups-for-repository)`.
+    public func actionsListConcurrencyGroupsForRepository(_ input: Operations.ActionsListConcurrencyGroupsForRepository.Input) async throws -> Operations.ActionsListConcurrencyGroupsForRepository.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ActionsListConcurrencyGroupsForRepository.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/repos/{}/{}/actions/concurrency_groups",
+                    parameters: [
+                        input.path.owner,
+                        input.path.repo
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "per_page",
+                    value: input.query.perPage
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "after",
+                    value: input.query.after
+                )
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let headers: Operations.ActionsListConcurrencyGroupsForRepository.Output.Ok.Headers = .init(link: try converter.getOptionalHeaderFieldAsURI(
+                        in: response.headerFields,
+                        name: "Link",
+                        as: Components.Headers.Link.self
+                    ))
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.ActionsListConcurrencyGroupsForRepository.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ConcurrencyGroupList.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(
+                        headers: headers,
+                        body: body
+                    ))
+                case 422:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ValidationFailed.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ValidationError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .unprocessableContent(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Get a concurrency group for a repository
+    ///
+    /// Gets a specific concurrency group for a repository, including all instances in the group's queue.
+    /// Returns 404 if the group is inactive or does not exist.
+    ///
+    /// Optionally, pass `ahead_of_run` or `ahead_of_job` to filter the results to only the items
+    /// ahead of the specified workflow run or job in the queue, plus the specified item itself
+    /// (returned as the last element). This is useful for determining what is blocking a particular
+    /// run or job. Returns 422 if the specified run or job is not in this concurrency group.
+    ///
+    /// When using `ahead_of_run`, this matches workflow-level concurrency and any reusable-workflow
+    /// leases held on behalf of that run. Job-level leases within the run are not considered to
+    /// block the run as a whole. Use `ahead_of_job` to match job-level concurrency and reusable-workflow
+    /// leases on the job's ancestor paths.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/concurrency_groups/{concurrency_group_name}/get(actions/get-concurrency-group-for-repository)`.
+    public func actionsGetConcurrencyGroupForRepository(_ input: Operations.ActionsGetConcurrencyGroupForRepository.Input) async throws -> Operations.ActionsGetConcurrencyGroupForRepository.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ActionsGetConcurrencyGroupForRepository.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/repos/{}/{}/actions/concurrency_groups/{}",
+                    parameters: [
+                        input.path.owner,
+                        input.path.repo,
+                        input.path.concurrencyGroupName
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "ahead_of_run",
+                    value: input.query.aheadOfRun
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "ahead_of_job",
+                    value: input.query.aheadOfJob
+                )
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.ActionsGetConcurrencyGroupForRepository.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ConcurrencyGroup.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                case 422:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ValidationFailed.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ValidationError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .unprocessableContent(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// Get a job for a workflow run
     ///
     /// Gets a specific job in a workflow run.
@@ -12315,6 +12563,163 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .conflict(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// List concurrency groups for a workflow run
+    ///
+    /// Lists all concurrency groups associated with a workflow run or its jobs.
+    ///
+    /// The set of groups is derived from the run's configuration, so a group is
+    /// included even when the run no longer has any items currently holding or
+    /// waiting in it. In that case the `group_members` array will be empty.
+    /// `total_count` reflects the number of groups the run participates in by
+    /// configuration, not the number with active items.
+    ///
+    /// This differs from `GET /repos/{owner}/{repo}/actions/concurrency_groups/{group_name}`,
+    /// which returns 404 when a group has no active items. That endpoint reports
+    /// the live state of a group repo-wide, while this endpoint reports the
+    /// groups associated with a specific run by configuration.
+    ///
+    /// Results are sorted by group name and support cursor-based pagination via
+    /// `before` and `after`. The `after` cursor paginates forward only and does
+    /// not emit a `rel="prev"` Link; use `before` to page backward from a
+    /// forward page's `next` cursor.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with a private repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/actions/runs/{run_id}/concurrency_groups/get(actions/list-concurrency-groups-for-workflow-run)`.
+    public func actionsListConcurrencyGroupsForWorkflowRun(_ input: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Input) async throws -> Operations.ActionsListConcurrencyGroupsForWorkflowRun.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ActionsListConcurrencyGroupsForWorkflowRun.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/repos/{}/{}/actions/runs/{}/concurrency_groups",
+                    parameters: [
+                        input.path.owner,
+                        input.path.repo,
+                        input.path.runId
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "per_page",
+                    value: input.query.perPage
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "before",
+                    value: input.query.before
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
+                    name: "after",
+                    value: input.query.after
+                )
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let headers: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Output.Ok.Headers = .init(link: try converter.getOptionalHeaderFieldAsURI(
+                        in: response.headerFields,
+                        name: "Link",
+                        as: Components.Headers.Link.self
+                    ))
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.ActionsListConcurrencyGroupsForWorkflowRun.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ConcurrencyGroupRunList.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(
+                        headers: headers,
+                        body: body
+                    ))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                case 422:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ValidationFailed.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.ValidationError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .unprocessableContent(.init(body: body))
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
