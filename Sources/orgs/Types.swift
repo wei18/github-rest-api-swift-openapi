@@ -91,6 +91,10 @@ public protocol APIProtocol: Sendable {
     /// If proposed records in the 'deployments' field have identical 'cluster', 'logical_environment',
     /// 'physical_environment', and 'deployment_name' values as existing records, the existing records will be updated.
     /// If no existing records match, new records will be created.
+    /// Note: Artifacts are uniquely identified by the combination of their repository and digest fields. If two entries in the deployments
+    /// array resolve to the same repository and have identical digest fields but differing name and version fields, the endpoint will use
+    /// the artifact name and version from the record processed first, since a single artifact (identified by repository and digest) can
+    /// only have one name and version.
     ///
     /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)`.
@@ -1195,6 +1199,10 @@ extension APIProtocol {
     /// If proposed records in the 'deployments' field have identical 'cluster', 'logical_environment',
     /// 'physical_environment', and 'deployment_name' values as existing records, the existing records will be updated.
     /// If no existing records match, new records will be created.
+    /// Note: Artifacts are uniquely identified by the combination of their repository and digest fields. If two entries in the deployments
+    /// array resolve to the same repository and have identical digest fields but differing name and version fields, the endpoint will use
+    /// the artifact name and version from the record processed first, since a single artifact (identified by repository and digest) can
+    /// only have one name and version.
     ///
     /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)`.
@@ -11850,6 +11858,10 @@ public enum Operations {
     /// If proposed records in the 'deployments' field have identical 'cluster', 'logical_environment',
     /// 'physical_environment', and 'deployment_name' values as existing records, the existing records will be updated.
     /// If no existing records match, new records will be created.
+    /// Note: Artifacts are uniquely identified by the combination of their repository and digest fields. If two entries in the deployments
+    /// array resolve to the same repository and have identical digest fields but differing name and version fields, the endpoint will use
+    /// the artifact name and version from the record processed first, since a single artifact (identified by repository and digest) can
+    /// only have one name and version.
     ///
     /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)`.
@@ -11906,21 +11918,15 @@ public enum Operations {
                     public var physicalEnvironment: Swift.String?
                     /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload`.
                     public struct DeploymentsPayloadPayload: Codable, Hashable, Sendable {
-                        /// The name of the artifact. Note that if multiple deployments have identical 'digest' parameter values,
-                        /// the name parameter must also be identical across all entries.
-                        ///
+                        /// The name of the artifact.
                         ///
                         /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/name`.
                         public var name: Swift.String
-                        /// The hex encoded digest of the artifact. Note that if multiple deployments have identical 'digest' parameter values,
-                        /// the name and version parameters must also be identical across all entries.
-                        ///
+                        /// The hex encoded digest of the artifact.
                         ///
                         /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/digest`.
                         public var digest: Swift.String
-                        /// The artifact version. Note that if multiple deployments have identical 'digest' parameter values,
-                        /// the version parameter must also be identical across all entries.
-                        ///
+                        /// The artifact version.
                         ///
                         /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/DeploymentsPayload/version`.
                         public var version: Swift.String?
@@ -11994,9 +12000,9 @@ public enum Operations {
                         /// Creates a new `DeploymentsPayloadPayload`.
                         ///
                         /// - Parameters:
-                        ///   - name: The name of the artifact. Note that if multiple deployments have identical 'digest' parameter values,
-                        ///   - digest: The hex encoded digest of the artifact. Note that if multiple deployments have identical 'digest' parameter values,
-                        ///   - version: The artifact version. Note that if multiple deployments have identical 'digest' parameter values,
+                        ///   - name: The name of the artifact.
+                        ///   - digest: The hex encoded digest of the artifact.
+                        ///   - version: The artifact version.
                         ///   - status: The deployment status of the artifact.
                         ///   - deploymentName: The unique identifier for the deployment represented by the new record. To accommodate differing
                         ///   - githubRepository: The name of the GitHub repository associated with the artifact. This should be used
