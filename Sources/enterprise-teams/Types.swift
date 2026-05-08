@@ -231,6 +231,17 @@ public enum Components {
             public var createdAt: Foundation.Date
             /// - Remark: Generated from `#/components/schemas/enterprise-team/updated_at`.
             public var updatedAt: Foundation.Date
+            /// Whether team members will receive notifications when the team is mentioned.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/notification_setting`.
+            @frozen public enum NotificationSettingPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case notificationsEnabled = "notifications_enabled"
+                case notificationsDisabled = "notifications_disabled"
+            }
+            /// Whether team members will receive notifications when the team is mentioned.
+            ///
+            /// - Remark: Generated from `#/components/schemas/enterprise-team/notification_setting`.
+            public var notificationSetting: Components.Schemas.EnterpriseTeam.NotificationSettingPayload?
             /// Creates a new `EnterpriseTeam`.
             ///
             /// - Parameters:
@@ -247,6 +258,7 @@ public enum Components {
             ///   - membersUrl:
             ///   - createdAt:
             ///   - updatedAt:
+            ///   - notificationSetting: Whether team members will receive notifications when the team is mentioned.
             public init(
                 id: Swift.Int64,
                 name: Swift.String,
@@ -260,7 +272,8 @@ public enum Components {
                 htmlUrl: Swift.String,
                 membersUrl: Swift.String,
                 createdAt: Foundation.Date,
-                updatedAt: Foundation.Date
+                updatedAt: Foundation.Date,
+                notificationSetting: Components.Schemas.EnterpriseTeam.NotificationSettingPayload? = nil
             ) {
                 self.id = id
                 self.name = name
@@ -275,6 +288,7 @@ public enum Components {
                 self.membersUrl = membersUrl
                 self.createdAt = createdAt
                 self.updatedAt = updatedAt
+                self.notificationSetting = notificationSetting
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -290,6 +304,7 @@ public enum Components {
                 case membersUrl = "members_url"
                 case createdAt = "created_at"
                 case updatedAt = "updated_at"
+                case notificationSetting = "notification_setting"
             }
         }
     }
@@ -644,6 +659,29 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/group_id`.
                     public var groupId: Swift.String?
+                    /// The notification setting the team is set to. The options are:
+                    ///
+                    /// * `notifications_enabled` - team members receive notifications when the team is @mentioned.
+                    /// * `notifications_disabled` - no one receives notifications.
+                    ///
+                    /// Default: `notifications_enabled`
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/notification_setting`.
+                    @frozen public enum NotificationSettingPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case notificationsEnabled = "notifications_enabled"
+                        case notificationsDisabled = "notifications_disabled"
+                    }
+                    /// The notification setting the team is set to. The options are:
+                    ///
+                    /// * `notifications_enabled` - team members receive notifications when the team is @mentioned.
+                    /// * `notifications_disabled` - no one receives notifications.
+                    ///
+                    /// Default: `notifications_enabled`
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/json/notification_setting`.
+                    public var notificationSetting: Operations.EnterpriseTeamsCreate.Input.Body.JsonPayload.NotificationSettingPayload?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -652,18 +690,21 @@ public enum Operations {
                     ///   - syncToOrganizations: Retired: this field is no longer supported.
                     ///   - organizationSelectionType: Specifies which organizations in the enterprise should have access to this team. Can be one of `disabled`, `selected`, or `all`.
                     ///   - groupId: The ID of the IdP group to assign team membership with. You can get this value from the [REST API endpoints for SCIM](https://docs.github.com/rest/scim#list-provisioned-scim-groups-for-an-enterprise).
+                    ///   - notificationSetting: The notification setting the team is set to. The options are:
                     public init(
                         name: Swift.String,
                         description: Swift.String? = nil,
                         syncToOrganizations: Operations.EnterpriseTeamsCreate.Input.Body.JsonPayload.SyncToOrganizationsPayload? = nil,
                         organizationSelectionType: Operations.EnterpriseTeamsCreate.Input.Body.JsonPayload.OrganizationSelectionTypePayload? = nil,
-                        groupId: Swift.String? = nil
+                        groupId: Swift.String? = nil,
+                        notificationSetting: Operations.EnterpriseTeamsCreate.Input.Body.JsonPayload.NotificationSettingPayload? = nil
                     ) {
                         self.name = name
                         self.description = description
                         self.syncToOrganizations = syncToOrganizations
                         self.organizationSelectionType = organizationSelectionType
                         self.groupId = groupId
+                        self.notificationSetting = notificationSetting
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
@@ -671,6 +712,7 @@ public enum Operations {
                         case syncToOrganizations = "sync_to_organizations"
                         case organizationSelectionType = "organization_selection_type"
                         case groupId = "group_id"
+                        case notificationSetting = "notification_setting"
                     }
                 }
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/POST/requestBody/content/application\/json`.
@@ -1057,6 +1099,25 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/group_id`.
                     public var groupId: Swift.String?
+                    /// The notification setting the team is set to. The options are:
+                    ///
+                    /// * `notifications_enabled` - team members receive notifications when the team is @mentioned.
+                    /// * `notifications_disabled` - no one receives notifications.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/notification_setting`.
+                    @frozen public enum NotificationSettingPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case notificationsEnabled = "notifications_enabled"
+                        case notificationsDisabled = "notifications_disabled"
+                    }
+                    /// The notification setting the team is set to. The options are:
+                    ///
+                    /// * `notifications_enabled` - team members receive notifications when the team is @mentioned.
+                    /// * `notifications_disabled` - no one receives notifications.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/json/notification_setting`.
+                    public var notificationSetting: Operations.EnterpriseTeamsUpdate.Input.Body.JsonPayload.NotificationSettingPayload?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -1065,18 +1126,21 @@ public enum Operations {
                     ///   - syncToOrganizations: Retired: this field is no longer supported.
                     ///   - organizationSelectionType: Specifies which organizations in the enterprise should have access to this team. Can be one of `disabled`, `selected`, or `all`.
                     ///   - groupId: The ID of the IdP group to assign team membership with. The new IdP group will replace the existing one, or replace existing direct members if the team isn't currently linked to an IdP group.
+                    ///   - notificationSetting: The notification setting the team is set to. The options are:
                     public init(
                         name: Swift.String? = nil,
                         description: Swift.String? = nil,
                         syncToOrganizations: Operations.EnterpriseTeamsUpdate.Input.Body.JsonPayload.SyncToOrganizationsPayload? = nil,
                         organizationSelectionType: Operations.EnterpriseTeamsUpdate.Input.Body.JsonPayload.OrganizationSelectionTypePayload? = nil,
-                        groupId: Swift.String? = nil
+                        groupId: Swift.String? = nil,
+                        notificationSetting: Operations.EnterpriseTeamsUpdate.Input.Body.JsonPayload.NotificationSettingPayload? = nil
                     ) {
                         self.name = name
                         self.description = description
                         self.syncToOrganizations = syncToOrganizations
                         self.organizationSelectionType = organizationSelectionType
                         self.groupId = groupId
+                        self.notificationSetting = notificationSetting
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
@@ -1084,6 +1148,7 @@ public enum Operations {
                         case syncToOrganizations = "sync_to_organizations"
                         case organizationSelectionType = "organization_selection_type"
                         case groupId = "group_id"
+                        case notificationSetting = "notification_setting"
                     }
                 }
                 /// - Remark: Generated from `#/paths/enterprises/{enterprise}/teams/{team_slug}/PATCH/requestBody/content/application\/json`.
