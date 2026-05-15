@@ -37,6 +37,19 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /enterprises/{enterprise}/copilot/metrics/reports/enterprise-28-day/latest`.
     /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/enterprise-28-day/latest/get(copilot/copilot-enterprise-usage-metrics)`.
     func copilotCopilotEnterpriseUsageMetrics(_ input: Operations.CopilotCopilotEnterpriseUsageMetrics.Input) async throws -> Operations.CopilotCopilotEnterpriseUsageMetrics.Output
+    /// Get Copilot enterprise user-teams report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot enterprise user-teams report for a specific day. The report provides user-team join data for Copilot across the enterprise, with one entry per user-team pair.
+    ///
+    /// The report contains user-team membership data for the specified day, enabling consumers to join with the existing enterprise user reports to compute team-level usage metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-enterprise-user-teams-one-day-report)`.
+    func copilotCopilotEnterpriseUserTeamsOneDayReport(_ input: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Input) async throws -> Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Output
     /// Get Copilot users usage metrics for a specific day
     ///
     /// Use this endpoint to retrieve download links for the Copilot user usage metrics report for a specific day. The report provides detailed user-level usage data and engagement metrics for Copilot features across the enterprise.
@@ -393,6 +406,21 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /orgs/{org}/copilot/metrics/reports/organization-28-day/latest`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/organization-28-day/latest/get(copilot/copilot-organization-usage-metrics)`.
     func copilotCopilotOrganizationUsageMetrics(_ input: Operations.CopilotCopilotOrganizationUsageMetrics.Input) async throws -> Operations.CopilotCopilotOrganizationUsageMetrics.Output
+    /// Get Copilot organization user-teams report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot organization user-teams report for a specific day. The report provides user-team join data for Copilot across the organization, with one entry per user-team pair.
+    ///
+    /// The report contains user-team membership data for the specified day, enabling consumers to join with the existing organization user reports to compute team-level usage metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/metrics/reports/user-teams-1-day`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-organization-user-teams-one-day-report)`.
+    func copilotCopilotOrganizationUserTeamsOneDayReport(_ input: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Input) async throws -> Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Output
     /// Get Copilot organization users usage metrics for a specific day
     ///
     /// Use this endpoint to retrieve download links for the Copilot organization user usage metrics report for a specific day. The report provides detailed user-level usage data and engagement metrics for Copilot features across the organization.
@@ -459,6 +487,20 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /orgs/{org}/team/{team_slug}/copilot/metrics`.
     /// - Remark: Generated from `#/paths//orgs/{org}/team/{team_slug}/copilot/metrics/get(copilot/copilot-metrics-for-team)`.
     func copilotCopilotMetricsForTeam(_ input: Operations.CopilotCopilotMetricsForTeam.Input) async throws -> Operations.CopilotCopilotMetricsForTeam.Output
+    /// Get Copilot cloud agent configuration for a repository
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Gets the Copilot cloud agent configuration for a repository, including MCP server
+    /// configuration, enabled review tools, Actions workflow approval settings, and firewall
+    /// configuration.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/copilot/cloud-agent/configuration`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/copilot/cloud-agent/configuration/get(copilot/get-copilot-cloud-agent-configuration)`.
+    func copilotGetCopilotCloudAgentConfiguration(_ input: Operations.CopilotGetCopilotCloudAgentConfiguration.Input) async throws -> Operations.CopilotGetCopilotCloudAgentConfiguration.Output
 }
 
 /// Convenience overloads for operation inputs.
@@ -504,6 +546,29 @@ extension APIProtocol {
     ) async throws -> Operations.CopilotCopilotEnterpriseUsageMetrics.Output {
         try await copilotCopilotEnterpriseUsageMetrics(Operations.CopilotCopilotEnterpriseUsageMetrics.Input(
             path: path,
+            headers: headers
+        ))
+    }
+    /// Get Copilot enterprise user-teams report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot enterprise user-teams report for a specific day. The report provides user-team join data for Copilot across the enterprise, with one entry per user-team pair.
+    ///
+    /// The report contains user-team membership data for the specified day, enabling consumers to join with the existing enterprise user reports to compute team-level usage metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-enterprise-user-teams-one-day-report)`.
+    public func copilotCopilotEnterpriseUserTeamsOneDayReport(
+        path: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Input.Path,
+        query: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Input.Query,
+        headers: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Input.Headers = .init()
+    ) async throws -> Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Output {
+        try await copilotCopilotEnterpriseUserTeamsOneDayReport(Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Input(
+            path: path,
+            query: query,
             headers: headers
         ))
     }
@@ -1069,6 +1134,31 @@ extension APIProtocol {
             headers: headers
         ))
     }
+    /// Get Copilot organization user-teams report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot organization user-teams report for a specific day. The report provides user-team join data for Copilot across the organization, with one entry per user-team pair.
+    ///
+    /// The report contains user-team membership data for the specified day, enabling consumers to join with the existing organization user reports to compute team-level usage metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/metrics/reports/user-teams-1-day`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-organization-user-teams-one-day-report)`.
+    public func copilotCopilotOrganizationUserTeamsOneDayReport(
+        path: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Input.Path,
+        query: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Input.Query,
+        headers: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Input.Headers = .init()
+    ) async throws -> Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Output {
+        try await copilotCopilotOrganizationUserTeamsOneDayReport(Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
     /// Get Copilot organization users usage metrics for a specific day
     ///
     /// Use this endpoint to retrieve download links for the Copilot organization user usage metrics report for a specific day. The report provides detailed user-level usage data and engagement metrics for Copilot features across the organization.
@@ -1168,6 +1258,28 @@ extension APIProtocol {
         try await copilotCopilotMetricsForTeam(Operations.CopilotCopilotMetricsForTeam.Input(
             path: path,
             query: query,
+            headers: headers
+        ))
+    }
+    /// Get Copilot cloud agent configuration for a repository
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Gets the Copilot cloud agent configuration for a repository, including MCP server
+    /// configuration, enabled review tools, Actions workflow approval settings, and firewall
+    /// configuration.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/copilot/cloud-agent/configuration`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/copilot/cloud-agent/configuration/get(copilot/get-copilot-cloud-agent-configuration)`.
+    public func copilotGetCopilotCloudAgentConfiguration(
+        path: Operations.CopilotGetCopilotCloudAgentConfiguration.Input.Path,
+        headers: Operations.CopilotGetCopilotCloudAgentConfiguration.Input.Headers = .init()
+    ) async throws -> Operations.CopilotGetCopilotCloudAgentConfiguration.Output {
+        try await copilotGetCopilotCloudAgentConfiguration(Operations.CopilotGetCopilotCloudAgentConfiguration.Input(
+            path: path,
             headers: headers
         ))
     }
@@ -4727,6 +4839,14 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/team-slug`.
         public typealias TeamSlug = Swift.String
+        /// The account owner of the repository. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/owner`.
+        public typealias Owner = Swift.String
+        /// The name of the repository without the `.git` extension. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/repo`.
+        public typealias Repo = Swift.String
         /// The unique identifier of the repository.
         ///
         /// - Remark: Generated from `#/components/parameters/repository-id`.
@@ -5435,6 +5555,231 @@ public enum Operations {
             /// Resource not found
             ///
             /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/enterprise-28-day/latest/get(copilot/copilot-enterprise-usage-metrics)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get Copilot enterprise user-teams report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot enterprise user-teams report for a specific day. The report provides user-team join data for Copilot across the enterprise, with one entry per user-team pair.
+    ///
+    /// The report contains user-team membership data for the specified day, enabling consumers to join with the existing enterprise user reports to compute team-level usage metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-enterprise-user-teams-one-day-report)`.
+    public enum CopilotCopilotEnterpriseUserTeamsOneDayReport {
+        public static let id: Swift.String = "copilot/copilot-enterprise-user-teams-one-day-report"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/GET/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The day to request data for, in `YYYY-MM-DD` format.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/GET/query/day`.
+                public var day: Components.Parameters.Day
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - day: The day to request data for, in `YYYY-MM-DD` format.
+                public init(day: Components.Parameters.Day) {
+                    self.day = day
+                }
+            }
+            public var query: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Input.Query
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Input.Path,
+                query: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Input.Query,
+                headers: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.CopilotUsageMetrics1DayReport)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.CopilotUsageMetrics1DayReport {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-enterprise-user-teams-one-day-report)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CopilotCopilotEnterpriseUserTeamsOneDayReport.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-enterprise-user-teams-one-day-report)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-enterprise-user-teams-one-day-report)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-enterprise-user-teams-one-day-report)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
@@ -11431,6 +11776,264 @@ public enum Operations {
             }
         }
     }
+    /// Get Copilot organization user-teams report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot organization user-teams report for a specific day. The report provides user-team join data for Copilot across the organization, with one entry per user-team pair.
+    ///
+    /// The report contains user-team membership data for the specified day, enabling consumers to join with the existing organization user reports to compute team-level usage metrics. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/metrics/reports/user-teams-1-day`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-organization-user-teams-one-day-report)`.
+    public enum CopilotCopilotOrganizationUserTeamsOneDayReport {
+        public static let id: Swift.String = "copilot/copilot-organization-user-teams-one-day-report"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/user-teams-1-day/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/user-teams-1-day/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/user-teams-1-day/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The day to request data for, in `YYYY-MM-DD` format.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/user-teams-1-day/GET/query/day`.
+                public var day: Components.Parameters.Day
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - day: The day to request data for, in `YYYY-MM-DD` format.
+                public init(day: Components.Parameters.Day) {
+                    self.day = day
+                }
+            }
+            public var query: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/user-teams-1-day/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Input.Path,
+                query: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Input.Query,
+                headers: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/user-teams-1-day/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/user-teams-1-day/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.CopilotUsageMetrics1DayReport)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.CopilotUsageMetrics1DayReport {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-organization-user-teams-one-day-report)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CopilotCopilotOrganizationUserTeamsOneDayReport.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-organization-user-teams-one-day-report)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Components.Responses.NoContent)
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-organization-user-teams-one-day-report)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Components.Responses.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-organization-user-teams-one-day-report)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-organization-user-teams-one-day-report)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/user-teams-1-day/get(copilot/copilot-organization-user-teams-one-day-report)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// Get Copilot organization users usage metrics for a specific day
     ///
     /// Use this endpoint to retrieve download links for the Copilot organization user usage metrics report for a specific day. The report provides detailed user-level usage data and engagement metrics for Copilot features across the organization.
@@ -12426,6 +13029,374 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get Copilot cloud agent configuration for a repository
+    ///
+    /// > [!NOTE]
+    /// > This endpoint is in public preview and is subject to change.
+    ///
+    /// Gets the Copilot cloud agent configuration for a repository, including MCP server
+    /// configuration, enabled review tools, Actions workflow approval settings, and firewall
+    /// configuration.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/copilot/cloud-agent/configuration`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/copilot/cloud-agent/configuration/get(copilot/get-copilot-cloud-agent-configuration)`.
+    public enum CopilotGetCopilotCloudAgentConfiguration {
+        public static let id: Swift.String = "copilot/get-copilot-cloud-agent-configuration"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.CopilotGetCopilotCloudAgentConfiguration.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotGetCopilotCloudAgentConfiguration.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotGetCopilotCloudAgentConfiguration.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotGetCopilotCloudAgentConfiguration.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.CopilotGetCopilotCloudAgentConfiguration.Input.Path,
+                headers: Operations.CopilotGetCopilotCloudAgentConfiguration.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The user-supplied MCP server configuration for the repository, as a free-form JSON object. This will be set to `null` if no configuration has been set.
+                        ///
+                        /// The shape of a valid MCP configuration may evolve over time, so this property is intentionally not strictly typed. Clients should not assume a fixed schema.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/mcp_configuration`.
+                        public struct McpConfigurationPayload: Codable, Hashable, Sendable {
+                            /// A container of undocumented properties.
+                            public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                            /// Creates a new `McpConfigurationPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - additionalProperties: A container of undocumented properties.
+                            public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                                self.additionalProperties = additionalProperties
+                            }
+                            public init(from decoder: any Swift.Decoder) throws {
+                                additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                            }
+                            public func encode(to encoder: any Swift.Encoder) throws {
+                                try encoder.encodeAdditionalProperties(additionalProperties)
+                            }
+                        }
+                        /// The user-supplied MCP server configuration for the repository, as a free-form JSON object. This will be set to `null` if no configuration has been set.
+                        ///
+                        /// The shape of a valid MCP configuration may evolve over time, so this property is intentionally not strictly typed. Clients should not assume a fixed schema.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/mcp_configuration`.
+                        public var mcpConfiguration: Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok.Body.JsonPayload.McpConfigurationPayload?
+                        /// The enabled review tools for Copilot cloud agent.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/enabled_tools`.
+                        public struct EnabledToolsPayload: Codable, Hashable, Sendable {
+                            /// Whether the CodeQL tool is enabled for the Copilot cloud agent.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/enabled_tools/codeql`.
+                            public var codeql: Swift.Bool
+                            /// Whether the Copilot code review tool is enabled for the Copilot cloud agent.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/enabled_tools/copilot_code_review`.
+                            public var copilotCodeReview: Swift.Bool
+                            /// Whether the secret scanning tool is enabled for the Copilot cloud agent.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/enabled_tools/secret_scanning`.
+                            public var secretScanning: Swift.Bool
+                            /// Whether the dependency vulnerability checks tool is enabled for the Copilot cloud agent.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/enabled_tools/dependency_vulnerability_checks`.
+                            public var dependencyVulnerabilityChecks: Swift.Bool
+                            /// Creates a new `EnabledToolsPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - codeql: Whether the CodeQL tool is enabled for the Copilot cloud agent.
+                            ///   - copilotCodeReview: Whether the Copilot code review tool is enabled for the Copilot cloud agent.
+                            ///   - secretScanning: Whether the secret scanning tool is enabled for the Copilot cloud agent.
+                            ///   - dependencyVulnerabilityChecks: Whether the dependency vulnerability checks tool is enabled for the Copilot cloud agent.
+                            public init(
+                                codeql: Swift.Bool,
+                                copilotCodeReview: Swift.Bool,
+                                secretScanning: Swift.Bool,
+                                dependencyVulnerabilityChecks: Swift.Bool
+                            ) {
+                                self.codeql = codeql
+                                self.copilotCodeReview = copilotCodeReview
+                                self.secretScanning = secretScanning
+                                self.dependencyVulnerabilityChecks = dependencyVulnerabilityChecks
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case codeql
+                                case copilotCodeReview = "copilot_code_review"
+                                case secretScanning = "secret_scanning"
+                                case dependencyVulnerabilityChecks = "dependency_vulnerability_checks"
+                            }
+                        }
+                        /// The enabled review tools for Copilot cloud agent.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/enabled_tools`.
+                        public var enabledTools: Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok.Body.JsonPayload.EnabledToolsPayload
+                        /// Whether Actions workflow approval is required for Copilot cloud agent pull requests.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/require_actions_workflow_approval`.
+                        public var requireActionsWorkflowApproval: Swift.Bool
+                        /// Whether the firewall is enabled.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/is_firewall_enabled`.
+                        public var isFirewallEnabled: Swift.Bool
+                        /// Whether the firewall recommended allowlist is enabled.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/is_firewall_recommended_allowlist_enabled`.
+                        public var isFirewallRecommendedAllowlistEnabled: Swift.Bool
+                        /// A list of custom allowlist entries, as hosts or URLs, that the firewall will allow the Copilot cloud agent to access.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/custom_allowlist`.
+                        public var customAllowlist: [Swift.String]
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - mcpConfiguration: The user-supplied MCP server configuration for the repository, as a free-form JSON object. This will be set to `null` if no configuration has been set.
+                        ///   - enabledTools: The enabled review tools for Copilot cloud agent.
+                        ///   - requireActionsWorkflowApproval: Whether Actions workflow approval is required for Copilot cloud agent pull requests.
+                        ///   - isFirewallEnabled: Whether the firewall is enabled.
+                        ///   - isFirewallRecommendedAllowlistEnabled: Whether the firewall recommended allowlist is enabled.
+                        ///   - customAllowlist: A list of custom allowlist entries, as hosts or URLs, that the firewall will allow the Copilot cloud agent to access.
+                        public init(
+                            mcpConfiguration: Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok.Body.JsonPayload.McpConfigurationPayload? = nil,
+                            enabledTools: Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok.Body.JsonPayload.EnabledToolsPayload,
+                            requireActionsWorkflowApproval: Swift.Bool,
+                            isFirewallEnabled: Swift.Bool,
+                            isFirewallRecommendedAllowlistEnabled: Swift.Bool,
+                            customAllowlist: [Swift.String]
+                        ) {
+                            self.mcpConfiguration = mcpConfiguration
+                            self.enabledTools = enabledTools
+                            self.requireActionsWorkflowApproval = requireActionsWorkflowApproval
+                            self.isFirewallEnabled = isFirewallEnabled
+                            self.isFirewallRecommendedAllowlistEnabled = isFirewallRecommendedAllowlistEnabled
+                            self.customAllowlist = customAllowlist
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case mcpConfiguration = "mcp_configuration"
+                            case enabledTools = "enabled_tools"
+                            case requireActionsWorkflowApproval = "require_actions_workflow_approval"
+                            case isFirewallEnabled = "is_firewall_enabled"
+                            case isFirewallRecommendedAllowlistEnabled = "is_firewall_recommended_allowlist_enabled"
+                            case customAllowlist = "custom_allowlist"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/application\/json`.
+                    case json(Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/copilot/cloud-agent/configuration/get(copilot/get-copilot-cloud-agent-configuration)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/copilot/cloud-agent/configuration/get(copilot/get-copilot-cloud-agent-configuration)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Requires authentication
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/copilot/cloud-agent/configuration/get(copilot/get-copilot-cloud-agent-configuration)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.RequiresAuthentication)
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.RequiresAuthentication {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/copilot/cloud-agent/configuration/get(copilot/get-copilot-cloud-agent-configuration)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/copilot/cloud-agent/configuration/get(copilot/get-copilot-cloud-agent-configuration)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
                             response: self
                         )
                     }
