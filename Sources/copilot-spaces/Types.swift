@@ -19,6 +19,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in a space; spaces with inaccessible resources are omitted from the response.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/get(copilot-spaces/list-for-org)`.
     func copilotSpacesListForOrg(_ input: Operations.CopilotSpacesListForOrg.Input) async throws -> Operations.CopilotSpacesListForOrg.Output
@@ -29,6 +31,8 @@ public protocol APIProtocol: Sendable {
     /// Organization members with appropriate permissions can create Copilot Spaces to be shared within their organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by the submitted resources.
     ///
     /// - Remark: HTTP `POST /orgs/{org}/copilot-spaces`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/post(copilot-spaces/create-for-org)`.
@@ -41,6 +45,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/get(copilot-spaces/get-for-org)`.
     func copilotSpacesGetForOrg(_ input: Operations.CopilotSpacesGetForOrg.Input) async throws -> Operations.CopilotSpacesGetForOrg.Output
@@ -51,6 +57,8 @@ public protocol APIProtocol: Sendable {
     /// Organization members with appropriate permissions can update Copilot Spaces owned by their organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including any being added or updated.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/copilot-spaces/{space_number}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/put(copilot-spaces/update-for-org)`.
@@ -65,6 +73,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// OAuth app tokens and personal access tokens (classic) need both the `read:org` and `repo` scopes to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `DELETE /orgs/{org}/copilot-spaces/{space_number}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/delete(copilot-spaces/delete-for-org)`.
     func copilotSpacesDeleteForOrg(_ input: Operations.CopilotSpacesDeleteForOrg.Input) async throws -> Operations.CopilotSpacesDeleteForOrg.Output
@@ -78,6 +88,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}/collaborators`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/get(copilot-spaces/list-collaborators-for-org)`.
     func copilotSpacesListCollaboratorsForOrg(_ input: Operations.CopilotSpacesListCollaboratorsForOrg.Input) async throws -> Operations.CopilotSpacesListCollaboratorsForOrg.Output
@@ -90,6 +102,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `POST /orgs/{org}/copilot-spaces/{space_number}/collaborators`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/post(copilot-spaces/add-collaborator-for-org)`.
     func copilotSpacesAddCollaboratorForOrg(_ input: Operations.CopilotSpacesAddCollaboratorForOrg.Input) async throws -> Operations.CopilotSpacesAddCollaboratorForOrg.Output
@@ -98,6 +112,8 @@ public protocol APIProtocol: Sendable {
     /// Updates the role of a collaborator for a specific Copilot Space owned by an organization. The authenticated user must have appropriate permissions to manage collaborators.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}/put(copilot-spaces/update-collaborator-for-org)`.
@@ -108,6 +124,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `DELETE /orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}/delete(copilot-spaces/remove-collaborator-for-org)`.
     func copilotSpacesRemoveCollaboratorForOrg(_ input: Operations.CopilotSpacesRemoveCollaboratorForOrg.Input) async throws -> Operations.CopilotSpacesRemoveCollaboratorForOrg.Output
@@ -117,6 +135,8 @@ public protocol APIProtocol: Sendable {
     /// The authenticated user must have appropriate permissions to view the space.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}/resources`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/get(copilot-spaces/list-resources-for-org)`.
@@ -133,6 +153,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including the resource being created.
+    ///
     /// - Remark: HTTP `POST /orgs/{org}/copilot-spaces/{space_number}/resources`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/post(copilot-spaces/create-resource-for-org)`.
     func copilotSpacesCreateResourceForOrg(_ input: Operations.CopilotSpacesCreateResourceForOrg.Input) async throws -> Operations.CopilotSpacesCreateResourceForOrg.Output
@@ -142,6 +164,8 @@ public protocol APIProtocol: Sendable {
     /// The authenticated user must have appropriate permissions to view the space.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}/get(copilot-spaces/get-resource-for-org)`.
@@ -153,6 +177,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including the resource being updated.
+    ///
     /// - Remark: HTTP `PUT /orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}/put(copilot-spaces/update-resource-for-org)`.
     func copilotSpacesUpdateResourceForOrg(_ input: Operations.CopilotSpacesUpdateResourceForOrg.Input) async throws -> Operations.CopilotSpacesUpdateResourceForOrg.Output
@@ -162,6 +188,8 @@ public protocol APIProtocol: Sendable {
     /// The authenticated user must have write permissions on the space.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `DELETE /orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}/delete(copilot-spaces/delete-resource-for-org)`.
@@ -331,6 +359,8 @@ extension APIProtocol {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in a space; spaces with inaccessible resources are omitted from the response.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/get(copilot-spaces/list-for-org)`.
     public func copilotSpacesListForOrg(
@@ -351,6 +381,8 @@ extension APIProtocol {
     /// Organization members with appropriate permissions can create Copilot Spaces to be shared within their organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by the submitted resources.
     ///
     /// - Remark: HTTP `POST /orgs/{org}/copilot-spaces`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/post(copilot-spaces/create-for-org)`.
@@ -373,6 +405,8 @@ extension APIProtocol {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/get(copilot-spaces/get-for-org)`.
     public func copilotSpacesGetForOrg(
@@ -391,6 +425,8 @@ extension APIProtocol {
     /// Organization members with appropriate permissions can update Copilot Spaces owned by their organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including any being added or updated.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/copilot-spaces/{space_number}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/put(copilot-spaces/update-for-org)`.
@@ -415,6 +451,8 @@ extension APIProtocol {
     ///
     /// OAuth app tokens and personal access tokens (classic) need both the `read:org` and `repo` scopes to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `DELETE /orgs/{org}/copilot-spaces/{space_number}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/delete(copilot-spaces/delete-for-org)`.
     public func copilotSpacesDeleteForOrg(
@@ -436,6 +474,8 @@ extension APIProtocol {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}/collaborators`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/get(copilot-spaces/list-collaborators-for-org)`.
     public func copilotSpacesListCollaboratorsForOrg(
@@ -456,6 +496,8 @@ extension APIProtocol {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `POST /orgs/{org}/copilot-spaces/{space_number}/collaborators`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/post(copilot-spaces/add-collaborator-for-org)`.
     public func copilotSpacesAddCollaboratorForOrg(
@@ -474,6 +516,8 @@ extension APIProtocol {
     /// Updates the role of a collaborator for a specific Copilot Space owned by an organization. The authenticated user must have appropriate permissions to manage collaborators.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}/put(copilot-spaces/update-collaborator-for-org)`.
@@ -494,6 +538,8 @@ extension APIProtocol {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `DELETE /orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}/delete(copilot-spaces/remove-collaborator-for-org)`.
     public func copilotSpacesRemoveCollaboratorForOrg(
@@ -511,6 +557,8 @@ extension APIProtocol {
     /// The authenticated user must have appropriate permissions to view the space.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}/resources`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/get(copilot-spaces/list-resources-for-org)`.
@@ -535,6 +583,8 @@ extension APIProtocol {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including the resource being created.
+    ///
     /// - Remark: HTTP `POST /orgs/{org}/copilot-spaces/{space_number}/resources`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/post(copilot-spaces/create-resource-for-org)`.
     public func copilotSpacesCreateResourceForOrg(
@@ -555,6 +605,8 @@ extension APIProtocol {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}/get(copilot-spaces/get-resource-for-org)`.
     public func copilotSpacesGetResourceForOrg(
@@ -572,6 +624,8 @@ extension APIProtocol {
     /// The authenticated user must have write permissions on the space.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including the resource being updated.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}/put(copilot-spaces/update-resource-for-org)`.
@@ -592,6 +646,8 @@ extension APIProtocol {
     /// The authenticated user must have write permissions on the space.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `DELETE /orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}/delete(copilot-spaces/delete-resource-for-org)`.
@@ -2172,6 +2228,8 @@ public enum Operations {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in a space; spaces with inaccessible resources are omitted from the response.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/get(copilot-spaces/list-for-org)`.
     public enum CopilotSpacesListForOrg {
@@ -2423,6 +2481,8 @@ public enum Operations {
     /// Organization members with appropriate permissions can create Copilot Spaces to be shared within their organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by the submitted resources.
     ///
     /// - Remark: HTTP `POST /orgs/{org}/copilot-spaces`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/post(copilot-spaces/create-for-org)`.
@@ -2802,6 +2862,8 @@ public enum Operations {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/get(copilot-spaces/get-for-org)`.
     public enum CopilotSpacesGetForOrg {
@@ -2992,6 +3054,8 @@ public enum Operations {
     /// Organization members with appropriate permissions can update Copilot Spaces owned by their organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including any being added or updated.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/copilot-spaces/{space_number}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/put(copilot-spaces/update-for-org)`.
@@ -3382,6 +3446,8 @@ public enum Operations {
     ///
     /// OAuth app tokens and personal access tokens (classic) need both the `read:org` and `repo` scopes to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `DELETE /orgs/{org}/copilot-spaces/{space_number}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/delete(copilot-spaces/delete-for-org)`.
     public enum CopilotSpacesDeleteForOrg {
@@ -3558,6 +3624,8 @@ public enum Operations {
     /// **Note:** Team collaborators listed here are teams that are defined in the organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}/collaborators`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/get(copilot-spaces/list-collaborators-for-org)`.
@@ -3767,6 +3835,8 @@ public enum Operations {
     /// When adding teams as collaborators, they must be defined in the organization.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `POST /orgs/{org}/copilot-spaces/{space_number}/collaborators`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/post(copilot-spaces/add-collaborator-for-org)`.
@@ -4038,6 +4108,8 @@ public enum Operations {
     /// Updates the role of a collaborator for a specific Copilot Space owned by an organization. The authenticated user must have appropriate permissions to manage collaborators.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}/put(copilot-spaces/update-collaborator-for-org)`.
@@ -4340,6 +4412,8 @@ public enum Operations {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `DELETE /orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/collaborators/{actor_type}/{actor_identifier}/delete(copilot-spaces/remove-collaborator-for-org)`.
     public enum CopilotSpacesRemoveCollaboratorForOrg {
@@ -4532,6 +4606,8 @@ public enum Operations {
     /// The authenticated user must have appropriate permissions to view the space.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}/resources`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/get(copilot-spaces/list-resources-for-org)`.
@@ -4744,6 +4820,8 @@ public enum Operations {
     /// For `github_file` resources, if a resource with the same repository, file path, and SHA already exists, the existing resource is returned with a `200` status.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including the resource being created.
     ///
     /// - Remark: HTTP `POST /orgs/{org}/copilot-spaces/{space_number}/resources`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/post(copilot-spaces/create-resource-for-org)`.
@@ -5075,6 +5153,8 @@ public enum Operations {
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
     ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}/get(copilot-spaces/get-resource-for-org)`.
     public enum CopilotSpacesGetResourceForOrg {
@@ -5271,6 +5351,8 @@ public enum Operations {
     /// The authenticated user must have write permissions on the space.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space, including the resource being updated.
     ///
     /// - Remark: HTTP `PUT /orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}/put(copilot-spaces/update-resource-for-org)`.
@@ -5537,6 +5619,8 @@ public enum Operations {
     /// The authenticated user must have write permissions on the space.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// Fine-grained tokens and GitHub App user access tokens must have been granted access to the organization that owns the space. They must also have been granted access to every repository referenced by resources in the space.
     ///
     /// - Remark: HTTP `DELETE /orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot-spaces/{space_number}/resources/{space_resource_id}/delete(copilot-spaces/delete-resource-for-org)`.
