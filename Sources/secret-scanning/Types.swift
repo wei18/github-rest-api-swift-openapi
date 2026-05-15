@@ -2785,7 +2785,12 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-scan/type`.
             public var _type: Swift.String?
-            /// The state of the scan. Either "completed", "running", or "pending"
+            /// The state of the scan. Either "completed", "running", "pending", "failed", or "unknown".
+            ///
+            /// "failed": this scan type has hit its retry limit and has been marked permanently failed.
+            /// This usually resolves on its own at the next scheduled scan attempt. If "failed" persists, contact Support.
+            ///
+            /// "unknown": the scan is in an unrecognized or currently unhandled state.
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-scan/status`.
             public var status: Swift.String?
@@ -2801,7 +2806,7 @@ public enum Components {
             ///
             /// - Parameters:
             ///   - _type: The type of scan
-            ///   - status: The state of the scan. Either "completed", "running", or "pending"
+            ///   - status: The state of the scan. Either "completed", "running", "pending", "failed", or "unknown".
             ///   - completedAt: The time that the scan was completed. Empty if the scan is running
             ///   - startedAt: The time that the scan was started. Empty if the scan is pending
             public init(
