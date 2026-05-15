@@ -3673,7 +3673,7 @@ public enum Components {
                 case dueOn = "due_on"
             }
         }
-        /// The type of issue.
+        /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
         ///
         /// - Remark: Generated from `#/components/schemas/issue-type`.
         public struct IssueType: Codable, Hashable, Sendable {
@@ -10843,6 +10843,17 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/GET/query/mentioned`.
                 public var mentioned: Swift.String?
+                /// A comma-separated list of issue field filters in `field_slug:value` format.
+                /// Only issues matching all specified field values are returned.
+                /// Requires issue fields to be enabled for the repository. Issue fields are
+                /// not available for user-owned repositories, and field availability for
+                /// organization-owned public repositories depends on the organization's
+                /// visibility settings. For example, `priority:Urgent,severity:High` filters
+                /// issues where the `priority` field is `Urgent` AND the `severity` field is
+                /// `High`.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/GET/query/issue_field_values`.
+                public var issueFieldValues: Swift.String?
                 /// A list of comma separated label names. Example: `bug,ui,@high`
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/GET/query/labels`.
@@ -10887,6 +10898,7 @@ public enum Operations {
                 ///   - _type: Can be the name of an issue type. If the string `*` is passed, issues with any type are accepted. If the string `none` is passed, issues without type are returned.
                 ///   - creator: The user that created the issue.
                 ///   - mentioned: A user that's mentioned in the issue.
+                ///   - issueFieldValues: A comma-separated list of issue field filters in `field_slug:value` format.
                 ///   - labels: A list of comma separated label names. Example: `bug,ui,@high`
                 ///   - sort: What to sort results by.
                 ///   - direction: The direction to sort the results by.
@@ -10900,6 +10912,7 @@ public enum Operations {
                     _type: Swift.String? = nil,
                     creator: Swift.String? = nil,
                     mentioned: Swift.String? = nil,
+                    issueFieldValues: Swift.String? = nil,
                     labels: Components.Parameters.Labels? = nil,
                     sort: Operations.IssuesListForRepo.Input.Query.SortPayload? = nil,
                     direction: Components.Parameters.Direction? = nil,
@@ -10913,6 +10926,7 @@ public enum Operations {
                     self._type = _type
                     self.creator = creator
                     self.mentioned = mentioned
+                    self.issueFieldValues = issueFieldValues
                     self.labels = labels
                     self.sort = sort
                     self.direction = direction
