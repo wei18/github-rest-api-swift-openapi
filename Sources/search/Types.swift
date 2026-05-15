@@ -1889,7 +1889,7 @@ public enum Components {
                 case dueOn = "due_on"
             }
         }
-        /// The type of issue.
+        /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
         ///
         /// - Remark: Generated from `#/components/schemas/issue-type`.
         public struct IssueType: Codable, Hashable, Sendable {
@@ -6542,6 +6542,7 @@ public enum Operations {
                             case noAccessibleRepos = "no_accessible_repos"
                             case serverError = "server_error"
                             case onlyNonSemanticFieldsRequested = "only_non_semantic_fields_requested"
+                            case serviceUnavailable = "service_unavailable"
                         }
                         /// When a semantic or hybrid search falls back to lexical search, this field contains the reasons for the fallback. Only present when a fallback occurred.
                         ///

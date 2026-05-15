@@ -205,6 +205,55 @@ public enum Components {
                 case status
             }
         }
+        /// Scim Error
+        ///
+        /// - Remark: Generated from `#/components/schemas/scim-error`.
+        public struct ScimError: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/scim-error/message`.
+            public var message: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/documentation_url`.
+            public var documentationUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/detail`.
+            public var detail: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/status`.
+            public var status: Swift.Int?
+            /// - Remark: Generated from `#/components/schemas/scim-error/scimType`.
+            public var scimType: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/scim-error/schemas`.
+            public var schemas: [Swift.String]?
+            /// Creates a new `ScimError`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - detail:
+            ///   - status:
+            ///   - scimType:
+            ///   - schemas:
+            public init(
+                message: Swift.String? = nil,
+                documentationUrl: Swift.String? = nil,
+                detail: Swift.String? = nil,
+                status: Swift.Int? = nil,
+                scimType: Swift.String? = nil,
+                schemas: [Swift.String]? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.detail = detail
+                self.status = status
+                self.scimType = scimType
+                self.schemas = schemas
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case detail
+                case status
+                case scimType
+                case schemas
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/DependencyGraphDiff`.
         public struct DependencyGraphDiffPayload: Codable, Hashable, Sendable {
             /// - Remark: Generated from `#/components/schemas/DependencyGraphDiff/change_type`.
@@ -1203,6 +1252,58 @@ public enum Components {
                 self.body = body
             }
         }
+        public struct BadRequest: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/bad_request/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/bad_request/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        default:
+                            try throwUnexpectedResponseBody(
+                                expectedContent: "application/json",
+                                body: self
+                            )
+                        }
+                    }
+                }
+                /// - Remark: Generated from `#/components/responses/bad_request/content/application\/scim+json`.
+                case applicationScimJson(Components.Schemas.ScimError)
+                /// The associated value of the enum case if `self` is `.applicationScimJson`.
+                ///
+                /// - Throws: An error if `self` is not `.applicationScimJson`.
+                /// - SeeAlso: `.applicationScimJson`.
+                public var applicationScimJson: Components.Schemas.ScimError {
+                    get throws {
+                        switch self {
+                        case let .applicationScimJson(body):
+                            return body
+                        default:
+                            try throwUnexpectedResponseBody(
+                                expectedContent: "application/scim+json",
+                                body: self
+                            )
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.BadRequest.Body
+            /// Creates a new `BadRequest`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.BadRequest.Body) {
+                self.body = body
+            }
+        }
         public struct Forbidden: Sendable, Hashable {
             /// - Remark: Generated from `#/components/responses/forbidden/content`.
             @frozen public enum Body: Sendable, Hashable {
@@ -1228,6 +1329,91 @@ public enum Components {
             /// - Parameters:
             ///   - body: Received HTTP response body
             public init(body: Components.Responses.Forbidden.Body) {
+                self.body = body
+            }
+        }
+        public struct InternalError: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/internal_error/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/internal_error/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.InternalError.Body
+            /// Creates a new `InternalError`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.InternalError.Body) {
+                self.body = body
+            }
+        }
+        public struct ServiceUnavailable: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/service_unavailable/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/service_unavailable/content/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/responses/service_unavailable/content/json/code`.
+                    public var code: Swift.String?
+                    /// - Remark: Generated from `#/components/responses/service_unavailable/content/json/message`.
+                    public var message: Swift.String?
+                    /// - Remark: Generated from `#/components/responses/service_unavailable/content/json/documentation_url`.
+                    public var documentationUrl: Swift.String?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - code:
+                    ///   - message:
+                    ///   - documentationUrl:
+                    public init(
+                        code: Swift.String? = nil,
+                        message: Swift.String? = nil,
+                        documentationUrl: Swift.String? = nil
+                    ) {
+                        self.code = code
+                        self.message = message
+                        self.documentationUrl = documentationUrl
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case code
+                        case message
+                        case documentationUrl = "documentation_url"
+                    }
+                }
+                /// - Remark: Generated from `#/components/responses/service_unavailable/content/application\/json`.
+                case json(Components.Responses.ServiceUnavailable.Body.JsonPayload)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Responses.ServiceUnavailable.Body.JsonPayload {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.ServiceUnavailable.Body
+            /// Creates a new `ServiceUnavailable`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.ServiceUnavailable.Body) {
                 self.body = body
             }
         }
@@ -1471,6 +1657,75 @@ public enum Operations {
                     }
                 }
             }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/compare/{basehead}/get(dependency-graph/diff-range)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/compare/{basehead}/get(dependency-graph/diff-range)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Service unavailable
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/dependency-graph/compare/{basehead}/get(dependency-graph/diff-range)/responses/503`.
+            ///
+            /// HTTP response code: `503 serviceUnavailable`.
+            case serviceUnavailable(Components.Responses.ServiceUnavailable)
+            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
+            ///
+            /// - Throws: An error if `self` is not `.serviceUnavailable`.
+            /// - SeeAlso: `.serviceUnavailable`.
+            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
+                get throws {
+                    switch self {
+                    case let .serviceUnavailable(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "serviceUnavailable",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -1478,11 +1733,14 @@ public enum Operations {
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
+            case applicationScimJson
             case other(Swift.String)
             public init?(rawValue: Swift.String) {
                 switch rawValue.lowercased() {
                 case "application/json":
                     self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
                 default:
                     self = .other(rawValue)
                 }
@@ -1493,11 +1751,14 @@ public enum Operations {
                     return string
                 case .json:
                     return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
                 }
             }
             public static var allCases: [Self] {
                 [
-                    .json
+                    .json,
+                    .applicationScimJson
                 ]
             }
         }

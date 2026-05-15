@@ -54,7 +54,7 @@ public protocol APIProtocol: Sendable {
     func codeScanningUpdateAlert(_ input: Operations.CodeScanningUpdateAlert.Input) async throws -> Operations.CodeScanningUpdateAlert.Output
     /// Get the status of an autofix for a code scanning alert
     ///
-    /// Gets the status and description of an autofix for a code scanning alert.
+    /// Gets the status and description of an autofix for a code scanning alert on the repository's default branch.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
     ///
@@ -76,7 +76,7 @@ public protocol APIProtocol: Sendable {
     func codeScanningCreateAutofix(_ input: Operations.CodeScanningCreateAutofix.Input) async throws -> Operations.CodeScanningCreateAutofix.Output
     /// Commit an autofix for a code scanning alert
     ///
-    /// Commits an autofix for a code scanning alert.
+    /// Commits an autofix for a code scanning alert from the repository's default branch.
     ///
     /// If an autofix is committed as a result of this request, then this endpoint will return a 201 Created response.
     ///
@@ -424,7 +424,7 @@ extension APIProtocol {
     }
     /// Get the status of an autofix for a code scanning alert
     ///
-    /// Gets the status and description of an autofix for a code scanning alert.
+    /// Gets the status and description of an autofix for a code scanning alert on the repository's default branch.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
     ///
@@ -462,7 +462,7 @@ extension APIProtocol {
     }
     /// Commit an autofix for a code scanning alert
     ///
-    /// Commits an autofix for a code scanning alert.
+    /// Commits an autofix for a code scanning alert from the repository's default branch.
     ///
     /// If an autofix is committed as a result of this request, then this endpoint will return a 201 Created response.
     ///
@@ -5360,7 +5360,7 @@ public enum Operations {
     }
     /// Get the status of an autofix for a code scanning alert
     ///
-    /// Gets the status and description of an autofix for a code scanning alert.
+    /// Gets the status and description of an autofix for a code scanning alert on the repository's default branch.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `security_events` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
     ///
@@ -5934,7 +5934,7 @@ public enum Operations {
     }
     /// Commit an autofix for a code scanning alert
     ///
-    /// Commits an autofix for a code scanning alert.
+    /// Commits an autofix for a code scanning alert from the repository's default branch.
     ///
     /// If an autofix is committed as a result of this request, then this endpoint will return a 201 Created response.
     ///
