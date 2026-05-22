@@ -10,10 +10,65 @@ import struct Foundation.Data
 import struct Foundation.Date
 #endif
 /// A type that performs HTTP operations defined by the OpenAPI document.
-public protocol APIProtocol: Sendable {}
+public protocol APIProtocol: Sendable {
+    /// Get a code quality setup configuration
+    ///
+    /// Gets a code quality setup configuration.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/code-quality/setup`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/get(code-quality/get-setup)`.
+    func codeQualityGetSetup(_ input: Operations.CodeQualityGetSetup.Input) async throws -> Operations.CodeQualityGetSetup.Output
+    /// Update a code quality setup configuration
+    ///
+    /// Updates a code quality setup configuration.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/code-quality/setup`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/patch(code-quality/update-setup)`.
+    func codeQualityUpdateSetup(_ input: Operations.CodeQualityUpdateSetup.Input) async throws -> Operations.CodeQualityUpdateSetup.Output
+}
 
 /// Convenience overloads for operation inputs.
 extension APIProtocol {
+    /// Get a code quality setup configuration
+    ///
+    /// Gets a code quality setup configuration.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/code-quality/setup`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/get(code-quality/get-setup)`.
+    public func codeQualityGetSetup(
+        path: Operations.CodeQualityGetSetup.Input.Path,
+        headers: Operations.CodeQualityGetSetup.Input.Headers = .init()
+    ) async throws -> Operations.CodeQualityGetSetup.Output {
+        try await codeQualityGetSetup(Operations.CodeQualityGetSetup.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Update a code quality setup configuration
+    ///
+    /// Updates a code quality setup configuration.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/code-quality/setup`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/patch(code-quality/update-setup)`.
+    public func codeQualityUpdateSetup(
+        path: Operations.CodeQualityUpdateSetup.Input.Path,
+        headers: Operations.CodeQualityUpdateSetup.Input.Headers = .init(),
+        body: Operations.CodeQualityUpdateSetup.Input.Body
+    ) async throws -> Operations.CodeQualityUpdateSetup.Output {
+        try await codeQualityUpdateSetup(Operations.CodeQualityUpdateSetup.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
 }
 
 /// Server URLs defined in the OpenAPI document.
@@ -38,16 +93,1018 @@ public enum Servers {
 /// Types generated from the components section of the OpenAPI document.
 public enum Components {
     /// Types generated from the `#/components/schemas` section of the OpenAPI document.
-    public enum Schemas {}
+    public enum Schemas {
+        /// Basic Error
+        ///
+        /// - Remark: Generated from `#/components/schemas/basic-error`.
+        public struct BasicError: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/basic-error/message`.
+            public var message: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/documentation_url`.
+            public var documentationUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/url`.
+            public var url: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/status`.
+            public var status: Swift.String?
+            /// Creates a new `BasicError`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - url:
+            ///   - status:
+            public init(
+                message: Swift.String? = nil,
+                documentationUrl: Swift.String? = nil,
+                url: Swift.String? = nil,
+                status: Swift.String? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.url = url
+                self.status = status
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case url
+                case status
+            }
+        }
+        /// An object without any properties.
+        ///
+        /// - Remark: Generated from `#/components/schemas/empty-object`.
+        public struct EmptyObject: Codable, Hashable, Sendable {
+            /// Creates a new `EmptyObject`.
+            public init() {}
+            public init(from decoder: any Swift.Decoder) throws {
+                try decoder.ensureNoAdditionalProperties(knownKeys: [])
+            }
+        }
+        /// Configuration for code quality setup.
+        ///
+        /// - Remark: Generated from `#/components/schemas/code-quality-setup`.
+        public struct CodeQualitySetup: Codable, Hashable, Sendable {
+            /// Code quality setup has been configured or not.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/state`.
+            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case configured = "configured"
+                case notConfigured = "not-configured"
+            }
+            /// Code quality setup has been configured or not.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/state`.
+            public var state: Components.Schemas.CodeQualitySetup.StatePayload?
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/LanguagesPayload`.
+            @frozen public enum LanguagesPayloadPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case csharp = "csharp"
+                case go = "go"
+                case javaKotlin = "java-kotlin"
+                case javascriptTypescript = "javascript-typescript"
+                case python = "python"
+                case ruby = "ruby"
+                case rust = "rust"
+            }
+            /// Languages to be analyzed.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/languages`.
+            public typealias LanguagesPayload = [Components.Schemas.CodeQualitySetup.LanguagesPayloadPayload]
+            /// Languages to be analyzed.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/languages`.
+            public var languages: Components.Schemas.CodeQualitySetup.LanguagesPayload?
+            /// Runner type to be used.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/runner_type`.
+            @frozen public enum RunnerTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case standard = "standard"
+                case labeled = "labeled"
+            }
+            /// Runner type to be used.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/runner_type`.
+            public var runnerType: Components.Schemas.CodeQualitySetup.RunnerTypePayload?
+            /// Runner label to be used if the runner type is labeled.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/runner_label`.
+            public var runnerLabel: Swift.String?
+            /// Timestamp of latest configuration update.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// The frequency of the periodic analysis.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/schedule`.
+            @frozen public enum SchedulePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case weekly = "weekly"
+            }
+            /// The frequency of the periodic analysis.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/schedule`.
+            public var schedule: Components.Schemas.CodeQualitySetup.SchedulePayload?
+            /// Creates a new `CodeQualitySetup`.
+            ///
+            /// - Parameters:
+            ///   - state: Code quality setup has been configured or not.
+            ///   - languages: Languages to be analyzed.
+            ///   - runnerType: Runner type to be used.
+            ///   - runnerLabel: Runner label to be used if the runner type is labeled.
+            ///   - updatedAt: Timestamp of latest configuration update.
+            ///   - schedule: The frequency of the periodic analysis.
+            public init(
+                state: Components.Schemas.CodeQualitySetup.StatePayload? = nil,
+                languages: Components.Schemas.CodeQualitySetup.LanguagesPayload? = nil,
+                runnerType: Components.Schemas.CodeQualitySetup.RunnerTypePayload? = nil,
+                runnerLabel: Swift.String? = nil,
+                updatedAt: Foundation.Date? = nil,
+                schedule: Components.Schemas.CodeQualitySetup.SchedulePayload? = nil
+            ) {
+                self.state = state
+                self.languages = languages
+                self.runnerType = runnerType
+                self.runnerLabel = runnerLabel
+                self.updatedAt = updatedAt
+                self.schedule = schedule
+            }
+            public enum CodingKeys: String, CodingKey {
+                case state
+                case languages
+                case runnerType = "runner_type"
+                case runnerLabel = "runner_label"
+                case updatedAt = "updated_at"
+                case schedule
+            }
+        }
+        /// Configuration for code quality setup.
+        ///
+        /// - Remark: Generated from `#/components/schemas/code-quality-setup-update`.
+        public struct CodeQualitySetupUpdate: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update/value1`.
+            public struct Value1Payload: Codable, Hashable, Sendable {
+                /// Creates a new `Value1Payload`.
+                public init() {}
+            }
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update/value1`.
+            public var value1: Components.Schemas.CodeQualitySetupUpdate.Value1Payload?
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update/value2`.
+            public struct Value2Payload: Codable, Hashable, Sendable {
+                /// Creates a new `Value2Payload`.
+                public init() {}
+            }
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update/value2`.
+            public var value2: Components.Schemas.CodeQualitySetupUpdate.Value2Payload?
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update/value3`.
+            public struct Value3Payload: Codable, Hashable, Sendable {
+                /// Creates a new `Value3Payload`.
+                public init() {}
+            }
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update/value3`.
+            public var value3: Components.Schemas.CodeQualitySetupUpdate.Value3Payload?
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update/value4`.
+            public struct Value4Payload: Codable, Hashable, Sendable {
+                /// Creates a new `Value4Payload`.
+                public init() {}
+            }
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update/value4`.
+            public var value4: Components.Schemas.CodeQualitySetupUpdate.Value4Payload?
+            /// Creates a new `CodeQualitySetupUpdate`.
+            ///
+            /// - Parameters:
+            ///   - value1:
+            ///   - value2:
+            ///   - value3:
+            ///   - value4:
+            public init(
+                value1: Components.Schemas.CodeQualitySetupUpdate.Value1Payload? = nil,
+                value2: Components.Schemas.CodeQualitySetupUpdate.Value2Payload? = nil,
+                value3: Components.Schemas.CodeQualitySetupUpdate.Value3Payload? = nil,
+                value4: Components.Schemas.CodeQualitySetupUpdate.Value4Payload? = nil
+            ) {
+                self.value1 = value1
+                self.value2 = value2
+                self.value3 = value3
+                self.value4 = value4
+            }
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
+                do {
+                    self.value1 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value2 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value3 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value4 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
+                    [
+                        self.value1,
+                        self.value2,
+                        self.value3,
+                        self.value4
+                    ],
+                    type: Self.self,
+                    codingPath: decoder.codingPath,
+                    errors: errors
+                )
+            }
+            public func encode(to encoder: any Swift.Encoder) throws {
+                try self.value1?.encode(to: encoder)
+                try self.value2?.encode(to: encoder)
+                try self.value3?.encode(to: encoder)
+                try self.value4?.encode(to: encoder)
+            }
+        }
+        /// You can use `run_url` to track the status of the run. This includes a property status and conclusion.
+        /// You should not rely on this always being an actions workflow run object.
+        ///
+        /// - Remark: Generated from `#/components/schemas/code-quality-setup-update-response`.
+        public struct CodeQualitySetupUpdateResponse: Codable, Hashable, Sendable {
+            /// ID of the corresponding run.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update-response/run_id`.
+            public var runId: Swift.Int?
+            /// URL of the corresponding run.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update-response/run_url`.
+            public var runUrl: Swift.String?
+            /// Creates a new `CodeQualitySetupUpdateResponse`.
+            ///
+            /// - Parameters:
+            ///   - runId: ID of the corresponding run.
+            ///   - runUrl: URL of the corresponding run.
+            public init(
+                runId: Swift.Int? = nil,
+                runUrl: Swift.String? = nil
+            ) {
+                self.runId = runId
+                self.runUrl = runUrl
+            }
+            public enum CodingKeys: String, CodingKey {
+                case runId = "run_id"
+                case runUrl = "run_url"
+            }
+        }
+    }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
-    public enum Parameters {}
+    public enum Parameters {
+        /// The account owner of the repository. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/owner`.
+        public typealias Owner = Swift.String
+        /// The name of the repository without the `.git` extension. The name is not case sensitive.
+        ///
+        /// - Remark: Generated from `#/components/parameters/repo`.
+        public typealias Repo = Swift.String
+    }
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}
     /// Types generated from the `#/components/responses` section of the OpenAPI document.
-    public enum Responses {}
+    public enum Responses {
+        public struct NotFound: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/not_found/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/not_found/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.NotFound.Body
+            /// Creates a new `NotFound`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.NotFound.Body) {
+                self.body = body
+            }
+        }
+        public struct ServiceUnavailable: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/service_unavailable/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/service_unavailable/content/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/responses/service_unavailable/content/json/code`.
+                    public var code: Swift.String?
+                    /// - Remark: Generated from `#/components/responses/service_unavailable/content/json/message`.
+                    public var message: Swift.String?
+                    /// - Remark: Generated from `#/components/responses/service_unavailable/content/json/documentation_url`.
+                    public var documentationUrl: Swift.String?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - code:
+                    ///   - message:
+                    ///   - documentationUrl:
+                    public init(
+                        code: Swift.String? = nil,
+                        message: Swift.String? = nil,
+                        documentationUrl: Swift.String? = nil
+                    ) {
+                        self.code = code
+                        self.message = message
+                        self.documentationUrl = documentationUrl
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case code
+                        case message
+                        case documentationUrl = "documentation_url"
+                    }
+                }
+                /// - Remark: Generated from `#/components/responses/service_unavailable/content/application\/json`.
+                case json(Components.Responses.ServiceUnavailable.Body.JsonPayload)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Responses.ServiceUnavailable.Body.JsonPayload {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.ServiceUnavailable.Body
+            /// Creates a new `ServiceUnavailable`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.ServiceUnavailable.Body) {
+                self.body = body
+            }
+        }
+        public struct CodeQualityForbiddenRead: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/code_quality_forbidden_read/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/code_quality_forbidden_read/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.CodeQualityForbiddenRead.Body
+            /// Creates a new `CodeQualityForbiddenRead`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.CodeQualityForbiddenRead.Body) {
+                self.body = body
+            }
+        }
+        public struct CodeQualityForbiddenWrite: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/code_quality_forbidden_write/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/code_quality_forbidden_write/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.CodeQualityForbiddenWrite.Body
+            /// Creates a new `CodeQualityForbiddenWrite`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.CodeQualityForbiddenWrite.Body) {
+                self.body = body
+            }
+        }
+        public struct CodeQualityConflict: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/code_quality_conflict/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/code_quality_conflict/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.CodeQualityConflict.Body
+            /// Creates a new `CodeQualityConflict`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.CodeQualityConflict.Body) {
+                self.body = body
+            }
+        }
+        public struct CodeQualityInvalidState: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/code_quality_invalid_state/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/code_quality_invalid_state/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.CodeQualityInvalidState.Body
+            /// Creates a new `CodeQualityInvalidState`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.CodeQualityInvalidState.Body) {
+                self.body = body
+            }
+        }
+    }
     /// Types generated from the `#/components/headers` section of the OpenAPI document.
     public enum Headers {}
 }
 
 /// API operations, with input and output types, generated from `#/paths` in the OpenAPI document.
-public enum Operations {}
+public enum Operations {
+    /// Get a code quality setup configuration
+    ///
+    /// Gets a code quality setup configuration.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/code-quality/setup`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/get(code-quality/get-setup)`.
+    public enum CodeQualityGetSetup {
+        public static let id: Swift.String = "code-quality/get-setup"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.CodeQualityGetSetup.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CodeQualityGetSetup.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CodeQualityGetSetup.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CodeQualityGetSetup.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.CodeQualityGetSetup.Input.Path,
+                headers: Operations.CodeQualityGetSetup.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.CodeQualitySetup)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.CodeQualitySetup {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CodeQualityGetSetup.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CodeQualityGetSetup.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/get(code-quality/get-setup)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CodeQualityGetSetup.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CodeQualityGetSetup.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Response if the user is not authorized to access Code quality for this repository.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/get(code-quality/get-setup)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.CodeQualityForbiddenRead)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.CodeQualityForbiddenRead {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/get(code-quality/get-setup)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Service unavailable
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/get(code-quality/get-setup)/responses/503`.
+            ///
+            /// HTTP response code: `503 serviceUnavailable`.
+            case serviceUnavailable(Components.Responses.ServiceUnavailable)
+            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
+            ///
+            /// - Throws: An error if `self` is not `.serviceUnavailable`.
+            /// - SeeAlso: `.serviceUnavailable`.
+            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
+                get throws {
+                    switch self {
+                    case let .serviceUnavailable(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "serviceUnavailable",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Update a code quality setup configuration
+    ///
+    /// Updates a code quality setup configuration.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/code-quality/setup`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/patch(code-quality/update-setup)`.
+    public enum CodeQualityUpdateSetup {
+        public static let id: Swift.String = "code-quality/update-setup"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/PATCH/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/PATCH/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.CodeQualityUpdateSetup.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CodeQualityUpdateSetup.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CodeQualityUpdateSetup.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CodeQualityUpdateSetup.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/PATCH/requestBody/content/application\/json`.
+                case json(Components.Schemas.CodeQualitySetupUpdate)
+            }
+            public var body: Operations.CodeQualityUpdateSetup.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.CodeQualityUpdateSetup.Input.Path,
+                headers: Operations.CodeQualityUpdateSetup.Input.Headers = .init(),
+                body: Operations.CodeQualityUpdateSetup.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/PATCH/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/PATCH/responses/200/content/application\/json`.
+                    case json(Components.Schemas.EmptyObject)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.EmptyObject {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CodeQualityUpdateSetup.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CodeQualityUpdateSetup.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/patch(code-quality/update-setup)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CodeQualityUpdateSetup.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CodeQualityUpdateSetup.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Accepted: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/PATCH/responses/202/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/setup/PATCH/responses/202/content/application\/json`.
+                    case json(Components.Schemas.CodeQualitySetupUpdateResponse)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.CodeQualitySetupUpdateResponse {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CodeQualityUpdateSetup.Output.Accepted.Body
+                /// Creates a new `Accepted`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CodeQualityUpdateSetup.Output.Accepted.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/patch(code-quality/update-setup)/responses/202`.
+            ///
+            /// HTTP response code: `202 accepted`.
+            case accepted(Operations.CodeQualityUpdateSetup.Output.Accepted)
+            /// The associated value of the enum case if `self` is `.accepted`.
+            ///
+            /// - Throws: An error if `self` is not `.accepted`.
+            /// - SeeAlso: `.accepted`.
+            public var accepted: Operations.CodeQualityUpdateSetup.Output.Accepted {
+                get throws {
+                    switch self {
+                    case let .accepted(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "accepted",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Response if the repository is archived or if Code quality is not enabled for this repository
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/patch(code-quality/update-setup)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.CodeQualityForbiddenWrite)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.CodeQualityForbiddenWrite {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/patch(code-quality/update-setup)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Response if there is already a code quality setup configuration update in progress
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/patch(code-quality/update-setup)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.CodeQualityConflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.CodeQualityConflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Response if the configuration change cannot be made
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/patch(code-quality/update-setup)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.CodeQualityInvalidState)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.CodeQualityInvalidState {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Service unavailable
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/setup/patch(code-quality/update-setup)/responses/503`.
+            ///
+            /// HTTP response code: `503 serviceUnavailable`.
+            case serviceUnavailable(Components.Responses.ServiceUnavailable)
+            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
+            ///
+            /// - Throws: An error if `self` is not `.serviceUnavailable`.
+            /// - SeeAlso: `.serviceUnavailable`.
+            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
+                get throws {
+                    switch self {
+                    case let .serviceUnavailable(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "serviceUnavailable",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+}

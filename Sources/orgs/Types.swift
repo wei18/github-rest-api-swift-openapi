@@ -4343,6 +4343,7 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_seat_management`.
             @frozen public enum OrganizationCopilotSeatManagementPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
                 case write = "write"
             }
             /// The level of permission to grant the access token for managing access to GitHub Copilot for members of an organization with a Copilot Business subscription. This property is in public preview and is subject to change.

@@ -430,10 +430,10 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/query/since`.
                 public var since: Foundation.Date?
-                /// Filter tasks by creator user ID
+                /// Filter tasks by creator user ID. Accepts one or more user IDs.
                 ///
                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/query/creator_id`.
-                public var creatorId: Swift.Int?
+                public var creatorId: [Swift.Int]?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -444,7 +444,7 @@ public enum Operations {
                 ///   - state: Comma-separated list of task states to filter by. Can be any combination of: `queued`, `in_progress`, `completed`, `failed`, `idle`, `waiting_for_user`, `timed_out`, `cancelled`.
                 ///   - isArchived: Filter by archived status. When `true`, returns only archived tasks. When `false` or omitted, returns only non-archived tasks. Defaults to `false`.
                 ///   - since: Only show tasks updated at or after this time (ISO 8601 timestamp)
-                ///   - creatorId: Filter tasks by creator user ID
+                ///   - creatorId: Filter tasks by creator user ID. Accepts one or more user IDs.
                 public init(
                     perPage: Swift.Int? = nil,
                     page: Swift.Int? = nil,
@@ -453,7 +453,7 @@ public enum Operations {
                     state: Swift.String? = nil,
                     isArchived: Swift.Bool? = nil,
                     since: Foundation.Date? = nil,
-                    creatorId: Swift.Int? = nil
+                    creatorId: [Swift.Int]? = nil
                 ) {
                     self.perPage = perPage
                     self.page = page
@@ -1815,6 +1815,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/base_ref`.
                     public var baseRef: Swift.String?
+                    /// Head ref for existing branch/PR. If provided with `base_ref`, the agent looks up open PR context for `head_ref` targeting `base_ref` and commits to `head_ref` instead of creating a new branch.
+                    ///
+                    /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/head_ref`.
+                    public var headRef: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -1822,22 +1826,26 @@ public enum Operations {
                     ///   - model: The model to use for this task. The allowed models may change over time and depend on the user's GitHub Copilot plan and organization policies. Currently supported values: `claude-sonnet-4.6`, `claude-opus-4.6`, `gpt-5.2-codex`, `gpt-5.3-codex`, `gpt-5.4`, `claude-sonnet-4.5`, `claude-opus-4.5`
                     ///   - createPullRequest: Whether to create a PR.
                     ///   - baseRef: Base ref for new branch/PR
+                    ///   - headRef: Head ref for existing branch/PR. If provided with `base_ref`, the agent looks up open PR context for `head_ref` targeting `base_ref` and commits to `head_ref` instead of creating a new branch.
                     public init(
                         prompt: Swift.String,
                         model: Swift.String? = nil,
                         createPullRequest: Swift.Bool? = nil,
-                        baseRef: Swift.String? = nil
+                        baseRef: Swift.String? = nil,
+                        headRef: Swift.String? = nil
                     ) {
                         self.prompt = prompt
                         self.model = model
                         self.createPullRequest = createPullRequest
                         self.baseRef = baseRef
+                        self.headRef = headRef
                     }
                     public enum CodingKeys: String, CodingKey {
                         case prompt
                         case model
                         case createPullRequest = "create_pull_request"
                         case baseRef = "base_ref"
+                        case headRef = "head_ref"
                     }
                 }
                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/content/application\/json`.

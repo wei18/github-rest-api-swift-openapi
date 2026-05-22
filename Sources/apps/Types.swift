@@ -2613,6 +2613,7 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_seat_management`.
             @frozen public enum OrganizationCopilotSeatManagementPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
                 case write = "write"
             }
             /// The level of permission to grant the access token for managing access to GitHub Copilot for members of an organization with a Copilot Business subscription. This property is in public preview and is subject to change.
@@ -8943,18 +8944,64 @@ public enum Operations {
                         public struct RepositoriesPayloadPayload: Codable, Hashable, Sendable {
                             /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload/value1`.
                             public var value1: Components.Schemas.Repository
+                            /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload/value2`.
+                            public struct Value2Payload: Codable, Hashable, Sendable {
+                                /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                ///
+                                /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload/value2/custom_properties`.
+                                public struct CustomPropertiesPayload: Codable, Hashable, Sendable {
+                                    /// A container of undocumented properties.
+                                    public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                                    /// Creates a new `CustomPropertiesPayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - additionalProperties: A container of undocumented properties.
+                                    public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                                        self.additionalProperties = additionalProperties
+                                    }
+                                    public init(from decoder: any Swift.Decoder) throws {
+                                        additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                                    }
+                                    public func encode(to encoder: any Swift.Encoder) throws {
+                                        try encoder.encodeAdditionalProperties(additionalProperties)
+                                    }
+                                }
+                                /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                ///
+                                /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload/value2/custom_properties`.
+                                public var customProperties: Operations.AppsListReposAccessibleToInstallation.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload.CustomPropertiesPayload?
+                                /// Creates a new `Value2Payload`.
+                                ///
+                                /// - Parameters:
+                                ///   - customProperties: The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                public init(customProperties: Operations.AppsListReposAccessibleToInstallation.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload.CustomPropertiesPayload? = nil) {
+                                    self.customProperties = customProperties
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case customProperties = "custom_properties"
+                                }
+                            }
+                            /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload/value2`.
+                            public var value2: Operations.AppsListReposAccessibleToInstallation.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload
                             /// Creates a new `RepositoriesPayloadPayload`.
                             ///
                             /// - Parameters:
                             ///   - value1:
-                            public init(value1: Components.Schemas.Repository) {
+                            ///   - value2:
+                            public init(
+                                value1: Components.Schemas.Repository,
+                                value2: Operations.AppsListReposAccessibleToInstallation.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload
+                            ) {
                                 self.value1 = value1
+                                self.value2 = value2
                             }
                             public init(from decoder: any Swift.Decoder) throws {
                                 self.value1 = try .init(from: decoder)
+                                self.value2 = try .init(from: decoder)
                             }
                             public func encode(to encoder: any Swift.Encoder) throws {
                                 try self.value1.encode(to: encoder)
+                                try self.value2.encode(to: encoder)
                             }
                         }
                         /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/repositories`.
@@ -11189,18 +11236,64 @@ public enum Operations {
                         public struct RepositoriesPayloadPayload: Codable, Hashable, Sendable {
                             /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload/value1`.
                             public var value1: Components.Schemas.Repository
+                            /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload/value2`.
+                            public struct Value2Payload: Codable, Hashable, Sendable {
+                                /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                ///
+                                /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload/value2/custom_properties`.
+                                public struct CustomPropertiesPayload: Codable, Hashable, Sendable {
+                                    /// A container of undocumented properties.
+                                    public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                                    /// Creates a new `CustomPropertiesPayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - additionalProperties: A container of undocumented properties.
+                                    public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                                        self.additionalProperties = additionalProperties
+                                    }
+                                    public init(from decoder: any Swift.Decoder) throws {
+                                        additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                                    }
+                                    public func encode(to encoder: any Swift.Encoder) throws {
+                                        try encoder.encodeAdditionalProperties(additionalProperties)
+                                    }
+                                }
+                                /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                ///
+                                /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload/value2/custom_properties`.
+                                public var customProperties: Operations.AppsListInstallationReposForAuthenticatedUser.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload.CustomPropertiesPayload?
+                                /// Creates a new `Value2Payload`.
+                                ///
+                                /// - Parameters:
+                                ///   - customProperties: The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                public init(customProperties: Operations.AppsListInstallationReposForAuthenticatedUser.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload.CustomPropertiesPayload? = nil) {
+                                    self.customProperties = customProperties
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case customProperties = "custom_properties"
+                                }
+                            }
+                            /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload/value2`.
+                            public var value2: Operations.AppsListInstallationReposForAuthenticatedUser.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload
                             /// Creates a new `RepositoriesPayloadPayload`.
                             ///
                             /// - Parameters:
                             ///   - value1:
-                            public init(value1: Components.Schemas.Repository) {
+                            ///   - value2:
+                            public init(
+                                value1: Components.Schemas.Repository,
+                                value2: Operations.AppsListInstallationReposForAuthenticatedUser.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload
+                            ) {
                                 self.value1 = value1
+                                self.value2 = value2
                             }
                             public init(from decoder: any Swift.Decoder) throws {
                                 self.value1 = try .init(from: decoder)
+                                self.value2 = try .init(from: decoder)
                             }
                             public func encode(to encoder: any Swift.Encoder) throws {
                                 try self.value1.encode(to: encoder)
+                                try self.value2.encode(to: encoder)
                             }
                         }
                         /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/repositories`.
