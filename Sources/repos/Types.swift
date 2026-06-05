@@ -1281,6 +1281,13 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `POST /repos/{owner}/{repo}/forks`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/forks/post(repos/create-fork)`.
     func reposCreateFork(_ input: Operations.ReposCreateFork.Input) async throws -> Operations.ReposCreateFork.Output
+    /// Get the hash algorithm for a repository
+    ///
+    /// Returns the hash algorithm used to store repository objects.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/hash-algorithm`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)`.
+    func reposGetHashAlgorithm(_ input: Operations.ReposGetHashAlgorithm.Input) async throws -> Operations.ReposGetHashAlgorithm.Output
     /// List repository webhooks
     ///
     /// Lists webhooks for a repository. `last response` may return null if there have not been any deliveries within 30 days.
@@ -4288,6 +4295,21 @@ extension APIProtocol {
             path: path,
             headers: headers,
             body: body
+        ))
+    }
+    /// Get the hash algorithm for a repository
+    ///
+    /// Returns the hash algorithm used to store repository objects.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/hash-algorithm`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)`.
+    public func reposGetHashAlgorithm(
+        path: Operations.ReposGetHashAlgorithm.Input.Path,
+        headers: Operations.ReposGetHashAlgorithm.Input.Headers = .init()
+    ) async throws -> Operations.ReposGetHashAlgorithm.Output {
+        try await reposGetHashAlgorithm(Operations.ReposGetHashAlgorithm.Input(
+            path: path,
+            headers: headers
         ))
     }
     /// List repository webhooks
@@ -20982,6 +21004,32 @@ public enum Components {
                 case app
             }
         }
+        /// Repository hash algorithm
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-hash-algorithm`.
+        public struct RepositoryHashAlgorithm: Codable, Hashable, Sendable {
+            /// The Git hash algorithm used by this repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-hash-algorithm/hash_algorithm`.
+            @frozen public enum HashAlgorithmPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case sha1 = "sha1"
+                case sha256 = "sha256"
+            }
+            /// The Git hash algorithm used by this repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-hash-algorithm/hash_algorithm`.
+            public var hashAlgorithm: Components.Schemas.RepositoryHashAlgorithm.HashAlgorithmPayload
+            /// Creates a new `RepositoryHashAlgorithm`.
+            ///
+            /// - Parameters:
+            ///   - hashAlgorithm: The Git hash algorithm used by this repository.
+            public init(hashAlgorithm: Components.Schemas.RepositoryHashAlgorithm.HashAlgorithmPayload) {
+                self.hashAlgorithm = hashAlgorithm
+            }
+            public enum CodingKeys: String, CodingKey {
+                case hashAlgorithm = "hash_algorithm"
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/hook-response`.
         public struct HookResponse: Codable, Hashable, Sendable {
             /// - Remark: Generated from `#/components/schemas/hook-response/code`.
@@ -23449,6 +23497,17 @@ public enum Components {
             case bypass = "bypass"
             case all = "all"
         }
+        /// The evaluate status to filter on. When specified, only rule suites resulting from rulesets with the specified evaluate status will be returned.
+        ///   - `all` - all rule suites will be returned.
+        ///   - `active` - only rule suites resulting from rulesets in active (non-evaluate) mode will be returned.
+        ///   - `evaluate` - only rule suites resulting from rulesets in evaluate mode will be returned.
+        ///
+        /// - Remark: Generated from `#/components/parameters/evaluate-status`.
+        @frozen public enum EvaluateStatus: String, Codable, Hashable, Sendable, CaseIterable {
+            case all = "all"
+            case active = "active"
+            case evaluate = "evaluate"
+        }
         /// The unique identifier of the rule suite result.
         /// To get this ID, you can use [GET /repos/{owner}/{repo}/rulesets/rule-suites](https://docs.github.com/rest/repos/rule-suites#list-repository-rule-suites)
         /// for repositories and [GET /orgs/{org}/rulesets/rule-suites](https://docs.github.com/rest/orgs/rule-suites#list-organization-rule-suites)
@@ -25260,6 +25319,19 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/rulesets/rule-suites/GET/query/rule_suite_result`.
                 public var ruleSuiteResult: Components.Parameters.RuleSuiteResult?
+                /// - Remark: Generated from `#/components/parameters/evaluate-status`.
+                @frozen public enum EvaluateStatus: String, Codable, Hashable, Sendable, CaseIterable {
+                    case all = "all"
+                    case active = "active"
+                    case evaluate = "evaluate"
+                }
+                /// The evaluate status to filter on. When specified, only rule suites resulting from rulesets with the specified evaluate status will be returned.
+                ///   - `all` - all rule suites will be returned.
+                ///   - `active` - only rule suites resulting from rulesets in active (non-evaluate) mode will be returned.
+                ///   - `evaluate` - only rule suites resulting from rulesets in evaluate mode will be returned.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/rulesets/rule-suites/GET/query/evaluate_status`.
+                public var evaluateStatus: Components.Parameters.EvaluateStatus?
                 /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/rulesets/rule-suites/GET/query/per_page`.
@@ -25276,6 +25348,7 @@ public enum Operations {
                 ///   - timePeriod: The time period to filter by.
                 ///   - actorName: The handle for the GitHub user account to filter on. When specified, only rule evaluations triggered by this actor will be returned.
                 ///   - ruleSuiteResult: The rule suite results to filter on. When specified, only suites with this result will be returned.
+                ///   - evaluateStatus: The evaluate status to filter on. When specified, only rule suites resulting from rulesets with the specified evaluate status will be returned.
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
@@ -25284,6 +25357,7 @@ public enum Operations {
                     timePeriod: Components.Parameters.TimePeriod? = nil,
                     actorName: Components.Parameters.ActorNameInQuery? = nil,
                     ruleSuiteResult: Components.Parameters.RuleSuiteResult? = nil,
+                    evaluateStatus: Components.Parameters.EvaluateStatus? = nil,
                     perPage: Components.Parameters.PerPage? = nil,
                     page: Components.Parameters.Page? = nil
                 ) {
@@ -25292,6 +25366,7 @@ public enum Operations {
                     self.timePeriod = timePeriod
                     self.actorName = actorName
                     self.ruleSuiteResult = ruleSuiteResult
+                    self.evaluateStatus = evaluateStatus
                     self.perPage = perPage
                     self.page = page
                 }
@@ -47823,6 +47898,193 @@ public enum Operations {
             }
         }
     }
+    /// Get the hash algorithm for a repository
+    ///
+    /// Returns the hash algorithm used to store repository objects.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/hash-algorithm`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)`.
+    public enum ReposGetHashAlgorithm {
+        public static let id: Swift.String = "repos/get-hash-algorithm"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ReposGetHashAlgorithm.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposGetHashAlgorithm.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposGetHashAlgorithm.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ReposGetHashAlgorithm.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ReposGetHashAlgorithm.Input.Path,
+                headers: Operations.ReposGetHashAlgorithm.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.RepositoryHashAlgorithm)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.RepositoryHashAlgorithm {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ReposGetHashAlgorithm.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ReposGetHashAlgorithm.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ReposGetHashAlgorithm.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ReposGetHashAlgorithm.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// List repository webhooks
     ///
     /// Lists webhooks for a repository. `last response` may return null if there have not been any deliveries within 30 days.
@@ -59935,6 +60197,19 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/rulesets/rule-suites/GET/query/rule_suite_result`.
                 public var ruleSuiteResult: Components.Parameters.RuleSuiteResult?
+                /// - Remark: Generated from `#/components/parameters/evaluate-status`.
+                @frozen public enum EvaluateStatus: String, Codable, Hashable, Sendable, CaseIterable {
+                    case all = "all"
+                    case active = "active"
+                    case evaluate = "evaluate"
+                }
+                /// The evaluate status to filter on. When specified, only rule suites resulting from rulesets with the specified evaluate status will be returned.
+                ///   - `all` - all rule suites will be returned.
+                ///   - `active` - only rule suites resulting from rulesets in active (non-evaluate) mode will be returned.
+                ///   - `evaluate` - only rule suites resulting from rulesets in evaluate mode will be returned.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/rulesets/rule-suites/GET/query/evaluate_status`.
+                public var evaluateStatus: Components.Parameters.EvaluateStatus?
                 /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/rulesets/rule-suites/GET/query/per_page`.
@@ -59950,6 +60225,7 @@ public enum Operations {
                 ///   - timePeriod: The time period to filter by.
                 ///   - actorName: The handle for the GitHub user account to filter on. When specified, only rule evaluations triggered by this actor will be returned.
                 ///   - ruleSuiteResult: The rule suite results to filter on. When specified, only suites with this result will be returned.
+                ///   - evaluateStatus: The evaluate status to filter on. When specified, only rule suites resulting from rulesets with the specified evaluate status will be returned.
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
@@ -59957,6 +60233,7 @@ public enum Operations {
                     timePeriod: Components.Parameters.TimePeriod? = nil,
                     actorName: Components.Parameters.ActorNameInQuery? = nil,
                     ruleSuiteResult: Components.Parameters.RuleSuiteResult? = nil,
+                    evaluateStatus: Components.Parameters.EvaluateStatus? = nil,
                     perPage: Components.Parameters.PerPage? = nil,
                     page: Components.Parameters.Page? = nil
                 ) {
@@ -59964,6 +60241,7 @@ public enum Operations {
                     self.timePeriod = timePeriod
                     self.actorName = actorName
                     self.ruleSuiteResult = ruleSuiteResult
+                    self.evaluateStatus = evaluateStatus
                     self.perPage = perPage
                     self.page = page
                 }
