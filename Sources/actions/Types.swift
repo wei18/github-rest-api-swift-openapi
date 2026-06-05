@@ -9549,6 +9549,10 @@ public enum Components {
             public var labels: [Components.Schemas.RunnerLabel]
             /// - Remark: Generated from `#/components/schemas/runner/ephemeral`.
             public var ephemeral: Swift.Bool?
+            /// The version of the GitHub Actions Runner software. This is only set if the runner has connected to the service at least once.
+            ///
+            /// - Remark: Generated from `#/components/schemas/runner/version`.
+            public var version: Swift.String?
             /// Creates a new `Runner`.
             ///
             /// - Parameters:
@@ -9560,6 +9564,7 @@ public enum Components {
             ///   - busy:
             ///   - labels:
             ///   - ephemeral:
+            ///   - version: The version of the GitHub Actions Runner software. This is only set if the runner has connected to the service at least once.
             public init(
                 id: Swift.Int,
                 runnerGroupId: Swift.Int? = nil,
@@ -9568,7 +9573,8 @@ public enum Components {
                 status: Swift.String,
                 busy: Swift.Bool,
                 labels: [Components.Schemas.RunnerLabel],
-                ephemeral: Swift.Bool? = nil
+                ephemeral: Swift.Bool? = nil,
+                version: Swift.String? = nil
             ) {
                 self.id = id
                 self.runnerGroupId = runnerGroupId
@@ -9578,6 +9584,7 @@ public enum Components {
                 self.busy = busy
                 self.labels = labels
                 self.ephemeral = ephemeral
+                self.version = version
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -9588,6 +9595,7 @@ public enum Components {
                 case busy
                 case labels
                 case ephemeral
+                case version
             }
         }
         /// Runner Application
