@@ -32,7 +32,7 @@ jobs:
             #
             git rm $SUBMODULE_PATH            
             git commit -m "Remove submodule to improve Swift Package experience"
-            git push --set-upstream origin $RELEASE_BRANCH
+            git push --force --set-upstream origin $RELEASE_BRANCH
           else
             echo "::error ::Submodule not found, skipping removal."
             exit 1
