@@ -1,28 +1,23 @@
-//
-//  File.swift
-//
-//
-//  Created on 2024/1/8.
-//
-
 import Foundation
 import GitHubRestAPIIssues
 import OpenAPIRuntime
 import OpenAPIURLSession
-import HTTPTypes
 
 let client = Client(
-    serverURL: try Servers.server1(),
+    serverURL: try Servers.Server1.url(),
     transport: URLSessionTransport()
 )
 
-let response = try await client.issues_sol_list_hyphen_comments(
-    path: .init(owner: "wei18", repo: "github-rest-api-swift-openapi", issue_number: 4)
+let response = try await client.issuesListComments(
+    path: .init(owner: "Wei18", repo: "github-rest-api-swift-openapi", issueNumber: 4)
 )
 
 switch response {
 case .ok(let okResponse):
-    print(okResponse)
+    let comments = try okResponse.body.json
+    for comment in comments {
+        print(comment.body ?? "(no content)")
+    }
 case .undocumented(statusCode: let statusCode, _):
     print("🥺 undocumented response: \(statusCode)")
 }

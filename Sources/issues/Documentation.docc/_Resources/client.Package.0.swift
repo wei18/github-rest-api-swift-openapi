@@ -2,10 +2,10 @@
 import PackageDescription
 
 let package = Package(
-    name: "YourGithubAPIExtension",
+    name: "GitHubAPIClient",
     targets: [
-        .target(
-            name: "YourGithubAPIExtension"
+        .executableTarget(
+            name: "GitHubAPIClient"
         )
     ]
 )

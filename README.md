@@ -19,50 +19,62 @@ let users = try await client.usersList().ok.body.json
 ```
 
 <details>
-<summary>Full Supported Framworks</summary>
+<summary>Full Supported Frameworks</summary>
     
 ```swift
 import GitHubRestAPIActions
 import GitHubRestAPIActivity
+import GitHubRestAPIAgentTasks
 import GitHubRestAPIApps
 import GitHubRestAPIBilling
+import GitHubRestAPICampaigns
 import GitHubRestAPIChecks
 import GitHubRestAPIClassroom
-import GitHubRestAPICode_Scanning
-import GitHubRestAPICodes_Of_Conduct
+import GitHubRestAPICodeQuality
+import GitHubRestAPICodeScanning
+import GitHubRestAPICodeSecurity
+import GitHubRestAPICodesOfConduct
 import GitHubRestAPICodespaces
 import GitHubRestAPICopilot
+import GitHubRestAPICopilotSpaces
+import GitHubRestAPICredentials
 import GitHubRestAPIDependabot
-import GitHubRestAPIDependency_Graph
+import GitHubRestAPIDependencyGraph
 import GitHubRestAPIDesktop
 import GitHubRestAPIEmojis
+import GitHubRestAPIEnterpriseTeamMemberships
+import GitHubRestAPIEnterpriseTeamOrganizations
+import GitHubRestAPIEnterpriseTeams
 import GitHubRestAPIGists
 import GitHubRestAPIGit
 import GitHubRestAPIGitignore
+import GitHubRestAPIHostedCompute
 import GitHubRestAPIInteractions
 import GitHubRestAPIIssues
 import GitHubRestAPILicenses
 import GitHubRestAPIMarkdown
-import GitHubRestAPIMerge_Queue
+import GitHubRestAPIMergeQueue
 import GitHubRestAPIMeta
 import GitHubRestAPIMigrations
 import GitHubRestAPIOidc
 import GitHubRestAPIOrgs
 import GitHubRestAPIPackages
+import GitHubRestAPIPrivateRegistries
 import GitHubRestAPIProjects
+import GitHubRestAPIProjectsClassic
 import GitHubRestAPIPulls
-import GitHubRestAPIRate_Limit
+import GitHubRestAPIRateLimit
 import GitHubRestAPIReactions
 import GitHubRestAPIRepos
 import GitHubRestAPISearch
-import GitHubRestAPISecret_Scanning
-import GitHubRestAPISecurity_Advisories
+import GitHubRestAPISecretScanning
+import GitHubRestAPISecurityAdvisories
 import GitHubRestAPITeams
 import GitHubRestAPIUsers
 ```
 </details>
 
-The [tutorial](https://swiftpackageindex.com/wei18/github-rest-api-swift-openapi/tutorial/use-github-restapi-issues) show you the following example or refer below.
+The [tutorial](https://swiftpackageindex.com/wei18/github-rest-api-swift-openapi/main/tutorials/githubrestapiissues) walks you through the following example step by step, or refer below.
 
 <details>
 <summary>Example of code for enhanced issues comment API</summary>
@@ -93,7 +105,7 @@ struct GitHubRestAPIIssuesExtension {
         let client = Client(
             serverURL: try Servers.Server1.url(),
             transport: URLSessionTransport(),
-            middlewares: [AuthenticationMiddleware(token: nil)]
+            middlewares: [AuthenticationMiddleware(token: "***")]
         )
 
         let comments = try await client.issuesListComments(

@@ -2,16 +2,16 @@
 import PackageDescription
 
 let package = Package(
-    name: "YourGithubAPIExtension",
+    name: "GitHubAPIClient",
     dependencies: [
-        .package(url: "https://github.com/wei18/github-rest-api-swift-openapi.git", from: "1.0.0"),
+        .package(url: "https://github.com/Wei18/github-rest-api-swift-openapi.git", from: "3.0.0"),
     ],
     targets: [
-        .target(
-            name: "YourGithubAPIExtension"
+        .executableTarget(
+            name: "GitHubAPIClient",
             dependencies: [
-                .product(name: "GitHubRestAPIIssues", package: "GitHubRestAPISwiftOpenAPI"),
-            ],
+                .product(name: "GitHubRestAPIIssues", package: "github-rest-api-swift-openapi"),
+            ]
         )
     ]
 )

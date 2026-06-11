@@ -1,0 +1,86 @@
+@Tutorial(time: 10) {
+
+    @XcodeRequirement(title: "Swift 5.9 or later", destination: "https://developer.apple.com/download/applications/")
+
+    @Intro(title: "Use a client in a Swift package") {
+        This tutorial guides you through calling GitHub's REST API with a generated Swift client, from scratch.
+
+        You'll add this package to a new executable package and use the `GitHubRestAPIIssues` module to list the comments of an issue.
+    }
+
+    @Section(title: "Configuring your project to use GitHubRestAPISwiftOpenAPI") {
+        @ContentAndMedia {
+            Create a new executable Swift package and add the package dependencies.
+        }
+        @Steps {
+            @Step {
+                Start with a new executable package, for example by running `swift package init --type executable --name GitHubAPIClient`.
+                @Code(name: "Package.swift", file: client.Package.0.swift)
+            }
+            @Step {
+                Update the `Package.swift` by adding the package dependency.
+                @Code(name: "Package.swift", file: client.Package.1.swift)
+            }
+            @Step {
+                Declare the product dependency for your target, then build the project to ensure it's configured correctly.
+                @Code(name: "Package.swift", file: client.Package.2.swift)
+            }
+        }
+    }
+
+    @Section(title: "Using the code in your target") {
+        @ContentAndMedia {
+            Use the generated client to call the GitHub Issues API.
+        }
+        @Steps {
+            @Step {
+                Open `main.swift`.
+
+                We'll make changes to this file to make use of the code to call the `GitHubRestAPIIssues` API.
+                @Code(name: "main.swift", file: client.main.0.swift)
+            }
+            @Step {
+                First we'll need to import the runtime dependencies.
+                @Code(name: "main.swift", file: client.main.1.swift)
+            }
+            @Step {
+                Next we'll create an instance of our client.
+
+                Note: `Servers.Server1.url()` is the GitHub API server, defined in the OpenAPI document.
+                @Code(name: "main.swift", file: client.main.2.swift)
+            }
+            @Step {
+                Finally, we can use the client to make a request and print the response.
+                @Code(name: "main.swift", file: client.main.3.swift)
+            }
+        }
+    }
+
+    @Section(title: "Pattern matching on the response") {
+        @ContentAndMedia {
+            Often we'd want to do a bit more than just print the high-level response
+            value. For example, we might like to branch our code based on the response we
+            received from the server.
+        }
+        @Steps {
+            @Step {
+                Add a `switch` statement to handle the different possible responses from the server.
+
+                Something's missing here, and if you recompile your package you'll see that the compiler helpfully tells you that your `switch` statement didn't cover all scenarios.
+                @Code(name: "main.swift", file: client.main.4.swift, previousFile: client.main.3.swift)
+            }
+            @Step {
+                In the event the server provides a response that doesn't conform to the API specification, you still have an opportunity as a client to handle it gracefully. We'll do so by printing a helpful message, indicating that our client doesn't know what to do with this because it hasn't been updated to handle this kind of response.
+
+                Everything should now compile again.
+                @Code(name: "main.swift", file: client.main.5.swift)
+            }
+            @Step {
+                Finally, let's extract and print the content from the response body.
+
+                The `body` accessor lets you handle the different content types that are specified for the API operation.
+                @Code(name: "main.swift", file: client.main.6.swift)
+            }
+        }
+    }
+}

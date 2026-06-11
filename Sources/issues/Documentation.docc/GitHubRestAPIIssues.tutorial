@@ -1,0 +1,13 @@
+@Tutorials(name: "GitHubRestAPIIssues") {
+
+    @Intro(title: "Using GitHub's REST API from Swift") {
+        Learn how to add this package as a dependency and call GitHub's REST API
+        with type-safe, generated Swift code.
+    }
+
+    @Chapter(name: "Getting started") {
+        Build a small command-line client that lists the comments of a GitHub issue.
+
+        @TutorialReference(tutorial: "doc:UseGitHubRestAPIIssues")
+    }
+}
