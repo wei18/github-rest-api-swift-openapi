@@ -6,25 +6,24 @@
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fwei18%2Fgithub-rest-api-swift-openapi%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/wei18/github-rest-api-swift-openapi)
 [![](https://img.shields.io/github/license/wei18/github-rest-api-swift-openapi)](LICENSE)
 
-English | [繁體中文](README.zh-TW.md)
+[English](README.md) | 繁體中文
 
-Type-safe Swift clients for GitHub's REST API, generated from GitHub's official
-[OpenAPI description](https://github.com/github/rest-api-description) with Apple's
-[Swift OpenAPI Generator](https://github.com/apple/swift-openapi-generator).
+型別安全的 GitHub REST API Swift 客戶端，由 GitHub 官方的
+[OpenAPI 描述文件](https://github.com/github/rest-api-description) 搭配 Apple 的
+[Swift OpenAPI Generator](https://github.com/apple/swift-openapi-generator) 自動生成。
 
-## Features
+## 特色
 
-- **Type-safe by construction** — every endpoint, parameter, and response schema is
-  generated from GitHub's official OpenAPI document; mismatches fail at compile time.
-- **Modular** — each GitHub API category ships as its own library product
-  (e.g. `GitHubRestAPIIssues`, `GitHubRestAPIRepos`), so you only build what you use.
-- **Always up to date** — the package tracks GitHub's API description automatically
-  and publishes a release every month.
-- **Cross-platform** — macOS, iOS, tvOS, watchOS, visionOS, and Linux.
+- **建構即型別安全** — 每個端點、參數與回應結構都從 GitHub 官方 OpenAPI 文件生成，
+  任何不一致在編譯期就會被攔下。
+- **模組化** — 每個 GitHub API 分類都是獨立的 library product
+  （例如 `GitHubRestAPIIssues`、`GitHubRestAPIRepos`），只編譯你用到的部分。
+- **持續更新** — 套件自動追蹤 GitHub 的 API 描述文件，每月發布新版本。
+- **跨平台** — 支援 macOS、iOS、tvOS、watchOS、visionOS 與 Linux。
 
-## Requirements
+## 系統需求
 
-| | Minimum |
+| | 最低版本 |
 | --- | --- |
 | Swift | 5.9 |
 | macOS | 10.15 |
@@ -32,9 +31,9 @@ Type-safe Swift clients for GitHub's REST API, generated from GitHub's official
 | watchOS | 6 |
 | visionOS | 1 |
 
-## Installation
+## 安裝
 
-Add the package to your `Package.swift`:
+在 `Package.swift` 加入套件依賴：
 
 ```swift
 dependencies: [
@@ -42,7 +41,7 @@ dependencies: [
 ]
 ```
 
-Then declare the products you need as target dependencies:
+再於 target 宣告需要的 products：
 
 ```swift
 .target(
@@ -53,9 +52,9 @@ Then declare the products you need as target dependencies:
 )
 ```
 
-In Xcode: **File ▸ Add Package Dependencies…** and enter the repository URL.
+使用 Xcode：**File ▸ Add Package Dependencies…** 並輸入本 repository 的網址。
 
-## Quick Start
+## 快速開始
 
 ```swift
 import GitHubRestAPIUsers
@@ -66,13 +65,12 @@ let client = Client(serverURL: try Servers.Server1.url(), transport: URLSessionT
 let users = try await client.usersList().ok.body.json
 ```
 
-The [tutorial](https://swiftpackageindex.com/wei18/github-rest-api-swift-openapi/main/tutorials/githubrestapiissues)
-walks through a complete example step by step, from adding the dependency to
-pattern matching on responses.
+[教學文件](https://swiftpackageindex.com/wei18/github-rest-api-swift-openapi/main/tutorials/githubrestapiissues)
+會一步步帶你完成完整範例：從加入依賴到對回應做模式比對。
 
-### Authentication
+### 認證
 
-Inject a token with a `ClientMiddleware`:
+透過 `ClientMiddleware` 注入 token：
 
 ```swift
 import Foundation
@@ -81,7 +79,7 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 import HTTPTypes
 
-/// Injects an authorization header into every request.
+/// 為每個請求注入 authorization header。
 struct AuthenticationMiddleware: ClientMiddleware {
 
     let token: String
@@ -106,10 +104,10 @@ let client = Client(
 )
 ```
 
-### Real-world example: upsert an issue comment
+### 實戰範例：issue 留言的 upsert
 
 <details>
-<summary>Update a bot comment in place, or create it if absent — the pattern used by CI status comments.</summary>
+<summary>有錨點就更新留言、沒有就新增 — CI 狀態留言常用的模式。</summary>
 
 ```swift
 import Foundation
@@ -122,10 +120,10 @@ struct GitHubRestAPIIssuesExtension {
 
     let owner: String
     let repo: String
-    /// The issue number or pull number.
+    /// Issue 或 pull request 的編號。
     let number: Int
 
-    /// Update the comment if the anchor is found; otherwise, create it.
+    /// 找得到錨點就更新該留言，否則建立新留言。
     func comment(anchor: String, body: String) async throws {
         let hidingContent = "<!-- Comment anchor: \(anchor) -->"
         let newBody = "\(body)\n\n\(hidingContent)"
@@ -156,12 +154,12 @@ struct GitHubRestAPIIssuesExtension {
 ```
 </details>
 
-## Available Modules
+## 可用模組
 
-One library product per GitHub API category — 49 in total.
+每個 GitHub API 分類對應一個 library product，共 49 個。
 
 <details>
-<summary>Full module list</summary>
+<summary>完整模組清單</summary>
 
 ```swift
 import GitHubRestAPIActions
@@ -216,33 +214,30 @@ import GitHubRestAPIUsers
 ```
 </details>
 
-Browse the full API surface in the
-[DocC documentation](https://swiftpackageindex.com/wei18/github-rest-api-swift-openapi/documentation).
+完整 API 介面請見
+[DocC 文件](https://swiftpackageindex.com/wei18/github-rest-api-swift-openapi/documentation)。
 
-## How It Works
+## 運作原理
 
 ```
-github/rest-api-description (git submodule, updated weekly by Dependabot)
+github/rest-api-description（git submodule，Dependabot 每週更新）
         │
-        ▼  one module per OpenAPI tag
+        ▼  每個 OpenAPI tag 生成一個模組
 swift-openapi-generator ──▶ Sources/<tag>/{Client,Types}.swift
         │
         ▼
-Package.swift / .spi.yml (kept in sync automatically)
+Package.swift / .spi.yml（自動保持同步）
 ```
 
-- Dependabot bumps the OpenAPI description weekly; CI regenerates all modules,
-  smoke-builds, and merges automatically.
-- A release is tagged monthly. Release tags are cut from a branch with the
-  submodule removed, so resolving the package never downloads the large
-  OpenAPI description repository.
+- Dependabot 每週更新 OpenAPI 描述文件；CI 重新生成所有模組、執行 smoke build 後自動合併。
+- 每月自動發布 release。Release tag 來自移除 submodule 的分支，
+  因此解析套件時不會下載龐大的 OpenAPI 描述 repository。
 
-## Contributing
+## 貢獻
 
-Most of `Sources/` is generated — see [CONTRIBUTING.md](CONTRIBUTING.md) for
-what is hand-written, how the pipeline works, and where to report
-API-mismatch issues upstream.
+`Sources/` 絕大多數是生成碼——請先閱讀 [CONTRIBUTING.md](CONTRIBUTING.md)
+了解哪些檔案是手寫的、pipeline 如何運作，以及 API 不一致問題該回報到哪個上游。
 
-## License
+## 授權
 
-This project is licensed under the [MIT License](LICENSE).
+本專案採用 [MIT License](LICENSE) 授權。
