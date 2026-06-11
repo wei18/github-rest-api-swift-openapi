@@ -15,70 +15,23 @@ struct ErrorMessage: LocalizedError {
     }
 }
 
-/// The generator supports filtering the OpenAPI document prior to generation,
-/// which can be useful when generating client code for a subset of a large API,
-/// or splitting an implementation of a server across multiple modules.
-struct SourcesBuilder {
-
-    struct Source {
-        let folderName: String
-        let targetName: String
-        var sourcePath: String { "Sources/\(folderName)" }
-        var productString: String {
-            #"""
-                    .library(name: "\#(targetName)", targets: ["\#(targetName)"]),
-            """#
-        }
-        var targetString: String {
-            #"""
-                    .target(
-                        name: "\#(targetName)",
-                        dependencies: [
-                            .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
-                            .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
-                        ],
-                        path: "\#(sourcePath)"
-                    ),
-            """#
-        }
-    }
-
-    private(set) var sources: [SourcesBuilder.Source] = []
-
-    init() throws {
-        let directoryURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-            .appendingPathComponent("Sources")
-        let resourceKeys = Set<URLResourceKey>([.nameKey, .isDirectoryKey])
-
-        guard let directoryEnumerator = FileManager.default.enumerator(
-            at: directoryURL,
-            includingPropertiesForKeys: Array(resourceKeys),
-            options: .skipsHiddenFiles) else {
-            throw ErrorMessage(message: "Variable directoryEnumerator not found.")
-        }
-
-        let sourceURLs = directoryEnumerator.compactMap { $0 as? URL }.filter { fileURL in
-            guard let resourceValues = try? fileURL.resourceValues(forKeys: resourceKeys),
-                  let isDirectory = resourceValues.isDirectory,
-                  isDirectory,
-                  fileURL.pathComponents.count == directoryURL.pathComponents.count + 1 // Check if it's a direct child
-            else { return false }
-            return true
-        }
-
-        sources = sourceURLs.map(\.lastPathComponent).sorted().map {
-            let folderName = $0
-            let targetName = folderName.split(separator: "-").map { $0.prefix(1).uppercased() + $0.dropFirst() }.joined()
-            return Source(folderName: folderName, targetName: "GitHubRestAPI\(targetName)")
-        }
-    }
-}
-
+/// Writes .spi.yml from `swift package dump-package` JSON read on stdin,
+/// so the documentation target list always matches the committed manifest.
+///
+/// Usage: swift package dump-package | swift Scripts/SPIManifestBuilder.swift
 struct SPIManifestBuilder {
-    
+
+    struct Manifest: Decodable {
+        struct Product: Decodable {
+            let name: String
+        }
+        let products: [Product]
+    }
+
     func getTemplate() throws -> String {
-        let sources = try SourcesBuilder().sources
-        let targetNamesString: String = sources.map(\.targetName)
+        let data = FileHandle.standardInput.readDataToEndOfFile()
+        let manifest = try JSONDecoder().decode(Manifest.self, from: data)
+        let targetNamesString: String = manifest.products.map(\.name)
             .map { "    - \($0)"}
             .joined(separator: "\n")
         return #"""
@@ -87,7 +40,7 @@ struct SPIManifestBuilder {
           configs:
           - documentation_targets:
         \#(targetNamesString)
-        
+
         """#
     }
 
@@ -104,4 +57,3 @@ struct SPIManifestBuilder {
 }
 
 try SPIManifestBuilder().write()
-

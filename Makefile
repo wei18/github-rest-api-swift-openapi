@@ -76,7 +76,7 @@ $(PACKAGE_PATHS): $(SOURCE_DIRS)
 
 .spi.yml: $(PACKAGE_PATHS)
 	@echo "::debug::make: $@"
-	swift Scripts/SPIManifestBuilder.swift
+	swift package dump-package | swift Scripts/SPIManifestBuilder.swift
 	@$(MAKE) commit file="$@"
 
 ## main
