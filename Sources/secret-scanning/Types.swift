@@ -2785,7 +2785,12 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-scan/type`.
             public var _type: Swift.String?
-            /// The state of the scan. Either "completed", "running", or "pending"
+            /// The state of the scan. Either "completed", "running", "pending", "failed", or "unknown".
+            ///
+            /// "failed": this scan type has hit its retry limit and has been marked permanently failed.
+            /// This usually resolves on its own at the next scheduled scan attempt. If "failed" persists, contact Support.
+            ///
+            /// "unknown": the scan is in an unrecognized or currently unhandled state.
             ///
             /// - Remark: Generated from `#/components/schemas/secret-scanning-scan/status`.
             public var status: Swift.String?
@@ -2801,7 +2806,7 @@ public enum Components {
             ///
             /// - Parameters:
             ///   - _type: The type of scan
-            ///   - status: The state of the scan. Either "completed", "running", or "pending"
+            ///   - status: The state of the scan. Either "completed", "running", "pending", "failed", or "unknown".
             ///   - completedAt: The time that the scan was completed. Empty if the scan is running
             ///   - startedAt: The time that the scan was started. Empty if the scan is pending
             public init(
@@ -3017,6 +3022,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-hide-secret`.
         public typealias SecretScanningAlertHideSecret = Swift.Bool
+        /// A boolean value (`true` or `false`) indicating whether to filter alerts by their push protection bypass status. When set to `true`, only alerts that were created because a push protection rule was bypassed will be returned. When set to `false`, only alerts that were not caused by a push protection bypass will be returned.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-bypassed`.
+        public typealias SecretScanningAlertBypassed = Swift.Bool
         /// The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
         ///
         /// - Remark: Generated from `#/components/parameters/alert-number`.
@@ -3380,6 +3389,10 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/hide_secret`.
                 public var hideSecret: Components.Parameters.SecretScanningAlertHideSecret?
+                /// A boolean value (`true` or `false`) indicating whether to filter alerts by their push protection bypass status. When set to `true`, only alerts that were created because a push protection rule was bypassed will be returned. When set to `false`, only alerts that were not caused by a push protection bypass will be returned.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/is_bypassed`.
+                public var isBypassed: Components.Parameters.SecretScanningAlertBypassed?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -3400,6 +3413,7 @@ public enum Operations {
                 ///   - isPubliclyLeaked: A boolean value representing whether or not to filter alerts by the publicly-leaked tag being present.
                 ///   - isMultiRepo: A boolean value representing whether or not to filter alerts by the multi-repo tag being present.
                 ///   - hideSecret: A boolean value representing whether or not to hide literal secrets in the results.
+                ///   - isBypassed: A boolean value (`true` or `false`) indicating whether to filter alerts by their push protection bypass status. When set to `true`, only alerts that were created because a push protection rule was bypassed will be returned. When set to `false`, only alerts that were not caused by a push protection bypass will be returned.
                 public init(
                     state: Components.Parameters.SecretScanningAlertState? = nil,
                     secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
@@ -3417,7 +3431,8 @@ public enum Operations {
                     validity: Components.Parameters.SecretScanningAlertValidity? = nil,
                     isPubliclyLeaked: Components.Parameters.SecretScanningAlertPubliclyLeaked? = nil,
                     isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo? = nil,
-                    hideSecret: Components.Parameters.SecretScanningAlertHideSecret? = nil
+                    hideSecret: Components.Parameters.SecretScanningAlertHideSecret? = nil,
+                    isBypassed: Components.Parameters.SecretScanningAlertBypassed? = nil
                 ) {
                     self.state = state
                     self.secretType = secretType
@@ -3436,6 +3451,7 @@ public enum Operations {
                     self.isPubliclyLeaked = isPubliclyLeaked
                     self.isMultiRepo = isMultiRepo
                     self.hideSecret = hideSecret
+                    self.isBypassed = isBypassed
                 }
             }
             public var query: Operations.SecretScanningListAlertsForOrg.Input.Query
@@ -4320,6 +4336,10 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/hide_secret`.
                 public var hideSecret: Components.Parameters.SecretScanningAlertHideSecret?
+                /// A boolean value (`true` or `false`) indicating whether to filter alerts by their push protection bypass status. When set to `true`, only alerts that were created because a push protection rule was bypassed will be returned. When set to `false`, only alerts that were not caused by a push protection bypass will be returned.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/is_bypassed`.
+                public var isBypassed: Components.Parameters.SecretScanningAlertBypassed?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -4340,6 +4360,7 @@ public enum Operations {
                 ///   - isPubliclyLeaked: A boolean value representing whether or not to filter alerts by the publicly-leaked tag being present.
                 ///   - isMultiRepo: A boolean value representing whether or not to filter alerts by the multi-repo tag being present.
                 ///   - hideSecret: A boolean value representing whether or not to hide literal secrets in the results.
+                ///   - isBypassed: A boolean value (`true` or `false`) indicating whether to filter alerts by their push protection bypass status. When set to `true`, only alerts that were created because a push protection rule was bypassed will be returned. When set to `false`, only alerts that were not caused by a push protection bypass will be returned.
                 public init(
                     state: Components.Parameters.SecretScanningAlertState? = nil,
                     secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
@@ -4357,7 +4378,8 @@ public enum Operations {
                     validity: Components.Parameters.SecretScanningAlertValidity? = nil,
                     isPubliclyLeaked: Components.Parameters.SecretScanningAlertPubliclyLeaked? = nil,
                     isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo? = nil,
-                    hideSecret: Components.Parameters.SecretScanningAlertHideSecret? = nil
+                    hideSecret: Components.Parameters.SecretScanningAlertHideSecret? = nil,
+                    isBypassed: Components.Parameters.SecretScanningAlertBypassed? = nil
                 ) {
                     self.state = state
                     self.secretType = secretType
@@ -4376,6 +4398,7 @@ public enum Operations {
                     self.isPubliclyLeaked = isPubliclyLeaked
                     self.isMultiRepo = isMultiRepo
                     self.hideSecret = hideSecret
+                    self.isBypassed = isBypassed
                 }
             }
             public var query: Operations.SecretScanningListAlertsForRepo.Input.Query
@@ -5041,6 +5064,41 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Forbidden: Sendable, Hashable {
+                /// Creates a new `Forbidden`.
+                public init() {}
+            }
+            /// Delegated alert dismissal is enabled and the authenticated user is not a valid reviewer.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/patch(secret-scanning/update-alert)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Operations.SecretScanningUpdateAlert.Output.Forbidden)
+            /// Delegated alert dismissal is enabled and the authenticated user is not a valid reviewer.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/patch(secret-scanning/update-alert)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            public static var forbidden: Self {
+                .forbidden(.init())
+            }
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Operations.SecretScanningUpdateAlert.Output.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
                             response: self
                         )
                     }

@@ -156,7 +156,7 @@ struct GitHubRestAPIIssuesExtension {
 
 ## 可用模組
 
-每個 GitHub API 分類對應一個 library product，共 49 個。
+每個 GitHub API 分類對應一個 library product，共 50 個。
 
 <details>
 <summary>完整模組清單</summary>
@@ -165,6 +165,7 @@ struct GitHubRestAPIIssuesExtension {
 import GitHubRestAPIActions
 import GitHubRestAPIActivity
 import GitHubRestAPIAgentTasks
+import GitHubRestAPIAgents
 import GitHubRestAPIApps
 import GitHubRestAPIBilling
 import GitHubRestAPICampaigns

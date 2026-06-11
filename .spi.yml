@@ -5,6 +5,7 @@ builder:
     - GitHubRestAPIActions
     - GitHubRestAPIActivity
     - GitHubRestAPIAgentTasks
+    - GitHubRestAPIAgents
     - GitHubRestAPIApps
     - GitHubRestAPIBilling
     - GitHubRestAPICampaigns

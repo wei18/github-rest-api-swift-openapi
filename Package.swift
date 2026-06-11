@@ -11,6 +11,7 @@ let sourceFolders = [
     "actions",
     "activity",
     "agent-tasks",
+    "agents",
     "apps",
     "billing",
     "campaigns",

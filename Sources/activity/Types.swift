@@ -3146,7 +3146,7 @@ public enum Components {
                 case dueOn = "due_on"
             }
         }
-        /// The type of issue.
+        /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
         ///
         /// - Remark: Generated from `#/components/schemas/issue-type`.
         public struct IssueType: Codable, Hashable, Sendable {

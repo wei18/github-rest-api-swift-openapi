@@ -26,7 +26,7 @@ public protocol APIProtocol: Sendable {
     ///
     ///
     /// Creates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
-    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, or `oidc_cloudsmith`), the `encrypted_value` and `key_id` fields should be omitted.
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, `oidc_cloudsmith`, or `oidc_gcp`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -57,7 +57,7 @@ public protocol APIProtocol: Sendable {
     ///
     ///
     /// Updates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
-    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, or `oidc_cloudsmith`), the `encrypted_value` and `key_id` fields should be omitted.
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, `oidc_cloudsmith`, or `oidc_gcp`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -103,7 +103,7 @@ extension APIProtocol {
     ///
     ///
     /// Creates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
-    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, or `oidc_cloudsmith`), the `encrypted_value` and `key_id` fields should be omitted.
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, `oidc_cloudsmith`, or `oidc_gcp`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -160,7 +160,7 @@ extension APIProtocol {
     ///
     ///
     /// Updates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
-    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, or `oidc_cloudsmith`), the `encrypted_value` and `key_id` fields should be omitted.
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, `oidc_cloudsmith`, or `oidc_gcp`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -473,6 +473,7 @@ public enum Components {
                 case oidcAws = "oidc_aws"
                 case oidcJfrog = "oidc_jfrog"
                 case oidcCloudsmith = "oidc_cloudsmith"
+                case oidcGcp = "oidc_gcp"
             }
             /// The authentication type for the private registry.
             ///
@@ -554,6 +555,14 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/api_host`.
             public var apiHost: Swift.String?
+            /// The full resource name of the GCP Workload Identity Provider (e.g. `projects/<NUM>/locations/global/workloadIdentityPools/<POOL>/providers/<PROVIDER>`).
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/workload_identity_provider`.
+            public var workloadIdentityProvider: Swift.String?
+            /// The GCP service account email to impersonate. If omitted, the federated token is used directly (direct WIF).
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/service_account`.
+            public var serviceAccount: Swift.String?
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/created_at`.
             public var createdAt: Foundation.Date
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration/updated_at`.
@@ -581,6 +590,8 @@ public enum Components {
             ///   - namespace: The Cloudsmith organization namespace.
             ///   - serviceSlug: The Cloudsmith service account slug.
             ///   - apiHost: The Cloudsmith API host.
+            ///   - workloadIdentityProvider: The full resource name of the GCP Workload Identity Provider (e.g. `projects/<NUM>/locations/global/workloadIdentityPools/<POOL>/providers/<PROVIDER>`).
+            ///   - serviceAccount: The GCP service account email to impersonate. If omitted, the federated token is used directly (direct WIF).
             ///   - createdAt:
             ///   - updatedAt:
             public init(
@@ -604,6 +615,8 @@ public enum Components {
                 namespace: Swift.String? = nil,
                 serviceSlug: Swift.String? = nil,
                 apiHost: Swift.String? = nil,
+                workloadIdentityProvider: Swift.String? = nil,
+                serviceAccount: Swift.String? = nil,
                 createdAt: Foundation.Date,
                 updatedAt: Foundation.Date
             ) {
@@ -627,6 +640,8 @@ public enum Components {
                 self.namespace = namespace
                 self.serviceSlug = serviceSlug
                 self.apiHost = apiHost
+                self.workloadIdentityProvider = workloadIdentityProvider
+                self.serviceAccount = serviceAccount
                 self.createdAt = createdAt
                 self.updatedAt = updatedAt
             }
@@ -651,6 +666,8 @@ public enum Components {
                 case namespace
                 case serviceSlug = "service_slug"
                 case apiHost = "api_host"
+                case workloadIdentityProvider = "workload_identity_provider"
+                case serviceAccount = "service_account"
                 case createdAt = "created_at"
                 case updatedAt = "updated_at"
             }
@@ -697,6 +714,7 @@ public enum Components {
                 case oidcAws = "oidc_aws"
                 case oidcJfrog = "oidc_jfrog"
                 case oidcCloudsmith = "oidc_cloudsmith"
+                case oidcGcp = "oidc_gcp"
             }
             /// The authentication type for the private registry.
             ///
@@ -782,6 +800,14 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/api_host`.
             public var apiHost: Swift.String?
+            /// The full resource name of the GCP Workload Identity Provider (e.g. `projects/<NUM>/locations/global/workloadIdentityPools/<POOL>/providers/<PROVIDER>`).
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/workload_identity_provider`.
+            public var workloadIdentityProvider: Swift.String?
+            /// The GCP service account email to impersonate. If omitted, the federated token is used directly (direct WIF).
+            ///
+            /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/service_account`.
+            public var serviceAccount: Swift.String?
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/created_at`.
             public var createdAt: Foundation.Date
             /// - Remark: Generated from `#/components/schemas/org-private-registry-configuration-with-selected-repositories/updated_at`.
@@ -810,6 +836,8 @@ public enum Components {
             ///   - namespace: The Cloudsmith organization namespace.
             ///   - serviceSlug: The Cloudsmith service account slug.
             ///   - apiHost: The Cloudsmith API host.
+            ///   - workloadIdentityProvider: The full resource name of the GCP Workload Identity Provider (e.g. `projects/<NUM>/locations/global/workloadIdentityPools/<POOL>/providers/<PROVIDER>`).
+            ///   - serviceAccount: The GCP service account email to impersonate. If omitted, the federated token is used directly (direct WIF).
             ///   - createdAt:
             ///   - updatedAt:
             public init(
@@ -834,6 +862,8 @@ public enum Components {
                 namespace: Swift.String? = nil,
                 serviceSlug: Swift.String? = nil,
                 apiHost: Swift.String? = nil,
+                workloadIdentityProvider: Swift.String? = nil,
+                serviceAccount: Swift.String? = nil,
                 createdAt: Foundation.Date,
                 updatedAt: Foundation.Date
             ) {
@@ -858,6 +888,8 @@ public enum Components {
                 self.namespace = namespace
                 self.serviceSlug = serviceSlug
                 self.apiHost = apiHost
+                self.workloadIdentityProvider = workloadIdentityProvider
+                self.serviceAccount = serviceAccount
                 self.createdAt = createdAt
                 self.updatedAt = updatedAt
             }
@@ -883,6 +915,8 @@ public enum Components {
                 case namespace
                 case serviceSlug = "service_slug"
                 case apiHost = "api_host"
+                case workloadIdentityProvider = "workload_identity_provider"
+                case serviceAccount = "service_account"
                 case createdAt = "created_at"
                 case updatedAt = "updated_at"
             }
@@ -1290,7 +1324,7 @@ public enum Operations {
     ///
     ///
     /// Creates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
-    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, or `oidc_cloudsmith`), the `encrypted_value` and `key_id` fields should be omitted.
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, `oidc_cloudsmith`, or `oidc_gcp`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -1390,7 +1424,7 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/selected_repository_ids`.
                     public var selectedRepositoryIds: [Swift.Int]?
-                    /// The authentication type for the private registry. Defaults to `token` if not specified. Use `oidc_azure`, `oidc_aws`, `oidc_jfrog`, or `oidc_cloudsmith` for OIDC authentication.
+                    /// The authentication type for the private registry. Defaults to `token` if not specified. Use `oidc_azure`, `oidc_aws`, `oidc_jfrog`, `oidc_cloudsmith`, or `oidc_gcp` for OIDC authentication.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/auth_type`.
                     @frozen public enum AuthTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
@@ -1400,8 +1434,9 @@ public enum Operations {
                         case oidcAws = "oidc_aws"
                         case oidcJfrog = "oidc_jfrog"
                         case oidcCloudsmith = "oidc_cloudsmith"
+                        case oidcGcp = "oidc_gcp"
                     }
-                    /// The authentication type for the private registry. Defaults to `token` if not specified. Use `oidc_azure`, `oidc_aws`, `oidc_jfrog`, or `oidc_cloudsmith` for OIDC authentication.
+                    /// The authentication type for the private registry. Defaults to `token` if not specified. Use `oidc_azure`, `oidc_aws`, `oidc_jfrog`, `oidc_cloudsmith`, or `oidc_gcp` for OIDC authentication.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/auth_type`.
                     public var authType: Operations.PrivateRegistriesCreateOrgPrivateRegistry.Input.Body.JsonPayload.AuthTypePayload?
@@ -1437,7 +1472,7 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/jfrog_oidc_provider_name`.
                     public var jfrogOidcProviderName: Swift.String?
-                    /// The OIDC audience. Optional for `oidc_aws`, `oidc_jfrog`, and required for `oidc_cloudsmith` auth types.
+                    /// The OIDC audience. Optional for `oidc_aws`, `oidc_jfrog`, and `oidc_gcp`, and required for `oidc_cloudsmith` auth types.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/audience`.
                     public var audience: Swift.String?
@@ -1457,6 +1492,14 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/api_host`.
                     public var apiHost: Swift.String?
+                    /// The full resource name of the GCP Workload Identity Provider (e.g. `projects/<NUM>/locations/global/workloadIdentityPools/<POOL>/providers/<PROVIDER>`). Required when `auth_type` is `oidc_gcp`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/workload_identity_provider`.
+                    public var workloadIdentityProvider: Swift.String?
+                    /// The GCP service account email to impersonate. Optional for `oidc_gcp` auth type. If omitted, the federated token is used directly (direct WIF).
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/json/service_account`.
+                    public var serviceAccount: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -1468,7 +1511,7 @@ public enum Operations {
                     ///   - keyId: The ID of the key you used to encrypt the secret. Required when `auth_type` is `token` or `username_password`. Should be omitted for OIDC auth types.
                     ///   - visibility: Which type of organization repositories have access to the private registry. `selected` means only the repositories specified by `selected_repository_ids` can access the private registry.
                     ///   - selectedRepositoryIds: An array of repository IDs that can access the organization private registry. You can only provide a list of repository IDs when `visibility` is set to `selected`. You can manage the list of selected repositories using the [Update a private registry for an organization](https://docs.github.com/rest/private-registries/organization-configurations#update-a-private-registry-for-an-organization) endpoint. This field should be omitted if `visibility` is set to `all` or `private`.
-                    ///   - authType: The authentication type for the private registry. Defaults to `token` if not specified. Use `oidc_azure`, `oidc_aws`, `oidc_jfrog`, or `oidc_cloudsmith` for OIDC authentication.
+                    ///   - authType: The authentication type for the private registry. Defaults to `token` if not specified. Use `oidc_azure`, `oidc_aws`, `oidc_jfrog`, `oidc_cloudsmith`, or `oidc_gcp` for OIDC authentication.
                     ///   - tenantId: The tenant ID of the Azure AD application. Required when `auth_type` is `oidc_azure`.
                     ///   - clientId: The client ID of the Azure AD application. Required when `auth_type` is `oidc_azure`.
                     ///   - awsRegion: The AWS region. Required when `auth_type` is `oidc_aws`.
@@ -1477,11 +1520,13 @@ public enum Operations {
                     ///   - domain: The CodeArtifact domain. Required when `auth_type` is `oidc_aws`.
                     ///   - domainOwner: The CodeArtifact domain owner (AWS account ID). Required when `auth_type` is `oidc_aws`.
                     ///   - jfrogOidcProviderName: The JFrog OIDC provider name. Required when `auth_type` is `oidc_jfrog`.
-                    ///   - audience: The OIDC audience. Optional for `oidc_aws`, `oidc_jfrog`, and required for `oidc_cloudsmith` auth types.
+                    ///   - audience: The OIDC audience. Optional for `oidc_aws`, `oidc_jfrog`, and `oidc_gcp`, and required for `oidc_cloudsmith` auth types.
                     ///   - identityMappingName: The JFrog identity mapping name. Optional for `oidc_jfrog` auth type.
                     ///   - namespace: The Cloudsmith organization namespace. Required when `auth_type` is `oidc_cloudsmith`.
                     ///   - serviceSlug: The Cloudsmith service account slug. Required when `auth_type` is `oidc_cloudsmith`.
                     ///   - apiHost: The Cloudsmith API host. Optional for `oidc_cloudsmith` auth type. If omitted, `api.cloudsmith.io` is used by default.
+                    ///   - workloadIdentityProvider: The full resource name of the GCP Workload Identity Provider (e.g. `projects/<NUM>/locations/global/workloadIdentityPools/<POOL>/providers/<PROVIDER>`). Required when `auth_type` is `oidc_gcp`.
+                    ///   - serviceAccount: The GCP service account email to impersonate. Optional for `oidc_gcp` auth type. If omitted, the federated token is used directly (direct WIF).
                     public init(
                         registryType: Operations.PrivateRegistriesCreateOrgPrivateRegistry.Input.Body.JsonPayload.RegistryTypePayload,
                         url: Swift.String,
@@ -1504,7 +1549,9 @@ public enum Operations {
                         identityMappingName: Swift.String? = nil,
                         namespace: Swift.String? = nil,
                         serviceSlug: Swift.String? = nil,
-                        apiHost: Swift.String? = nil
+                        apiHost: Swift.String? = nil,
+                        workloadIdentityProvider: Swift.String? = nil,
+                        serviceAccount: Swift.String? = nil
                     ) {
                         self.registryType = registryType
                         self.url = url
@@ -1528,6 +1575,8 @@ public enum Operations {
                         self.namespace = namespace
                         self.serviceSlug = serviceSlug
                         self.apiHost = apiHost
+                        self.workloadIdentityProvider = workloadIdentityProvider
+                        self.serviceAccount = serviceAccount
                     }
                     public enum CodingKeys: String, CodingKey {
                         case registryType = "registry_type"
@@ -1552,6 +1601,8 @@ public enum Operations {
                         case namespace
                         case serviceSlug = "service_slug"
                         case apiHost = "api_host"
+                        case workloadIdentityProvider = "workload_identity_provider"
+                        case serviceAccount = "service_account"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/POST/requestBody/content/application\/json`.
@@ -2078,7 +2129,7 @@ public enum Operations {
     ///
     ///
     /// Updates a private registry configuration with an encrypted value for an organization. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). For more information, see "[Encrypting secrets for the REST API](https://docs.github.com/rest/guides/encrypting-secrets-for-the-rest-api)."
-    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, or `oidc_cloudsmith`), the `encrypted_value` and `key_id` fields should be omitted.
+    /// For OIDC-based registries (`oidc_azure`, `oidc_aws`, `oidc_jfrog`, `oidc_cloudsmith`, or `oidc_gcp`), the `encrypted_value` and `key_id` fields should be omitted.
     ///
     /// OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint.
     ///
@@ -2197,6 +2248,7 @@ public enum Operations {
                         case oidcAws = "oidc_aws"
                         case oidcJfrog = "oidc_jfrog"
                         case oidcCloudsmith = "oidc_cloudsmith"
+                        case oidcGcp = "oidc_gcp"
                     }
                     /// The authentication type for the private registry. This field cannot be changed after creation. If provided, it must match the existing `auth_type` of the configuration. To change the authentication type, delete and recreate the configuration.
                     ///
@@ -2234,7 +2286,7 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/jfrog_oidc_provider_name`.
                     public var jfrogOidcProviderName: Swift.String?
-                    /// The OIDC audience. Optional for `oidc_aws`, `oidc_jfrog`, and required for `oidc_cloudsmith` auth types.
+                    /// The OIDC audience. Optional for `oidc_aws`, `oidc_jfrog`, and `oidc_gcp`, and required for `oidc_cloudsmith` auth types.
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/audience`.
                     public var audience: Swift.String?
@@ -2254,6 +2306,14 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/api_host`.
                     public var apiHost: Swift.String?
+                    /// The full resource name of the GCP Workload Identity Provider (e.g. `projects/<NUM>/locations/global/workloadIdentityPools/<POOL>/providers/<PROVIDER>`). Required when `auth_type` is `oidc_gcp`.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/workload_identity_provider`.
+                    public var workloadIdentityProvider: Swift.String?
+                    /// The GCP service account email to impersonate. Optional for `oidc_gcp` auth type. If omitted, the federated token is used directly (direct WIF).
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/json/service_account`.
+                    public var serviceAccount: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -2274,11 +2334,13 @@ public enum Operations {
                     ///   - domain: The CodeArtifact domain. Required when `auth_type` is `oidc_aws`.
                     ///   - domainOwner: The CodeArtifact domain owner (AWS account ID). Required when `auth_type` is `oidc_aws`.
                     ///   - jfrogOidcProviderName: The JFrog OIDC provider name. Required when `auth_type` is `oidc_jfrog`.
-                    ///   - audience: The OIDC audience. Optional for `oidc_aws`, `oidc_jfrog`, and required for `oidc_cloudsmith` auth types.
+                    ///   - audience: The OIDC audience. Optional for `oidc_aws`, `oidc_jfrog`, and `oidc_gcp`, and required for `oidc_cloudsmith` auth types.
                     ///   - identityMappingName: The JFrog identity mapping name. Optional for `oidc_jfrog` auth type.
                     ///   - namespace: The Cloudsmith organization namespace. Required when `auth_type` is `oidc_cloudsmith`.
                     ///   - serviceSlug: The Cloudsmith service account slug. Required when `auth_type` is `oidc_cloudsmith`.
                     ///   - apiHost: The Cloudsmith API host. Optional for `oidc_cloudsmith` auth type. If omitted, `api.cloudsmith.io` is used by default.
+                    ///   - workloadIdentityProvider: The full resource name of the GCP Workload Identity Provider (e.g. `projects/<NUM>/locations/global/workloadIdentityPools/<POOL>/providers/<PROVIDER>`). Required when `auth_type` is `oidc_gcp`.
+                    ///   - serviceAccount: The GCP service account email to impersonate. Optional for `oidc_gcp` auth type. If omitted, the federated token is used directly (direct WIF).
                     public init(
                         registryType: Operations.PrivateRegistriesUpdateOrgPrivateRegistry.Input.Body.JsonPayload.RegistryTypePayload? = nil,
                         url: Swift.String? = nil,
@@ -2301,7 +2363,9 @@ public enum Operations {
                         identityMappingName: Swift.String? = nil,
                         namespace: Swift.String? = nil,
                         serviceSlug: Swift.String? = nil,
-                        apiHost: Swift.String? = nil
+                        apiHost: Swift.String? = nil,
+                        workloadIdentityProvider: Swift.String? = nil,
+                        serviceAccount: Swift.String? = nil
                     ) {
                         self.registryType = registryType
                         self.url = url
@@ -2325,6 +2389,8 @@ public enum Operations {
                         self.namespace = namespace
                         self.serviceSlug = serviceSlug
                         self.apiHost = apiHost
+                        self.workloadIdentityProvider = workloadIdentityProvider
+                        self.serviceAccount = serviceAccount
                     }
                     public enum CodingKeys: String, CodingKey {
                         case registryType = "registry_type"
@@ -2349,6 +2415,8 @@ public enum Operations {
                         case namespace
                         case serviceSlug = "service_slug"
                         case apiHost = "api_host"
+                        case workloadIdentityProvider = "workload_identity_provider"
+                        case serviceAccount = "service_account"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/private-registries/{secret_name}/PATCH/requestBody/content/application\/json`.

@@ -677,6 +677,13 @@ public struct Client: APIProtocol {
                     in: &request,
                     style: .form,
                     explode: true,
+                    name: "issue_field_values",
+                    value: input.query.issueFieldValues
+                )
+                try converter.setQueryItemAsURI(
+                    in: &request,
+                    style: .form,
+                    explode: true,
                     name: "labels",
                     value: input.query.labels
                 )

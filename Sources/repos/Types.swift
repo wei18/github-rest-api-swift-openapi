@@ -1281,6 +1281,13 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `POST /repos/{owner}/{repo}/forks`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/forks/post(repos/create-fork)`.
     func reposCreateFork(_ input: Operations.ReposCreateFork.Input) async throws -> Operations.ReposCreateFork.Output
+    /// Get the hash algorithm for a repository
+    ///
+    /// Returns the hash algorithm used to store repository objects.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/hash-algorithm`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)`.
+    func reposGetHashAlgorithm(_ input: Operations.ReposGetHashAlgorithm.Input) async throws -> Operations.ReposGetHashAlgorithm.Output
     /// List repository webhooks
     ///
     /// Lists webhooks for a repository. `last response` may return null if there have not been any deliveries within 30 days.
@@ -4288,6 +4295,21 @@ extension APIProtocol {
             path: path,
             headers: headers,
             body: body
+        ))
+    }
+    /// Get the hash algorithm for a repository
+    ///
+    /// Returns the hash algorithm used to store repository objects.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/hash-algorithm`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)`.
+    public func reposGetHashAlgorithm(
+        path: Operations.ReposGetHashAlgorithm.Input.Path,
+        headers: Operations.ReposGetHashAlgorithm.Input.Headers = .init()
+    ) async throws -> Operations.ReposGetHashAlgorithm.Output {
+        try await reposGetHashAlgorithm(Operations.ReposGetHashAlgorithm.Input(
+            path: path,
+            headers: headers
         ))
     }
     /// List repository webhooks
@@ -12375,7 +12397,7 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/schemas/repository-ruleset-bypass-actor`.
         public struct RepositoryRulesetBypassActor: Codable, Hashable, Sendable {
-            /// The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, and `Team` actor types. If `actor_type` is `OrganizationAdmin`, `actor_id` is ignored. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
+            /// The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, `Team`, and `User` actor types. If `actor_type` is `OrganizationAdmin`, `actor_id` is ignored. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
             ///
             /// - Remark: Generated from `#/components/schemas/repository-ruleset-bypass-actor/actor_id`.
             public var actorId: Swift.Int?
@@ -12388,6 +12410,7 @@ public enum Components {
                 case repositoryRole = "RepositoryRole"
                 case team = "Team"
                 case deployKey = "DeployKey"
+                case user = "User"
             }
             /// The type of actor that can bypass a ruleset.
             ///
@@ -12408,7 +12431,7 @@ public enum Components {
             /// Creates a new `RepositoryRulesetBypassActor`.
             ///
             /// - Parameters:
-            ///   - actorId: The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, and `Team` actor types. If `actor_type` is `OrganizationAdmin`, `actor_id` is ignored. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
+            ///   - actorId: The ID of the actor that can bypass a ruleset. Required for `Integration`, `RepositoryRole`, `Team`, and `User` actor types. If `actor_type` is `OrganizationAdmin`, `actor_id` is ignored. If `actor_type` is `DeployKey`, this should be null. `OrganizationAdmin` is not applicable for personal repositories.
             ///   - actorType: The type of actor that can bypass a ruleset.
             ///   - bypassMode: When the specified actor can bypass the ruleset. `pull_request` means that an actor can only bypass rules on pull requests. `pull_request` is not applicable for the `DeployKey` actor type. Also, `pull_request` is only applicable to branch rulesets. When `bypass_mode` is `exempt`, rules will not be run for that actor and a bypass audit entry will not be created.
             public init(
@@ -13772,190 +13795,6 @@ public enum Components {
                 case parameters
             }
         }
-        /// Prevent commits that include changes in specified file and folder paths from being pushed to the commit graph. This includes absolute paths that contain file names.
-        ///
-        /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction`.
-        public struct RepositoryRuleFilePathRestriction: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction/type`.
-            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case filePathRestriction = "file_path_restriction"
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction/type`.
-            public var _type: Components.Schemas.RepositoryRuleFilePathRestriction._TypePayload
-            /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction/parameters`.
-            public struct ParametersPayload: Codable, Hashable, Sendable {
-                /// The file paths that are restricted from being pushed to the commit graph.
-                ///
-                /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction/parameters/restricted_file_paths`.
-                public var restrictedFilePaths: [Swift.String]
-                /// Creates a new `ParametersPayload`.
-                ///
-                /// - Parameters:
-                ///   - restrictedFilePaths: The file paths that are restricted from being pushed to the commit graph.
-                public init(restrictedFilePaths: [Swift.String]) {
-                    self.restrictedFilePaths = restrictedFilePaths
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case restrictedFilePaths = "restricted_file_paths"
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction/parameters`.
-            public var parameters: Components.Schemas.RepositoryRuleFilePathRestriction.ParametersPayload?
-            /// Creates a new `RepositoryRuleFilePathRestriction`.
-            ///
-            /// - Parameters:
-            ///   - _type:
-            ///   - parameters:
-            public init(
-                _type: Components.Schemas.RepositoryRuleFilePathRestriction._TypePayload,
-                parameters: Components.Schemas.RepositoryRuleFilePathRestriction.ParametersPayload? = nil
-            ) {
-                self._type = _type
-                self.parameters = parameters
-            }
-            public enum CodingKeys: String, CodingKey {
-                case _type = "type"
-                case parameters
-            }
-        }
-        /// Prevent commits that include file paths that exceed the specified character limit from being pushed to the commit graph.
-        ///
-        /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length`.
-        public struct RepositoryRuleMaxFilePathLength: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length/type`.
-            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case maxFilePathLength = "max_file_path_length"
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length/type`.
-            public var _type: Components.Schemas.RepositoryRuleMaxFilePathLength._TypePayload
-            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length/parameters`.
-            public struct ParametersPayload: Codable, Hashable, Sendable {
-                /// The maximum amount of characters allowed in file paths.
-                ///
-                /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length/parameters/max_file_path_length`.
-                public var maxFilePathLength: Swift.Int
-                /// Creates a new `ParametersPayload`.
-                ///
-                /// - Parameters:
-                ///   - maxFilePathLength: The maximum amount of characters allowed in file paths.
-                public init(maxFilePathLength: Swift.Int) {
-                    self.maxFilePathLength = maxFilePathLength
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case maxFilePathLength = "max_file_path_length"
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length/parameters`.
-            public var parameters: Components.Schemas.RepositoryRuleMaxFilePathLength.ParametersPayload?
-            /// Creates a new `RepositoryRuleMaxFilePathLength`.
-            ///
-            /// - Parameters:
-            ///   - _type:
-            ///   - parameters:
-            public init(
-                _type: Components.Schemas.RepositoryRuleMaxFilePathLength._TypePayload,
-                parameters: Components.Schemas.RepositoryRuleMaxFilePathLength.ParametersPayload? = nil
-            ) {
-                self._type = _type
-                self.parameters = parameters
-            }
-            public enum CodingKeys: String, CodingKey {
-                case _type = "type"
-                case parameters
-            }
-        }
-        /// Prevent commits that include files with specified file extensions from being pushed to the commit graph.
-        ///
-        /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction`.
-        public struct RepositoryRuleFileExtensionRestriction: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction/type`.
-            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case fileExtensionRestriction = "file_extension_restriction"
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction/type`.
-            public var _type: Components.Schemas.RepositoryRuleFileExtensionRestriction._TypePayload
-            /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction/parameters`.
-            public struct ParametersPayload: Codable, Hashable, Sendable {
-                /// The file extensions that are restricted from being pushed to the commit graph.
-                ///
-                /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction/parameters/restricted_file_extensions`.
-                public var restrictedFileExtensions: [Swift.String]
-                /// Creates a new `ParametersPayload`.
-                ///
-                /// - Parameters:
-                ///   - restrictedFileExtensions: The file extensions that are restricted from being pushed to the commit graph.
-                public init(restrictedFileExtensions: [Swift.String]) {
-                    self.restrictedFileExtensions = restrictedFileExtensions
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case restrictedFileExtensions = "restricted_file_extensions"
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction/parameters`.
-            public var parameters: Components.Schemas.RepositoryRuleFileExtensionRestriction.ParametersPayload?
-            /// Creates a new `RepositoryRuleFileExtensionRestriction`.
-            ///
-            /// - Parameters:
-            ///   - _type:
-            ///   - parameters:
-            public init(
-                _type: Components.Schemas.RepositoryRuleFileExtensionRestriction._TypePayload,
-                parameters: Components.Schemas.RepositoryRuleFileExtensionRestriction.ParametersPayload? = nil
-            ) {
-                self._type = _type
-                self.parameters = parameters
-            }
-            public enum CodingKeys: String, CodingKey {
-                case _type = "type"
-                case parameters
-            }
-        }
-        /// Prevent commits with individual files that exceed the specified limit from being pushed to the commit graph.
-        ///
-        /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size`.
-        public struct RepositoryRuleMaxFileSize: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size/type`.
-            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                case maxFileSize = "max_file_size"
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size/type`.
-            public var _type: Components.Schemas.RepositoryRuleMaxFileSize._TypePayload
-            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size/parameters`.
-            public struct ParametersPayload: Codable, Hashable, Sendable {
-                /// The maximum file size allowed in megabytes. This limit does not apply to Git Large File Storage (Git LFS).
-                ///
-                /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size/parameters/max_file_size`.
-                public var maxFileSize: Swift.Int
-                /// Creates a new `ParametersPayload`.
-                ///
-                /// - Parameters:
-                ///   - maxFileSize: The maximum file size allowed in megabytes. This limit does not apply to Git Large File Storage (Git LFS).
-                public init(maxFileSize: Swift.Int) {
-                    self.maxFileSize = maxFileSize
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case maxFileSize = "max_file_size"
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size/parameters`.
-            public var parameters: Components.Schemas.RepositoryRuleMaxFileSize.ParametersPayload?
-            /// Creates a new `RepositoryRuleMaxFileSize`.
-            ///
-            /// - Parameters:
-            ///   - _type:
-            ///   - parameters:
-            public init(
-                _type: Components.Schemas.RepositoryRuleMaxFileSize._TypePayload,
-                parameters: Components.Schemas.RepositoryRuleMaxFileSize.ParametersPayload? = nil
-            ) {
-                self._type = _type
-                self.parameters = parameters
-            }
-            public enum CodingKeys: String, CodingKey {
-                case _type = "type"
-                case parameters
-            }
-        }
         /// A workflow that must run for this rule to pass
         ///
         /// - Remark: Generated from `#/components/schemas/repository-rule-params-workflow-file-reference`.
@@ -14215,6 +14054,190 @@ public enum Components {
                 case parameters
             }
         }
+        /// Prevent commits that include changes in specified file and folder paths from being pushed to the commit graph. This includes absolute paths that contain file names.
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction`.
+        public struct RepositoryRuleFilePathRestriction: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case filePathRestriction = "file_path_restriction"
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction/type`.
+            public var _type: Components.Schemas.RepositoryRuleFilePathRestriction._TypePayload
+            /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction/parameters`.
+            public struct ParametersPayload: Codable, Hashable, Sendable {
+                /// The file paths that are restricted from being pushed to the commit graph.
+                ///
+                /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction/parameters/restricted_file_paths`.
+                public var restrictedFilePaths: [Swift.String]
+                /// Creates a new `ParametersPayload`.
+                ///
+                /// - Parameters:
+                ///   - restrictedFilePaths: The file paths that are restricted from being pushed to the commit graph.
+                public init(restrictedFilePaths: [Swift.String]) {
+                    self.restrictedFilePaths = restrictedFilePaths
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case restrictedFilePaths = "restricted_file_paths"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction/parameters`.
+            public var parameters: Components.Schemas.RepositoryRuleFilePathRestriction.ParametersPayload?
+            /// Creates a new `RepositoryRuleFilePathRestriction`.
+            ///
+            /// - Parameters:
+            ///   - _type:
+            ///   - parameters:
+            public init(
+                _type: Components.Schemas.RepositoryRuleFilePathRestriction._TypePayload,
+                parameters: Components.Schemas.RepositoryRuleFilePathRestriction.ParametersPayload? = nil
+            ) {
+                self._type = _type
+                self.parameters = parameters
+            }
+            public enum CodingKeys: String, CodingKey {
+                case _type = "type"
+                case parameters
+            }
+        }
+        /// Prevent commits that include file paths that exceed the specified character limit from being pushed to the commit graph.
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length`.
+        public struct RepositoryRuleMaxFilePathLength: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case maxFilePathLength = "max_file_path_length"
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length/type`.
+            public var _type: Components.Schemas.RepositoryRuleMaxFilePathLength._TypePayload
+            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length/parameters`.
+            public struct ParametersPayload: Codable, Hashable, Sendable {
+                /// The maximum amount of characters allowed in file paths.
+                ///
+                /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length/parameters/max_file_path_length`.
+                public var maxFilePathLength: Swift.Int
+                /// Creates a new `ParametersPayload`.
+                ///
+                /// - Parameters:
+                ///   - maxFilePathLength: The maximum amount of characters allowed in file paths.
+                public init(maxFilePathLength: Swift.Int) {
+                    self.maxFilePathLength = maxFilePathLength
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case maxFilePathLength = "max_file_path_length"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-path-length/parameters`.
+            public var parameters: Components.Schemas.RepositoryRuleMaxFilePathLength.ParametersPayload?
+            /// Creates a new `RepositoryRuleMaxFilePathLength`.
+            ///
+            /// - Parameters:
+            ///   - _type:
+            ///   - parameters:
+            public init(
+                _type: Components.Schemas.RepositoryRuleMaxFilePathLength._TypePayload,
+                parameters: Components.Schemas.RepositoryRuleMaxFilePathLength.ParametersPayload? = nil
+            ) {
+                self._type = _type
+                self.parameters = parameters
+            }
+            public enum CodingKeys: String, CodingKey {
+                case _type = "type"
+                case parameters
+            }
+        }
+        /// Prevent commits that include files with specified file extensions from being pushed to the commit graph.
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction`.
+        public struct RepositoryRuleFileExtensionRestriction: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case fileExtensionRestriction = "file_extension_restriction"
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction/type`.
+            public var _type: Components.Schemas.RepositoryRuleFileExtensionRestriction._TypePayload
+            /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction/parameters`.
+            public struct ParametersPayload: Codable, Hashable, Sendable {
+                /// The file extensions that are restricted from being pushed to the commit graph.
+                ///
+                /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction/parameters/restricted_file_extensions`.
+                public var restrictedFileExtensions: [Swift.String]
+                /// Creates a new `ParametersPayload`.
+                ///
+                /// - Parameters:
+                ///   - restrictedFileExtensions: The file extensions that are restricted from being pushed to the commit graph.
+                public init(restrictedFileExtensions: [Swift.String]) {
+                    self.restrictedFileExtensions = restrictedFileExtensions
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case restrictedFileExtensions = "restricted_file_extensions"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-file-extension-restriction/parameters`.
+            public var parameters: Components.Schemas.RepositoryRuleFileExtensionRestriction.ParametersPayload?
+            /// Creates a new `RepositoryRuleFileExtensionRestriction`.
+            ///
+            /// - Parameters:
+            ///   - _type:
+            ///   - parameters:
+            public init(
+                _type: Components.Schemas.RepositoryRuleFileExtensionRestriction._TypePayload,
+                parameters: Components.Schemas.RepositoryRuleFileExtensionRestriction.ParametersPayload? = nil
+            ) {
+                self._type = _type
+                self.parameters = parameters
+            }
+            public enum CodingKeys: String, CodingKey {
+                case _type = "type"
+                case parameters
+            }
+        }
+        /// Prevent commits with individual files that exceed the specified limit from being pushed to the commit graph.
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size`.
+        public struct RepositoryRuleMaxFileSize: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case maxFileSize = "max_file_size"
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size/type`.
+            public var _type: Components.Schemas.RepositoryRuleMaxFileSize._TypePayload
+            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size/parameters`.
+            public struct ParametersPayload: Codable, Hashable, Sendable {
+                /// The maximum file size allowed in megabytes. This limit does not apply to Git Large File Storage (Git LFS).
+                ///
+                /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size/parameters/max_file_size`.
+                public var maxFileSize: Swift.Int
+                /// Creates a new `ParametersPayload`.
+                ///
+                /// - Parameters:
+                ///   - maxFileSize: The maximum file size allowed in megabytes. This limit does not apply to Git Large File Storage (Git LFS).
+                public init(maxFileSize: Swift.Int) {
+                    self.maxFileSize = maxFileSize
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case maxFileSize = "max_file_size"
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-max-file-size/parameters`.
+            public var parameters: Components.Schemas.RepositoryRuleMaxFileSize.ParametersPayload?
+            /// Creates a new `RepositoryRuleMaxFileSize`.
+            ///
+            /// - Parameters:
+            ///   - _type:
+            ///   - parameters:
+            public init(
+                _type: Components.Schemas.RepositoryRuleMaxFileSize._TypePayload,
+                parameters: Components.Schemas.RepositoryRuleMaxFileSize.ParametersPayload? = nil
+            ) {
+                self._type = _type
+                self.parameters = parameters
+            }
+            public enum CodingKeys: String, CodingKey {
+                case _type = "type"
+                case parameters
+            }
+        }
         /// A repository rule.
         ///
         /// - Remark: Generated from `#/components/schemas/repository-rule`.
@@ -14250,19 +14273,19 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/repository-rule/case15`.
             case RepositoryRuleTagNamePattern(Components.Schemas.RepositoryRuleTagNamePattern)
             /// - Remark: Generated from `#/components/schemas/repository-rule/case16`.
-            case RepositoryRuleFilePathRestriction(Components.Schemas.RepositoryRuleFilePathRestriction)
-            /// - Remark: Generated from `#/components/schemas/repository-rule/case17`.
-            case RepositoryRuleMaxFilePathLength(Components.Schemas.RepositoryRuleMaxFilePathLength)
-            /// - Remark: Generated from `#/components/schemas/repository-rule/case18`.
-            case RepositoryRuleFileExtensionRestriction(Components.Schemas.RepositoryRuleFileExtensionRestriction)
-            /// - Remark: Generated from `#/components/schemas/repository-rule/case19`.
-            case RepositoryRuleMaxFileSize(Components.Schemas.RepositoryRuleMaxFileSize)
-            /// - Remark: Generated from `#/components/schemas/repository-rule/case20`.
             case RepositoryRuleWorkflows(Components.Schemas.RepositoryRuleWorkflows)
-            /// - Remark: Generated from `#/components/schemas/repository-rule/case21`.
+            /// - Remark: Generated from `#/components/schemas/repository-rule/case17`.
             case RepositoryRuleCodeScanning(Components.Schemas.RepositoryRuleCodeScanning)
-            /// - Remark: Generated from `#/components/schemas/repository-rule/case22`.
+            /// - Remark: Generated from `#/components/schemas/repository-rule/case18`.
             case RepositoryRuleCopilotCodeReview(Components.Schemas.RepositoryRuleCopilotCodeReview)
+            /// - Remark: Generated from `#/components/schemas/repository-rule/case19`.
+            case RepositoryRuleFilePathRestriction(Components.Schemas.RepositoryRuleFilePathRestriction)
+            /// - Remark: Generated from `#/components/schemas/repository-rule/case20`.
+            case RepositoryRuleMaxFilePathLength(Components.Schemas.RepositoryRuleMaxFilePathLength)
+            /// - Remark: Generated from `#/components/schemas/repository-rule/case21`.
+            case RepositoryRuleFileExtensionRestriction(Components.Schemas.RepositoryRuleFileExtensionRestriction)
+            /// - Remark: Generated from `#/components/schemas/repository-rule/case22`.
+            case RepositoryRuleMaxFileSize(Components.Schemas.RepositoryRuleMaxFileSize)
             public init(from decoder: any Swift.Decoder) throws {
                 var errors: [any Swift.Error] = []
                 do {
@@ -14356,6 +14379,24 @@ public enum Components {
                     errors.append(error)
                 }
                 do {
+                    self = .RepositoryRuleWorkflows(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleCodeScanning(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self = .RepositoryRuleCopilotCodeReview(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
                     self = .RepositoryRuleFilePathRestriction(try .init(from: decoder))
                     return
                 } catch {
@@ -14375,24 +14416,6 @@ public enum Components {
                 }
                 do {
                     self = .RepositoryRuleMaxFileSize(try .init(from: decoder))
-                    return
-                } catch {
-                    errors.append(error)
-                }
-                do {
-                    self = .RepositoryRuleWorkflows(try .init(from: decoder))
-                    return
-                } catch {
-                    errors.append(error)
-                }
-                do {
-                    self = .RepositoryRuleCodeScanning(try .init(from: decoder))
-                    return
-                } catch {
-                    errors.append(error)
-                }
-                do {
-                    self = .RepositoryRuleCopilotCodeReview(try .init(from: decoder))
                     return
                 } catch {
                     errors.append(error)
@@ -14435,6 +14458,12 @@ public enum Components {
                     try value.encode(to: encoder)
                 case let .RepositoryRuleTagNamePattern(value):
                     try value.encode(to: encoder)
+                case let .RepositoryRuleWorkflows(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleCodeScanning(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleCopilotCodeReview(value):
+                    try value.encode(to: encoder)
                 case let .RepositoryRuleFilePathRestriction(value):
                     try value.encode(to: encoder)
                 case let .RepositoryRuleMaxFilePathLength(value):
@@ -14442,12 +14471,6 @@ public enum Components {
                 case let .RepositoryRuleFileExtensionRestriction(value):
                     try value.encode(to: encoder)
                 case let .RepositoryRuleMaxFileSize(value):
-                    try value.encode(to: encoder)
-                case let .RepositoryRuleWorkflows(value):
-                    try value.encode(to: encoder)
-                case let .RepositoryRuleCodeScanning(value):
-                    try value.encode(to: encoder)
-                case let .RepositoryRuleCopilotCodeReview(value):
                     try value.encode(to: encoder)
                 }
             }
@@ -20981,6 +21004,32 @@ public enum Components {
                 case app
             }
         }
+        /// Repository hash algorithm
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-hash-algorithm`.
+        public struct RepositoryHashAlgorithm: Codable, Hashable, Sendable {
+            /// The Git hash algorithm used by this repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-hash-algorithm/hash_algorithm`.
+            @frozen public enum HashAlgorithmPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case sha1 = "sha1"
+                case sha256 = "sha256"
+            }
+            /// The Git hash algorithm used by this repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-hash-algorithm/hash_algorithm`.
+            public var hashAlgorithm: Components.Schemas.RepositoryHashAlgorithm.HashAlgorithmPayload
+            /// Creates a new `RepositoryHashAlgorithm`.
+            ///
+            /// - Parameters:
+            ///   - hashAlgorithm: The Git hash algorithm used by this repository.
+            public init(hashAlgorithm: Components.Schemas.RepositoryHashAlgorithm.HashAlgorithmPayload) {
+                self.hashAlgorithm = hashAlgorithm
+            }
+            public enum CodingKeys: String, CodingKey {
+                case hashAlgorithm = "hash_algorithm"
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/hook-response`.
         public struct HookResponse: Codable, Hashable, Sendable {
             /// - Remark: Generated from `#/components/schemas/hook-response/code`.
@@ -22585,126 +22634,10 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case16`.
             public struct Case16Payload: Codable, Hashable, Sendable {
                 /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case16/value1`.
-                public var value1: Components.Schemas.RepositoryRuleFilePathRestriction
+                public var value1: Components.Schemas.RepositoryRuleWorkflows
                 /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case16/value2`.
                 public var value2: Components.Schemas.RepositoryRuleRulesetInfo
                 /// Creates a new `Case16Payload`.
-                ///
-                /// - Parameters:
-                ///   - value1:
-                ///   - value2:
-                public init(
-                    value1: Components.Schemas.RepositoryRuleFilePathRestriction,
-                    value2: Components.Schemas.RepositoryRuleRulesetInfo
-                ) {
-                    self.value1 = value1
-                    self.value2 = value2
-                }
-                public init(from decoder: any Swift.Decoder) throws {
-                    self.value1 = try .init(from: decoder)
-                    self.value2 = try .init(from: decoder)
-                }
-                public func encode(to encoder: any Swift.Encoder) throws {
-                    try self.value1.encode(to: encoder)
-                    try self.value2.encode(to: encoder)
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case16`.
-            case case16(Components.Schemas.RepositoryRuleDetailed.Case16Payload)
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case17`.
-            public struct Case17Payload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case17/value1`.
-                public var value1: Components.Schemas.RepositoryRuleMaxFilePathLength
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case17/value2`.
-                public var value2: Components.Schemas.RepositoryRuleRulesetInfo
-                /// Creates a new `Case17Payload`.
-                ///
-                /// - Parameters:
-                ///   - value1:
-                ///   - value2:
-                public init(
-                    value1: Components.Schemas.RepositoryRuleMaxFilePathLength,
-                    value2: Components.Schemas.RepositoryRuleRulesetInfo
-                ) {
-                    self.value1 = value1
-                    self.value2 = value2
-                }
-                public init(from decoder: any Swift.Decoder) throws {
-                    self.value1 = try .init(from: decoder)
-                    self.value2 = try .init(from: decoder)
-                }
-                public func encode(to encoder: any Swift.Encoder) throws {
-                    try self.value1.encode(to: encoder)
-                    try self.value2.encode(to: encoder)
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case17`.
-            case case17(Components.Schemas.RepositoryRuleDetailed.Case17Payload)
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case18`.
-            public struct Case18Payload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case18/value1`.
-                public var value1: Components.Schemas.RepositoryRuleFileExtensionRestriction
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case18/value2`.
-                public var value2: Components.Schemas.RepositoryRuleRulesetInfo
-                /// Creates a new `Case18Payload`.
-                ///
-                /// - Parameters:
-                ///   - value1:
-                ///   - value2:
-                public init(
-                    value1: Components.Schemas.RepositoryRuleFileExtensionRestriction,
-                    value2: Components.Schemas.RepositoryRuleRulesetInfo
-                ) {
-                    self.value1 = value1
-                    self.value2 = value2
-                }
-                public init(from decoder: any Swift.Decoder) throws {
-                    self.value1 = try .init(from: decoder)
-                    self.value2 = try .init(from: decoder)
-                }
-                public func encode(to encoder: any Swift.Encoder) throws {
-                    try self.value1.encode(to: encoder)
-                    try self.value2.encode(to: encoder)
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case18`.
-            case case18(Components.Schemas.RepositoryRuleDetailed.Case18Payload)
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19`.
-            public struct Case19Payload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19/value1`.
-                public var value1: Components.Schemas.RepositoryRuleMaxFileSize
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19/value2`.
-                public var value2: Components.Schemas.RepositoryRuleRulesetInfo
-                /// Creates a new `Case19Payload`.
-                ///
-                /// - Parameters:
-                ///   - value1:
-                ///   - value2:
-                public init(
-                    value1: Components.Schemas.RepositoryRuleMaxFileSize,
-                    value2: Components.Schemas.RepositoryRuleRulesetInfo
-                ) {
-                    self.value1 = value1
-                    self.value2 = value2
-                }
-                public init(from decoder: any Swift.Decoder) throws {
-                    self.value1 = try .init(from: decoder)
-                    self.value2 = try .init(from: decoder)
-                }
-                public func encode(to encoder: any Swift.Encoder) throws {
-                    try self.value1.encode(to: encoder)
-                    try self.value2.encode(to: encoder)
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19`.
-            case case19(Components.Schemas.RepositoryRuleDetailed.Case19Payload)
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20`.
-            public struct Case20Payload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20/value1`.
-                public var value1: Components.Schemas.RepositoryRuleWorkflows
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20/value2`.
-                public var value2: Components.Schemas.RepositoryRuleRulesetInfo
-                /// Creates a new `Case20Payload`.
                 ///
                 /// - Parameters:
                 ///   - value1:
@@ -22725,15 +22658,15 @@ public enum Components {
                     try self.value2.encode(to: encoder)
                 }
             }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20`.
-            case case20(Components.Schemas.RepositoryRuleDetailed.Case20Payload)
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21`.
-            public struct Case21Payload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21/value1`.
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case16`.
+            case case16(Components.Schemas.RepositoryRuleDetailed.Case16Payload)
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case17`.
+            public struct Case17Payload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case17/value1`.
                 public var value1: Components.Schemas.RepositoryRuleCodeScanning
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21/value2`.
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case17/value2`.
                 public var value2: Components.Schemas.RepositoryRuleRulesetInfo
-                /// Creates a new `Case21Payload`.
+                /// Creates a new `Case17Payload`.
                 ///
                 /// - Parameters:
                 ///   - value1:
@@ -22754,12 +22687,128 @@ public enum Components {
                     try self.value2.encode(to: encoder)
                 }
             }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case17`.
+            case case17(Components.Schemas.RepositoryRuleDetailed.Case17Payload)
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case18`.
+            public struct Case18Payload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case18/value1`.
+                public var value1: Components.Schemas.RepositoryRuleCopilotCodeReview
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case18/value2`.
+                public var value2: Components.Schemas.RepositoryRuleRulesetInfo
+                /// Creates a new `Case18Payload`.
+                ///
+                /// - Parameters:
+                ///   - value1:
+                ///   - value2:
+                public init(
+                    value1: Components.Schemas.RepositoryRuleCopilotCodeReview,
+                    value2: Components.Schemas.RepositoryRuleRulesetInfo
+                ) {
+                    self.value1 = value1
+                    self.value2 = value2
+                }
+                public init(from decoder: any Swift.Decoder) throws {
+                    self.value1 = try .init(from: decoder)
+                    self.value2 = try .init(from: decoder)
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    try self.value1.encode(to: encoder)
+                    try self.value2.encode(to: encoder)
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case18`.
+            case case18(Components.Schemas.RepositoryRuleDetailed.Case18Payload)
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19`.
+            public struct Case19Payload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19/value1`.
+                public var value1: Components.Schemas.RepositoryRuleFilePathRestriction
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19/value2`.
+                public var value2: Components.Schemas.RepositoryRuleRulesetInfo
+                /// Creates a new `Case19Payload`.
+                ///
+                /// - Parameters:
+                ///   - value1:
+                ///   - value2:
+                public init(
+                    value1: Components.Schemas.RepositoryRuleFilePathRestriction,
+                    value2: Components.Schemas.RepositoryRuleRulesetInfo
+                ) {
+                    self.value1 = value1
+                    self.value2 = value2
+                }
+                public init(from decoder: any Swift.Decoder) throws {
+                    self.value1 = try .init(from: decoder)
+                    self.value2 = try .init(from: decoder)
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    try self.value1.encode(to: encoder)
+                    try self.value2.encode(to: encoder)
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19`.
+            case case19(Components.Schemas.RepositoryRuleDetailed.Case19Payload)
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20`.
+            public struct Case20Payload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20/value1`.
+                public var value1: Components.Schemas.RepositoryRuleMaxFilePathLength
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20/value2`.
+                public var value2: Components.Schemas.RepositoryRuleRulesetInfo
+                /// Creates a new `Case20Payload`.
+                ///
+                /// - Parameters:
+                ///   - value1:
+                ///   - value2:
+                public init(
+                    value1: Components.Schemas.RepositoryRuleMaxFilePathLength,
+                    value2: Components.Schemas.RepositoryRuleRulesetInfo
+                ) {
+                    self.value1 = value1
+                    self.value2 = value2
+                }
+                public init(from decoder: any Swift.Decoder) throws {
+                    self.value1 = try .init(from: decoder)
+                    self.value2 = try .init(from: decoder)
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    try self.value1.encode(to: encoder)
+                    try self.value2.encode(to: encoder)
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20`.
+            case case20(Components.Schemas.RepositoryRuleDetailed.Case20Payload)
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21`.
+            public struct Case21Payload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21/value1`.
+                public var value1: Components.Schemas.RepositoryRuleFileExtensionRestriction
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21/value2`.
+                public var value2: Components.Schemas.RepositoryRuleRulesetInfo
+                /// Creates a new `Case21Payload`.
+                ///
+                /// - Parameters:
+                ///   - value1:
+                ///   - value2:
+                public init(
+                    value1: Components.Schemas.RepositoryRuleFileExtensionRestriction,
+                    value2: Components.Schemas.RepositoryRuleRulesetInfo
+                ) {
+                    self.value1 = value1
+                    self.value2 = value2
+                }
+                public init(from decoder: any Swift.Decoder) throws {
+                    self.value1 = try .init(from: decoder)
+                    self.value2 = try .init(from: decoder)
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    try self.value1.encode(to: encoder)
+                    try self.value2.encode(to: encoder)
+                }
+            }
             /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21`.
             case case21(Components.Schemas.RepositoryRuleDetailed.Case21Payload)
             /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22`.
             public struct Case22Payload: Codable, Hashable, Sendable {
                 /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22/value1`.
-                public var value1: Components.Schemas.RepositoryRuleCopilotCodeReview
+                public var value1: Components.Schemas.RepositoryRuleMaxFileSize
                 /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22/value2`.
                 public var value2: Components.Schemas.RepositoryRuleRulesetInfo
                 /// Creates a new `Case22Payload`.
@@ -22768,7 +22817,7 @@ public enum Components {
                 ///   - value1:
                 ///   - value2:
                 public init(
-                    value1: Components.Schemas.RepositoryRuleCopilotCodeReview,
+                    value1: Components.Schemas.RepositoryRuleMaxFileSize,
                     value2: Components.Schemas.RepositoryRuleRulesetInfo
                 ) {
                     self.value1 = value1
@@ -23447,6 +23496,17 @@ public enum Components {
             case fail = "fail"
             case bypass = "bypass"
             case all = "all"
+        }
+        /// The evaluate status to filter on. When specified, only rule suites resulting from rulesets with the specified evaluate status will be returned.
+        ///   - `all` - all rule suites will be returned.
+        ///   - `active` - only rule suites resulting from rulesets in active (non-evaluate) mode will be returned.
+        ///   - `evaluate` - only rule suites resulting from rulesets in evaluate mode will be returned.
+        ///
+        /// - Remark: Generated from `#/components/parameters/evaluate-status`.
+        @frozen public enum EvaluateStatus: String, Codable, Hashable, Sendable, CaseIterable {
+            case all = "all"
+            case active = "active"
+            case evaluate = "evaluate"
         }
         /// The unique identifier of the rule suite result.
         /// To get this ID, you can use [GET /repos/{owner}/{repo}/rulesets/rule-suites](https://docs.github.com/rest/repos/rule-suites#list-repository-rule-suites)
@@ -25259,6 +25319,19 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/rulesets/rule-suites/GET/query/rule_suite_result`.
                 public var ruleSuiteResult: Components.Parameters.RuleSuiteResult?
+                /// - Remark: Generated from `#/components/parameters/evaluate-status`.
+                @frozen public enum EvaluateStatus: String, Codable, Hashable, Sendable, CaseIterable {
+                    case all = "all"
+                    case active = "active"
+                    case evaluate = "evaluate"
+                }
+                /// The evaluate status to filter on. When specified, only rule suites resulting from rulesets with the specified evaluate status will be returned.
+                ///   - `all` - all rule suites will be returned.
+                ///   - `active` - only rule suites resulting from rulesets in active (non-evaluate) mode will be returned.
+                ///   - `evaluate` - only rule suites resulting from rulesets in evaluate mode will be returned.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/rulesets/rule-suites/GET/query/evaluate_status`.
+                public var evaluateStatus: Components.Parameters.EvaluateStatus?
                 /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/rulesets/rule-suites/GET/query/per_page`.
@@ -25275,6 +25348,7 @@ public enum Operations {
                 ///   - timePeriod: The time period to filter by.
                 ///   - actorName: The handle for the GitHub user account to filter on. When specified, only rule evaluations triggered by this actor will be returned.
                 ///   - ruleSuiteResult: The rule suite results to filter on. When specified, only suites with this result will be returned.
+                ///   - evaluateStatus: The evaluate status to filter on. When specified, only rule suites resulting from rulesets with the specified evaluate status will be returned.
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
@@ -25283,6 +25357,7 @@ public enum Operations {
                     timePeriod: Components.Parameters.TimePeriod? = nil,
                     actorName: Components.Parameters.ActorNameInQuery? = nil,
                     ruleSuiteResult: Components.Parameters.RuleSuiteResult? = nil,
+                    evaluateStatus: Components.Parameters.EvaluateStatus? = nil,
                     perPage: Components.Parameters.PerPage? = nil,
                     page: Components.Parameters.Page? = nil
                 ) {
@@ -25291,6 +25366,7 @@ public enum Operations {
                     self.timePeriod = timePeriod
                     self.actorName = actorName
                     self.ruleSuiteResult = ruleSuiteResult
+                    self.evaluateStatus = evaluateStatus
                     self.perPage = perPage
                     self.page = page
                 }
@@ -47822,6 +47898,193 @@ public enum Operations {
             }
         }
     }
+    /// Get the hash algorithm for a repository
+    ///
+    /// Returns the hash algorithm used to store repository objects.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/hash-algorithm`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)`.
+    public enum ReposGetHashAlgorithm {
+        public static let id: Swift.String = "repos/get-hash-algorithm"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ReposGetHashAlgorithm.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposGetHashAlgorithm.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposGetHashAlgorithm.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ReposGetHashAlgorithm.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ReposGetHashAlgorithm.Input.Path,
+                headers: Operations.ReposGetHashAlgorithm.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/hash-algorithm/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.RepositoryHashAlgorithm)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.RepositoryHashAlgorithm {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ReposGetHashAlgorithm.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ReposGetHashAlgorithm.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ReposGetHashAlgorithm.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ReposGetHashAlgorithm.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/hash-algorithm/get(repos/get-hash-algorithm)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// List repository webhooks
     ///
     /// Lists webhooks for a repository. `last response` may return null if there have not been any deliveries within 30 days.
@@ -59934,6 +60197,19 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/rulesets/rule-suites/GET/query/rule_suite_result`.
                 public var ruleSuiteResult: Components.Parameters.RuleSuiteResult?
+                /// - Remark: Generated from `#/components/parameters/evaluate-status`.
+                @frozen public enum EvaluateStatus: String, Codable, Hashable, Sendable, CaseIterable {
+                    case all = "all"
+                    case active = "active"
+                    case evaluate = "evaluate"
+                }
+                /// The evaluate status to filter on. When specified, only rule suites resulting from rulesets with the specified evaluate status will be returned.
+                ///   - `all` - all rule suites will be returned.
+                ///   - `active` - only rule suites resulting from rulesets in active (non-evaluate) mode will be returned.
+                ///   - `evaluate` - only rule suites resulting from rulesets in evaluate mode will be returned.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/rulesets/rule-suites/GET/query/evaluate_status`.
+                public var evaluateStatus: Components.Parameters.EvaluateStatus?
                 /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/rulesets/rule-suites/GET/query/per_page`.
@@ -59949,6 +60225,7 @@ public enum Operations {
                 ///   - timePeriod: The time period to filter by.
                 ///   - actorName: The handle for the GitHub user account to filter on. When specified, only rule evaluations triggered by this actor will be returned.
                 ///   - ruleSuiteResult: The rule suite results to filter on. When specified, only suites with this result will be returned.
+                ///   - evaluateStatus: The evaluate status to filter on. When specified, only rule suites resulting from rulesets with the specified evaluate status will be returned.
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 public init(
@@ -59956,6 +60233,7 @@ public enum Operations {
                     timePeriod: Components.Parameters.TimePeriod? = nil,
                     actorName: Components.Parameters.ActorNameInQuery? = nil,
                     ruleSuiteResult: Components.Parameters.RuleSuiteResult? = nil,
+                    evaluateStatus: Components.Parameters.EvaluateStatus? = nil,
                     perPage: Components.Parameters.PerPage? = nil,
                     page: Components.Parameters.Page? = nil
                 ) {
@@ -59963,6 +60241,7 @@ public enum Operations {
                     self.timePeriod = timePeriod
                     self.actorName = actorName
                     self.ruleSuiteResult = ruleSuiteResult
+                    self.evaluateStatus = evaluateStatus
                     self.perPage = perPage
                     self.page = page
                 }

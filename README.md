@@ -158,7 +158,7 @@ struct GitHubRestAPIIssuesExtension {
 
 ## Available Modules
 
-One library product per GitHub API category — 49 in total.
+One library product per GitHub API category — 50 in total.
 
 <details>
 <summary>Full module list</summary>
@@ -167,6 +167,7 @@ One library product per GitHub API category — 49 in total.
 import GitHubRestAPIActions
 import GitHubRestAPIActivity
 import GitHubRestAPIAgentTasks
+import GitHubRestAPIAgents
 import GitHubRestAPIApps
 import GitHubRestAPIBilling
 import GitHubRestAPICampaigns

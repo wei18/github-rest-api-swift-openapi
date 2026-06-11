@@ -110,6 +110,9 @@ public protocol APIProtocol: Sendable {
     ///
     /// Creates an installation access token that enables a GitHub App to make authenticated API requests for the app's installation on an organization or individual account. Installation tokens expire one hour from the time you create them. Using an expired token produces a status code of `401 - Unauthorized`, and requires creating a new installation token. By default the installation token has access to all repositories that the installation can access.
     ///
+    /// > [!NOTE]
+    /// > Starting April 27, 2026, GitHub began a staged rollout of a stateless format (`ghs_APPID_JWT`) to all newly minted GitHub App installation tokens, making them more performant and improving the reliability of our API surface. If your application expects or relies on installation tokens being exactly 40 characters long, it may not handle this new token format correctly. You can now validate your apps and workflows using a temporary request header that lets you enable the token format on demand. For more information about the temporary header, see [the GitHub blog](https://github.blog/changelog/2026-05-15-github-app-installation-tokens-per-request-override-header).
+    ///
     /// Optionally, you can use the `repositories` or `repository_ids` body parameters to specify individual repositories that the installation access token can access. If you don't use `repositories` or `repository_ids` to grant access to specific repositories, the installation access token will have access to all repositories that the installation was granted access to. The installation access token cannot be granted access to repositories that the installation was not granted access to. Up to 500 repositories can be listed in this manner.
     ///
     /// Optionally, use the `permissions` body parameter to specify the permissions that the installation access token should have. If `permissions` is not specified, the installation access token will have all of the permissions that were granted to the app. The installation access token cannot be granted permissions that the app was not granted.
@@ -514,6 +517,9 @@ extension APIProtocol {
     /// Create an installation access token for an app
     ///
     /// Creates an installation access token that enables a GitHub App to make authenticated API requests for the app's installation on an organization or individual account. Installation tokens expire one hour from the time you create them. Using an expired token produces a status code of `401 - Unauthorized`, and requires creating a new installation token. By default the installation token has access to all repositories that the installation can access.
+    ///
+    /// > [!NOTE]
+    /// > Starting April 27, 2026, GitHub began a staged rollout of a stateless format (`ghs_APPID_JWT`) to all newly minted GitHub App installation tokens, making them more performant and improving the reliability of our API surface. If your application expects or relies on installation tokens being exactly 40 characters long, it may not handle this new token format correctly. You can now validate your apps and workflows using a temporary request header that lets you enable the token format on demand. For more information about the temporary header, see [the GitHub blog](https://github.blog/changelog/2026-05-15-github-app-installation-tokens-per-request-override-header).
     ///
     /// Optionally, you can use the `repositories` or `repository_ids` body parameters to specify individual repositories that the installation access token can access. If you don't use `repositories` or `repository_ids` to grant access to specific repositories, the installation access token will have access to all repositories that the installation was granted access to. The installation access token cannot be granted access to repositories that the installation was not granted access to. Up to 500 repositories can be listed in this manner.
     ///
@@ -2289,6 +2295,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/checks`.
             public var checks: Components.Schemas.AppPermissions.ChecksPayload?
+            /// The level of permission to grant the access token to view and manage code quality data.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/code_quality`.
+            @frozen public enum CodeQualityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
+                case write = "write"
+            }
+            /// The level of permission to grant the access token to view and manage code quality data.
+            ///
+            /// - Remark: Generated from `#/components/schemas/app-permissions/code_quality`.
+            public var codeQuality: Components.Schemas.AppPermissions.CodeQualityPayload?
             /// The level of permission to grant the access token to create, edit, delete, and list Codespaces.
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/codespaces`.
@@ -2602,6 +2619,7 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/app-permissions/organization_copilot_seat_management`.
             @frozen public enum OrganizationCopilotSeatManagementPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case read = "read"
                 case write = "write"
             }
             /// The level of permission to grant the access token for managing access to GitHub Copilot for members of an organization with a Copilot Business subscription. This property is in public preview and is subject to change.
@@ -2835,6 +2853,7 @@ public enum Components {
             ///   - artifactMetadata: The level of permission to grant the access token to create and retrieve build artifact metadata records.
             ///   - attestations: The level of permission to create and retrieve the access token for repository attestations.
             ///   - checks: The level of permission to grant the access token for checks on code.
+            ///   - codeQuality: The level of permission to grant the access token to view and manage code quality data.
             ///   - codespaces: The level of permission to grant the access token to create, edit, delete, and list Codespaces.
             ///   - contents: The level of permission to grant the access token for repository contents, commits, branches, downloads, releases, and merges.
             ///   - dependabotSecrets: The level of permission to grant the access token to manage Dependabot secrets.
@@ -2890,6 +2909,7 @@ public enum Components {
                 artifactMetadata: Components.Schemas.AppPermissions.ArtifactMetadataPayload? = nil,
                 attestations: Components.Schemas.AppPermissions.AttestationsPayload? = nil,
                 checks: Components.Schemas.AppPermissions.ChecksPayload? = nil,
+                codeQuality: Components.Schemas.AppPermissions.CodeQualityPayload? = nil,
                 codespaces: Components.Schemas.AppPermissions.CodespacesPayload? = nil,
                 contents: Components.Schemas.AppPermissions.ContentsPayload? = nil,
                 dependabotSecrets: Components.Schemas.AppPermissions.DependabotSecretsPayload? = nil,
@@ -2945,6 +2965,7 @@ public enum Components {
                 self.artifactMetadata = artifactMetadata
                 self.attestations = attestations
                 self.checks = checks
+                self.codeQuality = codeQuality
                 self.codespaces = codespaces
                 self.contents = contents
                 self.dependabotSecrets = dependabotSecrets
@@ -3001,6 +3022,7 @@ public enum Components {
                 case artifactMetadata = "artifact_metadata"
                 case attestations
                 case checks
+                case codeQuality = "code_quality"
                 case codespaces
                 case contents
                 case dependabotSecrets = "dependabot_secrets"
@@ -7107,6 +7129,9 @@ public enum Operations {
     ///
     /// Creates an installation access token that enables a GitHub App to make authenticated API requests for the app's installation on an organization or individual account. Installation tokens expire one hour from the time you create them. Using an expired token produces a status code of `401 - Unauthorized`, and requires creating a new installation token. By default the installation token has access to all repositories that the installation can access.
     ///
+    /// > [!NOTE]
+    /// > Starting April 27, 2026, GitHub began a staged rollout of a stateless format (`ghs_APPID_JWT`) to all newly minted GitHub App installation tokens, making them more performant and improving the reliability of our API surface. If your application expects or relies on installation tokens being exactly 40 characters long, it may not handle this new token format correctly. You can now validate your apps and workflows using a temporary request header that lets you enable the token format on demand. For more information about the temporary header, see [the GitHub blog](https://github.blog/changelog/2026-05-15-github-app-installation-tokens-per-request-override-header).
+    ///
     /// Optionally, you can use the `repositories` or `repository_ids` body parameters to specify individual repositories that the installation access token can access. If you don't use `repositories` or `repository_ids` to grant access to specific repositories, the installation access token will have access to all repositories that the installation was granted access to. The installation access token cannot be granted access to repositories that the installation was not granted access to. Up to 500 repositories can be listed in this manner.
     ///
     /// Optionally, use the `permissions` body parameter to specify the permissions that the installation access token should have. If `permissions` is not specified, the installation access token will have all of the permissions that were granted to the app. The installation access token cannot be granted permissions that the app was not granted.
@@ -8928,18 +8953,64 @@ public enum Operations {
                         public struct RepositoriesPayloadPayload: Codable, Hashable, Sendable {
                             /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload/value1`.
                             public var value1: Components.Schemas.Repository
+                            /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload/value2`.
+                            public struct Value2Payload: Codable, Hashable, Sendable {
+                                /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                ///
+                                /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload/value2/custom_properties`.
+                                public struct CustomPropertiesPayload: Codable, Hashable, Sendable {
+                                    /// A container of undocumented properties.
+                                    public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                                    /// Creates a new `CustomPropertiesPayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - additionalProperties: A container of undocumented properties.
+                                    public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                                        self.additionalProperties = additionalProperties
+                                    }
+                                    public init(from decoder: any Swift.Decoder) throws {
+                                        additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                                    }
+                                    public func encode(to encoder: any Swift.Encoder) throws {
+                                        try encoder.encodeAdditionalProperties(additionalProperties)
+                                    }
+                                }
+                                /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                ///
+                                /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload/value2/custom_properties`.
+                                public var customProperties: Operations.AppsListReposAccessibleToInstallation.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload.CustomPropertiesPayload?
+                                /// Creates a new `Value2Payload`.
+                                ///
+                                /// - Parameters:
+                                ///   - customProperties: The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                public init(customProperties: Operations.AppsListReposAccessibleToInstallation.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload.CustomPropertiesPayload? = nil) {
+                                    self.customProperties = customProperties
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case customProperties = "custom_properties"
+                                }
+                            }
+                            /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/RepositoriesPayload/value2`.
+                            public var value2: Operations.AppsListReposAccessibleToInstallation.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload
                             /// Creates a new `RepositoriesPayloadPayload`.
                             ///
                             /// - Parameters:
                             ///   - value1:
-                            public init(value1: Components.Schemas.Repository) {
+                            ///   - value2:
+                            public init(
+                                value1: Components.Schemas.Repository,
+                                value2: Operations.AppsListReposAccessibleToInstallation.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload
+                            ) {
                                 self.value1 = value1
+                                self.value2 = value2
                             }
                             public init(from decoder: any Swift.Decoder) throws {
                                 self.value1 = try .init(from: decoder)
+                                self.value2 = try .init(from: decoder)
                             }
                             public func encode(to encoder: any Swift.Encoder) throws {
                                 try self.value1.encode(to: encoder)
+                                try self.value2.encode(to: encoder)
                             }
                         }
                         /// - Remark: Generated from `#/paths/installation/repositories/GET/responses/200/content/json/repositories`.
@@ -11174,18 +11245,64 @@ public enum Operations {
                         public struct RepositoriesPayloadPayload: Codable, Hashable, Sendable {
                             /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload/value1`.
                             public var value1: Components.Schemas.Repository
+                            /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload/value2`.
+                            public struct Value2Payload: Codable, Hashable, Sendable {
+                                /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                ///
+                                /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload/value2/custom_properties`.
+                                public struct CustomPropertiesPayload: Codable, Hashable, Sendable {
+                                    /// A container of undocumented properties.
+                                    public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                                    /// Creates a new `CustomPropertiesPayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - additionalProperties: A container of undocumented properties.
+                                    public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                                        self.additionalProperties = additionalProperties
+                                    }
+                                    public init(from decoder: any Swift.Decoder) throws {
+                                        additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                                    }
+                                    public func encode(to encoder: any Swift.Encoder) throws {
+                                        try encoder.encodeAdditionalProperties(additionalProperties)
+                                    }
+                                }
+                                /// The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                ///
+                                /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload/value2/custom_properties`.
+                                public var customProperties: Operations.AppsListInstallationReposForAuthenticatedUser.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload.CustomPropertiesPayload?
+                                /// Creates a new `Value2Payload`.
+                                ///
+                                /// - Parameters:
+                                ///   - customProperties: The custom properties that were defined for the repository. The keys are the custom property names, and the values are the corresponding custom property values. Present for org repos only.
+                                public init(customProperties: Operations.AppsListInstallationReposForAuthenticatedUser.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload.CustomPropertiesPayload? = nil) {
+                                    self.customProperties = customProperties
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case customProperties = "custom_properties"
+                                }
+                            }
+                            /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/RepositoriesPayload/value2`.
+                            public var value2: Operations.AppsListInstallationReposForAuthenticatedUser.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload
                             /// Creates a new `RepositoriesPayloadPayload`.
                             ///
                             /// - Parameters:
                             ///   - value1:
-                            public init(value1: Components.Schemas.Repository) {
+                            ///   - value2:
+                            public init(
+                                value1: Components.Schemas.Repository,
+                                value2: Operations.AppsListInstallationReposForAuthenticatedUser.Output.Ok.Body.JsonPayload.RepositoriesPayloadPayload.Value2Payload
+                            ) {
                                 self.value1 = value1
+                                self.value2 = value2
                             }
                             public init(from decoder: any Swift.Decoder) throws {
                                 self.value1 = try .init(from: decoder)
+                                self.value2 = try .init(from: decoder)
                             }
                             public func encode(to encoder: any Swift.Encoder) throws {
                                 try self.value1.encode(to: encoder)
+                                try self.value2.encode(to: encoder)
                             }
                         }
                         /// - Remark: Generated from `#/paths/user/installations/{installation_id}/repositories/GET/responses/200/content/json/repositories`.
