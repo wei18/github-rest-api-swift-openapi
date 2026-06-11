@@ -49,7 +49,12 @@ jobs:
         run: |
           make install
           git push
-          
+
+      # Generator-level breakage affects all modules alike, so building one
+      # small module is enough to gate auto-merge without a full test run.
+      - name: "Smoke build"
+        run: swift build --target GitHubRestAPIUsers
+
       - name: "Update pr metadata"
         run: |
           gh pr merge --auto --merge "$PR_URL"
