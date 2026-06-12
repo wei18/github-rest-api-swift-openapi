@@ -268,7 +268,7 @@ public struct Client: APIProtocol {
     /// Get all budgets for an organization
     ///
     /// Gets all budgets for an organization. The authenticated user must be an organization admin or billing manager.
-    /// Each page returns up to 10 budgets.
+    /// Each page returns up to 100 budgets.
     ///
     /// - Remark: HTTP `GET /organizations/{org}/settings/billing/budgets`.
     /// - Remark: Generated from `#/paths//organizations/{org}/settings/billing/budgets/get(billing/get-all-budgets-org)`.

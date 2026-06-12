@@ -23,7 +23,7 @@ public protocol APIProtocol: Sendable {
     /// Get all budgets for an organization
     ///
     /// Gets all budgets for an organization. The authenticated user must be an organization admin or billing manager.
-    /// Each page returns up to 10 budgets.
+    /// Each page returns up to 100 budgets.
     ///
     /// - Remark: HTTP `GET /organizations/{org}/settings/billing/budgets`.
     /// - Remark: Generated from `#/paths//organizations/{org}/settings/billing/budgets/get(billing/get-all-budgets-org)`.
@@ -152,7 +152,7 @@ extension APIProtocol {
     /// Get all budgets for an organization
     ///
     /// Gets all budgets for an organization. The authenticated user must be an organization admin or billing manager.
-    /// Each page returns up to 10 budgets.
+    /// Each page returns up to 100 budgets.
     ///
     /// - Remark: HTTP `GET /organizations/{org}/settings/billing/budgets`.
     /// - Remark: Generated from `#/paths//organizations/{org}/settings/billing/budgets/get(billing/get-all-budgets-org)`.
@@ -3653,7 +3653,7 @@ public enum Operations {
     /// Get all budgets for an organization
     ///
     /// Gets all budgets for an organization. The authenticated user must be an organization admin or billing manager.
-    /// Each page returns up to 10 budgets.
+    /// Each page returns up to 100 budgets.
     ///
     /// - Remark: HTTP `GET /organizations/{org}/settings/billing/budgets`.
     /// - Remark: Generated from `#/paths//organizations/{org}/settings/billing/budgets/get(billing/get-all-budgets-org)`.
@@ -3681,7 +3681,7 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/GET/query/page`.
                 public var page: Swift.Int?
-                /// The number of results per page (max 10).
+                /// The number of results per page (max 100).
                 ///
                 /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/GET/query/per_page`.
                 public var perPage: Swift.Int?
@@ -3706,7 +3706,7 @@ public enum Operations {
                 ///
                 /// - Parameters:
                 ///   - page: The page number of the results to fetch.
-                ///   - perPage: The number of results per page (max 10).
+                ///   - perPage: The number of results per page (max 100).
                 ///   - scope: Filter budgets by scope type.
                 ///   - user: Filter consumed amount details for budgets by the specified user login.
                 public init(

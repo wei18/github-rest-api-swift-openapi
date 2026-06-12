@@ -2505,7 +2505,7 @@ public enum Operations {
                     /// A description of the code security configuration
                     ///
                     /// - Remark: Generated from `#/paths/enterprises/{enterprise}/code-security/configurations/POST/requestBody/json/description`.
-                    public var description: Swift.String
+                    public var description: Swift.String?
                     /// The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
                     ///
                     /// > [!WARNING]
@@ -2785,7 +2785,7 @@ public enum Operations {
                     ///   - enforcement: The enforcement status for a security configuration
                     public init(
                         name: Swift.String,
-                        description: Swift.String,
+                        description: Swift.String? = nil,
                         advancedSecurity: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.AdvancedSecurityPayload? = nil,
                         codeSecurity: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.CodeSecurityPayload? = nil,
                         dependencyGraph: Operations.CodeSecurityCreateConfigurationForEnterprise.Input.Body.JsonPayload.DependencyGraphPayload? = nil,
@@ -2863,7 +2863,7 @@ public enum Operations {
                             Swift.String.self,
                             forKey: .name
                         )
-                        self.description = try container.decode(
+                        self.description = try container.decodeIfPresent(
                             Swift.String.self,
                             forKey: .description
                         )
@@ -5481,7 +5481,7 @@ public enum Operations {
                     /// A description of the code security configuration
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/code-security/configurations/POST/requestBody/json/description`.
-                    public var description: Swift.String
+                    public var description: Swift.String?
                     /// The enablement status of GitHub Advanced Security features. `enabled` will enable both Code Security and Secret Protection features.
                     ///
                     /// > [!WARNING]
@@ -5864,7 +5864,7 @@ public enum Operations {
                     ///   - enforcement: The enforcement status for a security configuration
                     public init(
                         name: Swift.String,
-                        description: Swift.String,
+                        description: Swift.String? = nil,
                         advancedSecurity: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.AdvancedSecurityPayload? = nil,
                         codeSecurity: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.CodeSecurityPayload? = nil,
                         dependencyGraph: Operations.CodeSecurityCreateConfiguration.Input.Body.JsonPayload.DependencyGraphPayload? = nil,
@@ -5951,7 +5951,7 @@ public enum Operations {
                             Swift.String.self,
                             forKey: .name
                         )
-                        self.description = try container.decode(
+                        self.description = try container.decodeIfPresent(
                             Swift.String.self,
                             forKey: .description
                         )
