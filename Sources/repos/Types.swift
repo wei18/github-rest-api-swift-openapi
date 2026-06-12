@@ -27008,6 +27008,21 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/has_wiki`.
                     public var hasWiki: Swift.Bool?
+                    /// Either `true` to allow pull requests for this repository or `false` to prevent pull requests.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/has_pull_requests`.
+                    public var hasPullRequests: Swift.Bool?
+                    /// The policy that controls who can create pull requests for this repository: `all` or `collaborators_only`.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/pull_request_creation_policy`.
+                    @frozen public enum PullRequestCreationPolicyPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case all = "all"
+                        case collaboratorsOnly = "collaborators_only"
+                    }
+                    /// The policy that controls who can create pull requests for this repository: `all` or `collaborators_only`.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/pull_request_creation_policy`.
+                    public var pullRequestCreationPolicy: Operations.ReposUpdate.Input.Body.JsonPayload.PullRequestCreationPolicyPayload?
                     /// Either `true` to make this repo available as a template repository or `false` to prevent it.
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/PATCH/requestBody/json/is_template`.
@@ -27151,6 +27166,8 @@ public enum Operations {
                     ///   - hasIssues: Either `true` to enable issues for this repository or `false` to disable them.
                     ///   - hasProjects: Either `true` to enable projects for this repository or `false` to disable them. **Note:** If you're creating a repository in an organization that has disabled repository projects, the default is `false`, and if you pass `true`, the API returns an error.
                     ///   - hasWiki: Either `true` to enable the wiki for this repository or `false` to disable it.
+                    ///   - hasPullRequests: Either `true` to allow pull requests for this repository or `false` to prevent pull requests.
+                    ///   - pullRequestCreationPolicy: The policy that controls who can create pull requests for this repository: `all` or `collaborators_only`.
                     ///   - isTemplate: Either `true` to make this repo available as a template repository or `false` to prevent it.
                     ///   - defaultBranch: Updates the default branch for this repository.
                     ///   - allowSquashMerge: Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging.
@@ -27177,6 +27194,8 @@ public enum Operations {
                         hasIssues: Swift.Bool? = nil,
                         hasProjects: Swift.Bool? = nil,
                         hasWiki: Swift.Bool? = nil,
+                        hasPullRequests: Swift.Bool? = nil,
+                        pullRequestCreationPolicy: Operations.ReposUpdate.Input.Body.JsonPayload.PullRequestCreationPolicyPayload? = nil,
                         isTemplate: Swift.Bool? = nil,
                         defaultBranch: Swift.String? = nil,
                         allowSquashMerge: Swift.Bool? = nil,
@@ -27203,6 +27222,8 @@ public enum Operations {
                         self.hasIssues = hasIssues
                         self.hasProjects = hasProjects
                         self.hasWiki = hasWiki
+                        self.hasPullRequests = hasPullRequests
+                        self.pullRequestCreationPolicy = pullRequestCreationPolicy
                         self.isTemplate = isTemplate
                         self.defaultBranch = defaultBranch
                         self.allowSquashMerge = allowSquashMerge
@@ -27230,6 +27251,8 @@ public enum Operations {
                         case hasIssues = "has_issues"
                         case hasProjects = "has_projects"
                         case hasWiki = "has_wiki"
+                        case hasPullRequests = "has_pull_requests"
+                        case pullRequestCreationPolicy = "pull_request_creation_policy"
                         case isTemplate = "is_template"
                         case defaultBranch = "default_branch"
                         case allowSquashMerge = "allow_squash_merge"
