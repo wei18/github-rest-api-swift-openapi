@@ -80,7 +80,8 @@ jobs:
           PR_URL="$(gh pr create --head $RELEASE_BRANCH --title 'Bump patch version' --body 'Automated monthly release merge')"
           echo "PR_URL=$PR_URL" >> $GITHUB_ENV
 
+      # The workflow token cannot approve its own PR, so auto-merge waits on
+      # the repo's required review; approve (or admin-merge) the PR to land it.
       - name: "Update pr metadata"
         run: |
           gh pr merge --auto --merge "$PR_URL"
-          gh pr review --approve "$PR_URL"
