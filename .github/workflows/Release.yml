@@ -80,8 +80,14 @@ jobs:
           PR_URL="$(gh pr create --head $RELEASE_BRANCH --title 'Bump patch version' --body 'Automated monthly release merge')"
           echo "PR_URL=$PR_URL" >> $GITHUB_ENV
 
-      # The workflow token cannot approve its own PR, so auto-merge waits on
-      # the repo's required review; approve (or admin-merge) the PR to land it.
+      # The workflow token cannot approve its own PR, and GitHub Actions
+      # cannot be a ruleset bypass actor on personal repos. With a
+      # RELEASE_TOKEN secret (fine-grained PAT of a repo admin) the PR is
+      # admin-merged immediately; otherwise auto-merge is armed and the PR
+      # waits for a manual approval.
       - name: "Update pr metadata"
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN || github.token }}
         run: |
-          gh pr merge --auto --merge "$PR_URL"
+          gh pr merge --admin --merge "$PR_URL" \
+            || gh pr merge --auto --merge "$PR_URL"
