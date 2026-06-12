@@ -3780,6 +3780,7 @@ public enum Components {
             @frozen public enum DataTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
                 case text = "text"
                 case singleSelect = "single_select"
+                case multiSelect = "multi_select"
                 case number = "number"
                 case date = "date"
             }
@@ -3893,6 +3894,49 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/issue-field-value/single_select_option`.
             public var singleSelectOption: Components.Schemas.IssueFieldValue.SingleSelectOptionPayload?
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/MultiSelectOptionsPayload`.
+            public struct MultiSelectOptionsPayloadPayload: Codable, Hashable, Sendable {
+                /// Unique identifier for the option.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/MultiSelectOptionsPayload/id`.
+                public var id: Swift.Int64
+                /// The name of the option
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/MultiSelectOptionsPayload/name`.
+                public var name: Swift.String
+                /// The color of the option
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-field-value/MultiSelectOptionsPayload/color`.
+                public var color: Swift.String
+                /// Creates a new `MultiSelectOptionsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - id: Unique identifier for the option.
+                ///   - name: The name of the option
+                ///   - color: The color of the option
+                public init(
+                    id: Swift.Int64,
+                    name: Swift.String,
+                    color: Swift.String
+                ) {
+                    self.id = id
+                    self.name = name
+                    self.color = color
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case name
+                    case color
+                }
+            }
+            /// Details about the selected options
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/multi_select_options`.
+            public typealias MultiSelectOptionsPayload = [Components.Schemas.IssueFieldValue.MultiSelectOptionsPayloadPayload]
+            /// Details about the selected options
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/multi_select_options`.
+            public var multiSelectOptions: Components.Schemas.IssueFieldValue.MultiSelectOptionsPayload?
             /// Creates a new `IssueFieldValue`.
             ///
             /// - Parameters:
@@ -3901,18 +3945,21 @@ public enum Components {
             ///   - dataType: The data type of the issue field
             ///   - value: The value of the issue field
             ///   - singleSelectOption: Details about the selected option (only present for single_select fields)
+            ///   - multiSelectOptions: Details about the selected options
             public init(
                 issueFieldId: Swift.Int64,
                 nodeId: Swift.String,
                 dataType: Components.Schemas.IssueFieldValue.DataTypePayload,
                 value: Components.Schemas.IssueFieldValue.ValuePayload? = nil,
-                singleSelectOption: Components.Schemas.IssueFieldValue.SingleSelectOptionPayload? = nil
+                singleSelectOption: Components.Schemas.IssueFieldValue.SingleSelectOptionPayload? = nil,
+                multiSelectOptions: Components.Schemas.IssueFieldValue.MultiSelectOptionsPayload? = nil
             ) {
                 self.issueFieldId = issueFieldId
                 self.nodeId = nodeId
                 self.dataType = dataType
                 self.value = value
                 self.singleSelectOption = singleSelectOption
+                self.multiSelectOptions = multiSelectOptions
             }
             public enum CodingKeys: String, CodingKey {
                 case issueFieldId = "issue_field_id"
@@ -3920,6 +3967,7 @@ public enum Components {
                 case dataType = "data_type"
                 case value
                 case singleSelectOption = "single_select_option"
+                case multiSelectOptions = "multi_select_options"
             }
         }
         /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
