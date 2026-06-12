@@ -7767,6 +7767,7 @@ public enum Components {
                 case text = "text"
                 case date = "date"
                 case singleSelect = "single_select"
+                case multiSelect = "multi_select"
                 case number = "number"
             }
             /// The data type of the issue field.
@@ -7864,11 +7865,11 @@ public enum Components {
                     case updatedAt = "updated_at"
                 }
             }
-            /// Available options for single select fields.
+            /// Available options for single select and multi select fields.
             ///
             /// - Remark: Generated from `#/components/schemas/issue-field/options`.
             public typealias OptionsPayload = [Components.Schemas.IssueField.OptionsPayloadPayload]
-            /// Available options for single select fields.
+            /// Available options for single select and multi select fields.
             ///
             /// - Remark: Generated from `#/components/schemas/issue-field/options`.
             public var options: Components.Schemas.IssueField.OptionsPayload?
@@ -7889,7 +7890,7 @@ public enum Components {
             ///   - description: The description of the issue field.
             ///   - dataType: The data type of the issue field.
             ///   - visibility: The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues).
-            ///   - options: Available options for single select fields.
+            ///   - options: Available options for single select and multi select fields.
             ///   - createdAt: The time the issue field was created.
             ///   - updatedAt: The time the issue field was last updated.
             public init(
@@ -7942,6 +7943,7 @@ public enum Components {
                 case text = "text"
                 case date = "date"
                 case singleSelect = "single_select"
+                case multiSelect = "multi_select"
                 case number = "number"
             }
             /// The data type of the issue field.
@@ -8015,11 +8017,11 @@ public enum Components {
                     case priority
                 }
             }
-            /// Options for single select fields. Required when data_type is 'single_select'.
+            /// Options for select fields. Required when data_type is 'single_select' or 'multi_select'.
             ///
             /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/options`.
             public typealias OptionsPayload = [Components.Schemas.OrganizationCreateIssueField.OptionsPayloadPayload]
-            /// Options for single select fields. Required when data_type is 'single_select'.
+            /// Options for select fields. Required when data_type is 'single_select' or 'multi_select'.
             ///
             /// - Remark: Generated from `#/components/schemas/organization-create-issue-field/options`.
             public var options: Components.Schemas.OrganizationCreateIssueField.OptionsPayload?
@@ -8030,7 +8032,7 @@ public enum Components {
             ///   - description: Description of the issue field.
             ///   - dataType: The data type of the issue field.
             ///   - visibility: The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues). Only used when the visibility settings feature is enabled. Defaults to `organization_members_only`.
-            ///   - options: Options for single select fields. Required when data_type is 'single_select'.
+            ///   - options: Options for select fields. Required when data_type is 'single_select' or 'multi_select'.
             public init(
                 name: Swift.String,
                 description: Swift.String? = nil,
@@ -8137,11 +8139,11 @@ public enum Components {
                     case priority
                 }
             }
-            /// Options for single select fields. Only applicable when updating single_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
+            /// Options for select fields. Only applicable when updating single_select or multi_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
             ///
             /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/options`.
             public typealias OptionsPayload = [Components.Schemas.OrganizationUpdateIssueField.OptionsPayloadPayload]
-            /// Options for single select fields. Only applicable when updating single_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
+            /// Options for select fields. Only applicable when updating single_select or multi_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
             ///
             /// - Remark: Generated from `#/components/schemas/organization-update-issue-field/options`.
             public var options: Components.Schemas.OrganizationUpdateIssueField.OptionsPayload?
@@ -8151,7 +8153,7 @@ public enum Components {
             ///   - name: Name of the issue field.
             ///   - description: Description of the issue field.
             ///   - visibility: The visibility of the issue field. Can be `organization_members_only` (visible only within the organization) or `all` (visible to all users who can see issues). Only used when the visibility settings feature is enabled.
-            ///   - options: Options for single select fields. Only applicable when updating single_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
+            ///   - options: Options for select fields. Only applicable when updating single_select or multi_select fields. When provided, this array **replaces** the entire existing set of options rather than adding to or updating individual options. To retain or update an existing option, include it in the array with its `id`. Options sent without an `id` are treated as new options and may cause existing options to be deleted and recreated.
             public init(
                 name: Swift.String? = nil,
                 description: Swift.String? = nil,
