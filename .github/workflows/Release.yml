@@ -44,7 +44,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: Wei18/GitHubSwiftActions/Actions/Release@1.0.9
+      - uses: Wei18/GitHubSwiftActions/Actions/Release@1.0.10
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
