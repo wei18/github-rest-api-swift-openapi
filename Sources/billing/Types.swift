@@ -3969,22 +3969,32 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_entity_name`.
                     public var budgetEntityName: Swift.String?
-                    /// The type of pricing for the budget
+                    /// The type of pricing model used by the budget. Determines how `budget_product_sku` is interpreted.
+                    ///
+                    /// - `BundlePricing`: Covers all AI credit SKUs. Set `budget_product_sku` to `ai_credits`.
+                    /// - `ProductPricing`: Covers all SKUs that belong to a product. Set `budget_product_sku` to a product such as `actions` or `packages`.
+                    /// - `SkuPricing`: Covers a single, specific SKU. Set `budget_product_sku` to a SKU such as `actions_linux`.
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_type`.
                     @frozen public enum BudgetTypePayload: Codable, Hashable, Sendable {
                         /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_type/case1`.
                         @frozen public enum Case1Payload: String, Codable, Hashable, Sendable, CaseIterable {
-                            case productPricing = "ProductPricing"
+                            case bundlePricing = "BundlePricing"
                         }
                         /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_type/case1`.
                         case case1(Operations.BillingCreateOrganizationBudget.Input.Body.JsonPayload.BudgetTypePayload.Case1Payload)
                         /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_type/case2`.
                         @frozen public enum Case2Payload: String, Codable, Hashable, Sendable, CaseIterable {
-                            case skuPricing = "SkuPricing"
+                            case productPricing = "ProductPricing"
                         }
                         /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_type/case2`.
                         case case2(Operations.BillingCreateOrganizationBudget.Input.Body.JsonPayload.BudgetTypePayload.Case2Payload)
+                        /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_type/case3`.
+                        @frozen public enum Case3Payload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case skuPricing = "SkuPricing"
+                        }
+                        /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_type/case3`.
+                        case case3(Operations.BillingCreateOrganizationBudget.Input.Body.JsonPayload.BudgetTypePayload.Case3Payload)
                         public init(from decoder: any Swift.Decoder) throws {
                             var errors: [any Swift.Error] = []
                             do {
@@ -3995,6 +4005,12 @@ public enum Operations {
                             }
                             do {
                                 self = .case2(try decoder.decodeFromSingleValueContainer())
+                                return
+                            } catch {
+                                errors.append(error)
+                            }
+                            do {
+                                self = .case3(try decoder.decodeFromSingleValueContainer())
                                 return
                             } catch {
                                 errors.append(error)
@@ -4011,10 +4027,16 @@ public enum Operations {
                                 try encoder.encodeToSingleValueContainer(value)
                             case let .case2(value):
                                 try encoder.encodeToSingleValueContainer(value)
+                            case let .case3(value):
+                                try encoder.encodeToSingleValueContainer(value)
                             }
                         }
                     }
-                    /// The type of pricing for the budget
+                    /// The type of pricing model used by the budget. Determines how `budget_product_sku` is interpreted.
+                    ///
+                    /// - `BundlePricing`: Covers all AI credit SKUs. Set `budget_product_sku` to `ai_credits`.
+                    /// - `ProductPricing`: Covers all SKUs that belong to a product. Set `budget_product_sku` to a product such as `actions` or `packages`.
+                    /// - `SkuPricing`: Covers a single, specific SKU. Set `budget_product_sku` to a SKU such as `actions_linux`.
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_type`.
                     public var budgetType: Operations.BillingCreateOrganizationBudget.Input.Body.JsonPayload.BudgetTypePayload?
@@ -4022,6 +4044,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_product_sku`.
                     public var budgetProductSku: Swift.String?
+                    /// The username of the user for `user` scope budgets. This field is required when `budget_scope` is `user`.
+                    ///
+                    /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/user`.
+                    public var user: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -4030,8 +4056,9 @@ public enum Operations {
                     ///   - budgetAlerting:
                     ///   - budgetScope: The scope of the budget for this organization. Use 'organization' for org-level budgets or 'repository' for repo-specific budgets within the organization. `user` and `multi_user_customer` scopes are only supported when `budget_product_sku` is `ai_credits` or `premium_requests`.
                     ///   - budgetEntityName: The name of the entity to apply the budget to
-                    ///   - budgetType: The type of pricing for the budget
+                    ///   - budgetType: The type of pricing model used by the budget. Determines how `budget_product_sku` is interpreted.
                     ///   - budgetProductSku: A single product or SKU that will be covered in the budget
+                    ///   - user: The username of the user for `user` scope budgets. This field is required when `budget_scope` is `user`.
                     public init(
                         budgetAmount: Swift.Int? = nil,
                         preventFurtherUsage: Swift.Bool? = nil,
@@ -4039,7 +4066,8 @@ public enum Operations {
                         budgetScope: Operations.BillingCreateOrganizationBudget.Input.Body.JsonPayload.BudgetScopePayload? = nil,
                         budgetEntityName: Swift.String? = nil,
                         budgetType: Operations.BillingCreateOrganizationBudget.Input.Body.JsonPayload.BudgetTypePayload? = nil,
-                        budgetProductSku: Swift.String? = nil
+                        budgetProductSku: Swift.String? = nil,
+                        user: Swift.String? = nil
                     ) {
                         self.budgetAmount = budgetAmount
                         self.preventFurtherUsage = preventFurtherUsage
@@ -4048,6 +4076,7 @@ public enum Operations {
                         self.budgetEntityName = budgetEntityName
                         self.budgetType = budgetType
                         self.budgetProductSku = budgetProductSku
+                        self.user = user
                     }
                     public enum CodingKeys: String, CodingKey {
                         case budgetAmount = "budget_amount"
@@ -4057,6 +4086,7 @@ public enum Operations {
                         case budgetEntityName = "budget_entity_name"
                         case budgetType = "budget_type"
                         case budgetProductSku = "budget_product_sku"
+                        case user
                     }
                 }
                 /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/content/application\/json`.
@@ -4729,22 +4759,32 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_entity_name`.
                     public var budgetEntityName: Swift.String?
-                    /// The type of pricing for the budget
+                    /// The type of pricing model used by the budget. Determines how `budget_product_sku` is interpreted.
+                    ///
+                    /// - `BundlePricing`: Covers all AI credit SKUs. Set `budget_product_sku` to `ai_credits`.
+                    /// - `ProductPricing`: Covers all SKUs that belong to a product. Set `budget_product_sku` to a product such as `actions` or `packages`.
+                    /// - `SkuPricing`: Covers a single, specific SKU. Set `budget_product_sku` to a SKU such as `actions_linux`.
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_type`.
                     @frozen public enum BudgetTypePayload: Codable, Hashable, Sendable {
                         /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_type/case1`.
                         @frozen public enum Case1Payload: String, Codable, Hashable, Sendable, CaseIterable {
-                            case productPricing = "ProductPricing"
+                            case bundlePricing = "BundlePricing"
                         }
                         /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_type/case1`.
                         case case1(Operations.BillingUpdateBudgetOrg.Input.Body.JsonPayload.BudgetTypePayload.Case1Payload)
                         /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_type/case2`.
                         @frozen public enum Case2Payload: String, Codable, Hashable, Sendable, CaseIterable {
-                            case skuPricing = "SkuPricing"
+                            case productPricing = "ProductPricing"
                         }
                         /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_type/case2`.
                         case case2(Operations.BillingUpdateBudgetOrg.Input.Body.JsonPayload.BudgetTypePayload.Case2Payload)
+                        /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_type/case3`.
+                        @frozen public enum Case3Payload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case skuPricing = "SkuPricing"
+                        }
+                        /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_type/case3`.
+                        case case3(Operations.BillingUpdateBudgetOrg.Input.Body.JsonPayload.BudgetTypePayload.Case3Payload)
                         public init(from decoder: any Swift.Decoder) throws {
                             var errors: [any Swift.Error] = []
                             do {
@@ -4755,6 +4795,12 @@ public enum Operations {
                             }
                             do {
                                 self = .case2(try decoder.decodeFromSingleValueContainer())
+                                return
+                            } catch {
+                                errors.append(error)
+                            }
+                            do {
+                                self = .case3(try decoder.decodeFromSingleValueContainer())
                                 return
                             } catch {
                                 errors.append(error)
@@ -4771,10 +4817,16 @@ public enum Operations {
                                 try encoder.encodeToSingleValueContainer(value)
                             case let .case2(value):
                                 try encoder.encodeToSingleValueContainer(value)
+                            case let .case3(value):
+                                try encoder.encodeToSingleValueContainer(value)
                             }
                         }
                     }
-                    /// The type of pricing for the budget
+                    /// The type of pricing model used by the budget. Determines how `budget_product_sku` is interpreted.
+                    ///
+                    /// - `BundlePricing`: Covers all AI credit SKUs. Set `budget_product_sku` to `ai_credits`.
+                    /// - `ProductPricing`: Covers all SKUs that belong to a product. Set `budget_product_sku` to a product such as `actions` or `packages`.
+                    /// - `SkuPricing`: Covers a single, specific SKU. Set `budget_product_sku` to a SKU such as `actions_linux`.
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_type`.
                     public var budgetType: Operations.BillingUpdateBudgetOrg.Input.Body.JsonPayload.BudgetTypePayload?
@@ -4782,6 +4834,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_product_sku`.
                     public var budgetProductSku: Swift.String?
+                    /// The username of the user for `user` scope budgets.
+                    ///
+                    /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/user`.
+                    public var user: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -4790,8 +4846,9 @@ public enum Operations {
                     ///   - budgetAlerting:
                     ///   - budgetScope: The scope of the budget
                     ///   - budgetEntityName: The name of the entity to apply the budget to
-                    ///   - budgetType: The type of pricing for the budget
+                    ///   - budgetType: The type of pricing model used by the budget. Determines how `budget_product_sku` is interpreted.
                     ///   - budgetProductSku: A single product or SKU that will be covered in the budget
+                    ///   - user: The username of the user for `user` scope budgets.
                     public init(
                         budgetAmount: Swift.Int? = nil,
                         preventFurtherUsage: Swift.Bool? = nil,
@@ -4799,7 +4856,8 @@ public enum Operations {
                         budgetScope: Operations.BillingUpdateBudgetOrg.Input.Body.JsonPayload.BudgetScopePayload? = nil,
                         budgetEntityName: Swift.String? = nil,
                         budgetType: Operations.BillingUpdateBudgetOrg.Input.Body.JsonPayload.BudgetTypePayload? = nil,
-                        budgetProductSku: Swift.String? = nil
+                        budgetProductSku: Swift.String? = nil,
+                        user: Swift.String? = nil
                     ) {
                         self.budgetAmount = budgetAmount
                         self.preventFurtherUsage = preventFurtherUsage
@@ -4808,6 +4866,7 @@ public enum Operations {
                         self.budgetEntityName = budgetEntityName
                         self.budgetType = budgetType
                         self.budgetProductSku = budgetProductSku
+                        self.user = user
                     }
                     public enum CodingKeys: String, CodingKey {
                         case budgetAmount = "budget_amount"
@@ -4817,6 +4876,7 @@ public enum Operations {
                         case budgetEntityName = "budget_entity_name"
                         case budgetType = "budget_type"
                         case budgetProductSku = "budget_product_sku"
+                        case user
                     }
                 }
                 /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/content/application\/json`.
