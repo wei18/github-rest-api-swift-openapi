@@ -53,6 +53,41 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/interaction-limits`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/delete(interactions/remove-restrictions-for-repo)`.
     func interactionsRemoveRestrictionsForRepo(_ input: Operations.InteractionsRemoveRestrictionsForRepo.Input) async throws -> Operations.InteractionsRemoveRestrictionsForRepo.Output
+    /// Get pull request creation cap bypass list for a repository
+    ///
+    /// Lists the users that are on the pull request creation cap bypass list for a
+    /// repository. Users on this list can create pull requests regardless of any
+    /// configured pull request creation cap.
+    ///
+    /// Only repository admins can view the bypass list.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/get(interactions/get-pull-request-bypass-list-for-repo)`.
+    func interactionsGetPullRequestBypassListForRepo(_ input: Operations.InteractionsGetPullRequestBypassListForRepo.Input) async throws -> Operations.InteractionsGetPullRequestBypassListForRepo.Output
+    /// Add users to the pull request creation cap bypass list for a repository
+    ///
+    /// Adds users to the pull request creation cap bypass list for a repository.
+    /// Users on this list can create pull requests regardless of any configured
+    /// pull request creation cap.
+    ///
+    /// Only repository admins can modify the bypass list.
+    /// You can add a maximum of 100 users per request.
+    /// The bypass list can only hold a maximum of 100 users.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/put(interactions/set-pull-request-bypass-list-for-repo)`.
+    func interactionsSetPullRequestBypassListForRepo(_ input: Operations.InteractionsSetPullRequestBypassListForRepo.Input) async throws -> Operations.InteractionsSetPullRequestBypassListForRepo.Output
+    /// Remove users from the pull request creation cap bypass list for a repository
+    ///
+    /// Removes users from the pull request creation cap bypass list for a repository.
+    /// Removed users will be subject to any configured pull request creation cap.
+    ///
+    /// Only repository admins can modify the bypass list.
+    /// You can remove a maximum of 100 users per request.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/delete(interactions/remove-pull-request-bypass-list-for-repo)`.
+    func interactionsRemovePullRequestBypassListForRepo(_ input: Operations.InteractionsRemovePullRequestBypassListForRepo.Input) async throws -> Operations.InteractionsRemovePullRequestBypassListForRepo.Output
     /// Get interaction restrictions for your public repositories
     ///
     /// Shows which type of GitHub user can interact with your public repositories and when the restriction expires.
@@ -160,6 +195,69 @@ extension APIProtocol {
     public func interactionsRemoveRestrictionsForRepo(path: Operations.InteractionsRemoveRestrictionsForRepo.Input.Path) async throws -> Operations.InteractionsRemoveRestrictionsForRepo.Output {
         try await interactionsRemoveRestrictionsForRepo(Operations.InteractionsRemoveRestrictionsForRepo.Input(path: path))
     }
+    /// Get pull request creation cap bypass list for a repository
+    ///
+    /// Lists the users that are on the pull request creation cap bypass list for a
+    /// repository. Users on this list can create pull requests regardless of any
+    /// configured pull request creation cap.
+    ///
+    /// Only repository admins can view the bypass list.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/get(interactions/get-pull-request-bypass-list-for-repo)`.
+    public func interactionsGetPullRequestBypassListForRepo(
+        path: Operations.InteractionsGetPullRequestBypassListForRepo.Input.Path,
+        headers: Operations.InteractionsGetPullRequestBypassListForRepo.Input.Headers = .init()
+    ) async throws -> Operations.InteractionsGetPullRequestBypassListForRepo.Output {
+        try await interactionsGetPullRequestBypassListForRepo(Operations.InteractionsGetPullRequestBypassListForRepo.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Add users to the pull request creation cap bypass list for a repository
+    ///
+    /// Adds users to the pull request creation cap bypass list for a repository.
+    /// Users on this list can create pull requests regardless of any configured
+    /// pull request creation cap.
+    ///
+    /// Only repository admins can modify the bypass list.
+    /// You can add a maximum of 100 users per request.
+    /// The bypass list can only hold a maximum of 100 users.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/put(interactions/set-pull-request-bypass-list-for-repo)`.
+    public func interactionsSetPullRequestBypassListForRepo(
+        path: Operations.InteractionsSetPullRequestBypassListForRepo.Input.Path,
+        headers: Operations.InteractionsSetPullRequestBypassListForRepo.Input.Headers = .init(),
+        body: Operations.InteractionsSetPullRequestBypassListForRepo.Input.Body
+    ) async throws -> Operations.InteractionsSetPullRequestBypassListForRepo.Output {
+        try await interactionsSetPullRequestBypassListForRepo(Operations.InteractionsSetPullRequestBypassListForRepo.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Remove users from the pull request creation cap bypass list for a repository
+    ///
+    /// Removes users from the pull request creation cap bypass list for a repository.
+    /// Removed users will be subject to any configured pull request creation cap.
+    ///
+    /// Only repository admins can modify the bypass list.
+    /// You can remove a maximum of 100 users per request.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/delete(interactions/remove-pull-request-bypass-list-for-repo)`.
+    public func interactionsRemovePullRequestBypassListForRepo(
+        path: Operations.InteractionsRemovePullRequestBypassListForRepo.Input.Path,
+        headers: Operations.InteractionsRemovePullRequestBypassListForRepo.Input.Headers = .init(),
+        body: Operations.InteractionsRemovePullRequestBypassListForRepo.Input.Body
+    ) async throws -> Operations.InteractionsRemovePullRequestBypassListForRepo.Output {
+        try await interactionsRemovePullRequestBypassListForRepo(Operations.InteractionsRemovePullRequestBypassListForRepo.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
     /// Get interaction restrictions for your public repositories
     ///
     /// Shows which type of GitHub user can interact with your public repositories and when the restriction expires.
@@ -218,6 +316,188 @@ public enum Servers {
 public enum Components {
     /// Types generated from the `#/components/schemas` section of the OpenAPI document.
     public enum Schemas {
+        /// A GitHub user.
+        ///
+        /// - Remark: Generated from `#/components/schemas/simple-user`.
+        public struct SimpleUser: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/simple-user/name`.
+            public var name: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/email`.
+            public var email: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/login`.
+            public var login: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/simple-user/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/avatar_url`.
+            public var avatarUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/gravatar_id`.
+            public var gravatarId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/followers_url`.
+            public var followersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/following_url`.
+            public var followingUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/gists_url`.
+            public var gistsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/starred_url`.
+            public var starredUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/subscriptions_url`.
+            public var subscriptionsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/organizations_url`.
+            public var organizationsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/repos_url`.
+            public var reposUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/events_url`.
+            public var eventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/received_events_url`.
+            public var receivedEventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/type`.
+            public var _type: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-user/site_admin`.
+            public var siteAdmin: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/simple-user/starred_at`.
+            public var starredAt: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/simple-user/user_view_type`.
+            public var userViewType: Swift.String?
+            /// Creates a new `SimpleUser`.
+            ///
+            /// - Parameters:
+            ///   - name:
+            ///   - email:
+            ///   - login:
+            ///   - id:
+            ///   - nodeId:
+            ///   - avatarUrl:
+            ///   - gravatarId:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - followersUrl:
+            ///   - followingUrl:
+            ///   - gistsUrl:
+            ///   - starredUrl:
+            ///   - subscriptionsUrl:
+            ///   - organizationsUrl:
+            ///   - reposUrl:
+            ///   - eventsUrl:
+            ///   - receivedEventsUrl:
+            ///   - _type:
+            ///   - siteAdmin:
+            ///   - starredAt:
+            ///   - userViewType:
+            public init(
+                name: Swift.String? = nil,
+                email: Swift.String? = nil,
+                login: Swift.String,
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                avatarUrl: Swift.String,
+                gravatarId: Swift.String? = nil,
+                url: Swift.String,
+                htmlUrl: Swift.String,
+                followersUrl: Swift.String,
+                followingUrl: Swift.String,
+                gistsUrl: Swift.String,
+                starredUrl: Swift.String,
+                subscriptionsUrl: Swift.String,
+                organizationsUrl: Swift.String,
+                reposUrl: Swift.String,
+                eventsUrl: Swift.String,
+                receivedEventsUrl: Swift.String,
+                _type: Swift.String,
+                siteAdmin: Swift.Bool,
+                starredAt: Swift.String? = nil,
+                userViewType: Swift.String? = nil
+            ) {
+                self.name = name
+                self.email = email
+                self.login = login
+                self.id = id
+                self.nodeId = nodeId
+                self.avatarUrl = avatarUrl
+                self.gravatarId = gravatarId
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.followersUrl = followersUrl
+                self.followingUrl = followingUrl
+                self.gistsUrl = gistsUrl
+                self.starredUrl = starredUrl
+                self.subscriptionsUrl = subscriptionsUrl
+                self.organizationsUrl = organizationsUrl
+                self.reposUrl = reposUrl
+                self.eventsUrl = eventsUrl
+                self.receivedEventsUrl = receivedEventsUrl
+                self._type = _type
+                self.siteAdmin = siteAdmin
+                self.starredAt = starredAt
+                self.userViewType = userViewType
+            }
+            public enum CodingKeys: String, CodingKey {
+                case name
+                case email
+                case login
+                case id
+                case nodeId = "node_id"
+                case avatarUrl = "avatar_url"
+                case gravatarId = "gravatar_id"
+                case url
+                case htmlUrl = "html_url"
+                case followersUrl = "followers_url"
+                case followingUrl = "following_url"
+                case gistsUrl = "gists_url"
+                case starredUrl = "starred_url"
+                case subscriptionsUrl = "subscriptions_url"
+                case organizationsUrl = "organizations_url"
+                case reposUrl = "repos_url"
+                case eventsUrl = "events_url"
+                case receivedEventsUrl = "received_events_url"
+                case _type = "type"
+                case siteAdmin = "site_admin"
+                case starredAt = "starred_at"
+                case userViewType = "user_view_type"
+            }
+        }
+        /// Basic Error
+        ///
+        /// - Remark: Generated from `#/components/schemas/basic-error`.
+        public struct BasicError: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/basic-error/message`.
+            public var message: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/documentation_url`.
+            public var documentationUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/url`.
+            public var url: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/basic-error/status`.
+            public var status: Swift.String?
+            /// Creates a new `BasicError`.
+            ///
+            /// - Parameters:
+            ///   - message:
+            ///   - documentationUrl:
+            ///   - url:
+            ///   - status:
+            public init(
+                message: Swift.String? = nil,
+                documentationUrl: Swift.String? = nil,
+                url: Swift.String? = nil,
+                status: Swift.String? = nil
+            ) {
+                self.message = message
+                self.documentationUrl = documentationUrl
+                self.url = url
+                self.status = status
+            }
+            public enum CodingKeys: String, CodingKey {
+                case message
+                case documentationUrl = "documentation_url"
+                case url
+                case status
+            }
+        }
         /// Validation Error
         ///
         /// - Remark: Generated from `#/components/schemas/validation-error`.
@@ -417,6 +697,25 @@ public enum Components {
                 case expiry
             }
         }
+        /// A list of user logins to add or remove from the pull request creation cap bypass list.
+        ///
+        /// - Remark: Generated from `#/components/schemas/interaction-limit-pull-request-bypass-list`.
+        public struct InteractionLimitPullRequestBypassList: Codable, Hashable, Sendable {
+            /// A list of user logins to add or remove from the bypass list.
+            ///
+            /// - Remark: Generated from `#/components/schemas/interaction-limit-pull-request-bypass-list/users`.
+            public var users: [Swift.String]
+            /// Creates a new `InteractionLimitPullRequestBypassList`.
+            ///
+            /// - Parameters:
+            ///   - users: A list of user logins to add or remove from the bypass list.
+            public init(users: [Swift.String]) {
+                self.users = users
+            }
+            public enum CodingKeys: String, CodingKey {
+                case users
+            }
+        }
     }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
     public enum Parameters {
@@ -437,6 +736,34 @@ public enum Components {
     public enum RequestBodies {}
     /// Types generated from the `#/components/responses` section of the OpenAPI document.
     public enum Responses {
+        public struct NotFound: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/not_found/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/not_found/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.NotFound.Body
+            /// Creates a new `NotFound`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.NotFound.Body) {
+                self.body = body
+            }
+        }
         public struct ValidationFailed: Sendable, Hashable {
             /// - Remark: Generated from `#/components/responses/validation_failed/content`.
             @frozen public enum Body: Sendable, Hashable {
@@ -462,6 +789,34 @@ public enum Components {
             /// - Parameters:
             ///   - body: Received HTTP response body
             public init(body: Components.Responses.ValidationFailed.Body) {
+                self.body = body
+            }
+        }
+        public struct Forbidden: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/forbidden/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/forbidden/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.Forbidden.Body
+            /// Creates a new `Forbidden`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.Forbidden.Body) {
                 self.body = body
             }
         }
@@ -1390,6 +1745,613 @@ public enum Operations {
             ///
             /// A response with a code that is not documented in the OpenAPI document.
             case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+    }
+    /// Get pull request creation cap bypass list for a repository
+    ///
+    /// Lists the users that are on the pull request creation cap bypass list for a
+    /// repository. Users on this list can create pull requests regardless of any
+    /// configured pull request creation cap.
+    ///
+    /// Only repository admins can view the bypass list.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/get(interactions/get-pull-request-bypass-list-for-repo)`.
+    public enum InteractionsGetPullRequestBypassListForRepo {
+        public static let id: Swift.String = "interactions/get-pull-request-bypass-list-for-repo"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.InteractionsGetPullRequestBypassListForRepo.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.InteractionsGetPullRequestBypassListForRepo.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.InteractionsGetPullRequestBypassListForRepo.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.InteractionsGetPullRequestBypassListForRepo.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.InteractionsGetPullRequestBypassListForRepo.Input.Path,
+                headers: Operations.InteractionsGetPullRequestBypassListForRepo.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.SimpleUser])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.SimpleUser] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.InteractionsGetPullRequestBypassListForRepo.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.InteractionsGetPullRequestBypassListForRepo.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/get(interactions/get-pull-request-bypass-list-for-repo)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.InteractionsGetPullRequestBypassListForRepo.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.InteractionsGetPullRequestBypassListForRepo.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/get(interactions/get-pull-request-bypass-list-for-repo)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/get(interactions/get-pull-request-bypass-list-for-repo)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Add users to the pull request creation cap bypass list for a repository
+    ///
+    /// Adds users to the pull request creation cap bypass list for a repository.
+    /// Users on this list can create pull requests regardless of any configured
+    /// pull request creation cap.
+    ///
+    /// Only repository admins can modify the bypass list.
+    /// You can add a maximum of 100 users per request.
+    /// The bypass list can only hold a maximum of 100 users.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/put(interactions/set-pull-request-bypass-list-for-repo)`.
+    public enum InteractionsSetPullRequestBypassListForRepo {
+        public static let id: Swift.String = "interactions/set-pull-request-bypass-list-for-repo"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/PUT/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/PUT/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.InteractionsSetPullRequestBypassListForRepo.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.InteractionsSetPullRequestBypassListForRepo.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.InteractionsSetPullRequestBypassListForRepo.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.InteractionsSetPullRequestBypassListForRepo.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/PUT/requestBody/content/application\/json`.
+                case json(Components.Schemas.InteractionLimitPullRequestBypassList)
+            }
+            public var body: Operations.InteractionsSetPullRequestBypassListForRepo.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.InteractionsSetPullRequestBypassListForRepo.Input.Path,
+                headers: Operations.InteractionsSetPullRequestBypassListForRepo.Input.Headers = .init(),
+                body: Operations.InteractionsSetPullRequestBypassListForRepo.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/put(interactions/set-pull-request-bypass-list-for-repo)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.InteractionsSetPullRequestBypassListForRepo.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/put(interactions/set-pull-request-bypass-list-for-repo)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.InteractionsSetPullRequestBypassListForRepo.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/put(interactions/set-pull-request-bypass-list-for-repo)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/put(interactions/set-pull-request-bypass-list-for-repo)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/put(interactions/set-pull-request-bypass-list-for-repo)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Remove users from the pull request creation cap bypass list for a repository
+    ///
+    /// Removes users from the pull request creation cap bypass list for a repository.
+    /// Removed users will be subject to any configured pull request creation cap.
+    ///
+    /// Only repository admins can modify the bypass list.
+    /// You can remove a maximum of 100 users per request.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/delete(interactions/remove-pull-request-bypass-list-for-repo)`.
+    public enum InteractionsRemovePullRequestBypassListForRepo {
+        public static let id: Swift.String = "interactions/remove-pull-request-bypass-list-for-repo"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/DELETE/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/DELETE/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.InteractionsRemovePullRequestBypassListForRepo.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.InteractionsRemovePullRequestBypassListForRepo.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.InteractionsRemovePullRequestBypassListForRepo.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.InteractionsRemovePullRequestBypassListForRepo.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/DELETE/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/DELETE/requestBody/content/application\/json`.
+                case json(Components.Schemas.InteractionLimitPullRequestBypassList)
+            }
+            public var body: Operations.InteractionsRemovePullRequestBypassListForRepo.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.InteractionsRemovePullRequestBypassListForRepo.Input.Path,
+                headers: Operations.InteractionsRemovePullRequestBypassListForRepo.Input.Headers = .init(),
+                body: Operations.InteractionsRemovePullRequestBypassListForRepo.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/delete(interactions/remove-pull-request-bypass-list-for-repo)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.InteractionsRemovePullRequestBypassListForRepo.Output.NoContent)
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/delete(interactions/remove-pull-request-bypass-list-for-repo)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.InteractionsRemovePullRequestBypassListForRepo.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/delete(interactions/remove-pull-request-bypass-list-for-repo)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/delete(interactions/remove-pull-request-bypass-list-for-repo)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/delete(interactions/remove-pull-request-bypass-list-for-repo)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
         }
     }
     /// Get interaction restrictions for your public repositories
