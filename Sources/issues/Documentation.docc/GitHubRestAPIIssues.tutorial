@@ -8,6 +8,8 @@
     @Chapter(name: "Getting started") {
         Build a small command-line client that lists the comments of a GitHub issue.
 
+        @Image(source: "chapter-getting-started.png", alt: "Getting started: list the comments of a GitHub issue")
+
         @TutorialReference(tutorial: "doc:UseGitHubRestAPIIssues")
     }
 }
