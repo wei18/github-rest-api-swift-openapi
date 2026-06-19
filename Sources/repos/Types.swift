@@ -1425,6 +1425,15 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/invitations/{invitation_id}`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/invitations/{invitation_id}/delete(repos/delete-invitation)`.
     func reposDeleteInvitation(_ input: Operations.ReposDeleteInvitation.Input) async throws -> Operations.ReposDeleteInvitation.Output
+    /// List issue types for a repository
+    ///
+    /// Lists issue types available for a repository (inherited from its organization owner, with any per-repository overrides applied).
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Fine-grained access tokens require the "Metadata" repository permission (read).
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issue-types`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issue-types/get(repos/list-issue-types)`.
+    func reposListIssueTypes(_ input: Operations.ReposListIssueTypes.Input) async throws -> Operations.ReposListIssueTypes.Output
     /// List deploy keys
     ///
     ///
@@ -4600,6 +4609,23 @@ extension APIProtocol {
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/invitations/{invitation_id}/delete(repos/delete-invitation)`.
     public func reposDeleteInvitation(path: Operations.ReposDeleteInvitation.Input.Path) async throws -> Operations.ReposDeleteInvitation.Output {
         try await reposDeleteInvitation(Operations.ReposDeleteInvitation.Input(path: path))
+    }
+    /// List issue types for a repository
+    ///
+    /// Lists issue types available for a repository (inherited from its organization owner, with any per-repository overrides applied).
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Fine-grained access tokens require the "Metadata" repository permission (read).
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issue-types`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issue-types/get(repos/list-issue-types)`.
+    public func reposListIssueTypes(
+        path: Operations.ReposListIssueTypes.Input.Path,
+        headers: Operations.ReposListIssueTypes.Input.Headers = .init()
+    ) async throws -> Operations.ReposListIssueTypes.Output {
+        try await reposListIssueTypes(Operations.ReposListIssueTypes.Input(
+            path: path,
+            headers: headers
+        ))
     }
     /// List deploy keys
     ///
@@ -8263,6 +8289,96 @@ public enum Components {
                 case updatedAt = "updated_at"
                 case closedAt = "closed_at"
                 case dueOn = "due_on"
+            }
+        }
+        /// The type assigned to the issue. This is only present for issues in repositories where issue types are supported.
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-type`.
+        public struct IssueType: Codable, Hashable, Sendable {
+            /// The unique identifier of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/id`.
+            public var id: Swift.Int
+            /// The node identifier of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/name`.
+            public var name: Swift.String
+            /// The description of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/description`.
+            public var description: Swift.String?
+            /// The color of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/color`.
+            @frozen public enum ColorPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case gray = "gray"
+                case blue = "blue"
+                case green = "green"
+                case yellow = "yellow"
+                case orange = "orange"
+                case red = "red"
+                case pink = "pink"
+                case purple = "purple"
+            }
+            /// The color of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/color`.
+            public var color: Components.Schemas.IssueType.ColorPayload?
+            /// The time the issue type created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/created_at`.
+            public var createdAt: Foundation.Date?
+            /// The time the issue type last updated.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// The enabled state of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type/is_enabled`.
+            public var isEnabled: Swift.Bool?
+            /// Creates a new `IssueType`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the issue type.
+            ///   - nodeId: The node identifier of the issue type.
+            ///   - name: The name of the issue type.
+            ///   - description: The description of the issue type.
+            ///   - color: The color of the issue type.
+            ///   - createdAt: The time the issue type created.
+            ///   - updatedAt: The time the issue type last updated.
+            ///   - isEnabled: The enabled state of the issue type.
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                name: Swift.String,
+                description: Swift.String? = nil,
+                color: Components.Schemas.IssueType.ColorPayload? = nil,
+                createdAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil,
+                isEnabled: Swift.Bool? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.description = description
+                self.color = color
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.isEnabled = isEnabled
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case name
+                case description
+                case color
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case isEnabled = "is_enabled"
             }
         }
         /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
@@ -51469,6 +51585,172 @@ public enum Operations {
             ///
             /// A response with a code that is not documented in the OpenAPI document.
             case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+    }
+    /// List issue types for a repository
+    ///
+    /// Lists issue types available for a repository (inherited from its organization owner, with any per-repository overrides applied).
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Fine-grained access tokens require the "Metadata" repository permission (read).
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issue-types`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issue-types/get(repos/list-issue-types)`.
+    public enum ReposListIssueTypes {
+        public static let id: Swift.String = "repos/list-issue-types"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issue-types/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issue-types/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issue-types/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.ReposListIssueTypes.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issue-types/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposListIssueTypes.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.ReposListIssueTypes.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.ReposListIssueTypes.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.ReposListIssueTypes.Input.Path,
+                headers: Operations.ReposListIssueTypes.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issue-types/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issue-types/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.IssueType])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.IssueType] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.ReposListIssueTypes.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.ReposListIssueTypes.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issue-types/get(repos/list-issue-types)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.ReposListIssueTypes.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.ReposListIssueTypes.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issue-types/get(repos/list-issue-types)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
         }
     }
     /// List deploy keys

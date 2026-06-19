@@ -12876,6 +12876,95 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// List issue types for a repository
+    ///
+    /// Lists issue types available for a repository (inherited from its organization owner, with any per-repository overrides applied).
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+    /// Fine-grained access tokens require the "Metadata" repository permission (read).
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issue-types`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issue-types/get(repos/list-issue-types)`.
+    public func reposListIssueTypes(_ input: Operations.ReposListIssueTypes.Input) async throws -> Operations.ReposListIssueTypes.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.ReposListIssueTypes.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/repos/{}/{}/issue-types",
+                    parameters: [
+                        input.path.owner,
+                        input.path.repo
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.ReposListIssueTypes.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            [Components.Schemas.IssueType].self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// List deploy keys
     ///
     ///
