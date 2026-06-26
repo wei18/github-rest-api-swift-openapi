@@ -10108,6 +10108,22 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/team/type`.
             public var _type: Components.Schemas.Team._TypePayload
+            /// How the team's access to the repository was granted. This property is only
+            /// present when the team is returned in a repository context, such as
+            /// `GET /repos/{owner}/{repo}/teams`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/access_source`.
+            @frozen public enum AccessSourcePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case direct = "direct"
+                case organization = "organization"
+                case enterprise = "enterprise"
+            }
+            /// How the team's access to the repository was granted. This property is only
+            /// present when the team is returned in a repository context, such as
+            /// `GET /repos/{owner}/{repo}/teams`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/access_source`.
+            public var accessSource: Components.Schemas.Team.AccessSourcePayload?
             /// Unique identifier of the organization to which this team belongs
             ///
             /// - Remark: Generated from `#/components/schemas/team/organization_id`.
@@ -10135,6 +10151,7 @@ public enum Components {
             ///   - membersUrl:
             ///   - repositoriesUrl:
             ///   - _type: The ownership type of the team
+            ///   - accessSource: How the team's access to the repository was granted. This property is only
             ///   - organizationId: Unique identifier of the organization to which this team belongs
             ///   - enterpriseId: Unique identifier of the enterprise to which this team belongs
             ///   - parent:
@@ -10153,6 +10170,7 @@ public enum Components {
                 membersUrl: Swift.String,
                 repositoriesUrl: Swift.String,
                 _type: Components.Schemas.Team._TypePayload,
+                accessSource: Components.Schemas.Team.AccessSourcePayload? = nil,
                 organizationId: Swift.Int? = nil,
                 enterpriseId: Swift.Int? = nil,
                 parent: Components.Schemas.NullableTeamSimple? = nil
@@ -10171,6 +10189,7 @@ public enum Components {
                 self.membersUrl = membersUrl
                 self.repositoriesUrl = repositoriesUrl
                 self._type = _type
+                self.accessSource = accessSource
                 self.organizationId = organizationId
                 self.enterpriseId = enterpriseId
                 self.parent = parent
@@ -10190,6 +10209,7 @@ public enum Components {
                 case membersUrl = "members_url"
                 case repositoriesUrl = "repositories_url"
                 case _type = "type"
+                case accessSource = "access_source"
                 case organizationId = "organization_id"
                 case enterpriseId = "enterprise_id"
                 case parent
