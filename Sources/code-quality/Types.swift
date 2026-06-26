@@ -11,6 +11,24 @@ import struct Foundation.Date
 #endif
 /// A type that performs HTTP operations defined by the OpenAPI document.
 public protocol APIProtocol: Sendable {
+    /// List code quality findings for a repository
+    ///
+    /// Lists code quality findings for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/code-quality/findings`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/get(code-quality/list-findings-for-repo)`.
+    func codeQualityListFindingsForRepo(_ input: Operations.CodeQualityListFindingsForRepo.Input) async throws -> Operations.CodeQualityListFindingsForRepo.Output
+    /// Get a code quality finding
+    ///
+    /// Gets a single code quality finding.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/code-quality/findings/{finding_number}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/{finding_number}/get(code-quality/get-finding)`.
+    func codeQualityGetFinding(_ input: Operations.CodeQualityGetFinding.Input) async throws -> Operations.CodeQualityGetFinding.Output
     /// Get a code quality setup configuration
     ///
     /// Gets a code quality setup configuration.
@@ -33,6 +51,42 @@ public protocol APIProtocol: Sendable {
 
 /// Convenience overloads for operation inputs.
 extension APIProtocol {
+    /// List code quality findings for a repository
+    ///
+    /// Lists code quality findings for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/code-quality/findings`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/get(code-quality/list-findings-for-repo)`.
+    public func codeQualityListFindingsForRepo(
+        path: Operations.CodeQualityListFindingsForRepo.Input.Path,
+        query: Operations.CodeQualityListFindingsForRepo.Input.Query = .init(),
+        headers: Operations.CodeQualityListFindingsForRepo.Input.Headers = .init()
+    ) async throws -> Operations.CodeQualityListFindingsForRepo.Output {
+        try await codeQualityListFindingsForRepo(Operations.CodeQualityListFindingsForRepo.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Get a code quality finding
+    ///
+    /// Gets a single code quality finding.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/code-quality/findings/{finding_number}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/{finding_number}/get(code-quality/get-finding)`.
+    public func codeQualityGetFinding(
+        path: Operations.CodeQualityGetFinding.Input.Path,
+        headers: Operations.CodeQualityGetFinding.Input.Headers = .init()
+    ) async throws -> Operations.CodeQualityGetFinding.Output {
+        try await codeQualityGetFinding(Operations.CodeQualityGetFinding.Input(
+            path: path,
+            headers: headers
+        ))
+    }
     /// Get a code quality setup configuration
     ///
     /// Gets a code quality setup configuration.
@@ -139,6 +193,236 @@ public enum Components {
             public init() {}
             public init(from decoder: any Swift.Decoder) throws {
                 try decoder.ensureNoAdditionalProperties(knownKeys: [])
+            }
+        }
+        /// Code quality rule
+        ///
+        /// - Remark: Generated from `#/components/schemas/code-quality-finding-rule`.
+        public struct CodeQualityFindingRule: Codable, Hashable, Sendable {
+            /// A unique identifier for the rule used to detect the finding.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-rule/id`.
+            public var id: Swift.String
+            /// The name of the rule used to detect the finding.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-rule/title`.
+            public var title: Swift.String
+            /// A short description of the rule used to detect the finding.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-rule/description`.
+            public var description: Swift.String
+            /// A detailed description of the rule used to detect the finding.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-rule/help`.
+            public var help: Swift.String?
+            /// The severity of the rule used to detect the finding.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-rule/severity`.
+            @frozen public enum SeverityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case error = "error"
+                case warning = "warning"
+                case note = "note"
+                case none = "none"
+            }
+            /// The severity of the rule used to detect the finding.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-rule/severity`.
+            public var severity: Components.Schemas.CodeQualityFindingRule.SeverityPayload
+            /// The category of the rule used to detect the finding.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-rule/category`.
+            @frozen public enum CategoryPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case none = "none"
+                case maintainability = "maintainability"
+                case reliability = "reliability"
+            }
+            /// The category of the rule used to detect the finding.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-rule/category`.
+            public var category: Components.Schemas.CodeQualityFindingRule.CategoryPayload
+            /// Creates a new `CodeQualityFindingRule`.
+            ///
+            /// - Parameters:
+            ///   - id: A unique identifier for the rule used to detect the finding.
+            ///   - title: The name of the rule used to detect the finding.
+            ///   - description: A short description of the rule used to detect the finding.
+            ///   - help: A detailed description of the rule used to detect the finding.
+            ///   - severity: The severity of the rule used to detect the finding.
+            ///   - category: The category of the rule used to detect the finding.
+            public init(
+                id: Swift.String,
+                title: Swift.String,
+                description: Swift.String,
+                help: Swift.String? = nil,
+                severity: Components.Schemas.CodeQualityFindingRule.SeverityPayload,
+                category: Components.Schemas.CodeQualityFindingRule.CategoryPayload
+            ) {
+                self.id = id
+                self.title = title
+                self.description = description
+                self.help = help
+                self.severity = severity
+                self.category = category
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case title
+                case description
+                case help
+                case severity
+                case category
+            }
+        }
+        /// Code quality file location
+        ///
+        /// - Remark: Generated from `#/components/schemas/code-quality-finding-location`.
+        public struct CodeQualityFindingLocation: Codable, Hashable, Sendable {
+            /// The file path where the finding was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-location/path`.
+            public var path: Swift.String
+            /// The line number where the finding starts.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-location/start_line`.
+            public var startLine: Swift.Int?
+            /// The column number where the finding starts.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-location/start_column`.
+            public var startColumn: Swift.Int?
+            /// The line number where the finding ends.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-location/end_line`.
+            public var endLine: Swift.Int?
+            /// The column number where the finding ends.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-location/end_column`.
+            public var endColumn: Swift.Int?
+            /// Creates a new `CodeQualityFindingLocation`.
+            ///
+            /// - Parameters:
+            ///   - path: The file path where the finding was detected.
+            ///   - startLine: The line number where the finding starts.
+            ///   - startColumn: The column number where the finding starts.
+            ///   - endLine: The line number where the finding ends.
+            ///   - endColumn: The column number where the finding ends.
+            public init(
+                path: Swift.String,
+                startLine: Swift.Int? = nil,
+                startColumn: Swift.Int? = nil,
+                endLine: Swift.Int? = nil,
+                endColumn: Swift.Int? = nil
+            ) {
+                self.path = path
+                self.startLine = startLine
+                self.startColumn = startColumn
+                self.endLine = endLine
+                self.endColumn = endColumn
+            }
+            public enum CodingKeys: String, CodingKey {
+                case path
+                case startLine = "start_line"
+                case startColumn = "start_column"
+                case endLine = "end_line"
+                case endColumn = "end_column"
+            }
+        }
+        /// Code quality finding message
+        ///
+        /// - Remark: Generated from `#/components/schemas/code-quality-finding-message`.
+        public struct CodeQualityFindingMessage: Codable, Hashable, Sendable {
+            /// The message text of the code quality finding.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-message/text`.
+            public var text: Swift.String
+            /// The message text of the code quality finding in markdown format.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding-message/markdown`.
+            public var markdown: Swift.String
+            /// Creates a new `CodeQualityFindingMessage`.
+            ///
+            /// - Parameters:
+            ///   - text: The message text of the code quality finding.
+            ///   - markdown: The message text of the code quality finding in markdown format.
+            public init(
+                text: Swift.String,
+                markdown: Swift.String
+            ) {
+                self.text = text
+                self.markdown = markdown
+            }
+            public enum CodingKeys: String, CodingKey {
+                case text
+                case markdown
+            }
+        }
+        /// Code quality finding
+        ///
+        /// - Remark: Generated from `#/components/schemas/code-quality-finding`.
+        public struct CodeQualityFinding: Codable, Hashable, Sendable {
+            /// The finding number.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding/number`.
+            public var number: Swift.Int
+            /// State of the code quality finding.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding/state`.
+            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case open = "open"
+                case dismissed = "dismissed"
+            }
+            /// State of the code quality finding.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding/state`.
+            public var state: Components.Schemas.CodeQualityFinding.StatePayload
+            /// The REST API URL of the code quality finding resource.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding/rule`.
+            public var rule: Components.Schemas.CodeQualityFindingRule
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding/location`.
+            public var location: Components.Schemas.CodeQualityFindingLocation
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding/message`.
+            public var message: Components.Schemas.CodeQualityFindingMessage
+            /// The time the code quality finding was created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-finding/created_at`.
+            public var createdAt: Foundation.Date?
+            /// Creates a new `CodeQualityFinding`.
+            ///
+            /// - Parameters:
+            ///   - number: The finding number.
+            ///   - state: State of the code quality finding.
+            ///   - url: The REST API URL of the code quality finding resource.
+            ///   - rule:
+            ///   - location:
+            ///   - message:
+            ///   - createdAt: The time the code quality finding was created.
+            public init(
+                number: Swift.Int,
+                state: Components.Schemas.CodeQualityFinding.StatePayload,
+                url: Swift.String,
+                rule: Components.Schemas.CodeQualityFindingRule,
+                location: Components.Schemas.CodeQualityFindingLocation,
+                message: Components.Schemas.CodeQualityFindingMessage,
+                createdAt: Foundation.Date? = nil
+            ) {
+                self.number = number
+                self.state = state
+                self.url = url
+                self.rule = rule
+                self.location = location
+                self.message = message
+                self.createdAt = createdAt
+            }
+            public enum CodingKeys: String, CodingKey {
+                case number
+                case state
+                case url
+                case rule
+                case location
+                case message
+                case createdAt = "created_at"
             }
         }
         /// Configuration for code quality setup.
@@ -360,6 +644,25 @@ public enum Components {
     }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
     public enum Parameters {
+        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+        ///
+        /// - Remark: Generated from `#/components/parameters/pagination-before`.
+        public typealias PaginationBefore = Swift.String
+        /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+        ///
+        /// - Remark: Generated from `#/components/parameters/pagination-after`.
+        public typealias PaginationAfter = Swift.String
+        /// The direction to sort the results by.
+        ///
+        /// - Remark: Generated from `#/components/parameters/direction`.
+        @frozen public enum Direction: String, Codable, Hashable, Sendable, CaseIterable {
+            case asc = "asc"
+            case desc = "desc"
+        }
+        /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+        ///
+        /// - Remark: Generated from `#/components/parameters/per-page`.
+        public typealias PerPage = Swift.Int
         /// The account owner of the repository. The name is not case sensitive.
         ///
         /// - Remark: Generated from `#/components/parameters/owner`.
@@ -368,6 +671,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/repo`.
         public typealias Repo = Swift.String
+        /// The number that identifies a finding.
+        ///
+        /// - Remark: Generated from `#/components/parameters/code-quality-finding-number`.
+        public typealias CodeQualityFindingNumber = Swift.Int
     }
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}
@@ -577,6 +884,495 @@ public enum Components {
 
 /// API operations, with input and output types, generated from `#/paths` in the OpenAPI document.
 public enum Operations {
+    /// List code quality findings for a repository
+    ///
+    /// Lists code quality findings for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/code-quality/findings`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/get(code-quality/list-findings-for-repo)`.
+    public enum CodeQualityListFindingsForRepo {
+        public static let id: Swift.String = "code-quality/list-findings-for-repo"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.CodeQualityListFindingsForRepo.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// - Remark: Generated from `#/components/parameters/direction`.
+                @frozen public enum Direction: String, Codable, Hashable, Sendable, CaseIterable {
+                    case asc = "asc"
+                    case desc = "desc"
+                }
+                /// The direction to sort the results by.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/query/direction`.
+                public var direction: Components.Parameters.Direction?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/query/before`.
+                public var before: Components.Parameters.PaginationBefore?
+                /// A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/query/after`.
+                public var after: Components.Parameters.PaginationAfter?
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/query/state`.
+                @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case open = "open"
+                    case dismissed = "dismissed"
+                }
+                /// If specified, only code quality findings with this state will be returned.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/query/state`.
+                public var state: Operations.CodeQualityListFindingsForRepo.Input.Query.StatePayload?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - direction: The direction to sort the results by.
+                ///   - before: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results before this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - after: A cursor, as given in the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers). If specified, the query only searches for results after this cursor. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - state: If specified, only code quality findings with this state will be returned.
+                public init(
+                    perPage: Components.Parameters.PerPage? = nil,
+                    direction: Components.Parameters.Direction? = nil,
+                    before: Components.Parameters.PaginationBefore? = nil,
+                    after: Components.Parameters.PaginationAfter? = nil,
+                    state: Operations.CodeQualityListFindingsForRepo.Input.Query.StatePayload? = nil
+                ) {
+                    self.perPage = perPage
+                    self.direction = direction
+                    self.before = before
+                    self.after = after
+                    self.state = state
+                }
+            }
+            public var query: Operations.CodeQualityListFindingsForRepo.Input.Query
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CodeQualityListFindingsForRepo.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CodeQualityListFindingsForRepo.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CodeQualityListFindingsForRepo.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.CodeQualityListFindingsForRepo.Input.Path,
+                query: Operations.CodeQualityListFindingsForRepo.Input.Query = .init(),
+                headers: Operations.CodeQualityListFindingsForRepo.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.CodeQualityFinding])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.CodeQualityFinding] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CodeQualityListFindingsForRepo.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CodeQualityListFindingsForRepo.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/get(code-quality/list-findings-for-repo)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CodeQualityListFindingsForRepo.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CodeQualityListFindingsForRepo.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Response if the user is not authorized to access Code quality for this repository.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/get(code-quality/list-findings-for-repo)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.CodeQualityForbiddenRead)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.CodeQualityForbiddenRead {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/get(code-quality/list-findings-for-repo)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Service unavailable
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/get(code-quality/list-findings-for-repo)/responses/503`.
+            ///
+            /// HTTP response code: `503 serviceUnavailable`.
+            case serviceUnavailable(Components.Responses.ServiceUnavailable)
+            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
+            ///
+            /// - Throws: An error if `self` is not `.serviceUnavailable`.
+            /// - SeeAlso: `.serviceUnavailable`.
+            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
+                get throws {
+                    switch self {
+                    case let .serviceUnavailable(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "serviceUnavailable",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get a code quality finding
+    ///
+    /// Gets a single code quality finding.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` scope to use this endpoint with private or public repositories, or the `public_repo` scope to use this endpoint with only public repositories.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/code-quality/findings/{finding_number}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/{finding_number}/get(code-quality/get-finding)`.
+    public enum CodeQualityGetFinding {
+        public static let id: Swift.String = "code-quality/get-finding"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/{finding_number}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/{finding_number}/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/{finding_number}/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies a finding.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/{finding_number}/GET/path/finding_number`.
+                public var findingNumber: Components.Parameters.CodeQualityFindingNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - findingNumber: The number that identifies a finding.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    findingNumber: Components.Parameters.CodeQualityFindingNumber
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.findingNumber = findingNumber
+                }
+            }
+            public var path: Operations.CodeQualityGetFinding.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/{finding_number}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CodeQualityGetFinding.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CodeQualityGetFinding.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CodeQualityGetFinding.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.CodeQualityGetFinding.Input.Path,
+                headers: Operations.CodeQualityGetFinding.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/{finding_number}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/code-quality/findings/{finding_number}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.CodeQualityFinding)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.CodeQualityFinding {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CodeQualityGetFinding.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CodeQualityGetFinding.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/{finding_number}/get(code-quality/get-finding)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CodeQualityGetFinding.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CodeQualityGetFinding.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Response if the user is not authorized to access Code quality for this repository.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/{finding_number}/get(code-quality/get-finding)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.CodeQualityForbiddenRead)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.CodeQualityForbiddenRead {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/{finding_number}/get(code-quality/get-finding)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Service unavailable
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/code-quality/findings/{finding_number}/get(code-quality/get-finding)/responses/503`.
+            ///
+            /// HTTP response code: `503 serviceUnavailable`.
+            case serviceUnavailable(Components.Responses.ServiceUnavailable)
+            /// The associated value of the enum case if `self` is `.serviceUnavailable`.
+            ///
+            /// - Throws: An error if `self` is not `.serviceUnavailable`.
+            /// - SeeAlso: `.serviceUnavailable`.
+            public var serviceUnavailable: Components.Responses.ServiceUnavailable {
+                get throws {
+                    switch self {
+                    case let .serviceUnavailable(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "serviceUnavailable",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// Get a code quality setup configuration
     ///
     /// Gets a code quality setup configuration.
