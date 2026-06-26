@@ -3484,6 +3484,385 @@ public enum Components {
                 case codeSearchIndexStatus = "code_search_index_status"
             }
         }
+        /// A GitHub repository.
+        ///
+        /// - Remark: Generated from `#/components/schemas/simple-repository`.
+        public struct SimpleRepository: Codable, Hashable, Sendable {
+            /// A unique identifier of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/id`.
+            public var id: Swift.Int64
+            /// The GraphQL identifier of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/node_id`.
+            public var nodeId: Swift.String
+            /// The name of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/name`.
+            public var name: Swift.String
+            /// The full, globally unique, name of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/full_name`.
+            public var fullName: Swift.String
+            /// - Remark: Generated from `#/components/schemas/simple-repository/owner`.
+            public var owner: Components.Schemas.SimpleUser
+            /// Whether the repository is private.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/private`.
+            public var _private: Swift.Bool
+            /// The URL to view the repository on GitHub.com.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/html_url`.
+            public var htmlUrl: Swift.String
+            /// The repository description.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/description`.
+            public var description: Swift.String?
+            /// Whether the repository is a fork.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/fork`.
+            public var fork: Swift.Bool
+            /// The URL to get more information about the repository from the GitHub API.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/url`.
+            public var url: Swift.String
+            /// A template for the API URL to download the repository as an archive.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/archive_url`.
+            public var archiveUrl: Swift.String
+            /// A template for the API URL to list the available assignees for issues in the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/assignees_url`.
+            public var assigneesUrl: Swift.String
+            /// A template for the API URL to create or retrieve a raw Git blob in the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/blobs_url`.
+            public var blobsUrl: Swift.String
+            /// A template for the API URL to get information about branches in the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/branches_url`.
+            public var branchesUrl: Swift.String
+            /// A template for the API URL to get information about collaborators of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/collaborators_url`.
+            public var collaboratorsUrl: Swift.String
+            /// A template for the API URL to get information about comments on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/comments_url`.
+            public var commentsUrl: Swift.String
+            /// A template for the API URL to get information about commits on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/commits_url`.
+            public var commitsUrl: Swift.String
+            /// A template for the API URL to compare two commits or refs.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/compare_url`.
+            public var compareUrl: Swift.String
+            /// A template for the API URL to get the contents of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/contents_url`.
+            public var contentsUrl: Swift.String
+            /// A template for the API URL to list the contributors to the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/contributors_url`.
+            public var contributorsUrl: Swift.String
+            /// The API URL to list the deployments of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/deployments_url`.
+            public var deploymentsUrl: Swift.String
+            /// The API URL to list the downloads on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/downloads_url`.
+            public var downloadsUrl: Swift.String
+            /// The API URL to list the events of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/events_url`.
+            public var eventsUrl: Swift.String
+            /// The API URL to list the forks of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/forks_url`.
+            public var forksUrl: Swift.String
+            /// A template for the API URL to get information about Git commits of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/git_commits_url`.
+            public var gitCommitsUrl: Swift.String
+            /// A template for the API URL to get information about Git refs of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/git_refs_url`.
+            public var gitRefsUrl: Swift.String
+            /// A template for the API URL to get information about Git tags of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/git_tags_url`.
+            public var gitTagsUrl: Swift.String
+            /// A template for the API URL to get information about issue comments on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/issue_comment_url`.
+            public var issueCommentUrl: Swift.String
+            /// A template for the API URL to get information about issue events on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/issue_events_url`.
+            public var issueEventsUrl: Swift.String
+            /// A template for the API URL to get information about issues on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/issues_url`.
+            public var issuesUrl: Swift.String
+            /// A template for the API URL to get information about deploy keys on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/keys_url`.
+            public var keysUrl: Swift.String
+            /// A template for the API URL to get information about labels of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/labels_url`.
+            public var labelsUrl: Swift.String
+            /// The API URL to get information about the languages of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/languages_url`.
+            public var languagesUrl: Swift.String
+            /// The API URL to merge branches in the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/merges_url`.
+            public var mergesUrl: Swift.String
+            /// A template for the API URL to get information about milestones of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/milestones_url`.
+            public var milestonesUrl: Swift.String
+            /// A template for the API URL to get information about notifications on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/notifications_url`.
+            public var notificationsUrl: Swift.String
+            /// A template for the API URL to get information about pull requests on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/pulls_url`.
+            public var pullsUrl: Swift.String
+            /// A template for the API URL to get information about releases on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/releases_url`.
+            public var releasesUrl: Swift.String
+            /// The API URL to list the stargazers on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/stargazers_url`.
+            public var stargazersUrl: Swift.String
+            /// A template for the API URL to get information about statuses of a commit.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/statuses_url`.
+            public var statusesUrl: Swift.String
+            /// The API URL to list the subscribers on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/subscribers_url`.
+            public var subscribersUrl: Swift.String
+            /// The API URL to subscribe to notifications for this repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/subscription_url`.
+            public var subscriptionUrl: Swift.String
+            /// The API URL to get information about tags on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/tags_url`.
+            public var tagsUrl: Swift.String
+            /// The API URL to list the teams on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/teams_url`.
+            public var teamsUrl: Swift.String
+            /// A template for the API URL to create or retrieve a raw Git tree of the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/trees_url`.
+            public var treesUrl: Swift.String
+            /// The API URL to list the hooks on the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/simple-repository/hooks_url`.
+            public var hooksUrl: Swift.String
+            /// Creates a new `SimpleRepository`.
+            ///
+            /// - Parameters:
+            ///   - id: A unique identifier of the repository.
+            ///   - nodeId: The GraphQL identifier of the repository.
+            ///   - name: The name of the repository.
+            ///   - fullName: The full, globally unique, name of the repository.
+            ///   - owner:
+            ///   - _private: Whether the repository is private.
+            ///   - htmlUrl: The URL to view the repository on GitHub.com.
+            ///   - description: The repository description.
+            ///   - fork: Whether the repository is a fork.
+            ///   - url: The URL to get more information about the repository from the GitHub API.
+            ///   - archiveUrl: A template for the API URL to download the repository as an archive.
+            ///   - assigneesUrl: A template for the API URL to list the available assignees for issues in the repository.
+            ///   - blobsUrl: A template for the API URL to create or retrieve a raw Git blob in the repository.
+            ///   - branchesUrl: A template for the API URL to get information about branches in the repository.
+            ///   - collaboratorsUrl: A template for the API URL to get information about collaborators of the repository.
+            ///   - commentsUrl: A template for the API URL to get information about comments on the repository.
+            ///   - commitsUrl: A template for the API URL to get information about commits on the repository.
+            ///   - compareUrl: A template for the API URL to compare two commits or refs.
+            ///   - contentsUrl: A template for the API URL to get the contents of the repository.
+            ///   - contributorsUrl: A template for the API URL to list the contributors to the repository.
+            ///   - deploymentsUrl: The API URL to list the deployments of the repository.
+            ///   - downloadsUrl: The API URL to list the downloads on the repository.
+            ///   - eventsUrl: The API URL to list the events of the repository.
+            ///   - forksUrl: The API URL to list the forks of the repository.
+            ///   - gitCommitsUrl: A template for the API URL to get information about Git commits of the repository.
+            ///   - gitRefsUrl: A template for the API URL to get information about Git refs of the repository.
+            ///   - gitTagsUrl: A template for the API URL to get information about Git tags of the repository.
+            ///   - issueCommentUrl: A template for the API URL to get information about issue comments on the repository.
+            ///   - issueEventsUrl: A template for the API URL to get information about issue events on the repository.
+            ///   - issuesUrl: A template for the API URL to get information about issues on the repository.
+            ///   - keysUrl: A template for the API URL to get information about deploy keys on the repository.
+            ///   - labelsUrl: A template for the API URL to get information about labels of the repository.
+            ///   - languagesUrl: The API URL to get information about the languages of the repository.
+            ///   - mergesUrl: The API URL to merge branches in the repository.
+            ///   - milestonesUrl: A template for the API URL to get information about milestones of the repository.
+            ///   - notificationsUrl: A template for the API URL to get information about notifications on the repository.
+            ///   - pullsUrl: A template for the API URL to get information about pull requests on the repository.
+            ///   - releasesUrl: A template for the API URL to get information about releases on the repository.
+            ///   - stargazersUrl: The API URL to list the stargazers on the repository.
+            ///   - statusesUrl: A template for the API URL to get information about statuses of a commit.
+            ///   - subscribersUrl: The API URL to list the subscribers on the repository.
+            ///   - subscriptionUrl: The API URL to subscribe to notifications for this repository.
+            ///   - tagsUrl: The API URL to get information about tags on the repository.
+            ///   - teamsUrl: The API URL to list the teams on the repository.
+            ///   - treesUrl: A template for the API URL to create or retrieve a raw Git tree of the repository.
+            ///   - hooksUrl: The API URL to list the hooks on the repository.
+            public init(
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                name: Swift.String,
+                fullName: Swift.String,
+                owner: Components.Schemas.SimpleUser,
+                _private: Swift.Bool,
+                htmlUrl: Swift.String,
+                description: Swift.String? = nil,
+                fork: Swift.Bool,
+                url: Swift.String,
+                archiveUrl: Swift.String,
+                assigneesUrl: Swift.String,
+                blobsUrl: Swift.String,
+                branchesUrl: Swift.String,
+                collaboratorsUrl: Swift.String,
+                commentsUrl: Swift.String,
+                commitsUrl: Swift.String,
+                compareUrl: Swift.String,
+                contentsUrl: Swift.String,
+                contributorsUrl: Swift.String,
+                deploymentsUrl: Swift.String,
+                downloadsUrl: Swift.String,
+                eventsUrl: Swift.String,
+                forksUrl: Swift.String,
+                gitCommitsUrl: Swift.String,
+                gitRefsUrl: Swift.String,
+                gitTagsUrl: Swift.String,
+                issueCommentUrl: Swift.String,
+                issueEventsUrl: Swift.String,
+                issuesUrl: Swift.String,
+                keysUrl: Swift.String,
+                labelsUrl: Swift.String,
+                languagesUrl: Swift.String,
+                mergesUrl: Swift.String,
+                milestonesUrl: Swift.String,
+                notificationsUrl: Swift.String,
+                pullsUrl: Swift.String,
+                releasesUrl: Swift.String,
+                stargazersUrl: Swift.String,
+                statusesUrl: Swift.String,
+                subscribersUrl: Swift.String,
+                subscriptionUrl: Swift.String,
+                tagsUrl: Swift.String,
+                teamsUrl: Swift.String,
+                treesUrl: Swift.String,
+                hooksUrl: Swift.String
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.name = name
+                self.fullName = fullName
+                self.owner = owner
+                self._private = _private
+                self.htmlUrl = htmlUrl
+                self.description = description
+                self.fork = fork
+                self.url = url
+                self.archiveUrl = archiveUrl
+                self.assigneesUrl = assigneesUrl
+                self.blobsUrl = blobsUrl
+                self.branchesUrl = branchesUrl
+                self.collaboratorsUrl = collaboratorsUrl
+                self.commentsUrl = commentsUrl
+                self.commitsUrl = commitsUrl
+                self.compareUrl = compareUrl
+                self.contentsUrl = contentsUrl
+                self.contributorsUrl = contributorsUrl
+                self.deploymentsUrl = deploymentsUrl
+                self.downloadsUrl = downloadsUrl
+                self.eventsUrl = eventsUrl
+                self.forksUrl = forksUrl
+                self.gitCommitsUrl = gitCommitsUrl
+                self.gitRefsUrl = gitRefsUrl
+                self.gitTagsUrl = gitTagsUrl
+                self.issueCommentUrl = issueCommentUrl
+                self.issueEventsUrl = issueEventsUrl
+                self.issuesUrl = issuesUrl
+                self.keysUrl = keysUrl
+                self.labelsUrl = labelsUrl
+                self.languagesUrl = languagesUrl
+                self.mergesUrl = mergesUrl
+                self.milestonesUrl = milestonesUrl
+                self.notificationsUrl = notificationsUrl
+                self.pullsUrl = pullsUrl
+                self.releasesUrl = releasesUrl
+                self.stargazersUrl = stargazersUrl
+                self.statusesUrl = statusesUrl
+                self.subscribersUrl = subscribersUrl
+                self.subscriptionUrl = subscriptionUrl
+                self.tagsUrl = tagsUrl
+                self.teamsUrl = teamsUrl
+                self.treesUrl = treesUrl
+                self.hooksUrl = hooksUrl
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case name
+                case fullName = "full_name"
+                case owner
+                case _private = "private"
+                case htmlUrl = "html_url"
+                case description
+                case fork
+                case url
+                case archiveUrl = "archive_url"
+                case assigneesUrl = "assignees_url"
+                case blobsUrl = "blobs_url"
+                case branchesUrl = "branches_url"
+                case collaboratorsUrl = "collaborators_url"
+                case commentsUrl = "comments_url"
+                case commitsUrl = "commits_url"
+                case compareUrl = "compare_url"
+                case contentsUrl = "contents_url"
+                case contributorsUrl = "contributors_url"
+                case deploymentsUrl = "deployments_url"
+                case downloadsUrl = "downloads_url"
+                case eventsUrl = "events_url"
+                case forksUrl = "forks_url"
+                case gitCommitsUrl = "git_commits_url"
+                case gitRefsUrl = "git_refs_url"
+                case gitTagsUrl = "git_tags_url"
+                case issueCommentUrl = "issue_comment_url"
+                case issueEventsUrl = "issue_events_url"
+                case issuesUrl = "issues_url"
+                case keysUrl = "keys_url"
+                case labelsUrl = "labels_url"
+                case languagesUrl = "languages_url"
+                case mergesUrl = "merges_url"
+                case milestonesUrl = "milestones_url"
+                case notificationsUrl = "notifications_url"
+                case pullsUrl = "pulls_url"
+                case releasesUrl = "releases_url"
+                case stargazersUrl = "stargazers_url"
+                case statusesUrl = "statuses_url"
+                case subscribersUrl = "subscribers_url"
+                case subscriptionUrl = "subscription_url"
+                case tagsUrl = "tags_url"
+                case teamsUrl = "teams_url"
+                case treesUrl = "trees_url"
+                case hooksUrl = "hooks_url"
+            }
+        }
         /// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
         ///
         /// - Remark: Generated from `#/components/schemas/label`.
@@ -4147,6 +4526,25 @@ public enum Components {
                 case pinnedBy = "pinned_by"
             }
         }
+        /// Details about why an issue comment was minimized.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-issue-comment-minimized`.
+        public struct NullableIssueCommentMinimized: Codable, Hashable, Sendable {
+            /// The reason the comment was minimized.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment-minimized/reason`.
+            public var reason: Swift.String?
+            /// Creates a new `NullableIssueCommentMinimized`.
+            ///
+            /// - Parameters:
+            ///   - reason: The reason the comment was minimized.
+            public init(reason: Swift.String? = nil) {
+                self.reason = reason
+            }
+            public enum CodingKeys: String, CodingKey {
+                case reason
+            }
+        }
         /// Comments provide a way for people to collaborate on an issue.
         ///
         /// - Remark: Generated from `#/components/schemas/nullable-issue-comment`.
@@ -4187,6 +4585,8 @@ public enum Components {
             public var reactions: Components.Schemas.ReactionRollup?
             /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/pin`.
             public var pin: Components.Schemas.NullablePinnedIssueComment?
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/minimized`.
+            public var minimized: Components.Schemas.NullableIssueCommentMinimized?
             /// Creates a new `NullableIssueComment`.
             ///
             /// - Parameters:
@@ -4205,6 +4605,7 @@ public enum Components {
             ///   - performedViaGithubApp:
             ///   - reactions:
             ///   - pin:
+            ///   - minimized:
             public init(
                 id: Swift.Int64,
                 nodeId: Swift.String,
@@ -4220,7 +4621,8 @@ public enum Components {
                 authorAssociation: Components.Schemas.AuthorAssociation? = nil,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
                 reactions: Components.Schemas.ReactionRollup? = nil,
-                pin: Components.Schemas.NullablePinnedIssueComment? = nil
+                pin: Components.Schemas.NullablePinnedIssueComment? = nil,
+                minimized: Components.Schemas.NullableIssueCommentMinimized? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -4237,6 +4639,7 @@ public enum Components {
                 self.performedViaGithubApp = performedViaGithubApp
                 self.reactions = reactions
                 self.pin = pin
+                self.minimized = minimized
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -4254,6 +4657,7 @@ public enum Components {
                 case performedViaGithubApp = "performed_via_github_app"
                 case reactions
                 case pin
+                case minimized
             }
         }
         /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary`.
@@ -4299,6 +4703,10 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/issue-field-value/issue_field_id`.
             public var issueFieldId: Swift.Int64
+            /// The human-readable name of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/issue_field_name`.
+            public var issueFieldName: Swift.String?
             /// - Remark: Generated from `#/components/schemas/issue-field-value/node_id`.
             public var nodeId: Swift.String
             /// The data type of the issue field
@@ -4468,6 +4876,7 @@ public enum Components {
             ///
             /// - Parameters:
             ///   - issueFieldId: Unique identifier for the issue field.
+            ///   - issueFieldName: The human-readable name of the issue field.
             ///   - nodeId:
             ///   - dataType: The data type of the issue field
             ///   - value: The value of the issue field
@@ -4475,6 +4884,7 @@ public enum Components {
             ///   - multiSelectOptions: Details about the selected options
             public init(
                 issueFieldId: Swift.Int64,
+                issueFieldName: Swift.String? = nil,
                 nodeId: Swift.String,
                 dataType: Components.Schemas.IssueFieldValue.DataTypePayload,
                 value: Components.Schemas.IssueFieldValue.ValuePayload? = nil,
@@ -4482,6 +4892,7 @@ public enum Components {
                 multiSelectOptions: Components.Schemas.IssueFieldValue.MultiSelectOptionsPayload? = nil
             ) {
                 self.issueFieldId = issueFieldId
+                self.issueFieldName = issueFieldName
                 self.nodeId = nodeId
                 self.dataType = dataType
                 self.value = value
@@ -4490,6 +4901,7 @@ public enum Components {
             }
             public enum CodingKeys: String, CodingKey {
                 case issueFieldId = "issue_field_id"
+                case issueFieldName = "issue_field_name"
                 case nodeId = "node_id"
                 case dataType = "data_type"
                 case value
@@ -4948,6 +5360,8 @@ public enum Components {
             public var reactions: Components.Schemas.ReactionRollup?
             /// - Remark: Generated from `#/components/schemas/issue-comment/pin`.
             public var pin: Components.Schemas.NullablePinnedIssueComment?
+            /// - Remark: Generated from `#/components/schemas/issue-comment/minimized`.
+            public var minimized: Components.Schemas.NullableIssueCommentMinimized?
             /// Creates a new `IssueComment`.
             ///
             /// - Parameters:
@@ -4966,6 +5380,7 @@ public enum Components {
             ///   - performedViaGithubApp:
             ///   - reactions:
             ///   - pin:
+            ///   - minimized:
             public init(
                 id: Swift.Int64,
                 nodeId: Swift.String,
@@ -4981,7 +5396,8 @@ public enum Components {
                 authorAssociation: Components.Schemas.AuthorAssociation? = nil,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
                 reactions: Components.Schemas.ReactionRollup? = nil,
-                pin: Components.Schemas.NullablePinnedIssueComment? = nil
+                pin: Components.Schemas.NullablePinnedIssueComment? = nil,
+                minimized: Components.Schemas.NullableIssueCommentMinimized? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -4998,6 +5414,7 @@ public enum Components {
                 self.performedViaGithubApp = performedViaGithubApp
                 self.reactions = reactions
                 self.pin = pin
+                self.minimized = minimized
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -5015,6 +5432,7 @@ public enum Components {
                 case performedViaGithubApp = "performed_via_github_app"
                 case reactions
                 case pin
+                case minimized
             }
         }
         /// Groups of organization members that gives permissions on specified repositories.
@@ -5237,6 +5655,22 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/team/type`.
             public var _type: Components.Schemas.Team._TypePayload
+            /// How the team's access to the repository was granted. This property is only
+            /// present when the team is returned in a repository context, such as
+            /// `GET /repos/{owner}/{repo}/teams`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/access_source`.
+            @frozen public enum AccessSourcePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case direct = "direct"
+                case organization = "organization"
+                case enterprise = "enterprise"
+            }
+            /// How the team's access to the repository was granted. This property is only
+            /// present when the team is returned in a repository context, such as
+            /// `GET /repos/{owner}/{repo}/teams`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/team/access_source`.
+            public var accessSource: Components.Schemas.Team.AccessSourcePayload?
             /// Unique identifier of the organization to which this team belongs
             ///
             /// - Remark: Generated from `#/components/schemas/team/organization_id`.
@@ -5264,6 +5698,7 @@ public enum Components {
             ///   - membersUrl:
             ///   - repositoriesUrl:
             ///   - _type: The ownership type of the team
+            ///   - accessSource: How the team's access to the repository was granted. This property is only
             ///   - organizationId: Unique identifier of the organization to which this team belongs
             ///   - enterpriseId: Unique identifier of the enterprise to which this team belongs
             ///   - parent:
@@ -5282,6 +5717,7 @@ public enum Components {
                 membersUrl: Swift.String,
                 repositoriesUrl: Swift.String,
                 _type: Components.Schemas.Team._TypePayload,
+                accessSource: Components.Schemas.Team.AccessSourcePayload? = nil,
                 organizationId: Swift.Int? = nil,
                 enterpriseId: Swift.Int? = nil,
                 parent: Components.Schemas.NullableTeamSimple? = nil
@@ -5300,6 +5736,7 @@ public enum Components {
                 self.membersUrl = membersUrl
                 self.repositoriesUrl = repositoriesUrl
                 self._type = _type
+                self.accessSource = accessSource
                 self.organizationId = organizationId
                 self.enterpriseId = enterpriseId
                 self.parent = parent
@@ -5319,6 +5756,7 @@ public enum Components {
                 case membersUrl = "members_url"
                 case repositoriesUrl = "repositories_url"
                 case _type = "type"
+                case accessSource = "access_source"
                 case organizationId = "organization_id"
                 case enterpriseId = "enterprise_id"
                 case parent
@@ -5983,6 +6421,160 @@ public enum Components {
                 case to
             }
         }
+        /// The type of issue.
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-type-webhook`.
+        public struct IssueTypeWebhook: Codable, Hashable, Sendable {
+            /// The unique identifier of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type-webhook/id`.
+            public var id: Swift.Int
+            /// The name of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type-webhook/name`.
+            public var name: Swift.String
+            /// The color of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type-webhook/color`.
+            @frozen public enum ColorPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case gray = "gray"
+                case blue = "blue"
+                case green = "green"
+                case yellow = "yellow"
+                case orange = "orange"
+                case red = "red"
+                case pink = "pink"
+                case purple = "purple"
+            }
+            /// The color of the issue type.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-type-webhook/color`.
+            public var color: Components.Schemas.IssueTypeWebhook.ColorPayload?
+            /// Creates a new `IssueTypeWebhook`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the issue type.
+            ///   - name: The name of the issue type.
+            ///   - color: The color of the issue type.
+            public init(
+                id: Swift.Int,
+                name: Swift.String,
+                color: Components.Schemas.IssueTypeWebhook.ColorPayload? = nil
+            ) {
+                self.id = id
+                self.name = name
+                self.color = color
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case name
+                case color
+            }
+        }
+        /// A minimal reference to an issue linked from a timeline event (e.g. sub-issue, parent-issue, or dependency events).
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-reference`.
+        public struct IssueReference: Codable, Hashable, Sendable {
+            /// The number of the referenced issue.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-reference/number`.
+            public var number: Swift.Int
+            /// The title of the referenced issue.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-reference/title`.
+            public var title: Swift.String
+            /// The state of the referenced issue.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-reference/state`.
+            public var state: Swift.String
+            /// The reason for the referenced issue's state.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-reference/state_reason`.
+            public var stateReason: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue-reference/repository`.
+            public var repository: Components.Schemas.SimpleRepository
+            /// The type of the referenced issue.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type`.
+            public struct IssueTypePayload: Codable, Hashable, Sendable {
+                /// The unique identifier of the issue type.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type/id`.
+                public var id: Swift.Int
+                /// The node identifier of the issue type.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type/node_id`.
+                public var nodeId: Swift.String
+                /// The name of the issue type.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type/name`.
+                public var name: Swift.String
+                /// The color of the issue type.
+                ///
+                /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type/color`.
+                public var color: Swift.String?
+                /// Creates a new `IssueTypePayload`.
+                ///
+                /// - Parameters:
+                ///   - id: The unique identifier of the issue type.
+                ///   - nodeId: The node identifier of the issue type.
+                ///   - name: The name of the issue type.
+                ///   - color: The color of the issue type.
+                public init(
+                    id: Swift.Int,
+                    nodeId: Swift.String,
+                    name: Swift.String,
+                    color: Swift.String? = nil
+                ) {
+                    self.id = id
+                    self.nodeId = nodeId
+                    self.name = name
+                    self.color = color
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case id
+                    case nodeId = "node_id"
+                    case name
+                    case color
+                }
+            }
+            /// The type of the referenced issue.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type`.
+            public var issueType: Components.Schemas.IssueReference.IssueTypePayload?
+            /// Creates a new `IssueReference`.
+            ///
+            /// - Parameters:
+            ///   - number: The number of the referenced issue.
+            ///   - title: The title of the referenced issue.
+            ///   - state: The state of the referenced issue.
+            ///   - stateReason: The reason for the referenced issue's state.
+            ///   - repository:
+            ///   - issueType: The type of the referenced issue.
+            public init(
+                number: Swift.Int,
+                title: Swift.String,
+                state: Swift.String,
+                stateReason: Swift.String? = nil,
+                repository: Components.Schemas.SimpleRepository,
+                issueType: Components.Schemas.IssueReference.IssueTypePayload? = nil
+            ) {
+                self.number = number
+                self.title = title
+                self.state = state
+                self.stateReason = stateReason
+                self.repository = repository
+                self.issueType = issueType
+            }
+            public enum CodingKeys: String, CodingKey {
+                case number
+                case title
+                case state
+                case stateReason = "state_reason"
+                case repository
+                case issueType = "issue_type"
+            }
+        }
         /// Issue Event
         ///
         /// - Remark: Generated from `#/components/schemas/issue-event`.
@@ -6025,6 +6617,14 @@ public enum Components {
             public var projectCard: Components.Schemas.IssueEventProjectCard?
             /// - Remark: Generated from `#/components/schemas/issue-event/rename`.
             public var rename: Components.Schemas.IssueEventRename?
+            /// - Remark: Generated from `#/components/schemas/issue-event/issue_type`.
+            public var issueType: Components.Schemas.IssueTypeWebhook?
+            /// - Remark: Generated from `#/components/schemas/issue-event/prev_issue_type`.
+            public var prevIssueType: Components.Schemas.IssueTypeWebhook?
+            /// - Remark: Generated from `#/components/schemas/issue-event/sub_issue`.
+            public var subIssue: Components.Schemas.IssueReference?
+            /// - Remark: Generated from `#/components/schemas/issue-event/parent_issue`.
+            public var parentIssue: Components.Schemas.IssueReference?
             /// - Remark: Generated from `#/components/schemas/issue-event/author_association`.
             public var authorAssociation: Components.Schemas.AuthorAssociation?
             /// - Remark: Generated from `#/components/schemas/issue-event/lock_reason`.
@@ -6053,6 +6653,10 @@ public enum Components {
             ///   - milestone:
             ///   - projectCard:
             ///   - rename:
+            ///   - issueType:
+            ///   - prevIssueType:
+            ///   - subIssue:
+            ///   - parentIssue:
             ///   - authorAssociation:
             ///   - lockReason:
             ///   - performedViaGithubApp:
@@ -6076,6 +6680,10 @@ public enum Components {
                 milestone: Components.Schemas.IssueEventMilestone? = nil,
                 projectCard: Components.Schemas.IssueEventProjectCard? = nil,
                 rename: Components.Schemas.IssueEventRename? = nil,
+                issueType: Components.Schemas.IssueTypeWebhook? = nil,
+                prevIssueType: Components.Schemas.IssueTypeWebhook? = nil,
+                subIssue: Components.Schemas.IssueReference? = nil,
+                parentIssue: Components.Schemas.IssueReference? = nil,
                 authorAssociation: Components.Schemas.AuthorAssociation? = nil,
                 lockReason: Swift.String? = nil,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil
@@ -6099,6 +6707,10 @@ public enum Components {
                 self.milestone = milestone
                 self.projectCard = projectCard
                 self.rename = rename
+                self.issueType = issueType
+                self.prevIssueType = prevIssueType
+                self.subIssue = subIssue
+                self.parentIssue = parentIssue
                 self.authorAssociation = authorAssociation
                 self.lockReason = lockReason
                 self.performedViaGithubApp = performedViaGithubApp
@@ -6123,6 +6735,10 @@ public enum Components {
                 case milestone
                 case projectCard = "project_card"
                 case rename
+                case issueType = "issue_type"
+                case prevIssueType = "prev_issue_type"
+                case subIssue = "sub_issue"
+                case parentIssue = "parent_issue"
                 case authorAssociation = "author_association"
                 case lockReason = "lock_reason"
                 case performedViaGithubApp = "performed_via_github_app"
@@ -7581,6 +8197,523 @@ public enum Components {
                 case projectCard = "project_card"
             }
         }
+        /// Issue Type Added Issue Event
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event`.
+        public struct IssueTypeAddedIssueEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/actor`.
+            public var actor: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/event`.
+            public var event: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/commit_id`.
+            public var commitId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/commit_url`.
+            public var commitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/created_at`.
+            public var createdAt: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/issue_type`.
+            public var issueType: Components.Schemas.IssueTypeWebhook?
+            /// Creates a new `IssueTypeAddedIssueEvent`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - actor:
+            ///   - event:
+            ///   - commitId:
+            ///   - commitUrl:
+            ///   - createdAt:
+            ///   - performedViaGithubApp:
+            ///   - issueType:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                actor: Components.Schemas.SimpleUser,
+                event: Swift.String,
+                commitId: Swift.String? = nil,
+                commitUrl: Swift.String? = nil,
+                createdAt: Swift.String,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                issueType: Components.Schemas.IssueTypeWebhook? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.actor = actor
+                self.event = event
+                self.commitId = commitId
+                self.commitUrl = commitUrl
+                self.createdAt = createdAt
+                self.performedViaGithubApp = performedViaGithubApp
+                self.issueType = issueType
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case actor
+                case event
+                case commitId = "commit_id"
+                case commitUrl = "commit_url"
+                case createdAt = "created_at"
+                case performedViaGithubApp = "performed_via_github_app"
+                case issueType = "issue_type"
+            }
+        }
+        /// Issue Type Removed Issue Event
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event`.
+        public struct IssueTypeRemovedIssueEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/actor`.
+            public var actor: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/event`.
+            public var event: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/commit_id`.
+            public var commitId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/commit_url`.
+            public var commitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/created_at`.
+            public var createdAt: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/prev_issue_type`.
+            public var prevIssueType: Components.Schemas.IssueTypeWebhook?
+            /// Creates a new `IssueTypeRemovedIssueEvent`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - actor:
+            ///   - event:
+            ///   - commitId:
+            ///   - commitUrl:
+            ///   - createdAt:
+            ///   - performedViaGithubApp:
+            ///   - prevIssueType:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                actor: Components.Schemas.SimpleUser,
+                event: Swift.String,
+                commitId: Swift.String? = nil,
+                commitUrl: Swift.String? = nil,
+                createdAt: Swift.String,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                prevIssueType: Components.Schemas.IssueTypeWebhook? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.actor = actor
+                self.event = event
+                self.commitId = commitId
+                self.commitUrl = commitUrl
+                self.createdAt = createdAt
+                self.performedViaGithubApp = performedViaGithubApp
+                self.prevIssueType = prevIssueType
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case actor
+                case event
+                case commitId = "commit_id"
+                case commitUrl = "commit_url"
+                case createdAt = "created_at"
+                case performedViaGithubApp = "performed_via_github_app"
+                case prevIssueType = "prev_issue_type"
+            }
+        }
+        /// Issue Type Changed Issue Event
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event`.
+        public struct IssueTypeChangedIssueEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/actor`.
+            public var actor: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/event`.
+            public var event: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/commit_id`.
+            public var commitId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/commit_url`.
+            public var commitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/created_at`.
+            public var createdAt: Swift.String
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/issue_type`.
+            public var issueType: Components.Schemas.IssueTypeWebhook?
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/prev_issue_type`.
+            public var prevIssueType: Components.Schemas.IssueTypeWebhook?
+            /// Creates a new `IssueTypeChangedIssueEvent`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - actor:
+            ///   - event:
+            ///   - commitId:
+            ///   - commitUrl:
+            ///   - createdAt:
+            ///   - performedViaGithubApp:
+            ///   - issueType:
+            ///   - prevIssueType:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                actor: Components.Schemas.SimpleUser,
+                event: Swift.String,
+                commitId: Swift.String? = nil,
+                commitUrl: Swift.String? = nil,
+                createdAt: Swift.String,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                issueType: Components.Schemas.IssueTypeWebhook? = nil,
+                prevIssueType: Components.Schemas.IssueTypeWebhook? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.actor = actor
+                self.event = event
+                self.commitId = commitId
+                self.commitUrl = commitUrl
+                self.createdAt = createdAt
+                self.performedViaGithubApp = performedViaGithubApp
+                self.issueType = issueType
+                self.prevIssueType = prevIssueType
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case actor
+                case event
+                case commitId = "commit_id"
+                case commitUrl = "commit_url"
+                case createdAt = "created_at"
+                case performedViaGithubApp = "performed_via_github_app"
+                case issueType = "issue_type"
+                case prevIssueType = "prev_issue_type"
+            }
+        }
+        /// Sub-issue Added Issue Event
+        ///
+        /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event`.
+        public struct SubIssueAddedIssueEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/actor`.
+            public var actor: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/event`.
+            public var event: Swift.String
+            /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/commit_id`.
+            public var commitId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/commit_url`.
+            public var commitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/created_at`.
+            public var createdAt: Swift.String
+            /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/sub_issue`.
+            public var subIssue: Components.Schemas.IssueReference?
+            /// Creates a new `SubIssueAddedIssueEvent`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - actor:
+            ///   - event:
+            ///   - commitId:
+            ///   - commitUrl:
+            ///   - createdAt:
+            ///   - performedViaGithubApp:
+            ///   - subIssue:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                actor: Components.Schemas.SimpleUser,
+                event: Swift.String,
+                commitId: Swift.String? = nil,
+                commitUrl: Swift.String? = nil,
+                createdAt: Swift.String,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                subIssue: Components.Schemas.IssueReference? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.actor = actor
+                self.event = event
+                self.commitId = commitId
+                self.commitUrl = commitUrl
+                self.createdAt = createdAt
+                self.performedViaGithubApp = performedViaGithubApp
+                self.subIssue = subIssue
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case actor
+                case event
+                case commitId = "commit_id"
+                case commitUrl = "commit_url"
+                case createdAt = "created_at"
+                case performedViaGithubApp = "performed_via_github_app"
+                case subIssue = "sub_issue"
+            }
+        }
+        /// Sub-issue Removed Issue Event
+        ///
+        /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event`.
+        public struct SubIssueRemovedIssueEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/actor`.
+            public var actor: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/event`.
+            public var event: Swift.String
+            /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/commit_id`.
+            public var commitId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/commit_url`.
+            public var commitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/created_at`.
+            public var createdAt: Swift.String
+            /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/sub_issue`.
+            public var subIssue: Components.Schemas.IssueReference?
+            /// Creates a new `SubIssueRemovedIssueEvent`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - actor:
+            ///   - event:
+            ///   - commitId:
+            ///   - commitUrl:
+            ///   - createdAt:
+            ///   - performedViaGithubApp:
+            ///   - subIssue:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                actor: Components.Schemas.SimpleUser,
+                event: Swift.String,
+                commitId: Swift.String? = nil,
+                commitUrl: Swift.String? = nil,
+                createdAt: Swift.String,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                subIssue: Components.Schemas.IssueReference? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.actor = actor
+                self.event = event
+                self.commitId = commitId
+                self.commitUrl = commitUrl
+                self.createdAt = createdAt
+                self.performedViaGithubApp = performedViaGithubApp
+                self.subIssue = subIssue
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case actor
+                case event
+                case commitId = "commit_id"
+                case commitUrl = "commit_url"
+                case createdAt = "created_at"
+                case performedViaGithubApp = "performed_via_github_app"
+                case subIssue = "sub_issue"
+            }
+        }
+        /// Parent-issue Added Issue Event
+        ///
+        /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event`.
+        public struct ParentIssueAddedIssueEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/actor`.
+            public var actor: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/event`.
+            public var event: Swift.String
+            /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/commit_id`.
+            public var commitId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/commit_url`.
+            public var commitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/created_at`.
+            public var createdAt: Swift.String
+            /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/parent_issue`.
+            public var parentIssue: Components.Schemas.IssueReference?
+            /// Creates a new `ParentIssueAddedIssueEvent`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - actor:
+            ///   - event:
+            ///   - commitId:
+            ///   - commitUrl:
+            ///   - createdAt:
+            ///   - performedViaGithubApp:
+            ///   - parentIssue:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                actor: Components.Schemas.SimpleUser,
+                event: Swift.String,
+                commitId: Swift.String? = nil,
+                commitUrl: Swift.String? = nil,
+                createdAt: Swift.String,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                parentIssue: Components.Schemas.IssueReference? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.actor = actor
+                self.event = event
+                self.commitId = commitId
+                self.commitUrl = commitUrl
+                self.createdAt = createdAt
+                self.performedViaGithubApp = performedViaGithubApp
+                self.parentIssue = parentIssue
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case actor
+                case event
+                case commitId = "commit_id"
+                case commitUrl = "commit_url"
+                case createdAt = "created_at"
+                case performedViaGithubApp = "performed_via_github_app"
+                case parentIssue = "parent_issue"
+            }
+        }
+        /// Parent-issue Removed Issue Event
+        ///
+        /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event`.
+        public struct ParentIssueRemovedIssueEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/actor`.
+            public var actor: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/event`.
+            public var event: Swift.String
+            /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/commit_id`.
+            public var commitId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/commit_url`.
+            public var commitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/created_at`.
+            public var createdAt: Swift.String
+            /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/parent_issue`.
+            public var parentIssue: Components.Schemas.IssueReference?
+            /// Creates a new `ParentIssueRemovedIssueEvent`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - actor:
+            ///   - event:
+            ///   - commitId:
+            ///   - commitUrl:
+            ///   - createdAt:
+            ///   - performedViaGithubApp:
+            ///   - parentIssue:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                actor: Components.Schemas.SimpleUser,
+                event: Swift.String,
+                commitId: Swift.String? = nil,
+                commitUrl: Swift.String? = nil,
+                createdAt: Swift.String,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                parentIssue: Components.Schemas.IssueReference? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.actor = actor
+                self.event = event
+                self.commitId = commitId
+                self.commitUrl = commitUrl
+                self.createdAt = createdAt
+                self.performedViaGithubApp = performedViaGithubApp
+                self.parentIssue = parentIssue
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case actor
+                case event
+                case commitId = "commit_id"
+                case commitUrl = "commit_url"
+                case createdAt = "created_at"
+                case performedViaGithubApp = "performed_via_github_app"
+                case parentIssue = "parent_issue"
+            }
+        }
         /// Issue Event for Issue
         ///
         /// - Remark: Generated from `#/components/schemas/issue-event-for-issue`.
@@ -7615,6 +8748,20 @@ public enum Components {
             public var value14: Components.Schemas.RemovedFromProjectIssueEvent?
             /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value15`.
             public var value15: Components.Schemas.ConvertedNoteToIssueIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value16`.
+            public var value16: Components.Schemas.IssueTypeAddedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value17`.
+            public var value17: Components.Schemas.IssueTypeRemovedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value18`.
+            public var value18: Components.Schemas.IssueTypeChangedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value19`.
+            public var value19: Components.Schemas.SubIssueAddedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value20`.
+            public var value20: Components.Schemas.SubIssueRemovedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value21`.
+            public var value21: Components.Schemas.ParentIssueAddedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value22`.
+            public var value22: Components.Schemas.ParentIssueRemovedIssueEvent?
             /// Creates a new `IssueEventForIssue`.
             ///
             /// - Parameters:
@@ -7633,6 +8780,13 @@ public enum Components {
             ///   - value13:
             ///   - value14:
             ///   - value15:
+            ///   - value16:
+            ///   - value17:
+            ///   - value18:
+            ///   - value19:
+            ///   - value20:
+            ///   - value21:
+            ///   - value22:
             public init(
                 value1: Components.Schemas.LabeledIssueEvent? = nil,
                 value2: Components.Schemas.UnlabeledIssueEvent? = nil,
@@ -7648,7 +8802,14 @@ public enum Components {
                 value12: Components.Schemas.AddedToProjectIssueEvent? = nil,
                 value13: Components.Schemas.MovedColumnInProjectIssueEvent? = nil,
                 value14: Components.Schemas.RemovedFromProjectIssueEvent? = nil,
-                value15: Components.Schemas.ConvertedNoteToIssueIssueEvent? = nil
+                value15: Components.Schemas.ConvertedNoteToIssueIssueEvent? = nil,
+                value16: Components.Schemas.IssueTypeAddedIssueEvent? = nil,
+                value17: Components.Schemas.IssueTypeRemovedIssueEvent? = nil,
+                value18: Components.Schemas.IssueTypeChangedIssueEvent? = nil,
+                value19: Components.Schemas.SubIssueAddedIssueEvent? = nil,
+                value20: Components.Schemas.SubIssueRemovedIssueEvent? = nil,
+                value21: Components.Schemas.ParentIssueAddedIssueEvent? = nil,
+                value22: Components.Schemas.ParentIssueRemovedIssueEvent? = nil
             ) {
                 self.value1 = value1
                 self.value2 = value2
@@ -7665,6 +8826,13 @@ public enum Components {
                 self.value13 = value13
                 self.value14 = value14
                 self.value15 = value15
+                self.value16 = value16
+                self.value17 = value17
+                self.value18 = value18
+                self.value19 = value19
+                self.value20 = value20
+                self.value21 = value21
+                self.value22 = value22
             }
             public init(from decoder: any Swift.Decoder) throws {
                 var errors: [any Swift.Error] = []
@@ -7743,6 +8911,41 @@ public enum Components {
                 } catch {
                     errors.append(error)
                 }
+                do {
+                    self.value16 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value17 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value18 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value19 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value20 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value21 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value22 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
                 try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
                     [
                         self.value1,
@@ -7759,7 +8962,14 @@ public enum Components {
                         self.value12,
                         self.value13,
                         self.value14,
-                        self.value15
+                        self.value15,
+                        self.value16,
+                        self.value17,
+                        self.value18,
+                        self.value19,
+                        self.value20,
+                        self.value21,
+                        self.value22
                     ],
                     type: Self.self,
                     codingPath: decoder.codingPath,
@@ -7782,6 +8992,13 @@ public enum Components {
                 try self.value13?.encode(to: encoder)
                 try self.value14?.encode(to: encoder)
                 try self.value15?.encode(to: encoder)
+                try self.value16?.encode(to: encoder)
+                try self.value17?.encode(to: encoder)
+                try self.value18?.encode(to: encoder)
+                try self.value19?.encode(to: encoder)
+                try self.value20?.encode(to: encoder)
+                try self.value21?.encode(to: encoder)
+                try self.value22?.encode(to: encoder)
             }
         }
         /// Timeline Comment Event
@@ -7828,6 +9045,8 @@ public enum Components {
             public var reactions: Components.Schemas.ReactionRollup?
             /// - Remark: Generated from `#/components/schemas/timeline-comment-event/pin`.
             public var pin: Components.Schemas.NullablePinnedIssueComment?
+            /// - Remark: Generated from `#/components/schemas/timeline-comment-event/minimized`.
+            public var minimized: Components.Schemas.NullableIssueCommentMinimized?
             /// Creates a new `TimelineCommentEvent`.
             ///
             /// - Parameters:
@@ -7848,6 +9067,7 @@ public enum Components {
             ///   - performedViaGithubApp:
             ///   - reactions:
             ///   - pin:
+            ///   - minimized:
             public init(
                 event: Swift.String,
                 actor: Components.Schemas.SimpleUser,
@@ -7865,7 +9085,8 @@ public enum Components {
                 authorAssociation: Components.Schemas.AuthorAssociation,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
                 reactions: Components.Schemas.ReactionRollup? = nil,
-                pin: Components.Schemas.NullablePinnedIssueComment? = nil
+                pin: Components.Schemas.NullablePinnedIssueComment? = nil,
+                minimized: Components.Schemas.NullableIssueCommentMinimized? = nil
             ) {
                 self.event = event
                 self.actor = actor
@@ -7884,6 +9105,7 @@ public enum Components {
                 self.performedViaGithubApp = performedViaGithubApp
                 self.reactions = reactions
                 self.pin = pin
+                self.minimized = minimized
             }
             public enum CodingKeys: String, CodingKey {
                 case event
@@ -7903,6 +9125,7 @@ public enum Components {
                 case performedViaGithubApp = "performed_via_github_app"
                 case reactions
                 case pin
+                case minimized
             }
         }
         /// Timeline Cross Referenced Event
@@ -9052,6 +10275,20 @@ public enum Components {
             public var value21: Components.Schemas.TimelineUnassignedIssueEvent?
             /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value22`.
             public var value22: Components.Schemas.StateChangeIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value23`.
+            public var value23: Components.Schemas.IssueTypeAddedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value24`.
+            public var value24: Components.Schemas.IssueTypeRemovedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value25`.
+            public var value25: Components.Schemas.IssueTypeChangedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value26`.
+            public var value26: Components.Schemas.SubIssueAddedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value27`.
+            public var value27: Components.Schemas.SubIssueRemovedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value28`.
+            public var value28: Components.Schemas.ParentIssueAddedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value29`.
+            public var value29: Components.Schemas.ParentIssueRemovedIssueEvent?
             /// Creates a new `TimelineIssueEvents`.
             ///
             /// - Parameters:
@@ -9077,6 +10314,13 @@ public enum Components {
             ///   - value20:
             ///   - value21:
             ///   - value22:
+            ///   - value23:
+            ///   - value24:
+            ///   - value25:
+            ///   - value26:
+            ///   - value27:
+            ///   - value28:
+            ///   - value29:
             public init(
                 value1: Components.Schemas.LabeledIssueEvent? = nil,
                 value2: Components.Schemas.UnlabeledIssueEvent? = nil,
@@ -9099,7 +10343,14 @@ public enum Components {
                 value19: Components.Schemas.TimelineCommitCommentedEvent? = nil,
                 value20: Components.Schemas.TimelineAssignedIssueEvent? = nil,
                 value21: Components.Schemas.TimelineUnassignedIssueEvent? = nil,
-                value22: Components.Schemas.StateChangeIssueEvent? = nil
+                value22: Components.Schemas.StateChangeIssueEvent? = nil,
+                value23: Components.Schemas.IssueTypeAddedIssueEvent? = nil,
+                value24: Components.Schemas.IssueTypeRemovedIssueEvent? = nil,
+                value25: Components.Schemas.IssueTypeChangedIssueEvent? = nil,
+                value26: Components.Schemas.SubIssueAddedIssueEvent? = nil,
+                value27: Components.Schemas.SubIssueRemovedIssueEvent? = nil,
+                value28: Components.Schemas.ParentIssueAddedIssueEvent? = nil,
+                value29: Components.Schemas.ParentIssueRemovedIssueEvent? = nil
             ) {
                 self.value1 = value1
                 self.value2 = value2
@@ -9123,6 +10374,13 @@ public enum Components {
                 self.value20 = value20
                 self.value21 = value21
                 self.value22 = value22
+                self.value23 = value23
+                self.value24 = value24
+                self.value25 = value25
+                self.value26 = value26
+                self.value27 = value27
+                self.value28 = value28
+                self.value29 = value29
             }
             public init(from decoder: any Swift.Decoder) throws {
                 var errors: [any Swift.Error] = []
@@ -9236,6 +10494,41 @@ public enum Components {
                 } catch {
                     errors.append(error)
                 }
+                do {
+                    self.value23 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value24 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value25 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value26 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value27 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value28 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value29 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
                 try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
                     [
                         self.value1,
@@ -9259,7 +10552,14 @@ public enum Components {
                         self.value19,
                         self.value20,
                         self.value21,
-                        self.value22
+                        self.value22,
+                        self.value23,
+                        self.value24,
+                        self.value25,
+                        self.value26,
+                        self.value27,
+                        self.value28,
+                        self.value29
                     ],
                     type: Self.self,
                     codingPath: decoder.codingPath,
@@ -9289,6 +10589,13 @@ public enum Components {
                 try self.value20?.encode(to: encoder)
                 try self.value21?.encode(to: encoder)
                 try self.value22?.encode(to: encoder)
+                try self.value23?.encode(to: encoder)
+                try self.value24?.encode(to: encoder)
+                try self.value25?.encode(to: encoder)
+                try self.value26?.encode(to: encoder)
+                try self.value27?.encode(to: encoder)
+                try self.value28?.encode(to: encoder)
+                try self.value29?.encode(to: encoder)
             }
         }
         /// A collection of related issues and pull requests.
@@ -14023,10 +15330,64 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/labels`.
                     public var labels: Operations.IssuesUpdate.Input.Body.JsonPayload.LabelsPayload?
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/AssigneesPayload`.
+                    @frozen public enum AssigneesPayloadPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/AssigneesPayload/case1`.
+                        case case1(Swift.String)
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/AssigneesPayload/case2`.
+                        public struct Case2Payload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/AssigneesPayload/case2/login`.
+                            public var login: Swift.String?
+                            /// Creates a new `Case2Payload`.
+                            ///
+                            /// - Parameters:
+                            ///   - login:
+                            public init(login: Swift.String? = nil) {
+                                self.login = login
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case login
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/AssigneesPayload/case2`.
+                        case case2(Operations.IssuesUpdate.Input.Body.JsonPayload.AssigneesPayloadPayload.Case2Payload)
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
+                            do {
+                                self = .case1(try decoder.decodeFromSingleValueContainer())
+                                return
+                            } catch {
+                                errors.append(error)
+                            }
+                            do {
+                                self = .case2(try .init(from: decoder))
+                                return
+                            } catch {
+                                errors.append(error)
+                            }
+                            throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                type: Self.self,
+                                codingPath: decoder.codingPath,
+                                errors: errors
+                            )
+                        }
+                        public func encode(to encoder: any Swift.Encoder) throws {
+                            switch self {
+                            case let .case1(value):
+                                try encoder.encodeToSingleValueContainer(value)
+                            case let .case2(value):
+                                try value.encode(to: encoder)
+                            }
+                        }
+                    }
                     /// Usernames to assign to this issue. Pass one or more user logins to _replace_ the set of assignees on this issue. Send an empty array (`[]`) to clear all assignees from the issue. Only users with push access can set assignees for new issues. Without push access to the repository, assignee changes are silently dropped.
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/assignees`.
-                    public var assignees: [Swift.String]?
+                    public typealias AssigneesPayload = [Operations.IssuesUpdate.Input.Body.JsonPayload.AssigneesPayloadPayload]
+                    /// Usernames to assign to this issue. Pass one or more user logins to _replace_ the set of assignees on this issue. Send an empty array (`[]`) to clear all assignees from the issue. Only users with push access can set assignees for new issues. Without push access to the repository, assignee changes are silently dropped.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/assignees`.
+                    public var assignees: Operations.IssuesUpdate.Input.Body.JsonPayload.AssigneesPayload?
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/IssueFieldValuesPayload`.
                     public struct IssueFieldValuesPayloadPayload: Codable, Hashable, Sendable {
                         /// The ID of the issue field to set
@@ -14149,7 +15510,7 @@ public enum Operations {
                         stateReason: Operations.IssuesUpdate.Input.Body.JsonPayload.StateReasonPayload? = nil,
                         milestone: Operations.IssuesUpdate.Input.Body.JsonPayload.MilestonePayload? = nil,
                         labels: Operations.IssuesUpdate.Input.Body.JsonPayload.LabelsPayload? = nil,
-                        assignees: [Swift.String]? = nil,
+                        assignees: Operations.IssuesUpdate.Input.Body.JsonPayload.AssigneesPayload? = nil,
                         issueFieldValues: Operations.IssuesUpdate.Input.Body.JsonPayload.IssueFieldValuesPayload? = nil,
                         _type: Swift.String? = nil
                     ) {
@@ -14201,13 +15562,40 @@ public enum Operations {
             public struct Ok: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content`.
                 @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value1`.
+                        public var value1: Components.Schemas.Issue
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2`.
+                        public var value2: OpenAPIRuntime.OpenAPIObjectContainer
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - value1:
+                        ///   - value2:
+                        public init(
+                            value1: Components.Schemas.Issue,
+                            value2: OpenAPIRuntime.OpenAPIObjectContainer
+                        ) {
+                            self.value1 = value1
+                            self.value2 = value2
+                        }
+                        public init(from decoder: any Swift.Decoder) throws {
+                            self.value1 = try .init(from: decoder)
+                            self.value2 = try .init(from: decoder)
+                        }
+                        public func encode(to encoder: any Swift.Encoder) throws {
+                            try self.value1.encode(to: encoder)
+                            try self.value2.encode(to: encoder)
+                        }
+                    }
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/application\/json`.
-                    case json(Components.Schemas.Issue)
+                    case json(Operations.IssuesUpdate.Output.Ok.Body.JsonPayload)
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: Components.Schemas.Issue {
+                    public var json: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload {
                         get throws {
                             switch self {
                             case let .json(body):
