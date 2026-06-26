@@ -1415,6 +1415,8 @@ public enum Components {
                     case organization = "organization"
                     case repository = "repository"
                     case costCenter = "cost_center"
+                    case multiUserCustomer = "multi_user_customer"
+                    case user = "user"
                 }
                 /// The type of scope for the budget
                 ///
@@ -1424,6 +1426,14 @@ public enum Components {
                 ///
                 /// - Remark: Generated from `#/components/schemas/update-budget/budget/budget_entity_name`.
                 public var budgetEntityName: Swift.String?
+                /// The user login when the budget is scoped to a single user (`user` scope).
+                ///
+                /// - Remark: Generated from `#/components/schemas/update-budget/budget/user`.
+                public var user: Swift.String?
+                /// The consumed amount for the specified user within the budget. Only included for `user`-scoped budgets.
+                ///
+                /// - Remark: Generated from `#/components/schemas/update-budget/budget/consumed_amount`.
+                public var consumedAmount: Swift.Double?
                 /// The budget amount in whole dollars. For license-based products, this represents the number of licenses.
                 ///
                 /// - Remark: Generated from `#/components/schemas/update-budget/budget/budget_amount`.
@@ -1520,6 +1530,8 @@ public enum Components {
                 ///   - id: ID of the budget.
                 ///   - budgetScope: The type of scope for the budget
                 ///   - budgetEntityName: The name of the entity to apply the budget to
+                ///   - user: The user login when the budget is scoped to a single user (`user` scope).
+                ///   - consumedAmount: The consumed amount for the specified user within the budget. Only included for `user`-scoped budgets.
                 ///   - budgetAmount: The budget amount in whole dollars. For license-based products, this represents the number of licenses.
                 ///   - preventFurtherUsage: Whether to prevent additional spending once the budget is exceeded
                 ///   - budgetProductSku: A single product or sku to apply the budget to.
@@ -1529,6 +1541,8 @@ public enum Components {
                     id: Swift.String? = nil,
                     budgetScope: Components.Schemas.UpdateBudget.BudgetPayload.BudgetScopePayload? = nil,
                     budgetEntityName: Swift.String? = nil,
+                    user: Swift.String? = nil,
+                    consumedAmount: Swift.Double? = nil,
                     budgetAmount: Swift.Int? = nil,
                     preventFurtherUsage: Swift.Bool? = nil,
                     budgetProductSku: Swift.String? = nil,
@@ -1538,6 +1552,8 @@ public enum Components {
                     self.id = id
                     self.budgetScope = budgetScope
                     self.budgetEntityName = budgetEntityName
+                    self.user = user
+                    self.consumedAmount = consumedAmount
                     self.budgetAmount = budgetAmount
                     self.preventFurtherUsage = preventFurtherUsage
                     self.budgetProductSku = budgetProductSku
@@ -1548,6 +1564,8 @@ public enum Components {
                     case id
                     case budgetScope = "budget_scope"
                     case budgetEntityName = "budget_entity_name"
+                    case user
+                    case consumedAmount = "consumed_amount"
                     case budgetAmount = "budget_amount"
                     case preventFurtherUsage = "prevent_further_usage"
                     case budgetProductSku = "budget_product_sku"

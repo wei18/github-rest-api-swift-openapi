@@ -70,7 +70,7 @@ public protocol APIProtocol: Sendable {
     /// Users on this list can create pull requests regardless of any configured
     /// pull request creation cap.
     ///
-    /// Only repository admins can modify the bypass list.
+    /// Only users with maintainer permissions can modify the bypass list.
     /// You can add a maximum of 100 users per request.
     /// The bypass list can only hold a maximum of 100 users.
     ///
@@ -82,7 +82,7 @@ public protocol APIProtocol: Sendable {
     /// Removes users from the pull request creation cap bypass list for a repository.
     /// Removed users will be subject to any configured pull request creation cap.
     ///
-    /// Only repository admins can modify the bypass list.
+    /// Only users with maintainer permissions can modify the bypass list.
     /// You can remove a maximum of 100 users per request.
     ///
     /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
@@ -220,7 +220,7 @@ extension APIProtocol {
     /// Users on this list can create pull requests regardless of any configured
     /// pull request creation cap.
     ///
-    /// Only repository admins can modify the bypass list.
+    /// Only users with maintainer permissions can modify the bypass list.
     /// You can add a maximum of 100 users per request.
     /// The bypass list can only hold a maximum of 100 users.
     ///
@@ -242,7 +242,7 @@ extension APIProtocol {
     /// Removes users from the pull request creation cap bypass list for a repository.
     /// Removed users will be subject to any configured pull request creation cap.
     ///
-    /// Only repository admins can modify the bypass list.
+    /// Only users with maintainer permissions can modify the bypass list.
     /// You can remove a maximum of 100 users per request.
     ///
     /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
@@ -1944,7 +1944,7 @@ public enum Operations {
     /// Users on this list can create pull requests regardless of any configured
     /// pull request creation cap.
     ///
-    /// Only repository admins can modify the bypass list.
+    /// Only users with maintainer permissions can modify the bypass list.
     /// You can add a maximum of 100 users per request.
     /// The bypass list can only hold a maximum of 100 users.
     ///
@@ -2152,7 +2152,7 @@ public enum Operations {
     /// Removes users from the pull request creation cap bypass list for a repository.
     /// Removed users will be subject to any configured pull request creation cap.
     ///
-    /// Only repository admins can modify the bypass list.
+    /// Only users with maintainer permissions can modify the bypass list.
     /// You can remove a maximum of 100 users per request.
     ///
     /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.

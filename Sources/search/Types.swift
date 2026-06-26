@@ -2363,6 +2363,25 @@ public enum Components {
                 case pinnedBy = "pinned_by"
             }
         }
+        /// Details about why an issue comment was minimized.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-issue-comment-minimized`.
+        public struct NullableIssueCommentMinimized: Codable, Hashable, Sendable {
+            /// The reason the comment was minimized.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment-minimized/reason`.
+            public var reason: Swift.String?
+            /// Creates a new `NullableIssueCommentMinimized`.
+            ///
+            /// - Parameters:
+            ///   - reason: The reason the comment was minimized.
+            public init(reason: Swift.String? = nil) {
+                self.reason = reason
+            }
+            public enum CodingKeys: String, CodingKey {
+                case reason
+            }
+        }
         /// Comments provide a way for people to collaborate on an issue.
         ///
         /// - Remark: Generated from `#/components/schemas/nullable-issue-comment`.
@@ -2403,6 +2422,8 @@ public enum Components {
             public var reactions: Components.Schemas.ReactionRollup?
             /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/pin`.
             public var pin: Components.Schemas.NullablePinnedIssueComment?
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-comment/minimized`.
+            public var minimized: Components.Schemas.NullableIssueCommentMinimized?
             /// Creates a new `NullableIssueComment`.
             ///
             /// - Parameters:
@@ -2421,6 +2442,7 @@ public enum Components {
             ///   - performedViaGithubApp:
             ///   - reactions:
             ///   - pin:
+            ///   - minimized:
             public init(
                 id: Swift.Int64,
                 nodeId: Swift.String,
@@ -2436,7 +2458,8 @@ public enum Components {
                 authorAssociation: Components.Schemas.AuthorAssociation? = nil,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
                 reactions: Components.Schemas.ReactionRollup? = nil,
-                pin: Components.Schemas.NullablePinnedIssueComment? = nil
+                pin: Components.Schemas.NullablePinnedIssueComment? = nil,
+                minimized: Components.Schemas.NullableIssueCommentMinimized? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -2453,6 +2476,7 @@ public enum Components {
                 self.performedViaGithubApp = performedViaGithubApp
                 self.reactions = reactions
                 self.pin = pin
+                self.minimized = minimized
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -2470,6 +2494,7 @@ public enum Components {
                 case performedViaGithubApp = "performed_via_github_app"
                 case reactions
                 case pin
+                case minimized
             }
         }
         /// - Remark: Generated from `#/components/schemas/issue-dependencies-summary`.
@@ -2515,6 +2540,10 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/issue-field-value/issue_field_id`.
             public var issueFieldId: Swift.Int64
+            /// The human-readable name of the issue field.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-field-value/issue_field_name`.
+            public var issueFieldName: Swift.String?
             /// - Remark: Generated from `#/components/schemas/issue-field-value/node_id`.
             public var nodeId: Swift.String
             /// The data type of the issue field
@@ -2684,6 +2713,7 @@ public enum Components {
             ///
             /// - Parameters:
             ///   - issueFieldId: Unique identifier for the issue field.
+            ///   - issueFieldName: The human-readable name of the issue field.
             ///   - nodeId:
             ///   - dataType: The data type of the issue field
             ///   - value: The value of the issue field
@@ -2691,6 +2721,7 @@ public enum Components {
             ///   - multiSelectOptions: Details about the selected options
             public init(
                 issueFieldId: Swift.Int64,
+                issueFieldName: Swift.String? = nil,
                 nodeId: Swift.String,
                 dataType: Components.Schemas.IssueFieldValue.DataTypePayload,
                 value: Components.Schemas.IssueFieldValue.ValuePayload? = nil,
@@ -2698,6 +2729,7 @@ public enum Components {
                 multiSelectOptions: Components.Schemas.IssueFieldValue.MultiSelectOptionsPayload? = nil
             ) {
                 self.issueFieldId = issueFieldId
+                self.issueFieldName = issueFieldName
                 self.nodeId = nodeId
                 self.dataType = dataType
                 self.value = value
@@ -2706,6 +2738,7 @@ public enum Components {
             }
             public enum CodingKeys: String, CodingKey {
                 case issueFieldId = "issue_field_id"
+                case issueFieldName = "issue_field_name"
                 case nodeId = "node_id"
                 case dataType = "data_type"
                 case value
