@@ -2236,7 +2236,7 @@ public enum Components {
                 case createdAt = "created_at"
             }
         }
-        /// The permissions granted to the user access token.
+        /// The permissions granted to the fine-grained access token.
         ///
         /// - Remark: Generated from `#/components/schemas/app-permissions`.
         public struct AppPermissions: Codable, Hashable, Sendable {
