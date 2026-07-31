@@ -59,7 +59,7 @@ public protocol APIProtocol: Sendable {
     /// repository. Users on this list can create pull requests regardless of any
     /// configured pull request creation cap.
     ///
-    /// Only repository admins can view the bypass list.
+    /// Only users with maintainer permissions can view the bypass list.
     ///
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/get(interactions/get-pull-request-bypass-list-for-repo)`.
@@ -88,6 +88,26 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/delete(interactions/remove-pull-request-bypass-list-for-repo)`.
     func interactionsRemovePullRequestBypassListForRepo(_ input: Operations.InteractionsRemovePullRequestBypassListForRepo.Input) async throws -> Operations.InteractionsRemovePullRequestBypassListForRepo.Output
+    /// Get pull request creation cap for a repository
+    ///
+    /// Gets the pull request creation cap configuration for a repository.
+    /// The cap limits the number of open pull requests a user can have at one time.
+    ///
+    /// Only users with admin access to the repository can view the cap configuration.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/interaction-limits/pulls/creation-cap`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/get(interactions/get-pull-request-creation-cap-for-repo)`.
+    func interactionsGetPullRequestCreationCapForRepo(_ input: Operations.InteractionsGetPullRequestCreationCapForRepo.Input) async throws -> Operations.InteractionsGetPullRequestCreationCapForRepo.Output
+    /// Update pull request creation cap for a repository
+    ///
+    /// Updates the pull request creation cap for a repository. The cap limits the number
+    /// of open pull requests a user can have at one time.
+    ///
+    /// Only users with admin access to the repository can configure the cap.
+    ///
+    /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/interaction-limits/pulls/creation-cap`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/patch(interactions/update-pull-request-creation-cap-for-repo)`.
+    func interactionsUpdatePullRequestCreationCapForRepo(_ input: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input) async throws -> Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output
     /// Get interaction restrictions for your public repositories
     ///
     /// Shows which type of GitHub user can interact with your public repositories and when the restriction expires.
@@ -201,7 +221,7 @@ extension APIProtocol {
     /// repository. Users on this list can create pull requests regardless of any
     /// configured pull request creation cap.
     ///
-    /// Only repository admins can view the bypass list.
+    /// Only users with maintainer permissions can view the bypass list.
     ///
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/get(interactions/get-pull-request-bypass-list-for-repo)`.
@@ -253,6 +273,44 @@ extension APIProtocol {
         body: Operations.InteractionsRemovePullRequestBypassListForRepo.Input.Body
     ) async throws -> Operations.InteractionsRemovePullRequestBypassListForRepo.Output {
         try await interactionsRemovePullRequestBypassListForRepo(Operations.InteractionsRemovePullRequestBypassListForRepo.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get pull request creation cap for a repository
+    ///
+    /// Gets the pull request creation cap configuration for a repository.
+    /// The cap limits the number of open pull requests a user can have at one time.
+    ///
+    /// Only users with admin access to the repository can view the cap configuration.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/interaction-limits/pulls/creation-cap`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/get(interactions/get-pull-request-creation-cap-for-repo)`.
+    public func interactionsGetPullRequestCreationCapForRepo(
+        path: Operations.InteractionsGetPullRequestCreationCapForRepo.Input.Path,
+        headers: Operations.InteractionsGetPullRequestCreationCapForRepo.Input.Headers = .init()
+    ) async throws -> Operations.InteractionsGetPullRequestCreationCapForRepo.Output {
+        try await interactionsGetPullRequestCreationCapForRepo(Operations.InteractionsGetPullRequestCreationCapForRepo.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Update pull request creation cap for a repository
+    ///
+    /// Updates the pull request creation cap for a repository. The cap limits the number
+    /// of open pull requests a user can have at one time.
+    ///
+    /// Only users with admin access to the repository can configure the cap.
+    ///
+    /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/interaction-limits/pulls/creation-cap`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/patch(interactions/update-pull-request-creation-cap-for-repo)`.
+    public func interactionsUpdatePullRequestCreationCapForRepo(
+        path: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input.Path,
+        headers: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input.Headers = .init(),
+        body: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input.Body
+    ) async throws -> Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output {
+        try await interactionsUpdatePullRequestCreationCapForRepo(Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input(
             path: path,
             headers: headers,
             body: body
@@ -1753,7 +1811,7 @@ public enum Operations {
     /// repository. Users on this list can create pull requests regardless of any
     /// configured pull request creation cap.
     ///
-    /// Only repository admins can view the bypass list.
+    /// Only users with maintainer permissions can view the bypass list.
     ///
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/interaction-limits/pulls/bypass-list`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/get(interactions/get-pull-request-bypass-list-for-repo)`.
@@ -2303,6 +2361,601 @@ public enum Operations {
             /// Validation failed, or the endpoint has been spammed.
             ///
             /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/bypass-list/delete(interactions/remove-pull-request-bypass-list-for-repo)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get pull request creation cap for a repository
+    ///
+    /// Gets the pull request creation cap configuration for a repository.
+    /// The cap limits the number of open pull requests a user can have at one time.
+    ///
+    /// Only users with admin access to the repository can view the cap configuration.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/interaction-limits/pulls/creation-cap`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/get(interactions/get-pull-request-creation-cap-for-repo)`.
+    public enum InteractionsGetPullRequestCreationCapForRepo {
+        public static let id: Swift.String = "interactions/get-pull-request-creation-cap-for-repo"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.InteractionsGetPullRequestCreationCapForRepo.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.InteractionsGetPullRequestCreationCapForRepo.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.InteractionsGetPullRequestCreationCapForRepo.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.InteractionsGetPullRequestCreationCapForRepo.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.InteractionsGetPullRequestCreationCapForRepo.Input.Path,
+                headers: Operations.InteractionsGetPullRequestCreationCapForRepo.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// Whether the pull request creation cap is enabled
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/GET/responses/200/content/json/enabled`.
+                        public var enabled: Swift.Bool
+                        /// The maximum number of open pull requests a user can have at one time
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/GET/responses/200/content/json/max_open_pull_requests`.
+                        public var maxOpenPullRequests: Swift.Int
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - enabled: Whether the pull request creation cap is enabled
+                        ///   - maxOpenPullRequests: The maximum number of open pull requests a user can have at one time
+                        public init(
+                            enabled: Swift.Bool,
+                            maxOpenPullRequests: Swift.Int
+                        ) {
+                            self.enabled = enabled
+                            self.maxOpenPullRequests = maxOpenPullRequests
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case enabled
+                            case maxOpenPullRequests = "max_open_pull_requests"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/GET/responses/200/content/application\/json`.
+                    case json(Operations.InteractionsGetPullRequestCreationCapForRepo.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.InteractionsGetPullRequestCreationCapForRepo.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.InteractionsGetPullRequestCreationCapForRepo.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.InteractionsGetPullRequestCreationCapForRepo.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/get(interactions/get-pull-request-creation-cap-for-repo)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.InteractionsGetPullRequestCreationCapForRepo.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.InteractionsGetPullRequestCreationCapForRepo.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/get(interactions/get-pull-request-creation-cap-for-repo)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/get(interactions/get-pull-request-creation-cap-for-repo)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct MethodNotAllowed: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/GET/responses/405/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/GET/responses/405/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.InteractionsGetPullRequestCreationCapForRepo.Output.MethodNotAllowed.Body
+                /// Creates a new `MethodNotAllowed`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.InteractionsGetPullRequestCreationCapForRepo.Output.MethodNotAllowed.Body) {
+                    self.body = body
+                }
+            }
+            /// Method Not Allowed
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/get(interactions/get-pull-request-creation-cap-for-repo)/responses/405`.
+            ///
+            /// HTTP response code: `405 methodNotAllowed`.
+            case methodNotAllowed(Operations.InteractionsGetPullRequestCreationCapForRepo.Output.MethodNotAllowed)
+            /// The associated value of the enum case if `self` is `.methodNotAllowed`.
+            ///
+            /// - Throws: An error if `self` is not `.methodNotAllowed`.
+            /// - SeeAlso: `.methodNotAllowed`.
+            public var methodNotAllowed: Operations.InteractionsGetPullRequestCreationCapForRepo.Output.MethodNotAllowed {
+                get throws {
+                    switch self {
+                    case let .methodNotAllowed(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "methodNotAllowed",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Update pull request creation cap for a repository
+    ///
+    /// Updates the pull request creation cap for a repository. The cap limits the number
+    /// of open pull requests a user can have at one time.
+    ///
+    /// Only users with admin access to the repository can configure the cap.
+    ///
+    /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/interaction-limits/pulls/creation-cap`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/patch(interactions/update-pull-request-creation-cap-for-repo)`.
+    public enum InteractionsUpdatePullRequestCreationCapForRepo {
+        public static let id: Swift.String = "interactions/update-pull-request-creation-cap-for-repo"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.InteractionsUpdatePullRequestCreationCapForRepo.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.InteractionsUpdatePullRequestCreationCapForRepo.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// Whether the pull request creation cap is enabled
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/requestBody/json/enabled`.
+                    public var enabled: Swift.Bool
+                    /// The maximum number of open pull requests a user can have at one time
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/requestBody/json/max_open_pull_requests`.
+                    public var maxOpenPullRequests: Swift.Int?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - enabled: Whether the pull request creation cap is enabled
+                    ///   - maxOpenPullRequests: The maximum number of open pull requests a user can have at one time
+                    public init(
+                        enabled: Swift.Bool,
+                        maxOpenPullRequests: Swift.Int? = nil
+                    ) {
+                        self.enabled = enabled
+                        self.maxOpenPullRequests = maxOpenPullRequests
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case enabled
+                        case maxOpenPullRequests = "max_open_pull_requests"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/requestBody/content/application\/json`.
+                case json(Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input.Body.JsonPayload)
+            }
+            public var body: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input.Path,
+                headers: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input.Headers = .init(),
+                body: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// Whether the pull request creation cap is enabled
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/responses/200/content/json/enabled`.
+                        public var enabled: Swift.Bool
+                        /// The maximum number of open pull requests a user can have at one time
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/responses/200/content/json/max_open_pull_requests`.
+                        public var maxOpenPullRequests: Swift.Int
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - enabled: Whether the pull request creation cap is enabled
+                        ///   - maxOpenPullRequests: The maximum number of open pull requests a user can have at one time
+                        public init(
+                            enabled: Swift.Bool,
+                            maxOpenPullRequests: Swift.Int
+                        ) {
+                            self.enabled = enabled
+                            self.maxOpenPullRequests = maxOpenPullRequests
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case enabled
+                            case maxOpenPullRequests = "max_open_pull_requests"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/responses/200/content/application\/json`.
+                    case json(Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/patch(interactions/update-pull-request-creation-cap-for-repo)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/patch(interactions/update-pull-request-creation-cap-for-repo)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/patch(interactions/update-pull-request-creation-cap-for-repo)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct MethodNotAllowed: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/responses/405/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/PATCH/responses/405/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output.MethodNotAllowed.Body
+                /// Creates a new `MethodNotAllowed`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output.MethodNotAllowed.Body) {
+                    self.body = body
+                }
+            }
+            /// Method Not Allowed
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/patch(interactions/update-pull-request-creation-cap-for-repo)/responses/405`.
+            ///
+            /// HTTP response code: `405 methodNotAllowed`.
+            case methodNotAllowed(Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output.MethodNotAllowed)
+            /// The associated value of the enum case if `self` is `.methodNotAllowed`.
+            ///
+            /// - Throws: An error if `self` is not `.methodNotAllowed`.
+            /// - SeeAlso: `.methodNotAllowed`.
+            public var methodNotAllowed: Operations.InteractionsUpdatePullRequestCreationCapForRepo.Output.MethodNotAllowed {
+                get throws {
+                    switch self {
+                    case let .methodNotAllowed(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "methodNotAllowed",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/interaction-limits/pulls/creation-cap/patch(interactions/update-pull-request-creation-cap-for-repo)/responses/422`.
             ///
             /// HTTP response code: `422 unprocessableContent`.
             case unprocessableContent(Components.Responses.ValidationFailed)
