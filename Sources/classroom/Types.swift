@@ -11,58 +11,93 @@ import struct Foundation.Date
 #endif
 /// A type that performs HTTP operations defined by the OpenAPI document.
 public protocol APIProtocol: Sendable {
-    /// Get an assignment
+    /// Closing down - Get an assignment
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets a GitHub Classroom assignment. Assignment will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
     /// - Remark: HTTP `GET /assignments/{assignment_id}`.
     /// - Remark: Generated from `#/paths//assignments/{assignment_id}/get(classroom/get-an-assignment)`.
+    @available(*, deprecated)
     func classroomGetAnAssignment(_ input: Operations.ClassroomGetAnAssignment.Input) async throws -> Operations.ClassroomGetAnAssignment.Output
-    /// List accepted assignments for an assignment
+    /// Closing down - List accepted assignments for an assignment
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists any assignment repositories that have been created by students accepting a GitHub Classroom assignment. Accepted assignments will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
     /// - Remark: HTTP `GET /assignments/{assignment_id}/accepted_assignments`.
     /// - Remark: Generated from `#/paths//assignments/{assignment_id}/accepted_assignments/get(classroom/list-accepted-assignments-for-an-assignment)`.
+    @available(*, deprecated)
     func classroomListAcceptedAssignmentsForAnAssignment(_ input: Operations.ClassroomListAcceptedAssignmentsForAnAssignment.Input) async throws -> Operations.ClassroomListAcceptedAssignmentsForAnAssignment.Output
-    /// Get assignment grades
+    /// Closing down - Get assignment grades
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets grades for a GitHub Classroom assignment. Grades will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
     /// - Remark: HTTP `GET /assignments/{assignment_id}/grades`.
     /// - Remark: Generated from `#/paths//assignments/{assignment_id}/grades/get(classroom/get-assignment-grades)`.
+    @available(*, deprecated)
     func classroomGetAssignmentGrades(_ input: Operations.ClassroomGetAssignmentGrades.Input) async throws -> Operations.ClassroomGetAssignmentGrades.Output
-    /// List classrooms
+    /// Closing down - List classrooms
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists GitHub Classroom classrooms for the current user. Classrooms will only be returned if the current user is an administrator of one or more GitHub Classrooms.
     ///
     /// - Remark: HTTP `GET /classrooms`.
     /// - Remark: Generated from `#/paths//classrooms/get(classroom/list-classrooms)`.
+    @available(*, deprecated)
     func classroomListClassrooms(_ input: Operations.ClassroomListClassrooms.Input) async throws -> Operations.ClassroomListClassrooms.Output
-    /// Get a classroom
+    /// Closing down - Get a classroom
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets a GitHub Classroom classroom for the current user. Classroom will only be returned if the current user is an administrator of the GitHub Classroom.
     ///
     /// - Remark: HTTP `GET /classrooms/{classroom_id}`.
     /// - Remark: Generated from `#/paths//classrooms/{classroom_id}/get(classroom/get-a-classroom)`.
+    @available(*, deprecated)
     func classroomGetAClassroom(_ input: Operations.ClassroomGetAClassroom.Input) async throws -> Operations.ClassroomGetAClassroom.Output
-    /// List assignments for a classroom
+    /// Closing down - List assignments for a classroom
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists GitHub Classroom assignments for a classroom. Assignments will only be returned if the current user is an administrator of the GitHub Classroom.
     ///
     /// - Remark: HTTP `GET /classrooms/{classroom_id}/assignments`.
     /// - Remark: Generated from `#/paths//classrooms/{classroom_id}/assignments/get(classroom/list-assignments-for-a-classroom)`.
+    @available(*, deprecated)
     func classroomListAssignmentsForAClassroom(_ input: Operations.ClassroomListAssignmentsForAClassroom.Input) async throws -> Operations.ClassroomListAssignmentsForAClassroom.Output
 }
 
 /// Convenience overloads for operation inputs.
 extension APIProtocol {
-    /// Get an assignment
+    /// Closing down - Get an assignment
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets a GitHub Classroom assignment. Assignment will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
     /// - Remark: HTTP `GET /assignments/{assignment_id}`.
     /// - Remark: Generated from `#/paths//assignments/{assignment_id}/get(classroom/get-an-assignment)`.
+    @available(*, deprecated)
     public func classroomGetAnAssignment(
         path: Operations.ClassroomGetAnAssignment.Input.Path,
         headers: Operations.ClassroomGetAnAssignment.Input.Headers = .init()
@@ -72,12 +107,17 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// List accepted assignments for an assignment
+    /// Closing down - List accepted assignments for an assignment
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists any assignment repositories that have been created by students accepting a GitHub Classroom assignment. Accepted assignments will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
     /// - Remark: HTTP `GET /assignments/{assignment_id}/accepted_assignments`.
     /// - Remark: Generated from `#/paths//assignments/{assignment_id}/accepted_assignments/get(classroom/list-accepted-assignments-for-an-assignment)`.
+    @available(*, deprecated)
     public func classroomListAcceptedAssignmentsForAnAssignment(
         path: Operations.ClassroomListAcceptedAssignmentsForAnAssignment.Input.Path,
         query: Operations.ClassroomListAcceptedAssignmentsForAnAssignment.Input.Query = .init(),
@@ -89,12 +129,17 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// Get assignment grades
+    /// Closing down - Get assignment grades
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets grades for a GitHub Classroom assignment. Grades will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
     /// - Remark: HTTP `GET /assignments/{assignment_id}/grades`.
     /// - Remark: Generated from `#/paths//assignments/{assignment_id}/grades/get(classroom/get-assignment-grades)`.
+    @available(*, deprecated)
     public func classroomGetAssignmentGrades(
         path: Operations.ClassroomGetAssignmentGrades.Input.Path,
         headers: Operations.ClassroomGetAssignmentGrades.Input.Headers = .init()
@@ -104,12 +149,17 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// List classrooms
+    /// Closing down - List classrooms
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists GitHub Classroom classrooms for the current user. Classrooms will only be returned if the current user is an administrator of one or more GitHub Classrooms.
     ///
     /// - Remark: HTTP `GET /classrooms`.
     /// - Remark: Generated from `#/paths//classrooms/get(classroom/list-classrooms)`.
+    @available(*, deprecated)
     public func classroomListClassrooms(
         query: Operations.ClassroomListClassrooms.Input.Query = .init(),
         headers: Operations.ClassroomListClassrooms.Input.Headers = .init()
@@ -119,12 +169,17 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// Get a classroom
+    /// Closing down - Get a classroom
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets a GitHub Classroom classroom for the current user. Classroom will only be returned if the current user is an administrator of the GitHub Classroom.
     ///
     /// - Remark: HTTP `GET /classrooms/{classroom_id}`.
     /// - Remark: Generated from `#/paths//classrooms/{classroom_id}/get(classroom/get-a-classroom)`.
+    @available(*, deprecated)
     public func classroomGetAClassroom(
         path: Operations.ClassroomGetAClassroom.Input.Path,
         headers: Operations.ClassroomGetAClassroom.Input.Headers = .init()
@@ -134,12 +189,17 @@ extension APIProtocol {
             headers: headers
         ))
     }
-    /// List assignments for a classroom
+    /// Closing down - List assignments for a classroom
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists GitHub Classroom assignments for a classroom. Assignments will only be returned if the current user is an administrator of the GitHub Classroom.
     ///
     /// - Remark: HTTP `GET /classrooms/{classroom_id}/assignments`.
     /// - Remark: Generated from `#/paths//classrooms/{classroom_id}/assignments/get(classroom/list-assignments-for-a-classroom)`.
+    @available(*, deprecated)
     public func classroomListAssignmentsForAClassroom(
         path: Operations.ClassroomListAssignmentsForAClassroom.Input.Path,
         query: Operations.ClassroomListAssignmentsForAClassroom.Input.Query = .init(),
@@ -1010,6 +1070,34 @@ public enum Components {
                 self.body = body
             }
         }
+        public struct Gone: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/gone/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/gone/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.Gone.Body
+            /// Creates a new `Gone`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.Gone.Body) {
+                self.body = body
+            }
+        }
     }
     /// Types generated from the `#/components/headers` section of the OpenAPI document.
     public enum Headers {}
@@ -1017,7 +1105,11 @@ public enum Components {
 
 /// API operations, with input and output types, generated from `#/paths` in the OpenAPI document.
 public enum Operations {
-    /// Get an assignment
+    /// Closing down - Get an assignment
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets a GitHub Classroom assignment. Assignment will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
@@ -1141,6 +1233,29 @@ public enum Operations {
                     }
                 }
             }
+            /// Gone
+            ///
+            /// - Remark: Generated from `#/paths//assignments/{assignment_id}/get(classroom/get-an-assignment)/responses/410`.
+            ///
+            /// HTTP response code: `410 gone`.
+            case gone(Components.Responses.Gone)
+            /// The associated value of the enum case if `self` is `.gone`.
+            ///
+            /// - Throws: An error if `self` is not `.gone`.
+            /// - SeeAlso: `.gone`.
+            public var gone: Components.Responses.Gone {
+                get throws {
+                    switch self {
+                    case let .gone(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "gone",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -1172,7 +1287,11 @@ public enum Operations {
             }
         }
     }
-    /// List accepted assignments for an assignment
+    /// Closing down - List accepted assignments for an assignment
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists any assignment repositories that have been created by students accepting a GitHub Classroom assignment. Accepted assignments will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
@@ -1300,6 +1419,29 @@ public enum Operations {
                     }
                 }
             }
+            /// Gone
+            ///
+            /// - Remark: Generated from `#/paths//assignments/{assignment_id}/accepted_assignments/get(classroom/list-accepted-assignments-for-an-assignment)/responses/410`.
+            ///
+            /// HTTP response code: `410 gone`.
+            case gone(Components.Responses.Gone)
+            /// The associated value of the enum case if `self` is `.gone`.
+            ///
+            /// - Throws: An error if `self` is not `.gone`.
+            /// - SeeAlso: `.gone`.
+            public var gone: Components.Responses.Gone {
+                get throws {
+                    switch self {
+                    case let .gone(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "gone",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -1331,7 +1473,11 @@ public enum Operations {
             }
         }
     }
-    /// Get assignment grades
+    /// Closing down - Get assignment grades
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets grades for a GitHub Classroom assignment. Grades will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
@@ -1455,6 +1601,29 @@ public enum Operations {
                     }
                 }
             }
+            /// Gone
+            ///
+            /// - Remark: Generated from `#/paths//assignments/{assignment_id}/grades/get(classroom/get-assignment-grades)/responses/410`.
+            ///
+            /// HTTP response code: `410 gone`.
+            case gone(Components.Responses.Gone)
+            /// The associated value of the enum case if `self` is `.gone`.
+            ///
+            /// - Throws: An error if `self` is not `.gone`.
+            /// - SeeAlso: `.gone`.
+            public var gone: Components.Responses.Gone {
+                get throws {
+                    switch self {
+                    case let .gone(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "gone",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -1486,7 +1655,11 @@ public enum Operations {
             }
         }
     }
-    /// List classrooms
+    /// Closing down - List classrooms
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists GitHub Classroom classrooms for the current user. Classrooms will only be returned if the current user is an administrator of one or more GitHub Classrooms.
     ///
@@ -1596,6 +1769,29 @@ public enum Operations {
                     }
                 }
             }
+            /// Gone
+            ///
+            /// - Remark: Generated from `#/paths//classrooms/get(classroom/list-classrooms)/responses/410`.
+            ///
+            /// HTTP response code: `410 gone`.
+            case gone(Components.Responses.Gone)
+            /// The associated value of the enum case if `self` is `.gone`.
+            ///
+            /// - Throws: An error if `self` is not `.gone`.
+            /// - SeeAlso: `.gone`.
+            public var gone: Components.Responses.Gone {
+                get throws {
+                    switch self {
+                    case let .gone(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "gone",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -1627,7 +1823,11 @@ public enum Operations {
             }
         }
     }
-    /// Get a classroom
+    /// Closing down - Get a classroom
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets a GitHub Classroom classroom for the current user. Classroom will only be returned if the current user is an administrator of the GitHub Classroom.
     ///
@@ -1751,6 +1951,29 @@ public enum Operations {
                     }
                 }
             }
+            /// Gone
+            ///
+            /// - Remark: Generated from `#/paths//classrooms/{classroom_id}/get(classroom/get-a-classroom)/responses/410`.
+            ///
+            /// HTTP response code: `410 gone`.
+            case gone(Components.Responses.Gone)
+            /// The associated value of the enum case if `self` is `.gone`.
+            ///
+            /// - Throws: An error if `self` is not `.gone`.
+            /// - SeeAlso: `.gone`.
+            public var gone: Components.Responses.Gone {
+                get throws {
+                    switch self {
+                    case let .gone(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "gone",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -1782,7 +2005,11 @@ public enum Operations {
             }
         }
     }
-    /// List assignments for a classroom
+    /// Closing down - List assignments for a classroom
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists GitHub Classroom assignments for a classroom. Assignments will only be returned if the current user is an administrator of the GitHub Classroom.
     ///
@@ -1905,6 +2132,29 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Gone
+            ///
+            /// - Remark: Generated from `#/paths//classrooms/{classroom_id}/assignments/get(classroom/list-assignments-for-a-classroom)/responses/410`.
+            ///
+            /// HTTP response code: `410 gone`.
+            case gone(Components.Responses.Gone)
+            /// The associated value of the enum case if `self` is `.gone`.
+            ///
+            /// - Throws: An error if `self` is not `.gone`.
+            /// - SeeAlso: `.gone`.
+            public var gone: Components.Responses.Gone {
+                get throws {
+                    switch self {
+                    case let .gone(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "gone",
                             response: self
                         )
                     }
