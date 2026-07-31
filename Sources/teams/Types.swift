@@ -73,6 +73,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// Team members will include the members of child teams.
     ///
+    /// Each member includes their `role` on the team (`member` or `maintainer`) and an `inherited` flag indicating whether the membership is inherited from a child team (`true`) or is a direct membership (`false`). These fields let you read a member's role and direct/inherited status without additional requests.
+    ///
     /// To list members in a team, the team must be visible to the authenticated user.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/teams/{team_slug}/members`.
@@ -240,6 +242,8 @@ public protocol APIProtocol: Sendable {
     /// > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team members`](https://docs.github.com/rest/teams/members#list-team-members) endpoint.
     ///
     /// Team members will include the members of child teams.
+    ///
+    /// Each member includes their `role` on the team (`member` or `maintainer`) and an `inherited` flag indicating whether the membership is inherited from a child team (`true`) or is a direct membership (`false`).
     ///
     /// - Remark: HTTP `GET /teams/{team_id}/members`.
     /// - Remark: Generated from `#/paths//teams/{team_id}/members/get(teams/list-members-legacy)`.
@@ -531,6 +535,8 @@ extension APIProtocol {
     ///
     /// Team members will include the members of child teams.
     ///
+    /// Each member includes their `role` on the team (`member` or `maintainer`) and an `inherited` flag indicating whether the membership is inherited from a child team (`true`) or is a direct membership (`false`). These fields let you read a member's role and direct/inherited status without additional requests.
+    ///
     /// To list members in a team, the team must be visible to the authenticated user.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/teams/{team_slug}/members`.
@@ -802,6 +808,8 @@ extension APIProtocol {
     /// > **Endpoint closing down notice:** This endpoint route is closing down and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team members`](https://docs.github.com/rest/teams/members#list-team-members) endpoint.
     ///
     /// Team members will include the members of child teams.
+    ///
+    /// Each member includes their `role` on the team (`member` or `maintainer`) and an `inherited` flag indicating whether the membership is inherited from a child team (`true`) or is a direct membership (`false`).
     ///
     /// - Remark: HTTP `GET /teams/{team_id}/members`.
     /// - Remark: Generated from `#/paths//teams/{team_id}/members/get(teams/list-members-legacy)`.
@@ -3591,6 +3599,174 @@ public enum Components {
                 case enterpriseId = "enterprise_id"
             }
         }
+        /// A user that is a member of a team, including their role on the team and whether the membership is inherited from a child team.
+        ///
+        /// - Remark: Generated from `#/components/schemas/team-member`.
+        public struct TeamMember: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/team-member/name`.
+            public var name: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/team-member/email`.
+            public var email: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/team-member/login`.
+            public var login: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/team-member/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/avatar_url`.
+            public var avatarUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/gravatar_id`.
+            public var gravatarId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/team-member/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/html_url`.
+            public var htmlUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/followers_url`.
+            public var followersUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/following_url`.
+            public var followingUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/gists_url`.
+            public var gistsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/starred_url`.
+            public var starredUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/subscriptions_url`.
+            public var subscriptionsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/organizations_url`.
+            public var organizationsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/repos_url`.
+            public var reposUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/events_url`.
+            public var eventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/received_events_url`.
+            public var receivedEventsUrl: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/type`.
+            public var _type: Swift.String
+            /// - Remark: Generated from `#/components/schemas/team-member/site_admin`.
+            public var siteAdmin: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/team-member/starred_at`.
+            public var starredAt: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/team-member/user_view_type`.
+            public var userViewType: Swift.String?
+            /// The member's role on the team. Only present on the `List team members` endpoint, and only when the feature is enabled for the organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-member/role`.
+            @frozen public enum RolePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case member = "member"
+                case maintainer = "maintainer"
+            }
+            /// The member's role on the team. Only present on the `List team members` endpoint, and only when the feature is enabled for the organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-member/role`.
+            public var role: Components.Schemas.TeamMember.RolePayload?
+            /// Whether the user is a member of the team only through a child team. `true` means the membership is inherited from a child team; `false` means the user is a direct (immediate) member of the team. Only present on the `List team members` endpoint, and only when the feature is enabled for the organization.
+            ///
+            /// - Remark: Generated from `#/components/schemas/team-member/inherited`.
+            public var inherited: Swift.Bool?
+            /// Creates a new `TeamMember`.
+            ///
+            /// - Parameters:
+            ///   - name:
+            ///   - email:
+            ///   - login:
+            ///   - id:
+            ///   - nodeId:
+            ///   - avatarUrl:
+            ///   - gravatarId:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - followersUrl:
+            ///   - followingUrl:
+            ///   - gistsUrl:
+            ///   - starredUrl:
+            ///   - subscriptionsUrl:
+            ///   - organizationsUrl:
+            ///   - reposUrl:
+            ///   - eventsUrl:
+            ///   - receivedEventsUrl:
+            ///   - _type:
+            ///   - siteAdmin:
+            ///   - starredAt:
+            ///   - userViewType:
+            ///   - role: The member's role on the team. Only present on the `List team members` endpoint, and only when the feature is enabled for the organization.
+            ///   - inherited: Whether the user is a member of the team only through a child team. `true` means the membership is inherited from a child team; `false` means the user is a direct (immediate) member of the team. Only present on the `List team members` endpoint, and only when the feature is enabled for the organization.
+            public init(
+                name: Swift.String? = nil,
+                email: Swift.String? = nil,
+                login: Swift.String,
+                id: Swift.Int64,
+                nodeId: Swift.String,
+                avatarUrl: Swift.String,
+                gravatarId: Swift.String? = nil,
+                url: Swift.String,
+                htmlUrl: Swift.String,
+                followersUrl: Swift.String,
+                followingUrl: Swift.String,
+                gistsUrl: Swift.String,
+                starredUrl: Swift.String,
+                subscriptionsUrl: Swift.String,
+                organizationsUrl: Swift.String,
+                reposUrl: Swift.String,
+                eventsUrl: Swift.String,
+                receivedEventsUrl: Swift.String,
+                _type: Swift.String,
+                siteAdmin: Swift.Bool,
+                starredAt: Swift.String? = nil,
+                userViewType: Swift.String? = nil,
+                role: Components.Schemas.TeamMember.RolePayload? = nil,
+                inherited: Swift.Bool? = nil
+            ) {
+                self.name = name
+                self.email = email
+                self.login = login
+                self.id = id
+                self.nodeId = nodeId
+                self.avatarUrl = avatarUrl
+                self.gravatarId = gravatarId
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.followersUrl = followersUrl
+                self.followingUrl = followingUrl
+                self.gistsUrl = gistsUrl
+                self.starredUrl = starredUrl
+                self.subscriptionsUrl = subscriptionsUrl
+                self.organizationsUrl = organizationsUrl
+                self.reposUrl = reposUrl
+                self.eventsUrl = eventsUrl
+                self.receivedEventsUrl = receivedEventsUrl
+                self._type = _type
+                self.siteAdmin = siteAdmin
+                self.starredAt = starredAt
+                self.userViewType = userViewType
+                self.role = role
+                self.inherited = inherited
+            }
+            public enum CodingKeys: String, CodingKey {
+                case name
+                case email
+                case login
+                case id
+                case nodeId = "node_id"
+                case avatarUrl = "avatar_url"
+                case gravatarId = "gravatar_id"
+                case url
+                case htmlUrl = "html_url"
+                case followersUrl = "followers_url"
+                case followingUrl = "following_url"
+                case gistsUrl = "gists_url"
+                case starredUrl = "starred_url"
+                case subscriptionsUrl = "subscriptions_url"
+                case organizationsUrl = "organizations_url"
+                case reposUrl = "repos_url"
+                case eventsUrl = "events_url"
+                case receivedEventsUrl = "received_events_url"
+                case _type = "type"
+                case siteAdmin = "site_admin"
+                case starredAt = "starred_at"
+                case userViewType = "user_view_type"
+                case role
+                case inherited
+            }
+        }
         /// Team Membership
         ///
         /// - Remark: Generated from `#/components/schemas/team-membership`.
@@ -5814,6 +5990,8 @@ public enum Operations {
     ///
     /// Team members will include the members of child teams.
     ///
+    /// Each member includes their `role` on the team (`member` or `maintainer`) and an `inherited` flag indicating whether the membership is inherited from a child team (`true`) or is a direct membership (`false`). These fields let you read a member's role and direct/inherited status without additional requests.
+    ///
     /// To list members in a team, the team must be visible to the authenticated user.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/teams/{team_slug}/members`.
@@ -5929,12 +6107,12 @@ public enum Operations {
                 /// - Remark: Generated from `#/paths/orgs/{org}/teams/{team_slug}/members/GET/responses/200/content`.
                 @frozen public enum Body: Sendable, Hashable {
                     /// - Remark: Generated from `#/paths/orgs/{org}/teams/{team_slug}/members/GET/responses/200/content/application\/json`.
-                    case json([Components.Schemas.SimpleUser])
+                    case json([Components.Schemas.TeamMember])
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: [Components.Schemas.SimpleUser] {
+                    public var json: [Components.Schemas.TeamMember] {
                         get throws {
                             switch self {
                             case let .json(body):
@@ -8318,6 +8496,8 @@ public enum Operations {
     ///
     /// Team members will include the members of child teams.
     ///
+    /// Each member includes their `role` on the team (`member` or `maintainer`) and an `inherited` flag indicating whether the membership is inherited from a child team (`true`) or is a direct membership (`false`).
+    ///
     /// - Remark: HTTP `GET /teams/{team_id}/members`.
     /// - Remark: Generated from `#/paths//teams/{team_id}/members/get(teams/list-members-legacy)`.
     public enum TeamsListMembersLegacy {
@@ -8422,12 +8602,12 @@ public enum Operations {
                 /// - Remark: Generated from `#/paths/teams/{team_id}/members/GET/responses/200/content`.
                 @frozen public enum Body: Sendable, Hashable {
                     /// - Remark: Generated from `#/paths/teams/{team_id}/members/GET/responses/200/content/application\/json`.
-                    case json([Components.Schemas.SimpleUser])
+                    case json([Components.Schemas.TeamMember])
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: [Components.Schemas.SimpleUser] {
+                    public var json: [Components.Schemas.TeamMember] {
                         get throws {
                             switch self {
                             case let .json(body):

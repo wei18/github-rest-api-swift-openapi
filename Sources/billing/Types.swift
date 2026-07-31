@@ -870,6 +870,7 @@ public enum Components {
                 case repository = "repository"
                 case costCenter = "cost_center"
                 case multiUserCustomer = "multi_user_customer"
+                case multiUserCostCenter = "multi_user_cost_center"
                 case user = "user"
             }
             /// The scope of the budget
@@ -1071,6 +1072,7 @@ public enum Components {
                     case repository = "repository"
                     case costCenter = "cost_center"
                     case multiUserCustomer = "multi_user_customer"
+                    case multiUserCostCenter = "multi_user_cost_center"
                     case user = "user"
                 }
                 /// The type of scope for the budget
@@ -1246,6 +1248,7 @@ public enum Components {
                 case repository = "repository"
                 case costCenter = "cost_center"
                 case multiUserCustomer = "multi_user_customer"
+                case multiUserCostCenter = "multi_user_cost_center"
                 case user = "user"
             }
             /// The type of scope for the budget
@@ -1416,6 +1419,7 @@ public enum Components {
                     case repository = "repository"
                     case costCenter = "cost_center"
                     case multiUserCustomer = "multi_user_customer"
+                    case multiUserCostCenter = "multi_user_cost_center"
                     case user = "user"
                 }
                 /// The type of scope for the budget
@@ -3714,6 +3718,11 @@ public enum Operations {
                 }
                 /// Filter budgets by scope type.
                 ///
+                /// - `organization`: Budgets scoped to the organization.
+                /// - `repository`: Budgets scoped to a repository.
+                /// - `multi_user_customer`: Universal budgets that apply to all users in the organization.
+                /// - `user`: Budgets scoped to an individual user.
+                ///
                 /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/GET/query/scope`.
                 public var scope: Operations.BillingGetAllBudgetsOrg.Input.Query.ScopePayload?
                 /// Filter consumed amount details for budgets by the specified user login.
@@ -3970,7 +3979,15 @@ public enum Operations {
                     }
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_alerting`.
                     public var budgetAlerting: Operations.BillingCreateOrganizationBudget.Input.Body.JsonPayload.BudgetAlertingPayload?
-                    /// The scope of the budget for this organization. Use 'organization' for org-level budgets or 'repository' for repo-specific budgets within the organization. `user` and `multi_user_customer` scopes are only supported when `budget_product_sku` is `ai_credits` or `premium_requests`.
+                    /// The scope of the budget for this organization.
+                    ///
+                    /// - `organization`: Apply the budget to the organization.
+                    /// - `repository`: Apply the budget to a specific repository in the organization.
+                    /// - `multi_user_customer`: Apply a universal budget to all users in the organization.
+                    /// - `user`: Apply the budget to a single user in the organization.
+                    ///
+                    /// `user` and `multi_user_customer` scopes are only supported when
+                    /// `budget_product_sku` is `ai_credits` or `premium_requests`.
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_scope`.
                     @frozen public enum BudgetScopePayload: String, Codable, Hashable, Sendable, CaseIterable {
@@ -3979,7 +3996,15 @@ public enum Operations {
                         case multiUserCustomer = "multi_user_customer"
                         case user = "user"
                     }
-                    /// The scope of the budget for this organization. Use 'organization' for org-level budgets or 'repository' for repo-specific budgets within the organization. `user` and `multi_user_customer` scopes are only supported when `budget_product_sku` is `ai_credits` or `premium_requests`.
+                    /// The scope of the budget for this organization.
+                    ///
+                    /// - `organization`: Apply the budget to the organization.
+                    /// - `repository`: Apply the budget to a specific repository in the organization.
+                    /// - `multi_user_customer`: Apply a universal budget to all users in the organization.
+                    /// - `user`: Apply the budget to a single user in the organization.
+                    ///
+                    /// `user` and `multi_user_customer` scopes are only supported when
+                    /// `budget_product_sku` is `ai_credits` or `premium_requests`.
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/POST/requestBody/json/budget_scope`.
                     public var budgetScope: Operations.BillingCreateOrganizationBudget.Input.Body.JsonPayload.BudgetScopePayload?
@@ -4072,7 +4097,7 @@ public enum Operations {
                     ///   - budgetAmount: The budget amount in whole dollars. For license-based products, this represents the number of licenses.
                     ///   - preventFurtherUsage: Whether to prevent additional spending once the budget is exceeded. For `user` and `multi_user_customer` scopes, this must be `true`.
                     ///   - budgetAlerting:
-                    ///   - budgetScope: The scope of the budget for this organization. Use 'organization' for org-level budgets or 'repository' for repo-specific budgets within the organization. `user` and `multi_user_customer` scopes are only supported when `budget_product_sku` is `ai_credits` or `premium_requests`.
+                    ///   - budgetScope: The scope of the budget for this organization.
                     ///   - budgetEntityName: The name of the entity to apply the budget to
                     ///   - budgetType: The type of pricing model used by the budget. Determines how `budget_product_sku` is interpreted.
                     ///   - budgetProductSku: A single product or SKU that will be covered in the budget
@@ -4758,7 +4783,12 @@ public enum Operations {
                     }
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_alerting`.
                     public var budgetAlerting: Operations.BillingUpdateBudgetOrg.Input.Body.JsonPayload.BudgetAlertingPayload?
-                    /// The scope of the budget
+                    /// The scope of the budget for this organization.
+                    ///
+                    /// - `organization`: Apply the budget to the organization.
+                    /// - `repository`: Apply the budget to a specific repository in the organization.
+                    /// - `multi_user_customer`: Apply a universal budget to all users in the organization.
+                    /// - `user`: Apply the budget to a single user in the organization.
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_scope`.
                     @frozen public enum BudgetScopePayload: String, Codable, Hashable, Sendable, CaseIterable {
@@ -4769,7 +4799,12 @@ public enum Operations {
                         case multiUserCustomer = "multi_user_customer"
                         case user = "user"
                     }
-                    /// The scope of the budget
+                    /// The scope of the budget for this organization.
+                    ///
+                    /// - `organization`: Apply the budget to the organization.
+                    /// - `repository`: Apply the budget to a specific repository in the organization.
+                    /// - `multi_user_customer`: Apply a universal budget to all users in the organization.
+                    /// - `user`: Apply the budget to a single user in the organization.
                     ///
                     /// - Remark: Generated from `#/paths/organizations/{org}/settings/billing/budgets/{budget_id}/PATCH/requestBody/json/budget_scope`.
                     public var budgetScope: Operations.BillingUpdateBudgetOrg.Input.Body.JsonPayload.BudgetScopePayload?
@@ -4862,7 +4897,7 @@ public enum Operations {
                     ///   - budgetAmount: The budget amount in whole dollars. For license-based products, this represents the number of licenses.
                     ///   - preventFurtherUsage: Whether to prevent additional spending once the budget is exceeded. For budgets with `user` or `multi_user_customer` scope, this must remain `true`.
                     ///   - budgetAlerting:
-                    ///   - budgetScope: The scope of the budget
+                    ///   - budgetScope: The scope of the budget for this organization.
                     ///   - budgetEntityName: The name of the entity to apply the budget to
                     ///   - budgetType: The type of pricing model used by the budget. Determines how `budget_product_sku` is interpreted.
                     ///   - budgetProductSku: A single product or SKU that will be covered in the budget

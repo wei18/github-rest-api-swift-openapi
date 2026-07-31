@@ -13104,6 +13104,34 @@ public enum Components {
                 self.body = body
             }
         }
+        public struct Gone: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/gone/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/gone/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.Gone.Body
+            /// Creates a new `Gone`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.Gone.Body) {
+                self.body = body
+            }
+        }
         public struct InternalError: Sendable, Hashable {
             /// - Remark: Generated from `#/components/responses/internal_error/content`.
             @frozen public enum Body: Sendable, Hashable {
@@ -13312,34 +13340,6 @@ public enum Components {
             /// - Parameters:
             ///   - body: Received HTTP response body
             public init(body: Components.Responses.ActionsRunnerLabelsReadonly.Body) {
-                self.body = body
-            }
-        }
-        public struct Gone: Sendable, Hashable {
-            /// - Remark: Generated from `#/components/responses/gone/content`.
-            @frozen public enum Body: Sendable, Hashable {
-                /// - Remark: Generated from `#/components/responses/gone/content/application\/json`.
-                case json(Components.Schemas.BasicError)
-                /// The associated value of the enum case if `self` is `.json`.
-                ///
-                /// - Throws: An error if `self` is not `.json`.
-                /// - SeeAlso: `.json`.
-                public var json: Components.Schemas.BasicError {
-                    get throws {
-                        switch self {
-                        case let .json(body):
-                            return body
-                        }
-                    }
-                }
-            }
-            /// Received HTTP response body
-            public var body: Components.Responses.Gone.Body
-            /// Creates a new `Gone`.
-            ///
-            /// - Parameters:
-            ///   - body: Received HTTP response body
-            public init(body: Components.Responses.Gone.Body) {
                 self.body = body
             }
         }

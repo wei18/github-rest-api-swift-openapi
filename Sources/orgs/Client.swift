@@ -662,6 +662,28 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 207:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .code207(.init(body: body))
                 case 403:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Operations.OrgsSetClusterDeploymentRecords.Output.Forbidden.Body
@@ -687,6 +709,259 @@ public struct Client: APIProtocol {
                 case 404:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Operations.OrgsSetClusterDeploymentRecords.Output.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Create a cluster deployment records job
+    ///
+    /// Create a background job to set deployment records for a given cluster.
+    /// Performs validation and permission checks synchronously, returning rejected
+    /// deployments immediately, then enqueues a background job for the actual
+    /// deployment updates. Use the companion GET endpoint to poll for job status.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/post(orgs/create-cluster-deployment-records-job)`.
+    public func orgsCreateClusterDeploymentRecordsJob(_ input: Operations.OrgsCreateClusterDeploymentRecordsJob.Input) async throws -> Operations.OrgsCreateClusterDeploymentRecordsJob.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsCreateClusterDeploymentRecordsJob.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/artifacts/metadata/deployment-record/cluster/{}/jobs",
+                    parameters: [
+                        input.path.org,
+                        input.path.cluster
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .post
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case let .json(value):
+                    body = try converter.setRequiredRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 202:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Accepted.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Accepted.Body.JsonPayload.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .accepted(.init(body: body))
+                case 400:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.BadRequest.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .badRequest(.init(body: body))
+                case 403:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Forbidden.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .forbidden(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.NotFound.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .notFound(.init(body: body))
+                case 409:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Conflict.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .conflict(.init(body: body))
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
+    /// Get cluster deployment records job status
+    ///
+    /// Get the status and results of a previously created cluster deployment records job.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/get(orgs/get-cluster-deployment-records-job)`.
+    public func orgsGetClusterDeploymentRecordsJob(_ input: Operations.OrgsGetClusterDeploymentRecordsJob.Input) async throws -> Operations.OrgsGetClusterDeploymentRecordsJob.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.OrgsGetClusterDeploymentRecordsJob.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/orgs/{}/artifacts/metadata/deployment-record/cluster/{}/jobs/{}",
+                    parameters: [
+                        input.path.org,
+                        input.path.cluster,
+                        input.path.jobId
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .get
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                return (request, nil)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsGetClusterDeploymentRecordsJob.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.OrgsGetClusterDeploymentRecordsJob.Output.Ok.Body.JsonPayload.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                case 404:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsGetClusterDeploymentRecordsJob.Output.NotFound.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -3010,6 +3285,8 @@ public struct Client: APIProtocol {
     ///
     /// Get API request count statistics for an actor broken down by route within a specified time frame.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}/get(api-insights/get-route-stats-by-actor)`.
     public func apiInsightsGetRouteStatsByActor(_ input: Operations.ApiInsightsGetRouteStatsByActor.Input) async throws -> Operations.ApiInsightsGetRouteStatsByActor.Output {
@@ -3125,6 +3402,8 @@ public struct Client: APIProtocol {
     ///
     /// Get API request statistics for all subjects within an organization within a specified time frame. Subjects can be users or GitHub Apps.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/subject-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/subject-stats/get(api-insights/get-subject-stats)`.
     public func apiInsightsGetSubjectStats(_ input: Operations.ApiInsightsGetSubjectStats.Input) async throws -> Operations.ApiInsightsGetSubjectStats.Output {
@@ -3238,6 +3517,8 @@ public struct Client: APIProtocol {
     ///
     /// Get overall statistics of API requests made within an organization by all users and apps within a specified time frame.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/get(api-insights/get-summary-stats)`.
     public func apiInsightsGetSummaryStats(_ input: Operations.ApiInsightsGetSummaryStats.Input) async throws -> Operations.ApiInsightsGetSummaryStats.Output {
@@ -3315,6 +3596,8 @@ public struct Client: APIProtocol {
     /// Get summary stats by user
     ///
     /// Get overall statistics of API requests within the organization for a user.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats/users/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/users/{user_id}/get(api-insights/get-summary-stats-by-user)`.
@@ -3395,6 +3678,8 @@ public struct Client: APIProtocol {
     ///
     /// Get overall statistics of API requests within the organization made by a specific actor. Actors can be GitHub App installations, OAuth apps or other tokens on behalf of a user.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/{actor_type}/{actor_id}/get(api-insights/get-summary-stats-by-actor)`.
     public func apiInsightsGetSummaryStatsByActor(_ input: Operations.ApiInsightsGetSummaryStatsByActor.Input) async throws -> Operations.ApiInsightsGetSummaryStatsByActor.Output {
@@ -3474,6 +3759,8 @@ public struct Client: APIProtocol {
     /// Get time stats
     ///
     /// Get the number of API requests and rate-limited requests made within an organization over a specified time period.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/get(api-insights/get-time-stats)`.
@@ -3559,6 +3846,8 @@ public struct Client: APIProtocol {
     /// Get time stats by user
     ///
     /// Get the number of API requests and rate-limited requests made within an organization by a specific user over a specified time period.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats/users/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/users/{user_id}/get(api-insights/get-time-stats-by-user)`.
@@ -3646,6 +3935,8 @@ public struct Client: APIProtocol {
     ///
     /// Get the number of API requests and rate-limited requests made within an organization by a specific actor within a specified time period.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/{actor_type}/{actor_id}/get(api-insights/get-time-stats-by-actor)`.
     public func apiInsightsGetTimeStatsByActor(_ input: Operations.ApiInsightsGetTimeStatsByActor.Input) async throws -> Operations.ApiInsightsGetTimeStatsByActor.Output {
@@ -3732,6 +4023,8 @@ public struct Client: APIProtocol {
     /// Get user stats
     ///
     /// Get API usage statistics within an organization for a user broken down by the type of access.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/user-stats/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/user-stats/{user_id}/get(api-insights/get-user-stats)`.
@@ -10331,6 +10624,28 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 202:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.OrgsUpdateMembershipForAuthenticatedUser.Output.Accepted.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.OrgMembership.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .accepted(.init(body: body))
                 case 403:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.Forbidden.Body

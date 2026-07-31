@@ -38,12 +38,17 @@ public struct Client: APIProtocol {
     private var converter: Converter {
         client.converter
     }
-    /// Get an assignment
+    /// Closing down - Get an assignment
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets a GitHub Classroom assignment. Assignment will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
     /// - Remark: HTTP `GET /assignments/{assignment_id}`.
     /// - Remark: Generated from `#/paths//assignments/{assignment_id}/get(classroom/get-an-assignment)`.
+    @available(*, deprecated)
     public func classroomGetAnAssignment(_ input: Operations.ClassroomGetAnAssignment.Input) async throws -> Operations.ClassroomGetAnAssignment.Output {
         try await client.send(
             input: input,
@@ -112,6 +117,28 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .notFound(.init(body: body))
+                case 410:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Gone.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .gone(.init(body: body))
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -124,12 +151,17 @@ public struct Client: APIProtocol {
             }
         )
     }
-    /// List accepted assignments for an assignment
+    /// Closing down - List accepted assignments for an assignment
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists any assignment repositories that have been created by students accepting a GitHub Classroom assignment. Accepted assignments will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
     /// - Remark: HTTP `GET /assignments/{assignment_id}/accepted_assignments`.
     /// - Remark: Generated from `#/paths//assignments/{assignment_id}/accepted_assignments/get(classroom/list-accepted-assignments-for-an-assignment)`.
+    @available(*, deprecated)
     public func classroomListAcceptedAssignmentsForAnAssignment(_ input: Operations.ClassroomListAcceptedAssignmentsForAnAssignment.Input) async throws -> Operations.ClassroomListAcceptedAssignmentsForAnAssignment.Output {
         try await client.send(
             input: input,
@@ -190,6 +222,28 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 410:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Gone.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .gone(.init(body: body))
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -202,12 +256,17 @@ public struct Client: APIProtocol {
             }
         )
     }
-    /// Get assignment grades
+    /// Closing down - Get assignment grades
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets grades for a GitHub Classroom assignment. Grades will only be returned if the current user is an administrator of the GitHub Classroom for the assignment.
     ///
     /// - Remark: HTTP `GET /assignments/{assignment_id}/grades`.
     /// - Remark: Generated from `#/paths//assignments/{assignment_id}/grades/get(classroom/get-assignment-grades)`.
+    @available(*, deprecated)
     public func classroomGetAssignmentGrades(_ input: Operations.ClassroomGetAssignmentGrades.Input) async throws -> Operations.ClassroomGetAssignmentGrades.Output {
         try await client.send(
             input: input,
@@ -276,6 +335,28 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .notFound(.init(body: body))
+                case 410:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Gone.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .gone(.init(body: body))
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -288,12 +369,17 @@ public struct Client: APIProtocol {
             }
         )
     }
-    /// List classrooms
+    /// Closing down - List classrooms
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists GitHub Classroom classrooms for the current user. Classrooms will only be returned if the current user is an administrator of one or more GitHub Classrooms.
     ///
     /// - Remark: HTTP `GET /classrooms`.
     /// - Remark: Generated from `#/paths//classrooms/get(classroom/list-classrooms)`.
+    @available(*, deprecated)
     public func classroomListClassrooms(_ input: Operations.ClassroomListClassrooms.Input) async throws -> Operations.ClassroomListClassrooms.Output {
         try await client.send(
             input: input,
@@ -352,6 +438,28 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 410:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Gone.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .gone(.init(body: body))
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -364,12 +472,17 @@ public struct Client: APIProtocol {
             }
         )
     }
-    /// Get a classroom
+    /// Closing down - Get a classroom
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Gets a GitHub Classroom classroom for the current user. Classroom will only be returned if the current user is an administrator of the GitHub Classroom.
     ///
     /// - Remark: HTTP `GET /classrooms/{classroom_id}`.
     /// - Remark: Generated from `#/paths//classrooms/{classroom_id}/get(classroom/get-a-classroom)`.
+    @available(*, deprecated)
     public func classroomGetAClassroom(_ input: Operations.ClassroomGetAClassroom.Input) async throws -> Operations.ClassroomGetAClassroom.Output {
         try await client.send(
             input: input,
@@ -438,6 +551,28 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .notFound(.init(body: body))
+                case 410:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Gone.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .gone(.init(body: body))
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -450,12 +585,17 @@ public struct Client: APIProtocol {
             }
         )
     }
-    /// List assignments for a classroom
+    /// Closing down - List assignments for a classroom
+    ///
+    /// > [!WARNING]
+    /// > **Closing down notice:** This operation is closing down and will be removed on August 28, 2026.
+    /// > For more information, see the [GitHub Classroom sunset notice](https://gh.io/classroom-sunset).
     ///
     /// Lists GitHub Classroom assignments for a classroom. Assignments will only be returned if the current user is an administrator of the GitHub Classroom.
     ///
     /// - Remark: HTTP `GET /classrooms/{classroom_id}/assignments`.
     /// - Remark: Generated from `#/paths//classrooms/{classroom_id}/assignments/get(classroom/list-assignments-for-a-classroom)`.
+    @available(*, deprecated)
     public func classroomListAssignmentsForAClassroom(_ input: Operations.ClassroomListAssignmentsForAClassroom.Input) async throws -> Operations.ClassroomListAssignmentsForAClassroom.Output {
         try await client.send(
             input: input,
@@ -516,6 +656,28 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 410:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.Gone.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.BasicError.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .gone(.init(body: body))
                 default:
                     return .undocumented(
                         statusCode: response.status.code,

@@ -866,6 +866,29 @@ public enum Operations {
                             ///
                             /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/created_at`.
                             public var createdAt: Foundation.Date
+                            /// Custom agent metadata associated with this task
+                            ///
+                            /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/custom_agent`.
+                            public struct CustomAgentPayload: Codable, Hashable, Sendable {
+                                /// The custom agent's filename without the extension - for example, `performance-optimizer` for a `.github/agents/performance-optimizer.agent.md` custom agent.
+                                ///
+                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/custom_agent/id`.
+                                public var id: Swift.String?
+                                /// Creates a new `CustomAgentPayload`.
+                                ///
+                                /// - Parameters:
+                                ///   - id: The custom agent's filename without the extension - for example, `performance-optimizer` for a `.github/agents/performance-optimizer.agent.md` custom agent.
+                                public init(id: Swift.String? = nil) {
+                                    self.id = id
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case id
+                                }
+                            }
+                            /// Custom agent metadata associated with this task
+                            ///
+                            /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/GET/responses/200/content/json/TasksPayload/custom_agent`.
+                            public var customAgent: Operations.AgentTasksListTasksForRepo.Output.Ok.Body.JsonPayload.TasksPayloadPayload.CustomAgentPayload?
                             /// Creates a new `TasksPayloadPayload`.
                             ///
                             /// - Parameters:
@@ -884,6 +907,7 @@ public enum Operations {
                             ///   - archivedAt: Timestamp when the task was archived, null if not archived
                             ///   - updatedAt: Timestamp of the most recent update
                             ///   - createdAt: Timestamp when the task was created
+                            ///   - customAgent: Custom agent metadata associated with this task
                             public init(
                                 id: Swift.String,
                                 url: Swift.String? = nil,
@@ -899,7 +923,8 @@ public enum Operations {
                                 artifacts: Operations.AgentTasksListTasksForRepo.Output.Ok.Body.JsonPayload.TasksPayloadPayload.ArtifactsPayload? = nil,
                                 archivedAt: Foundation.Date? = nil,
                                 updatedAt: Foundation.Date? = nil,
-                                createdAt: Foundation.Date
+                                createdAt: Foundation.Date,
+                                customAgent: Operations.AgentTasksListTasksForRepo.Output.Ok.Body.JsonPayload.TasksPayloadPayload.CustomAgentPayload? = nil
                             ) {
                                 self.id = id
                                 self.url = url
@@ -916,6 +941,7 @@ public enum Operations {
                                 self.archivedAt = archivedAt
                                 self.updatedAt = updatedAt
                                 self.createdAt = createdAt
+                                self.customAgent = customAgent
                             }
                             public enum CodingKeys: String, CodingKey {
                                 case id
@@ -933,6 +959,7 @@ public enum Operations {
                                 case archivedAt = "archived_at"
                                 case updatedAt = "updated_at"
                                 case createdAt = "created_at"
+                                case customAgent = "custom_agent"
                             }
                         }
                         /// List of tasks
@@ -1807,6 +1834,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/model`.
                     public var model: Swift.String?
+                    /// Optional identifier for a custom agent to use for this task. Use the custom agent's filename without the extension - for example, for a `.github/agents/performance-optimizer.agent.md` custom agent, use `performance-optimizer`.
+                    ///
+                    /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/custom_agent`.
+                    public var customAgent: Swift.String?
                     /// Whether to create a PR.
                     ///
                     /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/requestBody/json/create_pull_request`.
@@ -1824,18 +1855,21 @@ public enum Operations {
                     /// - Parameters:
                     ///   - prompt: The user's prompt for the agent
                     ///   - model: The model to use for this task. The allowed models may change over time and depend on the user's GitHub Copilot plan and organization policies. Currently supported values: `claude-sonnet-4.6`, `claude-opus-4.6`, `gpt-5.2-codex`, `gpt-5.3-codex`, `gpt-5.4`, `claude-sonnet-4.5`, `claude-opus-4.5`
+                    ///   - customAgent: Optional identifier for a custom agent to use for this task. Use the custom agent's filename without the extension - for example, for a `.github/agents/performance-optimizer.agent.md` custom agent, use `performance-optimizer`.
                     ///   - createPullRequest: Whether to create a PR.
                     ///   - baseRef: Base ref for new branch/PR
                     ///   - headRef: Head ref for existing branch/PR. If provided with `base_ref`, the agent looks up open PR context for `head_ref` targeting `base_ref` and commits to `head_ref` instead of creating a new branch.
                     public init(
                         prompt: Swift.String,
                         model: Swift.String? = nil,
+                        customAgent: Swift.String? = nil,
                         createPullRequest: Swift.Bool? = nil,
                         baseRef: Swift.String? = nil,
                         headRef: Swift.String? = nil
                     ) {
                         self.prompt = prompt
                         self.model = model
+                        self.customAgent = customAgent
                         self.createPullRequest = createPullRequest
                         self.baseRef = baseRef
                         self.headRef = headRef
@@ -1843,6 +1877,7 @@ public enum Operations {
                     public enum CodingKeys: String, CodingKey {
                         case prompt
                         case model
+                        case customAgent = "custom_agent"
                         case createPullRequest = "create_pull_request"
                         case baseRef = "base_ref"
                         case headRef = "head_ref"
@@ -2219,6 +2254,29 @@ public enum Operations {
                         ///
                         /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/created_at`.
                         public var createdAt: Foundation.Date
+                        /// Custom agent metadata associated with this task
+                        ///
+                        /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/custom_agent`.
+                        public struct CustomAgentPayload: Codable, Hashable, Sendable {
+                            /// The custom agent's filename without the extension - for example, `performance-optimizer` for a `.github/agents/performance-optimizer.agent.md` custom agent.
+                            ///
+                            /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/custom_agent/id`.
+                            public var id: Swift.String?
+                            /// Creates a new `CustomAgentPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - id: The custom agent's filename without the extension - for example, `performance-optimizer` for a `.github/agents/performance-optimizer.agent.md` custom agent.
+                            public init(id: Swift.String? = nil) {
+                                self.id = id
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case id
+                            }
+                        }
+                        /// Custom agent metadata associated with this task
+                        ///
+                        /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/json/custom_agent`.
+                        public var customAgent: Operations.AgentTasksCreateTaskInRepo.Output.Created.Body.JsonPayload.CustomAgentPayload?
                         /// Creates a new `JsonPayload`.
                         ///
                         /// - Parameters:
@@ -2237,6 +2295,7 @@ public enum Operations {
                         ///   - archivedAt: Timestamp when the task was archived, null if not archived
                         ///   - updatedAt: Timestamp of the most recent update
                         ///   - createdAt: Timestamp when the task was created
+                        ///   - customAgent: Custom agent metadata associated with this task
                         public init(
                             id: Swift.String,
                             url: Swift.String? = nil,
@@ -2252,7 +2311,8 @@ public enum Operations {
                             artifacts: Operations.AgentTasksCreateTaskInRepo.Output.Created.Body.JsonPayload.ArtifactsPayload? = nil,
                             archivedAt: Foundation.Date? = nil,
                             updatedAt: Foundation.Date? = nil,
-                            createdAt: Foundation.Date
+                            createdAt: Foundation.Date,
+                            customAgent: Operations.AgentTasksCreateTaskInRepo.Output.Created.Body.JsonPayload.CustomAgentPayload? = nil
                         ) {
                             self.id = id
                             self.url = url
@@ -2269,6 +2329,7 @@ public enum Operations {
                             self.archivedAt = archivedAt
                             self.updatedAt = updatedAt
                             self.createdAt = createdAt
+                            self.customAgent = customAgent
                         }
                         public enum CodingKeys: String, CodingKey {
                             case id
@@ -2286,6 +2347,7 @@ public enum Operations {
                             case archivedAt = "archived_at"
                             case updatedAt = "updated_at"
                             case createdAt = "created_at"
+                            case customAgent = "custom_agent"
                         }
                     }
                     /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/POST/responses/201/content/application\/json`.
@@ -3342,6 +3404,29 @@ public enum Operations {
                             ///
                             /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/created_at`.
                             public var createdAt: Foundation.Date
+                            /// Custom agent metadata associated with this task
+                            ///
+                            /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/custom_agent`.
+                            public struct CustomAgentPayload: Codable, Hashable, Sendable {
+                                /// The custom agent's filename without the extension - for example, `performance-optimizer` for a `.github/agents/performance-optimizer.agent.md` custom agent.
+                                ///
+                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/custom_agent/id`.
+                                public var id: Swift.String?
+                                /// Creates a new `CustomAgentPayload`.
+                                ///
+                                /// - Parameters:
+                                ///   - id: The custom agent's filename without the extension - for example, `performance-optimizer` for a `.github/agents/performance-optimizer.agent.md` custom agent.
+                                public init(id: Swift.String? = nil) {
+                                    self.id = id
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case id
+                                }
+                            }
+                            /// Custom agent metadata associated with this task
+                            ///
+                            /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1/custom_agent`.
+                            public var customAgent: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value1Payload.CustomAgentPayload?
                             /// Creates a new `Value1Payload`.
                             ///
                             /// - Parameters:
@@ -3360,6 +3445,7 @@ public enum Operations {
                             ///   - archivedAt: Timestamp when the task was archived, null if not archived
                             ///   - updatedAt: Timestamp of the most recent update
                             ///   - createdAt: Timestamp when the task was created
+                            ///   - customAgent: Custom agent metadata associated with this task
                             public init(
                                 id: Swift.String,
                                 url: Swift.String? = nil,
@@ -3375,7 +3461,8 @@ public enum Operations {
                                 artifacts: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value1Payload.ArtifactsPayload? = nil,
                                 archivedAt: Foundation.Date? = nil,
                                 updatedAt: Foundation.Date? = nil,
-                                createdAt: Foundation.Date
+                                createdAt: Foundation.Date,
+                                customAgent: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value1Payload.CustomAgentPayload? = nil
                             ) {
                                 self.id = id
                                 self.url = url
@@ -3392,6 +3479,7 @@ public enum Operations {
                                 self.archivedAt = archivedAt
                                 self.updatedAt = updatedAt
                                 self.createdAt = createdAt
+                                self.customAgent = customAgent
                             }
                             public enum CodingKeys: String, CodingKey {
                                 case id
@@ -3409,6 +3497,7 @@ public enum Operations {
                                 case archivedAt = "archived_at"
                                 case updatedAt = "updated_at"
                                 case createdAt = "created_at"
+                                case customAgent = "custom_agent"
                             }
                         }
                         /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value1`.
@@ -3545,6 +3634,46 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/model`.
                                 public var model: Swift.String?
+                                /// Structured information about billing units consumed by the session.
+                                ///
+                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/usage`.
+                                public struct UsagePayload: Codable, Hashable, Sendable {
+                                    /// Billing unit used for this session. New sessions since June 1, 2026 use `ai_credits`, but older sessions use `premium_requests`.
+                                    ///
+                                    /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/usage/type`.
+                                    @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case aiCredits = "ai_credits"
+                                        case premiumRequests = "premium_requests"
+                                    }
+                                    /// Billing unit used for this session. New sessions since June 1, 2026 use `ai_credits`, but older sessions use `premium_requests`.
+                                    ///
+                                    /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/usage/type`.
+                                    public var _type: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.UsagePayload._TypePayload
+                                    /// Number of billing units used by this session. When the `type` is `ai_credits`, the value is a whole number, expressed in nano units. When presenting this to a human, divide by 1,000,000,000 and round to one decimal place. When aggregating (for example, summing usage across sessions), sum the nano values first, and divide once at the end before presenting to a human to avoid losing precision. When the `type` is `premium_requests`, the value may be fractional (for example `1.5`).
+                                    ///
+                                    /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/usage/amount`.
+                                    public var amount: Swift.Double
+                                    /// Creates a new `UsagePayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - _type: Billing unit used for this session. New sessions since June 1, 2026 use `ai_credits`, but older sessions use `premium_requests`.
+                                    ///   - amount: Number of billing units used by this session. When the `type` is `ai_credits`, the value is a whole number, expressed in nano units. When presenting this to a human, divide by 1,000,000,000 and round to one decimal place. When aggregating (for example, summing usage across sessions), sum the nano values first, and divide once at the end before presenting to a human to avoid losing precision. When the `type` is `premium_requests`, the value may be fractional (for example `1.5`).
+                                    public init(
+                                        _type: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.UsagePayload._TypePayload,
+                                        amount: Swift.Double
+                                    ) {
+                                        self._type = _type
+                                        self.amount = amount
+                                    }
+                                    public enum CodingKeys: String, CodingKey {
+                                        case _type = "type"
+                                        case amount
+                                    }
+                                }
+                                /// Structured information about billing units consumed by the session.
+                                ///
+                                /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/usage`.
+                                public var usage: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.UsagePayload?
                                 /// Error details for a failed session
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/repos/{owner}/{repo}/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/error`.
@@ -3585,6 +3714,7 @@ public enum Operations {
                                 ///   - headRef: Head branch name
                                 ///   - baseRef: Base branch name
                                 ///   - model: Model used for this session
+                                ///   - usage: Structured information about billing units consumed by the session.
                                 ///   - error: Error details for a failed session
                                 public init(
                                     id: Swift.String,
@@ -3601,6 +3731,7 @@ public enum Operations {
                                     headRef: Swift.String? = nil,
                                     baseRef: Swift.String? = nil,
                                     model: Swift.String? = nil,
+                                    usage: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.UsagePayload? = nil,
                                     error: Operations.AgentTasksGetTaskByRepoAndId.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload._ErrorPayload? = nil
                                 ) {
                                     self.id = id
@@ -3617,6 +3748,7 @@ public enum Operations {
                                     self.headRef = headRef
                                     self.baseRef = baseRef
                                     self.model = model
+                                    self.usage = usage
                                     self.error = error
                                 }
                                 public enum CodingKeys: String, CodingKey {
@@ -3634,6 +3766,7 @@ public enum Operations {
                                     case headRef = "head_ref"
                                     case baseRef = "base_ref"
                                     case model
+                                    case usage
                                     case error
                                 }
                             }
@@ -4924,6 +5057,29 @@ public enum Operations {
                             ///
                             /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/created_at`.
                             public var createdAt: Foundation.Date
+                            /// Custom agent metadata associated with this task
+                            ///
+                            /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/custom_agent`.
+                            public struct CustomAgentPayload: Codable, Hashable, Sendable {
+                                /// The custom agent's filename without the extension - for example, `performance-optimizer` for a `.github/agents/performance-optimizer.agent.md` custom agent.
+                                ///
+                                /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/custom_agent/id`.
+                                public var id: Swift.String?
+                                /// Creates a new `CustomAgentPayload`.
+                                ///
+                                /// - Parameters:
+                                ///   - id: The custom agent's filename without the extension - for example, `performance-optimizer` for a `.github/agents/performance-optimizer.agent.md` custom agent.
+                                public init(id: Swift.String? = nil) {
+                                    self.id = id
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case id
+                                }
+                            }
+                            /// Custom agent metadata associated with this task
+                            ///
+                            /// - Remark: Generated from `#/paths/agents/tasks/GET/responses/200/content/json/TasksPayload/custom_agent`.
+                            public var customAgent: Operations.AgentTasksListTasks.Output.Ok.Body.JsonPayload.TasksPayloadPayload.CustomAgentPayload?
                             /// Creates a new `TasksPayloadPayload`.
                             ///
                             /// - Parameters:
@@ -4942,6 +5098,7 @@ public enum Operations {
                             ///   - archivedAt: Timestamp when the task was archived, null if not archived
                             ///   - updatedAt: Timestamp of the most recent update
                             ///   - createdAt: Timestamp when the task was created
+                            ///   - customAgent: Custom agent metadata associated with this task
                             public init(
                                 id: Swift.String,
                                 url: Swift.String? = nil,
@@ -4957,7 +5114,8 @@ public enum Operations {
                                 artifacts: Operations.AgentTasksListTasks.Output.Ok.Body.JsonPayload.TasksPayloadPayload.ArtifactsPayload? = nil,
                                 archivedAt: Foundation.Date? = nil,
                                 updatedAt: Foundation.Date? = nil,
-                                createdAt: Foundation.Date
+                                createdAt: Foundation.Date,
+                                customAgent: Operations.AgentTasksListTasks.Output.Ok.Body.JsonPayload.TasksPayloadPayload.CustomAgentPayload? = nil
                             ) {
                                 self.id = id
                                 self.url = url
@@ -4974,6 +5132,7 @@ public enum Operations {
                                 self.archivedAt = archivedAt
                                 self.updatedAt = updatedAt
                                 self.createdAt = createdAt
+                                self.customAgent = customAgent
                             }
                             public enum CodingKeys: String, CodingKey {
                                 case id
@@ -4991,6 +5150,7 @@ public enum Operations {
                                 case archivedAt = "archived_at"
                                 case updatedAt = "updated_at"
                                 case createdAt = "created_at"
+                                case customAgent = "custom_agent"
                             }
                         }
                         /// List of tasks
@@ -6073,6 +6233,29 @@ public enum Operations {
                             ///
                             /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/created_at`.
                             public var createdAt: Foundation.Date
+                            /// Custom agent metadata associated with this task
+                            ///
+                            /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/custom_agent`.
+                            public struct CustomAgentPayload: Codable, Hashable, Sendable {
+                                /// The custom agent's filename without the extension - for example, `performance-optimizer` for a `.github/agents/performance-optimizer.agent.md` custom agent.
+                                ///
+                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/custom_agent/id`.
+                                public var id: Swift.String?
+                                /// Creates a new `CustomAgentPayload`.
+                                ///
+                                /// - Parameters:
+                                ///   - id: The custom agent's filename without the extension - for example, `performance-optimizer` for a `.github/agents/performance-optimizer.agent.md` custom agent.
+                                public init(id: Swift.String? = nil) {
+                                    self.id = id
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case id
+                                }
+                            }
+                            /// Custom agent metadata associated with this task
+                            ///
+                            /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1/custom_agent`.
+                            public var customAgent: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value1Payload.CustomAgentPayload?
                             /// Creates a new `Value1Payload`.
                             ///
                             /// - Parameters:
@@ -6091,6 +6274,7 @@ public enum Operations {
                             ///   - archivedAt: Timestamp when the task was archived, null if not archived
                             ///   - updatedAt: Timestamp of the most recent update
                             ///   - createdAt: Timestamp when the task was created
+                            ///   - customAgent: Custom agent metadata associated with this task
                             public init(
                                 id: Swift.String,
                                 url: Swift.String? = nil,
@@ -6106,7 +6290,8 @@ public enum Operations {
                                 artifacts: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value1Payload.ArtifactsPayload? = nil,
                                 archivedAt: Foundation.Date? = nil,
                                 updatedAt: Foundation.Date? = nil,
-                                createdAt: Foundation.Date
+                                createdAt: Foundation.Date,
+                                customAgent: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value1Payload.CustomAgentPayload? = nil
                             ) {
                                 self.id = id
                                 self.url = url
@@ -6123,6 +6308,7 @@ public enum Operations {
                                 self.archivedAt = archivedAt
                                 self.updatedAt = updatedAt
                                 self.createdAt = createdAt
+                                self.customAgent = customAgent
                             }
                             public enum CodingKeys: String, CodingKey {
                                 case id
@@ -6140,6 +6326,7 @@ public enum Operations {
                                 case archivedAt = "archived_at"
                                 case updatedAt = "updated_at"
                                 case createdAt = "created_at"
+                                case customAgent = "custom_agent"
                             }
                         }
                         /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value1`.
@@ -6276,6 +6463,46 @@ public enum Operations {
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/model`.
                                 public var model: Swift.String?
+                                /// Structured information about billing units consumed by the session.
+                                ///
+                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/usage`.
+                                public struct UsagePayload: Codable, Hashable, Sendable {
+                                    /// Billing unit used for this session. New sessions since June 1, 2026 use `ai_credits`, but older sessions use `premium_requests`.
+                                    ///
+                                    /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/usage/type`.
+                                    @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case aiCredits = "ai_credits"
+                                        case premiumRequests = "premium_requests"
+                                    }
+                                    /// Billing unit used for this session. New sessions since June 1, 2026 use `ai_credits`, but older sessions use `premium_requests`.
+                                    ///
+                                    /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/usage/type`.
+                                    public var _type: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.UsagePayload._TypePayload
+                                    /// Number of billing units used by this session. When the `type` is `ai_credits`, the value is a whole number, expressed in nano units. When presenting this to a human, divide by 1,000,000,000 and round to one decimal place. When aggregating (for example, summing usage across sessions), sum the nano values first, and divide once at the end before presenting to a human to avoid losing precision. When the `type` is `premium_requests`, the value may be fractional (for example `1.5`).
+                                    ///
+                                    /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/usage/amount`.
+                                    public var amount: Swift.Double
+                                    /// Creates a new `UsagePayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - _type: Billing unit used for this session. New sessions since June 1, 2026 use `ai_credits`, but older sessions use `premium_requests`.
+                                    ///   - amount: Number of billing units used by this session. When the `type` is `ai_credits`, the value is a whole number, expressed in nano units. When presenting this to a human, divide by 1,000,000,000 and round to one decimal place. When aggregating (for example, summing usage across sessions), sum the nano values first, and divide once at the end before presenting to a human to avoid losing precision. When the `type` is `premium_requests`, the value may be fractional (for example `1.5`).
+                                    public init(
+                                        _type: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.UsagePayload._TypePayload,
+                                        amount: Swift.Double
+                                    ) {
+                                        self._type = _type
+                                        self.amount = amount
+                                    }
+                                    public enum CodingKeys: String, CodingKey {
+                                        case _type = "type"
+                                        case amount
+                                    }
+                                }
+                                /// Structured information about billing units consumed by the session.
+                                ///
+                                /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/usage`.
+                                public var usage: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.UsagePayload?
                                 /// Error details for a failed session
                                 ///
                                 /// - Remark: Generated from `#/paths/agents/tasks/{task_id}/GET/responses/200/content/json/value2/SessionsPayload/error`.
@@ -6316,6 +6543,7 @@ public enum Operations {
                                 ///   - headRef: Head branch name
                                 ///   - baseRef: Base branch name
                                 ///   - model: Model used for this session
+                                ///   - usage: Structured information about billing units consumed by the session.
                                 ///   - error: Error details for a failed session
                                 public init(
                                     id: Swift.String,
@@ -6332,6 +6560,7 @@ public enum Operations {
                                     headRef: Swift.String? = nil,
                                     baseRef: Swift.String? = nil,
                                     model: Swift.String? = nil,
+                                    usage: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload.UsagePayload? = nil,
                                     error: Operations.AgentTasksGetTaskById.Output.Ok.Body.JsonPayload.Value2Payload.SessionsPayloadPayload._ErrorPayload? = nil
                                 ) {
                                     self.id = id
@@ -6348,6 +6577,7 @@ public enum Operations {
                                     self.headRef = headRef
                                     self.baseRef = baseRef
                                     self.model = model
+                                    self.usage = usage
                                     self.error = error
                                 }
                                 public enum CodingKeys: String, CodingKey {
@@ -6365,6 +6595,7 @@ public enum Operations {
                                     case headRef = "head_ref"
                                     case baseRef = "base_ref"
                                     case model
+                                    case usage
                                     case error
                                 }
                             }

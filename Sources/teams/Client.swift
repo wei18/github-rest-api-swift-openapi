@@ -673,6 +673,8 @@ public struct Client: APIProtocol {
     ///
     /// Team members will include the members of child teams.
     ///
+    /// Each member includes their `role` on the team (`member` or `maintainer`) and an `inherited` flag indicating whether the membership is inherited from a child team (`true`) or is a direct membership (`false`). These fields let you read a member's role and direct/inherited status without additional requests.
+    ///
     /// To list members in a team, the team must be visible to the authenticated user.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/teams/{team_slug}/members`.
@@ -740,7 +742,7 @@ public struct Client: APIProtocol {
                     switch chosenContentType {
                     case "application/json":
                         body = try await converter.getResponseBodyAsJSON(
-                            [Components.Schemas.SimpleUser].self,
+                            [Components.Schemas.TeamMember].self,
                             from: responseBody,
                             transforming: { value in
                                 .json(value)
@@ -1800,6 +1802,8 @@ public struct Client: APIProtocol {
     ///
     /// Team members will include the members of child teams.
     ///
+    /// Each member includes their `role` on the team (`member` or `maintainer`) and an `inherited` flag indicating whether the membership is inherited from a child team (`true`) or is a direct membership (`false`).
+    ///
     /// - Remark: HTTP `GET /teams/{team_id}/members`.
     /// - Remark: Generated from `#/paths//teams/{team_id}/members/get(teams/list-members-legacy)`.
     @available(*, deprecated)
@@ -1865,7 +1869,7 @@ public struct Client: APIProtocol {
                     switch chosenContentType {
                     case "application/json":
                         body = try await converter.getResponseBodyAsJSON(
-                            [Components.Schemas.SimpleUser].self,
+                            [Components.Schemas.TeamMember].self,
                             from: responseBody,
                             transforming: { value in
                                 .json(value)

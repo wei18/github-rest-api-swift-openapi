@@ -399,6 +399,49 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `PUT /repos/{owner}/{repo}/pulls/{pull_number}/update-branch`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/update-branch/put(pulls/update-branch)`.
     func pullsUpdateBranch(_ input: Operations.PullsUpdateBranch.Input) async throws -> Operations.PullsUpdateBranch.Output
+    /// List pull request stacks
+    ///
+    /// Lists pull request stacks in a repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/stacks`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/get(pull-request-stacks/list)`.
+    func pullRequestStacksList(_ input: Operations.PullRequestStacksList.Input) async throws -> Operations.PullRequestStacksList.Output
+    /// Create a pull request stack
+    ///
+    /// Creates a stack from an ordered list of pull request numbers. Provide the pull
+    /// request numbers from the bottom of the stack to the top. Each pull request's
+    /// base ref must match the previous pull request's head ref.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/stacks`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/post(pull-request-stacks/create)`.
+    func pullRequestStacksCreate(_ input: Operations.PullRequestStacksCreate.Input) async throws -> Operations.PullRequestStacksCreate.Output
+    /// Get a pull request stack
+    ///
+    /// Gets a pull request stack by providing its stack number.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/stacks/{stack_number}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/get(pull-request-stacks/get)`.
+    func pullRequestStacksGet(_ input: Operations.PullRequestStacksGet.Input) async throws -> Operations.PullRequestStacksGet.Output
+    /// Add pull requests to a pull request stack
+    ///
+    /// Appends an ordered list of pull request numbers onto the top of an existing
+    /// stack. Provide only the pull requests you want to add, from the current top of
+    /// the stack upward. The first new pull request's base ref must match the current
+    /// top pull request's head ref.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/stacks/{stack_number}/add`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/add/post(pull-request-stacks/add)`.
+    func pullRequestStacksAdd(_ input: Operations.PullRequestStacksAdd.Input) async throws -> Operations.PullRequestStacksAdd.Output
+    /// Remove pull requests from a pull request stack
+    ///
+    /// Removes the unmerged pull requests from a stack. Pull requests that cannot be
+    /// unstacked (for example, those that are queued for merge) are left in place. When pull requests remain in the stack, the updated
+    /// stack is returned with a `200`. When no pull requests remain, the stack is
+    /// dissolved and a `204` is returned.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/stacks/{stack_number}/unstack`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/unstack/post(pull-request-stacks/unstack)`.
+    func pullRequestStacksUnstack(_ input: Operations.PullRequestStacksUnstack.Input) async throws -> Operations.PullRequestStacksUnstack.Output
 }
 
 /// Convenience overloads for operation inputs.
@@ -1039,6 +1082,95 @@ extension APIProtocol {
             path: path,
             headers: headers,
             body: body
+        ))
+    }
+    /// List pull request stacks
+    ///
+    /// Lists pull request stacks in a repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/stacks`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/get(pull-request-stacks/list)`.
+    public func pullRequestStacksList(
+        path: Operations.PullRequestStacksList.Input.Path,
+        query: Operations.PullRequestStacksList.Input.Query = .init(),
+        headers: Operations.PullRequestStacksList.Input.Headers = .init()
+    ) async throws -> Operations.PullRequestStacksList.Output {
+        try await pullRequestStacksList(Operations.PullRequestStacksList.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Create a pull request stack
+    ///
+    /// Creates a stack from an ordered list of pull request numbers. Provide the pull
+    /// request numbers from the bottom of the stack to the top. Each pull request's
+    /// base ref must match the previous pull request's head ref.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/stacks`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/post(pull-request-stacks/create)`.
+    public func pullRequestStacksCreate(
+        path: Operations.PullRequestStacksCreate.Input.Path,
+        headers: Operations.PullRequestStacksCreate.Input.Headers = .init(),
+        body: Operations.PullRequestStacksCreate.Input.Body
+    ) async throws -> Operations.PullRequestStacksCreate.Output {
+        try await pullRequestStacksCreate(Operations.PullRequestStacksCreate.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get a pull request stack
+    ///
+    /// Gets a pull request stack by providing its stack number.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/stacks/{stack_number}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/get(pull-request-stacks/get)`.
+    public func pullRequestStacksGet(
+        path: Operations.PullRequestStacksGet.Input.Path,
+        headers: Operations.PullRequestStacksGet.Input.Headers = .init()
+    ) async throws -> Operations.PullRequestStacksGet.Output {
+        try await pullRequestStacksGet(Operations.PullRequestStacksGet.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Add pull requests to a pull request stack
+    ///
+    /// Appends an ordered list of pull request numbers onto the top of an existing
+    /// stack. Provide only the pull requests you want to add, from the current top of
+    /// the stack upward. The first new pull request's base ref must match the current
+    /// top pull request's head ref.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/stacks/{stack_number}/add`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/add/post(pull-request-stacks/add)`.
+    public func pullRequestStacksAdd(
+        path: Operations.PullRequestStacksAdd.Input.Path,
+        headers: Operations.PullRequestStacksAdd.Input.Headers = .init(),
+        body: Operations.PullRequestStacksAdd.Input.Body
+    ) async throws -> Operations.PullRequestStacksAdd.Output {
+        try await pullRequestStacksAdd(Operations.PullRequestStacksAdd.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Remove pull requests from a pull request stack
+    ///
+    /// Removes the unmerged pull requests from a stack. Pull requests that cannot be
+    /// unstacked (for example, those that are queued for merge) are left in place. When pull requests remain in the stack, the updated
+    /// stack is returned with a `200`. When no pull requests remain, the stack is
+    /// dissolved and a `204` is returned.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/stacks/{stack_number}/unstack`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/unstack/post(pull-request-stacks/unstack)`.
+    public func pullRequestStacksUnstack(
+        path: Operations.PullRequestStacksUnstack.Input.Path,
+        headers: Operations.PullRequestStacksUnstack.Input.Headers = .init()
+    ) async throws -> Operations.PullRequestStacksUnstack.Output {
+        try await pullRequestStacksUnstack(Operations.PullRequestStacksUnstack.Input(
+            path: path,
+            headers: headers
         ))
     }
 }
@@ -2600,6 +2732,163 @@ public enum Components {
                 case rocket
             }
         }
+        /// - Remark: Generated from `#/components/schemas/pull-request-minimal`.
+        public struct PullRequestMinimal: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/id`.
+            public var id: Swift.Int64
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/number`.
+            public var number: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public struct HeadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                /// Creates a new `HeadPayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.HeadPayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/head`.
+            public var head: Components.Schemas.PullRequestMinimal.HeadPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/ref`.
+                public var ref: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/sha`.
+                public var sha: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public struct RepoPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/id`.
+                    public var id: Swift.Int64
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/url`.
+                    public var url: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo/name`.
+                    public var name: Swift.String
+                    /// Creates a new `RepoPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - id:
+                    ///   - url:
+                    ///   - name:
+                    public init(
+                        id: Swift.Int64,
+                        url: Swift.String,
+                        name: Swift.String
+                    ) {
+                        self.id = id
+                        self.url = url
+                        self.name = name
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case id
+                        case url
+                        case name
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base/repo`.
+                public var repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                ///   - sha:
+                ///   - repo:
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String,
+                    repo: Components.Schemas.PullRequestMinimal.BasePayload.RepoPayload
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                    self.repo = repo
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                    case repo
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-minimal/base`.
+            public var base: Components.Schemas.PullRequestMinimal.BasePayload
+            /// Creates a new `PullRequestMinimal`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - number:
+            ///   - url:
+            ///   - head:
+            ///   - base:
+            public init(
+                id: Swift.Int64,
+                number: Swift.Int,
+                url: Swift.String,
+                head: Components.Schemas.PullRequestMinimal.HeadPayload,
+                base: Components.Schemas.PullRequestMinimal.BasePayload
+            ) {
+                self.id = id
+                self.number = number
+                self.url = url
+                self.head = head
+                self.base = base
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case number
+                case url
+                case head
+                case base
+            }
+        }
         /// An object without any properties.
         ///
         /// - Remark: Generated from `#/components/schemas/empty-object`.
@@ -3143,6 +3432,84 @@ public enum Components {
                 case commitMessage = "commit_message"
             }
         }
+        /// The stack information associated with a pull request.
+        ///
+        /// - Remark: Generated from `#/components/schemas/pull-request-stack`.
+        public struct PullRequestStack: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// The base ref of the stack this pull request belongs to.
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack/base/ref`.
+                public var ref: Swift.String
+                /// The base SHA of the stack this pull request belongs to.
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack/base/sha`.
+                public var sha: Swift.String
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - ref: The base ref of the stack this pull request belongs to.
+                ///   - sha: The base SHA of the stack this pull request belongs to.
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/base`.
+            public var base: Components.Schemas.PullRequestStack.BasePayload
+            /// The total number of pull requests in the stack.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/size`.
+            public var size: Swift.Int?
+            /// The one-based position of this pull request within the stack, where 1 is the bottom of the stack.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/position`.
+            public var position: Swift.Int?
+            /// The ID of the stack that this pull request belongs to.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/id`.
+            public var id: Swift.Int?
+            /// The number of the stack that this pull request belongs to.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/number`.
+            public var number: Swift.Int?
+            /// Creates a new `PullRequestStack`.
+            ///
+            /// - Parameters:
+            ///   - base:
+            ///   - size: The total number of pull requests in the stack.
+            ///   - position: The one-based position of this pull request within the stack, where 1 is the bottom of the stack.
+            ///   - id: The ID of the stack that this pull request belongs to.
+            ///   - number: The number of the stack that this pull request belongs to.
+            public init(
+                base: Components.Schemas.PullRequestStack.BasePayload,
+                size: Swift.Int? = nil,
+                position: Swift.Int? = nil,
+                id: Swift.Int? = nil,
+                number: Swift.Int? = nil
+            ) {
+                self.base = base
+                self.size = size
+                self.position = position
+                self.id = id
+                self.number = number
+            }
+            public enum CodingKeys: String, CodingKey {
+                case base
+                case size
+                case position
+                case id
+                case number
+            }
+        }
         /// Pull Request Simple
         ///
         /// - Remark: Generated from `#/components/schemas/pull-request-simple`.
@@ -3413,6 +3780,8 @@ public enum Components {
             public var authorAssociation: Components.Schemas.AuthorAssociation
             /// - Remark: Generated from `#/components/schemas/pull-request-simple/auto_merge`.
             public var autoMerge: Components.Schemas.AutoMerge?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/stack`.
+            public var stack: Components.Schemas.PullRequestStack?
             /// Indicates whether or not the pull request is a draft.
             ///
             /// - Remark: Generated from `#/components/schemas/pull-request-simple/draft`.
@@ -3455,6 +3824,7 @@ public enum Components {
             ///   - _links:
             ///   - authorAssociation:
             ///   - autoMerge:
+            ///   - stack:
             ///   - draft: Indicates whether or not the pull request is a draft.
             public init(
                 url: Swift.String,
@@ -3492,6 +3862,7 @@ public enum Components {
                 _links: Components.Schemas.PullRequestSimple._LinksPayload,
                 authorAssociation: Components.Schemas.AuthorAssociation,
                 autoMerge: Components.Schemas.AutoMerge? = nil,
+                stack: Components.Schemas.PullRequestStack? = nil,
                 draft: Swift.Bool? = nil
             ) {
                 self.url = url
@@ -3529,6 +3900,7 @@ public enum Components {
                 self._links = _links
                 self.authorAssociation = authorAssociation
                 self.autoMerge = autoMerge
+                self.stack = stack
                 self.draft = draft
             }
             public enum CodingKeys: String, CodingKey {
@@ -3567,6 +3939,7 @@ public enum Components {
                 case _links
                 case authorAssociation = "author_association"
                 case autoMerge = "auto_merge"
+                case stack
                 case draft
             }
         }
@@ -4623,6 +4996,8 @@ public enum Components {
             public var authorAssociation: Components.Schemas.AuthorAssociation
             /// - Remark: Generated from `#/components/schemas/pull-request/auto_merge`.
             public var autoMerge: Components.Schemas.AutoMerge?
+            /// - Remark: Generated from `#/components/schemas/pull-request/stack`.
+            public var stack: Components.Schemas.PullRequestStack?
             /// Indicates whether or not the pull request is a draft.
             ///
             /// - Remark: Generated from `#/components/schemas/pull-request/draft`.
@@ -4691,6 +5066,7 @@ public enum Components {
             ///   - _links:
             ///   - authorAssociation:
             ///   - autoMerge:
+            ///   - stack:
             ///   - draft: Indicates whether or not the pull request is a draft.
             ///   - merged:
             ///   - mergeable:
@@ -4740,6 +5116,7 @@ public enum Components {
                 _links: Components.Schemas.PullRequest._LinksPayload,
                 authorAssociation: Components.Schemas.AuthorAssociation,
                 autoMerge: Components.Schemas.AutoMerge? = nil,
+                stack: Components.Schemas.PullRequestStack? = nil,
                 draft: Swift.Bool? = nil,
                 merged: Swift.Bool,
                 mergeable: Swift.Bool? = nil,
@@ -4789,6 +5166,7 @@ public enum Components {
                 self._links = _links
                 self.authorAssociation = authorAssociation
                 self.autoMerge = autoMerge
+                self.stack = stack
                 self.draft = draft
                 self.merged = merged
                 self.mergeable = mergeable
@@ -4839,6 +5217,7 @@ public enum Components {
                 case _links
                 case authorAssociation = "author_association"
                 case autoMerge = "auto_merge"
+                case stack
                 case draft
                 case merged
                 case mergeable
@@ -5311,6 +5690,238 @@ public enum Components {
                 case subjectType = "subject_type"
             }
         }
+        /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal`.
+        public struct PullRequestStackMinimal: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/number`.
+            public var number: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/base/ref`.
+                public var ref: Swift.String
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - ref:
+                public init(ref: Swift.String) {
+                    self.ref = ref
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/base`.
+            public var base: Components.Schemas.PullRequestStackMinimal.BasePayload
+            /// Whether the stack has any open pull request. False when all pull requests are merged or closed.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/open`.
+            public var open: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/created_at`.
+            public var createdAt: Foundation.Date
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/PullRequestsPayload`.
+            public struct PullRequestsPayloadPayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/PullRequestsPayload/number`.
+                public var number: Swift.Int
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/PullRequestsPayload/state`.
+                @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case open = "open"
+                    case closed = "closed"
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/PullRequestsPayload/state`.
+                public var state: Components.Schemas.PullRequestStackMinimal.PullRequestsPayloadPayload.StatePayload
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/PullRequestsPayload/draft`.
+                public var draft: Swift.Bool
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/PullRequestsPayload/merged_at`.
+                public var mergedAt: Foundation.Date?
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/PullRequestsPayload/head`.
+                public struct HeadPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/PullRequestsPayload/head/ref`.
+                    public var ref: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/PullRequestsPayload/head/sha`.
+                    public var sha: Swift.String
+                    /// Creates a new `HeadPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - ref:
+                    ///   - sha:
+                    public init(
+                        ref: Swift.String,
+                        sha: Swift.String
+                    ) {
+                        self.ref = ref
+                        self.sha = sha
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case ref
+                        case sha
+                    }
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/PullRequestsPayload/head`.
+                public var head: Components.Schemas.PullRequestStackMinimal.PullRequestsPayloadPayload.HeadPayload
+                /// Creates a new `PullRequestsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - number:
+                ///   - state:
+                ///   - draft:
+                ///   - mergedAt:
+                ///   - head:
+                public init(
+                    number: Swift.Int,
+                    state: Components.Schemas.PullRequestStackMinimal.PullRequestsPayloadPayload.StatePayload,
+                    draft: Swift.Bool,
+                    mergedAt: Foundation.Date? = nil,
+                    head: Components.Schemas.PullRequestStackMinimal.PullRequestsPayloadPayload.HeadPayload
+                ) {
+                    self.number = number
+                    self.state = state
+                    self.draft = draft
+                    self.mergedAt = mergedAt
+                    self.head = head
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case number
+                    case state
+                    case draft
+                    case mergedAt = "merged_at"
+                    case head
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/pull_requests`.
+            public typealias PullRequestsPayload = [Components.Schemas.PullRequestStackMinimal.PullRequestsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-minimal/pull_requests`.
+            public var pullRequests: Components.Schemas.PullRequestStackMinimal.PullRequestsPayload
+            /// Creates a new `PullRequestStackMinimal`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - number:
+            ///   - nodeId:
+            ///   - url:
+            ///   - base:
+            ///   - open: Whether the stack has any open pull request. False when all pull requests are merged or closed.
+            ///   - createdAt:
+            ///   - pullRequests:
+            public init(
+                id: Swift.Int,
+                number: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                base: Components.Schemas.PullRequestStackMinimal.BasePayload,
+                open: Swift.Bool,
+                createdAt: Foundation.Date,
+                pullRequests: Components.Schemas.PullRequestStackMinimal.PullRequestsPayload
+            ) {
+                self.id = id
+                self.number = number
+                self.nodeId = nodeId
+                self.url = url
+                self.base = base
+                self.open = open
+                self.createdAt = createdAt
+                self.pullRequests = pullRequests
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case number
+                case nodeId = "node_id"
+                case url
+                case base
+                case open
+                case createdAt = "created_at"
+                case pullRequests = "pull_requests"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request`.
+        public struct PullRequestStackPullRequest: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request/value1`.
+            public var value1: Components.Schemas.PullRequestMinimal
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request/value2`.
+            public struct Value2Payload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request/value2/node_id`.
+                public var nodeId: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request/value2/title`.
+                public var title: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request/value2/state`.
+                @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case open = "open"
+                    case closed = "closed"
+                }
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request/value2/state`.
+                public var state: Components.Schemas.PullRequestStackPullRequest.Value2Payload.StatePayload
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request/value2/merged_at`.
+                public var mergedAt: Foundation.Date?
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request/value2/draft`.
+                public var draft: Swift.Bool
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request/value2/html_url`.
+                public var htmlUrl: Swift.String
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request/value2/user`.
+                public var user: Components.Schemas.NullableSimpleUser?
+                /// Creates a new `Value2Payload`.
+                ///
+                /// - Parameters:
+                ///   - nodeId:
+                ///   - title:
+                ///   - state:
+                ///   - mergedAt:
+                ///   - draft:
+                ///   - htmlUrl:
+                ///   - user:
+                public init(
+                    nodeId: Swift.String,
+                    title: Swift.String,
+                    state: Components.Schemas.PullRequestStackPullRequest.Value2Payload.StatePayload,
+                    mergedAt: Foundation.Date? = nil,
+                    draft: Swift.Bool,
+                    htmlUrl: Swift.String,
+                    user: Components.Schemas.NullableSimpleUser? = nil
+                ) {
+                    self.nodeId = nodeId
+                    self.title = title
+                    self.state = state
+                    self.mergedAt = mergedAt
+                    self.draft = draft
+                    self.htmlUrl = htmlUrl
+                    self.user = user
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case nodeId = "node_id"
+                    case title
+                    case state
+                    case mergedAt = "merged_at"
+                    case draft
+                    case htmlUrl = "html_url"
+                    case user
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack-pull-request/value2`.
+            public var value2: Components.Schemas.PullRequestStackPullRequest.Value2Payload
+            /// Creates a new `PullRequestStackPullRequest`.
+            ///
+            /// - Parameters:
+            ///   - value1:
+            ///   - value2:
+            public init(
+                value1: Components.Schemas.PullRequestMinimal,
+                value2: Components.Schemas.PullRequestStackPullRequest.Value2Payload
+            ) {
+                self.value1 = value1
+                self.value2 = value2
+            }
+            public init(from decoder: any Swift.Decoder) throws {
+                self.value1 = try .init(from: decoder)
+                self.value2 = try .init(from: decoder)
+            }
+            public func encode(to encoder: any Swift.Encoder) throws {
+                try self.value1.encode(to: encoder)
+                try self.value2.encode(to: encoder)
+            }
+        }
     }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
     public enum Parameters {
@@ -5501,6 +6112,10 @@ public enum Components {
             public init(body: Components.Responses.InternalError.Body) {
                 self.body = body
             }
+        }
+        public struct NoContent: Sendable, Hashable {
+            /// Creates a new `NoContent`.
+            public init() {}
         }
         public struct ServiceUnavailable: Sendable, Hashable {
             /// - Remark: Generated from `#/components/responses/service_unavailable/content`.
@@ -12096,6 +12711,1883 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// List pull request stacks
+    ///
+    /// Lists pull request stacks in a repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/stacks`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/get(pull-request-stacks/list)`.
+    public enum PullRequestStacksList {
+        public static let id: Swift.String = "pull-request-stacks/list"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.PullRequestStacksList.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// Filter to the stack containing this repository pull request number.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/GET/query/pull_request`.
+                public var pullRequest: Swift.Int?
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/GET/query/page`.
+                public var page: Components.Parameters.Page?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - pullRequest: Filter to the stack containing this repository pull request number.
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    pullRequest: Swift.Int? = nil,
+                    perPage: Components.Parameters.PerPage? = nil,
+                    page: Components.Parameters.Page? = nil
+                ) {
+                    self.pullRequest = pullRequest
+                    self.perPage = perPage
+                    self.page = page
+                }
+            }
+            public var query: Operations.PullRequestStacksList.Input.Query
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullRequestStacksList.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullRequestStacksList.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.PullRequestStacksList.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.PullRequestStacksList.Input.Path,
+                query: Operations.PullRequestStacksList.Input.Query = .init(),
+                headers: Operations.PullRequestStacksList.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.PullRequestStackMinimal])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.PullRequestStackMinimal] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullRequestStacksList.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullRequestStacksList.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/get(pull-request-stacks/list)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.PullRequestStacksList.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.PullRequestStacksList.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/get(pull-request-stacks/list)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/get(pull-request-stacks/list)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Create a pull request stack
+    ///
+    /// Creates a stack from an ordered list of pull request numbers. Provide the pull
+    /// request numbers from the bottom of the stack to the top. Each pull request's
+    /// base ref must match the previous pull request's head ref.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/stacks`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/post(pull-request-stacks/create)`.
+    public enum PullRequestStacksCreate {
+        public static let id: Swift.String = "pull-request-stacks/create"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.PullRequestStacksCreate.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullRequestStacksCreate.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullRequestStacksCreate.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.PullRequestStacksCreate.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// An ordered list of pull request numbers forming the stack from bottom to top.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/requestBody/json/pull_requests`.
+                    public var pullRequests: [Swift.Int]
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - pullRequests: An ordered list of pull request numbers forming the stack from bottom to top.
+                    public init(pullRequests: [Swift.Int]) {
+                        self.pullRequests = pullRequests
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case pullRequests = "pull_requests"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/requestBody/content/application\/json`.
+                case json(Operations.PullRequestStacksCreate.Input.Body.JsonPayload)
+            }
+            public var body: Operations.PullRequestStacksCreate.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.PullRequestStacksCreate.Input.Path,
+                headers: Operations.PullRequestStacksCreate.Input.Headers = .init(),
+                body: Operations.PullRequestStacksCreate.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/json/id`.
+                        public var id: Swift.Int
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/json/number`.
+                        public var number: Swift.Int
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/json/node_id`.
+                        public var nodeId: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/json/url`.
+                        public var url: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/json/base`.
+                        public struct BasePayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/json/base/ref`.
+                            public var ref: Swift.String
+                            /// Creates a new `BasePayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - ref:
+                            public init(ref: Swift.String) {
+                                self.ref = ref
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case ref
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/json/base`.
+                        public var base: Operations.PullRequestStacksCreate.Output.Created.Body.JsonPayload.BasePayload
+                        /// Whether the stack has any open pull request. False when all pull requests are merged or closed.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/json/open`.
+                        public var open: Swift.Bool
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/json/created_at`.
+                        public var createdAt: Foundation.Date
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/json/pull_requests`.
+                        public var pullRequests: [Components.Schemas.PullRequestStackPullRequest]
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - id:
+                        ///   - number:
+                        ///   - nodeId:
+                        ///   - url:
+                        ///   - base:
+                        ///   - open: Whether the stack has any open pull request. False when all pull requests are merged or closed.
+                        ///   - createdAt:
+                        ///   - pullRequests:
+                        public init(
+                            id: Swift.Int,
+                            number: Swift.Int,
+                            nodeId: Swift.String,
+                            url: Swift.String,
+                            base: Operations.PullRequestStacksCreate.Output.Created.Body.JsonPayload.BasePayload,
+                            open: Swift.Bool,
+                            createdAt: Foundation.Date,
+                            pullRequests: [Components.Schemas.PullRequestStackPullRequest]
+                        ) {
+                            self.id = id
+                            self.number = number
+                            self.nodeId = nodeId
+                            self.url = url
+                            self.base = base
+                            self.open = open
+                            self.createdAt = createdAt
+                            self.pullRequests = pullRequests
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case id
+                            case number
+                            case nodeId = "node_id"
+                            case url
+                            case base
+                            case open
+                            case createdAt = "created_at"
+                            case pullRequests = "pull_requests"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/201/content/application\/json`.
+                    case json(Operations.PullRequestStacksCreate.Output.Created.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.PullRequestStacksCreate.Output.Created.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullRequestStacksCreate.Output.Created.Body
+                /// Creates a new `Created`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullRequestStacksCreate.Output.Created.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/post(pull-request-stacks/create)/responses/201`.
+            ///
+            /// HTTP response code: `201 created`.
+            case created(Operations.PullRequestStacksCreate.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
+            ///
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.PullRequestStacksCreate.Output.Created {
+                get throws {
+                    switch self {
+                    case let .created(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/post(pull-request-stacks/create)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct UnprocessableContent: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// Validation Error
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/message`.
+                        public var message: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/documentation_url`.
+                        public var documentationUrl: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload`.
+                        public struct ErrorsPayloadPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/resource`.
+                            public var resource: Swift.String?
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/field`.
+                            public var field: Swift.String?
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/message`.
+                            public var message: Swift.String?
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/code`.
+                            public var code: Swift.String
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/index`.
+                            public var index: Swift.Int?
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/value`.
+                            @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/value/case1`.
+                                case case1(Swift.String?)
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/value/case2`.
+                                case case2(Swift.Int?)
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/value/Case3Payload`.
+                                @frozen public enum Case3PayloadPayload: Codable, Hashable, Sendable {
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/value/Case3Payload/case1`.
+                                    case case1(Swift.String)
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/value/Case3Payload/case2`.
+                                    case case2(Swift.Int)
+                                    public init(from decoder: any Swift.Decoder) throws {
+                                        var errors: [any Swift.Error] = []
+                                        do {
+                                            self = .case1(try decoder.decodeFromSingleValueContainer())
+                                            return
+                                        } catch {
+                                            errors.append(error)
+                                        }
+                                        do {
+                                            self = .case2(try decoder.decodeFromSingleValueContainer())
+                                            return
+                                        } catch {
+                                            errors.append(error)
+                                        }
+                                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                            type: Self.self,
+                                            codingPath: decoder.codingPath,
+                                            errors: errors
+                                        )
+                                    }
+                                    public func encode(to encoder: any Swift.Encoder) throws {
+                                        switch self {
+                                        case let .case1(value):
+                                            try encoder.encodeToSingleValueContainer(value)
+                                        case let .case2(value):
+                                            try encoder.encodeToSingleValueContainer(value)
+                                        }
+                                    }
+                                }
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/value/case3`.
+                                public typealias Case3Payload = [Operations.PullRequestStacksCreate.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayloadPayload.ValuePayload.Case3PayloadPayload]
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/value/case3`.
+                                case case3(Operations.PullRequestStacksCreate.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayloadPayload.ValuePayload.Case3Payload?)
+                                public init(from decoder: any Swift.Decoder) throws {
+                                    var errors: [any Swift.Error] = []
+                                    do {
+                                        self = .case1(try decoder.decodeFromSingleValueContainer())
+                                        return
+                                    } catch {
+                                        errors.append(error)
+                                    }
+                                    do {
+                                        self = .case2(try decoder.decodeFromSingleValueContainer())
+                                        return
+                                    } catch {
+                                        errors.append(error)
+                                    }
+                                    do {
+                                        self = .case3(try decoder.decodeFromSingleValueContainer())
+                                        return
+                                    } catch {
+                                        errors.append(error)
+                                    }
+                                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                        type: Self.self,
+                                        codingPath: decoder.codingPath,
+                                        errors: errors
+                                    )
+                                }
+                                public func encode(to encoder: any Swift.Encoder) throws {
+                                    switch self {
+                                    case let .case1(value):
+                                        try encoder.encodeToSingleValueContainer(value)
+                                    case let .case2(value):
+                                        try encoder.encodeToSingleValueContainer(value)
+                                    case let .case3(value):
+                                        try encoder.encodeToSingleValueContainer(value)
+                                    }
+                                }
+                            }
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/ErrorsPayload/value`.
+                            public var value: Operations.PullRequestStacksCreate.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayloadPayload.ValuePayload?
+                            /// Creates a new `ErrorsPayloadPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - resource:
+                            ///   - field:
+                            ///   - message:
+                            ///   - code:
+                            ///   - index:
+                            ///   - value:
+                            public init(
+                                resource: Swift.String? = nil,
+                                field: Swift.String? = nil,
+                                message: Swift.String? = nil,
+                                code: Swift.String,
+                                index: Swift.Int? = nil,
+                                value: Operations.PullRequestStacksCreate.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayloadPayload.ValuePayload? = nil
+                            ) {
+                                self.resource = resource
+                                self.field = field
+                                self.message = message
+                                self.code = code
+                                self.index = index
+                                self.value = value
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case resource
+                                case field
+                                case message
+                                case code
+                                case index
+                                case value
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/errors`.
+                        public typealias ErrorsPayload = [Operations.PullRequestStacksCreate.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayloadPayload]
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/json/errors`.
+                        public var errors: Operations.PullRequestStacksCreate.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayload?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - message:
+                        ///   - documentationUrl:
+                        ///   - errors:
+                        public init(
+                            message: Swift.String,
+                            documentationUrl: Swift.String,
+                            errors: Operations.PullRequestStacksCreate.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayload? = nil
+                        ) {
+                            self.message = message
+                            self.documentationUrl = documentationUrl
+                            self.errors = errors
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case message
+                            case documentationUrl = "documentation_url"
+                            case errors
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/POST/responses/422/content/application\/json`.
+                    case json(Operations.PullRequestStacksCreate.Output.UnprocessableContent.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.PullRequestStacksCreate.Output.UnprocessableContent.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullRequestStacksCreate.Output.UnprocessableContent.Body
+                /// Creates a new `UnprocessableContent`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullRequestStacksCreate.Output.UnprocessableContent.Body) {
+                    self.body = body
+                }
+            }
+            /// Validation failed. Returned when the request references pull requests that
+            /// don't exist in the repository, or when the pull requests can't form a
+            /// valid stack.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/post(pull-request-stacks/create)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Operations.PullRequestStacksCreate.Output.UnprocessableContent)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Operations.PullRequestStacksCreate.Output.UnprocessableContent {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get a pull request stack
+    ///
+    /// Gets a pull request stack by providing its stack number.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/stacks/{stack_number}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/get(pull-request-stacks/get)`.
+    public enum PullRequestStacksGet {
+        public static let id: Swift.String = "pull-request-stacks/get"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the pull request stack.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/path/stack_number`.
+                public var stackNumber: Swift.Int
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - stackNumber: The number that identifies the pull request stack.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    stackNumber: Swift.Int
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.stackNumber = stackNumber
+                }
+            }
+            public var path: Operations.PullRequestStacksGet.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullRequestStacksGet.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullRequestStacksGet.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.PullRequestStacksGet.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.PullRequestStacksGet.Input.Path,
+                headers: Operations.PullRequestStacksGet.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/json/id`.
+                        public var id: Swift.Int
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/json/number`.
+                        public var number: Swift.Int
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/json/node_id`.
+                        public var nodeId: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/json/url`.
+                        public var url: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/json/base`.
+                        public struct BasePayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/json/base/ref`.
+                            public var ref: Swift.String
+                            /// Creates a new `BasePayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - ref:
+                            public init(ref: Swift.String) {
+                                self.ref = ref
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case ref
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/json/base`.
+                        public var base: Operations.PullRequestStacksGet.Output.Ok.Body.JsonPayload.BasePayload
+                        /// Whether the stack has any open pull request. False when all pull requests are merged or closed.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/json/open`.
+                        public var open: Swift.Bool
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/json/created_at`.
+                        public var createdAt: Foundation.Date
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/json/pull_requests`.
+                        public var pullRequests: [Components.Schemas.PullRequestStackPullRequest]
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - id:
+                        ///   - number:
+                        ///   - nodeId:
+                        ///   - url:
+                        ///   - base:
+                        ///   - open: Whether the stack has any open pull request. False when all pull requests are merged or closed.
+                        ///   - createdAt:
+                        ///   - pullRequests:
+                        public init(
+                            id: Swift.Int,
+                            number: Swift.Int,
+                            nodeId: Swift.String,
+                            url: Swift.String,
+                            base: Operations.PullRequestStacksGet.Output.Ok.Body.JsonPayload.BasePayload,
+                            open: Swift.Bool,
+                            createdAt: Foundation.Date,
+                            pullRequests: [Components.Schemas.PullRequestStackPullRequest]
+                        ) {
+                            self.id = id
+                            self.number = number
+                            self.nodeId = nodeId
+                            self.url = url
+                            self.base = base
+                            self.open = open
+                            self.createdAt = createdAt
+                            self.pullRequests = pullRequests
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case id
+                            case number
+                            case nodeId = "node_id"
+                            case url
+                            case base
+                            case open
+                            case createdAt = "created_at"
+                            case pullRequests = "pull_requests"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/GET/responses/200/content/application\/json`.
+                    case json(Operations.PullRequestStacksGet.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.PullRequestStacksGet.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullRequestStacksGet.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullRequestStacksGet.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/get(pull-request-stacks/get)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.PullRequestStacksGet.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.PullRequestStacksGet.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/get(pull-request-stacks/get)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Add pull requests to a pull request stack
+    ///
+    /// Appends an ordered list of pull request numbers onto the top of an existing
+    /// stack. Provide only the pull requests you want to add, from the current top of
+    /// the stack upward. The first new pull request's base ref must match the current
+    /// top pull request's head ref.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/stacks/{stack_number}/add`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/add/post(pull-request-stacks/add)`.
+    public enum PullRequestStacksAdd {
+        public static let id: Swift.String = "pull-request-stacks/add"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the pull request stack.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/path/stack_number`.
+                public var stackNumber: Swift.Int
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - stackNumber: The number that identifies the pull request stack.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    stackNumber: Swift.Int
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.stackNumber = stackNumber
+                }
+            }
+            public var path: Operations.PullRequestStacksAdd.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullRequestStacksAdd.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullRequestStacksAdd.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.PullRequestStacksAdd.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// An ordered list of pull request numbers to append to the stack, from the current top upward.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/requestBody/json/pull_requests`.
+                    public var pullRequests: [Swift.Int]
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - pullRequests: An ordered list of pull request numbers to append to the stack, from the current top upward.
+                    public init(pullRequests: [Swift.Int]) {
+                        self.pullRequests = pullRequests
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case pullRequests = "pull_requests"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/requestBody/content/application\/json`.
+                case json(Operations.PullRequestStacksAdd.Input.Body.JsonPayload)
+            }
+            public var body: Operations.PullRequestStacksAdd.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.PullRequestStacksAdd.Input.Path,
+                headers: Operations.PullRequestStacksAdd.Input.Headers = .init(),
+                body: Operations.PullRequestStacksAdd.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/json/id`.
+                        public var id: Swift.Int
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/json/number`.
+                        public var number: Swift.Int
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/json/node_id`.
+                        public var nodeId: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/json/url`.
+                        public var url: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/json/base`.
+                        public struct BasePayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/json/base/ref`.
+                            public var ref: Swift.String
+                            /// Creates a new `BasePayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - ref:
+                            public init(ref: Swift.String) {
+                                self.ref = ref
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case ref
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/json/base`.
+                        public var base: Operations.PullRequestStacksAdd.Output.Ok.Body.JsonPayload.BasePayload
+                        /// Whether the stack has any open pull request. False when all pull requests are merged or closed.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/json/open`.
+                        public var open: Swift.Bool
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/json/created_at`.
+                        public var createdAt: Foundation.Date
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/json/pull_requests`.
+                        public var pullRequests: [Components.Schemas.PullRequestStackPullRequest]
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - id:
+                        ///   - number:
+                        ///   - nodeId:
+                        ///   - url:
+                        ///   - base:
+                        ///   - open: Whether the stack has any open pull request. False when all pull requests are merged or closed.
+                        ///   - createdAt:
+                        ///   - pullRequests:
+                        public init(
+                            id: Swift.Int,
+                            number: Swift.Int,
+                            nodeId: Swift.String,
+                            url: Swift.String,
+                            base: Operations.PullRequestStacksAdd.Output.Ok.Body.JsonPayload.BasePayload,
+                            open: Swift.Bool,
+                            createdAt: Foundation.Date,
+                            pullRequests: [Components.Schemas.PullRequestStackPullRequest]
+                        ) {
+                            self.id = id
+                            self.number = number
+                            self.nodeId = nodeId
+                            self.url = url
+                            self.base = base
+                            self.open = open
+                            self.createdAt = createdAt
+                            self.pullRequests = pullRequests
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case id
+                            case number
+                            case nodeId = "node_id"
+                            case url
+                            case base
+                            case open
+                            case createdAt = "created_at"
+                            case pullRequests = "pull_requests"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/200/content/application\/json`.
+                    case json(Operations.PullRequestStacksAdd.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.PullRequestStacksAdd.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullRequestStacksAdd.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullRequestStacksAdd.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/add/post(pull-request-stacks/add)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.PullRequestStacksAdd.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.PullRequestStacksAdd.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/add/post(pull-request-stacks/add)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Conflict: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/409/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/409/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullRequestStacksAdd.Output.Conflict.Body
+                /// Creates a new `Conflict`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullRequestStacksAdd.Output.Conflict.Body) {
+                    self.body = body
+                }
+            }
+            /// Conflict. Returned when the stack is being modified by another request.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/add/post(pull-request-stacks/add)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Operations.PullRequestStacksAdd.Output.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Operations.PullRequestStacksAdd.Output.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct UnprocessableContent: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// Validation Error
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/message`.
+                        public var message: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/documentation_url`.
+                        public var documentationUrl: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload`.
+                        public struct ErrorsPayloadPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/resource`.
+                            public var resource: Swift.String?
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/field`.
+                            public var field: Swift.String?
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/message`.
+                            public var message: Swift.String?
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/code`.
+                            public var code: Swift.String
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/index`.
+                            public var index: Swift.Int?
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/value`.
+                            @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/value/case1`.
+                                case case1(Swift.String?)
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/value/case2`.
+                                case case2(Swift.Int?)
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/value/Case3Payload`.
+                                @frozen public enum Case3PayloadPayload: Codable, Hashable, Sendable {
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/value/Case3Payload/case1`.
+                                    case case1(Swift.String)
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/value/Case3Payload/case2`.
+                                    case case2(Swift.Int)
+                                    public init(from decoder: any Swift.Decoder) throws {
+                                        var errors: [any Swift.Error] = []
+                                        do {
+                                            self = .case1(try decoder.decodeFromSingleValueContainer())
+                                            return
+                                        } catch {
+                                            errors.append(error)
+                                        }
+                                        do {
+                                            self = .case2(try decoder.decodeFromSingleValueContainer())
+                                            return
+                                        } catch {
+                                            errors.append(error)
+                                        }
+                                        throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                            type: Self.self,
+                                            codingPath: decoder.codingPath,
+                                            errors: errors
+                                        )
+                                    }
+                                    public func encode(to encoder: any Swift.Encoder) throws {
+                                        switch self {
+                                        case let .case1(value):
+                                            try encoder.encodeToSingleValueContainer(value)
+                                        case let .case2(value):
+                                            try encoder.encodeToSingleValueContainer(value)
+                                        }
+                                    }
+                                }
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/value/case3`.
+                                public typealias Case3Payload = [Operations.PullRequestStacksAdd.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayloadPayload.ValuePayload.Case3PayloadPayload]
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/value/case3`.
+                                case case3(Operations.PullRequestStacksAdd.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayloadPayload.ValuePayload.Case3Payload?)
+                                public init(from decoder: any Swift.Decoder) throws {
+                                    var errors: [any Swift.Error] = []
+                                    do {
+                                        self = .case1(try decoder.decodeFromSingleValueContainer())
+                                        return
+                                    } catch {
+                                        errors.append(error)
+                                    }
+                                    do {
+                                        self = .case2(try decoder.decodeFromSingleValueContainer())
+                                        return
+                                    } catch {
+                                        errors.append(error)
+                                    }
+                                    do {
+                                        self = .case3(try decoder.decodeFromSingleValueContainer())
+                                        return
+                                    } catch {
+                                        errors.append(error)
+                                    }
+                                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                        type: Self.self,
+                                        codingPath: decoder.codingPath,
+                                        errors: errors
+                                    )
+                                }
+                                public func encode(to encoder: any Swift.Encoder) throws {
+                                    switch self {
+                                    case let .case1(value):
+                                        try encoder.encodeToSingleValueContainer(value)
+                                    case let .case2(value):
+                                        try encoder.encodeToSingleValueContainer(value)
+                                    case let .case3(value):
+                                        try encoder.encodeToSingleValueContainer(value)
+                                    }
+                                }
+                            }
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/ErrorsPayload/value`.
+                            public var value: Operations.PullRequestStacksAdd.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayloadPayload.ValuePayload?
+                            /// Creates a new `ErrorsPayloadPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - resource:
+                            ///   - field:
+                            ///   - message:
+                            ///   - code:
+                            ///   - index:
+                            ///   - value:
+                            public init(
+                                resource: Swift.String? = nil,
+                                field: Swift.String? = nil,
+                                message: Swift.String? = nil,
+                                code: Swift.String,
+                                index: Swift.Int? = nil,
+                                value: Operations.PullRequestStacksAdd.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayloadPayload.ValuePayload? = nil
+                            ) {
+                                self.resource = resource
+                                self.field = field
+                                self.message = message
+                                self.code = code
+                                self.index = index
+                                self.value = value
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case resource
+                                case field
+                                case message
+                                case code
+                                case index
+                                case value
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/errors`.
+                        public typealias ErrorsPayload = [Operations.PullRequestStacksAdd.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayloadPayload]
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/json/errors`.
+                        public var errors: Operations.PullRequestStacksAdd.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayload?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - message:
+                        ///   - documentationUrl:
+                        ///   - errors:
+                        public init(
+                            message: Swift.String,
+                            documentationUrl: Swift.String,
+                            errors: Operations.PullRequestStacksAdd.Output.UnprocessableContent.Body.JsonPayload.ErrorsPayload? = nil
+                        ) {
+                            self.message = message
+                            self.documentationUrl = documentationUrl
+                            self.errors = errors
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case message
+                            case documentationUrl = "documentation_url"
+                            case errors
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/add/POST/responses/422/content/application\/json`.
+                    case json(Operations.PullRequestStacksAdd.Output.UnprocessableContent.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.PullRequestStacksAdd.Output.UnprocessableContent.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullRequestStacksAdd.Output.UnprocessableContent.Body
+                /// Creates a new `UnprocessableContent`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullRequestStacksAdd.Output.UnprocessableContent.Body) {
+                    self.body = body
+                }
+            }
+            /// Validation failed. Returned when the request references pull requests that
+            /// don't exist in the repository, or when the pull requests can't be appended
+            /// to the stack.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/add/post(pull-request-stacks/add)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Operations.PullRequestStacksAdd.Output.UnprocessableContent)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Operations.PullRequestStacksAdd.Output.UnprocessableContent {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Remove pull requests from a pull request stack
+    ///
+    /// Removes the unmerged pull requests from a stack. Pull requests that cannot be
+    /// unstacked (for example, those that are queued for merge) are left in place. When pull requests remain in the stack, the updated
+    /// stack is returned with a `200`. When no pull requests remain, the stack is
+    /// dissolved and a `204` is returned.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/stacks/{stack_number}/unstack`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/unstack/post(pull-request-stacks/unstack)`.
+    public enum PullRequestStacksUnstack {
+        public static let id: Swift.String = "pull-request-stacks/unstack"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the pull request stack.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/path/stack_number`.
+                public var stackNumber: Swift.Int
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - stackNumber: The number that identifies the pull request stack.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    stackNumber: Swift.Int
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.stackNumber = stackNumber
+                }
+            }
+            public var path: Operations.PullRequestStacksUnstack.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullRequestStacksUnstack.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullRequestStacksUnstack.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.PullRequestStacksUnstack.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.PullRequestStacksUnstack.Input.Path,
+                headers: Operations.PullRequestStacksUnstack.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/json/id`.
+                        public var id: Swift.Int
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/json/number`.
+                        public var number: Swift.Int
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/json/node_id`.
+                        public var nodeId: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/json/url`.
+                        public var url: Swift.String
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/json/base`.
+                        public struct BasePayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/json/base/ref`.
+                            public var ref: Swift.String
+                            /// Creates a new `BasePayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - ref:
+                            public init(ref: Swift.String) {
+                                self.ref = ref
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case ref
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/json/base`.
+                        public var base: Operations.PullRequestStacksUnstack.Output.Ok.Body.JsonPayload.BasePayload
+                        /// Whether the stack has any open pull request. False when all pull requests are merged or closed.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/json/open`.
+                        public var open: Swift.Bool
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/json/created_at`.
+                        public var createdAt: Foundation.Date
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/json/pull_requests`.
+                        public var pullRequests: [Components.Schemas.PullRequestStackPullRequest]
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - id:
+                        ///   - number:
+                        ///   - nodeId:
+                        ///   - url:
+                        ///   - base:
+                        ///   - open: Whether the stack has any open pull request. False when all pull requests are merged or closed.
+                        ///   - createdAt:
+                        ///   - pullRequests:
+                        public init(
+                            id: Swift.Int,
+                            number: Swift.Int,
+                            nodeId: Swift.String,
+                            url: Swift.String,
+                            base: Operations.PullRequestStacksUnstack.Output.Ok.Body.JsonPayload.BasePayload,
+                            open: Swift.Bool,
+                            createdAt: Foundation.Date,
+                            pullRequests: [Components.Schemas.PullRequestStackPullRequest]
+                        ) {
+                            self.id = id
+                            self.number = number
+                            self.nodeId = nodeId
+                            self.url = url
+                            self.base = base
+                            self.open = open
+                            self.createdAt = createdAt
+                            self.pullRequests = pullRequests
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case id
+                            case number
+                            case nodeId = "node_id"
+                            case url
+                            case base
+                            case open
+                            case createdAt = "created_at"
+                            case pullRequests = "pull_requests"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/200/content/application\/json`.
+                    case json(Operations.PullRequestStacksUnstack.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.PullRequestStacksUnstack.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullRequestStacksUnstack.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullRequestStacksUnstack.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/unstack/post(pull-request-stacks/unstack)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.PullRequestStacksUnstack.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.PullRequestStacksUnstack.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/unstack/post(pull-request-stacks/unstack)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Conflict: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/409/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/409/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullRequestStacksUnstack.Output.Conflict.Body
+                /// Creates a new `Conflict`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullRequestStacksUnstack.Output.Conflict.Body) {
+                    self.body = body
+                }
+            }
+            /// Conflict. Returned when the stack is being modified by another request.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/unstack/post(pull-request-stacks/unstack)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Operations.PullRequestStacksUnstack.Output.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Operations.PullRequestStacksUnstack.Output.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct UnprocessableContent: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/422/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/stacks/{stack_number}/unstack/POST/responses/422/content/application\/json`.
+                    case json(Components.Schemas.ValidationError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ValidationError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullRequestStacksUnstack.Output.UnprocessableContent.Body
+                /// Creates a new `UnprocessableContent`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullRequestStacksUnstack.Output.UnprocessableContent.Body) {
+                    self.body = body
+                }
+            }
+            /// Validation failed. Returned when the stack can't be unstacked because every
+            /// pull request in it is locked and cannot be removed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/unstack/post(pull-request-stacks/unstack)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Operations.PullRequestStacksUnstack.Output.UnprocessableContent)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Operations.PullRequestStacksUnstack.Output.UnprocessableContent {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/unstack/post(pull-request-stacks/unstack)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Components.Responses.NoContent)
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/stacks/{stack_number}/unstack/post(pull-request-stacks/unstack)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Components.Responses.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
                             response: self
                         )
                     }

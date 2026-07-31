@@ -4066,6 +4066,84 @@ public enum Components {
                 case commitMessage = "commit_message"
             }
         }
+        /// The stack information associated with a pull request.
+        ///
+        /// - Remark: Generated from `#/components/schemas/pull-request-stack`.
+        public struct PullRequestStack: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// The base ref of the stack this pull request belongs to.
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack/base/ref`.
+                public var ref: Swift.String
+                /// The base SHA of the stack this pull request belongs to.
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack/base/sha`.
+                public var sha: Swift.String
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - ref: The base ref of the stack this pull request belongs to.
+                ///   - sha: The base SHA of the stack this pull request belongs to.
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/base`.
+            public var base: Components.Schemas.PullRequestStack.BasePayload
+            /// The total number of pull requests in the stack.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/size`.
+            public var size: Swift.Int?
+            /// The one-based position of this pull request within the stack, where 1 is the bottom of the stack.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/position`.
+            public var position: Swift.Int?
+            /// The ID of the stack that this pull request belongs to.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/id`.
+            public var id: Swift.Int?
+            /// The number of the stack that this pull request belongs to.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/number`.
+            public var number: Swift.Int?
+            /// Creates a new `PullRequestStack`.
+            ///
+            /// - Parameters:
+            ///   - base:
+            ///   - size: The total number of pull requests in the stack.
+            ///   - position: The one-based position of this pull request within the stack, where 1 is the bottom of the stack.
+            ///   - id: The ID of the stack that this pull request belongs to.
+            ///   - number: The number of the stack that this pull request belongs to.
+            public init(
+                base: Components.Schemas.PullRequestStack.BasePayload,
+                size: Swift.Int? = nil,
+                position: Swift.Int? = nil,
+                id: Swift.Int? = nil,
+                number: Swift.Int? = nil
+            ) {
+                self.base = base
+                self.size = size
+                self.position = position
+                self.id = id
+                self.number = number
+            }
+            public enum CodingKeys: String, CodingKey {
+                case base
+                case size
+                case position
+                case id
+                case number
+            }
+        }
         /// Pull Request Simple
         ///
         /// - Remark: Generated from `#/components/schemas/pull-request-simple`.
@@ -4336,6 +4414,8 @@ public enum Components {
             public var authorAssociation: Components.Schemas.AuthorAssociation
             /// - Remark: Generated from `#/components/schemas/pull-request-simple/auto_merge`.
             public var autoMerge: Components.Schemas.AutoMerge?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/stack`.
+            public var stack: Components.Schemas.PullRequestStack?
             /// Indicates whether or not the pull request is a draft.
             ///
             /// - Remark: Generated from `#/components/schemas/pull-request-simple/draft`.
@@ -4378,6 +4458,7 @@ public enum Components {
             ///   - _links:
             ///   - authorAssociation:
             ///   - autoMerge:
+            ///   - stack:
             ///   - draft: Indicates whether or not the pull request is a draft.
             public init(
                 url: Swift.String,
@@ -4415,6 +4496,7 @@ public enum Components {
                 _links: Components.Schemas.PullRequestSimple._LinksPayload,
                 authorAssociation: Components.Schemas.AuthorAssociation,
                 autoMerge: Components.Schemas.AutoMerge? = nil,
+                stack: Components.Schemas.PullRequestStack? = nil,
                 draft: Swift.Bool? = nil
             ) {
                 self.url = url
@@ -4452,6 +4534,7 @@ public enum Components {
                 self._links = _links
                 self.authorAssociation = authorAssociation
                 self.autoMerge = autoMerge
+                self.stack = stack
                 self.draft = draft
             }
             public enum CodingKeys: String, CodingKey {
@@ -4490,6 +4573,7 @@ public enum Components {
                 case _links
                 case authorAssociation = "author_association"
                 case autoMerge = "auto_merge"
+                case stack
                 case draft
             }
         }

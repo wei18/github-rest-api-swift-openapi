@@ -99,6 +99,23 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)`.
     func orgsSetClusterDeploymentRecords(_ input: Operations.OrgsSetClusterDeploymentRecords.Input) async throws -> Operations.OrgsSetClusterDeploymentRecords.Output
+    /// Create a cluster deployment records job
+    ///
+    /// Create a background job to set deployment records for a given cluster.
+    /// Performs validation and permission checks synchronously, returning rejected
+    /// deployments immediately, then enqueues a background job for the actual
+    /// deployment updates. Use the companion GET endpoint to poll for job status.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/post(orgs/create-cluster-deployment-records-job)`.
+    func orgsCreateClusterDeploymentRecordsJob(_ input: Operations.OrgsCreateClusterDeploymentRecordsJob.Input) async throws -> Operations.OrgsCreateClusterDeploymentRecordsJob.Output
+    /// Get cluster deployment records job status
+    ///
+    /// Get the status and results of a previously created cluster deployment records job.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/get(orgs/get-cluster-deployment-records-job)`.
+    func orgsGetClusterDeploymentRecordsJob(_ input: Operations.OrgsGetClusterDeploymentRecordsJob.Input) async throws -> Operations.OrgsGetClusterDeploymentRecordsJob.Output
     /// Create artifact metadata storage record
     ///
     /// Create metadata storage records for artifacts associated with an organization.
@@ -352,12 +369,16 @@ public protocol APIProtocol: Sendable {
     ///
     /// Get API request count statistics for an actor broken down by route within a specified time frame.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}/get(api-insights/get-route-stats-by-actor)`.
     func apiInsightsGetRouteStatsByActor(_ input: Operations.ApiInsightsGetRouteStatsByActor.Input) async throws -> Operations.ApiInsightsGetRouteStatsByActor.Output
     /// Get subject stats
     ///
     /// Get API request statistics for all subjects within an organization within a specified time frame. Subjects can be users or GitHub Apps.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/subject-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/subject-stats/get(api-insights/get-subject-stats)`.
@@ -366,12 +387,16 @@ public protocol APIProtocol: Sendable {
     ///
     /// Get overall statistics of API requests made within an organization by all users and apps within a specified time frame.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/get(api-insights/get-summary-stats)`.
     func apiInsightsGetSummaryStats(_ input: Operations.ApiInsightsGetSummaryStats.Input) async throws -> Operations.ApiInsightsGetSummaryStats.Output
     /// Get summary stats by user
     ///
     /// Get overall statistics of API requests within the organization for a user.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats/users/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/users/{user_id}/get(api-insights/get-summary-stats-by-user)`.
@@ -380,12 +405,16 @@ public protocol APIProtocol: Sendable {
     ///
     /// Get overall statistics of API requests within the organization made by a specific actor. Actors can be GitHub App installations, OAuth apps or other tokens on behalf of a user.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/{actor_type}/{actor_id}/get(api-insights/get-summary-stats-by-actor)`.
     func apiInsightsGetSummaryStatsByActor(_ input: Operations.ApiInsightsGetSummaryStatsByActor.Input) async throws -> Operations.ApiInsightsGetSummaryStatsByActor.Output
     /// Get time stats
     ///
     /// Get the number of API requests and rate-limited requests made within an organization over a specified time period.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/get(api-insights/get-time-stats)`.
@@ -394,6 +423,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// Get the number of API requests and rate-limited requests made within an organization by a specific user over a specified time period.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats/users/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/users/{user_id}/get(api-insights/get-time-stats-by-user)`.
     func apiInsightsGetTimeStatsByUser(_ input: Operations.ApiInsightsGetTimeStatsByUser.Input) async throws -> Operations.ApiInsightsGetTimeStatsByUser.Output
@@ -401,12 +432,16 @@ public protocol APIProtocol: Sendable {
     ///
     /// Get the number of API requests and rate-limited requests made within an organization by a specific actor within a specified time period.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/{actor_type}/{actor_id}/get(api-insights/get-time-stats-by-actor)`.
     func apiInsightsGetTimeStatsByActor(_ input: Operations.ApiInsightsGetTimeStatsByActor.Input) async throws -> Operations.ApiInsightsGetTimeStatsByActor.Output
     /// Get user stats
     ///
     /// Get API usage statistics within an organization for a user broken down by the type of access.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/user-stats/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/user-stats/{user_id}/get(api-insights/get-user-stats)`.
@@ -1217,6 +1252,41 @@ extension APIProtocol {
             body: body
         ))
     }
+    /// Create a cluster deployment records job
+    ///
+    /// Create a background job to set deployment records for a given cluster.
+    /// Performs validation and permission checks synchronously, returning rejected
+    /// deployments immediately, then enqueues a background job for the actual
+    /// deployment updates. Use the companion GET endpoint to poll for job status.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/post(orgs/create-cluster-deployment-records-job)`.
+    public func orgsCreateClusterDeploymentRecordsJob(
+        path: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Path,
+        headers: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Headers = .init(),
+        body: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body
+    ) async throws -> Operations.OrgsCreateClusterDeploymentRecordsJob.Output {
+        try await orgsCreateClusterDeploymentRecordsJob(Operations.OrgsCreateClusterDeploymentRecordsJob.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get cluster deployment records job status
+    ///
+    /// Get the status and results of a previously created cluster deployment records job.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/get(orgs/get-cluster-deployment-records-job)`.
+    public func orgsGetClusterDeploymentRecordsJob(
+        path: Operations.OrgsGetClusterDeploymentRecordsJob.Input.Path,
+        headers: Operations.OrgsGetClusterDeploymentRecordsJob.Input.Headers = .init()
+    ) async throws -> Operations.OrgsGetClusterDeploymentRecordsJob.Output {
+        try await orgsGetClusterDeploymentRecordsJob(Operations.OrgsGetClusterDeploymentRecordsJob.Input(
+            path: path,
+            headers: headers
+        ))
+    }
     /// Create artifact metadata storage record
     ///
     /// Create metadata storage records for artifacts associated with an organization.
@@ -1690,6 +1760,8 @@ extension APIProtocol {
     ///
     /// Get API request count statistics for an actor broken down by route within a specified time frame.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}/get(api-insights/get-route-stats-by-actor)`.
     public func apiInsightsGetRouteStatsByActor(
@@ -1706,6 +1778,8 @@ extension APIProtocol {
     /// Get subject stats
     ///
     /// Get API request statistics for all subjects within an organization within a specified time frame. Subjects can be users or GitHub Apps.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/subject-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/subject-stats/get(api-insights/get-subject-stats)`.
@@ -1724,6 +1798,8 @@ extension APIProtocol {
     ///
     /// Get overall statistics of API requests made within an organization by all users and apps within a specified time frame.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/get(api-insights/get-summary-stats)`.
     public func apiInsightsGetSummaryStats(
@@ -1740,6 +1816,8 @@ extension APIProtocol {
     /// Get summary stats by user
     ///
     /// Get overall statistics of API requests within the organization for a user.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats/users/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/users/{user_id}/get(api-insights/get-summary-stats-by-user)`.
@@ -1758,6 +1836,8 @@ extension APIProtocol {
     ///
     /// Get overall statistics of API requests within the organization made by a specific actor. Actors can be GitHub App installations, OAuth apps or other tokens on behalf of a user.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/{actor_type}/{actor_id}/get(api-insights/get-summary-stats-by-actor)`.
     public func apiInsightsGetSummaryStatsByActor(
@@ -1774,6 +1854,8 @@ extension APIProtocol {
     /// Get time stats
     ///
     /// Get the number of API requests and rate-limited requests made within an organization over a specified time period.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/get(api-insights/get-time-stats)`.
@@ -1792,6 +1874,8 @@ extension APIProtocol {
     ///
     /// Get the number of API requests and rate-limited requests made within an organization by a specific user over a specified time period.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats/users/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/users/{user_id}/get(api-insights/get-time-stats-by-user)`.
     public func apiInsightsGetTimeStatsByUser(
@@ -1809,6 +1893,8 @@ extension APIProtocol {
     ///
     /// Get the number of API requests and rate-limited requests made within an organization by a specific actor within a specified time period.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/{actor_type}/{actor_id}/get(api-insights/get-time-stats-by-actor)`.
     public func apiInsightsGetTimeStatsByActor(
@@ -1825,6 +1911,8 @@ extension APIProtocol {
     /// Get user stats
     ///
     /// Get API usage statistics within an organization for a user broken down by the type of access.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/user-stats/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/user-stats/{user_id}/get(api-insights/get-user-stats)`.
@@ -3960,7 +4048,7 @@ public enum Components {
                 case response
             }
         }
-        /// The permissions granted to the user access token.
+        /// The permissions granted to the fine-grained access token.
         ///
         /// - Remark: Generated from `#/components/schemas/app-permissions`.
         public struct AppPermissions: Codable, Hashable, Sendable {
@@ -12084,6 +12172,14 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/deployments`.
                     public var deployments: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayload
+                    /// When enabled, deployments associated with repositories the actor can write to are processed
+                    /// while deployments associated with repositories that cannot be resolved or written to by the actor
+                    /// are skipped and reported in the `errors` array. When false (the default), the endpoint returns
+                    /// an error if any targeted repository cannot be resolved, the actor lacks write access, or no matching attestation can be found.
+                    ///
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/requestBody/json/partial_success`.
+                    public var partialSuccess: Swift.Bool?
                     /// If true, the endpoint will return the set records in the response body
                     ///
                     ///
@@ -12095,22 +12191,26 @@ public enum Operations {
                     ///   - logicalEnvironment: The stage of the deployment.
                     ///   - physicalEnvironment: The physical region of the deployment.
                     ///   - deployments: The list of deployments to record.
+                    ///   - partialSuccess: When enabled, deployments associated with repositories the actor can write to are processed
                     ///   - returnRecords: If true, the endpoint will return the set records in the response body
                     public init(
                         logicalEnvironment: Swift.String,
                         physicalEnvironment: Swift.String? = nil,
                         deployments: Operations.OrgsSetClusterDeploymentRecords.Input.Body.JsonPayload.DeploymentsPayload,
+                        partialSuccess: Swift.Bool? = nil,
                         returnRecords: Swift.Bool? = nil
                     ) {
                         self.logicalEnvironment = logicalEnvironment
                         self.physicalEnvironment = physicalEnvironment
                         self.deployments = deployments
+                        self.partialSuccess = partialSuccess
                         self.returnRecords = returnRecords
                     }
                     public enum CodingKeys: String, CodingKey {
                         case logicalEnvironment = "logical_environment"
                         case physicalEnvironment = "physical_environment"
                         case deployments
+                        case partialSuccess = "partial_success"
                         case returnRecords = "return_records"
                     }
                 }
@@ -12212,6 +12312,229 @@ public enum Operations {
                     }
                 }
             }
+            public struct Code207: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The number of deployment records created or updated.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/total_count`.
+                        public var totalCount: Swift.Int
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/deployment_records`.
+                        public var deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload`.
+                        public struct ErrorsPayloadPayload: Codable, Hashable, Sendable {
+                            /// The reason the deployment failed processing.
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/cause`.
+                            @frozen public enum CausePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                case unauthorized = "unauthorized"
+                                case notFound = "not_found"
+                            }
+                            /// The reason the deployment failed processing.
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/cause`.
+                            public var cause: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload.ErrorsPayloadPayload.CausePayload?
+                            /// The deployment payload that could not be processed.
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/deployment`.
+                            public struct DeploymentPayload: Codable, Hashable, Sendable {
+                                /// The name of the artifact.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/deployment/name`.
+                                public var name: Swift.String?
+                                /// The digest of the artifact.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/deployment/digest`.
+                                public var digest: Swift.String?
+                                /// The name of the deployment that failed processing.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/deployment/deployment_name`.
+                                public var deploymentName: Swift.String?
+                                /// The version of the deployment.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/deployment/version`.
+                                public var version: Swift.String?
+                                /// The deployment status.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/deployment/status`.
+                                public var status: Swift.String?
+                                /// The repository associated with the deployment.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/deployment/github_repository`.
+                                public var githubRepository: Swift.String?
+                                /// Custom metadata tags for the deployment.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/deployment/tags`.
+                                public struct TagsPayload: Codable, Hashable, Sendable {
+                                    /// A container of undocumented properties.
+                                    public var additionalProperties: [String: Swift.String]
+                                    /// Creates a new `TagsPayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - additionalProperties: A container of undocumented properties.
+                                    public init(additionalProperties: [String: Swift.String] = .init()) {
+                                        self.additionalProperties = additionalProperties
+                                    }
+                                    public init(from decoder: any Swift.Decoder) throws {
+                                        additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                                    }
+                                    public func encode(to encoder: any Swift.Encoder) throws {
+                                        try encoder.encodeAdditionalProperties(additionalProperties)
+                                    }
+                                }
+                                /// Custom metadata tags for the deployment.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/deployment/tags`.
+                                public var tags: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload.ErrorsPayloadPayload.DeploymentPayload.TagsPayload?
+                                /// Runtime risk classifications for the deployment.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/deployment/runtime_risks`.
+                                public var runtimeRisks: [Swift.String]?
+                                /// Creates a new `DeploymentPayload`.
+                                ///
+                                /// - Parameters:
+                                ///   - name: The name of the artifact.
+                                ///   - digest: The digest of the artifact.
+                                ///   - deploymentName: The name of the deployment that failed processing.
+                                ///   - version: The version of the deployment.
+                                ///   - status: The deployment status.
+                                ///   - githubRepository: The repository associated with the deployment.
+                                ///   - tags: Custom metadata tags for the deployment.
+                                ///   - runtimeRisks: Runtime risk classifications for the deployment.
+                                public init(
+                                    name: Swift.String? = nil,
+                                    digest: Swift.String? = nil,
+                                    deploymentName: Swift.String? = nil,
+                                    version: Swift.String? = nil,
+                                    status: Swift.String? = nil,
+                                    githubRepository: Swift.String? = nil,
+                                    tags: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload.ErrorsPayloadPayload.DeploymentPayload.TagsPayload? = nil,
+                                    runtimeRisks: [Swift.String]? = nil
+                                ) {
+                                    self.name = name
+                                    self.digest = digest
+                                    self.deploymentName = deploymentName
+                                    self.version = version
+                                    self.status = status
+                                    self.githubRepository = githubRepository
+                                    self.tags = tags
+                                    self.runtimeRisks = runtimeRisks
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case name
+                                    case digest
+                                    case deploymentName = "deployment_name"
+                                    case version
+                                    case status
+                                    case githubRepository = "github_repository"
+                                    case tags
+                                    case runtimeRisks = "runtime_risks"
+                                }
+                            }
+                            /// The deployment payload that could not be processed.
+                            ///
+                            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/ErrorsPayload/deployment`.
+                            public var deployment: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload.ErrorsPayloadPayload.DeploymentPayload?
+                            /// Creates a new `ErrorsPayloadPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - cause: The reason the deployment failed processing.
+                            ///   - deployment: The deployment payload that could not be processed.
+                            public init(
+                                cause: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload.ErrorsPayloadPayload.CausePayload? = nil,
+                                deployment: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload.ErrorsPayloadPayload.DeploymentPayload? = nil
+                            ) {
+                                self.cause = cause
+                                self.deployment = deployment
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case cause
+                                case deployment
+                            }
+                        }
+                        /// A list of errors for deployments that could not be processed.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/errors`.
+                        public typealias ErrorsPayload = [Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload.ErrorsPayloadPayload]
+                        /// A list of errors for deployments that could not be processed.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/json/errors`.
+                        public var errors: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload.ErrorsPayload?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - totalCount: The number of deployment records created or updated.
+                        ///   - deploymentRecords:
+                        ///   - errors: A list of errors for deployments that could not be processed.
+                        public init(
+                            totalCount: Swift.Int,
+                            deploymentRecords: [Components.Schemas.ArtifactDeploymentRecord]? = nil,
+                            errors: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload.ErrorsPayload? = nil
+                        ) {
+                            self.totalCount = totalCount
+                            self.deploymentRecords = deploymentRecords
+                            self.errors = errors
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case totalCount = "total_count"
+                            case deploymentRecords = "deployment_records"
+                            case errors
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/207/content/application\/json`.
+                    case json(Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body
+                /// Creates a new `Code207`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsSetClusterDeploymentRecords.Output.Code207.Body) {
+                    self.body = body
+                }
+            }
+            /// This response format is only returned when `partial_success` is set to true in the request body.
+            /// Successfully processed deployments are included in the `deployment_records` field. Records that could
+            /// not be processed and were skipped because of unresolvable repositories, missing actor permissions, or lack of a matching attestation are
+            /// included in the `errors` field.
+            ///
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/post(orgs/set-cluster-deployment-records)/responses/207`.
+            ///
+            /// HTTP response code: `207 code207`.
+            case code207(Operations.OrgsSetClusterDeploymentRecords.Output.Code207)
+            /// The associated value of the enum case if `self` is `.code207`.
+            ///
+            /// - Throws: An error if `self` is not `.code207`.
+            /// - SeeAlso: `.code207`.
+            public var code207: Operations.OrgsSetClusterDeploymentRecords.Output.Code207 {
+                get throws {
+                    switch self {
+                    case let .code207(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "code207",
+                            response: self
+                        )
+                    }
+                }
+            }
             public struct Forbidden: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/POST/responses/403/content`.
                 @frozen public enum Body: Sendable, Hashable {
@@ -12302,6 +12625,804 @@ public enum Operations {
             /// - Throws: An error if `self` is not `.notFound`.
             /// - SeeAlso: `.notFound`.
             public var notFound: Operations.OrgsSetClusterDeploymentRecords.Output.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Create a cluster deployment records job
+    ///
+    /// Create a background job to set deployment records for a given cluster.
+    /// Performs validation and permission checks synchronously, returning rejected
+    /// deployments immediately, then enqueues a background job for the actual
+    /// deployment updates. Use the companion GET endpoint to poll for job status.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/post(orgs/create-cluster-deployment-records-job)`.
+    public enum OrgsCreateClusterDeploymentRecordsJob {
+        public static let id: Swift.String = "orgs/create-cluster-deployment-records-job"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/path/org`.
+                public var org: Components.Parameters.Org
+                /// The cluster name.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/path/cluster`.
+                public var cluster: Swift.String
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - cluster: The cluster name.
+                public init(
+                    org: Components.Parameters.Org,
+                    cluster: Swift.String
+                ) {
+                    self.org = org
+                    self.cluster = cluster
+                }
+            }
+            public var path: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateClusterDeploymentRecordsJob.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsCreateClusterDeploymentRecordsJob.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The stage of the deployment.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/logical_environment`.
+                    public var logicalEnvironment: Swift.String
+                    /// The physical region of the deployment.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/physical_environment`.
+                    public var physicalEnvironment: Swift.String?
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload`.
+                    public struct DeploymentsPayloadPayload: Codable, Hashable, Sendable {
+                        /// The name of the artifact.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/name`.
+                        public var name: Swift.String
+                        /// The hex encoded digest of the artifact.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/digest`.
+                        public var digest: Swift.String
+                        /// The artifact version.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/version`.
+                        public var version: Swift.String?
+                        /// The deployment status of the artifact.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/status`.
+                        @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case deployed = "deployed"
+                            case decommissioned = "decommissioned"
+                        }
+                        /// The deployment status of the artifact.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/status`.
+                        public var status: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body.JsonPayload.DeploymentsPayloadPayload.StatusPayload?
+                        /// The unique identifier for the deployment represented by the new record.
+                        ///
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/deployment_name`.
+                        public var deploymentName: Swift.String
+                        /// The name of the GitHub repository associated with the artifact.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/github_repository`.
+                        public var githubRepository: Swift.String?
+                        /// Key-value pairs to tag the deployment record.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/tags`.
+                        public struct TagsPayload: Codable, Hashable, Sendable {
+                            /// A container of undocumented properties.
+                            public var additionalProperties: [String: Swift.String]
+                            /// Creates a new `TagsPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - additionalProperties: A container of undocumented properties.
+                            public init(additionalProperties: [String: Swift.String] = .init()) {
+                                self.additionalProperties = additionalProperties
+                            }
+                            public init(from decoder: any Swift.Decoder) throws {
+                                additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                            }
+                            public func encode(to encoder: any Swift.Encoder) throws {
+                                try encoder.encodeAdditionalProperties(additionalProperties)
+                            }
+                        }
+                        /// Key-value pairs to tag the deployment record.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/tags`.
+                        public var tags: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body.JsonPayload.DeploymentsPayloadPayload.TagsPayload?
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/RuntimeRisksPayload`.
+                        @frozen public enum RuntimeRisksPayloadPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case criticalResource = "critical-resource"
+                            case internetExposed = "internet-exposed"
+                            case lateralMovement = "lateral-movement"
+                            case sensitiveData = "sensitive-data"
+                        }
+                        /// A list of runtime risks associated with the deployment.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/runtime_risks`.
+                        public typealias RuntimeRisksPayload = [Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body.JsonPayload.DeploymentsPayloadPayload.RuntimeRisksPayloadPayload]
+                        /// A list of runtime risks associated with the deployment.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/DeploymentsPayload/runtime_risks`.
+                        public var runtimeRisks: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body.JsonPayload.DeploymentsPayloadPayload.RuntimeRisksPayload?
+                        /// Creates a new `DeploymentsPayloadPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - name: The name of the artifact.
+                        ///   - digest: The hex encoded digest of the artifact.
+                        ///   - version: The artifact version.
+                        ///   - status: The deployment status of the artifact.
+                        ///   - deploymentName: The unique identifier for the deployment represented by the new record.
+                        ///   - githubRepository: The name of the GitHub repository associated with the artifact.
+                        ///   - tags: Key-value pairs to tag the deployment record.
+                        ///   - runtimeRisks: A list of runtime risks associated with the deployment.
+                        public init(
+                            name: Swift.String,
+                            digest: Swift.String,
+                            version: Swift.String? = nil,
+                            status: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body.JsonPayload.DeploymentsPayloadPayload.StatusPayload? = nil,
+                            deploymentName: Swift.String,
+                            githubRepository: Swift.String? = nil,
+                            tags: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body.JsonPayload.DeploymentsPayloadPayload.TagsPayload? = nil,
+                            runtimeRisks: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body.JsonPayload.DeploymentsPayloadPayload.RuntimeRisksPayload? = nil
+                        ) {
+                            self.name = name
+                            self.digest = digest
+                            self.version = version
+                            self.status = status
+                            self.deploymentName = deploymentName
+                            self.githubRepository = githubRepository
+                            self.tags = tags
+                            self.runtimeRisks = runtimeRisks
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case name
+                            case digest
+                            case version
+                            case status
+                            case deploymentName = "deployment_name"
+                            case githubRepository = "github_repository"
+                            case tags
+                            case runtimeRisks = "runtime_risks"
+                        }
+                    }
+                    /// The list of deployments to record.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/deployments`.
+                    public typealias DeploymentsPayload = [Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body.JsonPayload.DeploymentsPayloadPayload]
+                    /// The list of deployments to record.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/json/deployments`.
+                    public var deployments: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body.JsonPayload.DeploymentsPayload
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - logicalEnvironment: The stage of the deployment.
+                    ///   - physicalEnvironment: The physical region of the deployment.
+                    ///   - deployments: The list of deployments to record.
+                    public init(
+                        logicalEnvironment: Swift.String,
+                        physicalEnvironment: Swift.String? = nil,
+                        deployments: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body.JsonPayload.DeploymentsPayload
+                    ) {
+                        self.logicalEnvironment = logicalEnvironment
+                        self.physicalEnvironment = physicalEnvironment
+                        self.deployments = deployments
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case logicalEnvironment = "logical_environment"
+                        case physicalEnvironment = "physical_environment"
+                        case deployments
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/requestBody/content/application\/json`.
+                case json(Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body.JsonPayload)
+            }
+            public var body: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Path,
+                headers: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Headers = .init(),
+                body: Operations.OrgsCreateClusterDeploymentRecordsJob.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Accepted: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/202/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/202/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The ID of the created job.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/202/content/json/job_id`.
+                        public var jobId: Swift.Int
+                        /// Deployments that were rejected during authorization.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/202/content/json/errors`.
+                        public var errors: [OpenAPIRuntime.OpenAPIObjectContainer]?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - jobId: The ID of the created job.
+                        ///   - errors: Deployments that were rejected during authorization.
+                        public init(
+                            jobId: Swift.Int,
+                            errors: [OpenAPIRuntime.OpenAPIObjectContainer]? = nil
+                        ) {
+                            self.jobId = jobId
+                            self.errors = errors
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case jobId = "job_id"
+                            case errors
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/202/content/application\/json`.
+                    case json(Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Accepted.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Accepted.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Accepted.Body
+                /// Creates a new `Accepted`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Accepted.Body) {
+                    self.body = body
+                }
+            }
+            /// Job created successfully. Authorized deployments will be processed in the background.
+            ///
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/post(orgs/create-cluster-deployment-records-job)/responses/202`.
+            ///
+            /// HTTP response code: `202 accepted`.
+            case accepted(Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Accepted)
+            /// The associated value of the enum case if `self` is `.accepted`.
+            ///
+            /// - Throws: An error if `self` is not `.accepted`.
+            /// - SeeAlso: `.accepted`.
+            public var accepted: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Accepted {
+                get throws {
+                    switch self {
+                    case let .accepted(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "accepted",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct BadRequest: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/400/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/400/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.BadRequest.Body
+                /// Creates a new `BadRequest`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.BadRequest.Body) {
+                    self.body = body
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/post(orgs/create-cluster-deployment-records-job)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Operations.OrgsCreateClusterDeploymentRecordsJob.Output.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Forbidden: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/403/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/403/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Forbidden.Body
+                /// Creates a new `Forbidden`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Forbidden.Body) {
+                    self.body = body
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/post(orgs/create-cluster-deployment-records-job)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct NotFound: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/404/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/404/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.NotFound.Body
+                /// Creates a new `NotFound`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.NotFound.Body) {
+                    self.body = body
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/post(orgs/create-cluster-deployment-records-job)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Operations.OrgsCreateClusterDeploymentRecordsJob.Output.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Conflict: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/409/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/POST/responses/409/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Conflict.Body
+                /// Creates a new `Conflict`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Conflict.Body) {
+                    self.body = body
+                }
+            }
+            /// A job is already in progress for this cluster.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/post(orgs/create-cluster-deployment-records-job)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Operations.OrgsCreateClusterDeploymentRecordsJob.Output.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get cluster deployment records job status
+    ///
+    /// Get the status and results of a previously created cluster deployment records job.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/get(orgs/get-cluster-deployment-records-job)`.
+    public enum OrgsGetClusterDeploymentRecordsJob {
+        public static let id: Swift.String = "orgs/get-cluster-deployment-records-job"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// The cluster name.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/path/cluster`.
+                public var cluster: Swift.String
+                /// The ID of the job.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/path/job_id`.
+                public var jobId: Swift.Int
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - cluster: The cluster name.
+                ///   - jobId: The ID of the job.
+                public init(
+                    org: Components.Parameters.Org,
+                    cluster: Swift.String,
+                    jobId: Swift.Int
+                ) {
+                    self.org = org
+                    self.cluster = cluster
+                    self.jobId = jobId
+                }
+            }
+            public var path: Operations.OrgsGetClusterDeploymentRecordsJob.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsGetClusterDeploymentRecordsJob.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.OrgsGetClusterDeploymentRecordsJob.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.OrgsGetClusterDeploymentRecordsJob.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.OrgsGetClusterDeploymentRecordsJob.Input.Path,
+                headers: Operations.OrgsGetClusterDeploymentRecordsJob.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The ID of the job.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/responses/200/content/json/job_id`.
+                        public var jobId: Swift.Int
+                        /// The current status of the job.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/responses/200/content/json/status`.
+                        @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case pending = "pending"
+                            case processing = "processing"
+                            case completed = "completed"
+                            case failed = "failed"
+                        }
+                        /// The current status of the job.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/responses/200/content/json/status`.
+                        public var status: Operations.OrgsGetClusterDeploymentRecordsJob.Output.Ok.Body.JsonPayload.StatusPayload
+                        /// When the job started processing (only present when processing, completed, or failed).
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/responses/200/content/json/started_at`.
+                        public var startedAt: Foundation.Date?
+                        /// The number of records successfully mutated (only present when completed).
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/responses/200/content/json/total_count`.
+                        public var totalCount: Swift.Int?
+                        /// Processing errors (only present when completed or failed).
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/responses/200/content/json/errors`.
+                        public var errors: [OpenAPIRuntime.OpenAPIObjectContainer]?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - jobId: The ID of the job.
+                        ///   - status: The current status of the job.
+                        ///   - startedAt: When the job started processing (only present when processing, completed, or failed).
+                        ///   - totalCount: The number of records successfully mutated (only present when completed).
+                        ///   - errors: Processing errors (only present when completed or failed).
+                        public init(
+                            jobId: Swift.Int,
+                            status: Operations.OrgsGetClusterDeploymentRecordsJob.Output.Ok.Body.JsonPayload.StatusPayload,
+                            startedAt: Foundation.Date? = nil,
+                            totalCount: Swift.Int? = nil,
+                            errors: [OpenAPIRuntime.OpenAPIObjectContainer]? = nil
+                        ) {
+                            self.jobId = jobId
+                            self.status = status
+                            self.startedAt = startedAt
+                            self.totalCount = totalCount
+                            self.errors = errors
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case jobId = "job_id"
+                            case status
+                            case startedAt = "started_at"
+                            case totalCount = "total_count"
+                            case errors
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/responses/200/content/application\/json`.
+                    case json(Operations.OrgsGetClusterDeploymentRecordsJob.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.OrgsGetClusterDeploymentRecordsJob.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsGetClusterDeploymentRecordsJob.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsGetClusterDeploymentRecordsJob.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Job status retrieved successfully.
+            ///
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/get(orgs/get-cluster-deployment-records-job)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.OrgsGetClusterDeploymentRecordsJob.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.OrgsGetClusterDeploymentRecordsJob.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct NotFound: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/responses/404/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/GET/responses/404/content/application\/json`.
+                    case json(Components.Schemas.BasicError)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.BasicError {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsGetClusterDeploymentRecordsJob.Output.NotFound.Body
+                /// Creates a new `NotFound`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsGetClusterDeploymentRecordsJob.Output.NotFound.Body) {
+                    self.body = body
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/artifacts/metadata/deployment-record/cluster/{cluster}/jobs/{job_id}/get(orgs/get-cluster-deployment-records-job)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Operations.OrgsGetClusterDeploymentRecordsJob.Output.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Operations.OrgsGetClusterDeploymentRecordsJob.Output.NotFound {
                 get throws {
                     switch self {
                     case let .notFound(response):
@@ -17641,6 +18762,8 @@ public enum Operations {
     ///
     /// Get API request count statistics for an actor broken down by route within a specified time frame.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}/get(api-insights/get-route-stats-by-actor)`.
     public enum ApiInsightsGetRouteStatsByActor {
@@ -17875,6 +18998,8 @@ public enum Operations {
     ///
     /// Get API request statistics for all subjects within an organization within a specified time frame. Subjects can be users or GitHub Apps.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/subject-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/subject-stats/get(api-insights/get-subject-stats)`.
     public enum ApiInsightsGetSubjectStats {
@@ -18084,6 +19209,8 @@ public enum Operations {
     ///
     /// Get overall statistics of API requests made within an organization by all users and apps within a specified time frame.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/get(api-insights/get-summary-stats)`.
     public enum ApiInsightsGetSummaryStats {
@@ -18242,6 +19369,8 @@ public enum Operations {
     /// Get summary stats by user
     ///
     /// Get overall statistics of API requests within the organization for a user.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats/users/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/users/{user_id}/get(api-insights/get-summary-stats-by-user)`.
@@ -18410,6 +19539,8 @@ public enum Operations {
     /// Get summary stats by actor
     ///
     /// Get overall statistics of API requests within the organization made by a specific actor. Actors can be GitHub App installations, OAuth apps or other tokens on behalf of a user.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/summary-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/summary-stats/{actor_type}/{actor_id}/get(api-insights/get-summary-stats-by-actor)`.
@@ -18594,6 +19725,8 @@ public enum Operations {
     ///
     /// Get the number of API requests and rate-limited requests made within an organization over a specified time period.
     ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
+    ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/get(api-insights/get-time-stats)`.
     public enum ApiInsightsGetTimeStats {
@@ -18759,6 +19892,8 @@ public enum Operations {
     /// Get time stats by user
     ///
     /// Get the number of API requests and rate-limited requests made within an organization by a specific user over a specified time period.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats/users/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/users/{user_id}/get(api-insights/get-time-stats-by-user)`.
@@ -18934,6 +20069,8 @@ public enum Operations {
     /// Get time stats by actor
     ///
     /// Get the number of API requests and rate-limited requests made within an organization by a specific actor within a specified time period.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/time-stats/{actor_type}/{actor_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/time-stats/{actor_type}/{actor_id}/get(api-insights/get-time-stats-by-actor)`.
@@ -19124,6 +20261,8 @@ public enum Operations {
     /// Get user stats
     ///
     /// Get API usage statistics within an organization for a user broken down by the type of access.
+    ///
+    /// Under normal conditions, you can expect API data to appear within 4–6 hours after making a request. During incidents or periods of unusually high volume, it may take longer to show up.
     ///
     /// - Remark: HTTP `GET /orgs/{org}/insights/api/user-stats/{user_id}`.
     /// - Remark: Generated from `#/paths//orgs/{org}/insights/api/user-stats/{user_id}/get(api-insights/get-user-stats)`.
@@ -31562,7 +32701,7 @@ public enum Operations {
                     self.body = body
                 }
             }
-            /// Response
+            /// The user's organization invitation was accepted synchronously.
             ///
             /// - Remark: Generated from `#/paths//user/memberships/orgs/{org}/patch(orgs/update-membership-for-authenticated-user)/responses/200`.
             ///
@@ -31580,6 +32719,57 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Accepted: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/user/memberships/orgs/{org}/PATCH/responses/202/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/user/memberships/orgs/{org}/PATCH/responses/202/content/application\/json`.
+                    case json(Components.Schemas.OrgMembership)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.OrgMembership {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.OrgsUpdateMembershipForAuthenticatedUser.Output.Accepted.Body
+                /// Creates a new `Accepted`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.OrgsUpdateMembershipForAuthenticatedUser.Output.Accepted.Body) {
+                    self.body = body
+                }
+            }
+            /// The acceptance of the user's organization invitation is being processed asynchronously.
+            ///
+            /// - Remark: Generated from `#/paths//user/memberships/orgs/{org}/patch(orgs/update-membership-for-authenticated-user)/responses/202`.
+            ///
+            /// HTTP response code: `202 accepted`.
+            case accepted(Operations.OrgsUpdateMembershipForAuthenticatedUser.Output.Accepted)
+            /// The associated value of the enum case if `self` is `.accepted`.
+            ///
+            /// - Throws: An error if `self` is not `.accepted`.
+            /// - SeeAlso: `.accepted`.
+            public var accepted: Operations.OrgsUpdateMembershipForAuthenticatedUser.Output.Accepted {
+                get throws {
+                    switch self {
+                    case let .accepted(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "accepted",
                             response: self
                         )
                     }

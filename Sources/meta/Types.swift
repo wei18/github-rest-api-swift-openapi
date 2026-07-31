@@ -458,6 +458,8 @@ public enum Components {
             public var dependabot: [Swift.String]?
             /// - Remark: Generated from `#/components/schemas/api-overview/copilot`.
             public var copilot: [Swift.String]?
+            /// - Remark: Generated from `#/components/schemas/api-overview/commit_signing_keys`.
+            public var commitSigningKeys: [Swift.String]?
             /// - Remark: Generated from `#/components/schemas/api-overview/domains`.
             public struct DomainsPayload: Codable, Hashable, Sendable {
                 /// - Remark: Generated from `#/components/schemas/api-overview/domains/website`.
@@ -578,6 +580,7 @@ public enum Components {
             ///   - codespaces:
             ///   - dependabot:
             ///   - copilot:
+            ///   - commitSigningKeys:
             ///   - domains:
             public init(
                 verifiablePasswordAuthentication: Swift.Bool,
@@ -596,6 +599,7 @@ public enum Components {
                 codespaces: [Swift.String]? = nil,
                 dependabot: [Swift.String]? = nil,
                 copilot: [Swift.String]? = nil,
+                commitSigningKeys: [Swift.String]? = nil,
                 domains: Components.Schemas.ApiOverview.DomainsPayload? = nil
             ) {
                 self.verifiablePasswordAuthentication = verifiablePasswordAuthentication
@@ -614,6 +618,7 @@ public enum Components {
                 self.codespaces = codespaces
                 self.dependabot = dependabot
                 self.copilot = copilot
+                self.commitSigningKeys = commitSigningKeys
                 self.domains = domains
             }
             public enum CodingKeys: String, CodingKey {
@@ -633,6 +638,7 @@ public enum Components {
                 case codespaces
                 case dependabot
                 case copilot
+                case commitSigningKeys = "commit_signing_keys"
                 case domains
             }
         }

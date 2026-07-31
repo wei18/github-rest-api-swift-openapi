@@ -22,6 +22,42 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /orgs/{org}/secret-scanning/alerts`.
     /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/alerts/get(secret-scanning/list-alerts-for-org)`.
     func secretScanningListAlertsForOrg(_ input: Operations.SecretScanningListAlertsForOrg.Input) async throws -> Operations.SecretScanningListAlertsForOrg.Output
+    /// List organization custom patterns
+    ///
+    /// Lists secret scanning custom patterns for an organization.
+    ///
+    /// Personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/get(secret-scanning/list-org-custom-patterns)`.
+    func secretScanningListOrgCustomPatterns(_ input: Operations.SecretScanningListOrgCustomPatterns.Input) async throws -> Operations.SecretScanningListOrgCustomPatterns.Output
+    /// Bulk create organization custom patterns
+    ///
+    /// Bulk creates secret scanning custom patterns for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-org-custom-patterns)`.
+    func secretScanningBulkCreateOrgCustomPatterns(_ input: Operations.SecretScanningBulkCreateOrgCustomPatterns.Input) async throws -> Operations.SecretScanningBulkCreateOrgCustomPatterns.Output
+    /// Bulk delete organization custom patterns
+    ///
+    /// Bulk deletes secret scanning custom patterns for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-org-custom-patterns)`.
+    func secretScanningBulkDeleteOrgCustomPatterns(_ input: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input) async throws -> Operations.SecretScanningBulkDeleteOrgCustomPatterns.Output
+    /// Update an organization custom pattern
+    ///
+    /// Updates a secret scanning custom pattern for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/secret-scanning/custom-patterns/{pattern_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-org-custom-pattern)`.
+    func secretScanningUpdateOrgCustomPattern(_ input: Operations.SecretScanningUpdateOrgCustomPattern.Input) async throws -> Operations.SecretScanningUpdateOrgCustomPattern.Output
     /// List organization pattern configurations
     ///
     /// Lists the secret scanning pattern configurations for an organization.
@@ -86,6 +122,42 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/locations`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/locations/get(secret-scanning/list-locations-for-alert)`.
     func secretScanningListLocationsForAlert(_ input: Operations.SecretScanningListLocationsForAlert.Input) async throws -> Operations.SecretScanningListLocationsForAlert.Output
+    /// List repository custom patterns
+    ///
+    /// Lists secret scanning custom patterns for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/get(secret-scanning/list-repo-custom-patterns)`.
+    func secretScanningListRepoCustomPatterns(_ input: Operations.SecretScanningListRepoCustomPatterns.Input) async throws -> Operations.SecretScanningListRepoCustomPatterns.Output
+    /// Bulk create repository custom patterns
+    ///
+    /// Bulk creates secret scanning custom patterns for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-repo-custom-patterns)`.
+    func secretScanningBulkCreateRepoCustomPatterns(_ input: Operations.SecretScanningBulkCreateRepoCustomPatterns.Input) async throws -> Operations.SecretScanningBulkCreateRepoCustomPatterns.Output
+    /// Bulk delete repository custom patterns
+    ///
+    /// Bulk deletes secret scanning custom patterns for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-repo-custom-patterns)`.
+    func secretScanningBulkDeleteRepoCustomPatterns(_ input: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input) async throws -> Operations.SecretScanningBulkDeleteRepoCustomPatterns.Output
+    /// Update a repository custom pattern
+    ///
+    /// Updates a secret scanning custom pattern for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-repo-custom-pattern)`.
+    func secretScanningUpdateRepoCustomPattern(_ input: Operations.SecretScanningUpdateRepoCustomPattern.Input) async throws -> Operations.SecretScanningUpdateRepoCustomPattern.Output
     /// Create a push protection bypass
     ///
     /// Creates a bypass for a previously push protected secret.
@@ -132,6 +204,82 @@ extension APIProtocol {
             path: path,
             query: query,
             headers: headers
+        ))
+    }
+    /// List organization custom patterns
+    ///
+    /// Lists secret scanning custom patterns for an organization.
+    ///
+    /// Personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/get(secret-scanning/list-org-custom-patterns)`.
+    public func secretScanningListOrgCustomPatterns(
+        path: Operations.SecretScanningListOrgCustomPatterns.Input.Path,
+        query: Operations.SecretScanningListOrgCustomPatterns.Input.Query = .init(),
+        headers: Operations.SecretScanningListOrgCustomPatterns.Input.Headers = .init()
+    ) async throws -> Operations.SecretScanningListOrgCustomPatterns.Output {
+        try await secretScanningListOrgCustomPatterns(Operations.SecretScanningListOrgCustomPatterns.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Bulk create organization custom patterns
+    ///
+    /// Bulk creates secret scanning custom patterns for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-org-custom-patterns)`.
+    public func secretScanningBulkCreateOrgCustomPatterns(
+        path: Operations.SecretScanningBulkCreateOrgCustomPatterns.Input.Path,
+        headers: Operations.SecretScanningBulkCreateOrgCustomPatterns.Input.Headers = .init(),
+        body: Operations.SecretScanningBulkCreateOrgCustomPatterns.Input.Body
+    ) async throws -> Operations.SecretScanningBulkCreateOrgCustomPatterns.Output {
+        try await secretScanningBulkCreateOrgCustomPatterns(Operations.SecretScanningBulkCreateOrgCustomPatterns.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Bulk delete organization custom patterns
+    ///
+    /// Bulk deletes secret scanning custom patterns for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-org-custom-patterns)`.
+    public func secretScanningBulkDeleteOrgCustomPatterns(
+        path: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Path,
+        headers: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Headers = .init(),
+        body: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Body
+    ) async throws -> Operations.SecretScanningBulkDeleteOrgCustomPatterns.Output {
+        try await secretScanningBulkDeleteOrgCustomPatterns(Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Update an organization custom pattern
+    ///
+    /// Updates a secret scanning custom pattern for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/secret-scanning/custom-patterns/{pattern_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-org-custom-pattern)`.
+    public func secretScanningUpdateOrgCustomPattern(
+        path: Operations.SecretScanningUpdateOrgCustomPattern.Input.Path,
+        headers: Operations.SecretScanningUpdateOrgCustomPattern.Input.Headers = .init(),
+        body: Operations.SecretScanningUpdateOrgCustomPattern.Input.Body
+    ) async throws -> Operations.SecretScanningUpdateOrgCustomPattern.Output {
+        try await secretScanningUpdateOrgCustomPattern(Operations.SecretScanningUpdateOrgCustomPattern.Input(
+            path: path,
+            headers: headers,
+            body: body
         ))
     }
     /// List organization pattern configurations
@@ -254,6 +402,82 @@ extension APIProtocol {
             path: path,
             query: query,
             headers: headers
+        ))
+    }
+    /// List repository custom patterns
+    ///
+    /// Lists secret scanning custom patterns for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/get(secret-scanning/list-repo-custom-patterns)`.
+    public func secretScanningListRepoCustomPatterns(
+        path: Operations.SecretScanningListRepoCustomPatterns.Input.Path,
+        query: Operations.SecretScanningListRepoCustomPatterns.Input.Query = .init(),
+        headers: Operations.SecretScanningListRepoCustomPatterns.Input.Headers = .init()
+    ) async throws -> Operations.SecretScanningListRepoCustomPatterns.Output {
+        try await secretScanningListRepoCustomPatterns(Operations.SecretScanningListRepoCustomPatterns.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Bulk create repository custom patterns
+    ///
+    /// Bulk creates secret scanning custom patterns for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-repo-custom-patterns)`.
+    public func secretScanningBulkCreateRepoCustomPatterns(
+        path: Operations.SecretScanningBulkCreateRepoCustomPatterns.Input.Path,
+        headers: Operations.SecretScanningBulkCreateRepoCustomPatterns.Input.Headers = .init(),
+        body: Operations.SecretScanningBulkCreateRepoCustomPatterns.Input.Body
+    ) async throws -> Operations.SecretScanningBulkCreateRepoCustomPatterns.Output {
+        try await secretScanningBulkCreateRepoCustomPatterns(Operations.SecretScanningBulkCreateRepoCustomPatterns.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Bulk delete repository custom patterns
+    ///
+    /// Bulk deletes secret scanning custom patterns for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-repo-custom-patterns)`.
+    public func secretScanningBulkDeleteRepoCustomPatterns(
+        path: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Path,
+        headers: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Headers = .init(),
+        body: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Body
+    ) async throws -> Operations.SecretScanningBulkDeleteRepoCustomPatterns.Output {
+        try await secretScanningBulkDeleteRepoCustomPatterns(Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Update a repository custom pattern
+    ///
+    /// Updates a secret scanning custom pattern for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-repo-custom-pattern)`.
+    public func secretScanningUpdateRepoCustomPattern(
+        path: Operations.SecretScanningUpdateRepoCustomPattern.Input.Path,
+        headers: Operations.SecretScanningUpdateRepoCustomPattern.Input.Headers = .init(),
+        body: Operations.SecretScanningUpdateRepoCustomPattern.Input.Body
+    ) async throws -> Operations.SecretScanningUpdateRepoCustomPattern.Output {
+        try await secretScanningUpdateRepoCustomPattern(Operations.SecretScanningUpdateRepoCustomPattern.Input(
+            path: path,
+            headers: headers,
+            body: body
         ))
     }
     /// Create a push protection bypass
@@ -2121,6 +2345,368 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/schemas/secret-scanning-row-version`.
         public typealias SecretScanningRowVersion = Swift.String
+        /// A custom pattern for secret scanning.
+        ///
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern`.
+        public struct SecretScanningCustomPattern: Codable, Hashable, Sendable {
+            /// The ID of the custom pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/id`.
+            public var id: Swift.Int
+            /// The name of the custom pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/name`.
+            public var name: Swift.String
+            /// The regular expression of the custom pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/pattern`.
+            public var pattern: Swift.String
+            /// A URL-friendly identifier for the custom pattern, derived from its name.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/slug`.
+            public var slug: Swift.String
+            /// The state of the custom pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/state`.
+            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case published = "published"
+                case unpublished = "unpublished"
+            }
+            /// The state of the custom pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/state`.
+            public var state: Components.Schemas.SecretScanningCustomPattern.StatePayload
+            /// Whether push protection is enabled for this custom pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/push_protection_enabled`.
+            public var pushProtectionEnabled: Swift.Bool
+            /// The start delimiter regex for the custom pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/start_delimiter`.
+            public var startDelimiter: Swift.String?
+            /// The end delimiter regex for the custom pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/end_delimiter`.
+            public var endDelimiter: Swift.String?
+            /// List of regexes that the secret must match.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/must_match`.
+            public var mustMatch: [Swift.String]?
+            /// List of regexes that the secret must not match.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/must_not_match`.
+            public var mustNotMatch: [Swift.String]?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/custom_pattern_version`.
+            public var customPatternVersion: Components.Schemas.SecretScanningRowVersion?
+            /// The date and time the custom pattern was created in ISO 8601 format.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/created_at`.
+            public var createdAt: Foundation.Date?
+            /// The date and time the custom pattern was last updated in ISO 8601 format.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern/updated_at`.
+            public var updatedAt: Foundation.Date?
+            /// Creates a new `SecretScanningCustomPattern`.
+            ///
+            /// - Parameters:
+            ///   - id: The ID of the custom pattern.
+            ///   - name: The name of the custom pattern.
+            ///   - pattern: The regular expression of the custom pattern.
+            ///   - slug: A URL-friendly identifier for the custom pattern, derived from its name.
+            ///   - state: The state of the custom pattern.
+            ///   - pushProtectionEnabled: Whether push protection is enabled for this custom pattern.
+            ///   - startDelimiter: The start delimiter regex for the custom pattern.
+            ///   - endDelimiter: The end delimiter regex for the custom pattern.
+            ///   - mustMatch: List of regexes that the secret must match.
+            ///   - mustNotMatch: List of regexes that the secret must not match.
+            ///   - customPatternVersion:
+            ///   - createdAt: The date and time the custom pattern was created in ISO 8601 format.
+            ///   - updatedAt: The date and time the custom pattern was last updated in ISO 8601 format.
+            public init(
+                id: Swift.Int,
+                name: Swift.String,
+                pattern: Swift.String,
+                slug: Swift.String,
+                state: Components.Schemas.SecretScanningCustomPattern.StatePayload,
+                pushProtectionEnabled: Swift.Bool,
+                startDelimiter: Swift.String? = nil,
+                endDelimiter: Swift.String? = nil,
+                mustMatch: [Swift.String]? = nil,
+                mustNotMatch: [Swift.String]? = nil,
+                customPatternVersion: Components.Schemas.SecretScanningRowVersion? = nil,
+                createdAt: Foundation.Date? = nil,
+                updatedAt: Foundation.Date? = nil
+            ) {
+                self.id = id
+                self.name = name
+                self.pattern = pattern
+                self.slug = slug
+                self.state = state
+                self.pushProtectionEnabled = pushProtectionEnabled
+                self.startDelimiter = startDelimiter
+                self.endDelimiter = endDelimiter
+                self.mustMatch = mustMatch
+                self.mustNotMatch = mustNotMatch
+                self.customPatternVersion = customPatternVersion
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case name
+                case pattern
+                case slug
+                case state
+                case pushProtectionEnabled = "push_protection_enabled"
+                case startDelimiter = "start_delimiter"
+                case endDelimiter = "end_delimiter"
+                case mustMatch = "must_match"
+                case mustNotMatch = "must_not_match"
+                case customPatternVersion = "custom_pattern_version"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+            }
+        }
+        /// A custom pattern to create in a bulk operation.
+        ///
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-create`.
+        public struct SecretScanningCustomPatternToCreate: Codable, Hashable, Sendable {
+            /// The name of the custom pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-create/name`.
+            public var name: Swift.String
+            /// The regular expression of the custom pattern.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-create/pattern`.
+            public var pattern: Swift.String
+            /// The start delimiter regex for the custom pattern.
+            /// Defaults to `\A|[^0-9A-Za-z]` when not specified.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-create/start_delimiter`.
+            public var startDelimiter: Swift.String?
+            /// The end delimiter regex for the custom pattern.
+            /// Defaults to `\z|[^0-9A-Za-z]` when not specified.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-create/end_delimiter`.
+            public var endDelimiter: Swift.String?
+            /// List of regexes that the secret must match.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-create/must_match`.
+            public var mustMatch: [Swift.String]?
+            /// List of regexes that the secret must not match.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-create/must_not_match`.
+            public var mustNotMatch: [Swift.String]?
+            /// Creates a new `SecretScanningCustomPatternToCreate`.
+            ///
+            /// - Parameters:
+            ///   - name: The name of the custom pattern.
+            ///   - pattern: The regular expression of the custom pattern.
+            ///   - startDelimiter: The start delimiter regex for the custom pattern.
+            ///   - endDelimiter: The end delimiter regex for the custom pattern.
+            ///   - mustMatch: List of regexes that the secret must match.
+            ///   - mustNotMatch: List of regexes that the secret must not match.
+            public init(
+                name: Swift.String,
+                pattern: Swift.String,
+                startDelimiter: Swift.String? = nil,
+                endDelimiter: Swift.String? = nil,
+                mustMatch: [Swift.String]? = nil,
+                mustNotMatch: [Swift.String]? = nil
+            ) {
+                self.name = name
+                self.pattern = pattern
+                self.startDelimiter = startDelimiter
+                self.endDelimiter = endDelimiter
+                self.mustMatch = mustMatch
+                self.mustNotMatch = mustNotMatch
+            }
+            public enum CodingKeys: String, CodingKey {
+                case name
+                case pattern
+                case startDelimiter = "start_delimiter"
+                case endDelimiter = "end_delimiter"
+                case mustMatch = "must_match"
+                case mustNotMatch = "must_not_match"
+            }
+        }
+        /// A validation error for a custom pattern in a batch operation.
+        ///
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-validation-error`.
+        public struct SecretScanningCustomPatternValidationError: Codable, Hashable, Sendable {
+            /// A machine-readable code describing the error.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-validation-error/code`.
+            @frozen public enum CodePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case invalid = "invalid"
+                case unprocessable = "unprocessable"
+                case startDelimiter = "start_delimiter"
+                case endDelimiter = "end_delimiter"
+                case name = "name"
+                case mustMatch = "must_match"
+                case mustNotMatch = "must_not_match"
+                case customPatternVersionMismatch = "custom_pattern_version_mismatch"
+            }
+            /// A machine-readable code describing the error.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-validation-error/code`.
+            public var code: Components.Schemas.SecretScanningCustomPatternValidationError.CodePayload?
+            /// A human-readable description of the error.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-validation-error/message`.
+            public var message: Swift.String?
+            /// Creates a new `SecretScanningCustomPatternValidationError`.
+            ///
+            /// - Parameters:
+            ///   - code: A machine-readable code describing the error.
+            ///   - message: A human-readable description of the error.
+            public init(
+                code: Components.Schemas.SecretScanningCustomPatternValidationError.CodePayload? = nil,
+                message: Swift.String? = nil
+            ) {
+                self.code = code
+                self.message = message
+            }
+            public enum CodingKeys: String, CodingKey {
+                case code
+                case message
+            }
+        }
+        /// A custom pattern to delete in a bulk operation.
+        ///
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-delete`.
+        public struct SecretScanningCustomPatternToDelete: Codable, Hashable, Sendable {
+            /// The ID of the custom pattern to delete.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-delete/pattern_id`.
+            public var patternId: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-delete/custom_pattern_version`.
+            public var customPatternVersion: Components.Schemas.SecretScanningRowVersion?
+            /// Creates a new `SecretScanningCustomPatternToDelete`.
+            ///
+            /// - Parameters:
+            ///   - patternId: The ID of the custom pattern to delete.
+            ///   - customPatternVersion:
+            public init(
+                patternId: Swift.Int,
+                customPatternVersion: Components.Schemas.SecretScanningRowVersion? = nil
+            ) {
+                self.patternId = patternId
+                self.customPatternVersion = customPatternVersion
+            }
+            public enum CodingKeys: String, CodingKey {
+                case patternId = "pattern_id"
+                case customPatternVersion = "custom_pattern_version"
+            }
+        }
+        /// Fields to update on a custom pattern. At least one updatable field (`pattern`, `start_delimiter`, `end_delimiter`, `must_match`, or `must_not_match`) must also be provided. Only provided fields will be updated.
+        ///
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-update`.
+        public struct SecretScanningCustomPatternToUpdate: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-update/value1`.
+            public struct Value1Payload: Codable, Hashable, Sendable {
+                /// Creates a new `Value1Payload`.
+                public init() {}
+            }
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-update/value1`.
+            public var value1: Components.Schemas.SecretScanningCustomPatternToUpdate.Value1Payload?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-update/value2`.
+            public struct Value2Payload: Codable, Hashable, Sendable {
+                /// Creates a new `Value2Payload`.
+                public init() {}
+            }
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-update/value2`.
+            public var value2: Components.Schemas.SecretScanningCustomPatternToUpdate.Value2Payload?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-update/value3`.
+            public struct Value3Payload: Codable, Hashable, Sendable {
+                /// Creates a new `Value3Payload`.
+                public init() {}
+            }
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-update/value3`.
+            public var value3: Components.Schemas.SecretScanningCustomPatternToUpdate.Value3Payload?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-update/value4`.
+            public struct Value4Payload: Codable, Hashable, Sendable {
+                /// Creates a new `Value4Payload`.
+                public init() {}
+            }
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-update/value4`.
+            public var value4: Components.Schemas.SecretScanningCustomPatternToUpdate.Value4Payload?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-update/value5`.
+            public struct Value5Payload: Codable, Hashable, Sendable {
+                /// Creates a new `Value5Payload`.
+                public init() {}
+            }
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-custom-pattern-to-update/value5`.
+            public var value5: Components.Schemas.SecretScanningCustomPatternToUpdate.Value5Payload?
+            /// Creates a new `SecretScanningCustomPatternToUpdate`.
+            ///
+            /// - Parameters:
+            ///   - value1:
+            ///   - value2:
+            ///   - value3:
+            ///   - value4:
+            ///   - value5:
+            public init(
+                value1: Components.Schemas.SecretScanningCustomPatternToUpdate.Value1Payload? = nil,
+                value2: Components.Schemas.SecretScanningCustomPatternToUpdate.Value2Payload? = nil,
+                value3: Components.Schemas.SecretScanningCustomPatternToUpdate.Value3Payload? = nil,
+                value4: Components.Schemas.SecretScanningCustomPatternToUpdate.Value4Payload? = nil,
+                value5: Components.Schemas.SecretScanningCustomPatternToUpdate.Value5Payload? = nil
+            ) {
+                self.value1 = value1
+                self.value2 = value2
+                self.value3 = value3
+                self.value4 = value4
+                self.value5 = value5
+            }
+            public init(from decoder: any Swift.Decoder) throws {
+                var errors: [any Swift.Error] = []
+                do {
+                    self.value1 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value2 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value3 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value4 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value5 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
+                    [
+                        self.value1,
+                        self.value2,
+                        self.value3,
+                        self.value4,
+                        self.value5
+                    ],
+                    type: Self.self,
+                    codingPath: decoder.codingPath,
+                    errors: errors
+                )
+            }
+            public func encode(to encoder: any Swift.Encoder) throws {
+                try self.value1?.encode(to: encoder)
+                try self.value2?.encode(to: encoder)
+                try self.value3?.encode(to: encoder)
+                try self.value4?.encode(to: encoder)
+                try self.value5?.encode(to: encoder)
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/secret-scanning-pattern-override`.
         public struct SecretScanningPatternOverride: Codable, Hashable, Sendable {
             /// The ID of the pattern.
@@ -2546,6 +3132,301 @@ public enum Components {
                 case closureRequestComment = "closure_request_comment"
                 case closureRequestReviewerComment = "closure_request_reviewer_comment"
                 case closureRequestReviewer = "closure_request_reviewer"
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/SecretScanningAlertMetadata`.
+        public struct SecretScanningAlertMetadataPayload: Codable, Hashable, Sendable {
+            /// The metadata key.
+            ///
+            /// - Remark: Generated from `#/components/schemas/SecretScanningAlertMetadata/key`.
+            public var key: Swift.String
+            /// The metadata value.
+            ///
+            /// - Remark: Generated from `#/components/schemas/SecretScanningAlertMetadata/value`.
+            public var value: Swift.String
+            /// Creates a new `SecretScanningAlertMetadataPayload`.
+            ///
+            /// - Parameters:
+            ///   - key: The metadata key.
+            ///   - value: The metadata value.
+            public init(
+                key: Swift.String,
+                value: Swift.String
+            ) {
+                self.key = key
+                self.value = value
+            }
+            public enum CodingKeys: String, CodingKey {
+                case key
+                case value
+            }
+        }
+        /// A list of metadata key/value pairs associated with the secret scanning alert.
+        ///
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-metadata`.
+        public typealias SecretScanningAlertMetadata = [Components.Schemas.SecretScanningAlertMetadataPayload]
+        /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata`.
+        public struct SecretScanningAlertWithMetadata: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/number`.
+            public var number: Components.Schemas.AlertNumber?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/created_at`.
+            public var createdAt: Components.Schemas.AlertCreatedAt?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/updated_at`.
+            public var updatedAt: Components.Schemas.NullableAlertUpdatedAt?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/url`.
+            public var url: Components.Schemas.AlertUrl?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/html_url`.
+            public var htmlUrl: Components.Schemas.AlertHtmlUrl?
+            /// The REST API URL of the code locations for this alert.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/locations_url`.
+            public var locationsUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/state`.
+            public var state: Components.Schemas.SecretScanningAlertState?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/resolution`.
+            public var resolution: Components.Schemas.SecretScanningAlertResolution?
+            /// The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/resolved_at`.
+            public var resolvedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/resolved_by`.
+            public var resolvedBy: Components.Schemas.NullableSimpleUser?
+            /// An optional comment to resolve an alert.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/resolution_comment`.
+            public var resolutionComment: Swift.String?
+            /// The type of secret that secret scanning detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/secret_type`.
+            public var secretType: Swift.String?
+            /// User-friendly name for the detected secret, matching the `secret_type`.
+            /// For a list of built-in patterns, see "[Supported secret scanning patterns](https://docs.github.com/code-security/secret-scanning/introduction/supported-secret-scanning-patterns#supported-secrets)."
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/secret_type_display_name`.
+            public var secretTypeDisplayName: Swift.String?
+            /// The provider of the secret that was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/provider`.
+            public var provider: Swift.String?
+            /// The slug identifier for the provider of the secret that was detected. Use this value for filtering by provider with the `providers` or `exclude_providers` parameters.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/provider_slug`.
+            public var providerSlug: Swift.String?
+            /// The secret that was detected.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/secret`.
+            public var secret: Swift.String?
+            /// Whether push protection was bypassed for the detected secret.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/push_protection_bypassed`.
+            public var pushProtectionBypassed: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/push_protection_bypassed_by`.
+            public var pushProtectionBypassedBy: Components.Schemas.NullableSimpleUser?
+            /// The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/push_protection_bypassed_at`.
+            public var pushProtectionBypassedAt: Foundation.Date?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/push_protection_bypass_request_reviewer`.
+            public var pushProtectionBypassRequestReviewer: Components.Schemas.NullableSimpleUser?
+            /// An optional comment when reviewing a push protection bypass.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/push_protection_bypass_request_reviewer_comment`.
+            public var pushProtectionBypassRequestReviewerComment: Swift.String?
+            /// An optional comment when requesting a push protection bypass.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/push_protection_bypass_request_comment`.
+            public var pushProtectionBypassRequestComment: Swift.String?
+            /// The URL to a push protection bypass request.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/push_protection_bypass_request_html_url`.
+            public var pushProtectionBypassRequestHtmlUrl: Swift.String?
+            /// The token status as of the latest validity check.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/validity`.
+            @frozen public enum ValidityPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case active = "active"
+                case inactive = "inactive"
+                case unknown = "unknown"
+            }
+            /// The token status as of the latest validity check.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/validity`.
+            public var validity: Components.Schemas.SecretScanningAlertWithMetadata.ValidityPayload?
+            /// Whether the detected secret was publicly leaked.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/publicly_leaked`.
+            public var publiclyLeaked: Swift.Bool?
+            /// Whether the detected secret was found in multiple repositories under the same organization or enterprise.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/multi_repo`.
+            public var multiRepo: Swift.Bool?
+            /// A boolean value representing whether or not alert is base64 encoded
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/is_base64_encoded`.
+            public var isBase64Encoded: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/first_location_detected`.
+            public var firstLocationDetected: Components.Schemas.NullableSecretScanningFirstDetectedLocation?
+            /// A boolean value representing whether or not the token in the alert was detected in more than one location.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/has_more_locations`.
+            public var hasMoreLocations: Swift.Bool?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/assigned_to`.
+            public var assignedTo: Components.Schemas.NullableSimpleUser?
+            /// An optional comment from the closure request author.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/closure_request_comment`.
+            public var closureRequestComment: Swift.String?
+            /// An optional comment from the closure request reviewer.
+            ///
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/closure_request_reviewer_comment`.
+            public var closureRequestReviewerComment: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/closure_request_reviewer`.
+            public var closureRequestReviewer: Components.Schemas.NullableSimpleUser?
+            /// - Remark: Generated from `#/components/schemas/secret-scanning-alert-with-metadata/metadata`.
+            public var metadata: Components.Schemas.SecretScanningAlertMetadata?
+            /// Creates a new `SecretScanningAlertWithMetadata`.
+            ///
+            /// - Parameters:
+            ///   - number:
+            ///   - createdAt:
+            ///   - updatedAt:
+            ///   - url:
+            ///   - htmlUrl:
+            ///   - locationsUrl: The REST API URL of the code locations for this alert.
+            ///   - state:
+            ///   - resolution:
+            ///   - resolvedAt: The time that the alert was resolved in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///   - resolvedBy:
+            ///   - resolutionComment: An optional comment to resolve an alert.
+            ///   - secretType: The type of secret that secret scanning detected.
+            ///   - secretTypeDisplayName: User-friendly name for the detected secret, matching the `secret_type`.
+            ///   - provider: The provider of the secret that was detected.
+            ///   - providerSlug: The slug identifier for the provider of the secret that was detected. Use this value for filtering by provider with the `providers` or `exclude_providers` parameters.
+            ///   - secret: The secret that was detected.
+            ///   - pushProtectionBypassed: Whether push protection was bypassed for the detected secret.
+            ///   - pushProtectionBypassedBy:
+            ///   - pushProtectionBypassedAt: The time that push protection was bypassed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+            ///   - pushProtectionBypassRequestReviewer:
+            ///   - pushProtectionBypassRequestReviewerComment: An optional comment when reviewing a push protection bypass.
+            ///   - pushProtectionBypassRequestComment: An optional comment when requesting a push protection bypass.
+            ///   - pushProtectionBypassRequestHtmlUrl: The URL to a push protection bypass request.
+            ///   - validity: The token status as of the latest validity check.
+            ///   - publiclyLeaked: Whether the detected secret was publicly leaked.
+            ///   - multiRepo: Whether the detected secret was found in multiple repositories under the same organization or enterprise.
+            ///   - isBase64Encoded: A boolean value representing whether or not alert is base64 encoded
+            ///   - firstLocationDetected:
+            ///   - hasMoreLocations: A boolean value representing whether or not the token in the alert was detected in more than one location.
+            ///   - assignedTo:
+            ///   - closureRequestComment: An optional comment from the closure request author.
+            ///   - closureRequestReviewerComment: An optional comment from the closure request reviewer.
+            ///   - closureRequestReviewer:
+            ///   - metadata:
+            public init(
+                number: Components.Schemas.AlertNumber? = nil,
+                createdAt: Components.Schemas.AlertCreatedAt? = nil,
+                updatedAt: Components.Schemas.NullableAlertUpdatedAt? = nil,
+                url: Components.Schemas.AlertUrl? = nil,
+                htmlUrl: Components.Schemas.AlertHtmlUrl? = nil,
+                locationsUrl: Swift.String? = nil,
+                state: Components.Schemas.SecretScanningAlertState? = nil,
+                resolution: Components.Schemas.SecretScanningAlertResolution? = nil,
+                resolvedAt: Foundation.Date? = nil,
+                resolvedBy: Components.Schemas.NullableSimpleUser? = nil,
+                resolutionComment: Swift.String? = nil,
+                secretType: Swift.String? = nil,
+                secretTypeDisplayName: Swift.String? = nil,
+                provider: Swift.String? = nil,
+                providerSlug: Swift.String? = nil,
+                secret: Swift.String? = nil,
+                pushProtectionBypassed: Swift.Bool? = nil,
+                pushProtectionBypassedBy: Components.Schemas.NullableSimpleUser? = nil,
+                pushProtectionBypassedAt: Foundation.Date? = nil,
+                pushProtectionBypassRequestReviewer: Components.Schemas.NullableSimpleUser? = nil,
+                pushProtectionBypassRequestReviewerComment: Swift.String? = nil,
+                pushProtectionBypassRequestComment: Swift.String? = nil,
+                pushProtectionBypassRequestHtmlUrl: Swift.String? = nil,
+                validity: Components.Schemas.SecretScanningAlertWithMetadata.ValidityPayload? = nil,
+                publiclyLeaked: Swift.Bool? = nil,
+                multiRepo: Swift.Bool? = nil,
+                isBase64Encoded: Swift.Bool? = nil,
+                firstLocationDetected: Components.Schemas.NullableSecretScanningFirstDetectedLocation? = nil,
+                hasMoreLocations: Swift.Bool? = nil,
+                assignedTo: Components.Schemas.NullableSimpleUser? = nil,
+                closureRequestComment: Swift.String? = nil,
+                closureRequestReviewerComment: Swift.String? = nil,
+                closureRequestReviewer: Components.Schemas.NullableSimpleUser? = nil,
+                metadata: Components.Schemas.SecretScanningAlertMetadata? = nil
+            ) {
+                self.number = number
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+                self.url = url
+                self.htmlUrl = htmlUrl
+                self.locationsUrl = locationsUrl
+                self.state = state
+                self.resolution = resolution
+                self.resolvedAt = resolvedAt
+                self.resolvedBy = resolvedBy
+                self.resolutionComment = resolutionComment
+                self.secretType = secretType
+                self.secretTypeDisplayName = secretTypeDisplayName
+                self.provider = provider
+                self.providerSlug = providerSlug
+                self.secret = secret
+                self.pushProtectionBypassed = pushProtectionBypassed
+                self.pushProtectionBypassedBy = pushProtectionBypassedBy
+                self.pushProtectionBypassedAt = pushProtectionBypassedAt
+                self.pushProtectionBypassRequestReviewer = pushProtectionBypassRequestReviewer
+                self.pushProtectionBypassRequestReviewerComment = pushProtectionBypassRequestReviewerComment
+                self.pushProtectionBypassRequestComment = pushProtectionBypassRequestComment
+                self.pushProtectionBypassRequestHtmlUrl = pushProtectionBypassRequestHtmlUrl
+                self.validity = validity
+                self.publiclyLeaked = publiclyLeaked
+                self.multiRepo = multiRepo
+                self.isBase64Encoded = isBase64Encoded
+                self.firstLocationDetected = firstLocationDetected
+                self.hasMoreLocations = hasMoreLocations
+                self.assignedTo = assignedTo
+                self.closureRequestComment = closureRequestComment
+                self.closureRequestReviewerComment = closureRequestReviewerComment
+                self.closureRequestReviewer = closureRequestReviewer
+                self.metadata = metadata
+            }
+            public enum CodingKeys: String, CodingKey {
+                case number
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
+                case url
+                case htmlUrl = "html_url"
+                case locationsUrl = "locations_url"
+                case state
+                case resolution
+                case resolvedAt = "resolved_at"
+                case resolvedBy = "resolved_by"
+                case resolutionComment = "resolution_comment"
+                case secretType = "secret_type"
+                case secretTypeDisplayName = "secret_type_display_name"
+                case provider
+                case providerSlug = "provider_slug"
+                case secret
+                case pushProtectionBypassed = "push_protection_bypassed"
+                case pushProtectionBypassedBy = "push_protection_bypassed_by"
+                case pushProtectionBypassedAt = "push_protection_bypassed_at"
+                case pushProtectionBypassRequestReviewer = "push_protection_bypass_request_reviewer"
+                case pushProtectionBypassRequestReviewerComment = "push_protection_bypass_request_reviewer_comment"
+                case pushProtectionBypassRequestComment = "push_protection_bypass_request_comment"
+                case pushProtectionBypassRequestHtmlUrl = "push_protection_bypass_request_html_url"
+                case validity
+                case publiclyLeaked = "publicly_leaked"
+                case multiRepo = "multi_repo"
+                case isBase64Encoded = "is_base64_encoded"
+                case firstLocationDetected = "first_location_detected"
+                case hasMoreLocations = "has_more_locations"
+                case assignedTo = "assigned_to"
+                case closureRequestComment = "closure_request_comment"
+                case closureRequestReviewerComment = "closure_request_reviewer_comment"
+                case closureRequestReviewer = "closure_request_reviewer"
+                case metadata
             }
         }
         /// - Remark: Generated from `#/components/schemas/secret-scanning-location`.
@@ -3026,6 +3907,43 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-bypassed`.
         public typealias SecretScanningAlertBypassed = Swift.Bool
+        /// A comma-separated list of metadata fields to filter alerts by. Only alerts that have all of the
+        /// specified metadata fields attached will be returned. Possible values are: `owner-email`, `owner-id`,
+        /// `owner-name`, `secret-id`, `secret-name`, `secret-issued-date`, `secret-expiration-date`, `organization-name`,
+        /// `organization-id`, `last-used-date`, and `has-organization-access`.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-included-metadata`.
+        public typealias SecretScanningAlertIncludedMetadata = Swift.String
+        /// Filters alerts to only those whose attached `owner_email` metadata field matches the
+        /// provided value. The value must be the lowercase hex-encoded SHA-256 hash of the email
+        /// address to match (for example, the SHA-256 of `user@example.com`). Only alerts that
+        /// have an `owner_email` metadata value whose SHA-256 hash equals this parameter are
+        /// returned.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-alert-owner-email-hash`.
+        public typealias SecretScanningAlertOwnerEmailHash = Swift.String
+        /// Filter custom patterns by state. When absent, returns patterns in all states.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-custom-pattern-state`.
+        @frozen public enum SecretScanningCustomPatternState: String, Codable, Hashable, Sendable, CaseIterable {
+            case published = "published"
+            case unpublished = "unpublished"
+        }
+        /// Filter custom patterns by whether push protection is enabled. When absent, returns patterns regardless of push protection status.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-custom-pattern-push-protection`.
+        @frozen public enum SecretScanningCustomPatternPushProtection: String, Codable, Hashable, Sendable, CaseIterable {
+            case enabled = "enabled"
+            case disabled = "disabled"
+        }
+        /// The property to sort the results by.
+        ///
+        /// - Remark: Generated from `#/components/parameters/secret-scanning-custom-pattern-sort`.
+        @frozen public enum SecretScanningCustomPatternSort: String, Codable, Hashable, Sendable, CaseIterable {
+            case created = "created"
+            case updated = "updated"
+            case name = "name"
+        }
         /// The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
         ///
         /// - Remark: Generated from `#/components/parameters/alert-number`.
@@ -3260,6 +4178,34 @@ public enum Components {
                 self.body = body
             }
         }
+        public struct PreconditionFailed: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/precondition_failed/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/precondition_failed/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.PreconditionFailed.Body
+            /// Creates a new `PreconditionFailed`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.PreconditionFailed.Body) {
+                self.body = body
+            }
+        }
     }
     /// Types generated from the `#/components/headers` section of the OpenAPI document.
     public enum Headers {
@@ -3393,6 +4339,21 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/is_bypassed`.
                 public var isBypassed: Components.Parameters.SecretScanningAlertBypassed?
+                /// A comma-separated list of metadata fields to filter alerts by. Only alerts that have all of the
+                /// specified metadata fields attached will be returned. Possible values are: `owner-email`, `owner-id`,
+                /// `owner-name`, `secret-id`, `secret-name`, `secret-issued-date`, `secret-expiration-date`, `organization-name`,
+                /// `organization-id`, `last-used-date`, and `has-organization-access`.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/included_metadata`.
+                public var includedMetadata: Components.Parameters.SecretScanningAlertIncludedMetadata?
+                /// Filters alerts to only those whose attached `owner_email` metadata field matches the
+                /// provided value. The value must be the lowercase hex-encoded SHA-256 hash of the email
+                /// address to match (for example, the SHA-256 of `user@example.com`). Only alerts that
+                /// have an `owner_email` metadata value whose SHA-256 hash equals this parameter are
+                /// returned.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/alerts/GET/query/owner_email_hash`.
+                public var ownerEmailHash: Components.Parameters.SecretScanningAlertOwnerEmailHash?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -3414,6 +4375,8 @@ public enum Operations {
                 ///   - isMultiRepo: A boolean value representing whether or not to filter alerts by the multi-repo tag being present.
                 ///   - hideSecret: A boolean value representing whether or not to hide literal secrets in the results.
                 ///   - isBypassed: A boolean value (`true` or `false`) indicating whether to filter alerts by their push protection bypass status. When set to `true`, only alerts that were created because a push protection rule was bypassed will be returned. When set to `false`, only alerts that were not caused by a push protection bypass will be returned.
+                ///   - includedMetadata: A comma-separated list of metadata fields to filter alerts by. Only alerts that have all of the
+                ///   - ownerEmailHash: Filters alerts to only those whose attached `owner_email` metadata field matches the
                 public init(
                     state: Components.Parameters.SecretScanningAlertState? = nil,
                     secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
@@ -3432,7 +4395,9 @@ public enum Operations {
                     isPubliclyLeaked: Components.Parameters.SecretScanningAlertPubliclyLeaked? = nil,
                     isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo? = nil,
                     hideSecret: Components.Parameters.SecretScanningAlertHideSecret? = nil,
-                    isBypassed: Components.Parameters.SecretScanningAlertBypassed? = nil
+                    isBypassed: Components.Parameters.SecretScanningAlertBypassed? = nil,
+                    includedMetadata: Components.Parameters.SecretScanningAlertIncludedMetadata? = nil,
+                    ownerEmailHash: Components.Parameters.SecretScanningAlertOwnerEmailHash? = nil
                 ) {
                     self.state = state
                     self.secretType = secretType
@@ -3452,6 +4417,8 @@ public enum Operations {
                     self.isMultiRepo = isMultiRepo
                     self.hideSecret = hideSecret
                     self.isBypassed = isBypassed
+                    self.includedMetadata = includedMetadata
+                    self.ownerEmailHash = ownerEmailHash
                 }
             }
             public var query: Operations.SecretScanningListAlertsForOrg.Input.Query
@@ -3627,6 +4594,1186 @@ public enum Operations {
             public static var allCases: [Self] {
                 [
                     .json
+                ]
+            }
+        }
+    }
+    /// List organization custom patterns
+    ///
+    /// Lists secret scanning custom patterns for an organization.
+    ///
+    /// Personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/get(secret-scanning/list-org-custom-patterns)`.
+    public enum SecretScanningListOrgCustomPatterns {
+        public static let id: Swift.String = "secret-scanning/list-org-custom-patterns"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.SecretScanningListOrgCustomPatterns.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/parameters/secret-scanning-custom-pattern-state`.
+                @frozen public enum SecretScanningCustomPatternState: String, Codable, Hashable, Sendable, CaseIterable {
+                    case published = "published"
+                    case unpublished = "unpublished"
+                }
+                /// Filter custom patterns by state. When absent, returns patterns in all states.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/query/state`.
+                public var state: Components.Parameters.SecretScanningCustomPatternState?
+                /// - Remark: Generated from `#/components/parameters/secret-scanning-custom-pattern-push-protection`.
+                @frozen public enum SecretScanningCustomPatternPushProtection: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// Filter custom patterns by whether push protection is enabled. When absent, returns patterns regardless of push protection status.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/query/push_protection`.
+                public var pushProtection: Components.Parameters.SecretScanningCustomPatternPushProtection?
+                /// - Remark: Generated from `#/components/parameters/secret-scanning-custom-pattern-sort`.
+                @frozen public enum SecretScanningCustomPatternSort: String, Codable, Hashable, Sendable, CaseIterable {
+                    case created = "created"
+                    case updated = "updated"
+                    case name = "name"
+                }
+                /// The property to sort the results by.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/query/sort`.
+                public var sort: Components.Parameters.SecretScanningCustomPatternSort?
+                /// - Remark: Generated from `#/components/parameters/direction`.
+                @frozen public enum Direction: String, Codable, Hashable, Sendable, CaseIterable {
+                    case asc = "asc"
+                    case desc = "desc"
+                }
+                /// The direction to sort the results by.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/query/direction`.
+                public var direction: Components.Parameters.Direction?
+                /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/query/page`.
+                public var page: Components.Parameters.Page?
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - state: Filter custom patterns by state. When absent, returns patterns in all states.
+                ///   - pushProtection: Filter custom patterns by whether push protection is enabled. When absent, returns patterns regardless of push protection status.
+                ///   - sort: The property to sort the results by.
+                ///   - direction: The direction to sort the results by.
+                ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    state: Components.Parameters.SecretScanningCustomPatternState? = nil,
+                    pushProtection: Components.Parameters.SecretScanningCustomPatternPushProtection? = nil,
+                    sort: Components.Parameters.SecretScanningCustomPatternSort? = nil,
+                    direction: Components.Parameters.Direction? = nil,
+                    page: Components.Parameters.Page? = nil,
+                    perPage: Components.Parameters.PerPage? = nil
+                ) {
+                    self.state = state
+                    self.pushProtection = pushProtection
+                    self.sort = sort
+                    self.direction = direction
+                    self.page = page
+                    self.perPage = perPage
+                }
+            }
+            public var query: Operations.SecretScanningListOrgCustomPatterns.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningListOrgCustomPatterns.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningListOrgCustomPatterns.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.SecretScanningListOrgCustomPatterns.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.SecretScanningListOrgCustomPatterns.Input.Path,
+                query: Operations.SecretScanningListOrgCustomPatterns.Input.Query = .init(),
+                headers: Operations.SecretScanningListOrgCustomPatterns.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.SecretScanningListOrgCustomPatterns.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.SecretScanningCustomPattern])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.SecretScanningCustomPattern] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.SecretScanningListOrgCustomPatterns.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.SecretScanningListOrgCustomPatterns.Output.Ok.Headers = .init(),
+                    body: Operations.SecretScanningListOrgCustomPatterns.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/get(secret-scanning/list-org-custom-patterns)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.SecretScanningListOrgCustomPatterns.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.SecretScanningListOrgCustomPatterns.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/get(secret-scanning/list-org-custom-patterns)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/get(secret-scanning/list-org-custom-patterns)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Bulk create organization custom patterns
+    ///
+    /// Bulk creates secret scanning custom patterns for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `POST /orgs/{org}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-org-custom-patterns)`.
+    public enum SecretScanningBulkCreateOrgCustomPatterns {
+        public static let id: Swift.String = "secret-scanning/bulk-create-org-custom-patterns"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.SecretScanningBulkCreateOrgCustomPatterns.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningBulkCreateOrgCustomPatterns.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningBulkCreateOrgCustomPatterns.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.SecretScanningBulkCreateOrgCustomPatterns.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The list of custom patterns to create.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/requestBody/json/patterns`.
+                    public var patterns: [Components.Schemas.SecretScanningCustomPatternToCreate]
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - patterns: The list of custom patterns to create.
+                    public init(patterns: [Components.Schemas.SecretScanningCustomPatternToCreate]) {
+                        self.patterns = patterns
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case patterns
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/requestBody/content/application\/json`.
+                case json(Operations.SecretScanningBulkCreateOrgCustomPatterns.Input.Body.JsonPayload)
+            }
+            public var body: Operations.SecretScanningBulkCreateOrgCustomPatterns.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.SecretScanningBulkCreateOrgCustomPatterns.Input.Path,
+                headers: Operations.SecretScanningBulkCreateOrgCustomPatterns.Input.Headers = .init(),
+                body: Operations.SecretScanningBulkCreateOrgCustomPatterns.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/201/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/201/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The list of successfully created custom patterns.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/201/content/json/created_patterns`.
+                        public var createdPatterns: [Components.Schemas.SecretScanningCustomPattern]?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - createdPatterns: The list of successfully created custom patterns.
+                        public init(createdPatterns: [Components.Schemas.SecretScanningCustomPattern]? = nil) {
+                            self.createdPatterns = createdPatterns
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case createdPatterns = "created_patterns"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/201/content/application\/json`.
+                    case json(Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.Created.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.Created.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.Created.Body
+                /// Creates a new `Created`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.Created.Body) {
+                    self.body = body
+                }
+            }
+            /// All patterns created successfully.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-org-custom-patterns)/responses/201`.
+            ///
+            /// HTTP response code: `201 created`.
+            case created(Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
+            ///
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.Created {
+                get throws {
+                    switch self {
+                    case let .created(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-org-custom-patterns)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-org-custom-patterns)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-org-custom-patterns)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct UnprocessableContent: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/422/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/422/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// A summary message describing the error.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/422/content/json/message`.
+                        public var message: Swift.String?
+                        /// A map of validation errors keyed by the zero-based index of the pattern that failed.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/422/content/json/validation_errors`.
+                        public struct ValidationErrorsPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/422/content/json/validation_errors/additionalProperties`.
+                            public struct AdditionalPropertiesPayload: Codable, Hashable, Sendable {
+                                /// List of validation errors for this pattern.
+                                ///
+                                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/422/content/json/validation_errors/additionalProperties/errors`.
+                                public var errors: [Components.Schemas.SecretScanningCustomPatternValidationError]?
+                                /// Creates a new `AdditionalPropertiesPayload`.
+                                ///
+                                /// - Parameters:
+                                ///   - errors: List of validation errors for this pattern.
+                                public init(errors: [Components.Schemas.SecretScanningCustomPatternValidationError]? = nil) {
+                                    self.errors = errors
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case errors
+                                }
+                            }
+                            /// A container of undocumented properties.
+                            public var additionalProperties: [String: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.UnprocessableContent.Body.JsonPayload.ValidationErrorsPayload.AdditionalPropertiesPayload]
+                            /// Creates a new `ValidationErrorsPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - additionalProperties: A container of undocumented properties.
+                            public init(additionalProperties: [String: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.UnprocessableContent.Body.JsonPayload.ValidationErrorsPayload.AdditionalPropertiesPayload] = .init()) {
+                                self.additionalProperties = additionalProperties
+                            }
+                            public init(from decoder: any Swift.Decoder) throws {
+                                additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                            }
+                            public func encode(to encoder: any Swift.Encoder) throws {
+                                try encoder.encodeAdditionalProperties(additionalProperties)
+                            }
+                        }
+                        /// A map of validation errors keyed by the zero-based index of the pattern that failed.
+                        ///
+                        /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/422/content/json/validation_errors`.
+                        public var validationErrors: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.UnprocessableContent.Body.JsonPayload.ValidationErrorsPayload?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - message: A summary message describing the error.
+                        ///   - validationErrors: A map of validation errors keyed by the zero-based index of the pattern that failed.
+                        public init(
+                            message: Swift.String? = nil,
+                            validationErrors: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.UnprocessableContent.Body.JsonPayload.ValidationErrorsPayload? = nil
+                        ) {
+                            self.message = message
+                            self.validationErrors = validationErrors
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case message
+                            case validationErrors = "validation_errors"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/POST/responses/422/content/application\/json`.
+                    case json(Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.UnprocessableContent.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.UnprocessableContent.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.UnprocessableContent.Body
+                /// Creates a new `UnprocessableContent`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.UnprocessableContent.Body) {
+                    self.body = body
+                }
+            }
+            /// Validation failed for one or more patterns.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-org-custom-patterns)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.UnprocessableContent)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Operations.SecretScanningBulkCreateOrgCustomPatterns.Output.UnprocessableContent {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Bulk delete organization custom patterns
+    ///
+    /// Bulk deletes secret scanning custom patterns for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `DELETE /orgs/{org}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-org-custom-patterns)`.
+    public enum SecretScanningBulkDeleteOrgCustomPatterns {
+        public static let id: Swift.String = "secret-scanning/bulk-delete-org-custom-patterns"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/DELETE/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningBulkDeleteOrgCustomPatterns.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningBulkDeleteOrgCustomPatterns.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/DELETE/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/DELETE/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The list of custom patterns to delete.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/DELETE/requestBody/json/patterns`.
+                    public var patterns: [Components.Schemas.SecretScanningCustomPatternToDelete]
+                    /// What to do with alerts associated with the deleted patterns.
+                    /// `delete_alerts` permanently removes the alerts.
+                    /// `resolve_alerts` resolves the alerts as "pattern deleted".
+                    /// Defaults to `delete_alerts` when not specified.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/DELETE/requestBody/json/post_delete_action`.
+                    @frozen public enum PostDeleteActionPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case deleteAlerts = "delete_alerts"
+                        case resolveAlerts = "resolve_alerts"
+                    }
+                    /// What to do with alerts associated with the deleted patterns.
+                    /// `delete_alerts` permanently removes the alerts.
+                    /// `resolve_alerts` resolves the alerts as "pattern deleted".
+                    /// Defaults to `delete_alerts` when not specified.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/DELETE/requestBody/json/post_delete_action`.
+                    public var postDeleteAction: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Body.JsonPayload.PostDeleteActionPayload?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - patterns: The list of custom patterns to delete.
+                    ///   - postDeleteAction: What to do with alerts associated with the deleted patterns.
+                    public init(
+                        patterns: [Components.Schemas.SecretScanningCustomPatternToDelete],
+                        postDeleteAction: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Body.JsonPayload.PostDeleteActionPayload? = nil
+                    ) {
+                        self.patterns = patterns
+                        self.postDeleteAction = postDeleteAction
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case patterns
+                        case postDeleteAction = "post_delete_action"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/DELETE/requestBody/content/application\/json`.
+                case json(Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Body.JsonPayload)
+            }
+            public var body: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Path,
+                headers: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Headers = .init(),
+                body: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// All patterns deleted successfully.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-org-custom-patterns)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.SecretScanningBulkDeleteOrgCustomPatterns.Output.NoContent)
+            /// All patterns deleted successfully.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-org-custom-patterns)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.SecretScanningBulkDeleteOrgCustomPatterns.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-org-custom-patterns)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-org-custom-patterns)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-org-custom-patterns)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Precondition Failed
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-org-custom-patterns)/responses/412`.
+            ///
+            /// HTTP response code: `412 preconditionFailed`.
+            case preconditionFailed(Components.Responses.PreconditionFailed)
+            /// The associated value of the enum case if `self` is `.preconditionFailed`.
+            ///
+            /// - Throws: An error if `self` is not `.preconditionFailed`.
+            /// - SeeAlso: `.preconditionFailed`.
+            public var preconditionFailed: Components.Responses.PreconditionFailed {
+                get throws {
+                    switch self {
+                    case let .preconditionFailed(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "preconditionFailed",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Update an organization custom pattern
+    ///
+    /// Updates a secret scanning custom pattern for an organization.
+    ///
+    /// Personal access tokens (classic) need the `write:org` scope to use this endpoint.
+    ///
+    /// - Remark: HTTP `PATCH /orgs/{org}/secret-scanning/custom-patterns/{pattern_id}`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-org-custom-pattern)`.
+    public enum SecretScanningUpdateOrgCustomPattern {
+        public static let id: Swift.String = "secret-scanning/update-org-custom-pattern"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/PATCH/path/org`.
+                public var org: Components.Parameters.Org
+                /// The ID of the custom pattern.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/PATCH/path/pattern_id`.
+                public var patternId: Swift.Int
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                ///   - patternId: The ID of the custom pattern.
+                public init(
+                    org: Components.Parameters.Org,
+                    patternId: Swift.Int
+                ) {
+                    self.org = org
+                    self.patternId = patternId
+                }
+            }
+            public var path: Operations.SecretScanningUpdateOrgCustomPattern.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningUpdateOrgCustomPattern.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningUpdateOrgCustomPattern.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.SecretScanningUpdateOrgCustomPattern.Input.Headers
+            /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/PATCH/requestBody/content/application\/json`.
+                case json(Components.Schemas.SecretScanningCustomPatternToUpdate)
+            }
+            public var body: Operations.SecretScanningUpdateOrgCustomPattern.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.SecretScanningUpdateOrgCustomPattern.Input.Path,
+                headers: Operations.SecretScanningUpdateOrgCustomPattern.Input.Headers = .init(),
+                body: Operations.SecretScanningUpdateOrgCustomPattern.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/PATCH/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/PATCH/responses/200/content/application\/json`.
+                    case json(Components.Schemas.SecretScanningCustomPattern)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.SecretScanningCustomPattern {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.SecretScanningUpdateOrgCustomPattern.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.SecretScanningUpdateOrgCustomPattern.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Pattern updated successfully.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-org-custom-pattern)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.SecretScanningUpdateOrgCustomPattern.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.SecretScanningUpdateOrgCustomPattern.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-org-custom-pattern)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-org-custom-pattern)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-org-custom-pattern)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Precondition Failed
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-org-custom-pattern)/responses/412`.
+            ///
+            /// HTTP response code: `412 preconditionFailed`.
+            case preconditionFailed(Components.Responses.PreconditionFailed)
+            /// The associated value of the enum case if `self` is `.preconditionFailed`.
+            ///
+            /// - Throws: An error if `self` is not `.preconditionFailed`.
+            /// - SeeAlso: `.preconditionFailed`.
+            public var preconditionFailed: Components.Responses.PreconditionFailed {
+                get throws {
+                    switch self {
+                    case let .preconditionFailed(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "preconditionFailed",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-org-custom-pattern)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
                 ]
             }
         }
@@ -4340,6 +6487,21 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/is_bypassed`.
                 public var isBypassed: Components.Parameters.SecretScanningAlertBypassed?
+                /// A comma-separated list of metadata fields to filter alerts by. Only alerts that have all of the
+                /// specified metadata fields attached will be returned. Possible values are: `owner-email`, `owner-id`,
+                /// `owner-name`, `secret-id`, `secret-name`, `secret-issued-date`, `secret-expiration-date`, `organization-name`,
+                /// `organization-id`, `last-used-date`, and `has-organization-access`.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/included_metadata`.
+                public var includedMetadata: Components.Parameters.SecretScanningAlertIncludedMetadata?
+                /// Filters alerts to only those whose attached `owner_email` metadata field matches the
+                /// provided value. The value must be the lowercase hex-encoded SHA-256 hash of the email
+                /// address to match (for example, the SHA-256 of `user@example.com`). Only alerts that
+                /// have an `owner_email` metadata value whose SHA-256 hash equals this parameter are
+                /// returned.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/GET/query/owner_email_hash`.
+                public var ownerEmailHash: Components.Parameters.SecretScanningAlertOwnerEmailHash?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -4361,6 +6523,8 @@ public enum Operations {
                 ///   - isMultiRepo: A boolean value representing whether or not to filter alerts by the multi-repo tag being present.
                 ///   - hideSecret: A boolean value representing whether or not to hide literal secrets in the results.
                 ///   - isBypassed: A boolean value (`true` or `false`) indicating whether to filter alerts by their push protection bypass status. When set to `true`, only alerts that were created because a push protection rule was bypassed will be returned. When set to `false`, only alerts that were not caused by a push protection bypass will be returned.
+                ///   - includedMetadata: A comma-separated list of metadata fields to filter alerts by. Only alerts that have all of the
+                ///   - ownerEmailHash: Filters alerts to only those whose attached `owner_email` metadata field matches the
                 public init(
                     state: Components.Parameters.SecretScanningAlertState? = nil,
                     secretType: Components.Parameters.SecretScanningAlertSecretType? = nil,
@@ -4379,7 +6543,9 @@ public enum Operations {
                     isPubliclyLeaked: Components.Parameters.SecretScanningAlertPubliclyLeaked? = nil,
                     isMultiRepo: Components.Parameters.SecretScanningAlertMultiRepo? = nil,
                     hideSecret: Components.Parameters.SecretScanningAlertHideSecret? = nil,
-                    isBypassed: Components.Parameters.SecretScanningAlertBypassed? = nil
+                    isBypassed: Components.Parameters.SecretScanningAlertBypassed? = nil,
+                    includedMetadata: Components.Parameters.SecretScanningAlertIncludedMetadata? = nil,
+                    ownerEmailHash: Components.Parameters.SecretScanningAlertOwnerEmailHash? = nil
                 ) {
                     self.state = state
                     self.secretType = secretType
@@ -4399,6 +6565,8 @@ public enum Operations {
                     self.isMultiRepo = isMultiRepo
                     self.hideSecret = hideSecret
                     self.isBypassed = isBypassed
+                    self.includedMetadata = includedMetadata
+                    self.ownerEmailHash = ownerEmailHash
                 }
             }
             public var query: Operations.SecretScanningListAlertsForRepo.Input.Query
@@ -4663,12 +6831,12 @@ public enum Operations {
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/GET/responses/200/content`.
                 @frozen public enum Body: Sendable, Hashable {
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/GET/responses/200/content/application\/json`.
-                    case json(Components.Schemas.SecretScanningAlert)
+                    case json(Components.Schemas.SecretScanningAlertWithMetadata)
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: Components.Schemas.SecretScanningAlert {
+                    public var json: Components.Schemas.SecretScanningAlertWithMetadata {
                         get throws {
                             switch self {
                             case let .json(body):
@@ -4987,12 +7155,12 @@ public enum Operations {
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/responses/200/content`.
                 @frozen public enum Body: Sendable, Hashable {
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/PATCH/responses/200/content/application\/json`.
-                    case json(Components.Schemas.SecretScanningAlert)
+                    case json(Components.Schemas.SecretScanningAlertWithMetadata)
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: Components.Schemas.SecretScanningAlert {
+                    public var json: Components.Schemas.SecretScanningAlertWithMetadata {
                         get throws {
                             switch self {
                             case let .json(body):
@@ -5480,6 +7648,1220 @@ public enum Operations {
             public static var allCases: [Self] {
                 [
                     .json
+                ]
+            }
+        }
+    }
+    /// List repository custom patterns
+    ///
+    /// Lists secret scanning custom patterns for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/get(secret-scanning/list-repo-custom-patterns)`.
+    public enum SecretScanningListRepoCustomPatterns {
+        public static let id: Swift.String = "secret-scanning/list-repo-custom-patterns"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.SecretScanningListRepoCustomPatterns.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/parameters/secret-scanning-custom-pattern-state`.
+                @frozen public enum SecretScanningCustomPatternState: String, Codable, Hashable, Sendable, CaseIterable {
+                    case published = "published"
+                    case unpublished = "unpublished"
+                }
+                /// Filter custom patterns by state. When absent, returns patterns in all states.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/query/state`.
+                public var state: Components.Parameters.SecretScanningCustomPatternState?
+                /// - Remark: Generated from `#/components/parameters/secret-scanning-custom-pattern-push-protection`.
+                @frozen public enum SecretScanningCustomPatternPushProtection: String, Codable, Hashable, Sendable, CaseIterable {
+                    case enabled = "enabled"
+                    case disabled = "disabled"
+                }
+                /// Filter custom patterns by whether push protection is enabled. When absent, returns patterns regardless of push protection status.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/query/push_protection`.
+                public var pushProtection: Components.Parameters.SecretScanningCustomPatternPushProtection?
+                /// - Remark: Generated from `#/components/parameters/secret-scanning-custom-pattern-sort`.
+                @frozen public enum SecretScanningCustomPatternSort: String, Codable, Hashable, Sendable, CaseIterable {
+                    case created = "created"
+                    case updated = "updated"
+                    case name = "name"
+                }
+                /// The property to sort the results by.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/query/sort`.
+                public var sort: Components.Parameters.SecretScanningCustomPatternSort?
+                /// - Remark: Generated from `#/components/parameters/direction`.
+                @frozen public enum Direction: String, Codable, Hashable, Sendable, CaseIterable {
+                    case asc = "asc"
+                    case desc = "desc"
+                }
+                /// The direction to sort the results by.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/query/direction`.
+                public var direction: Components.Parameters.Direction?
+                /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/query/page`.
+                public var page: Components.Parameters.Page?
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - state: Filter custom patterns by state. When absent, returns patterns in all states.
+                ///   - pushProtection: Filter custom patterns by whether push protection is enabled. When absent, returns patterns regardless of push protection status.
+                ///   - sort: The property to sort the results by.
+                ///   - direction: The direction to sort the results by.
+                ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    state: Components.Parameters.SecretScanningCustomPatternState? = nil,
+                    pushProtection: Components.Parameters.SecretScanningCustomPatternPushProtection? = nil,
+                    sort: Components.Parameters.SecretScanningCustomPatternSort? = nil,
+                    direction: Components.Parameters.Direction? = nil,
+                    page: Components.Parameters.Page? = nil,
+                    perPage: Components.Parameters.PerPage? = nil
+                ) {
+                    self.state = state
+                    self.pushProtection = pushProtection
+                    self.sort = sort
+                    self.direction = direction
+                    self.page = page
+                    self.perPage = perPage
+                }
+            }
+            public var query: Operations.SecretScanningListRepoCustomPatterns.Input.Query
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningListRepoCustomPatterns.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningListRepoCustomPatterns.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.SecretScanningListRepoCustomPatterns.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.SecretScanningListRepoCustomPatterns.Input.Path,
+                query: Operations.SecretScanningListRepoCustomPatterns.Input.Query = .init(),
+                headers: Operations.SecretScanningListRepoCustomPatterns.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.SecretScanningListRepoCustomPatterns.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.SecretScanningCustomPattern])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.SecretScanningCustomPattern] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.SecretScanningListRepoCustomPatterns.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.SecretScanningListRepoCustomPatterns.Output.Ok.Headers = .init(),
+                    body: Operations.SecretScanningListRepoCustomPatterns.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/get(secret-scanning/list-repo-custom-patterns)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.SecretScanningListRepoCustomPatterns.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.SecretScanningListRepoCustomPatterns.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/get(secret-scanning/list-repo-custom-patterns)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/get(secret-scanning/list-repo-custom-patterns)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Bulk create repository custom patterns
+    ///
+    /// Bulk creates secret scanning custom patterns for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-repo-custom-patterns)`.
+    public enum SecretScanningBulkCreateRepoCustomPatterns {
+        public static let id: Swift.String = "secret-scanning/bulk-create-repo-custom-patterns"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.SecretScanningBulkCreateRepoCustomPatterns.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningBulkCreateRepoCustomPatterns.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningBulkCreateRepoCustomPatterns.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.SecretScanningBulkCreateRepoCustomPatterns.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The list of custom patterns to create.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/requestBody/json/patterns`.
+                    public var patterns: [Components.Schemas.SecretScanningCustomPatternToCreate]
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - patterns: The list of custom patterns to create.
+                    public init(patterns: [Components.Schemas.SecretScanningCustomPatternToCreate]) {
+                        self.patterns = patterns
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case patterns
+                    }
+                }
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/requestBody/content/application\/json`.
+                case json(Operations.SecretScanningBulkCreateRepoCustomPatterns.Input.Body.JsonPayload)
+            }
+            public var body: Operations.SecretScanningBulkCreateRepoCustomPatterns.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.SecretScanningBulkCreateRepoCustomPatterns.Input.Path,
+                headers: Operations.SecretScanningBulkCreateRepoCustomPatterns.Input.Headers = .init(),
+                body: Operations.SecretScanningBulkCreateRepoCustomPatterns.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/201/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/201/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// The list of successfully created custom patterns.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/201/content/json/created_patterns`.
+                        public var createdPatterns: [Components.Schemas.SecretScanningCustomPattern]?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - createdPatterns: The list of successfully created custom patterns.
+                        public init(createdPatterns: [Components.Schemas.SecretScanningCustomPattern]? = nil) {
+                            self.createdPatterns = createdPatterns
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case createdPatterns = "created_patterns"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/201/content/application\/json`.
+                    case json(Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.Created.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.Created.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.Created.Body
+                /// Creates a new `Created`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.Created.Body) {
+                    self.body = body
+                }
+            }
+            /// All patterns created successfully.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-repo-custom-patterns)/responses/201`.
+            ///
+            /// HTTP response code: `201 created`.
+            case created(Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
+            ///
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.Created {
+                get throws {
+                    switch self {
+                    case let .created(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-repo-custom-patterns)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-repo-custom-patterns)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-repo-custom-patterns)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct UnprocessableContent: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/422/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/422/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// A summary message describing the error.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/422/content/json/message`.
+                        public var message: Swift.String?
+                        /// A map of validation errors keyed by the zero-based index of the pattern that failed.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/422/content/json/validation_errors`.
+                        public struct ValidationErrorsPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/422/content/json/validation_errors/additionalProperties`.
+                            public struct AdditionalPropertiesPayload: Codable, Hashable, Sendable {
+                                /// List of validation errors for this pattern.
+                                ///
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/422/content/json/validation_errors/additionalProperties/errors`.
+                                public var errors: [Components.Schemas.SecretScanningCustomPatternValidationError]?
+                                /// Creates a new `AdditionalPropertiesPayload`.
+                                ///
+                                /// - Parameters:
+                                ///   - errors: List of validation errors for this pattern.
+                                public init(errors: [Components.Schemas.SecretScanningCustomPatternValidationError]? = nil) {
+                                    self.errors = errors
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case errors
+                                }
+                            }
+                            /// A container of undocumented properties.
+                            public var additionalProperties: [String: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.UnprocessableContent.Body.JsonPayload.ValidationErrorsPayload.AdditionalPropertiesPayload]
+                            /// Creates a new `ValidationErrorsPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - additionalProperties: A container of undocumented properties.
+                            public init(additionalProperties: [String: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.UnprocessableContent.Body.JsonPayload.ValidationErrorsPayload.AdditionalPropertiesPayload] = .init()) {
+                                self.additionalProperties = additionalProperties
+                            }
+                            public init(from decoder: any Swift.Decoder) throws {
+                                additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                            }
+                            public func encode(to encoder: any Swift.Encoder) throws {
+                                try encoder.encodeAdditionalProperties(additionalProperties)
+                            }
+                        }
+                        /// A map of validation errors keyed by the zero-based index of the pattern that failed.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/422/content/json/validation_errors`.
+                        public var validationErrors: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.UnprocessableContent.Body.JsonPayload.ValidationErrorsPayload?
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - message: A summary message describing the error.
+                        ///   - validationErrors: A map of validation errors keyed by the zero-based index of the pattern that failed.
+                        public init(
+                            message: Swift.String? = nil,
+                            validationErrors: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.UnprocessableContent.Body.JsonPayload.ValidationErrorsPayload? = nil
+                        ) {
+                            self.message = message
+                            self.validationErrors = validationErrors
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case message
+                            case validationErrors = "validation_errors"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/POST/responses/422/content/application\/json`.
+                    case json(Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.UnprocessableContent.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.UnprocessableContent.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.UnprocessableContent.Body
+                /// Creates a new `UnprocessableContent`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.UnprocessableContent.Body) {
+                    self.body = body
+                }
+            }
+            /// Validation failed for one or more patterns.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/post(secret-scanning/bulk-create-repo-custom-patterns)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.UnprocessableContent)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Operations.SecretScanningBulkCreateRepoCustomPatterns.Output.UnprocessableContent {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Bulk delete repository custom patterns
+    ///
+    /// Bulk deletes secret scanning custom patterns for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `DELETE /repos/{owner}/{repo}/secret-scanning/custom-patterns`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-repo-custom-patterns)`.
+    public enum SecretScanningBulkDeleteRepoCustomPatterns {
+        public static let id: Swift.String = "secret-scanning/bulk-delete-repo-custom-patterns"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/DELETE/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/DELETE/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/DELETE/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                }
+            }
+            public var path: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/DELETE/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningBulkDeleteRepoCustomPatterns.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningBulkDeleteRepoCustomPatterns.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/DELETE/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/DELETE/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// The list of custom patterns to delete.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/DELETE/requestBody/json/patterns`.
+                    public var patterns: [Components.Schemas.SecretScanningCustomPatternToDelete]
+                    /// What to do with alerts associated with the deleted patterns.
+                    /// `delete_alerts` permanently removes the alerts.
+                    /// `resolve_alerts` resolves the alerts as "pattern deleted".
+                    /// Defaults to `delete_alerts` when not specified.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/DELETE/requestBody/json/post_delete_action`.
+                    @frozen public enum PostDeleteActionPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case deleteAlerts = "delete_alerts"
+                        case resolveAlerts = "resolve_alerts"
+                    }
+                    /// What to do with alerts associated with the deleted patterns.
+                    /// `delete_alerts` permanently removes the alerts.
+                    /// `resolve_alerts` resolves the alerts as "pattern deleted".
+                    /// Defaults to `delete_alerts` when not specified.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/DELETE/requestBody/json/post_delete_action`.
+                    public var postDeleteAction: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Body.JsonPayload.PostDeleteActionPayload?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - patterns: The list of custom patterns to delete.
+                    ///   - postDeleteAction: What to do with alerts associated with the deleted patterns.
+                    public init(
+                        patterns: [Components.Schemas.SecretScanningCustomPatternToDelete],
+                        postDeleteAction: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Body.JsonPayload.PostDeleteActionPayload? = nil
+                    ) {
+                        self.patterns = patterns
+                        self.postDeleteAction = postDeleteAction
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case patterns
+                        case postDeleteAction = "post_delete_action"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/DELETE/requestBody/content/application\/json`.
+                case json(Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Body.JsonPayload)
+            }
+            public var body: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Path,
+                headers: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Headers = .init(),
+                body: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct NoContent: Sendable, Hashable {
+                /// Creates a new `NoContent`.
+                public init() {}
+            }
+            /// All patterns deleted successfully.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-repo-custom-patterns)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Operations.SecretScanningBulkDeleteRepoCustomPatterns.Output.NoContent)
+            /// All patterns deleted successfully.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-repo-custom-patterns)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Operations.SecretScanningBulkDeleteRepoCustomPatterns.Output.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-repo-custom-patterns)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-repo-custom-patterns)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-repo-custom-patterns)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Precondition Failed
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/delete(secret-scanning/bulk-delete-repo-custom-patterns)/responses/412`.
+            ///
+            /// HTTP response code: `412 preconditionFailed`.
+            case preconditionFailed(Components.Responses.PreconditionFailed)
+            /// The associated value of the enum case if `self` is `.preconditionFailed`.
+            ///
+            /// - Throws: An error if `self` is not `.preconditionFailed`.
+            /// - SeeAlso: `.preconditionFailed`.
+            public var preconditionFailed: Components.Responses.PreconditionFailed {
+                get throws {
+                    switch self {
+                    case let .preconditionFailed(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "preconditionFailed",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
+                ]
+            }
+        }
+    }
+    /// Update a repository custom pattern
+    ///
+    /// Updates a secret scanning custom pattern for a repository.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `repo` or `security_events` scope to use this endpoint. If this endpoint is only used with public repositories, the token can use the `public_repo` scope instead.
+    ///
+    /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-repo-custom-pattern)`.
+    public enum SecretScanningUpdateRepoCustomPattern {
+        public static let id: Swift.String = "secret-scanning/update-repo-custom-pattern"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/PATCH/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/PATCH/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/PATCH/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The ID of the custom pattern.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/PATCH/path/pattern_id`.
+                public var patternId: Swift.Int
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - patternId: The ID of the custom pattern.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    patternId: Swift.Int
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.patternId = patternId
+                }
+            }
+            public var path: Operations.SecretScanningUpdateRepoCustomPattern.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/PATCH/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningUpdateRepoCustomPattern.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.SecretScanningUpdateRepoCustomPattern.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.SecretScanningUpdateRepoCustomPattern.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/PATCH/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/PATCH/requestBody/content/application\/json`.
+                case json(Components.Schemas.SecretScanningCustomPatternToUpdate)
+            }
+            public var body: Operations.SecretScanningUpdateRepoCustomPattern.Input.Body
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.SecretScanningUpdateRepoCustomPattern.Input.Path,
+                headers: Operations.SecretScanningUpdateRepoCustomPattern.Input.Headers = .init(),
+                body: Operations.SecretScanningUpdateRepoCustomPattern.Input.Body
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/PATCH/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/PATCH/responses/200/content/application\/json`.
+                    case json(Components.Schemas.SecretScanningCustomPattern)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.SecretScanningCustomPattern {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.SecretScanningUpdateRepoCustomPattern.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.SecretScanningUpdateRepoCustomPattern.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Pattern updated successfully.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-repo-custom-pattern)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.SecretScanningUpdateRepoCustomPattern.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.SecretScanningUpdateRepoCustomPattern.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-repo-custom-pattern)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-repo-custom-pattern)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-repo-custom-pattern)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Precondition Failed
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-repo-custom-pattern)/responses/412`.
+            ///
+            /// HTTP response code: `412 preconditionFailed`.
+            case preconditionFailed(Components.Responses.PreconditionFailed)
+            /// The associated value of the enum case if `self` is `.preconditionFailed`.
+            ///
+            /// - Throws: An error if `self` is not `.preconditionFailed`.
+            /// - SeeAlso: `.preconditionFailed`.
+            public var preconditionFailed: Components.Responses.PreconditionFailed {
+                get throws {
+                    switch self {
+                    case let .preconditionFailed(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "preconditionFailed",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/secret-scanning/custom-patterns/{pattern_id}/patch(secret-scanning/update-repo-custom-pattern)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case applicationScimJson
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json,
+                    .applicationScimJson
                 ]
             }
         }
