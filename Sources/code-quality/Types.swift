@@ -487,6 +487,17 @@ public enum Components {
             ///
             /// - Remark: Generated from `#/components/schemas/code-quality-setup/schedule`.
             public var schedule: Components.Schemas.CodeQualitySetup.SchedulePayload?
+            /// The AI findings configuration for the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/ai_findings_option`.
+            @frozen public enum AiFindingsOptionPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case disabled = "disabled"
+                case onPush = "on_push"
+            }
+            /// The AI findings configuration for the repository.
+            ///
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup/ai_findings_option`.
+            public var aiFindingsOption: Components.Schemas.CodeQualitySetup.AiFindingsOptionPayload?
             /// Creates a new `CodeQualitySetup`.
             ///
             /// - Parameters:
@@ -496,13 +507,15 @@ public enum Components {
             ///   - runnerLabel: Runner label to be used if the runner type is labeled.
             ///   - updatedAt: Timestamp of latest configuration update.
             ///   - schedule: The frequency of the periodic analysis.
+            ///   - aiFindingsOption: The AI findings configuration for the repository.
             public init(
                 state: Components.Schemas.CodeQualitySetup.StatePayload? = nil,
                 languages: Components.Schemas.CodeQualitySetup.LanguagesPayload? = nil,
                 runnerType: Components.Schemas.CodeQualitySetup.RunnerTypePayload? = nil,
                 runnerLabel: Swift.String? = nil,
                 updatedAt: Foundation.Date? = nil,
-                schedule: Components.Schemas.CodeQualitySetup.SchedulePayload? = nil
+                schedule: Components.Schemas.CodeQualitySetup.SchedulePayload? = nil,
+                aiFindingsOption: Components.Schemas.CodeQualitySetup.AiFindingsOptionPayload? = nil
             ) {
                 self.state = state
                 self.languages = languages
@@ -510,6 +523,7 @@ public enum Components {
                 self.runnerLabel = runnerLabel
                 self.updatedAt = updatedAt
                 self.schedule = schedule
+                self.aiFindingsOption = aiFindingsOption
             }
             public enum CodingKeys: String, CodingKey {
                 case state
@@ -518,6 +532,7 @@ public enum Components {
                 case runnerLabel = "runner_label"
                 case updatedAt = "updated_at"
                 case schedule
+                case aiFindingsOption = "ai_findings_option"
             }
         }
         /// Configuration for code quality setup.
@@ -552,6 +567,13 @@ public enum Components {
             }
             /// - Remark: Generated from `#/components/schemas/code-quality-setup-update/value4`.
             public var value4: Components.Schemas.CodeQualitySetupUpdate.Value4Payload?
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update/value5`.
+            public struct Value5Payload: Codable, Hashable, Sendable {
+                /// Creates a new `Value5Payload`.
+                public init() {}
+            }
+            /// - Remark: Generated from `#/components/schemas/code-quality-setup-update/value5`.
+            public var value5: Components.Schemas.CodeQualitySetupUpdate.Value5Payload?
             /// Creates a new `CodeQualitySetupUpdate`.
             ///
             /// - Parameters:
@@ -559,16 +581,19 @@ public enum Components {
             ///   - value2:
             ///   - value3:
             ///   - value4:
+            ///   - value5:
             public init(
                 value1: Components.Schemas.CodeQualitySetupUpdate.Value1Payload? = nil,
                 value2: Components.Schemas.CodeQualitySetupUpdate.Value2Payload? = nil,
                 value3: Components.Schemas.CodeQualitySetupUpdate.Value3Payload? = nil,
-                value4: Components.Schemas.CodeQualitySetupUpdate.Value4Payload? = nil
+                value4: Components.Schemas.CodeQualitySetupUpdate.Value4Payload? = nil,
+                value5: Components.Schemas.CodeQualitySetupUpdate.Value5Payload? = nil
             ) {
                 self.value1 = value1
                 self.value2 = value2
                 self.value3 = value3
                 self.value4 = value4
+                self.value5 = value5
             }
             public init(from decoder: any Swift.Decoder) throws {
                 var errors: [any Swift.Error] = []
@@ -592,12 +617,18 @@ public enum Components {
                 } catch {
                     errors.append(error)
                 }
+                do {
+                    self.value5 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
                 try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
                     [
                         self.value1,
                         self.value2,
                         self.value3,
-                        self.value4
+                        self.value4,
+                        self.value5
                     ],
                     type: Self.self,
                     codingPath: decoder.codingPath,
@@ -609,6 +640,7 @@ public enum Components {
                 try self.value2?.encode(to: encoder)
                 try self.value3?.encode(to: encoder)
                 try self.value4?.encode(to: encoder)
+                try self.value5?.encode(to: encoder)
             }
         }
         /// You can use `run_url` to track the status of the run. This includes a property status and conclusion.
