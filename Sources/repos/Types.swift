@@ -1677,6 +1677,11 @@ public protocol APIProtocol: Sendable {
     ///
     /// Users with push access to the repository can create a release.
     ///
+    /// > [!NOTE]
+    /// > If the commit identified by `target_commitish` (or, when `target_commitish` is omitted, the latest commit on the default branch) adds or modifies any file under `.github/workflows/` relative to the repository's default branch, the authenticating token must be authorized to modify workflows. Otherwise, this endpoint returns `404 Not Found`; some authentication paths surface `403 Resource not accessible by integration` instead.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `workflow` scope when the resolved target commit modifies workflow files. Fine-grained access tokens and GitHub App installation tokens also need the "Workflows" repository permission (write). The `GITHUB_TOKEN` available to GitHub Actions cannot be authorized for this; for more information, see "[Automatic token authentication](https://docs.github.com/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)".
+    ///
     /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)" and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
     ///
     /// - Remark: HTTP `POST /repos/{owner}/{repo}/releases`.
@@ -1745,6 +1750,11 @@ public protocol APIProtocol: Sendable {
     /// Update a release
     ///
     /// Users with push access to the repository can edit a release.
+    ///
+    /// > [!NOTE]
+    /// > If the resolved target commit (the new value of `target_commitish` if you are changing it, otherwise the existing target) adds or modifies any file under `.github/workflows/` relative to the repository's default branch, the authenticating token must be authorized to modify workflows. Otherwise, this endpoint returns `404 Not Found`; some authentication paths surface `403 Resource not accessible by integration` instead.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `workflow` scope when the resolved target commit modifies workflow files. Fine-grained access tokens and GitHub App installation tokens also need the "Workflows" repository permission (write). The `GITHUB_TOKEN` available to GitHub Actions cannot be authorized for this; for more information, see "[Automatic token authentication](https://docs.github.com/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)".
     ///
     /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/releases/{release_id}`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/releases/{release_id}/patch(repos/update-release)`.
@@ -5104,6 +5114,11 @@ extension APIProtocol {
     ///
     /// Users with push access to the repository can create a release.
     ///
+    /// > [!NOTE]
+    /// > If the commit identified by `target_commitish` (or, when `target_commitish` is omitted, the latest commit on the default branch) adds or modifies any file under `.github/workflows/` relative to the repository's default branch, the authenticating token must be authorized to modify workflows. Otherwise, this endpoint returns `404 Not Found`; some authentication paths surface `403 Resource not accessible by integration` instead.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `workflow` scope when the resolved target commit modifies workflow files. Fine-grained access tokens and GitHub App installation tokens also need the "Workflows" repository permission (write). The `GITHUB_TOKEN` available to GitHub Actions cannot be authorized for this; for more information, see "[Automatic token authentication](https://docs.github.com/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)".
+    ///
     /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)" and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
     ///
     /// - Remark: HTTP `POST /repos/{owner}/{repo}/releases`.
@@ -5242,6 +5257,11 @@ extension APIProtocol {
     /// Update a release
     ///
     /// Users with push access to the repository can edit a release.
+    ///
+    /// > [!NOTE]
+    /// > If the resolved target commit (the new value of `target_commitish` if you are changing it, otherwise the existing target) adds or modifies any file under `.github/workflows/` relative to the repository's default branch, the authenticating token must be authorized to modify workflows. Otherwise, this endpoint returns `404 Not Found`; some authentication paths surface `403 Resource not accessible by integration` instead.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `workflow` scope when the resolved target commit modifies workflow files. Fine-grained access tokens and GitHub App installation tokens also need the "Workflows" repository permission (write). The `GITHUB_TOKEN` available to GitHub Actions cannot be authorized for this; for more information, see "[Automatic token authentication](https://docs.github.com/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)".
     ///
     /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/releases/{release_id}`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/releases/{release_id}/patch(repos/update-release)`.
@@ -10406,6 +10426,84 @@ public enum Components {
                 case commitMessage = "commit_message"
             }
         }
+        /// The stack information associated with a pull request.
+        ///
+        /// - Remark: Generated from `#/components/schemas/pull-request-stack`.
+        public struct PullRequestStack: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/base`.
+            public struct BasePayload: Codable, Hashable, Sendable {
+                /// The base ref of the stack this pull request belongs to.
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack/base/ref`.
+                public var ref: Swift.String
+                /// The base SHA of the stack this pull request belongs to.
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-stack/base/sha`.
+                public var sha: Swift.String
+                /// Creates a new `BasePayload`.
+                ///
+                /// - Parameters:
+                ///   - ref: The base ref of the stack this pull request belongs to.
+                ///   - sha: The base SHA of the stack this pull request belongs to.
+                public init(
+                    ref: Swift.String,
+                    sha: Swift.String
+                ) {
+                    self.ref = ref
+                    self.sha = sha
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case ref
+                    case sha
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/base`.
+            public var base: Components.Schemas.PullRequestStack.BasePayload
+            /// The total number of pull requests in the stack.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/size`.
+            public var size: Swift.Int?
+            /// The one-based position of this pull request within the stack, where 1 is the bottom of the stack.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/position`.
+            public var position: Swift.Int?
+            /// The ID of the stack that this pull request belongs to.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/id`.
+            public var id: Swift.Int?
+            /// The number of the stack that this pull request belongs to.
+            ///
+            /// - Remark: Generated from `#/components/schemas/pull-request-stack/number`.
+            public var number: Swift.Int?
+            /// Creates a new `PullRequestStack`.
+            ///
+            /// - Parameters:
+            ///   - base:
+            ///   - size: The total number of pull requests in the stack.
+            ///   - position: The one-based position of this pull request within the stack, where 1 is the bottom of the stack.
+            ///   - id: The ID of the stack that this pull request belongs to.
+            ///   - number: The number of the stack that this pull request belongs to.
+            public init(
+                base: Components.Schemas.PullRequestStack.BasePayload,
+                size: Swift.Int? = nil,
+                position: Swift.Int? = nil,
+                id: Swift.Int? = nil,
+                number: Swift.Int? = nil
+            ) {
+                self.base = base
+                self.size = size
+                self.position = position
+                self.id = id
+                self.number = number
+            }
+            public enum CodingKeys: String, CodingKey {
+                case base
+                case size
+                case position
+                case id
+                case number
+            }
+        }
         /// Pull Request Simple
         ///
         /// - Remark: Generated from `#/components/schemas/pull-request-simple`.
@@ -10676,6 +10774,8 @@ public enum Components {
             public var authorAssociation: Components.Schemas.AuthorAssociation
             /// - Remark: Generated from `#/components/schemas/pull-request-simple/auto_merge`.
             public var autoMerge: Components.Schemas.AutoMerge?
+            /// - Remark: Generated from `#/components/schemas/pull-request-simple/stack`.
+            public var stack: Components.Schemas.PullRequestStack?
             /// Indicates whether or not the pull request is a draft.
             ///
             /// - Remark: Generated from `#/components/schemas/pull-request-simple/draft`.
@@ -10718,6 +10818,7 @@ public enum Components {
             ///   - _links:
             ///   - authorAssociation:
             ///   - autoMerge:
+            ///   - stack:
             ///   - draft: Indicates whether or not the pull request is a draft.
             public init(
                 url: Swift.String,
@@ -10755,6 +10856,7 @@ public enum Components {
                 _links: Components.Schemas.PullRequestSimple._LinksPayload,
                 authorAssociation: Components.Schemas.AuthorAssociation,
                 autoMerge: Components.Schemas.AutoMerge? = nil,
+                stack: Components.Schemas.PullRequestStack? = nil,
                 draft: Swift.Bool? = nil
             ) {
                 self.url = url
@@ -10792,6 +10894,7 @@ public enum Components {
                 self._links = _links
                 self.authorAssociation = authorAssociation
                 self.autoMerge = autoMerge
+                self.stack = stack
                 self.draft = draft
             }
             public enum CodingKeys: String, CodingKey {
@@ -10830,6 +10933,7 @@ public enum Components {
                 case _links
                 case authorAssociation = "author_association"
                 case autoMerge = "auto_merge"
+                case stack
                 case draft
             }
         }
@@ -13233,6 +13337,73 @@ public enum Components {
                 case _type = "type"
             }
         }
+        /// An actor allowed to dismiss pull request reviews
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-rule-params-actor`.
+        public struct RepositoryRuleParamsActor: Codable, Hashable, Sendable {
+            /// ID of the actor that can dismiss reviews.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-rule-params-actor/id`.
+            public var id: Swift.Int
+            /// The type of the actor
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-rule-params-actor/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case user = "User"
+                case team = "Team"
+                case integrationInstallation = "IntegrationInstallation"
+                case repositoryRole = "RepositoryRole"
+            }
+            /// The type of the actor
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-rule-params-actor/type`.
+            public var _type: Components.Schemas.RepositoryRuleParamsActor._TypePayload
+            /// Creates a new `RepositoryRuleParamsActor`.
+            ///
+            /// - Parameters:
+            ///   - id: ID of the actor that can dismiss reviews.
+            ///   - _type: The type of the actor
+            public init(
+                id: Swift.Int,
+                _type: Components.Schemas.RepositoryRuleParamsActor._TypePayload
+            ) {
+                self.id = id
+                self._type = _type
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case _type = "type"
+            }
+        }
+        /// Specify people, teams, or apps allowed to dismiss pull request reviews.
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-rule-params-dismissal-restriction`.
+        public struct RepositoryRuleParamsDismissalRestriction: Codable, Hashable, Sendable {
+            /// Specify people, teams, or apps allowed to dismiss pull request reviews.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-rule-params-dismissal-restriction/allowed_actors`.
+            public var allowedActors: [Components.Schemas.RepositoryRuleParamsActor]?
+            /// Whether to restrict review dismissal to specific actors.
+            ///
+            /// - Remark: Generated from `#/components/schemas/repository-rule-params-dismissal-restriction/enabled`.
+            public var enabled: Swift.Bool
+            /// Creates a new `RepositoryRuleParamsDismissalRestriction`.
+            ///
+            /// - Parameters:
+            ///   - allowedActors: Specify people, teams, or apps allowed to dismiss pull request reviews.
+            ///   - enabled: Whether to restrict review dismissal to specific actors.
+            public init(
+                allowedActors: [Components.Schemas.RepositoryRuleParamsActor]? = nil,
+                enabled: Swift.Bool
+            ) {
+                self.allowedActors = allowedActors
+                self.enabled = enabled
+            }
+            public enum CodingKeys: String, CodingKey {
+                case allowedActors = "allowed_actors"
+                case enabled
+            }
+        }
         /// A required reviewing team
         ///
         /// - Remark: Generated from `#/components/schemas/repository-rule-params-reviewer`.
@@ -13333,6 +13504,8 @@ public enum Components {
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request/parameters/dismiss_stale_reviews_on_push`.
                 public var dismissStaleReviewsOnPush: Swift.Bool
+                /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request/parameters/dismissal_restriction`.
+                public var dismissalRestriction: Components.Schemas.RepositoryRuleParamsDismissalRestriction?
                 /// Require an approving review in pull requests that modify files that have a designated code owner.
                 ///
                 /// - Remark: Generated from `#/components/schemas/repository-rule-pull-request/parameters/require_code_owner_review`.
@@ -13361,6 +13534,7 @@ public enum Components {
                 /// - Parameters:
                 ///   - allowedMergeMethods: Array of allowed merge methods. Allowed values include `merge`, `squash`, and `rebase`. At least one option must be enabled.
                 ///   - dismissStaleReviewsOnPush: New, reviewable commits pushed will dismiss previous pull request review approvals.
+                ///   - dismissalRestriction:
                 ///   - requireCodeOwnerReview: Require an approving review in pull requests that modify files that have a designated code owner.
                 ///   - requireLastPushApproval: Whether the most recent reviewable push must be approved by someone other than the person who pushed it.
                 ///   - requiredApprovingReviewCount: The number of approving reviews that are required before a pull request can be merged.
@@ -13369,6 +13543,7 @@ public enum Components {
                 public init(
                     allowedMergeMethods: Components.Schemas.RepositoryRulePullRequest.ParametersPayload.AllowedMergeMethodsPayload? = nil,
                     dismissStaleReviewsOnPush: Swift.Bool,
+                    dismissalRestriction: Components.Schemas.RepositoryRuleParamsDismissalRestriction? = nil,
                     requireCodeOwnerReview: Swift.Bool,
                     requireLastPushApproval: Swift.Bool,
                     requiredApprovingReviewCount: Swift.Int,
@@ -13377,6 +13552,7 @@ public enum Components {
                 ) {
                     self.allowedMergeMethods = allowedMergeMethods
                     self.dismissStaleReviewsOnPush = dismissStaleReviewsOnPush
+                    self.dismissalRestriction = dismissalRestriction
                     self.requireCodeOwnerReview = requireCodeOwnerReview
                     self.requireLastPushApproval = requireLastPushApproval
                     self.requiredApprovingReviewCount = requiredApprovingReviewCount
@@ -13386,6 +13562,7 @@ public enum Components {
                 public enum CodingKeys: String, CodingKey {
                     case allowedMergeMethods = "allowed_merge_methods"
                     case dismissStaleReviewsOnPush = "dismiss_stale_reviews_on_push"
+                    case dismissalRestriction = "dismissal_restriction"
                     case requireCodeOwnerReview = "require_code_owner_review"
                     case requireLastPushApproval = "require_last_push_approval"
                     case requiredApprovingReviewCount = "required_approving_review_count"
@@ -14190,6 +14367,27 @@ public enum Components {
                 case parameters
             }
         }
+        /// Enforce any added or changed dependencies to comply with the organization's license policy.
+        ///
+        /// - Remark: Generated from `#/components/schemas/repository-rule-license-compliance-scanning`.
+        public struct RepositoryRuleLicenseComplianceScanning: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/repository-rule-license-compliance-scanning/type`.
+            @frozen public enum _TypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case licenseComplianceScanning = "license_compliance_scanning"
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-license-compliance-scanning/type`.
+            public var _type: Components.Schemas.RepositoryRuleLicenseComplianceScanning._TypePayload
+            /// Creates a new `RepositoryRuleLicenseComplianceScanning`.
+            ///
+            /// - Parameters:
+            ///   - _type:
+            public init(_type: Components.Schemas.RepositoryRuleLicenseComplianceScanning._TypePayload) {
+                self._type = _type
+            }
+            public enum CodingKeys: String, CodingKey {
+                case _type = "type"
+            }
+        }
         /// Prevent commits that include changes in specified file and folder paths from being pushed to the commit graph. This includes absolute paths that contain file names.
         ///
         /// - Remark: Generated from `#/components/schemas/repository-rule-file-path-restriction`.
@@ -14415,12 +14613,14 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/repository-rule/case18`.
             case RepositoryRuleCopilotCodeReview(Components.Schemas.RepositoryRuleCopilotCodeReview)
             /// - Remark: Generated from `#/components/schemas/repository-rule/case19`.
-            case RepositoryRuleFilePathRestriction(Components.Schemas.RepositoryRuleFilePathRestriction)
+            case RepositoryRuleLicenseComplianceScanning(Components.Schemas.RepositoryRuleLicenseComplianceScanning)
             /// - Remark: Generated from `#/components/schemas/repository-rule/case20`.
-            case RepositoryRuleMaxFilePathLength(Components.Schemas.RepositoryRuleMaxFilePathLength)
+            case RepositoryRuleFilePathRestriction(Components.Schemas.RepositoryRuleFilePathRestriction)
             /// - Remark: Generated from `#/components/schemas/repository-rule/case21`.
-            case RepositoryRuleFileExtensionRestriction(Components.Schemas.RepositoryRuleFileExtensionRestriction)
+            case RepositoryRuleMaxFilePathLength(Components.Schemas.RepositoryRuleMaxFilePathLength)
             /// - Remark: Generated from `#/components/schemas/repository-rule/case22`.
+            case RepositoryRuleFileExtensionRestriction(Components.Schemas.RepositoryRuleFileExtensionRestriction)
+            /// - Remark: Generated from `#/components/schemas/repository-rule/case23`.
             case RepositoryRuleMaxFileSize(Components.Schemas.RepositoryRuleMaxFileSize)
             public init(from decoder: any Swift.Decoder) throws {
                 var errors: [any Swift.Error] = []
@@ -14533,6 +14733,12 @@ public enum Components {
                     errors.append(error)
                 }
                 do {
+                    self = .RepositoryRuleLicenseComplianceScanning(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
+                do {
                     self = .RepositoryRuleFilePathRestriction(try .init(from: decoder))
                     return
                 } catch {
@@ -14599,6 +14805,8 @@ public enum Components {
                 case let .RepositoryRuleCodeScanning(value):
                     try value.encode(to: encoder)
                 case let .RepositoryRuleCopilotCodeReview(value):
+                    try value.encode(to: encoder)
+                case let .RepositoryRuleLicenseComplianceScanning(value):
                     try value.encode(to: encoder)
                 case let .RepositoryRuleFilePathRestriction(value):
                     try value.encode(to: encoder)
@@ -22857,10 +23065,39 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19`.
             public struct Case19Payload: Codable, Hashable, Sendable {
                 /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19/value1`.
-                public var value1: Components.Schemas.RepositoryRuleFilePathRestriction
+                public var value1: Components.Schemas.RepositoryRuleLicenseComplianceScanning
                 /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19/value2`.
                 public var value2: Components.Schemas.RepositoryRuleRulesetInfo
                 /// Creates a new `Case19Payload`.
+                ///
+                /// - Parameters:
+                ///   - value1:
+                ///   - value2:
+                public init(
+                    value1: Components.Schemas.RepositoryRuleLicenseComplianceScanning,
+                    value2: Components.Schemas.RepositoryRuleRulesetInfo
+                ) {
+                    self.value1 = value1
+                    self.value2 = value2
+                }
+                public init(from decoder: any Swift.Decoder) throws {
+                    self.value1 = try .init(from: decoder)
+                    self.value2 = try .init(from: decoder)
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    try self.value1.encode(to: encoder)
+                    try self.value2.encode(to: encoder)
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19`.
+            case case19(Components.Schemas.RepositoryRuleDetailed.Case19Payload)
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20`.
+            public struct Case20Payload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20/value1`.
+                public var value1: Components.Schemas.RepositoryRuleFilePathRestriction
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20/value2`.
+                public var value2: Components.Schemas.RepositoryRuleRulesetInfo
+                /// Creates a new `Case20Payload`.
                 ///
                 /// - Parameters:
                 ///   - value1:
@@ -22881,15 +23118,15 @@ public enum Components {
                     try self.value2.encode(to: encoder)
                 }
             }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case19`.
-            case case19(Components.Schemas.RepositoryRuleDetailed.Case19Payload)
             /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20`.
-            public struct Case20Payload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20/value1`.
+            case case20(Components.Schemas.RepositoryRuleDetailed.Case20Payload)
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21`.
+            public struct Case21Payload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21/value1`.
                 public var value1: Components.Schemas.RepositoryRuleMaxFilePathLength
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20/value2`.
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21/value2`.
                 public var value2: Components.Schemas.RepositoryRuleRulesetInfo
-                /// Creates a new `Case20Payload`.
+                /// Creates a new `Case21Payload`.
                 ///
                 /// - Parameters:
                 ///   - value1:
@@ -22910,15 +23147,15 @@ public enum Components {
                     try self.value2.encode(to: encoder)
                 }
             }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case20`.
-            case case20(Components.Schemas.RepositoryRuleDetailed.Case20Payload)
             /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21`.
-            public struct Case21Payload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21/value1`.
+            case case21(Components.Schemas.RepositoryRuleDetailed.Case21Payload)
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22`.
+            public struct Case22Payload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22/value1`.
                 public var value1: Components.Schemas.RepositoryRuleFileExtensionRestriction
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21/value2`.
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22/value2`.
                 public var value2: Components.Schemas.RepositoryRuleRulesetInfo
-                /// Creates a new `Case21Payload`.
+                /// Creates a new `Case22Payload`.
                 ///
                 /// - Parameters:
                 ///   - value1:
@@ -22939,15 +23176,15 @@ public enum Components {
                     try self.value2.encode(to: encoder)
                 }
             }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case21`.
-            case case21(Components.Schemas.RepositoryRuleDetailed.Case21Payload)
             /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22`.
-            public struct Case22Payload: Codable, Hashable, Sendable {
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22/value1`.
+            case case22(Components.Schemas.RepositoryRuleDetailed.Case22Payload)
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case23`.
+            public struct Case23Payload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case23/value1`.
                 public var value1: Components.Schemas.RepositoryRuleMaxFileSize
-                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22/value2`.
+                /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case23/value2`.
                 public var value2: Components.Schemas.RepositoryRuleRulesetInfo
-                /// Creates a new `Case22Payload`.
+                /// Creates a new `Case23Payload`.
                 ///
                 /// - Parameters:
                 ///   - value1:
@@ -22968,8 +23205,8 @@ public enum Components {
                     try self.value2.encode(to: encoder)
                 }
             }
-            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case22`.
-            case case22(Components.Schemas.RepositoryRuleDetailed.Case22Payload)
+            /// - Remark: Generated from `#/components/schemas/repository-rule-detailed/case23`.
+            case case23(Components.Schemas.RepositoryRuleDetailed.Case23Payload)
             public init(from decoder: any Swift.Decoder) throws {
                 var errors: [any Swift.Error] = []
                 do {
@@ -23104,6 +23341,12 @@ public enum Components {
                 } catch {
                     errors.append(error)
                 }
+                do {
+                    self = .case23(try .init(from: decoder))
+                    return
+                } catch {
+                    errors.append(error)
+                }
                 throw Swift.DecodingError.failedToDecodeOneOfSchema(
                     type: Self.self,
                     codingPath: decoder.codingPath,
@@ -23155,6 +23398,8 @@ public enum Components {
                 case let .case21(value):
                     try value.encode(to: encoder)
                 case let .case22(value):
+                    try value.encode(to: encoder)
+                case let .case23(value):
                     try value.encode(to: encoder)
                 }
             }
@@ -57266,6 +57511,11 @@ public enum Operations {
     ///
     /// Users with push access to the repository can create a release.
     ///
+    /// > [!NOTE]
+    /// > If the commit identified by `target_commitish` (or, when `target_commitish` is omitted, the latest commit on the default branch) adds or modifies any file under `.github/workflows/` relative to the repository's default branch, the authenticating token must be authorized to modify workflows. Otherwise, this endpoint returns `404 Not Found`; some authentication paths surface `403 Resource not accessible by integration` instead.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `workflow` scope when the resolved target commit modifies workflow files. Fine-grained access tokens and GitHub App installation tokens also need the "Workflows" repository permission (write). The `GITHUB_TOKEN` available to GitHub Actions cannot be authorized for this; for more information, see "[Automatic token authentication](https://docs.github.com/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)".
+    ///
     /// This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)" and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
     ///
     /// - Remark: HTTP `POST /repos/{owner}/{repo}/releases`.
@@ -58893,6 +59143,11 @@ public enum Operations {
     /// Update a release
     ///
     /// Users with push access to the repository can edit a release.
+    ///
+    /// > [!NOTE]
+    /// > If the resolved target commit (the new value of `target_commitish` if you are changing it, otherwise the existing target) adds or modifies any file under `.github/workflows/` relative to the repository's default branch, the authenticating token must be authorized to modify workflows. Otherwise, this endpoint returns `404 Not Found`; some authentication paths surface `403 Resource not accessible by integration` instead.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `workflow` scope when the resolved target commit modifies workflow files. Fine-grained access tokens and GitHub App installation tokens also need the "Workflows" repository permission (write). The `GITHUB_TOKEN` available to GitHub Actions cannot be authorized for this; for more information, see "[Automatic token authentication](https://docs.github.com/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token)".
     ///
     /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/releases/{release_id}`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/releases/{release_id}/patch(repos/update-release)`.
