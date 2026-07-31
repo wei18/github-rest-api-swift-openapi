@@ -37,6 +37,19 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /enterprises/{enterprise}/copilot/metrics/reports/enterprise-28-day/latest`.
     /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/enterprise-28-day/latest/get(copilot/copilot-enterprise-usage-metrics)`.
     func copilotCopilotEnterpriseUsageMetrics(_ input: Operations.CopilotCopilotEnterpriseUsageMetrics.Input) async throws -> Operations.CopilotCopilotEnterpriseUsageMetrics.Output
+    /// Get Copilot enterprise repository report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot enterprise repository report for a specific day. The report provides per-repository pull request metrics for Copilot across the enterprise, with one entry per repository.
+    ///
+    /// The report contains repository-level pull request activity for the specified day, including the Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the specified day are included. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/copilot/metrics/reports/repos-1-day`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-enterprise-repos-one-day-report)`.
+    func copilotCopilotEnterpriseReposOneDayReport(_ input: Operations.CopilotCopilotEnterpriseReposOneDayReport.Input) async throws -> Operations.CopilotCopilotEnterpriseReposOneDayReport.Output
     /// Get Copilot enterprise user-teams report for a specific day
     ///
     /// Use this endpoint to retrieve download links for the Copilot enterprise user-teams report for a specific day. The report provides user-team join data for Copilot across the enterprise, with one entry per user-team pair.
@@ -387,6 +400,21 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /orgs/{org}/copilot/metrics/reports/organization-28-day/latest`.
     /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/organization-28-day/latest/get(copilot/copilot-organization-usage-metrics)`.
     func copilotCopilotOrganizationUsageMetrics(_ input: Operations.CopilotCopilotOrganizationUsageMetrics.Input) async throws -> Operations.CopilotCopilotOrganizationUsageMetrics.Output
+    /// Get Copilot organization repository report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot organization repository report for a specific day. The report provides per-repository pull request metrics for Copilot across the organization, with one entry per repository.
+    ///
+    /// The report contains repository-level pull request activity for the specified day, including the Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the specified day are included. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/metrics/reports/repos-1-day`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-organization-repos-one-day-report)`.
+    func copilotCopilotOrganizationReposOneDayReport(_ input: Operations.CopilotCopilotOrganizationReposOneDayReport.Input) async throws -> Operations.CopilotCopilotOrganizationReposOneDayReport.Output
     /// Get Copilot organization user-teams report for a specific day
     ///
     /// Use this endpoint to retrieve download links for the Copilot organization user-teams report for a specific day. The report provides user-team join data for Copilot across the organization, with one entry per user-team pair.
@@ -508,6 +536,29 @@ extension APIProtocol {
     ) async throws -> Operations.CopilotCopilotEnterpriseUsageMetrics.Output {
         try await copilotCopilotEnterpriseUsageMetrics(Operations.CopilotCopilotEnterpriseUsageMetrics.Input(
             path: path,
+            headers: headers
+        ))
+    }
+    /// Get Copilot enterprise repository report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot enterprise repository report for a specific day. The report provides per-repository pull request metrics for Copilot across the enterprise, with one entry per repository.
+    ///
+    /// The report contains repository-level pull request activity for the specified day, including the Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the specified day are included. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/copilot/metrics/reports/repos-1-day`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-enterprise-repos-one-day-report)`.
+    public func copilotCopilotEnterpriseReposOneDayReport(
+        path: Operations.CopilotCopilotEnterpriseReposOneDayReport.Input.Path,
+        query: Operations.CopilotCopilotEnterpriseReposOneDayReport.Input.Query,
+        headers: Operations.CopilotCopilotEnterpriseReposOneDayReport.Input.Headers = .init()
+    ) async throws -> Operations.CopilotCopilotEnterpriseReposOneDayReport.Output {
+        try await copilotCopilotEnterpriseReposOneDayReport(Operations.CopilotCopilotEnterpriseReposOneDayReport.Input(
+            path: path,
+            query: query,
             headers: headers
         ))
     }
@@ -1064,6 +1115,31 @@ extension APIProtocol {
     ) async throws -> Operations.CopilotCopilotOrganizationUsageMetrics.Output {
         try await copilotCopilotOrganizationUsageMetrics(Operations.CopilotCopilotOrganizationUsageMetrics.Input(
             path: path,
+            headers: headers
+        ))
+    }
+    /// Get Copilot organization repository report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot organization repository report for a specific day. The report provides per-repository pull request metrics for Copilot across the organization, with one entry per repository.
+    ///
+    /// The report contains repository-level pull request activity for the specified day, including the Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the specified day are included. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/metrics/reports/repos-1-day`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-organization-repos-one-day-report)`.
+    public func copilotCopilotOrganizationReposOneDayReport(
+        path: Operations.CopilotCopilotOrganizationReposOneDayReport.Input.Path,
+        query: Operations.CopilotCopilotOrganizationReposOneDayReport.Input.Query,
+        headers: Operations.CopilotCopilotOrganizationReposOneDayReport.Input.Headers = .init()
+    ) async throws -> Operations.CopilotCopilotOrganizationReposOneDayReport.Output {
+        try await copilotCopilotOrganizationReposOneDayReport(Operations.CopilotCopilotOrganizationReposOneDayReport.Input(
+            path: path,
+            query: query,
             headers: headers
         ))
     }
@@ -4560,6 +4636,262 @@ public enum Operations {
             /// Resource not found
             ///
             /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/enterprise-28-day/latest/get(copilot/copilot-enterprise-usage-metrics)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get Copilot enterprise repository report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot enterprise repository report for a specific day. The report provides per-repository pull request metrics for Copilot across the enterprise, with one entry per repository.
+    ///
+    /// The report contains repository-level pull request activity for the specified day, including the Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the specified day are included. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Enterprise owners, billing managers, and authorized users with fine-grained "View Enterprise Copilot Metrics" permission can retrieve Copilot metrics reports for the enterprise. OAuth app tokens and personal access tokens (classic) need either the `manage_billing:copilot` or `read:enterprise` scopes to use this endpoint.
+    ///
+    /// - Remark: HTTP `GET /enterprises/{enterprise}/copilot/metrics/reports/repos-1-day`.
+    /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-enterprise-repos-one-day-report)`.
+    public enum CopilotCopilotEnterpriseReposOneDayReport {
+        public static let id: Swift.String = "copilot/copilot-enterprise-repos-one-day-report"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The slug version of the enterprise name.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/GET/path/enterprise`.
+                public var enterprise: Components.Parameters.Enterprise
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - enterprise: The slug version of the enterprise name.
+                public init(enterprise: Components.Parameters.Enterprise) {
+                    self.enterprise = enterprise
+                }
+            }
+            public var path: Operations.CopilotCopilotEnterpriseReposOneDayReport.Input.Path
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The day to request data for, in `YYYY-MM-DD` format.
+                ///
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/GET/query/day`.
+                public var day: Components.Parameters.Day
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - day: The day to request data for, in `YYYY-MM-DD` format.
+                public init(day: Components.Parameters.Day) {
+                    self.day = day
+                }
+            }
+            public var query: Operations.CopilotCopilotEnterpriseReposOneDayReport.Input.Query
+            /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotCopilotEnterpriseReposOneDayReport.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotCopilotEnterpriseReposOneDayReport.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotCopilotEnterpriseReposOneDayReport.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.CopilotCopilotEnterpriseReposOneDayReport.Input.Path,
+                query: Operations.CopilotCopilotEnterpriseReposOneDayReport.Input.Query,
+                headers: Operations.CopilotCopilotEnterpriseReposOneDayReport.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.CopilotUsageMetrics1DayReport)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.CopilotUsageMetrics1DayReport {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CopilotCopilotEnterpriseReposOneDayReport.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CopilotCopilotEnterpriseReposOneDayReport.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-enterprise-repos-one-day-report)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CopilotCopilotEnterpriseReposOneDayReport.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CopilotCopilotEnterpriseReposOneDayReport.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-enterprise-repos-one-day-report)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Components.Responses.NoContent)
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-enterprise-repos-one-day-report)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Components.Responses.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-enterprise-repos-one-day-report)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-enterprise-repos-one-day-report)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//enterprises/{enterprise}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-enterprise-repos-one-day-report)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
@@ -10504,6 +10836,264 @@ public enum Operations {
             }
         }
     }
+    /// Get Copilot organization repository report for a specific day
+    ///
+    /// Use this endpoint to retrieve download links for the Copilot organization repository report for a specific day. The report provides per-repository pull request metrics for Copilot across the organization, with one entry per repository.
+    ///
+    /// The report contains repository-level pull request activity for the specified day, including the Copilot Coding Agent (CCA) and Copilot Code Review (CCR) breakdowns. Only repositories that had activity on the specified day are included. Reports are generated daily and made available for download through signed URLs with a limited expiration time.
+    ///
+    /// The response includes download links to the report files, along with the specific date of the report. The report covers a complete day for which data has been processed.
+    ///
+    /// Organization owners and authorized users with fine-grained "View Organization Copilot Metrics" permission can retrieve Copilot metrics reports for the organization. OAuth app tokens and personal access tokens (classic) need the `read:org` scope to use this endpoint.
+    ///
+    /// For more information about organization metrics attribution, see [How are metrics attributed across organizations](https://docs.github.com/copilot/concepts/copilot-metrics#how-are-metrics-attributed-across-organizations).
+    ///
+    /// - Remark: HTTP `GET /orgs/{org}/copilot/metrics/reports/repos-1-day`.
+    /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-organization-repos-one-day-report)`.
+    public enum CopilotCopilotOrganizationReposOneDayReport {
+        public static let id: Swift.String = "copilot/copilot-organization-repos-one-day-report"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/repos-1-day/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The organization name. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/repos-1-day/GET/path/org`.
+                public var org: Components.Parameters.Org
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - org: The organization name. The name is not case sensitive.
+                public init(org: Components.Parameters.Org) {
+                    self.org = org
+                }
+            }
+            public var path: Operations.CopilotCopilotOrganizationReposOneDayReport.Input.Path
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/repos-1-day/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// The day to request data for, in `YYYY-MM-DD` format.
+                ///
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/repos-1-day/GET/query/day`.
+                public var day: Components.Parameters.Day
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - day: The day to request data for, in `YYYY-MM-DD` format.
+                public init(day: Components.Parameters.Day) {
+                    self.day = day
+                }
+            }
+            public var query: Operations.CopilotCopilotOrganizationReposOneDayReport.Input.Query
+            /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/repos-1-day/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotCopilotOrganizationReposOneDayReport.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.CopilotCopilotOrganizationReposOneDayReport.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.CopilotCopilotOrganizationReposOneDayReport.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.CopilotCopilotOrganizationReposOneDayReport.Input.Path,
+                query: Operations.CopilotCopilotOrganizationReposOneDayReport.Input.Query,
+                headers: Operations.CopilotCopilotOrganizationReposOneDayReport.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/repos-1-day/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/orgs/{org}/copilot/metrics/reports/repos-1-day/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.CopilotUsageMetrics1DayReport)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.CopilotUsageMetrics1DayReport {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CopilotCopilotOrganizationReposOneDayReport.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CopilotCopilotOrganizationReposOneDayReport.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-organization-repos-one-day-report)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.CopilotCopilotOrganizationReposOneDayReport.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.CopilotCopilotOrganizationReposOneDayReport.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-organization-repos-one-day-report)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            case noContent(Components.Responses.NoContent)
+            /// A header with no content is returned.
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-organization-repos-one-day-report)/responses/204`.
+            ///
+            /// HTTP response code: `204 noContent`.
+            public static var noContent: Self {
+                .noContent(.init())
+            }
+            /// The associated value of the enum case if `self` is `.noContent`.
+            ///
+            /// - Throws: An error if `self` is not `.noContent`.
+            /// - SeeAlso: `.noContent`.
+            public var noContent: Components.Responses.NoContent {
+                get throws {
+                    switch self {
+                    case let .noContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "noContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Internal Error
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-organization-repos-one-day-report)/responses/500`.
+            ///
+            /// HTTP response code: `500 internalServerError`.
+            case internalServerError(Components.Responses.InternalError)
+            /// The associated value of the enum case if `self` is `.internalServerError`.
+            ///
+            /// - Throws: An error if `self` is not `.internalServerError`.
+            /// - SeeAlso: `.internalServerError`.
+            public var internalServerError: Components.Responses.InternalError {
+                get throws {
+                    switch self {
+                    case let .internalServerError(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "internalServerError",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-organization-repos-one-day-report)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//orgs/{org}/copilot/metrics/reports/repos-1-day/get(copilot/copilot-organization-repos-one-day-report)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// Get Copilot organization user-teams report for a specific day
     ///
     /// Use this endpoint to retrieve download links for the Copilot organization user-teams report for a specific day. The report provides user-team join data for Copilot across the organization, with one entry per user-team pair.
@@ -11671,6 +12261,14 @@ public enum Operations {
                         ///
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/custom_allowlist`.
                         public var customAllowlist: [Swift.String]
+                        /// Whether automations are enabled in this repository. When true, users can create automations that automatically run agents on a schedule or in response to events like new issues or updated pull requests.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/is_automations_enabled`.
+                        public var isAutomationsEnabled: Swift.Bool
+                        /// Whether write access is required for automation triggers. When true, automations will only run if the user triggering the event has write access to the repository. When false, users can create automations that listen for events triggered by users without write access.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/json/require_write_access_for_automation_triggers`.
+                        public var requireWriteAccessForAutomationTriggers: Swift.Bool
                         /// Creates a new `JsonPayload`.
                         ///
                         /// - Parameters:
@@ -11680,13 +12278,17 @@ public enum Operations {
                         ///   - isFirewallEnabled: Whether the firewall is enabled.
                         ///   - isFirewallRecommendedAllowlistEnabled: Whether the firewall recommended allowlist is enabled.
                         ///   - customAllowlist: A list of custom allowlist entries, as hosts or URLs, that the firewall will allow the Copilot cloud agent to access.
+                        ///   - isAutomationsEnabled: Whether automations are enabled in this repository. When true, users can create automations that automatically run agents on a schedule or in response to events like new issues or updated pull requests.
+                        ///   - requireWriteAccessForAutomationTriggers: Whether write access is required for automation triggers. When true, automations will only run if the user triggering the event has write access to the repository. When false, users can create automations that listen for events triggered by users without write access.
                         public init(
                             mcpConfiguration: Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok.Body.JsonPayload.McpConfigurationPayload? = nil,
                             enabledTools: Operations.CopilotGetCopilotCloudAgentConfiguration.Output.Ok.Body.JsonPayload.EnabledToolsPayload,
                             requireActionsWorkflowApproval: Swift.Bool,
                             isFirewallEnabled: Swift.Bool,
                             isFirewallRecommendedAllowlistEnabled: Swift.Bool,
-                            customAllowlist: [Swift.String]
+                            customAllowlist: [Swift.String],
+                            isAutomationsEnabled: Swift.Bool,
+                            requireWriteAccessForAutomationTriggers: Swift.Bool
                         ) {
                             self.mcpConfiguration = mcpConfiguration
                             self.enabledTools = enabledTools
@@ -11694,6 +12296,8 @@ public enum Operations {
                             self.isFirewallEnabled = isFirewallEnabled
                             self.isFirewallRecommendedAllowlistEnabled = isFirewallRecommendedAllowlistEnabled
                             self.customAllowlist = customAllowlist
+                            self.isAutomationsEnabled = isAutomationsEnabled
+                            self.requireWriteAccessForAutomationTriggers = requireWriteAccessForAutomationTriggers
                         }
                         public enum CodingKeys: String, CodingKey {
                             case mcpConfiguration = "mcp_configuration"
@@ -11702,6 +12306,8 @@ public enum Operations {
                             case isFirewallEnabled = "is_firewall_enabled"
                             case isFirewallRecommendedAllowlistEnabled = "is_firewall_recommended_allowlist_enabled"
                             case customAllowlist = "custom_allowlist"
+                            case isAutomationsEnabled = "is_automations_enabled"
+                            case requireWriteAccessForAutomationTriggers = "require_write_access_for_automation_triggers"
                         }
                     }
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/copilot/cloud-agent/configuration/GET/responses/200/content/application\/json`.
