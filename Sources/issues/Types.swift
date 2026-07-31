@@ -530,6 +530,37 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `PATCH /repos/{owner}/{repo}/issues/{issue_number}/sub_issues/priority`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/sub_issues/priority/patch(issues/reprioritize-sub-issue)`.
     func issuesReprioritizeSubIssue(_ input: Operations.IssuesReprioritizeSubIssue.Input) async throws -> Operations.IssuesReprioritizeSubIssue.Output
+    /// List issue suggestions
+    ///
+    /// Lists the suggestions on an issue. A suggestion is an agent-proposed change to an issue's type, labels, fields, assignees, or closed state that a maintainer can approve or dismiss.
+    ///
+    /// By default only pending suggestions are returned. Use `state=all` to return suggestions in every state, or `state=<state>` to filter to a single state. Use `action=<action>` to return only suggestions for a specific change.
+    ///
+    /// This endpoint is only available while the issue suggestions feature is enabled for the repository, and only supports issues, not pull requests.
+    ///
+    /// Requires triage access to the repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/suggestions`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/get(issues/list-suggestions)`.
+    func issuesListSuggestions(_ input: Operations.IssuesListSuggestions.Input) async throws -> Operations.IssuesListSuggestions.Output
+    /// Approve an issue suggestion
+    ///
+    /// Approves a pending suggestion on an issue. Applies the proposed change (creating the corresponding timeline event), transitions the suggestion to `approved`, and dismisses any competing pending suggestions for the same change.
+    ///
+    /// Requires triage access to the repository. Approving a suggestion also requires permission to perform the change it applies (for example, setting the issue type, adding a label or assignee, or closing the issue); this only affects fine-grained access tokens and GitHub Apps whose permissions are narrower than the triage role. This endpoint only supports issues, not pull requests.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/post(issues/approve-suggestion)`.
+    func issuesApproveSuggestion(_ input: Operations.IssuesApproveSuggestion.Input) async throws -> Operations.IssuesApproveSuggestion.Output
+    /// Dismiss an issue suggestion
+    ///
+    /// Dismisses a pending suggestion on an issue. Transitions the suggestion to `dismissed` without applying any change or creating a timeline event.
+    ///
+    /// Requires triage access to the repository. This endpoint only supports issues, not pull requests.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/post(issues/dismiss-suggestion)`.
+    func issuesDismissSuggestion(_ input: Operations.IssuesDismissSuggestion.Input) async throws -> Operations.IssuesDismissSuggestion.Output
     /// List timeline events for an issue
     ///
     /// List all timeline events for an issue.
@@ -1536,6 +1567,63 @@ extension APIProtocol {
             path: path,
             headers: headers,
             body: body
+        ))
+    }
+    /// List issue suggestions
+    ///
+    /// Lists the suggestions on an issue. A suggestion is an agent-proposed change to an issue's type, labels, fields, assignees, or closed state that a maintainer can approve or dismiss.
+    ///
+    /// By default only pending suggestions are returned. Use `state=all` to return suggestions in every state, or `state=<state>` to filter to a single state. Use `action=<action>` to return only suggestions for a specific change.
+    ///
+    /// This endpoint is only available while the issue suggestions feature is enabled for the repository, and only supports issues, not pull requests.
+    ///
+    /// Requires triage access to the repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/suggestions`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/get(issues/list-suggestions)`.
+    public func issuesListSuggestions(
+        path: Operations.IssuesListSuggestions.Input.Path,
+        query: Operations.IssuesListSuggestions.Input.Query = .init(),
+        headers: Operations.IssuesListSuggestions.Input.Headers = .init()
+    ) async throws -> Operations.IssuesListSuggestions.Output {
+        try await issuesListSuggestions(Operations.IssuesListSuggestions.Input(
+            path: path,
+            query: query,
+            headers: headers
+        ))
+    }
+    /// Approve an issue suggestion
+    ///
+    /// Approves a pending suggestion on an issue. Applies the proposed change (creating the corresponding timeline event), transitions the suggestion to `approved`, and dismisses any competing pending suggestions for the same change.
+    ///
+    /// Requires triage access to the repository. Approving a suggestion also requires permission to perform the change it applies (for example, setting the issue type, adding a label or assignee, or closing the issue); this only affects fine-grained access tokens and GitHub Apps whose permissions are narrower than the triage role. This endpoint only supports issues, not pull requests.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/post(issues/approve-suggestion)`.
+    public func issuesApproveSuggestion(
+        path: Operations.IssuesApproveSuggestion.Input.Path,
+        headers: Operations.IssuesApproveSuggestion.Input.Headers = .init()
+    ) async throws -> Operations.IssuesApproveSuggestion.Output {
+        try await issuesApproveSuggestion(Operations.IssuesApproveSuggestion.Input(
+            path: path,
+            headers: headers
+        ))
+    }
+    /// Dismiss an issue suggestion
+    ///
+    /// Dismisses a pending suggestion on an issue. Transitions the suggestion to `dismissed` without applying any change or creating a timeline event.
+    ///
+    /// Requires triage access to the repository. This endpoint only supports issues, not pull requests.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/post(issues/dismiss-suggestion)`.
+    public func issuesDismissSuggestion(
+        path: Operations.IssuesDismissSuggestion.Input.Path,
+        headers: Operations.IssuesDismissSuggestion.Input.Headers = .init()
+    ) async throws -> Operations.IssuesDismissSuggestion.Output {
+        try await issuesDismissSuggestion(Operations.IssuesDismissSuggestion.Input(
+            path: path,
+            headers: headers
         ))
     }
     /// List timeline events for an issue
@@ -6473,45 +6561,45 @@ public enum Components {
         }
         /// A minimal reference to an issue linked from a timeline event (e.g. sub-issue, parent-issue, or dependency events).
         ///
-        /// - Remark: Generated from `#/components/schemas/issue-reference`.
-        public struct IssueReference: Codable, Hashable, Sendable {
+        /// - Remark: Generated from `#/components/schemas/nullable-issue-reference`.
+        public struct NullableIssueReference: Codable, Hashable, Sendable {
             /// The number of the referenced issue.
             ///
-            /// - Remark: Generated from `#/components/schemas/issue-reference/number`.
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-reference/number`.
             public var number: Swift.Int
             /// The title of the referenced issue.
             ///
-            /// - Remark: Generated from `#/components/schemas/issue-reference/title`.
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-reference/title`.
             public var title: Swift.String
             /// The state of the referenced issue.
             ///
-            /// - Remark: Generated from `#/components/schemas/issue-reference/state`.
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-reference/state`.
             public var state: Swift.String
             /// The reason for the referenced issue's state.
             ///
-            /// - Remark: Generated from `#/components/schemas/issue-reference/state_reason`.
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-reference/state_reason`.
             public var stateReason: Swift.String?
-            /// - Remark: Generated from `#/components/schemas/issue-reference/repository`.
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-reference/repository`.
             public var repository: Components.Schemas.SimpleRepository
             /// The type of the referenced issue.
             ///
-            /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type`.
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-reference/issue_type`.
             public struct IssueTypePayload: Codable, Hashable, Sendable {
                 /// The unique identifier of the issue type.
                 ///
-                /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type/id`.
+                /// - Remark: Generated from `#/components/schemas/nullable-issue-reference/issue_type/id`.
                 public var id: Swift.Int
                 /// The node identifier of the issue type.
                 ///
-                /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type/node_id`.
+                /// - Remark: Generated from `#/components/schemas/nullable-issue-reference/issue_type/node_id`.
                 public var nodeId: Swift.String
                 /// The name of the issue type.
                 ///
-                /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type/name`.
+                /// - Remark: Generated from `#/components/schemas/nullable-issue-reference/issue_type/name`.
                 public var name: Swift.String
                 /// The color of the issue type.
                 ///
-                /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type/color`.
+                /// - Remark: Generated from `#/components/schemas/nullable-issue-reference/issue_type/color`.
                 public var color: Swift.String?
                 /// Creates a new `IssueTypePayload`.
                 ///
@@ -6540,9 +6628,9 @@ public enum Components {
             }
             /// The type of the referenced issue.
             ///
-            /// - Remark: Generated from `#/components/schemas/issue-reference/issue_type`.
-            public var issueType: Components.Schemas.IssueReference.IssueTypePayload?
-            /// Creates a new `IssueReference`.
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-reference/issue_type`.
+            public var issueType: Components.Schemas.NullableIssueReference.IssueTypePayload?
+            /// Creates a new `NullableIssueReference`.
             ///
             /// - Parameters:
             ///   - number: The number of the referenced issue.
@@ -6557,7 +6645,7 @@ public enum Components {
                 state: Swift.String,
                 stateReason: Swift.String? = nil,
                 repository: Components.Schemas.SimpleRepository,
-                issueType: Components.Schemas.IssueReference.IssueTypePayload? = nil
+                issueType: Components.Schemas.NullableIssueReference.IssueTypePayload? = nil
             ) {
                 self.number = number
                 self.title = title
@@ -6573,6 +6661,43 @@ public enum Components {
                 case stateReason = "state_reason"
                 case repository
                 case issueType = "issue_type"
+            }
+        }
+        /// The intent behind an agent's action on an issue, including the rationale and confidence. Present (and `null` when the event carried no agent intent) on supported event types while the issue suggestions feature is enabled for the repository; the property is omitted entirely when the feature is disabled or the event type does not support intent.
+        ///
+        /// - Remark: Generated from `#/components/schemas/nullable-issue-event-intent`.
+        public struct NullableIssueEventIntent: Codable, Hashable, Sendable {
+            /// The reasoning the agent provided for the change.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-event-intent/rationale`.
+            public var rationale: Swift.String?
+            /// The confidence level the agent had when performing this action.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-event-intent/confidence`.
+            @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case low = "LOW"
+                case medium = "MEDIUM"
+                case high = "HIGH"
+            }
+            /// The confidence level the agent had when performing this action.
+            ///
+            /// - Remark: Generated from `#/components/schemas/nullable-issue-event-intent/confidence`.
+            public var confidence: Components.Schemas.NullableIssueEventIntent.ConfidencePayload?
+            /// Creates a new `NullableIssueEventIntent`.
+            ///
+            /// - Parameters:
+            ///   - rationale: The reasoning the agent provided for the change.
+            ///   - confidence: The confidence level the agent had when performing this action.
+            public init(
+                rationale: Swift.String? = nil,
+                confidence: Components.Schemas.NullableIssueEventIntent.ConfidencePayload? = nil
+            ) {
+                self.rationale = rationale
+                self.confidence = confidence
+            }
+            public enum CodingKeys: String, CodingKey {
+                case rationale
+                case confidence
             }
         }
         /// Issue Event
@@ -6622,9 +6747,15 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/issue-event/prev_issue_type`.
             public var prevIssueType: Components.Schemas.IssueTypeWebhook?
             /// - Remark: Generated from `#/components/schemas/issue-event/sub_issue`.
-            public var subIssue: Components.Schemas.IssueReference?
+            public var subIssue: Components.Schemas.NullableIssueReference?
             /// - Remark: Generated from `#/components/schemas/issue-event/parent_issue`.
-            public var parentIssue: Components.Schemas.IssueReference?
+            public var parentIssue: Components.Schemas.NullableIssueReference?
+            /// - Remark: Generated from `#/components/schemas/issue-event/blocked_by`.
+            public var blockedBy: Components.Schemas.NullableIssueReference?
+            /// - Remark: Generated from `#/components/schemas/issue-event/blocking`.
+            public var blocking: Components.Schemas.NullableIssueReference?
+            /// - Remark: Generated from `#/components/schemas/issue-event/intent`.
+            public var intent: Components.Schemas.NullableIssueEventIntent?
             /// - Remark: Generated from `#/components/schemas/issue-event/author_association`.
             public var authorAssociation: Components.Schemas.AuthorAssociation?
             /// - Remark: Generated from `#/components/schemas/issue-event/lock_reason`.
@@ -6657,6 +6788,9 @@ public enum Components {
             ///   - prevIssueType:
             ///   - subIssue:
             ///   - parentIssue:
+            ///   - blockedBy:
+            ///   - blocking:
+            ///   - intent:
             ///   - authorAssociation:
             ///   - lockReason:
             ///   - performedViaGithubApp:
@@ -6682,8 +6816,11 @@ public enum Components {
                 rename: Components.Schemas.IssueEventRename? = nil,
                 issueType: Components.Schemas.IssueTypeWebhook? = nil,
                 prevIssueType: Components.Schemas.IssueTypeWebhook? = nil,
-                subIssue: Components.Schemas.IssueReference? = nil,
-                parentIssue: Components.Schemas.IssueReference? = nil,
+                subIssue: Components.Schemas.NullableIssueReference? = nil,
+                parentIssue: Components.Schemas.NullableIssueReference? = nil,
+                blockedBy: Components.Schemas.NullableIssueReference? = nil,
+                blocking: Components.Schemas.NullableIssueReference? = nil,
+                intent: Components.Schemas.NullableIssueEventIntent? = nil,
                 authorAssociation: Components.Schemas.AuthorAssociation? = nil,
                 lockReason: Swift.String? = nil,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil
@@ -6711,6 +6848,9 @@ public enum Components {
                 self.prevIssueType = prevIssueType
                 self.subIssue = subIssue
                 self.parentIssue = parentIssue
+                self.blockedBy = blockedBy
+                self.blocking = blocking
+                self.intent = intent
                 self.authorAssociation = authorAssociation
                 self.lockReason = lockReason
                 self.performedViaGithubApp = performedViaGithubApp
@@ -6739,6 +6879,9 @@ public enum Components {
                 case prevIssueType = "prev_issue_type"
                 case subIssue = "sub_issue"
                 case parentIssue = "parent_issue"
+                case blockedBy = "blocked_by"
+                case blocking
+                case intent
                 case authorAssociation = "author_association"
                 case lockReason = "lock_reason"
                 case performedViaGithubApp = "performed_via_github_app"
@@ -6791,6 +6934,8 @@ public enum Components {
             }
             /// - Remark: Generated from `#/components/schemas/labeled-issue-event/label`.
             public var label: Components.Schemas.LabeledIssueEvent.LabelPayload
+            /// - Remark: Generated from `#/components/schemas/labeled-issue-event/intent`.
+            public var intent: Components.Schemas.NullableIssueEventIntent?
             /// Creates a new `LabeledIssueEvent`.
             ///
             /// - Parameters:
@@ -6804,6 +6949,7 @@ public enum Components {
             ///   - createdAt:
             ///   - performedViaGithubApp:
             ///   - label:
+            ///   - intent:
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -6814,7 +6960,8 @@ public enum Components {
                 commitUrl: Swift.String? = nil,
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                label: Components.Schemas.LabeledIssueEvent.LabelPayload
+                label: Components.Schemas.LabeledIssueEvent.LabelPayload,
+                intent: Components.Schemas.NullableIssueEventIntent? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -6826,6 +6973,7 @@ public enum Components {
                 self.createdAt = createdAt
                 self.performedViaGithubApp = performedViaGithubApp
                 self.label = label
+                self.intent = intent
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -6838,6 +6986,7 @@ public enum Components {
                 case createdAt = "created_at"
                 case performedViaGithubApp = "performed_via_github_app"
                 case label
+                case intent
             }
         }
         /// Unlabeled Issue Event
@@ -6887,6 +7036,8 @@ public enum Components {
             }
             /// - Remark: Generated from `#/components/schemas/unlabeled-issue-event/label`.
             public var label: Components.Schemas.UnlabeledIssueEvent.LabelPayload
+            /// - Remark: Generated from `#/components/schemas/unlabeled-issue-event/intent`.
+            public var intent: Components.Schemas.NullableIssueEventIntent?
             /// Creates a new `UnlabeledIssueEvent`.
             ///
             /// - Parameters:
@@ -6900,6 +7051,7 @@ public enum Components {
             ///   - createdAt:
             ///   - performedViaGithubApp:
             ///   - label:
+            ///   - intent:
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -6910,7 +7062,8 @@ public enum Components {
                 commitUrl: Swift.String? = nil,
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                label: Components.Schemas.UnlabeledIssueEvent.LabelPayload
+                label: Components.Schemas.UnlabeledIssueEvent.LabelPayload,
+                intent: Components.Schemas.NullableIssueEventIntent? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -6922,6 +7075,7 @@ public enum Components {
                 self.createdAt = createdAt
                 self.performedViaGithubApp = performedViaGithubApp
                 self.label = label
+                self.intent = intent
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -6934,6 +7088,7 @@ public enum Components {
                 case createdAt = "created_at"
                 case performedViaGithubApp = "performed_via_github_app"
                 case label
+                case intent
             }
         }
         /// Assigned Issue Event
@@ -6962,6 +7117,8 @@ public enum Components {
             public var assignee: Components.Schemas.SimpleUser
             /// - Remark: Generated from `#/components/schemas/assigned-issue-event/assigner`.
             public var assigner: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/assigned-issue-event/intent`.
+            public var intent: Components.Schemas.NullableIssueEventIntent?
             /// Creates a new `AssignedIssueEvent`.
             ///
             /// - Parameters:
@@ -6976,6 +7133,7 @@ public enum Components {
             ///   - performedViaGithubApp:
             ///   - assignee:
             ///   - assigner:
+            ///   - intent:
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -6987,7 +7145,8 @@ public enum Components {
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.Integration? = nil,
                 assignee: Components.Schemas.SimpleUser,
-                assigner: Components.Schemas.SimpleUser
+                assigner: Components.Schemas.SimpleUser,
+                intent: Components.Schemas.NullableIssueEventIntent? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -7000,6 +7159,7 @@ public enum Components {
                 self.performedViaGithubApp = performedViaGithubApp
                 self.assignee = assignee
                 self.assigner = assigner
+                self.intent = intent
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -7013,6 +7173,7 @@ public enum Components {
                 case performedViaGithubApp = "performed_via_github_app"
                 case assignee
                 case assigner
+                case intent
             }
         }
         /// Unassigned Issue Event
@@ -8221,6 +8382,8 @@ public enum Components {
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/issue_type`.
             public var issueType: Components.Schemas.IssueTypeWebhook?
+            /// - Remark: Generated from `#/components/schemas/issue-type-added-issue-event/intent`.
+            public var intent: Components.Schemas.NullableIssueEventIntent?
             /// Creates a new `IssueTypeAddedIssueEvent`.
             ///
             /// - Parameters:
@@ -8234,6 +8397,7 @@ public enum Components {
             ///   - createdAt:
             ///   - performedViaGithubApp:
             ///   - issueType:
+            ///   - intent:
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -8244,7 +8408,8 @@ public enum Components {
                 commitUrl: Swift.String? = nil,
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                issueType: Components.Schemas.IssueTypeWebhook? = nil
+                issueType: Components.Schemas.IssueTypeWebhook? = nil,
+                intent: Components.Schemas.NullableIssueEventIntent? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -8256,6 +8421,7 @@ public enum Components {
                 self.createdAt = createdAt
                 self.performedViaGithubApp = performedViaGithubApp
                 self.issueType = issueType
+                self.intent = intent
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -8268,6 +8434,7 @@ public enum Components {
                 case createdAt = "created_at"
                 case performedViaGithubApp = "performed_via_github_app"
                 case issueType = "issue_type"
+                case intent
             }
         }
         /// Issue Type Removed Issue Event
@@ -8294,6 +8461,8 @@ public enum Components {
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/prev_issue_type`.
             public var prevIssueType: Components.Schemas.IssueTypeWebhook?
+            /// - Remark: Generated from `#/components/schemas/issue-type-removed-issue-event/intent`.
+            public var intent: Components.Schemas.NullableIssueEventIntent?
             /// Creates a new `IssueTypeRemovedIssueEvent`.
             ///
             /// - Parameters:
@@ -8307,6 +8476,7 @@ public enum Components {
             ///   - createdAt:
             ///   - performedViaGithubApp:
             ///   - prevIssueType:
+            ///   - intent:
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -8317,7 +8487,8 @@ public enum Components {
                 commitUrl: Swift.String? = nil,
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                prevIssueType: Components.Schemas.IssueTypeWebhook? = nil
+                prevIssueType: Components.Schemas.IssueTypeWebhook? = nil,
+                intent: Components.Schemas.NullableIssueEventIntent? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -8329,6 +8500,7 @@ public enum Components {
                 self.createdAt = createdAt
                 self.performedViaGithubApp = performedViaGithubApp
                 self.prevIssueType = prevIssueType
+                self.intent = intent
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -8341,6 +8513,7 @@ public enum Components {
                 case createdAt = "created_at"
                 case performedViaGithubApp = "performed_via_github_app"
                 case prevIssueType = "prev_issue_type"
+                case intent
             }
         }
         /// Issue Type Changed Issue Event
@@ -8369,6 +8542,8 @@ public enum Components {
             public var issueType: Components.Schemas.IssueTypeWebhook?
             /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/prev_issue_type`.
             public var prevIssueType: Components.Schemas.IssueTypeWebhook?
+            /// - Remark: Generated from `#/components/schemas/issue-type-changed-issue-event/intent`.
+            public var intent: Components.Schemas.NullableIssueEventIntent?
             /// Creates a new `IssueTypeChangedIssueEvent`.
             ///
             /// - Parameters:
@@ -8383,6 +8558,7 @@ public enum Components {
             ///   - performedViaGithubApp:
             ///   - issueType:
             ///   - prevIssueType:
+            ///   - intent:
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -8394,7 +8570,8 @@ public enum Components {
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
                 issueType: Components.Schemas.IssueTypeWebhook? = nil,
-                prevIssueType: Components.Schemas.IssueTypeWebhook? = nil
+                prevIssueType: Components.Schemas.IssueTypeWebhook? = nil,
+                intent: Components.Schemas.NullableIssueEventIntent? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -8407,6 +8584,7 @@ public enum Components {
                 self.performedViaGithubApp = performedViaGithubApp
                 self.issueType = issueType
                 self.prevIssueType = prevIssueType
+                self.intent = intent
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -8420,6 +8598,7 @@ public enum Components {
                 case performedViaGithubApp = "performed_via_github_app"
                 case issueType = "issue_type"
                 case prevIssueType = "prev_issue_type"
+                case intent
             }
         }
         /// Sub-issue Added Issue Event
@@ -8445,7 +8624,7 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/performed_via_github_app`.
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/sub-issue-added-issue-event/sub_issue`.
-            public var subIssue: Components.Schemas.IssueReference?
+            public var subIssue: Components.Schemas.NullableIssueReference?
             /// Creates a new `SubIssueAddedIssueEvent`.
             ///
             /// - Parameters:
@@ -8469,7 +8648,7 @@ public enum Components {
                 commitUrl: Swift.String? = nil,
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                subIssue: Components.Schemas.IssueReference? = nil
+                subIssue: Components.Schemas.NullableIssueReference? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -8518,7 +8697,7 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/performed_via_github_app`.
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/sub-issue-removed-issue-event/sub_issue`.
-            public var subIssue: Components.Schemas.IssueReference?
+            public var subIssue: Components.Schemas.NullableIssueReference?
             /// Creates a new `SubIssueRemovedIssueEvent`.
             ///
             /// - Parameters:
@@ -8542,7 +8721,7 @@ public enum Components {
                 commitUrl: Swift.String? = nil,
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                subIssue: Components.Schemas.IssueReference? = nil
+                subIssue: Components.Schemas.NullableIssueReference? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -8591,7 +8770,7 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/performed_via_github_app`.
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/parent-issue-added-issue-event/parent_issue`.
-            public var parentIssue: Components.Schemas.IssueReference?
+            public var parentIssue: Components.Schemas.NullableIssueReference?
             /// Creates a new `ParentIssueAddedIssueEvent`.
             ///
             /// - Parameters:
@@ -8615,7 +8794,7 @@ public enum Components {
                 commitUrl: Swift.String? = nil,
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                parentIssue: Components.Schemas.IssueReference? = nil
+                parentIssue: Components.Schemas.NullableIssueReference? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -8664,7 +8843,7 @@ public enum Components {
             /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/performed_via_github_app`.
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/parent-issue-removed-issue-event/parent_issue`.
-            public var parentIssue: Components.Schemas.IssueReference?
+            public var parentIssue: Components.Schemas.NullableIssueReference?
             /// Creates a new `ParentIssueRemovedIssueEvent`.
             ///
             /// - Parameters:
@@ -8688,7 +8867,7 @@ public enum Components {
                 commitUrl: Swift.String? = nil,
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                parentIssue: Components.Schemas.IssueReference? = nil
+                parentIssue: Components.Schemas.NullableIssueReference? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -8712,6 +8891,298 @@ public enum Components {
                 case createdAt = "created_at"
                 case performedViaGithubApp = "performed_via_github_app"
                 case parentIssue = "parent_issue"
+            }
+        }
+        /// Blocked-by Added Issue Event
+        ///
+        /// - Remark: Generated from `#/components/schemas/blocked-by-added-issue-event`.
+        public struct BlockedByAddedIssueEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/blocked-by-added-issue-event/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/blocked-by-added-issue-event/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocked-by-added-issue-event/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocked-by-added-issue-event/actor`.
+            public var actor: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/blocked-by-added-issue-event/event`.
+            public var event: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocked-by-added-issue-event/commit_id`.
+            public var commitId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/blocked-by-added-issue-event/commit_url`.
+            public var commitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/blocked-by-added-issue-event/created_at`.
+            public var createdAt: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocked-by-added-issue-event/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/blocked-by-added-issue-event/blocked_by`.
+            public var blockedBy: Components.Schemas.NullableIssueReference?
+            /// Creates a new `BlockedByAddedIssueEvent`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - actor:
+            ///   - event:
+            ///   - commitId:
+            ///   - commitUrl:
+            ///   - createdAt:
+            ///   - performedViaGithubApp:
+            ///   - blockedBy:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                actor: Components.Schemas.SimpleUser,
+                event: Swift.String,
+                commitId: Swift.String? = nil,
+                commitUrl: Swift.String? = nil,
+                createdAt: Swift.String,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                blockedBy: Components.Schemas.NullableIssueReference? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.actor = actor
+                self.event = event
+                self.commitId = commitId
+                self.commitUrl = commitUrl
+                self.createdAt = createdAt
+                self.performedViaGithubApp = performedViaGithubApp
+                self.blockedBy = blockedBy
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case actor
+                case event
+                case commitId = "commit_id"
+                case commitUrl = "commit_url"
+                case createdAt = "created_at"
+                case performedViaGithubApp = "performed_via_github_app"
+                case blockedBy = "blocked_by"
+            }
+        }
+        /// Blocked-by Removed Issue Event
+        ///
+        /// - Remark: Generated from `#/components/schemas/blocked-by-removed-issue-event`.
+        public struct BlockedByRemovedIssueEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/blocked-by-removed-issue-event/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/blocked-by-removed-issue-event/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocked-by-removed-issue-event/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocked-by-removed-issue-event/actor`.
+            public var actor: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/blocked-by-removed-issue-event/event`.
+            public var event: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocked-by-removed-issue-event/commit_id`.
+            public var commitId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/blocked-by-removed-issue-event/commit_url`.
+            public var commitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/blocked-by-removed-issue-event/created_at`.
+            public var createdAt: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocked-by-removed-issue-event/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/blocked-by-removed-issue-event/blocked_by`.
+            public var blockedBy: Components.Schemas.NullableIssueReference?
+            /// Creates a new `BlockedByRemovedIssueEvent`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - actor:
+            ///   - event:
+            ///   - commitId:
+            ///   - commitUrl:
+            ///   - createdAt:
+            ///   - performedViaGithubApp:
+            ///   - blockedBy:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                actor: Components.Schemas.SimpleUser,
+                event: Swift.String,
+                commitId: Swift.String? = nil,
+                commitUrl: Swift.String? = nil,
+                createdAt: Swift.String,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                blockedBy: Components.Schemas.NullableIssueReference? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.actor = actor
+                self.event = event
+                self.commitId = commitId
+                self.commitUrl = commitUrl
+                self.createdAt = createdAt
+                self.performedViaGithubApp = performedViaGithubApp
+                self.blockedBy = blockedBy
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case actor
+                case event
+                case commitId = "commit_id"
+                case commitUrl = "commit_url"
+                case createdAt = "created_at"
+                case performedViaGithubApp = "performed_via_github_app"
+                case blockedBy = "blocked_by"
+            }
+        }
+        /// Blocking Added Issue Event
+        ///
+        /// - Remark: Generated from `#/components/schemas/blocking-added-issue-event`.
+        public struct BlockingAddedIssueEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/blocking-added-issue-event/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/blocking-added-issue-event/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocking-added-issue-event/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocking-added-issue-event/actor`.
+            public var actor: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/blocking-added-issue-event/event`.
+            public var event: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocking-added-issue-event/commit_id`.
+            public var commitId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/blocking-added-issue-event/commit_url`.
+            public var commitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/blocking-added-issue-event/created_at`.
+            public var createdAt: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocking-added-issue-event/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/blocking-added-issue-event/blocking`.
+            public var blocking: Components.Schemas.NullableIssueReference?
+            /// Creates a new `BlockingAddedIssueEvent`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - actor:
+            ///   - event:
+            ///   - commitId:
+            ///   - commitUrl:
+            ///   - createdAt:
+            ///   - performedViaGithubApp:
+            ///   - blocking:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                actor: Components.Schemas.SimpleUser,
+                event: Swift.String,
+                commitId: Swift.String? = nil,
+                commitUrl: Swift.String? = nil,
+                createdAt: Swift.String,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                blocking: Components.Schemas.NullableIssueReference? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.actor = actor
+                self.event = event
+                self.commitId = commitId
+                self.commitUrl = commitUrl
+                self.createdAt = createdAt
+                self.performedViaGithubApp = performedViaGithubApp
+                self.blocking = blocking
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case actor
+                case event
+                case commitId = "commit_id"
+                case commitUrl = "commit_url"
+                case createdAt = "created_at"
+                case performedViaGithubApp = "performed_via_github_app"
+                case blocking
+            }
+        }
+        /// Blocking Removed Issue Event
+        ///
+        /// - Remark: Generated from `#/components/schemas/blocking-removed-issue-event`.
+        public struct BlockingRemovedIssueEvent: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/blocking-removed-issue-event/id`.
+            public var id: Swift.Int
+            /// - Remark: Generated from `#/components/schemas/blocking-removed-issue-event/node_id`.
+            public var nodeId: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocking-removed-issue-event/url`.
+            public var url: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocking-removed-issue-event/actor`.
+            public var actor: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/blocking-removed-issue-event/event`.
+            public var event: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocking-removed-issue-event/commit_id`.
+            public var commitId: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/blocking-removed-issue-event/commit_url`.
+            public var commitUrl: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/blocking-removed-issue-event/created_at`.
+            public var createdAt: Swift.String
+            /// - Remark: Generated from `#/components/schemas/blocking-removed-issue-event/performed_via_github_app`.
+            public var performedViaGithubApp: Components.Schemas.NullableIntegration?
+            /// - Remark: Generated from `#/components/schemas/blocking-removed-issue-event/blocking`.
+            public var blocking: Components.Schemas.NullableIssueReference?
+            /// Creates a new `BlockingRemovedIssueEvent`.
+            ///
+            /// - Parameters:
+            ///   - id:
+            ///   - nodeId:
+            ///   - url:
+            ///   - actor:
+            ///   - event:
+            ///   - commitId:
+            ///   - commitUrl:
+            ///   - createdAt:
+            ///   - performedViaGithubApp:
+            ///   - blocking:
+            public init(
+                id: Swift.Int,
+                nodeId: Swift.String,
+                url: Swift.String,
+                actor: Components.Schemas.SimpleUser,
+                event: Swift.String,
+                commitId: Swift.String? = nil,
+                commitUrl: Swift.String? = nil,
+                createdAt: Swift.String,
+                performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
+                blocking: Components.Schemas.NullableIssueReference? = nil
+            ) {
+                self.id = id
+                self.nodeId = nodeId
+                self.url = url
+                self.actor = actor
+                self.event = event
+                self.commitId = commitId
+                self.commitUrl = commitUrl
+                self.createdAt = createdAt
+                self.performedViaGithubApp = performedViaGithubApp
+                self.blocking = blocking
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case nodeId = "node_id"
+                case url
+                case actor
+                case event
+                case commitId = "commit_id"
+                case commitUrl = "commit_url"
+                case createdAt = "created_at"
+                case performedViaGithubApp = "performed_via_github_app"
+                case blocking
             }
         }
         /// Issue Event for Issue
@@ -8762,6 +9233,14 @@ public enum Components {
             public var value21: Components.Schemas.ParentIssueAddedIssueEvent?
             /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value22`.
             public var value22: Components.Schemas.ParentIssueRemovedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value23`.
+            public var value23: Components.Schemas.BlockedByAddedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value24`.
+            public var value24: Components.Schemas.BlockedByRemovedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value25`.
+            public var value25: Components.Schemas.BlockingAddedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/issue-event-for-issue/value26`.
+            public var value26: Components.Schemas.BlockingRemovedIssueEvent?
             /// Creates a new `IssueEventForIssue`.
             ///
             /// - Parameters:
@@ -8787,6 +9266,10 @@ public enum Components {
             ///   - value20:
             ///   - value21:
             ///   - value22:
+            ///   - value23:
+            ///   - value24:
+            ///   - value25:
+            ///   - value26:
             public init(
                 value1: Components.Schemas.LabeledIssueEvent? = nil,
                 value2: Components.Schemas.UnlabeledIssueEvent? = nil,
@@ -8809,7 +9292,11 @@ public enum Components {
                 value19: Components.Schemas.SubIssueAddedIssueEvent? = nil,
                 value20: Components.Schemas.SubIssueRemovedIssueEvent? = nil,
                 value21: Components.Schemas.ParentIssueAddedIssueEvent? = nil,
-                value22: Components.Schemas.ParentIssueRemovedIssueEvent? = nil
+                value22: Components.Schemas.ParentIssueRemovedIssueEvent? = nil,
+                value23: Components.Schemas.BlockedByAddedIssueEvent? = nil,
+                value24: Components.Schemas.BlockedByRemovedIssueEvent? = nil,
+                value25: Components.Schemas.BlockingAddedIssueEvent? = nil,
+                value26: Components.Schemas.BlockingRemovedIssueEvent? = nil
             ) {
                 self.value1 = value1
                 self.value2 = value2
@@ -8833,6 +9320,10 @@ public enum Components {
                 self.value20 = value20
                 self.value21 = value21
                 self.value22 = value22
+                self.value23 = value23
+                self.value24 = value24
+                self.value25 = value25
+                self.value26 = value26
             }
             public init(from decoder: any Swift.Decoder) throws {
                 var errors: [any Swift.Error] = []
@@ -8946,6 +9437,26 @@ public enum Components {
                 } catch {
                     errors.append(error)
                 }
+                do {
+                    self.value23 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value24 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value25 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value26 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
                 try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
                     [
                         self.value1,
@@ -8969,7 +9480,11 @@ public enum Components {
                         self.value19,
                         self.value20,
                         self.value21,
-                        self.value22
+                        self.value22,
+                        self.value23,
+                        self.value24,
+                        self.value25,
+                        self.value26
                     ],
                     type: Self.self,
                     codingPath: decoder.codingPath,
@@ -8999,6 +9514,213 @@ public enum Components {
                 try self.value20?.encode(to: encoder)
                 try self.value21?.encode(to: encoder)
                 try self.value22?.encode(to: encoder)
+                try self.value23?.encode(to: encoder)
+                try self.value24?.encode(to: encoder)
+                try self.value25?.encode(to: encoder)
+                try self.value26?.encode(to: encoder)
+            }
+        }
+        /// An agent-proposed change to an issue that a maintainer can approve or dismiss.
+        ///
+        /// - Remark: Generated from `#/components/schemas/issue-suggestion`.
+        public struct IssueSuggestion: Codable, Hashable, Sendable {
+            /// The unique identifier of the suggestion.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/id`.
+            public var id: Swift.Int
+            /// The unique identifier of the issue the suggestion applies to.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/issue_id`.
+            public var issueId: Swift.Int
+            /// The kind of change proposed.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/action`.
+            @frozen public enum ActionPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case setType = "set_type"
+                case addLabel = "add_label"
+                case addField = "add_field"
+                case addAssignee = "add_assignee"
+                case closeIssue = "close_issue"
+            }
+            /// The kind of change proposed.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/action`.
+            public var action: Components.Schemas.IssueSuggestion.ActionPayload
+            /// The suggestion's lifecycle state.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/state`.
+            @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case pending = "pending"
+                case applied = "applied"
+                case approved = "approved"
+                case dismissed = "dismissed"
+                case replaced = "replaced"
+                case invalidated = "invalidated"
+            }
+            /// The suggestion's lifecycle state.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/state`.
+            public var state: Components.Schemas.IssueSuggestion.StatePayload
+            /// The identifier of the target the change applies to (issue type, label, field, assignee, or duplicate issue), when applicable.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/target_id`.
+            public var targetId: Swift.Int?
+            /// The proposed value, when applicable. An array for multi-select field suggestions.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/target_value`.
+            @frozen public enum TargetValuePayload: Codable, Hashable, Sendable {
+                /// - Remark: Generated from `#/components/schemas/issue-suggestion/target_value/case1`.
+                case case1(Swift.String)
+                /// - Remark: Generated from `#/components/schemas/issue-suggestion/target_value/case2`.
+                case case2(Swift.Double)
+                /// - Remark: Generated from `#/components/schemas/issue-suggestion/target_value/case3`.
+                case case3(Swift.Bool)
+                /// - Remark: Generated from `#/components/schemas/issue-suggestion/target_value/case4`.
+                case case4([Swift.String])
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
+                    do {
+                        self = .case1(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .case2(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .case3(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .case4(try decoder.decodeFromSingleValueContainer())
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    switch self {
+                    case let .case1(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    case let .case2(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    case let .case3(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    case let .case4(value):
+                        try encoder.encodeToSingleValueContainer(value)
+                    }
+                }
+            }
+            /// The proposed value, when applicable. An array for multi-select field suggestions.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/target_value`.
+            public var targetValue: Components.Schemas.IssueSuggestion.TargetValuePayload?
+            /// The rationale the actor provided for the suggestion.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/rationale`.
+            public var rationale: Swift.String?
+            /// The actor's confidence level in the suggestion.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/confidence`.
+            @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case low = "LOW"
+                case medium = "MEDIUM"
+                case high = "HIGH"
+            }
+            /// The actor's confidence level in the suggestion.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/confidence`.
+            public var confidence: Components.Schemas.IssueSuggestion.ConfidencePayload?
+            /// The unique identifier of the actor that proposed the suggestion.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/actor_id`.
+            public var actorId: Swift.Int?
+            /// The identifier of the timeline event created when the suggestion was approved, when applicable.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/issue_event_id`.
+            public var issueEventId: Swift.Int?
+            /// The unique identifier of the user who approved or dismissed the suggestion.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/resolved_by`.
+            public var resolvedBy: Swift.Int?
+            /// The time the suggestion was created.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/created_at`.
+            public var createdAt: Foundation.Date
+            /// The time the suggestion was last updated.
+            ///
+            /// - Remark: Generated from `#/components/schemas/issue-suggestion/updated_at`.
+            public var updatedAt: Foundation.Date
+            /// Creates a new `IssueSuggestion`.
+            ///
+            /// - Parameters:
+            ///   - id: The unique identifier of the suggestion.
+            ///   - issueId: The unique identifier of the issue the suggestion applies to.
+            ///   - action: The kind of change proposed.
+            ///   - state: The suggestion's lifecycle state.
+            ///   - targetId: The identifier of the target the change applies to (issue type, label, field, assignee, or duplicate issue), when applicable.
+            ///   - targetValue: The proposed value, when applicable. An array for multi-select field suggestions.
+            ///   - rationale: The rationale the actor provided for the suggestion.
+            ///   - confidence: The actor's confidence level in the suggestion.
+            ///   - actorId: The unique identifier of the actor that proposed the suggestion.
+            ///   - issueEventId: The identifier of the timeline event created when the suggestion was approved, when applicable.
+            ///   - resolvedBy: The unique identifier of the user who approved or dismissed the suggestion.
+            ///   - createdAt: The time the suggestion was created.
+            ///   - updatedAt: The time the suggestion was last updated.
+            public init(
+                id: Swift.Int,
+                issueId: Swift.Int,
+                action: Components.Schemas.IssueSuggestion.ActionPayload,
+                state: Components.Schemas.IssueSuggestion.StatePayload,
+                targetId: Swift.Int? = nil,
+                targetValue: Components.Schemas.IssueSuggestion.TargetValuePayload? = nil,
+                rationale: Swift.String? = nil,
+                confidence: Components.Schemas.IssueSuggestion.ConfidencePayload? = nil,
+                actorId: Swift.Int? = nil,
+                issueEventId: Swift.Int? = nil,
+                resolvedBy: Swift.Int? = nil,
+                createdAt: Foundation.Date,
+                updatedAt: Foundation.Date
+            ) {
+                self.id = id
+                self.issueId = issueId
+                self.action = action
+                self.state = state
+                self.targetId = targetId
+                self.targetValue = targetValue
+                self.rationale = rationale
+                self.confidence = confidence
+                self.actorId = actorId
+                self.issueEventId = issueEventId
+                self.resolvedBy = resolvedBy
+                self.createdAt = createdAt
+                self.updatedAt = updatedAt
+            }
+            public enum CodingKeys: String, CodingKey {
+                case id
+                case issueId = "issue_id"
+                case action
+                case state
+                case targetId = "target_id"
+                case targetValue = "target_value"
+                case rationale
+                case confidence
+                case actorId = "actor_id"
+                case issueEventId = "issue_event_id"
+                case resolvedBy = "resolved_by"
+                case createdAt = "created_at"
+                case updatedAt = "updated_at"
             }
         }
         /// Timeline Comment Event
@@ -10032,6 +10754,8 @@ public enum Components {
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/timeline-assigned-issue-event/assignee`.
             public var assignee: Components.Schemas.SimpleUser
+            /// - Remark: Generated from `#/components/schemas/timeline-assigned-issue-event/intent`.
+            public var intent: Components.Schemas.NullableIssueEventIntent?
             /// Creates a new `TimelineAssignedIssueEvent`.
             ///
             /// - Parameters:
@@ -10045,6 +10769,7 @@ public enum Components {
             ///   - createdAt:
             ///   - performedViaGithubApp:
             ///   - assignee:
+            ///   - intent:
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -10055,7 +10780,8 @@ public enum Components {
                 commitUrl: Swift.String? = nil,
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                assignee: Components.Schemas.SimpleUser
+                assignee: Components.Schemas.SimpleUser,
+                intent: Components.Schemas.NullableIssueEventIntent? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -10067,6 +10793,7 @@ public enum Components {
                 self.createdAt = createdAt
                 self.performedViaGithubApp = performedViaGithubApp
                 self.assignee = assignee
+                self.intent = intent
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -10079,6 +10806,7 @@ public enum Components {
                 case createdAt = "created_at"
                 case performedViaGithubApp = "performed_via_github_app"
                 case assignee
+                case intent
             }
         }
         /// Timeline Unassigned Issue Event
@@ -10178,6 +10906,8 @@ public enum Components {
             public var performedViaGithubApp: Components.Schemas.NullableIntegration?
             /// - Remark: Generated from `#/components/schemas/state-change-issue-event/state_reason`.
             public var stateReason: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/state-change-issue-event/intent`.
+            public var intent: Components.Schemas.NullableIssueEventIntent?
             /// Creates a new `StateChangeIssueEvent`.
             ///
             /// - Parameters:
@@ -10191,6 +10921,7 @@ public enum Components {
             ///   - createdAt:
             ///   - performedViaGithubApp:
             ///   - stateReason:
+            ///   - intent:
             public init(
                 id: Swift.Int,
                 nodeId: Swift.String,
@@ -10201,7 +10932,8 @@ public enum Components {
                 commitUrl: Swift.String? = nil,
                 createdAt: Swift.String,
                 performedViaGithubApp: Components.Schemas.NullableIntegration? = nil,
-                stateReason: Swift.String? = nil
+                stateReason: Swift.String? = nil,
+                intent: Components.Schemas.NullableIssueEventIntent? = nil
             ) {
                 self.id = id
                 self.nodeId = nodeId
@@ -10213,6 +10945,7 @@ public enum Components {
                 self.createdAt = createdAt
                 self.performedViaGithubApp = performedViaGithubApp
                 self.stateReason = stateReason
+                self.intent = intent
             }
             public enum CodingKeys: String, CodingKey {
                 case id
@@ -10225,6 +10958,7 @@ public enum Components {
                 case createdAt = "created_at"
                 case performedViaGithubApp = "performed_via_github_app"
                 case stateReason = "state_reason"
+                case intent
             }
         }
         /// Timeline Event
@@ -10289,6 +11023,14 @@ public enum Components {
             public var value28: Components.Schemas.ParentIssueAddedIssueEvent?
             /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value29`.
             public var value29: Components.Schemas.ParentIssueRemovedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value30`.
+            public var value30: Components.Schemas.BlockedByAddedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value31`.
+            public var value31: Components.Schemas.BlockedByRemovedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value32`.
+            public var value32: Components.Schemas.BlockingAddedIssueEvent?
+            /// - Remark: Generated from `#/components/schemas/timeline-issue-events/value33`.
+            public var value33: Components.Schemas.BlockingRemovedIssueEvent?
             /// Creates a new `TimelineIssueEvents`.
             ///
             /// - Parameters:
@@ -10321,6 +11063,10 @@ public enum Components {
             ///   - value27:
             ///   - value28:
             ///   - value29:
+            ///   - value30:
+            ///   - value31:
+            ///   - value32:
+            ///   - value33:
             public init(
                 value1: Components.Schemas.LabeledIssueEvent? = nil,
                 value2: Components.Schemas.UnlabeledIssueEvent? = nil,
@@ -10350,7 +11096,11 @@ public enum Components {
                 value26: Components.Schemas.SubIssueAddedIssueEvent? = nil,
                 value27: Components.Schemas.SubIssueRemovedIssueEvent? = nil,
                 value28: Components.Schemas.ParentIssueAddedIssueEvent? = nil,
-                value29: Components.Schemas.ParentIssueRemovedIssueEvent? = nil
+                value29: Components.Schemas.ParentIssueRemovedIssueEvent? = nil,
+                value30: Components.Schemas.BlockedByAddedIssueEvent? = nil,
+                value31: Components.Schemas.BlockedByRemovedIssueEvent? = nil,
+                value32: Components.Schemas.BlockingAddedIssueEvent? = nil,
+                value33: Components.Schemas.BlockingRemovedIssueEvent? = nil
             ) {
                 self.value1 = value1
                 self.value2 = value2
@@ -10381,6 +11131,10 @@ public enum Components {
                 self.value27 = value27
                 self.value28 = value28
                 self.value29 = value29
+                self.value30 = value30
+                self.value31 = value31
+                self.value32 = value32
+                self.value33 = value33
             }
             public init(from decoder: any Swift.Decoder) throws {
                 var errors: [any Swift.Error] = []
@@ -10529,6 +11283,26 @@ public enum Components {
                 } catch {
                     errors.append(error)
                 }
+                do {
+                    self.value30 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value31 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value32 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
+                do {
+                    self.value33 = try .init(from: decoder)
+                } catch {
+                    errors.append(error)
+                }
                 try Swift.DecodingError.verifyAtLeastOneSchemaIsNotNil(
                     [
                         self.value1,
@@ -10559,7 +11333,11 @@ public enum Components {
                         self.value26,
                         self.value27,
                         self.value28,
-                        self.value29
+                        self.value29,
+                        self.value30,
+                        self.value31,
+                        self.value32,
+                        self.value33
                     ],
                     type: Self.self,
                     codingPath: decoder.codingPath,
@@ -10596,6 +11374,10 @@ public enum Components {
                 try self.value27?.encode(to: encoder)
                 try self.value28?.encode(to: encoder)
                 try self.value29?.encode(to: encoder)
+                try self.value30?.encode(to: encoder)
+                try self.value31?.encode(to: encoder)
+                try self.value32?.encode(to: encoder)
+                try self.value33?.encode(to: encoder)
             }
         }
         /// A collection of related issues and pull requests.
@@ -10777,6 +11559,10 @@ public enum Components {
         ///
         /// - Remark: Generated from `#/components/parameters/issue-number`.
         public typealias IssueNumber = Swift.Int
+        /// A comma-separated list of timeline event names to exclude from the response.
+        ///
+        /// - Remark: Generated from `#/components/parameters/issue-timeline-exclude`.
+        public typealias IssueTimelineExclude = Swift.String
         /// The number that identifies the milestone.
         ///
         /// - Remark: Generated from `#/components/parameters/milestone-number`.
@@ -10982,6 +11768,34 @@ public enum Components {
                 self.body = body
             }
         }
+        public struct Gone: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/gone/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/gone/content/application\/json`.
+                case json(Components.Schemas.BasicError)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.BasicError {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.Gone.Body
+            /// Creates a new `Gone`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.Gone.Body) {
+                self.body = body
+            }
+        }
         public struct ServiceUnavailable: Sendable, Hashable {
             /// - Remark: Generated from `#/components/responses/service_unavailable/content`.
             @frozen public enum Body: Sendable, Hashable {
@@ -11064,34 +11878,6 @@ public enum Components {
             /// - Parameters:
             ///   - body: Received HTTP response body
             public init(body: Components.Responses.MovedPermanently.Body) {
-                self.body = body
-            }
-        }
-        public struct Gone: Sendable, Hashable {
-            /// - Remark: Generated from `#/components/responses/gone/content`.
-            @frozen public enum Body: Sendable, Hashable {
-                /// - Remark: Generated from `#/components/responses/gone/content/application\/json`.
-                case json(Components.Schemas.BasicError)
-                /// The associated value of the enum case if `self` is `.json`.
-                ///
-                /// - Throws: An error if `self` is not `.json`.
-                /// - SeeAlso: `.json`.
-                public var json: Components.Schemas.BasicError {
-                    get throws {
-                        switch self {
-                        case let .json(body):
-                            return body
-                        }
-                    }
-                }
-            }
-            /// Received HTTP response body
-            public var body: Components.Responses.Gone.Body
-            /// Creates a new `Gone`.
-            ///
-            /// - Parameters:
-            ///   - body: Received HTTP response body
-            public init(body: Components.Responses.Gone.Body) {
                 self.body = body
             }
         }
@@ -15213,6 +15999,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/state_reason`.
                     public var stateReason: Operations.IssuesUpdate.Input.Body.JsonPayload.StateReasonPayload?
+                    /// The ID of the issue to mark as the canonical duplicate when `state_reason` is `duplicate`. The issue must exist and be accessible to the authenticated user. Ignored when `state_reason` is not `duplicate`.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/duplicate_issue_id`.
+                    public var duplicateIssueId: Swift.Int?
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/milestone`.
                     @frozen public enum MilestonePayload: Codable, Hashable, Sendable {
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/milestone/case1`.
@@ -15266,6 +16056,26 @@ public enum Operations {
                             public var description: Swift.String?
                             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/LabelsPayload/case2/color`.
                             public var color: Swift.String?
+                            /// Optional reasoning for selecting this label.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/LabelsPayload/case2/rationale`.
+                            public var rationale: Swift.String?
+                            /// If `true`, the change is stored as a pending suggestion for human review rather than applied directly.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/LabelsPayload/case2/suggest`.
+                            public var suggest: Swift.Bool?
+                            /// The confidence level for this label choice.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/LabelsPayload/case2/confidence`.
+                            @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                case low = "low"
+                                case medium = "medium"
+                                case high = "high"
+                            }
+                            /// The confidence level for this label choice.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/LabelsPayload/case2/confidence`.
+                            public var confidence: Operations.IssuesUpdate.Input.Body.JsonPayload.LabelsPayloadPayload.Case2Payload.ConfidencePayload?
                             /// Creates a new `Case2Payload`.
                             ///
                             /// - Parameters:
@@ -15273,22 +16083,34 @@ public enum Operations {
                             ///   - name:
                             ///   - description:
                             ///   - color:
+                            ///   - rationale: Optional reasoning for selecting this label.
+                            ///   - suggest: If `true`, the change is stored as a pending suggestion for human review rather than applied directly.
+                            ///   - confidence: The confidence level for this label choice.
                             public init(
                                 id: Swift.Int? = nil,
                                 name: Swift.String? = nil,
                                 description: Swift.String? = nil,
-                                color: Swift.String? = nil
+                                color: Swift.String? = nil,
+                                rationale: Swift.String? = nil,
+                                suggest: Swift.Bool? = nil,
+                                confidence: Operations.IssuesUpdate.Input.Body.JsonPayload.LabelsPayloadPayload.Case2Payload.ConfidencePayload? = nil
                             ) {
                                 self.id = id
                                 self.name = name
                                 self.description = description
                                 self.color = color
+                                self.rationale = rationale
+                                self.suggest = suggest
+                                self.confidence = confidence
                             }
                             public enum CodingKeys: String, CodingKey {
                                 case id
                                 case name
                                 case description
                                 case color
+                                case rationale
+                                case suggest
+                                case confidence
                             }
                         }
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/LabelsPayload/case2`.
@@ -15338,15 +16160,49 @@ public enum Operations {
                         public struct Case2Payload: Codable, Hashable, Sendable {
                             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/AssigneesPayload/case2/login`.
                             public var login: Swift.String?
+                            /// Optional reasoning for selecting this assignee.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/AssigneesPayload/case2/rationale`.
+                            public var rationale: Swift.String?
+                            /// If `true`, the change is stored as a pending suggestion for human review rather than applied directly.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/AssigneesPayload/case2/suggest`.
+                            public var suggest: Swift.Bool?
+                            /// The confidence level for this assignee choice.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/AssigneesPayload/case2/confidence`.
+                            @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                case low = "low"
+                                case medium = "medium"
+                                case high = "high"
+                            }
+                            /// The confidence level for this assignee choice.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/AssigneesPayload/case2/confidence`.
+                            public var confidence: Operations.IssuesUpdate.Input.Body.JsonPayload.AssigneesPayloadPayload.Case2Payload.ConfidencePayload?
                             /// Creates a new `Case2Payload`.
                             ///
                             /// - Parameters:
                             ///   - login:
-                            public init(login: Swift.String? = nil) {
+                            ///   - rationale: Optional reasoning for selecting this assignee.
+                            ///   - suggest: If `true`, the change is stored as a pending suggestion for human review rather than applied directly.
+                            ///   - confidence: The confidence level for this assignee choice.
+                            public init(
+                                login: Swift.String? = nil,
+                                rationale: Swift.String? = nil,
+                                suggest: Swift.Bool? = nil,
+                                confidence: Operations.IssuesUpdate.Input.Body.JsonPayload.AssigneesPayloadPayload.Case2Payload.ConfidencePayload? = nil
+                            ) {
                                 self.login = login
+                                self.rationale = rationale
+                                self.suggest = suggest
+                                self.confidence = confidence
                             }
                             public enum CodingKeys: String, CodingKey {
                                 case login
+                                case rationale
+                                case suggest
+                                case confidence
                             }
                         }
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/AssigneesPayload/case2`.
@@ -15445,21 +16301,53 @@ public enum Operations {
                         ///
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/IssueFieldValuesPayload/value`.
                         public var value: Operations.IssuesUpdate.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
+                        /// Optional reasoning for setting this field value.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/IssueFieldValuesPayload/rationale`.
+                        public var rationale: Swift.String?
+                        /// If `true`, the change is stored as a pending suggestion for human review rather than applied directly.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/IssueFieldValuesPayload/suggest`.
+                        public var suggest: Swift.Bool?
+                        /// The confidence level for this field value choice.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/IssueFieldValuesPayload/confidence`.
+                        @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case low = "low"
+                            case medium = "medium"
+                            case high = "high"
+                        }
+                        /// The confidence level for this field value choice.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/IssueFieldValuesPayload/confidence`.
+                        public var confidence: Operations.IssuesUpdate.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ConfidencePayload?
                         /// Creates a new `IssueFieldValuesPayloadPayload`.
                         ///
                         /// - Parameters:
                         ///   - fieldId: The ID of the issue field to set
                         ///   - value: The value to set for the field. For multi-select fields, provide an array of option names.
+                        ///   - rationale: Optional reasoning for setting this field value.
+                        ///   - suggest: If `true`, the change is stored as a pending suggestion for human review rather than applied directly.
+                        ///   - confidence: The confidence level for this field value choice.
                         public init(
                             fieldId: Swift.Int,
-                            value: Operations.IssuesUpdate.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload
+                            value: Operations.IssuesUpdate.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload,
+                            rationale: Swift.String? = nil,
+                            suggest: Swift.Bool? = nil,
+                            confidence: Operations.IssuesUpdate.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ConfidencePayload? = nil
                         ) {
                             self.fieldId = fieldId
                             self.value = value
+                            self.rationale = rationale
+                            self.suggest = suggest
+                            self.confidence = confidence
                         }
                         public enum CodingKeys: String, CodingKey {
                             case fieldId = "field_id"
                             case value
+                            case rationale
+                            case suggest
+                            case confidence
                         }
                         public init(from decoder: any Swift.Decoder) throws {
                             let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -15471,9 +16359,24 @@ public enum Operations {
                                 Operations.IssuesUpdate.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ValuePayload.self,
                                 forKey: .value
                             )
+                            self.rationale = try container.decodeIfPresent(
+                                Swift.String.self,
+                                forKey: .rationale
+                            )
+                            self.suggest = try container.decodeIfPresent(
+                                Swift.Bool.self,
+                                forKey: .suggest
+                            )
+                            self.confidence = try container.decodeIfPresent(
+                                Operations.IssuesUpdate.Input.Body.JsonPayload.IssueFieldValuesPayloadPayload.ConfidencePayload.self,
+                                forKey: .confidence
+                            )
                             try decoder.ensureNoAdditionalProperties(knownKeys: [
                                 "field_id",
-                                "value"
+                                "value",
+                                "rationale",
+                                "suggest",
+                                "confidence"
                             ])
                         }
                     }
@@ -15485,10 +16388,104 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/issue_field_values`.
                     public var issueFieldValues: Operations.IssuesUpdate.Input.Body.JsonPayload.IssueFieldValuesPayload?
-                    /// The name of the issue type to associate with this issue or use `null` to remove the current issue type. Only users with push access can set the type for issues. Without push access to the repository, type changes are silently dropped.
+                    /// The issue type to associate with this issue. Only users with push access can set the type for issues. Without push access to the repository, type changes are silently dropped.
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/type`.
-                    public var _type: Swift.String?
+                    @frozen public enum _TypePayload: Codable, Hashable, Sendable {
+                        /// The name of the issue type.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/type/case1`.
+                        case case1(Swift.String)
+                        /// The issue type with optional metadata.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/type/case2`.
+                        public struct Case2Payload: Codable, Hashable, Sendable {
+                            /// The name of the issue type to associate with this issue, or `null` to remove the current issue type.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/type/case2/value`.
+                            public var value: Swift.String?
+                            /// Optional reasoning for selecting this type.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/type/case2/rationale`.
+                            public var rationale: Swift.String?
+                            /// If `true`, the change is stored as a pending suggestion for human review rather than applied directly.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/type/case2/suggest`.
+                            public var suggest: Swift.Bool?
+                            /// The confidence level for this type choice.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/type/case2/confidence`.
+                            @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                case low = "low"
+                                case medium = "medium"
+                                case high = "high"
+                            }
+                            /// The confidence level for this type choice.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/type/case2/confidence`.
+                            public var confidence: Operations.IssuesUpdate.Input.Body.JsonPayload._TypePayload.Case2Payload.ConfidencePayload?
+                            /// Creates a new `Case2Payload`.
+                            ///
+                            /// - Parameters:
+                            ///   - value: The name of the issue type to associate with this issue, or `null` to remove the current issue type.
+                            ///   - rationale: Optional reasoning for selecting this type.
+                            ///   - suggest: If `true`, the change is stored as a pending suggestion for human review rather than applied directly.
+                            ///   - confidence: The confidence level for this type choice.
+                            public init(
+                                value: Swift.String? = nil,
+                                rationale: Swift.String? = nil,
+                                suggest: Swift.Bool? = nil,
+                                confidence: Operations.IssuesUpdate.Input.Body.JsonPayload._TypePayload.Case2Payload.ConfidencePayload? = nil
+                            ) {
+                                self.value = value
+                                self.rationale = rationale
+                                self.suggest = suggest
+                                self.confidence = confidence
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case value
+                                case rationale
+                                case suggest
+                                case confidence
+                            }
+                        }
+                        /// The issue type with optional metadata.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/type/case2`.
+                        case case2(Operations.IssuesUpdate.Input.Body.JsonPayload._TypePayload.Case2Payload)
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
+                            do {
+                                self = .case1(try decoder.decodeFromSingleValueContainer())
+                                return
+                            } catch {
+                                errors.append(error)
+                            }
+                            do {
+                                self = .case2(try .init(from: decoder))
+                                return
+                            } catch {
+                                errors.append(error)
+                            }
+                            throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                type: Self.self,
+                                codingPath: decoder.codingPath,
+                                errors: errors
+                            )
+                        }
+                        public func encode(to encoder: any Swift.Encoder) throws {
+                            switch self {
+                            case let .case1(value):
+                                try encoder.encodeToSingleValueContainer(value)
+                            case let .case2(value):
+                                try value.encode(to: encoder)
+                            }
+                        }
+                    }
+                    /// The issue type to associate with this issue. Only users with push access can set the type for issues. Without push access to the repository, type changes are silently dropped.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/requestBody/json/type`.
+                    public var _type: Operations.IssuesUpdate.Input.Body.JsonPayload._TypePayload?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -15497,28 +16494,31 @@ public enum Operations {
                     ///   - assignee: Username to assign to this issue. **This field is closing down.**
                     ///   - state: The open or closed state of the issue.
                     ///   - stateReason: The reason for the state change. Ignored unless `state` is changed.
+                    ///   - duplicateIssueId: The ID of the issue to mark as the canonical duplicate when `state_reason` is `duplicate`. The issue must exist and be accessible to the authenticated user. Ignored when `state_reason` is not `duplicate`.
                     ///   - milestone:
                     ///   - labels: Labels to associate with this issue. Pass one or more labels to _replace_ the set of labels on this issue. Send an empty array (`[]`) to clear all labels from the issue. Only users with push access can set labels for issues. Without push access to the repository, label changes are silently dropped.
                     ///   - assignees: Usernames to assign to this issue. Pass one or more user logins to _replace_ the set of assignees on this issue. Send an empty array (`[]`) to clear all assignees from the issue. Only users with push access can set assignees for new issues. Without push access to the repository, assignee changes are silently dropped.
                     ///   - issueFieldValues: An array of issue field values to set on this issue. Each field value must include the field ID and the value to set. Only users with push access can set field values for issues
-                    ///   - _type: The name of the issue type to associate with this issue or use `null` to remove the current issue type. Only users with push access can set the type for issues. Without push access to the repository, type changes are silently dropped.
+                    ///   - _type: The issue type to associate with this issue. Only users with push access can set the type for issues. Without push access to the repository, type changes are silently dropped.
                     public init(
                         title: Operations.IssuesUpdate.Input.Body.JsonPayload.TitlePayload? = nil,
                         body: Swift.String? = nil,
                         assignee: Swift.String? = nil,
                         state: Operations.IssuesUpdate.Input.Body.JsonPayload.StatePayload? = nil,
                         stateReason: Operations.IssuesUpdate.Input.Body.JsonPayload.StateReasonPayload? = nil,
+                        duplicateIssueId: Swift.Int? = nil,
                         milestone: Operations.IssuesUpdate.Input.Body.JsonPayload.MilestonePayload? = nil,
                         labels: Operations.IssuesUpdate.Input.Body.JsonPayload.LabelsPayload? = nil,
                         assignees: Operations.IssuesUpdate.Input.Body.JsonPayload.AssigneesPayload? = nil,
                         issueFieldValues: Operations.IssuesUpdate.Input.Body.JsonPayload.IssueFieldValuesPayload? = nil,
-                        _type: Swift.String? = nil
+                        _type: Operations.IssuesUpdate.Input.Body.JsonPayload._TypePayload? = nil
                     ) {
                         self.title = title
                         self.body = body
                         self.assignee = assignee
                         self.state = state
                         self.stateReason = stateReason
+                        self.duplicateIssueId = duplicateIssueId
                         self.milestone = milestone
                         self.labels = labels
                         self.assignees = assignees
@@ -15531,6 +16531,7 @@ public enum Operations {
                         case assignee
                         case state
                         case stateReason = "state_reason"
+                        case duplicateIssueId = "duplicate_issue_id"
                         case milestone
                         case labels
                         case assignees
@@ -15567,7 +16568,389 @@ public enum Operations {
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value1`.
                         public var value1: Components.Schemas.Issue
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2`.
-                        public var value2: OpenAPIRuntime.OpenAPIObjectContainer
+                        public struct Value2Payload: Codable, Hashable, Sendable {
+                            /// Pending suggestions for each suggestible field (`type`,
+                            /// `issue_field_values`, `labels`, `assignees`, `state`) the
+                            /// request touched. Omitted for fields not in the request or
+                            /// with no pending suggestions. Items tagged `already_applied`
+                            /// are echoes of the current request's inputs whose target is
+                            /// already applied to the issue; they are not persisted as
+                            /// pending suggestions.
+                            ///
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions`.
+                            public struct SuggestionsPayload: Codable, Hashable, Sendable {
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload`.
+                                public struct _TypePayloadPayload: Codable, Hashable, Sendable {
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload/value`.
+                                    public var value: Swift.String?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload/rationale`.
+                                    public var rationale: Swift.String?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload/suggest`.
+                                    public var suggest: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload/confidence`.
+                                    @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case low = "low"
+                                        case medium = "medium"
+                                        case high = "high"
+                                    }
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload/confidence`.
+                                    public var confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload._TypePayloadPayload.ConfidencePayload?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload/already_applied`.
+                                    public var alreadyApplied: Swift.Bool?
+                                    /// Creates a new `_TypePayloadPayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - value:
+                                    ///   - rationale:
+                                    ///   - suggest:
+                                    ///   - confidence:
+                                    ///   - alreadyApplied:
+                                    public init(
+                                        value: Swift.String? = nil,
+                                        rationale: Swift.String? = nil,
+                                        suggest: Swift.Bool? = nil,
+                                        confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload._TypePayloadPayload.ConfidencePayload? = nil,
+                                        alreadyApplied: Swift.Bool? = nil
+                                    ) {
+                                        self.value = value
+                                        self.rationale = rationale
+                                        self.suggest = suggest
+                                        self.confidence = confidence
+                                        self.alreadyApplied = alreadyApplied
+                                    }
+                                    public enum CodingKeys: String, CodingKey {
+                                        case value
+                                        case rationale
+                                        case suggest
+                                        case confidence
+                                        case alreadyApplied = "already_applied"
+                                    }
+                                }
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/type`.
+                                public typealias _TypePayload = [Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload._TypePayloadPayload]
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/type`.
+                                public var _type: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload._TypePayload?
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload`.
+                                public struct IssueFieldValuesPayloadPayload: Codable, Hashable, Sendable {
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/field_id`.
+                                    public var fieldId: Swift.Int?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/value`.
+                                    @frozen public enum ValuePayload: Codable, Hashable, Sendable {
+                                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/value/case1`.
+                                        case case1(Swift.String)
+                                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/value/case2`.
+                                        case case2(Swift.Double)
+                                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/value/case3`.
+                                        case case3([Swift.String])
+                                        public init(from decoder: any Swift.Decoder) throws {
+                                            var errors: [any Swift.Error] = []
+                                            do {
+                                                self = .case1(try decoder.decodeFromSingleValueContainer())
+                                                return
+                                            } catch {
+                                                errors.append(error)
+                                            }
+                                            do {
+                                                self = .case2(try decoder.decodeFromSingleValueContainer())
+                                                return
+                                            } catch {
+                                                errors.append(error)
+                                            }
+                                            do {
+                                                self = .case3(try decoder.decodeFromSingleValueContainer())
+                                                return
+                                            } catch {
+                                                errors.append(error)
+                                            }
+                                            throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                                type: Self.self,
+                                                codingPath: decoder.codingPath,
+                                                errors: errors
+                                            )
+                                        }
+                                        public func encode(to encoder: any Swift.Encoder) throws {
+                                            switch self {
+                                            case let .case1(value):
+                                                try encoder.encodeToSingleValueContainer(value)
+                                            case let .case2(value):
+                                                try encoder.encodeToSingleValueContainer(value)
+                                            case let .case3(value):
+                                                try encoder.encodeToSingleValueContainer(value)
+                                            }
+                                        }
+                                    }
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/value`.
+                                    public var value: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayloadPayload.ValuePayload?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/rationale`.
+                                    public var rationale: Swift.String?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/suggest`.
+                                    public var suggest: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/confidence`.
+                                    @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case low = "low"
+                                        case medium = "medium"
+                                        case high = "high"
+                                    }
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/confidence`.
+                                    public var confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayloadPayload.ConfidencePayload?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/already_applied`.
+                                    public var alreadyApplied: Swift.Bool?
+                                    /// Creates a new `IssueFieldValuesPayloadPayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - fieldId:
+                                    ///   - value:
+                                    ///   - rationale:
+                                    ///   - suggest:
+                                    ///   - confidence:
+                                    ///   - alreadyApplied:
+                                    public init(
+                                        fieldId: Swift.Int? = nil,
+                                        value: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayloadPayload.ValuePayload? = nil,
+                                        rationale: Swift.String? = nil,
+                                        suggest: Swift.Bool? = nil,
+                                        confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayloadPayload.ConfidencePayload? = nil,
+                                        alreadyApplied: Swift.Bool? = nil
+                                    ) {
+                                        self.fieldId = fieldId
+                                        self.value = value
+                                        self.rationale = rationale
+                                        self.suggest = suggest
+                                        self.confidence = confidence
+                                        self.alreadyApplied = alreadyApplied
+                                    }
+                                    public enum CodingKeys: String, CodingKey {
+                                        case fieldId = "field_id"
+                                        case value
+                                        case rationale
+                                        case suggest
+                                        case confidence
+                                        case alreadyApplied = "already_applied"
+                                    }
+                                }
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/issue_field_values`.
+                                public typealias IssueFieldValuesPayload = [Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayloadPayload]
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/issue_field_values`.
+                                public var issueFieldValues: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayload?
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload`.
+                                public struct LabelsPayloadPayload: Codable, Hashable, Sendable {
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload/name`.
+                                    public var name: Swift.String?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload/rationale`.
+                                    public var rationale: Swift.String?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload/suggest`.
+                                    public var suggest: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload/confidence`.
+                                    @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case low = "low"
+                                        case medium = "medium"
+                                        case high = "high"
+                                    }
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload/confidence`.
+                                    public var confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.LabelsPayloadPayload.ConfidencePayload?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload/already_applied`.
+                                    public var alreadyApplied: Swift.Bool?
+                                    /// Creates a new `LabelsPayloadPayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - name:
+                                    ///   - rationale:
+                                    ///   - suggest:
+                                    ///   - confidence:
+                                    ///   - alreadyApplied:
+                                    public init(
+                                        name: Swift.String? = nil,
+                                        rationale: Swift.String? = nil,
+                                        suggest: Swift.Bool? = nil,
+                                        confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.LabelsPayloadPayload.ConfidencePayload? = nil,
+                                        alreadyApplied: Swift.Bool? = nil
+                                    ) {
+                                        self.name = name
+                                        self.rationale = rationale
+                                        self.suggest = suggest
+                                        self.confidence = confidence
+                                        self.alreadyApplied = alreadyApplied
+                                    }
+                                    public enum CodingKeys: String, CodingKey {
+                                        case name
+                                        case rationale
+                                        case suggest
+                                        case confidence
+                                        case alreadyApplied = "already_applied"
+                                    }
+                                }
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/labels`.
+                                public typealias LabelsPayload = [Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.LabelsPayloadPayload]
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/labels`.
+                                public var labels: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.LabelsPayload?
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload`.
+                                public struct AssigneesPayloadPayload: Codable, Hashable, Sendable {
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload/login`.
+                                    public var login: Swift.String?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload/rationale`.
+                                    public var rationale: Swift.String?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload/suggest`.
+                                    public var suggest: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload/confidence`.
+                                    @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case low = "low"
+                                        case medium = "medium"
+                                        case high = "high"
+                                    }
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload/confidence`.
+                                    public var confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.AssigneesPayloadPayload.ConfidencePayload?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload/already_applied`.
+                                    public var alreadyApplied: Swift.Bool?
+                                    /// Creates a new `AssigneesPayloadPayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - login:
+                                    ///   - rationale:
+                                    ///   - suggest:
+                                    ///   - confidence:
+                                    ///   - alreadyApplied:
+                                    public init(
+                                        login: Swift.String? = nil,
+                                        rationale: Swift.String? = nil,
+                                        suggest: Swift.Bool? = nil,
+                                        confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.AssigneesPayloadPayload.ConfidencePayload? = nil,
+                                        alreadyApplied: Swift.Bool? = nil
+                                    ) {
+                                        self.login = login
+                                        self.rationale = rationale
+                                        self.suggest = suggest
+                                        self.confidence = confidence
+                                        self.alreadyApplied = alreadyApplied
+                                    }
+                                    public enum CodingKeys: String, CodingKey {
+                                        case login
+                                        case rationale
+                                        case suggest
+                                        case confidence
+                                        case alreadyApplied = "already_applied"
+                                    }
+                                }
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/assignees`.
+                                public typealias AssigneesPayload = [Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.AssigneesPayloadPayload]
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/assignees`.
+                                public var assignees: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.AssigneesPayload?
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload`.
+                                public struct StatePayloadPayload: Codable, Hashable, Sendable {
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/value`.
+                                    public var value: Swift.String?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/state_reason`.
+                                    public var stateReason: Swift.String?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/duplicate_issue_id`.
+                                    public var duplicateIssueId: Swift.Int?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/rationale`.
+                                    public var rationale: Swift.String?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/suggest`.
+                                    public var suggest: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/confidence`.
+                                    @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case low = "low"
+                                        case medium = "medium"
+                                        case high = "high"
+                                    }
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/confidence`.
+                                    public var confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.StatePayloadPayload.ConfidencePayload?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/already_applied`.
+                                    public var alreadyApplied: Swift.Bool?
+                                    /// Creates a new `StatePayloadPayload`.
+                                    ///
+                                    /// - Parameters:
+                                    ///   - value:
+                                    ///   - stateReason:
+                                    ///   - duplicateIssueId:
+                                    ///   - rationale:
+                                    ///   - suggest:
+                                    ///   - confidence:
+                                    ///   - alreadyApplied:
+                                    public init(
+                                        value: Swift.String? = nil,
+                                        stateReason: Swift.String? = nil,
+                                        duplicateIssueId: Swift.Int? = nil,
+                                        rationale: Swift.String? = nil,
+                                        suggest: Swift.Bool? = nil,
+                                        confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.StatePayloadPayload.ConfidencePayload? = nil,
+                                        alreadyApplied: Swift.Bool? = nil
+                                    ) {
+                                        self.value = value
+                                        self.stateReason = stateReason
+                                        self.duplicateIssueId = duplicateIssueId
+                                        self.rationale = rationale
+                                        self.suggest = suggest
+                                        self.confidence = confidence
+                                        self.alreadyApplied = alreadyApplied
+                                    }
+                                    public enum CodingKeys: String, CodingKey {
+                                        case value
+                                        case stateReason = "state_reason"
+                                        case duplicateIssueId = "duplicate_issue_id"
+                                        case rationale
+                                        case suggest
+                                        case confidence
+                                        case alreadyApplied = "already_applied"
+                                    }
+                                }
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/state`.
+                                public typealias StatePayload = [Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.StatePayloadPayload]
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/state`.
+                                public var state: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.StatePayload?
+                                /// Creates a new `SuggestionsPayload`.
+                                ///
+                                /// - Parameters:
+                                ///   - _type:
+                                ///   - issueFieldValues:
+                                ///   - labels:
+                                ///   - assignees:
+                                ///   - state:
+                                public init(
+                                    _type: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload._TypePayload? = nil,
+                                    issueFieldValues: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayload? = nil,
+                                    labels: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.LabelsPayload? = nil,
+                                    assignees: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.AssigneesPayload? = nil,
+                                    state: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.StatePayload? = nil
+                                ) {
+                                    self._type = _type
+                                    self.issueFieldValues = issueFieldValues
+                                    self.labels = labels
+                                    self.assignees = assignees
+                                    self.state = state
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case _type = "type"
+                                    case issueFieldValues = "issue_field_values"
+                                    case labels
+                                    case assignees
+                                    case state
+                                }
+                            }
+                            /// Pending suggestions for each suggestible field (`type`,
+                            /// `issue_field_values`, `labels`, `assignees`, `state`) the
+                            /// request touched. Omitted for fields not in the request or
+                            /// with no pending suggestions. Items tagged `already_applied`
+                            /// are echoes of the current request's inputs whose target is
+                            /// already applied to the issue; they are not persisted as
+                            /// pending suggestions.
+                            ///
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions`.
+                            public var suggestions: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload?
+                            /// Creates a new `Value2Payload`.
+                            ///
+                            /// - Parameters:
+                            ///   - suggestions: Pending suggestions for each suggestible field (`type`,
+                            public init(suggestions: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload? = nil) {
+                                self.suggestions = suggestions
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case suggestions
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2`.
+                        public var value2: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload
                         /// Creates a new `JsonPayload`.
                         ///
                         /// - Parameters:
@@ -15575,7 +16958,7 @@ public enum Operations {
                         ///   - value2:
                         public init(
                             value1: Components.Schemas.Issue,
-                            value2: OpenAPIRuntime.OpenAPIObjectContainer
+                            value2: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload
                         ) {
                             self.value1 = value1
                             self.value2 = value2
@@ -15862,15 +17245,105 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json/AssigneesPayload`.
+                    @frozen public enum AssigneesPayloadPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json/AssigneesPayload/case1`.
+                        case case1(Swift.String)
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json/AssigneesPayload/case2`.
+                        public struct Case2Payload: Codable, Hashable, Sendable {
+                            /// The login of the user to assign.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json/AssigneesPayload/case2/login`.
+                            public var login: Swift.String
+                            /// Optional reasoning for adding this assignee.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json/AssigneesPayload/case2/rationale`.
+                            public var rationale: Swift.String?
+                            /// If `true`, the assignee is stored as a pending suggestion for human review rather than applied directly.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json/AssigneesPayload/case2/suggest`.
+                            public var suggest: Swift.Bool?
+                            /// The confidence level for this assignee choice.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json/AssigneesPayload/case2/confidence`.
+                            @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                case low = "low"
+                                case medium = "medium"
+                                case high = "high"
+                            }
+                            /// The confidence level for this assignee choice.
+                            ///
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json/AssigneesPayload/case2/confidence`.
+                            public var confidence: Operations.IssuesAddAssignees.Input.Body.JsonPayload.AssigneesPayloadPayload.Case2Payload.ConfidencePayload?
+                            /// Creates a new `Case2Payload`.
+                            ///
+                            /// - Parameters:
+                            ///   - login: The login of the user to assign.
+                            ///   - rationale: Optional reasoning for adding this assignee.
+                            ///   - suggest: If `true`, the assignee is stored as a pending suggestion for human review rather than applied directly.
+                            ///   - confidence: The confidence level for this assignee choice.
+                            public init(
+                                login: Swift.String,
+                                rationale: Swift.String? = nil,
+                                suggest: Swift.Bool? = nil,
+                                confidence: Operations.IssuesAddAssignees.Input.Body.JsonPayload.AssigneesPayloadPayload.Case2Payload.ConfidencePayload? = nil
+                            ) {
+                                self.login = login
+                                self.rationale = rationale
+                                self.suggest = suggest
+                                self.confidence = confidence
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case login
+                                case rationale
+                                case suggest
+                                case confidence
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json/AssigneesPayload/case2`.
+                        case case2(Operations.IssuesAddAssignees.Input.Body.JsonPayload.AssigneesPayloadPayload.Case2Payload)
+                        public init(from decoder: any Swift.Decoder) throws {
+                            var errors: [any Swift.Error] = []
+                            do {
+                                self = .case1(try decoder.decodeFromSingleValueContainer())
+                                return
+                            } catch {
+                                errors.append(error)
+                            }
+                            do {
+                                self = .case2(try .init(from: decoder))
+                                return
+                            } catch {
+                                errors.append(error)
+                            }
+                            throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                type: Self.self,
+                                codingPath: decoder.codingPath,
+                                errors: errors
+                            )
+                        }
+                        public func encode(to encoder: any Swift.Encoder) throws {
+                            switch self {
+                            case let .case1(value):
+                                try encoder.encodeToSingleValueContainer(value)
+                            case let .case2(value):
+                                try value.encode(to: encoder)
+                            }
+                        }
+                    }
                     /// Usernames of people to assign this issue to. _NOTE: Only users with push access can add assignees to an issue. Assignees are silently ignored otherwise._
                     ///
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json/assignees`.
-                    public var assignees: [Swift.String]?
+                    public typealias AssigneesPayload = [Operations.IssuesAddAssignees.Input.Body.JsonPayload.AssigneesPayloadPayload]
+                    /// Usernames of people to assign this issue to. _NOTE: Only users with push access can add assignees to an issue. Assignees are silently ignored otherwise._
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/assignees/POST/requestBody/json/assignees`.
+                    public var assignees: Operations.IssuesAddAssignees.Input.Body.JsonPayload.AssigneesPayload?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
                     ///   - assignees: Usernames of people to assign this issue to. _NOTE: Only users with push access can add assignees to an issue. Assignees are silently ignored otherwise._
-                    public init(assignees: [Swift.String]? = nil) {
+                    public init(assignees: Operations.IssuesAddAssignees.Input.Body.JsonPayload.AssigneesPayload? = nil) {
                         self.assignees = assignees
                     }
                     public enum CodingKeys: String, CodingKey {
@@ -19925,15 +21398,105 @@ public enum Operations {
                 @frozen public enum JsonPayload: Codable, Hashable, Sendable {
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1`.
                     public struct Case1Payload: Codable, Hashable, Sendable {
-                        /// The names of the labels to add to the issue's existing labels. You can also pass an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. To replace all of the labels for an issue, use "[Set labels for an issue](https://docs.github.com/rest/issues/labels#set-labels-for-an-issue)."
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1/LabelsPayload`.
+                        @frozen public enum LabelsPayloadPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1/LabelsPayload/case1`.
+                            case case1(Swift.String)
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1/LabelsPayload/case2`.
+                            public struct Case2Payload: Codable, Hashable, Sendable {
+                                /// The name of the label to add.
+                                ///
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1/LabelsPayload/case2/name`.
+                                public var name: Swift.String
+                                /// Optional reasoning for adding this label.
+                                ///
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1/LabelsPayload/case2/rationale`.
+                                public var rationale: Swift.String?
+                                /// If `true`, the label is stored as a pending suggestion for human review rather than applied directly.
+                                ///
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1/LabelsPayload/case2/suggest`.
+                                public var suggest: Swift.Bool?
+                                /// The confidence level for this label choice.
+                                ///
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1/LabelsPayload/case2/confidence`.
+                                @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                    case low = "low"
+                                    case medium = "medium"
+                                    case high = "high"
+                                }
+                                /// The confidence level for this label choice.
+                                ///
+                                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1/LabelsPayload/case2/confidence`.
+                                public var confidence: Operations.IssuesAddLabels.Input.Body.JsonPayload.Case1Payload.LabelsPayloadPayload.Case2Payload.ConfidencePayload?
+                                /// Creates a new `Case2Payload`.
+                                ///
+                                /// - Parameters:
+                                ///   - name: The name of the label to add.
+                                ///   - rationale: Optional reasoning for adding this label.
+                                ///   - suggest: If `true`, the label is stored as a pending suggestion for human review rather than applied directly.
+                                ///   - confidence: The confidence level for this label choice.
+                                public init(
+                                    name: Swift.String,
+                                    rationale: Swift.String? = nil,
+                                    suggest: Swift.Bool? = nil,
+                                    confidence: Operations.IssuesAddLabels.Input.Body.JsonPayload.Case1Payload.LabelsPayloadPayload.Case2Payload.ConfidencePayload? = nil
+                                ) {
+                                    self.name = name
+                                    self.rationale = rationale
+                                    self.suggest = suggest
+                                    self.confidence = confidence
+                                }
+                                public enum CodingKeys: String, CodingKey {
+                                    case name
+                                    case rationale
+                                    case suggest
+                                    case confidence
+                                }
+                            }
+                            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1/LabelsPayload/case2`.
+                            case case2(Operations.IssuesAddLabels.Input.Body.JsonPayload.Case1Payload.LabelsPayloadPayload.Case2Payload)
+                            public init(from decoder: any Swift.Decoder) throws {
+                                var errors: [any Swift.Error] = []
+                                do {
+                                    self = .case1(try decoder.decodeFromSingleValueContainer())
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                do {
+                                    self = .case2(try .init(from: decoder))
+                                    return
+                                } catch {
+                                    errors.append(error)
+                                }
+                                throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                                    type: Self.self,
+                                    codingPath: decoder.codingPath,
+                                    errors: errors
+                                )
+                            }
+                            public func encode(to encoder: any Swift.Encoder) throws {
+                                switch self {
+                                case let .case1(value):
+                                    try encoder.encodeToSingleValueContainer(value)
+                                case let .case2(value):
+                                    try value.encode(to: encoder)
+                                }
+                            }
+                        }
+                        /// The labels to add to the issue's existing labels. You can also pass an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. To replace all of the labels for an issue, use "[Set labels for an issue](https://docs.github.com/rest/issues/labels#set-labels-for-an-issue)."
                         ///
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1/labels`.
-                        public var labels: [Swift.String]?
+                        public typealias LabelsPayload = [Operations.IssuesAddLabels.Input.Body.JsonPayload.Case1Payload.LabelsPayloadPayload]
+                        /// The labels to add to the issue's existing labels. You can also pass an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. To replace all of the labels for an issue, use "[Set labels for an issue](https://docs.github.com/rest/issues/labels#set-labels-for-an-issue)."
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case1/labels`.
+                        public var labels: Operations.IssuesAddLabels.Input.Body.JsonPayload.Case1Payload.LabelsPayload?
                         /// Creates a new `Case1Payload`.
                         ///
                         /// - Parameters:
-                        ///   - labels: The names of the labels to add to the issue's existing labels. You can also pass an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. To replace all of the labels for an issue, use "[Set labels for an issue](https://docs.github.com/rest/issues/labels#set-labels-for-an-issue)."
-                        public init(labels: [Swift.String]? = nil) {
+                        ///   - labels: The labels to add to the issue's existing labels. You can also pass an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. To replace all of the labels for an issue, use "[Set labels for an issue](https://docs.github.com/rest/issues/labels#set-labels-for-an-issue)."
+                        public init(labels: Operations.IssuesAddLabels.Input.Body.JsonPayload.Case1Payload.LabelsPayload? = nil) {
                             self.labels = labels
                         }
                         public enum CodingKeys: String, CodingKey {
@@ -19948,15 +21511,49 @@ public enum Operations {
                     public struct Case3PayloadPayload: Codable, Hashable, Sendable {
                         /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/Case3Payload/name`.
                         public var name: Swift.String
+                        /// Optional reasoning for adding this label.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/Case3Payload/rationale`.
+                        public var rationale: Swift.String?
+                        /// If `true`, the label is stored as a pending suggestion for human review rather than applied directly.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/Case3Payload/suggest`.
+                        public var suggest: Swift.Bool?
+                        /// The confidence level for this label choice.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/Case3Payload/confidence`.
+                        @frozen public enum ConfidencePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case low = "low"
+                            case medium = "medium"
+                            case high = "high"
+                        }
+                        /// The confidence level for this label choice.
+                        ///
+                        /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/Case3Payload/confidence`.
+                        public var confidence: Operations.IssuesAddLabels.Input.Body.JsonPayload.Case3PayloadPayload.ConfidencePayload?
                         /// Creates a new `Case3PayloadPayload`.
                         ///
                         /// - Parameters:
                         ///   - name:
-                        public init(name: Swift.String) {
+                        ///   - rationale: Optional reasoning for adding this label.
+                        ///   - suggest: If `true`, the label is stored as a pending suggestion for human review rather than applied directly.
+                        ///   - confidence: The confidence level for this label choice.
+                        public init(
+                            name: Swift.String,
+                            rationale: Swift.String? = nil,
+                            suggest: Swift.Bool? = nil,
+                            confidence: Operations.IssuesAddLabels.Input.Body.JsonPayload.Case3PayloadPayload.ConfidencePayload? = nil
+                        ) {
                             self.name = name
+                            self.rationale = rationale
+                            self.suggest = suggest
+                            self.confidence = confidence
                         }
                         public enum CodingKeys: String, CodingKey {
                             case name
+                            case rationale
+                            case suggest
+                            case confidence
                         }
                     }
                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/labels/POST/requestBody/json/case3`.
@@ -22759,6 +24356,736 @@ public enum Operations {
             }
         }
     }
+    /// List issue suggestions
+    ///
+    /// Lists the suggestions on an issue. A suggestion is an agent-proposed change to an issue's type, labels, fields, assignees, or closed state that a maintainer can approve or dismiss.
+    ///
+    /// By default only pending suggestions are returned. Use `state=all` to return suggestions in every state, or `state=<state>` to filter to a single state. Use `action=<action>` to return only suggestions for a specific change.
+    ///
+    /// This endpoint is only available while the issue suggestions feature is enabled for the repository, and only supports issues, not pull requests.
+    ///
+    /// Requires triage access to the repository.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/issues/{issue_number}/suggestions`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/get(issues/list-suggestions)`.
+    public enum IssuesListSuggestions {
+        public static let id: Swift.String = "issues/list-suggestions"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the issue.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/path/issue_number`.
+                public var issueNumber: Components.Parameters.IssueNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - issueNumber: The number that identifies the issue.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    issueNumber: Components.Parameters.IssueNumber
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.issueNumber = issueNumber
+                }
+            }
+            public var path: Operations.IssuesListSuggestions.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/query`.
+            public struct Query: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/query/state`.
+                @frozen public enum StatePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case pending = "pending"
+                    case applied = "applied"
+                    case approved = "approved"
+                    case dismissed = "dismissed"
+                    case replaced = "replaced"
+                    case invalidated = "invalidated"
+                    case all = "all"
+                }
+                /// Filter suggestions by their state.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/query/state`.
+                public var state: Operations.IssuesListSuggestions.Input.Query.StatePayload?
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/query/action`.
+                @frozen public enum ActionPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case setType = "set_type"
+                    case addLabel = "add_label"
+                    case addField = "add_field"
+                    case addAssignee = "add_assignee"
+                    case closeIssue = "close_issue"
+                }
+                /// Filter suggestions by the change they propose.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/query/action`.
+                public var action: Operations.IssuesListSuggestions.Input.Query.ActionPayload?
+                /// The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/query/per_page`.
+                public var perPage: Components.Parameters.PerPage?
+                /// The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/query/page`.
+                public var page: Components.Parameters.Page?
+                /// Creates a new `Query`.
+                ///
+                /// - Parameters:
+                ///   - state: Filter suggestions by their state.
+                ///   - action: Filter suggestions by the change they propose.
+                ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                public init(
+                    state: Operations.IssuesListSuggestions.Input.Query.StatePayload? = nil,
+                    action: Operations.IssuesListSuggestions.Input.Query.ActionPayload? = nil,
+                    perPage: Components.Parameters.PerPage? = nil,
+                    page: Components.Parameters.Page? = nil
+                ) {
+                    self.state = state
+                    self.action = action
+                    self.perPage = perPage
+                    self.page = page
+                }
+            }
+            public var query: Operations.IssuesListSuggestions.Input.Query
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesListSuggestions.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesListSuggestions.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.IssuesListSuggestions.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - query:
+            ///   - headers:
+            public init(
+                path: Operations.IssuesListSuggestions.Input.Path,
+                query: Operations.IssuesListSuggestions.Input.Query = .init(),
+                headers: Operations.IssuesListSuggestions.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.query = query
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/responses/200/headers`.
+                public struct Headers: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/responses/200/headers/Link`.
+                    public var link: Components.Headers.Link?
+                    /// Creates a new `Headers`.
+                    ///
+                    /// - Parameters:
+                    ///   - link:
+                    public init(link: Components.Headers.Link? = nil) {
+                        self.link = link
+                    }
+                }
+                /// Received HTTP response headers
+                public var headers: Operations.IssuesListSuggestions.Output.Ok.Headers
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/GET/responses/200/content/application\/json`.
+                    case json([Components.Schemas.IssueSuggestion])
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: [Components.Schemas.IssueSuggestion] {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.IssuesListSuggestions.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - headers: Received HTTP response headers
+                ///   - body: Received HTTP response body
+                public init(
+                    headers: Operations.IssuesListSuggestions.Output.Ok.Headers = .init(),
+                    body: Operations.IssuesListSuggestions.Output.Ok.Body
+                ) {
+                    self.headers = headers
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/get(issues/list-suggestions)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.IssuesListSuggestions.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.IssuesListSuggestions.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/get(issues/list-suggestions)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/get(issues/list-suggestions)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Approve an issue suggestion
+    ///
+    /// Approves a pending suggestion on an issue. Applies the proposed change (creating the corresponding timeline event), transitions the suggestion to `approved`, and dismisses any competing pending suggestions for the same change.
+    ///
+    /// Requires triage access to the repository. Approving a suggestion also requires permission to perform the change it applies (for example, setting the issue type, adding a label or assignee, or closing the issue); this only affects fine-grained access tokens and GitHub Apps whose permissions are narrower than the triage role. This endpoint only supports issues, not pull requests.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/post(issues/approve-suggestion)`.
+    public enum IssuesApproveSuggestion {
+        public static let id: Swift.String = "issues/approve-suggestion"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/POST/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/POST/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the issue.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/POST/path/issue_number`.
+                public var issueNumber: Components.Parameters.IssueNumber
+                /// The unique identifier of the suggestion.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/POST/path/suggestion_id`.
+                public var suggestionId: Swift.Int
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - issueNumber: The number that identifies the issue.
+                ///   - suggestionId: The unique identifier of the suggestion.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    issueNumber: Components.Parameters.IssueNumber,
+                    suggestionId: Swift.Int
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.issueNumber = issueNumber
+                    self.suggestionId = suggestionId
+                }
+            }
+            public var path: Operations.IssuesApproveSuggestion.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesApproveSuggestion.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesApproveSuggestion.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.IssuesApproveSuggestion.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.IssuesApproveSuggestion.Input.Path,
+                headers: Operations.IssuesApproveSuggestion.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/POST/responses/200/content/application\/json`.
+                    case json(Components.Schemas.IssueSuggestion)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.IssueSuggestion {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.IssuesApproveSuggestion.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.IssuesApproveSuggestion.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/post(issues/approve-suggestion)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.IssuesApproveSuggestion.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.IssuesApproveSuggestion.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/post(issues/approve-suggestion)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/post(issues/approve-suggestion)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/approve/post(issues/approve-suggestion)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Dismiss an issue suggestion
+    ///
+    /// Dismisses a pending suggestion on an issue. Transitions the suggestion to `dismissed` without applying any change or creating a timeline event.
+    ///
+    /// Requires triage access to the repository. This endpoint only supports issues, not pull requests.
+    ///
+    /// - Remark: HTTP `POST /repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/post(issues/dismiss-suggestion)`.
+    public enum IssuesDismissSuggestion {
+        public static let id: Swift.String = "issues/dismiss-suggestion"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/POST/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/POST/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/POST/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the issue.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/POST/path/issue_number`.
+                public var issueNumber: Components.Parameters.IssueNumber
+                /// The unique identifier of the suggestion.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/POST/path/suggestion_id`.
+                public var suggestionId: Swift.Int
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - issueNumber: The number that identifies the issue.
+                ///   - suggestionId: The unique identifier of the suggestion.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    issueNumber: Components.Parameters.IssueNumber,
+                    suggestionId: Swift.Int
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.issueNumber = issueNumber
+                    self.suggestionId = suggestionId
+                }
+            }
+            public var path: Operations.IssuesDismissSuggestion.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/POST/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesDismissSuggestion.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.IssuesDismissSuggestion.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.IssuesDismissSuggestion.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.IssuesDismissSuggestion.Input.Path,
+                headers: Operations.IssuesDismissSuggestion.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/POST/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/POST/responses/200/content/application\/json`.
+                    case json(Components.Schemas.IssueSuggestion)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.IssueSuggestion {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.IssuesDismissSuggestion.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.IssuesDismissSuggestion.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Response
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/post(issues/dismiss-suggestion)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.IssuesDismissSuggestion.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.IssuesDismissSuggestion.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/post(issues/dismiss-suggestion)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/post(issues/dismiss-suggestion)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/suggestions/{suggestion_id}/dismiss/post(issues/dismiss-suggestion)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
     /// List timeline events for an issue
     ///
     /// List all timeline events for an issue.
@@ -22809,17 +25136,24 @@ public enum Operations {
                 ///
                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/timeline/GET/query/page`.
                 public var page: Components.Parameters.Page?
+                /// A comma-separated list of timeline event names to exclude from the response.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/timeline/GET/query/exclude`.
+                public var exclude: Components.Parameters.IssueTimelineExclude?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
                 ///   - perPage: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
                 ///   - page: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+                ///   - exclude: A comma-separated list of timeline event names to exclude from the response.
                 public init(
                     perPage: Components.Parameters.PerPage? = nil,
-                    page: Components.Parameters.Page? = nil
+                    page: Components.Parameters.Page? = nil,
+                    exclude: Components.Parameters.IssueTimelineExclude? = nil
                 ) {
                     self.perPage = perPage
                     self.page = page
+                    self.exclude = exclude
                 }
             }
             public var query: Operations.IssuesListEventsForTimeline.Input.Query
@@ -22945,6 +25279,29 @@ public enum Operations {
                     }
                 }
             }
+            /// Bad Request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/timeline/get(issues/list-events-for-timeline)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Components.Responses.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Components.Responses.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Gone
             ///
             /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/issues/{issue_number}/timeline/get(issues/list-events-for-timeline)/responses/410`.
@@ -22975,11 +25332,14 @@ public enum Operations {
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
+            case applicationScimJson
             case other(Swift.String)
             public init?(rawValue: Swift.String) {
                 switch rawValue.lowercased() {
                 case "application/json":
                     self = .json
+                case "application/scim+json":
+                    self = .applicationScimJson
                 default:
                     self = .other(rawValue)
                 }
@@ -22990,11 +25350,14 @@ public enum Operations {
                     return string
                 case .json:
                     return "application/json"
+                case .applicationScimJson:
+                    return "application/scim+json"
                 }
             }
             public static var allCases: [Self] {
                 [
-                    .json
+                    .json,
+                    .applicationScimJson
                 ]
             }
         }
