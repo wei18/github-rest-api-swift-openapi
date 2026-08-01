@@ -1,0 +1,4 @@
+[submodule "Submodule/github/rest-api-description"]
+	path = Submodule/github/rest-api-description
+	url = https://github.com/github/rest-api-description.git
+	shallow = true
