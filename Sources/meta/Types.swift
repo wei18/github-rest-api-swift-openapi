@@ -22,7 +22,7 @@ public protocol APIProtocol: Sendable {
     ///
     /// Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://docs.github.com/articles/about-github-s-ip-addresses/)."
     ///
-    /// The API's response also includes a list of GitHub's domain names.
+    /// The API's response also includes a list of GitHub's domain names, and the public keys used by GitHub to sign commits made through the web UI.
     ///
     /// The values shown in the documentation's response are example values. You must always query the API directly to get the latest values.
     ///
@@ -70,7 +70,7 @@ extension APIProtocol {
     ///
     /// Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://docs.github.com/articles/about-github-s-ip-addresses/)."
     ///
-    /// The API's response also includes a list of GitHub's domain names.
+    /// The API's response also includes a list of GitHub's domain names, and the public keys used by GitHub to sign commits made through the web UI.
     ///
     /// The values shown in the documentation's response are example values. You must always query the API directly to get the latest values.
     ///
@@ -470,6 +470,8 @@ public enum Components {
                 public var copilot: [Swift.String]?
                 /// - Remark: Generated from `#/components/schemas/api-overview/domains/packages`.
                 public var packages: [Swift.String]?
+                /// - Remark: Generated from `#/components/schemas/api-overview/domains/storage`.
+                public var storage: [Swift.String]?
                 /// - Remark: Generated from `#/components/schemas/api-overview/domains/actions`.
                 public var actions: [Swift.String]?
                 /// - Remark: Generated from `#/components/schemas/api-overview/domains/actions_inbound`.
@@ -529,6 +531,7 @@ public enum Components {
                 ///   - codespaces:
                 ///   - copilot:
                 ///   - packages:
+                ///   - storage:
                 ///   - actions:
                 ///   - actionsInbound:
                 ///   - artifactAttestations:
@@ -537,6 +540,7 @@ public enum Components {
                     codespaces: [Swift.String]? = nil,
                     copilot: [Swift.String]? = nil,
                     packages: [Swift.String]? = nil,
+                    storage: [Swift.String]? = nil,
                     actions: [Swift.String]? = nil,
                     actionsInbound: Components.Schemas.ApiOverview.DomainsPayload.ActionsInboundPayload? = nil,
                     artifactAttestations: Components.Schemas.ApiOverview.DomainsPayload.ArtifactAttestationsPayload? = nil
@@ -545,6 +549,7 @@ public enum Components {
                     self.codespaces = codespaces
                     self.copilot = copilot
                     self.packages = packages
+                    self.storage = storage
                     self.actions = actions
                     self.actionsInbound = actionsInbound
                     self.artifactAttestations = artifactAttestations
@@ -554,6 +559,7 @@ public enum Components {
                     case codespaces
                     case copilot
                     case packages
+                    case storage
                     case actions
                     case actionsInbound = "actions_inbound"
                     case artifactAttestations = "artifact_attestations"
@@ -804,7 +810,7 @@ public enum Operations {
     ///
     /// Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://docs.github.com/articles/about-github-s-ip-addresses/)."
     ///
-    /// The API's response also includes a list of GitHub's domain names.
+    /// The API's response also includes a list of GitHub's domain names, and the public keys used by GitHub to sign commits made through the web UI.
     ///
     /// The values shown in the documentation's response are example values. You must always query the API directly to get the latest values.
     ///
