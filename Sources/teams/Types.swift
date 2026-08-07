@@ -135,6 +135,8 @@ public protocol APIProtocol: Sendable {
     ///
     /// Lists a team's repositories visible to the authenticated user.
     ///
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` or `repo` scope to use this endpoint.
+    ///
     /// > [!NOTE]
     /// > You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos`.
     ///
@@ -626,6 +628,8 @@ extension APIProtocol {
     /// List team repositories
     ///
     /// Lists a team's repositories visible to the authenticated user.
+    ///
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` or `repo` scope to use this endpoint.
     ///
     /// > [!NOTE]
     /// > You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos`.
@@ -4921,6 +4925,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/teams/POST/requestBody/json/parent_team_id`.
                     public var parentTeamId: Swift.Int?
+                    /// The slug of a team to set as the parent team. Ignored when `parent_team_id` is also provided.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/teams/POST/requestBody/json/parent_team_slug`.
+                    public var parentTeamSlug: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -4932,6 +4940,7 @@ public enum Operations {
                     ///   - notificationSetting: The notification setting the team has chosen. The options are:  
                     ///   - permission: **Closing down notice**. The permission that new repositories will be added to the team with when none is specified.
                     ///   - parentTeamId: The ID of a team to set as the parent team.
+                    ///   - parentTeamSlug: The slug of a team to set as the parent team. Ignored when `parent_team_id` is also provided.
                     public init(
                         name: Swift.String,
                         description: Swift.String? = nil,
@@ -4940,7 +4949,8 @@ public enum Operations {
                         privacy: Operations.TeamsCreate.Input.Body.JsonPayload.PrivacyPayload? = nil,
                         notificationSetting: Operations.TeamsCreate.Input.Body.JsonPayload.NotificationSettingPayload? = nil,
                         permission: Operations.TeamsCreate.Input.Body.JsonPayload.PermissionPayload? = nil,
-                        parentTeamId: Swift.Int? = nil
+                        parentTeamId: Swift.Int? = nil,
+                        parentTeamSlug: Swift.String? = nil
                     ) {
                         self.name = name
                         self.description = description
@@ -4950,6 +4960,7 @@ public enum Operations {
                         self.notificationSetting = notificationSetting
                         self.permission = permission
                         self.parentTeamId = parentTeamId
+                        self.parentTeamSlug = parentTeamSlug
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
@@ -4960,6 +4971,7 @@ public enum Operations {
                         case notificationSetting = "notification_setting"
                         case permission
                         case parentTeamId = "parent_team_id"
+                        case parentTeamSlug = "parent_team_slug"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/teams/POST/requestBody/content/application\/json`.
@@ -5390,6 +5402,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/orgs/{org}/teams/{team_slug}/PATCH/requestBody/json/parent_team_id`.
                     public var parentTeamId: Swift.Int?
+                    /// The slug of a team to set as the parent team. Ignored when `parent_team_id` is also provided.
+                    ///
+                    /// - Remark: Generated from `#/paths/orgs/{org}/teams/{team_slug}/PATCH/requestBody/json/parent_team_slug`.
+                    public var parentTeamSlug: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -5399,13 +5415,15 @@ public enum Operations {
                     ///   - notificationSetting: The notification setting the team has chosen. Editing teams without specifying this parameter leaves `notification_setting` intact. The options are: 
                     ///   - permission: **Closing down notice**. The permission that new repositories will be added to the team with when none is specified.
                     ///   - parentTeamId: The ID of a team to set as the parent team.
+                    ///   - parentTeamSlug: The slug of a team to set as the parent team. Ignored when `parent_team_id` is also provided.
                     public init(
                         name: Swift.String? = nil,
                         description: Swift.String? = nil,
                         privacy: Operations.TeamsUpdateInOrg.Input.Body.JsonPayload.PrivacyPayload? = nil,
                         notificationSetting: Operations.TeamsUpdateInOrg.Input.Body.JsonPayload.NotificationSettingPayload? = nil,
                         permission: Operations.TeamsUpdateInOrg.Input.Body.JsonPayload.PermissionPayload? = nil,
-                        parentTeamId: Swift.Int? = nil
+                        parentTeamId: Swift.Int? = nil,
+                        parentTeamSlug: Swift.String? = nil
                     ) {
                         self.name = name
                         self.description = description
@@ -5413,6 +5431,7 @@ public enum Operations {
                         self.notificationSetting = notificationSetting
                         self.permission = permission
                         self.parentTeamId = parentTeamId
+                        self.parentTeamSlug = parentTeamSlug
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
@@ -5421,6 +5440,7 @@ public enum Operations {
                         case notificationSetting = "notification_setting"
                         case permission
                         case parentTeamId = "parent_team_id"
+                        case parentTeamSlug = "parent_team_slug"
                     }
                 }
                 /// - Remark: Generated from `#/paths/orgs/{org}/teams/{team_slug}/PATCH/requestBody/content/application\/json`.
@@ -6783,6 +6803,8 @@ public enum Operations {
     ///
     /// Lists a team's repositories visible to the authenticated user.
     ///
+    /// OAuth app tokens and personal access tokens (classic) need the `read:org` or `repo` scope to use this endpoint.
+    ///
     /// > [!NOTE]
     /// > You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos`.
     ///
@@ -7885,6 +7907,10 @@ public enum Operations {
                     ///
                     /// - Remark: Generated from `#/paths/teams/{team_id}/PATCH/requestBody/json/parent_team_id`.
                     public var parentTeamId: Swift.Int?
+                    /// The slug of a team to set as the parent team. Ignored when `parent_team_id` is also provided.
+                    ///
+                    /// - Remark: Generated from `#/paths/teams/{team_id}/PATCH/requestBody/json/parent_team_slug`.
+                    public var parentTeamSlug: Swift.String?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -7894,13 +7920,15 @@ public enum Operations {
                     ///   - notificationSetting: The notification setting the team has chosen. Editing teams without specifying this parameter leaves `notification_setting` intact. The options are: 
                     ///   - permission: **Closing down notice**. The permission that new repositories will be added to the team with when none is specified.
                     ///   - parentTeamId: The ID of a team to set as the parent team.
+                    ///   - parentTeamSlug: The slug of a team to set as the parent team. Ignored when `parent_team_id` is also provided.
                     public init(
                         name: Swift.String,
                         description: Swift.String? = nil,
                         privacy: Operations.TeamsUpdateLegacy.Input.Body.JsonPayload.PrivacyPayload? = nil,
                         notificationSetting: Operations.TeamsUpdateLegacy.Input.Body.JsonPayload.NotificationSettingPayload? = nil,
                         permission: Operations.TeamsUpdateLegacy.Input.Body.JsonPayload.PermissionPayload? = nil,
-                        parentTeamId: Swift.Int? = nil
+                        parentTeamId: Swift.Int? = nil,
+                        parentTeamSlug: Swift.String? = nil
                     ) {
                         self.name = name
                         self.description = description
@@ -7908,6 +7936,7 @@ public enum Operations {
                         self.notificationSetting = notificationSetting
                         self.permission = permission
                         self.parentTeamId = parentTeamId
+                        self.parentTeamSlug = parentTeamSlug
                     }
                     public enum CodingKeys: String, CodingKey {
                         case name
@@ -7916,6 +7945,7 @@ public enum Operations {
                         case notificationSetting = "notification_setting"
                         case permission
                         case parentTeamId = "parent_team_id"
+                        case parentTeamSlug = "parent_team_slug"
                     }
                 }
                 /// - Remark: Generated from `#/paths/teams/{team_id}/PATCH/requestBody/content/application\/json`.
