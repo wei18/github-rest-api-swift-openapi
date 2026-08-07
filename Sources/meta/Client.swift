@@ -104,7 +104,7 @@ public struct Client: APIProtocol {
     ///
     /// Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://docs.github.com/articles/about-github-s-ip-addresses/)."
     ///
-    /// The API's response also includes a list of GitHub's domain names.
+    /// The API's response also includes a list of GitHub's domain names, and the public keys used by GitHub to sign commits made through the web UI.
     ///
     /// The values shown in the documentation's response are example values. You must always query the API directly to get the latest values.
     ///

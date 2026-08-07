@@ -16572,10 +16572,9 @@ public enum Operations {
                             /// Pending suggestions for each suggestible field (`type`,
                             /// `issue_field_values`, `labels`, `assignees`, `state`) the
                             /// request touched. Omitted for fields not in the request or
-                            /// with no pending suggestions. Items tagged `already_applied`
-                            /// are echoes of the current request's inputs whose target is
-                            /// already applied to the issue; they are not persisted as
-                            /// pending suggestions.
+                            /// with no pending or ignored suggestions. Items tagged
+                            /// `ignored` are echoes of the current request's inputs that
+                            /// were not persisted as pending suggestions.
                             ///
                             ///
                             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions`.
@@ -16596,8 +16595,15 @@ public enum Operations {
                                     }
                                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload/confidence`.
                                     public var confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload._TypePayloadPayload.ConfidencePayload?
-                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload/already_applied`.
-                                    public var alreadyApplied: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload/ignored`.
+                                    public var ignored: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload/ignored_reason`.
+                                    @frozen public enum IgnoredReasonPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case alreadyApplied = "already_applied"
+                                        case issueAlreadyClosed = "issue_already_closed"
+                                    }
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/_TypePayload/ignored_reason`.
+                                    public var ignoredReason: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload._TypePayloadPayload.IgnoredReasonPayload?
                                     /// Creates a new `_TypePayloadPayload`.
                                     ///
                                     /// - Parameters:
@@ -16605,26 +16611,30 @@ public enum Operations {
                                     ///   - rationale:
                                     ///   - suggest:
                                     ///   - confidence:
-                                    ///   - alreadyApplied:
+                                    ///   - ignored:
+                                    ///   - ignoredReason:
                                     public init(
                                         value: Swift.String? = nil,
                                         rationale: Swift.String? = nil,
                                         suggest: Swift.Bool? = nil,
                                         confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload._TypePayloadPayload.ConfidencePayload? = nil,
-                                        alreadyApplied: Swift.Bool? = nil
+                                        ignored: Swift.Bool? = nil,
+                                        ignoredReason: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload._TypePayloadPayload.IgnoredReasonPayload? = nil
                                     ) {
                                         self.value = value
                                         self.rationale = rationale
                                         self.suggest = suggest
                                         self.confidence = confidence
-                                        self.alreadyApplied = alreadyApplied
+                                        self.ignored = ignored
+                                        self.ignoredReason = ignoredReason
                                     }
                                     public enum CodingKeys: String, CodingKey {
                                         case value
                                         case rationale
                                         case suggest
                                         case confidence
-                                        case alreadyApplied = "already_applied"
+                                        case ignored
+                                        case ignoredReason = "ignored_reason"
                                     }
                                 }
                                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/type`.
@@ -16694,8 +16704,15 @@ public enum Operations {
                                     }
                                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/confidence`.
                                     public var confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayloadPayload.ConfidencePayload?
-                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/already_applied`.
-                                    public var alreadyApplied: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/ignored`.
+                                    public var ignored: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/ignored_reason`.
+                                    @frozen public enum IgnoredReasonPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case alreadyApplied = "already_applied"
+                                        case issueAlreadyClosed = "issue_already_closed"
+                                    }
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/IssueFieldValuesPayload/ignored_reason`.
+                                    public var ignoredReason: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayloadPayload.IgnoredReasonPayload?
                                     /// Creates a new `IssueFieldValuesPayloadPayload`.
                                     ///
                                     /// - Parameters:
@@ -16704,21 +16721,24 @@ public enum Operations {
                                     ///   - rationale:
                                     ///   - suggest:
                                     ///   - confidence:
-                                    ///   - alreadyApplied:
+                                    ///   - ignored:
+                                    ///   - ignoredReason:
                                     public init(
                                         fieldId: Swift.Int? = nil,
                                         value: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayloadPayload.ValuePayload? = nil,
                                         rationale: Swift.String? = nil,
                                         suggest: Swift.Bool? = nil,
                                         confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayloadPayload.ConfidencePayload? = nil,
-                                        alreadyApplied: Swift.Bool? = nil
+                                        ignored: Swift.Bool? = nil,
+                                        ignoredReason: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.IssueFieldValuesPayloadPayload.IgnoredReasonPayload? = nil
                                     ) {
                                         self.fieldId = fieldId
                                         self.value = value
                                         self.rationale = rationale
                                         self.suggest = suggest
                                         self.confidence = confidence
-                                        self.alreadyApplied = alreadyApplied
+                                        self.ignored = ignored
+                                        self.ignoredReason = ignoredReason
                                     }
                                     public enum CodingKeys: String, CodingKey {
                                         case fieldId = "field_id"
@@ -16726,7 +16746,8 @@ public enum Operations {
                                         case rationale
                                         case suggest
                                         case confidence
-                                        case alreadyApplied = "already_applied"
+                                        case ignored
+                                        case ignoredReason = "ignored_reason"
                                     }
                                 }
                                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/issue_field_values`.
@@ -16749,8 +16770,15 @@ public enum Operations {
                                     }
                                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload/confidence`.
                                     public var confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.LabelsPayloadPayload.ConfidencePayload?
-                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload/already_applied`.
-                                    public var alreadyApplied: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload/ignored`.
+                                    public var ignored: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload/ignored_reason`.
+                                    @frozen public enum IgnoredReasonPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case alreadyApplied = "already_applied"
+                                        case issueAlreadyClosed = "issue_already_closed"
+                                    }
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/LabelsPayload/ignored_reason`.
+                                    public var ignoredReason: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.LabelsPayloadPayload.IgnoredReasonPayload?
                                     /// Creates a new `LabelsPayloadPayload`.
                                     ///
                                     /// - Parameters:
@@ -16758,26 +16786,30 @@ public enum Operations {
                                     ///   - rationale:
                                     ///   - suggest:
                                     ///   - confidence:
-                                    ///   - alreadyApplied:
+                                    ///   - ignored:
+                                    ///   - ignoredReason:
                                     public init(
                                         name: Swift.String? = nil,
                                         rationale: Swift.String? = nil,
                                         suggest: Swift.Bool? = nil,
                                         confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.LabelsPayloadPayload.ConfidencePayload? = nil,
-                                        alreadyApplied: Swift.Bool? = nil
+                                        ignored: Swift.Bool? = nil,
+                                        ignoredReason: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.LabelsPayloadPayload.IgnoredReasonPayload? = nil
                                     ) {
                                         self.name = name
                                         self.rationale = rationale
                                         self.suggest = suggest
                                         self.confidence = confidence
-                                        self.alreadyApplied = alreadyApplied
+                                        self.ignored = ignored
+                                        self.ignoredReason = ignoredReason
                                     }
                                     public enum CodingKeys: String, CodingKey {
                                         case name
                                         case rationale
                                         case suggest
                                         case confidence
-                                        case alreadyApplied = "already_applied"
+                                        case ignored
+                                        case ignoredReason = "ignored_reason"
                                     }
                                 }
                                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/labels`.
@@ -16800,8 +16832,15 @@ public enum Operations {
                                     }
                                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload/confidence`.
                                     public var confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.AssigneesPayloadPayload.ConfidencePayload?
-                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload/already_applied`.
-                                    public var alreadyApplied: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload/ignored`.
+                                    public var ignored: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload/ignored_reason`.
+                                    @frozen public enum IgnoredReasonPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case alreadyApplied = "already_applied"
+                                        case issueAlreadyClosed = "issue_already_closed"
+                                    }
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/AssigneesPayload/ignored_reason`.
+                                    public var ignoredReason: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.AssigneesPayloadPayload.IgnoredReasonPayload?
                                     /// Creates a new `AssigneesPayloadPayload`.
                                     ///
                                     /// - Parameters:
@@ -16809,26 +16848,30 @@ public enum Operations {
                                     ///   - rationale:
                                     ///   - suggest:
                                     ///   - confidence:
-                                    ///   - alreadyApplied:
+                                    ///   - ignored:
+                                    ///   - ignoredReason:
                                     public init(
                                         login: Swift.String? = nil,
                                         rationale: Swift.String? = nil,
                                         suggest: Swift.Bool? = nil,
                                         confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.AssigneesPayloadPayload.ConfidencePayload? = nil,
-                                        alreadyApplied: Swift.Bool? = nil
+                                        ignored: Swift.Bool? = nil,
+                                        ignoredReason: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.AssigneesPayloadPayload.IgnoredReasonPayload? = nil
                                     ) {
                                         self.login = login
                                         self.rationale = rationale
                                         self.suggest = suggest
                                         self.confidence = confidence
-                                        self.alreadyApplied = alreadyApplied
+                                        self.ignored = ignored
+                                        self.ignoredReason = ignoredReason
                                     }
                                     public enum CodingKeys: String, CodingKey {
                                         case login
                                         case rationale
                                         case suggest
                                         case confidence
-                                        case alreadyApplied = "already_applied"
+                                        case ignored
+                                        case ignoredReason = "ignored_reason"
                                     }
                                 }
                                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/assignees`.
@@ -16855,8 +16898,15 @@ public enum Operations {
                                     }
                                     /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/confidence`.
                                     public var confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.StatePayloadPayload.ConfidencePayload?
-                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/already_applied`.
-                                    public var alreadyApplied: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/ignored`.
+                                    public var ignored: Swift.Bool?
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/ignored_reason`.
+                                    @frozen public enum IgnoredReasonPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                                        case alreadyApplied = "already_applied"
+                                        case issueAlreadyClosed = "issue_already_closed"
+                                    }
+                                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/StatePayload/ignored_reason`.
+                                    public var ignoredReason: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.StatePayloadPayload.IgnoredReasonPayload?
                                     /// Creates a new `StatePayloadPayload`.
                                     ///
                                     /// - Parameters:
@@ -16866,7 +16916,8 @@ public enum Operations {
                                     ///   - rationale:
                                     ///   - suggest:
                                     ///   - confidence:
-                                    ///   - alreadyApplied:
+                                    ///   - ignored:
+                                    ///   - ignoredReason:
                                     public init(
                                         value: Swift.String? = nil,
                                         stateReason: Swift.String? = nil,
@@ -16874,7 +16925,8 @@ public enum Operations {
                                         rationale: Swift.String? = nil,
                                         suggest: Swift.Bool? = nil,
                                         confidence: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.StatePayloadPayload.ConfidencePayload? = nil,
-                                        alreadyApplied: Swift.Bool? = nil
+                                        ignored: Swift.Bool? = nil,
+                                        ignoredReason: Operations.IssuesUpdate.Output.Ok.Body.JsonPayload.Value2Payload.SuggestionsPayload.StatePayloadPayload.IgnoredReasonPayload? = nil
                                     ) {
                                         self.value = value
                                         self.stateReason = stateReason
@@ -16882,7 +16934,8 @@ public enum Operations {
                                         self.rationale = rationale
                                         self.suggest = suggest
                                         self.confidence = confidence
-                                        self.alreadyApplied = alreadyApplied
+                                        self.ignored = ignored
+                                        self.ignoredReason = ignoredReason
                                     }
                                     public enum CodingKeys: String, CodingKey {
                                         case value
@@ -16891,7 +16944,8 @@ public enum Operations {
                                         case rationale
                                         case suggest
                                         case confidence
-                                        case alreadyApplied = "already_applied"
+                                        case ignored
+                                        case ignoredReason = "ignored_reason"
                                     }
                                 }
                                 /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions/state`.
@@ -16930,10 +16984,9 @@ public enum Operations {
                             /// Pending suggestions for each suggestible field (`type`,
                             /// `issue_field_values`, `labels`, `assignees`, `state`) the
                             /// request touched. Omitted for fields not in the request or
-                            /// with no pending suggestions. Items tagged `already_applied`
-                            /// are echoes of the current request's inputs whose target is
-                            /// already applied to the issue; they are not persisted as
-                            /// pending suggestions.
+                            /// with no pending or ignored suggestions. Items tagged
+                            /// `ignored` are echoes of the current request's inputs that
+                            /// were not persisted as pending suggestions.
                             ///
                             ///
                             /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/issues/{issue_number}/PATCH/responses/200/content/json/value2/suggestions`.

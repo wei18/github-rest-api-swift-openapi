@@ -245,6 +245,32 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge`.
     /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge/put(pulls/merge)`.
     func pullsMerge(_ input: Operations.PullsMerge.Input) async throws -> Operations.PullsMerge.Output
+    /// Merge a pull request asynchronously
+    ///
+    /// Merges a pull request into the base branch in the background. Merging in this way allows certain types of errors to be retried, and avoids the risk of timeouts for particularly complex merges.
+    ///
+    /// This is the required method for merging stacked PRs, but also supports unstacked PRs. When using this endpoint to merge a stacked pull request, all pull requests in the stack up to and including the requested PR will be merged into the base branch.
+    ///
+    /// The response includes a UUID that can be used to fetch the result of the merge. If another asynchronous merge request has already been made for this pull request, the UUID of that request will be returned instead with a 409 response status to indicate that the merge options may be different from those that were requested. If there isn't an existing asynchronous merge request, a 202 response status is used.
+    ///
+    /// If the pull request is already merged, the merge commit OID will be returned immediately with a 200 status.
+    ///
+    /// If the pull request cannot be merged (e.g. because it is closed, or still a draft) this result will be returned immediately with a 400 response status. Branch protection rules and repository rules are not run at this stage, only basic pull request state checks are performed.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge-async`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/put(pulls/merge-async)`.
+    func pullsMergeAsync(_ input: Operations.PullsMergeAsync.Input) async throws -> Operations.PullsMergeAsync.Output
+    /// Get the result of an asynchronous merge
+    ///
+    /// Fetches the current result of an asynchronous merge request, identified by the UUID that was returned when the merge was requested.
+    ///
+    /// While the merge is still queued, the response includes the UUID, merge method, and expected head SHA of the request. Once the merge has completed, the response reports whether it was merged, including the merge commit OID on success or a message describing why it could not be merged on failure.
+    ///
+    /// The result of an asynchronous merge request is retained for 24 hours after its most recent update. After this window the request expires and this endpoint returns a `404` response for its UUID.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/get(pulls/get-merge-async-result)`.
+    func pullsGetMergeAsyncResult(_ input: Operations.PullsGetMergeAsyncResult.Input) async throws -> Operations.PullsGetMergeAsyncResult.Output
     /// Get all requested reviewers for a pull request
     ///
     /// Gets the users or teams whose review is requested for a pull request. Once a requested reviewer submits a review, they are no longer considered a requested reviewer. Their review will instead be returned by the [List reviews for a pull request](https://docs.github.com/rest/pulls/reviews#list-reviews-for-a-pull-request) operation.
@@ -814,6 +840,50 @@ extension APIProtocol {
             path: path,
             headers: headers,
             body: body
+        ))
+    }
+    /// Merge a pull request asynchronously
+    ///
+    /// Merges a pull request into the base branch in the background. Merging in this way allows certain types of errors to be retried, and avoids the risk of timeouts for particularly complex merges.
+    ///
+    /// This is the required method for merging stacked PRs, but also supports unstacked PRs. When using this endpoint to merge a stacked pull request, all pull requests in the stack up to and including the requested PR will be merged into the base branch.
+    ///
+    /// The response includes a UUID that can be used to fetch the result of the merge. If another asynchronous merge request has already been made for this pull request, the UUID of that request will be returned instead with a 409 response status to indicate that the merge options may be different from those that were requested. If there isn't an existing asynchronous merge request, a 202 response status is used.
+    ///
+    /// If the pull request is already merged, the merge commit OID will be returned immediately with a 200 status.
+    ///
+    /// If the pull request cannot be merged (e.g. because it is closed, or still a draft) this result will be returned immediately with a 400 response status. Branch protection rules and repository rules are not run at this stage, only basic pull request state checks are performed.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge-async`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/put(pulls/merge-async)`.
+    public func pullsMergeAsync(
+        path: Operations.PullsMergeAsync.Input.Path,
+        headers: Operations.PullsMergeAsync.Input.Headers = .init(),
+        body: Operations.PullsMergeAsync.Input.Body? = nil
+    ) async throws -> Operations.PullsMergeAsync.Output {
+        try await pullsMergeAsync(Operations.PullsMergeAsync.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
+    /// Get the result of an asynchronous merge
+    ///
+    /// Fetches the current result of an asynchronous merge request, identified by the UUID that was returned when the merge was requested.
+    ///
+    /// While the merge is still queued, the response includes the UUID, merge method, and expected head SHA of the request. Once the merge has completed, the response reports whether it was merged, including the merge commit OID on success or a message describing why it could not be merged on failure.
+    ///
+    /// The result of an asynchronous merge request is retained for 24 hours after its most recent update. After this window the request expires and this endpoint returns a `404` response for its UUID.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/get(pulls/get-merge-async-result)`.
+    public func pullsGetMergeAsyncResult(
+        path: Operations.PullsGetMergeAsyncResult.Input.Path,
+        headers: Operations.PullsGetMergeAsyncResult.Input.Headers = .init()
+    ) async throws -> Operations.PullsGetMergeAsyncResult.Output {
+        try await pullsGetMergeAsyncResult(Operations.PullsGetMergeAsyncResult.Input(
+            path: path,
+            headers: headers
         ))
     }
     /// Get all requested reviewers for a pull request
@@ -5262,6 +5332,259 @@ public enum Components {
                 case sha
                 case merged
                 case message
+            }
+        }
+        /// Pull Request Merge Async Result
+        ///
+        /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result`.
+        public struct PullRequestMergeAsyncResult: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/status`.
+            @frozen public enum StatusPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case pending = "pending"
+                case merged = "merged"
+                case enqueued = "enqueued"
+                case failed = "failed"
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/status`.
+            public var status: Components.Schemas.PullRequestMergeAsyncResult.StatusPayload
+            /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details`.
+            @frozen public enum DetailsPayload: Codable, Hashable, Sendable {
+                /// When an asynchronous merge request was created or already existed
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case1`.
+                public struct Case1Payload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case1/message`.
+                    public var message: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case1/uuid`.
+                    public var uuid: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case1/merge_method`.
+                    @frozen public enum MergeMethodPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case _default = "default"
+                        case merge = "merge"
+                        case squash = "squash"
+                        case rebase = "rebase"
+                    }
+                    /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case1/merge_method`.
+                    public var mergeMethod: Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload.Case1Payload.MergeMethodPayload
+                    /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case1/merge_action`.
+                    @frozen public enum MergeActionPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case _default = "default"
+                        case mergeQueue = "merge_queue"
+                        case directMerge = "direct_merge"
+                    }
+                    /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case1/merge_action`.
+                    public var mergeAction: Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload.Case1Payload.MergeActionPayload
+                    /// SHA that the pull request head must match for the enqueued merge to proceed.
+                    ///
+                    /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case1/expected_head_sha`.
+                    public var expectedHeadSha: Swift.String
+                    /// Creates a new `Case1Payload`.
+                    ///
+                    /// - Parameters:
+                    ///   - message:
+                    ///   - uuid:
+                    ///   - mergeMethod:
+                    ///   - mergeAction:
+                    ///   - expectedHeadSha: SHA that the pull request head must match for the enqueued merge to proceed.
+                    public init(
+                        message: Swift.String,
+                        uuid: Swift.String,
+                        mergeMethod: Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload.Case1Payload.MergeMethodPayload,
+                        mergeAction: Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload.Case1Payload.MergeActionPayload,
+                        expectedHeadSha: Swift.String
+                    ) {
+                        self.message = message
+                        self.uuid = uuid
+                        self.mergeMethod = mergeMethod
+                        self.mergeAction = mergeAction
+                        self.expectedHeadSha = expectedHeadSha
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case message
+                        case uuid
+                        case mergeMethod = "merge_method"
+                        case mergeAction = "merge_action"
+                        case expectedHeadSha = "expected_head_sha"
+                    }
+                    public init(from decoder: any Swift.Decoder) throws {
+                        let container = try decoder.container(keyedBy: CodingKeys.self)
+                        self.message = try container.decode(
+                            Swift.String.self,
+                            forKey: .message
+                        )
+                        self.uuid = try container.decode(
+                            Swift.String.self,
+                            forKey: .uuid
+                        )
+                        self.mergeMethod = try container.decode(
+                            Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload.Case1Payload.MergeMethodPayload.self,
+                            forKey: .mergeMethod
+                        )
+                        self.mergeAction = try container.decode(
+                            Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload.Case1Payload.MergeActionPayload.self,
+                            forKey: .mergeAction
+                        )
+                        self.expectedHeadSha = try container.decode(
+                            Swift.String.self,
+                            forKey: .expectedHeadSha
+                        )
+                        try decoder.ensureNoAdditionalProperties(knownKeys: [
+                            "message",
+                            "uuid",
+                            "merge_method",
+                            "merge_action",
+                            "expected_head_sha"
+                        ])
+                    }
+                }
+                /// When an asynchronous merge request was created or already existed
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case1`.
+                case case1(Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload.Case1Payload)
+                /// When the pull request cannot be merged
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case2`.
+                public struct Case2Payload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case2/message`.
+                    public var message: Swift.String
+                    /// Creates a new `Case2Payload`.
+                    ///
+                    /// - Parameters:
+                    ///   - message:
+                    public init(message: Swift.String) {
+                        self.message = message
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case message
+                    }
+                    public init(from decoder: any Swift.Decoder) throws {
+                        let container = try decoder.container(keyedBy: CodingKeys.self)
+                        self.message = try container.decode(
+                            Swift.String.self,
+                            forKey: .message
+                        )
+                        try decoder.ensureNoAdditionalProperties(knownKeys: [
+                            "message"
+                        ])
+                    }
+                }
+                /// When the pull request cannot be merged
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case2`.
+                case case2(Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload.Case2Payload)
+                /// When the pull request is already merged
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case3`.
+                public struct Case3Payload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case3/message`.
+                    public var message: Swift.String
+                    /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case3/sha`.
+                    public var sha: Swift.String
+                    /// Creates a new `Case3Payload`.
+                    ///
+                    /// - Parameters:
+                    ///   - message:
+                    ///   - sha:
+                    public init(
+                        message: Swift.String,
+                        sha: Swift.String
+                    ) {
+                        self.message = message
+                        self.sha = sha
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case message
+                        case sha
+                    }
+                    public init(from decoder: any Swift.Decoder) throws {
+                        let container = try decoder.container(keyedBy: CodingKeys.self)
+                        self.message = try container.decode(
+                            Swift.String.self,
+                            forKey: .message
+                        )
+                        self.sha = try container.decode(
+                            Swift.String.self,
+                            forKey: .sha
+                        )
+                        try decoder.ensureNoAdditionalProperties(knownKeys: [
+                            "message",
+                            "sha"
+                        ])
+                    }
+                }
+                /// When the pull request is already merged
+                ///
+                /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details/case3`.
+                case case3(Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload.Case3Payload)
+                public init(from decoder: any Swift.Decoder) throws {
+                    var errors: [any Swift.Error] = []
+                    do {
+                        self = .case1(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .case2(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    do {
+                        self = .case3(try .init(from: decoder))
+                        return
+                    } catch {
+                        errors.append(error)
+                    }
+                    throw Swift.DecodingError.failedToDecodeOneOfSchema(
+                        type: Self.self,
+                        codingPath: decoder.codingPath,
+                        errors: errors
+                    )
+                }
+                public func encode(to encoder: any Swift.Encoder) throws {
+                    switch self {
+                    case let .case1(value):
+                        try value.encode(to: encoder)
+                    case let .case2(value):
+                        try value.encode(to: encoder)
+                    case let .case3(value):
+                        try value.encode(to: encoder)
+                    }
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/pull-request-merge-async-result/details`.
+            public var details: Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload
+            /// Creates a new `PullRequestMergeAsyncResult`.
+            ///
+            /// - Parameters:
+            ///   - status:
+            ///   - details:
+            public init(
+                status: Components.Schemas.PullRequestMergeAsyncResult.StatusPayload,
+                details: Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload
+            ) {
+                self.status = status
+                self.details = details
+            }
+            public enum CodingKeys: String, CodingKey {
+                case status
+                case details
+            }
+            public init(from decoder: any Swift.Decoder) throws {
+                let container = try decoder.container(keyedBy: CodingKeys.self)
+                self.status = try container.decode(
+                    Components.Schemas.PullRequestMergeAsyncResult.StatusPayload.self,
+                    forKey: .status
+                )
+                self.details = try container.decode(
+                    Components.Schemas.PullRequestMergeAsyncResult.DetailsPayload.self,
+                    forKey: .details
+                )
+                try decoder.ensureNoAdditionalProperties(knownKeys: [
+                    "status",
+                    "details"
+                ])
             }
         }
         /// Pull Request Review Request
@@ -9914,6 +10237,665 @@ public enum Operations {
             /// Resource not found
             ///
             /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge/put(pulls/merge)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Merge a pull request asynchronously
+    ///
+    /// Merges a pull request into the base branch in the background. Merging in this way allows certain types of errors to be retried, and avoids the risk of timeouts for particularly complex merges.
+    ///
+    /// This is the required method for merging stacked PRs, but also supports unstacked PRs. When using this endpoint to merge a stacked pull request, all pull requests in the stack up to and including the requested PR will be merged into the base branch.
+    ///
+    /// The response includes a UUID that can be used to fetch the result of the merge. If another asynchronous merge request has already been made for this pull request, the UUID of that request will be returned instead with a 409 response status to indicate that the merge options may be different from those that were requested. If there isn't an existing asynchronous merge request, a 202 response status is used.
+    ///
+    /// If the pull request is already merged, the merge commit OID will be returned immediately with a 200 status.
+    ///
+    /// If the pull request cannot be merged (e.g. because it is closed, or still a draft) this result will be returned immediately with a 400 response status. Branch protection rules and repository rules are not run at this stage, only basic pull request state checks are performed.
+    ///
+    /// - Remark: HTTP `PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge-async`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/put(pulls/merge-async)`.
+    public enum PullsMergeAsync {
+        public static let id: Swift.String = "pulls/merge-async"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the pull request.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/path/pull_number`.
+                public var pullNumber: Components.Parameters.PullNumber
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - pullNumber: The number that identifies the pull request.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    pullNumber: Components.Parameters.PullNumber
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.pullNumber = pullNumber
+                }
+            }
+            public var path: Operations.PullsMergeAsync.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullsMergeAsync.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullsMergeAsync.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.PullsMergeAsync.Input.Headers
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// Title for the automatic commit message.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/requestBody/json/commit_title`.
+                    public var commitTitle: Swift.String?
+                    /// Extra detail to append to automatic commit message.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/requestBody/json/commit_message`.
+                    public var commitMessage: Swift.String?
+                    /// SHA that pull request head must match to allow merge. If not provided, the current head of the PR at the time of the request will be used; if the PR is pushed in between the merge being requested and being executed, the merge will be cancelled.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/requestBody/json/sha`.
+                    public var sha: Swift.String?
+                    /// The merge method to use.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/requestBody/json/merge_method`.
+                    @frozen public enum MergeMethodPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case merge = "merge"
+                        case squash = "squash"
+                        case rebase = "rebase"
+                    }
+                    /// The merge method to use.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/requestBody/json/merge_method`.
+                    public var mergeMethod: Operations.PullsMergeAsync.Input.Body.JsonPayload.MergeMethodPayload?
+                    /// The action that will be taken to merge the pull request. `direct_merge` merges the pull request directly without using a merge queue; `merge_queue` adds the pull request to a merge queue; `default` selects the most appropriate option.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/requestBody/json/merge_action`.
+                    @frozen public enum MergeActionPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                        case _default = "default"
+                        case directMerge = "direct_merge"
+                        case mergeQueue = "merge_queue"
+                    }
+                    /// The action that will be taken to merge the pull request. `direct_merge` merges the pull request directly without using a merge queue; `merge_queue` adds the pull request to a merge queue; `default` selects the most appropriate option.
+                    ///
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/requestBody/json/merge_action`.
+                    public var mergeAction: Operations.PullsMergeAsync.Input.Body.JsonPayload.MergeActionPayload?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - commitTitle: Title for the automatic commit message.
+                    ///   - commitMessage: Extra detail to append to automatic commit message.
+                    ///   - sha: SHA that pull request head must match to allow merge. If not provided, the current head of the PR at the time of the request will be used; if the PR is pushed in between the merge being requested and being executed, the merge will be cancelled.
+                    ///   - mergeMethod: The merge method to use.
+                    ///   - mergeAction: The action that will be taken to merge the pull request. `direct_merge` merges the pull request directly without using a merge queue; `merge_queue` adds the pull request to a merge queue; `default` selects the most appropriate option.
+                    public init(
+                        commitTitle: Swift.String? = nil,
+                        commitMessage: Swift.String? = nil,
+                        sha: Swift.String? = nil,
+                        mergeMethod: Operations.PullsMergeAsync.Input.Body.JsonPayload.MergeMethodPayload? = nil,
+                        mergeAction: Operations.PullsMergeAsync.Input.Body.JsonPayload.MergeActionPayload? = nil
+                    ) {
+                        self.commitTitle = commitTitle
+                        self.commitMessage = commitMessage
+                        self.sha = sha
+                        self.mergeMethod = mergeMethod
+                        self.mergeAction = mergeAction
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case commitTitle = "commit_title"
+                        case commitMessage = "commit_message"
+                        case sha
+                        case mergeMethod = "merge_method"
+                        case mergeAction = "merge_action"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/requestBody/content/application\/json`.
+                case json(Operations.PullsMergeAsync.Input.Body.JsonPayload)
+            }
+            public var body: Operations.PullsMergeAsync.Input.Body?
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.PullsMergeAsync.Input.Path,
+                headers: Operations.PullsMergeAsync.Input.Headers = .init(),
+                body: Operations.PullsMergeAsync.Input.Body? = nil
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Accepted: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/responses/202/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/responses/202/content/application\/json`.
+                    case json(Components.Schemas.PullRequestMergeAsyncResult)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.PullRequestMergeAsyncResult {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullsMergeAsync.Output.Accepted.Body
+                /// Creates a new `Accepted`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullsMergeAsync.Output.Accepted.Body) {
+                    self.body = body
+                }
+            }
+            /// if the merge request was accepted and will run in the background
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/put(pulls/merge-async)/responses/202`.
+            ///
+            /// HTTP response code: `202 accepted`.
+            case accepted(Operations.PullsMergeAsync.Output.Accepted)
+            /// The associated value of the enum case if `self` is `.accepted`.
+            ///
+            /// - Throws: An error if `self` is not `.accepted`.
+            /// - SeeAlso: `.accepted`.
+            public var accepted: Operations.PullsMergeAsync.Output.Accepted {
+                get throws {
+                    switch self {
+                    case let .accepted(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "accepted",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/responses/200/content/application\/json`.
+                    case json(Components.Schemas.PullRequestMergeAsyncResult)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.PullRequestMergeAsyncResult {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullsMergeAsync.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullsMergeAsync.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// if the pull request was already merged, or is already in a merge queue
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/put(pulls/merge-async)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.PullsMergeAsync.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.PullsMergeAsync.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct Conflict: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/responses/409/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/responses/409/content/application\/json`.
+                    case json(Components.Schemas.PullRequestMergeAsyncResult)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.PullRequestMergeAsyncResult {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullsMergeAsync.Output.Conflict.Body
+                /// Creates a new `Conflict`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullsMergeAsync.Output.Conflict.Body) {
+                    self.body = body
+                }
+            }
+            /// if there is an existing merge request already enqueued for this pull request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/put(pulls/merge-async)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Operations.PullsMergeAsync.Output.Conflict)
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Operations.PullsMergeAsync.Output.Conflict {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct BadRequest: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/responses/400/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/PUT/responses/400/content/application\/json`.
+                    case json(Components.Schemas.PullRequestMergeAsyncResult)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.PullRequestMergeAsyncResult {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullsMergeAsync.Output.BadRequest.Body
+                /// Creates a new `BadRequest`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullsMergeAsync.Output.BadRequest.Body) {
+                    self.body = body
+                }
+            }
+            /// if the pull request is not ready to be merged, e.g. because it is closed
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/put(pulls/merge-async)/responses/400`.
+            ///
+            /// HTTP response code: `400 badRequest`.
+            case badRequest(Operations.PullsMergeAsync.Output.BadRequest)
+            /// The associated value of the enum case if `self` is `.badRequest`.
+            ///
+            /// - Throws: An error if `self` is not `.badRequest`.
+            /// - SeeAlso: `.badRequest`.
+            public var badRequest: Operations.PullsMergeAsync.Output.BadRequest {
+                get throws {
+                    switch self {
+                    case let .badRequest(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "badRequest",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Validation failed, or the endpoint has been spammed.
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/put(pulls/merge-async)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Components.Responses.ValidationFailed)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Components.Responses.ValidationFailed {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/put(pulls/merge-async)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/put(pulls/merge-async)/responses/404`.
+            ///
+            /// HTTP response code: `404 notFound`.
+            case notFound(Components.Responses.NotFound)
+            /// The associated value of the enum case if `self` is `.notFound`.
+            ///
+            /// - Throws: An error if `self` is not `.notFound`.
+            /// - SeeAlso: `.notFound`.
+            public var notFound: Components.Responses.NotFound {
+                get throws {
+                    switch self {
+                    case let .notFound(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "notFound",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Get the result of an asynchronous merge
+    ///
+    /// Fetches the current result of an asynchronous merge request, identified by the UUID that was returned when the merge was requested.
+    ///
+    /// While the merge is still queued, the response includes the UUID, merge method, and expected head SHA of the request. Once the merge has completed, the response reports whether it was merged, including the merge commit OID on success or a message describing why it could not be merged on failure.
+    ///
+    /// The result of an asynchronous merge request is retained for 24 hours after its most recent update. After this window the request expires and this endpoint returns a `404` response for its UUID.
+    ///
+    /// - Remark: HTTP `GET /repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}`.
+    /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/get(pulls/get-merge-async-result)`.
+    public enum PullsGetMergeAsyncResult {
+        public static let id: Swift.String = "pulls/get-merge-async-result"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/GET/path`.
+            public struct Path: Sendable, Hashable {
+                /// The account owner of the repository. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/GET/path/owner`.
+                public var owner: Components.Parameters.Owner
+                /// The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/GET/path/repo`.
+                public var repo: Components.Parameters.Repo
+                /// The number that identifies the pull request.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/GET/path/pull_number`.
+                public var pullNumber: Components.Parameters.PullNumber
+                /// The UUID of the asynchronous merge request, as returned when the merge was requested.
+                ///
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/GET/path/uuid`.
+                public var uuid: Swift.String
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - owner: The account owner of the repository. The name is not case sensitive.
+                ///   - repo: The name of the repository without the `.git` extension. The name is not case sensitive.
+                ///   - pullNumber: The number that identifies the pull request.
+                ///   - uuid: The UUID of the asynchronous merge request, as returned when the merge was requested.
+                public init(
+                    owner: Components.Parameters.Owner,
+                    repo: Components.Parameters.Repo,
+                    pullNumber: Components.Parameters.PullNumber,
+                    uuid: Swift.String
+                ) {
+                    self.owner = owner
+                    self.repo = repo
+                    self.pullNumber = pullNumber
+                    self.uuid = uuid
+                }
+            }
+            public var path: Operations.PullsGetMergeAsyncResult.Input.Path
+            /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/GET/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullsGetMergeAsyncResult.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.PullsGetMergeAsyncResult.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.PullsGetMergeAsyncResult.Input.Headers
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            public init(
+                path: Operations.PullsGetMergeAsyncResult.Input.Path,
+                headers: Operations.PullsGetMergeAsyncResult.Input.Headers = .init()
+            ) {
+                self.path = path
+                self.headers = headers
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/GET/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/GET/responses/200/content/application\/json`.
+                    case json(Components.Schemas.PullRequestMergeAsyncResult)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.PullRequestMergeAsyncResult {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.PullsGetMergeAsyncResult.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.PullsGetMergeAsyncResult.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// the current result of the asynchronous merge request
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/get(pulls/get-merge-async-result)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.PullsGetMergeAsyncResult.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.PullsGetMergeAsyncResult.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Forbidden
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/get(pulls/get-merge-async-result)/responses/403`.
+            ///
+            /// HTTP response code: `403 forbidden`.
+            case forbidden(Components.Responses.Forbidden)
+            /// The associated value of the enum case if `self` is `.forbidden`.
+            ///
+            /// - Throws: An error if `self` is not `.forbidden`.
+            /// - SeeAlso: `.forbidden`.
+            public var forbidden: Components.Responses.Forbidden {
+                get throws {
+                    switch self {
+                    case let .forbidden(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "forbidden",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Resource not found
+            ///
+            /// - Remark: Generated from `#/paths//repos/{owner}/{repo}/pulls/{pull_number}/merge-async/{uuid}/get(pulls/get-merge-async-result)/responses/404`.
             ///
             /// HTTP response code: `404 notFound`.
             case notFound(Components.Responses.NotFound)
