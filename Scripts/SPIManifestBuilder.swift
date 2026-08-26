@@ -31,15 +31,16 @@ struct SPIManifestBuilder {
     func getTemplate() throws -> String {
         let data = FileHandle.standardInput.readDataToEndOfFile()
         let manifest = try JSONDecoder().decode(Manifest.self, from: data)
+        // Flow-style sequence keeps the file under SPI's 1500-byte manifest
+        // limit (SPIManifest.Manifest.maxByteSize); block style overflows it
+        // once the target list grows past ~48 entries.
         let targetNamesString: String = manifest.products.map(\.name)
-            .map { "    - \($0)"}
-            .joined(separator: "\n")
+            .joined(separator: ",")
         return #"""
         version: 1
         builder:
           configs:
-          - documentation_targets:
-        \#(targetNamesString)
+          - documentation_targets: [\#(targetNamesString)]
 
         """#
     }
