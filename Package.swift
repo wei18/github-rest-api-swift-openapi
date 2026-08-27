@@ -1,7 +1,6 @@
 // swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
-import Foundation
 import PackageDescription
 
 // Each entry is one direct subdirectory of Sources/, i.e. one generated module.
@@ -79,6 +78,10 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession", from: "1.0.0"),
+        // Declared unconditionally: Swift Package Index only injects swift-docc-plugin
+        // when it does not detect one in the manifest, so an env-gated declaration
+        // makes its documentation build fail (see SwiftPackageIndex-Server#4088).
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0"),
     ],
     targets: sourceFolders.map {
         .target(
@@ -100,10 +103,3 @@ let package = Package(
         )
     ]
 )
-
-// swift-docc is not needed for package users
-if ProcessInfo.processInfo.environment["ENABLE_DOCC_SUPPORT"] == "1" {
-    package.dependencies += [
-        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0"),
-    ]
-}
